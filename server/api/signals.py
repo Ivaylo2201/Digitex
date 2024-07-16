@@ -18,7 +18,7 @@ def recalculate_total(sender: CartItem, instance: CartItem, **_: dict):
     total_price_for_each_cartitem: QuerySet = (
         cart_items.annotate(
             price=ExpressionWrapper(
-                F('quantity') * (F('product__price') - (F('product__price') * F('product__discount_percentage') / 100)),
+                F('quantity') * (F('product__base_price') - (F('product__base_price') * F('product__discount_percentage') / 100)),
                 output_field=DecimalField(max_digits=OUTPUT_FIELD_MAX_DIGITS, decimal_places=OUTPUT_FIELD_DECIMAL_PLACES)
             )
         )

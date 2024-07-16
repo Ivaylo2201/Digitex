@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
@@ -5,6 +6,7 @@ from django.contrib.auth.models import User
 from .constraints import (
     CARTITEM_CART_RELATED_NAME,
     CARTITEM_QUANTITY_MAX_VALUE,
+    CARTITEM_QUANTITY_MIN_VALUE,
     CART_SUBTOTAL_DECIMAL_PLACES,
     CART_SUBTOTAL_DEFAULT_VALUE,
     CART_SUBTOTAL_MAX_DIGITS,
@@ -12,6 +14,8 @@ from .constraints import (
     ORDER_PRICE_MAX_DIGITS,
     ORDER_USER_RELATED_NAME,
     PRODUCT_CATEGORY_MAX_LENGTH,
+    PRODUCT_DISCOUNT_PERCENTAGE_MAX_VALUE,
+    PRODUCT_DISCOUNT_PERCENTAGE_MIN_VALUE,
     PRODUCT_IMAGE_UPLOAD_DIRECTORY,
     PRODUCT_NAME_MAX_LENGTH,
     ProductCategory,
@@ -32,14 +36,18 @@ class Product(models.Model):
         choices=ProductCategory.choices
     )
 
-    price = models.DecimalField(
+    base_price = models.DecimalField(
         max_digits=PRODUCT_PRICE_MAX_DIGITS,
         decimal_places=PRODUCT_PRICE_DECIMAL_PLACES,
         validators=[MinValueValidator(PRODUCT_PRICE_MIN_VALUE)]
     )
 
     discount_percentage = models.PositiveSmallIntegerField(
-        default=PRODUCT_DISCOUNT_PERCENTAGE_DEFAULT_VALUE
+        default=PRODUCT_DISCOUNT_PERCENTAGE_DEFAULT_VALUE,
+        validators=[
+            MinValueValidator(PRODUCT_DISCOUNT_PERCENTAGE_MIN_VALUE),
+            MaxValueValidator(PRODUCT_DISCOUNT_PERCENTAGE_MAX_VALUE)
+        ]
     )
 
     image = models.ImageField(
@@ -47,8 +55,11 @@ class Product(models.Model):
     )
 
     @property
-    def get_product_price(self) -> str:
-        return f'{(self.price - self.price * (self.discount_percentage / 100)):.2f}'
+    def price(self) -> Decimal:
+        return self.base_price - self.base_price * (Decimal(self.discount_percentage) / 100)
+    
+    def __str__(self) -> str:
+        return self.name
 
 
 class Cart(models.Model):
@@ -63,6 +74,13 @@ class Cart(models.Model):
         default=CART_SUBTOTAL_DEFAULT_VALUE
     )
 
+    @property
+    def cartitems_count(self) -> int:
+        return len(self.cartitems.all())
+    
+    def __str__(self) -> str:
+        return f'{self.user.username}\'s cart'
+
 
 class Order(models.Model):
     user = models.ForeignKey(
@@ -71,11 +89,11 @@ class Order(models.Model):
         related_name=ORDER_USER_RELATED_NAME
     )
 
-    item_count = models.PositiveSmallIntegerField(
+    items_count = models.PositiveSmallIntegerField(
         editable=False
     )
 
-    price = models.DecimalField(
+    total_price = models.DecimalField(
         max_digits=ORDER_PRICE_MAX_DIGITS,
         decimal_places=ORDER_PRICE_DECIMAL_PLACES
     )
@@ -99,9 +117,12 @@ class CartItem(models.Model):
     )
 
     quantity = models.PositiveSmallIntegerField(
-        MaxValueValidator(CARTITEM_QUANTITY_MAX_VALUE)
+        validators=[
+            MinValueValidator(CARTITEM_QUANTITY_MIN_VALUE),
+            MaxValueValidator(CARTITEM_QUANTITY_MAX_VALUE)
+        ]
     )
 
     @property
-    def get_cartitem_price(self) -> str:
-        return f'{(self.product.get_price * self.quantity):.2f}'
+    def price(self) -> Decimal:
+        return self.product.price * self.quantity
