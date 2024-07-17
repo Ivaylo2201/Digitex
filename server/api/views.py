@@ -30,7 +30,7 @@ class ProductsByCategoryListAPIView(views.ListAPIView):
 class ProductsByLookupListAPIView(views.ListAPIView):
     serializer_class = ProductSerializer
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         lookup: str = self.request.query_params['lookup']
         criteria: Q = Q(name__icontains=lookup) | Q(category__icontains=lookup)
 

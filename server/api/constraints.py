@@ -4,9 +4,16 @@ from django.db import models
 PRODUCT_NAME_MAX_LENGTH: int = 25
 PRODUCT_CATEGORY_MAX_LENGTH: int = 20
 
+
 class ProductCategory(models.TextChoices):
-    SMARTPHONE = 'Smartphone', 'Smartphone'
     LAPTOP = 'Laptop', 'Laptop'
+    SMARTPHONE = 'Smartphone', 'Smartphone'
+    TV = 'TV', 'TV'
+    TABLET = 'Tablet', 'Tablet'
+    COMPUTER = 'Computer', 'Computer'
+    HEADSET = 'Headset', 'Headset'
+    MONITOR = 'Monitor', 'Monitor'
+
 
 PRODUCT_PRICE_MAX_DIGITS: int = 10
 PRODUCT_PRICE_DECIMAL_PLACES: int = 2
