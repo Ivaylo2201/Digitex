@@ -97,7 +97,7 @@ class PlaceOrderCreateAPIView(views.CreateAPIView):
         Order.objects.create(
             user=request.user,
             items_count=cart.cartitems_count,
-            price=cart.subtotal
+            total_price=cart.subtotal
         )
 
         cart.cartitems.all().delete()
