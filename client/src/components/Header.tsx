@@ -3,8 +3,16 @@ import { AccountButton } from './AccountButton';
 import { CartButton } from './CartButton';
 import { CategoryLinks } from './CategoryLinks';
 import { InformationPanel } from './InformationPanel';
+import { useCart } from './CartContextProvider';
+import { useEffect } from 'react';
 
 export const Header = (): JSX.Element => {
+    const { fetchCartData } = useCart();
+
+    useEffect(() => {
+        fetchCartData()
+    }, []);
+
     return (
         <header className=''>
             <InformationPanel />

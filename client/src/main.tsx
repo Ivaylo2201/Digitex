@@ -6,6 +6,7 @@ import {
     RouterProvider
 } from 'react-router-dom';
 import { Home } from './pages/Home.tsx';
+import { ProductsList } from './components/ProductsList.tsx';
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <h2>Discounted</h2>
+                element: <ProductsList category='discounted' />
             },
             {
                 path: '/products/smartphones'
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
                 path: '/products/tablets'
             },
             {
-                path: '/products/monitors'
+                path: '/products/monitors',
+                element: <ProductsList category='monitors' />
             },
             {
                 path: '/products/tvs'

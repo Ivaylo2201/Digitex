@@ -24,6 +24,7 @@ interface CartContextType {
     addToCart: (pk: number, quantity: number) => void;
     removeFromCart: (pk: number) => void;
     placeOrder: () => void;
+    fetchCartData: () => void;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -36,11 +37,7 @@ export const useCart = (): CartContextType => {
     return context;
 };
 
-export const CartProvider = ({
-    children
-}: {
-    children: ReactNode;
-}) => {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cartData, setCartData] = useState<Cart>({
         subtotal: 0,
         cartitems: [],
@@ -68,10 +65,7 @@ export const CartProvider = ({
         }
     };
 
-    const addToCart = async (
-        product: number,
-        quantity: number
-    ): Promise<void> => {
+    const addToCart = async (product: number, quantity: number): Promise<void> => {
         const url: string = 'http://localhost:8000/api/cart/add/';
 
         const body = {
@@ -103,7 +97,7 @@ export const CartProvider = ({
 
         try {
             await axios.post(url, {}, getAuthHeaders());
-            fetchCartData()   
+            fetchCartData();
         } catch (error) {
             console.error(error);
         }
@@ -115,12 +109,11 @@ export const CartProvider = ({
         setIsCartOpen,
         addToCart,
         removeFromCart,
-        placeOrder
+        placeOrder,
+        fetchCartData,
     };
 
     return (
-        <CartContext.Provider value={contextValue}>
-            {children}
-        </CartContext.Provider>
+        <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
     );
 };

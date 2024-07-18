@@ -2,15 +2,11 @@ import CrossIcon from '../icons/CrossIcon';
 import { CartItem } from '../types/CartItem';
 import { useCart } from './CartContextProvider';
 
-export const CartItemCard = ({
-    pk,
-    product,
-    quantity
-}: CartItem): JSX.Element => {
+export const CartItemCard = ({ pk, product, quantity }: CartItem): JSX.Element => {
     const { removeFromCart } = useCart();
 
     return (
-        <article className='relative w-72 flex gap-3 py-2 items-center font-Montserrat text-theme-darkblue'>
+        <article className='relative w-72 flex gap-4 py-2 items-center font-Montserrat text-theme-darkblue'>
             <button
                 onClick={() => removeFromCart(pk)}
                 className='w-5 h-5 ml-1 rounded-full flex justify-center items-center bg-theme-darkblue hover:bg-theme-blue text-xs text-theme-white font-Montserrat transition-colors duration-100'
@@ -26,9 +22,7 @@ export const CartItemCard = ({
                         {product.name}
                     </p>
                     <div className='flex gap-2'>
-                        <span className='font-normal'>
-                            {quantity}x
-                        </span>
+                        <span className='font-normal'>{quantity}x</span>
                         <p>${product.price}</p>
                     </div>
                 </div>

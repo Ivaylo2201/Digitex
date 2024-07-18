@@ -23,7 +23,7 @@ class ProductsByCategoryListAPIView(views.ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self) -> QuerySet:
-        category: str = self.kwargs['category']
+        category: str = self.kwargs['category'][0:-1]
         return Product.objects.filter(category__iexact=category)
 
 

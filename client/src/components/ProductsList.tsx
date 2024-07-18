@@ -1,0 +1,47 @@
+import { useEffect, useState } from 'react';
+import { Product } from '../types/Product';
+import axios, { AxiosResponse } from 'axios';
+import { ProductCard } from '../components/ProductCard';
+
+export const ProductsList = ({
+    category
+}: {
+    category: string;
+}): JSX.Element => {
+    const [products, setProducts] = useState<Product[]>([]);
+
+    useEffect(() => {
+        fetchProducts();
+    }, [category]);
+
+    const fetchProducts = async () => {
+        const url: string = `http://localhost:8000/api/products/${category}/`;
+
+        try {
+            const response: AxiosResponse<Product[]> = await axios.get(url);
+            setProducts(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    return (
+        <main className='p-10 flex justify-center'>
+            <div className='w-2/3 flex justify-center gap-10 flex-wrap'>
+                {products.map((product) => {
+                    return (
+                        <ProductCard
+                            name={product.name}
+                            image={product.image}
+                            price={product.price}
+                            pk={product.pk}
+                            category={product.category}
+                            base_price={product.base_price}
+                            discount_percentage={product.discount_percentage}
+                        />
+                    );
+                })}
+            </div>
+        </main>
+    );
+};

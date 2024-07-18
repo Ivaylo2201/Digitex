@@ -1,5 +1,3 @@
-import axios from 'axios';
-import getAuthHeaders from '../utils/getAuthHeaders';
 import { useCart } from './CartContextProvider';
 import { CardItemCardList } from './CartItemCardList';
 import { NoCartItems } from './NoCartItems';
@@ -8,7 +6,7 @@ export const CartWindow = (): JSX.Element => {
     const { placeOrder, cartData } = useCart();
 
     return (
-        <section className='absolute top-16 rounded-sm p-3 flex flex-col gap-2 bg-theme-white border border-theme-gray'>
+        <section className='absolute z-50 -left-13 lg:-left-10 top-16 rounded-sm p-3 flex flex-col gap-2 bg-theme-white border border-theme-gray'>
             <>
                 {cartData.cartitems_count > 0 ? (
                     <CardItemCardList items={cartData.cartitems} />
