@@ -27,9 +27,9 @@ export const CartWindow = (): JSX.Element => {
                     </div>
                     <button
                         onClick={placeOrder}
-                        className='text-xm uppercase bg-theme-lightcrimson hover:bg-theme-crimson text-theme-white rounded-full px-7 py-2 mr-1 transition-colors duration-150'
+                        className='text-xm uppercase bg-theme-lightcrimson hover:bg-theme-crimson text-theme-white rounded-full px-5 py-2 mr-1 transition-colors duration-150'
                     >
-                        Buy
+                        Order
                     </button>
                 </div>
             </div>

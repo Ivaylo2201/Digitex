@@ -54,6 +54,11 @@ class Product(models.Model):
         upload_to=PRODUCT_IMAGE_UPLOAD_DIRECTORY
     )
 
+    date_added = models.DateTimeField(
+        auto_now_add=True,
+        editable=False
+    )
+
     @property
     def price(self) -> Decimal:
         return self.base_price - self.base_price * (Decimal(self.discount_percentage) / 100)

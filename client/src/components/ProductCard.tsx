@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Product } from '../types/Product';
 import { useCart } from './CartContextProvider';
 import { DiscountLabel } from './DiscountLabel';
+import { PlusIcon } from '../icons/PlusIcon';
+import { MinusIcon } from '../icons/MinusIcon';
+import { QuantityButton } from './QuantityButton';
 
 export const ProductCard = ({
     pk,
@@ -12,9 +16,15 @@ export const ProductCard = ({
     image
 }: Product): JSX.Element => {
     const { addToCart } = useCart();
+    const [quantity, setQuantity] = useState<number>(1);
+
+    const incrementQuantity = (): void =>
+        setQuantity((q) => (q < 25 ? q + 1 : q));
+    const decrementQuantity = (): void =>
+        setQuantity((q) => (q > 1 ? q - 1 : q));
 
     return (
-        <article className='bg-theme-white relative inline-flex flex-col gap-4 items-center px-5 py-8 font-Montserrat border-2 rounded border-theme-gray transition-colors duration-150 hover:border-theme-lightcrimson '>
+        <article className='bg-theme-white relative inline-flex flex-col gap-4 items-center px-5 py-8 font-Montserrat border-2 rounded-lg border-theme-gray transition-colors duration-150 hover:border-theme-lightcrimson '>
             {discount_percentage > 0 && (
                 <DiscountLabel amount={discount_percentage} />
             )}
@@ -35,12 +45,27 @@ export const ProductCard = ({
                     )}
                 </div>
             </div>
-            <button
-                onClick={() => addToCart(pk, 10)}
-                className='uppercase bg-theme-lightcrimson hover:bg-theme-crimson px-14 py-2 rounded-full text-theme-white transition-colors duration-200'
-            >
-                Buy
-            </button>
+            <div className='flex gap-4 items-center'>
+                <div className='w-24 h-8 flex justify-center'>
+                    <QuantityButton
+                        callback={decrementQuantity}
+                        Icon={MinusIcon}
+                    />
+                    <div className='w-1/3 h-full flex justify-center items-center'>
+                        {quantity}
+                    </div>
+                    <QuantityButton
+                        callback={incrementQuantity}
+                        Icon={PlusIcon}
+                    />
+                </div>
+                <button
+                    onClick={() => addToCart(pk, quantity)}
+                    className='uppercase bg-theme-lightcrimson hover:bg-theme-crimson px-8 py-2 rounded-full text-theme-white transition-colors duration-200'
+                >
+                    Buy
+                </button>
+            </div>
         </article>
     );
 };

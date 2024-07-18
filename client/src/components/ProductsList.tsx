@@ -27,10 +27,11 @@ export const ProductsList = ({
 
     return (
         <main className='p-10 flex justify-center'>
-            <div className='w-2/3 flex justify-center gap-10 flex-wrap'>
-                {products.map((product) => {
+            <div className='w-2/3 flex justify-center gap-8 flex-wrap'>
+                {products.map((product, i) => {
                     return (
                         <ProductCard
+                            key={i}
                             name={product.name}
                             image={product.image}
                             price={product.price}

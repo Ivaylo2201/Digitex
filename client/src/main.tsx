@@ -5,8 +5,9 @@ import {
     createBrowserRouter,
     RouterProvider
 } from 'react-router-dom';
-import { Home } from './pages/Home.tsx';
+
 import { ProductsList } from './components/ProductsList.tsx';
+import { Home } from './components/Home.tsx';
 
 const router = createBrowserRouter([
     {
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
                 element: <ProductsList category='discounted' />
             },
             {
-                path: '/products/smartphones'
+                path: '/products/smartphones',
+                element: <ProductsList category='smartphones' />
             },
             {
                 path: '/products/tablets'

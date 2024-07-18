@@ -11,7 +11,8 @@ class ProductAdmin(admin.ModelAdmin):
         'base_price',
         'discount_percentage',
         'image',
-        'price'
+        'price',
+        'date_added',
     ]
 
 @admin.register(CartItem)
@@ -29,5 +30,6 @@ class OrderAdmin(admin.ModelAdmin):
         'pk',
         'user',
         'items_count',
-        'total_price'
+        'total_price',
+        'order_date'
     ]
