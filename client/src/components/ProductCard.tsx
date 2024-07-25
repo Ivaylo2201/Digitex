@@ -24,7 +24,7 @@ export const ProductCard = ({
         setQuantity((q) => (q > 1 ? q - 1 : q));
 
     return (
-        <article className='bg-theme-white relative inline-flex flex-col gap-4 items-center px-5 py-8 font-Montserrat border-2 rounded-lg border-theme-gray transition-colors duration-150 hover:border-theme-lightcrimson '>
+        <article className='bg-theme-white relative inline-flex flex-col gap-6 items-center px-5 py-8 font-Montserrat border-2 rounded-lg border-theme-gray transition-colors duration-150 hover:border-theme-crimson '>
             {discount_percentage > 0 && (
                 <DiscountLabel amount={discount_percentage} />
             )}
@@ -35,7 +35,7 @@ export const ProductCard = ({
                 </span>
                 <p className='font-bold'>{name}</p>
                 <div className='flex gap-2 justify-center items-center'>
-                    <span className='font-bold text-xl text-theme-lightcrimson'>
+                    <span className='font-bold text-xl text-theme-crimson'>
                         {`$${price}`}
                     </span>
                     {discount_percentage > 0 && (
@@ -45,13 +45,13 @@ export const ProductCard = ({
                     )}
                 </div>
             </div>
-            <div className='flex gap-4 items-center'>
+            <div className='flex gap-5 items-center'>
                 <div className='w-24 h-8 flex justify-center'>
                     <QuantityButton
                         callback={decrementQuantity}
                         Icon={MinusIcon}
                     />
-                    <div className='w-1/3 h-full flex justify-center items-center'>
+                    <div className='w-8 h-full flex justify-center items-center'>
                         {quantity}
                     </div>
                     <QuantityButton
@@ -61,7 +61,7 @@ export const ProductCard = ({
                 </div>
                 <button
                     onClick={() => addToCart(pk, quantity)}
-                    className='uppercase bg-theme-lightcrimson hover:bg-theme-crimson px-8 py-2 rounded-full text-theme-white transition-colors duration-200'
+                    className='uppercase bg-theme-crimson hover:bg-theme-lightcrimson px-8 py-2 rounded-full text-theme-white transition-colors duration-200'
                 >
                     Buy
                 </button>

@@ -2,7 +2,11 @@ import CrossIcon from '../icons/CrossIcon';
 import { CartItem } from '../types/CartItem';
 import { useCart } from './CartContextProvider';
 
-export const CartItemCard = ({ pk, product, quantity }: CartItem): JSX.Element => {
+export const CartItemCard = ({
+    pk,
+    product,
+    quantity
+}: CartItem): JSX.Element => {
     const { removeFromCart } = useCart();
 
     return (

@@ -1,7 +1,11 @@
 import { CartItem } from '../types/CartItem';
 import { CartItemCard } from './CartItemCard';
 
-export const CardItemCardList = ({ items }: { items: CartItem[] }): JSX.Element => {
+export const CardItemCardList = ({
+    items
+}: {
+    items: CartItem[];
+}): JSX.Element => {
     return (
         <>
             {items.map((item, i) => {

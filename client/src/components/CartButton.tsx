@@ -12,7 +12,7 @@ export const CartButton = (): JSX.Element => {
                 className='relative flex flex-col justify-center items-center cursor-pointer'
             >
                 {cartData.cartitems_count > 0 && (
-                    <span className='w-5 h-5 flex justify-center items-center absolute -top-2 -right-1 rounded-full bg-theme-lightcrimson text-xs text-theme-white font-Montserrat '>
+                    <span className='w-5 h-5 flex justify-center items-center absolute -top-2 -right-1 rounded-full bg-theme-crimson text-xs text-theme-white font-Montserrat '>
                         {cartData.cartitems_count}
                     </span>
                 )}

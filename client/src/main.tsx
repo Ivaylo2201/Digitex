@@ -23,23 +23,36 @@ const router = createBrowserRouter([
                 element: <ProductsList category='smartphones' />
             },
             {
-                path: '/products/tablets'
+                path: '/products/tablets',
+                element: <ProductsList category='tablets' />
             },
             {
                 path: '/products/monitors',
                 element: <ProductsList category='monitors' />
             },
             {
-                path: '/products/tvs'
+                path: '/products/tvs',
+                element: <ProductsList category='tvs' />
             },
             {
-                path: '/products/laptops'
+                path: '/products/laptops',
+                element: <ProductsList category='laptops' />
             },
             {
-                path: '/products/computers'
+                path: '/products/computers',
+                element: <ProductsList category='computers' />
             },
             {
-                path: '/products/headsets'
+                path: '/products/headsets',
+                element: <ProductsList category='headsets' />
+            },
+            {
+                path: '/accounts/login',
+                element: <h1>Signup</h1>
+            },
+            {
+                path: '/accounts/signup',
+                element: <h1>Signup</h1>
             }
         ]
     }

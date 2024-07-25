@@ -16,7 +16,7 @@ from .models import Cart, CartItem, Order, Product
 
 class DiscountedProductsListAPIView(views.ListAPIView):
     queryset = Product.objects.filter(
-        discount_percentage__gt=0).order_by('-date_added')[0:7]
+        discount_percentage__gt=0).order_by('-date_added')[0:8]
     serializer_class = ProductSerializer
 
 
