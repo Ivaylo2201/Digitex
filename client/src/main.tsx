@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import {
-    createBrowserRouter,
-    RouterProvider
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ProductsList } from './components/ProductsList.tsx';
 import { Home } from './components/Home.tsx';
+import { SignInForm } from './components/SignInForm.tsx';
 
 const router = createBrowserRouter([
     {
@@ -47,8 +45,8 @@ const router = createBrowserRouter([
                 element: <ProductsList category='headsets' />
             },
             {
-                path: '/accounts/login',
-                element: <h1>Signup</h1>
+                path: '/accounts/signin',
+                element: <SignInForm />
             },
             {
                 path: '/accounts/signup',

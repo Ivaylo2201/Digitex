@@ -6,7 +6,7 @@ import { PlusIcon } from '../icons/PlusIcon';
 import { MinusIcon } from '../icons/MinusIcon';
 import { QuantityButton } from './QuantityButton';
 
-export const ProductCard = ({
+export const ProductCard: React.FC<Product> = ({
     pk,
     name,
     category,
@@ -14,7 +14,7 @@ export const ProductCard = ({
     price,
     discount_percentage,
     image
-}: Product): JSX.Element => {
+}) => {
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState<number>(1);
 
@@ -24,15 +24,13 @@ export const ProductCard = ({
         setQuantity((q) => (q > 1 ? q - 1 : q));
 
     return (
-        <article className='bg-theme-white relative inline-flex flex-col gap-6 items-center px-5 py-8 font-Montserrat border-2 rounded-lg border-theme-gray transition-colors duration-150 hover:border-theme-crimson '>
+        <article className='bg-theme-white relative inline-flex flex-col gap-6 items-center px-5 py-8 font-Montserrat border-2 rounded-lg border-theme-gray transition-colors duration-150 hover:border-theme-crimson'>
             {discount_percentage > 0 && (
                 <DiscountLabel amount={discount_percentage} />
             )}
             <img src={image} className='w-56 h-40 object-contain' />
             <div className='text-center'>
-                <span className='text-theme-darkgray text-2xm'>
-                    {category}
-                </span>
+                <span className='text-theme-darkgray text-2xm'>{category}</span>
                 <p className='font-bold'>{name}</p>
                 <div className='flex gap-2 justify-center items-center'>
                     <span className='font-bold text-xl text-theme-crimson'>

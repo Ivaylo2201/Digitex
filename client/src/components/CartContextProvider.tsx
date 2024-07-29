@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
 import getAuthHeaders from '../utils/getAuthHeaders';
 import { CartItem } from '../types/CartItem';
+import { useNavigate } from 'react-router-dom';
 
 type Cart = {
     subtotal: number;
@@ -19,6 +20,10 @@ interface CartContextType {
     fetchCartData: () => void;
 }
 
+type ProviderProps = {
+    children: React.ReactNode;
+};
+
 const CartContext = createContext<CartContextType | null>(null);
 
 export const useCart = (): CartContextType => {
@@ -29,17 +34,14 @@ export const useCart = (): CartContextType => {
     return context;
 };
 
-export const CartProvider = ({
-    children
-}: {
-    children: React.ReactNode;
-}) => {
+export const CartProvider: React.FC<ProviderProps> = ({ children }) => {
     const [cartData, setCartData] = useState<Cart>({
         subtotal: 0,
         cartitems: [],
         cartitems_count: 0
     });
     const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isCartOpen) {
@@ -76,7 +78,11 @@ export const CartProvider = ({
             await axios.post(url, body, getAuthHeaders());
             fetchCartData();
         } catch (error) {
-            console.error(error);
+            if (axios.isAxiosError(error) && error.response?.status === 401) {
+                navigate('/accounts/signin');
+            } else {
+                console.error(error);
+            }
         }
     };
 

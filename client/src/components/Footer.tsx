@@ -3,7 +3,7 @@ import FacebookIcon from '../icons/FacebookIcon';
 import GooglePlusIcon from '../icons/GooglePlusIcon';
 import InstagramIcon from '../icons/InstagramIcon';
 
-export const Footer: React.FC = (): JSX.Element => {
+export const Footer: React.FC = () => {
     return (
         <footer className='py-8 gap-2 flex flex-col justify-center items-center bg-theme-eerie-black'>
             <Link

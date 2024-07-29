@@ -3,7 +3,8 @@ from django.db.models import Q, QuerySet
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, authenticate
+from rest_framework.authtoken.models import Token
 import rest_framework.generics as views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
@@ -104,3 +105,27 @@ class PlaceOrderCreateAPIView(views.CreateAPIView):
         cart.cartitems.all().delete()
 
         return Response({'detail': 'Successfully placed order'}, status=status.HTTP_201_CREATED)
+
+
+class RetrieveUserAPIView(views.RetrieveAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request: Request, *args, **kwargs) -> Response:
+        return Response({'username': request.user.username}, status=status.HTTP_200_OK)
+
+
+class SignInUserAPIView(views.CreateAPIView):
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        username: str = request.data['username']
+        password: str = request.data['password']
+
+        user: Optional[User] = authenticate(
+            username=username, password=password)
+
+        if user is None:
+            return Response({'detail': 'Invalid credentials!'}, status=status.HTTP_400_BAD_REQUEST)
+
+        token: Token = Token.objects.get_or_create(user=user)[0]
+
+        return Response({'token': token.key}, status=status.HTTP_200_OK)

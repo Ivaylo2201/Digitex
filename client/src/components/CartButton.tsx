@@ -1,14 +1,26 @@
 import CartIcon from '../icons/CartIcon';
 import { CartWindow } from './CartWindow';
 import { useCart } from './CartContextProvider';
+import { useLogger } from './LogContextProvider';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export const CartButton = (): JSX.Element => {
+export const CartButton: React.FC = () => {
     const { cartData, isCartOpen, setIsCartOpen } = useCart();
+    const { isLoggedIn } = useLogger()
+    const navigate: NavigateFunction = useNavigate()
+
+    const dispatch = (): void => {
+        if (isLoggedIn) {
+            setIsCartOpen(!isCartOpen)
+        } else {
+            navigate('accounts/signin/');
+        }
+    }
 
     return (
         <div className='relative inline-flex flex-col justify-center items-center'>
             <button
-                onClick={() => setIsCartOpen(!isCartOpen)}
+                onClick={dispatch}
                 className='relative flex flex-col justify-center items-center cursor-pointer'
             >
                 {cartData.cartitems_count > 0 && (

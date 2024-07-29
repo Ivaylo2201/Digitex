@@ -6,7 +6,7 @@ import { InformationPanel } from './InformationPanel';
 import { useCart } from './CartContextProvider';
 import { useEffect } from 'react';
 
-export const Header = (): JSX.Element => {
+export const Header: React.FC = () => {
     const { fetchCartData } = useCart();
 
     useEffect(() => {

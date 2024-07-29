@@ -3,11 +3,7 @@ import { Product } from '../types/Product';
 import axios, { AxiosResponse } from 'axios';
 import { ProductCard } from '../components/ProductCard';
 
-export const ProductsList = ({
-    category
-}: {
-    category: string;
-}): JSX.Element => {
+export const ProductsList: React.FC<{ category: string }> = ({ category }) => {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {

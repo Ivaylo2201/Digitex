@@ -1,6 +1,6 @@
 import { CategoryLink } from './CategoryLink';
 
-export const CategoryLinks = (): JSX.Element => {
+export const CategoryLinks: React.FC = () => {
     return (
         <nav className='border-b-2 border-theme-gray flex justify-center'>
             <ul className='w-full lg:w-3/5 flex flex-col justify-center lg:flex-row'>

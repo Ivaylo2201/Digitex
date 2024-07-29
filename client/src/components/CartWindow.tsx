@@ -1,15 +1,15 @@
 import { useCart } from './CartContextProvider';
-import { CardItemCardList } from './CartItemCardList';
+import { CartItemCardList } from './CartItemCardList';
 import { NoCartItems } from './NoCartItems';
 
-export const CartWindow = (): JSX.Element => {
+export const CartWindow: React.FC = () => {
     const { placeOrder, cartData } = useCart();
 
     return (
         <section className='absolute z-50 -left-40 lg:-left-0 top-16 rounded-sm p-3 flex flex-col gap-2 bg-theme-white border border-theme-gray'>
             <>
                 {cartData.cartitems_count > 0 ? (
-                    <CardItemCardList items={cartData.cartitems} />
+                    <CartItemCardList items={cartData.cartitems} />
                 ) : (
                     <NoCartItems />
                 )}

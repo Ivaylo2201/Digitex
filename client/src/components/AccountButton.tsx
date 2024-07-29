@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AccountIcon from '../icons/AccountIcon';
 import { AccountWindow } from './AccountWindow';
 
-export const AccountButton = (): JSX.Element => {
+export const AccountButton: React.FC = () => {
     const [isAccountWindowOpen, setIsAccountWindowOpen] =
         useState<boolean>(false);
 
