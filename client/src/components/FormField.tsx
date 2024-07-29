@@ -13,10 +13,11 @@ export const FormField: React.FC<FormFieldProps> = ({
 }) => {
     return (
         <input
+            required
             type={type}
             placeholder={placeholder}
             name={placeholder.toLowerCase()}
-            className='px-2 py-1 bg-theme-gray outline-none'
+            className='px-2 py-1 bg-theme-gray outline-none mb-3'
             onChange={onChange}
         />
     );

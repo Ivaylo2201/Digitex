@@ -22,7 +22,7 @@ export const ProductsList: React.FC<{ category: string }> = ({ category }) => {
     };
 
     return (
-        <main className='p-10 flex justify-center'>
+        <main className='p-14 flex justify-center'>
             <div className='w-2/3 flex justify-center gap-8 flex-wrap'>
                 {products.map((product, i) => {
                     return (

@@ -1,15 +1,14 @@
 from django.urls import path, include
 
-from .views import AddCartItemToCartCreateAPIView, CartRetrieveAPIView, DiscountedProductsListAPIView, PlaceOrderCreateAPIView, ProductsByCategoryListAPIView, ProductsByLookupListAPIView, RemoveCartItemFromCartDestroyAPIView, RetrieveUserAPIView, SignInUserAPIView
+from .views import AddCartItemToCartCreateAPIView, CartRetrieveAPIView, DiscountedProductsListAPIView, PlaceOrderCreateAPIView, ProductsByCategoryListAPIView, ProductsByLookupListAPIView, RemoveCartItemFromCartDestroyAPIView, SignInUserAPIView, SignOutUserAPIView, SignUpUserCreateAPIView
 
 
 urlpatterns = [
     path('accounts/', include(
         [
-            path('retrieve/', RetrieveUserAPIView.as_view()),
-            # path('signup/'),
+            path('signup/', SignUpUserCreateAPIView.as_view()),
             path('signin/', SignInUserAPIView.as_view()),
-            # path('signout/'),
+            path('signout/', SignOutUserAPIView.as_view()),
         ]
     )),
     path('products/', include(

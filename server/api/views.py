@@ -11,7 +11,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from .permissions import IsOwner
-from .serializers import AddCartItemToCartSerializer, CartSerializer, ProductSerializer
+from .serializers import AddCartItemToCartSerializer, CartSerializer, ProductSerializer, UserSerializer
 from .models import Cart, CartItem, Order, Product
 
 
@@ -107,18 +107,16 @@ class PlaceOrderCreateAPIView(views.CreateAPIView):
         return Response({'detail': 'Successfully placed order'}, status=status.HTTP_201_CREATED)
 
 
-class RetrieveUserAPIView(views.RetrieveAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request: Request, *args, **kwargs) -> Response:
-        return Response({'username': request.user.username}, status=status.HTTP_200_OK)
+class SignUpUserCreateAPIView(views.CreateAPIView):
+    serializer_class = UserSerializer
 
 
 class SignInUserAPIView(views.CreateAPIView):
     def post(self, request: Request, *args, **kwargs) -> Response:
         username: str = request.data['username']
         password: str = request.data['password']
+
+        print(username, password)
 
         user: Optional[User] = authenticate(
             username=username, password=password)
@@ -129,3 +127,13 @@ class SignInUserAPIView(views.CreateAPIView):
         token: Token = Token.objects.get_or_create(user=user)[0]
 
         return Response({'token': token.key}, status=status.HTTP_200_OK)
+
+
+class SignOutUserAPIView(views.DestroyAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request: Request, *args, **kwargs) -> Response:
+        user: User = request.user
+        Token.objects.filter(user=user).delete()
+        return Response({'detail': 'User successfully signed out'}, status=status.HTTP_200_OK)

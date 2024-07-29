@@ -81,7 +81,10 @@ class Cart(models.Model):
 
     @property
     def cartitems_count(self) -> int:
-        return len(self.cartitems.all())
+        total: int = 0    
+        for item in self.cartitems.all():
+            total += item.quantity
+        return total
     
     def __str__(self) -> str:
         return f'{self.user.username}\'s cart'

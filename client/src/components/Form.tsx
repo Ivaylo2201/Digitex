@@ -1,18 +1,24 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useLogger } from './LogContextProvider';
 import { FormField } from './FormField';
+import { FormPurpose } from '../types/FormPurpose';
+
 
 type User = {
     username: string;
     password: string;
+    email?: string;
 };
 
-export const SignInForm: React.FC = () => {
+export const Form: React.FC<{ purpose: FormPurpose }> = ({ purpose }) => {
     const [formData, setFormData] = useState<User>({
         username: '',
-        password: ''
+        password: '',
+        email: ''
     });
-    const { signIn, setError, error } = useLogger();
+    const label: string = purpose === FormPurpose.SIGNIN ? 'Sign in' : 'Sign up'
+
+    const { signIn, signUp, setError, error } = useLogger();
 
     useEffect(() => {
         setError('');
@@ -27,23 +33,34 @@ export const SignInForm: React.FC = () => {
     };
 
     const handleSubmit = (e: FormEvent) => {
-        signIn(e, formData);
+        if (purpose === FormPurpose.SIGNIN) {
+            signIn(e, formData);
+        } else {
+            signUp(e, formData);
+        }
     };
 
     return (
         <main className='p-10 lg:p-20 flex justify-center'>
             <form
                 onSubmit={handleSubmit}
-                className='p-14 bg-theme-white relative inline-flex flex-col gap-6 items-center font-Montserrat border-2 rounded-lg border-theme-gray transition-colors duration-150 hover:border-theme-crimson'
+                className='p-14 bg-theme-white relative inline-flex flex-col gap-4 items-center font-Montserrat border-2 rounded-lg border-theme-gray transition-colors duration-150 hover:border-theme-crimson'
             >
                 <h2 className='text-4xl mb-6 font-bold text-theme-darkblue'>
-                    Sign in
+                    {label}
                 </h2>
                 <FormField
                     type='text'
                     placeholder='Username'
                     onChange={handleChange}
                 />
+                {purpose === FormPurpose.SIGNUP && (
+                    <FormField
+                        type='email'
+                        placeholder='Email'
+                        onChange={handleChange}
+                    />
+                )}
                 <FormField
                     type='password'
                     placeholder='Password'
@@ -53,9 +70,9 @@ export const SignInForm: React.FC = () => {
                 <span className='font-bold text-theme-crimson'>{error}</span>
                 <button
                     type='submit'
-                    className='text-xm uppercase bg-theme-crimson hover:bg-theme-lightcrimson text-theme-white rounded-full px-5 py-2 mr-1 transition-colors duration-150'
+                    className='text-xm uppercase bg-theme-crimson hover:bg-theme-lightcrimson text-theme-white rounded-full px-8 py-2 mr-1 transition-colors duration-150'
                 >
-                    Sign In
+                    {label}
                 </button>
             </form>
         </main>

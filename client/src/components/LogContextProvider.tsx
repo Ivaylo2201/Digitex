@@ -1,11 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import {
-    createContext,
-    FormEvent,
-    useContext,
-    useState
-} from 'react';
+import { createContext, FormEvent, useContext, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
+import getAuthHeaders from '../utils/getAuthHeaders';
 type User = {
     username: string;
     password: string;
@@ -14,7 +10,7 @@ type User = {
 type LogContextType = {
     signIn: (e: FormEvent, body: User) => void;
     signOut: () => void;
-    signUp: () => void;
+    signUp: (e: FormEvent, body: User) => void;
     setError: React.Dispatch<React.SetStateAction<string>>;
     error: string;
     isLoggedIn: boolean;
@@ -61,13 +57,29 @@ export const LogProvider: React.FC<ProviderProps> = ({ children }) => {
         }
     };
 
-    const signOut = (): void => {
-        setIsLoggedIn(false);
+    const signOut = async (): Promise<void> => {
         localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        const url: string = 'http://localhost:8000/api/accounts/signout/';
+
+        try {
+            await axios.delete(url, getAuthHeaders());
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    const signUp = async (): Promise<void> => {};
+    const signUp = async (e: FormEvent, body: User): Promise<void> => {
+        e.preventDefault();
+        const url: string = 'http://localhost:8000/api/accounts/signup/';
 
+        try {
+            await axios.post(url, body);
+            signIn(e, body);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const contextValue: LogContextType = {
         isLoggedIn,

@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta, timezone
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 from .models import Cart, CartItem, Product
 from .constraints import SERIALIZER_MAX_DIGITS, SERIALIZER_DECIMAL_PLACES
@@ -59,3 +59,13 @@ class CartSerializer(serializers.ModelSerializer):
             'subtotal',
             'cartitems_count'
         ]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
+    def create(self, validated_data) -> User: 
+        user = User.objects.create_user(**validated_data)
+        return user
