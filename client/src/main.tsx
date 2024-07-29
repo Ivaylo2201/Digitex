@@ -5,8 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ProductsList } from './components/ProductsList.tsx';
 import { Home } from './components/Home.tsx';
-import { Form } from './components/Form.tsx';
-import { FormPurpose } from './types/FormPurpose.ts';
+import { SignInForm } from './components/SignInForm.tsx';
+import { SignUpForm } from './components/SignUpForm.tsx';
 
 const router = createBrowserRouter([
     {
@@ -47,11 +47,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/accounts/signin',
-                element: <Form purpose={FormPurpose.SIGNIN} />
+                element: <SignInForm />
             },
             {
                 path: '/accounts/signup',
-                element: <Form purpose={FormPurpose.SIGNUP} />
+                element: <SignUpForm />
             }
         ]
     }
