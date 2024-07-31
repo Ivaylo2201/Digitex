@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { ProductsList } from './components/ProductsList.tsx';
-import { Home } from './components/Home.tsx';
-import { SignInForm } from './components/SignInForm.tsx';
-import { SignUpForm } from './components/SignUpForm.tsx';
+
+import { Home } from './components/common/Home.tsx';
+import { SignInForm } from './components/forms/SignInForm.tsx';
+import { SignUpForm } from './components/forms/SignUpForm.tsx';
+import { ProductsList } from './components/product/ProductsList.tsx';
 
 const router = createBrowserRouter([
     {

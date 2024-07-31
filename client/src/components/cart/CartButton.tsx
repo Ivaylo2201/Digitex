@@ -1,7 +1,7 @@
-import CartIcon from '../icons/CartIcon';
+import CartIcon from '../../icons/CartIcon';
+import { useCart } from '../context/CartContextProvider';
+import { useLogger } from '../context/LogContextProvider';
 import { CartWindow } from './CartWindow';
-import { useCart } from './CartContextProvider';
-import { useLogger } from './LogContextProvider';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
 export const CartButton: React.FC = () => {

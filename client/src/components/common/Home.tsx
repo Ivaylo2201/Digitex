@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { CartProvider } from '../components/CartContextProvider';
-import { Footer } from './Footer';
-import { LogProvider } from './LogContextProvider';
+import { CartProvider } from '../context/CartContextProvider';
+import { LogProvider } from '../context/LogContextProvider';
+import { Header } from '../layout/Header';
+import { Footer } from '../layout/Footer';
+
 
 export const Home: React.FC = () => {
     return (

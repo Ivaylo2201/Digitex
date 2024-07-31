@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
-import getAuthHeaders from '../utils/getAuthHeaders';
-import { CartItem } from '../types/CartItem';
 import { useNavigate } from 'react-router-dom';
+import { CartItem } from '../../types/CartItem';
+import getAuthHeaders from '../../utils/getAuthHeaders';
 
 type Cart = {
     subtotal: number;

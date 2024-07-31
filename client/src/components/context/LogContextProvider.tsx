@@ -1,7 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { createContext, FormEvent, useContext, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-import getAuthHeaders from '../utils/getAuthHeaders';
+import getAuthHeaders from '../../utils/getAuthHeaders';
+
+
 type User = {
     username: string;
     password: string;

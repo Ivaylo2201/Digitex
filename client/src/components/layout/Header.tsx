@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { AccountButton } from './AccountButton';
-import { CartButton } from './CartButton';
-import { CategoryLinks } from './CategoryLinks';
 import { InformationPanel } from './InformationPanel';
-import { useCart } from './CartContextProvider';
 import { useEffect } from 'react';
+import { useCart } from '../context/CartContextProvider';
+import { AccountButton } from '../auth/AccountButton';
+import { CartButton } from '../cart/CartButton';
+import { CategoryLinks } from '../navigation/CategoryLinks';
 
 export const Header: React.FC = () => {
     const { fetchCartData } = useCart();

@@ -1,6 +1,7 @@
-import CrossIcon from '../icons/CrossIcon';
-import { CartItem } from '../types/CartItem';
-import { useCart } from './CartContextProvider';
+import CrossIcon from "../../icons/CrossIcon";
+import { CartItem } from "../../types/CartItem";
+import { useCart } from "../context/CartContextProvider";
+
 
 export const CartItemCard: React.FC<CartItem> = ({ pk, product, quantity }) => {
     const { removeFromCart } = useCart();

@@ -116,8 +116,6 @@ class SignInUserAPIView(views.CreateAPIView):
         username: str = request.data['username']
         password: str = request.data['password']
 
-        print(username, password)
-
         user: Optional[User] = authenticate(
             username=username, password=password)
 

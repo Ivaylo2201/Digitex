@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Product } from '../types/Product';
-import { useCart } from './CartContextProvider';
 import { DiscountLabel } from './DiscountLabel';
-import { PlusIcon } from '../icons/PlusIcon';
-import { MinusIcon } from '../icons/MinusIcon';
 import { QuantityButton } from './QuantityButton';
+import { useCart } from '../context/CartContextProvider';
+import { Product } from '../../types/Product';
+import { MinusIcon } from '../../icons/MinusIcon';
+import { PlusIcon } from '../../icons/PlusIcon';
 
 export const ProductCard: React.FC<Product> = ({
     pk,

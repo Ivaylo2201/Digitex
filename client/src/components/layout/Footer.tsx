@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import FacebookIcon from '../icons/FacebookIcon';
-import GooglePlusIcon from '../icons/GooglePlusIcon';
-import InstagramIcon from '../icons/InstagramIcon';
+import FacebookIcon from '../../icons/FacebookIcon';
+import InstagramIcon from '../../icons/InstagramIcon';
+import GooglePlusIcon from '../../icons/GooglePlusIcon';
+
 
 export const Footer: React.FC = () => {
     return (

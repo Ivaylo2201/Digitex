@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import AccountIcon from '../icons/AccountIcon';
 import { AccountWindow } from './AccountWindow';
+import AccountIcon from '../../icons/AccountIcon';
 
 export const AccountButton: React.FC = () => {
     const [isAccountWindowOpen, setIsAccountWindowOpen] =

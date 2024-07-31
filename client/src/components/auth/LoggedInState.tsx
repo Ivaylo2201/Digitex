@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useLogger } from './LogContextProvider';
+import { useLogger } from '../context/LogContextProvider';
+
 
 export const LoggedInState: React.FC = () => {
     const { signOut } = useLogger()

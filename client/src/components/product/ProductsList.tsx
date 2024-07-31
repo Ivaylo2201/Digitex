@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Product } from '../types/Product';
 import axios, { AxiosResponse } from 'axios';
-import { ProductCard } from '../components/ProductCard';
+import { Product } from '../../types/Product';
+import { ProductCard } from './ProductCard';
+
 
 export const ProductsList: React.FC<{ category: string }> = ({ category }) => {
     const [products, setProducts] = useState<Product[]>([]);

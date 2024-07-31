@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { FormField } from './FormField';
-import { useLogger } from './LogContextProvider';
-import { FormLayout } from './FormLayout';
-import { User } from '../types/User';
+import { User } from '../../types/User';
+import { useLogger } from '../context/LogContextProvider';
+import { FormLayout } from '../layout/FormLayout';
 
 export const SignInForm: React.FC = () => {
     const [formData, setFormData] = useState<User>({
@@ -26,7 +26,7 @@ export const SignInForm: React.FC = () => {
             onSubmit={(e) => signIn(e, formData)}
             error={error}
             hyperlink={{
-                helpText: 'Don\'t have an account? Sign up',
+                helpText: "Don't have an account? Sign up",
                 to: '/accounts/signup'
             }}
         >

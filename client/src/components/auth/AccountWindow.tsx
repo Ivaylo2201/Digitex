@@ -1,6 +1,7 @@
+import { useLogger } from '../context/LogContextProvider';
 import { LoggedInState } from './LoggedInState';
 import { LoggedOutState } from './LoggedOutState';
-import { useLogger } from './LogContextProvider';
+
 
 export const AccountWindow: React.FC = () => {
     const { isLoggedIn } = useLogger();

@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { FormField } from './FormField';
-import { useLogger } from './LogContextProvider';
-import { FormLayout } from './FormLayout';
-import { User } from '../types/User';
+import { User } from '../../types/User';
+import { useLogger } from '../context/LogContextProvider';
+import { FormLayout } from '../layout/FormLayout';
 
 export const SignUpForm: React.FC = () => {
     const [formData, setFormData] = useState<User & { email: string }>({
