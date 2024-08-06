@@ -1,9 +1,10 @@
 import CrossIcon from "../../icons/CrossIcon";
 import { CartItem } from "../../types/CartItem";
 import { useCart } from "../context/CartContextProvider";
+import { CartItemImage } from "./CartItemImage";
 
 
-export const CartItemCard: React.FC<CartItem> = ({ pk, product, quantity }) => {
+export const CartItemCard = ({ pk, product, quantity }: CartItem) => {
     const { removeFromCart } = useCart();
 
     return (
@@ -15,9 +16,7 @@ export const CartItemCard: React.FC<CartItem> = ({ pk, product, quantity }) => {
                 <CrossIcon />
             </button>
             <div className='flex flex-grow gap-4'>
-                <div className='w-16 flex items-center'>
-                    <img src={product.image} alt='' />
-                </div>
+                <CartItemImage image={product.image} />
                 <div className='flex flex-col justify-center font-bold text-2xm'>
                     <p className='w-40 whitespace-nowrap overflow-hidden text-ellipsis'>
                         {product.name}

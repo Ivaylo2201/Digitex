@@ -1,10 +1,11 @@
 import { CartItem } from '../../types/CartItem';
 import { CartItemCard } from './CartItemCard';
 
+type CartItemCardListProps = {
+    items: CartItem[];
+};
 
-export const CartItemCardList: React.FC<{ items: CartItem[] }> = ({
-    items
-}) => {
+export const CartItemCardList = ({ items }: CartItemCardListProps) => {
     return (
         <>
             {items.map((item, i) => {

@@ -11,13 +11,19 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from .permissions import IsOwner
-from .serializers import AddCartItemToCartSerializer, CartSerializer, ProductSerializer, UserSerializer
+from .serializers import (
+    AddCartItemToCartSerializer,
+    CartSerializer,
+    ProductSerializer,
+    UserSerializer,
+)
 from .models import Cart, CartItem, Order, Product
 
 
 class DiscountedProductsListAPIView(views.ListAPIView):
-    queryset = Product.objects.filter(
-        discount_percentage__gt=0).order_by('-date_added')[0:8]
+    queryset = Product.objects.filter(discount_percentage__gt=0).order_by(
+        "-date_added"
+    )[0:8]
     serializer_class = ProductSerializer
 
 
@@ -25,7 +31,7 @@ class ProductsByCategoryListAPIView(views.ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self) -> QuerySet:
-        category: str = self.kwargs['category'][0:-1]
+        category: str = self.kwargs["category"][0:-1]
         return Product.objects.filter(category__iexact=category)
 
 
@@ -33,7 +39,7 @@ class ProductsByLookupListAPIView(views.ListAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self) -> QuerySet:
-        lookup: str = self.request.query_params['lookup']
+        lookup: str = self.request.query_params["lookup"]
         criteria: Q = Q(name__icontains=lookup) | Q(category__icontains=lookup)
 
         if lookup is not None:
@@ -59,19 +65,19 @@ class AddCartItemToCartCreateAPIView(views.CreateAPIView):
         serializer = AddCartItemToCartSerializer(data=request.data)
 
         if not serializer.is_valid():
-            return Response({'details': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"details": serializer.errors}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         cart: Cart = request.user.cart
-        product: Product = Product.objects.get(pk=request.data['product'])
-        quantity: int = request.data['quantity']
+        product: Product = Product.objects.get(pk=request.data["product"])
+        quantity: int = request.data["quantity"]
 
-        CartItem.objects.create(
-            cart=cart,
-            product=product,
-            quantity=quantity
+        CartItem.objects.create(cart=cart, product=product, quantity=quantity)
+
+        return Response(
+            {"details": "Successfully added to cart"}, status=status.HTTP_201_CREATED
         )
-
-        return Response({'details': 'Successfully added to cart'}, status=status.HTTP_201_CREATED)
 
 
 class RemoveCartItemFromCartDestroyAPIView(views.DestroyAPIView):
@@ -83,7 +89,10 @@ class RemoveCartItemFromCartDestroyAPIView(views.DestroyAPIView):
         self.check_object_permissions(request, cart_item)
         cart_item.delete()
 
-        return Response({'details': 'Successfully removed from cart'}, status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"details": "Successfully removed from cart"},
+            status=status.HTTP_204_NO_CONTENT,
+        )
 
 
 class PlaceOrderCreateAPIView(views.CreateAPIView):
@@ -94,17 +103,21 @@ class PlaceOrderCreateAPIView(views.CreateAPIView):
         cart: Cart = request.user.cart
 
         if cart.cartitems_count == 0:
-            return Response({'detail': 'Shopping cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "Shopping cart is empty"}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         Order.objects.create(
             user=request.user,
             items_count=cart.cartitems_count,
-            total_price=cart.subtotal
+            total_price=cart.subtotal,
         )
 
         cart.cartitems.all().delete()
 
-        return Response({'detail': 'Successfully placed order'}, status=status.HTTP_201_CREATED)
+        return Response(
+            {"detail": "Successfully placed order"}, status=status.HTTP_201_CREATED
+        )
 
 
 class SignUpUserCreateAPIView(views.CreateAPIView):
@@ -113,18 +126,19 @@ class SignUpUserCreateAPIView(views.CreateAPIView):
 
 class SignInUserAPIView(views.CreateAPIView):
     def post(self, request: Request, *args, **kwargs) -> Response:
-        username: str = request.data['username']
-        password: str = request.data['password']
+        username: str = request.data["username"]
+        password: str = request.data["password"]
 
-        user: Optional[User] = authenticate(
-            username=username, password=password)
+        user: Optional[User] = authenticate(username=username, password=password)
 
         if user is None:
-            return Response({'detail': 'Invalid credentials!'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"detail": "Invalid credentials!"}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         token: Token = Token.objects.get_or_create(user=user)[0]
 
-        return Response({'token': token.key}, status=status.HTTP_200_OK)
+        return Response({"token": token.key}, status=status.HTTP_200_OK)
 
 
 class SignOutUserAPIView(views.DestroyAPIView):
@@ -134,4 +148,6 @@ class SignOutUserAPIView(views.DestroyAPIView):
     def delete(self, request: Request, *args, **kwargs) -> Response:
         user: User = request.user
         Token.objects.filter(user=user).delete()
-        return Response({'detail': 'User successfully signed out'}, status=status.HTTP_200_OK)
+        return Response(
+            {"detail": "User successfully signed out"}, status=status.HTTP_200_OK
+        )

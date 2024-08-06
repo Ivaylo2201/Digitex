@@ -9,7 +9,7 @@ const baseClassName: string = 'text-center block py-4 px-10 font-Montserrat';
 const inactiveClassName: string = `${baseClassName} bg-theme-white text-theme-darkgray hover:bg-theme-crimson hover:text-theme-white transition-colors duration-150`;
 const activeClassName: string = `${baseClassName} bg-theme-crimson text-theme-white`;
 
-export const CategoryLink: React.FC<CategoryLinkProps> = ({ to, label }) => {
+export const CategoryLink = ({ to, label }: CategoryLinkProps) => {
     return (
         <li>
             <NavLink

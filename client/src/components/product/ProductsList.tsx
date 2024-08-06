@@ -1,26 +1,13 @@
-import { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
 import { Product } from '../../types/Product';
 import { ProductCard } from './ProductCard';
+import { useProducts } from '../../hooks/useProducts';
 
+type ProductListProps = {
+    category: string;
+};
 
-export const ProductsList: React.FC<{ category: string }> = ({ category }) => {
-    const [products, setProducts] = useState<Product[]>([]);
-
-    useEffect(() => {
-        fetchProducts();
-    }, [category]);
-
-    const fetchProducts = async () => {
-        const url: string = `http://localhost:8000/api/products/${category}/`;
-
-        try {
-            const response: AxiosResponse<Product[]> = await axios.get(url);
-            setProducts(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+export const ProductsList = ({ category }: ProductListProps) => {
+    const products: Product[] = useProducts(category);
 
     return (
         <main className='p-14 flex justify-center'>
