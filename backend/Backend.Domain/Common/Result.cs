@@ -1,4 +1,4 @@
-﻿namespace Backend.Domain.Abstractions;
+﻿namespace Backend.Domain.Common;
 
 public class Result
 {
