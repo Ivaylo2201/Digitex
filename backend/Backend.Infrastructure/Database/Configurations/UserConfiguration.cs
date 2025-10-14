@@ -33,5 +33,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(order => order.User)
             .HasForeignKey(order => order.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder
+            .HasMany(user => user.LikedProducts)
+            .WithMany(product => product.LikedBy);
     }
 }

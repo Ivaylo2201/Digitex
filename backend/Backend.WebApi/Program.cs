@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var isInDevelopment = builder.Configuration["Environment"] == "Development";
 
-builder.Services.AddControllers(o => o.Filters.Add<ExceptionFilter>());
 builder.Services.AddOpenApi();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
