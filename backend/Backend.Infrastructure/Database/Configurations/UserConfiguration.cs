@@ -37,5 +37,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder
             .HasMany(user => user.LikedProducts)
             .WithMany(product => product.LikedBy);
+        
+        builder
+            .HasMany(user => user.Addresses)
+            .WithOne(address => address.User)
+            .HasForeignKey(address => address.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

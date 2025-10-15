@@ -6,9 +6,15 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
+    private const int InstructionsMaxLength = 255;
+    
     public void Configure(EntityTypeBuilder<Order> builder)
     {
         builder.HasKey(order => order.Id);
+        
+        builder
+            .Property(order => order.Instructions)
+            .HasMaxLength(InstructionsMaxLength);
         
         builder
             .HasOne(order => order.User)
