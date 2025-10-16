@@ -54,7 +54,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 180
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -68,7 +67,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 160
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -82,7 +80,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 165
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -96,7 +93,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 245
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -110,7 +106,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 285
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -124,7 +119,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 320
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -138,7 +132,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 450
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -152,7 +145,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 300
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -166,7 +158,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 350
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -180,7 +171,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 220
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -194,7 +184,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 230
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -208,7 +197,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 170
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -222,7 +210,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 130
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -236,7 +223,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 150
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -250,7 +236,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 120
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -264,7 +249,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 250
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -278,7 +262,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 150
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -292,7 +275,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 185
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -306,7 +288,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 150
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -320,7 +301,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 120
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -334,7 +314,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 75
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -348,7 +327,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 75
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -362,7 +340,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 80
         },
-
         new()
         {
             Brand = Brands["nvidia"],
@@ -376,7 +353,6 @@ internal static class Data
             DirectXSupport = 12,
             Tdp = 145
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -407,7 +383,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 125
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -422,7 +397,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 125
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -437,7 +411,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 125
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -452,7 +425,6 @@ internal static class Data
             Socket = Socket.Am5,
             Tdp = 170
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -467,7 +439,6 @@ internal static class Data
             Socket = Socket.Am5,
             Tdp = 170
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -482,7 +453,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 130
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -497,7 +467,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 130
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -512,7 +481,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 125
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -527,7 +495,6 @@ internal static class Data
             Socket = Socket.Am5,
             Tdp = 170
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -542,7 +509,6 @@ internal static class Data
             Socket = Socket.Am5,
             Tdp = 170
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -557,7 +523,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -572,7 +537,6 @@ internal static class Data
             Socket = Socket.Lga1700,
             Tdp = 60
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -587,7 +551,6 @@ internal static class Data
             Socket = Socket.Am4,
             Tdp = 105
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -602,7 +565,6 @@ internal static class Data
             Socket = Socket.Am4,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -617,7 +579,6 @@ internal static class Data
             Socket = Socket.Am4,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -632,7 +593,6 @@ internal static class Data
             Socket = Socket.Lga1200,
             Tdp = 125
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -647,7 +607,6 @@ internal static class Data
             Socket = Socket.Lga1200,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -662,7 +621,6 @@ internal static class Data
             Socket = Socket.Lga1200,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -677,7 +635,6 @@ internal static class Data
             Socket = Socket.Am4,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -692,7 +649,6 @@ internal static class Data
             Socket = Socket.Am4,
             Tdp = 105
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -707,7 +663,6 @@ internal static class Data
             Socket = Socket.Lga1151,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -722,7 +677,6 @@ internal static class Data
             Socket = Socket.Lga1151,
             Tdp = 95
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -737,7 +691,6 @@ internal static class Data
             Socket = Socket.Am4,
             Tdp = 65
         },
-
         new()
         {
             Brand = Brands["amd"],
@@ -752,7 +705,6 @@ internal static class Data
             Socket = Socket.STrx4,
             Tdp = 280
         },
-
         new()
         {
             Brand = Brands["intel"],
@@ -784,7 +736,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 3
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -799,7 +750,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 4
         },
-
         new()
         {
             Brand = Brands["gigabyte"],
@@ -814,7 +764,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 3
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -829,7 +778,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 2
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -844,7 +792,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 2
         },
-
         new()
         {
             Brand = Brands["gigabyte"],
@@ -859,7 +806,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 3
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -874,7 +820,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 3
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -889,7 +834,6 @@ internal static class Data
             RamSlots = 8,
             PcieSlots = 4
         },
-
         new()
         {
             Brand = Brands["gigabyte"],
@@ -904,7 +848,6 @@ internal static class Data
             RamSlots = 8,
             PcieSlots = 4
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -919,7 +862,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 2
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -934,7 +876,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -949,7 +890,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["gigabyte"],
@@ -964,7 +904,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -979,7 +918,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 2
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -994,7 +932,6 @@ internal static class Data
             RamSlots = 2,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["gigabyte"],
@@ -1009,7 +946,6 @@ internal static class Data
             RamSlots = 2,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1024,7 +960,6 @@ internal static class Data
             RamSlots = 2,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -1039,7 +974,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["gigabyte"],
@@ -1054,7 +988,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1069,7 +1002,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1084,7 +1016,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 3
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -1099,7 +1030,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 2
         },
-
         new()
         {
             Brand = Brands["gigabyte"],
@@ -1114,7 +1044,6 @@ internal static class Data
             RamSlots = 4,
             PcieSlots = 3
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1129,7 +1058,6 @@ internal static class Data
             RamSlots = 2,
             PcieSlots = 1
         },
-
         new()
         {
             Brand = Brands["msi"],
@@ -1162,7 +1090,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["lg"],
@@ -1178,7 +1105,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.233
         },
-
         new()
         {
             Brand = Brands["samsung"],
@@ -1194,7 +1120,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["acer"],
@@ -1210,7 +1135,6 @@ internal static class Data
             Resolution = new Resolution(3840, 2160),
             PixelSize = 0.155
         },
-
         new()
         {
             Brand = Brands["benq"],
@@ -1226,7 +1150,6 @@ internal static class Data
             Resolution = new Resolution(3440, 1440),
             PixelSize = 0.232
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1242,7 +1165,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.233
         },
-
         new()
         {
             Brand = Brands["lg"],
@@ -1258,7 +1180,6 @@ internal static class Data
             Resolution = new Resolution(3440, 1440),
             PixelSize = 0.232
         },
-
         new()
         {
             Brand = Brands["samsung"],
@@ -1274,7 +1195,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.233
         },
-
         new()
         {
             Brand = Brands["acer"],
@@ -1290,7 +1210,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.233
         },
-
         new()
         {
             Brand = Brands["benq"],
@@ -1306,7 +1225,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.233
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1322,7 +1240,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.248
         },
-
         new()
         {
             Brand = Brands["lg"],
@@ -1338,7 +1255,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["acer"],
@@ -1354,7 +1270,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["samsung"],
@@ -1370,7 +1285,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["benq"],
@@ -1386,7 +1300,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1402,7 +1315,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["lg"],
@@ -1418,7 +1330,6 @@ internal static class Data
             Resolution = new Resolution(3840, 2160),
             PixelSize = 0.155
         },
-
         new()
         {
             Brand = Brands["acer"],
@@ -1434,7 +1345,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["samsung"],
@@ -1450,7 +1360,6 @@ internal static class Data
             Resolution = new Resolution(1920, 1080),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["benq"],
@@ -1466,7 +1375,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["asus"],
@@ -1482,7 +1390,6 @@ internal static class Data
             Resolution = new Resolution(2560, 1440),
             PixelSize = 0.276
         },
-
         new()
         {
             Brand = Brands["lg"],
@@ -1498,7 +1405,6 @@ internal static class Data
             Resolution = new Resolution(3440, 1440),
             PixelSize = 0.232
         },
-
         new()
         {
             Brand = Brands["acer"],
@@ -1514,7 +1420,6 @@ internal static class Data
             Resolution = new Resolution(3440, 1440),
             PixelSize = 0.232
         },
-
         new()
         {
             Brand = Brands["samsung"],
@@ -1530,7 +1435,6 @@ internal static class Data
             Resolution = new Resolution(5120, 1440),
             PixelSize = 0.233
         },
-
         new()
         {
             Brand = Brands["benq"],
@@ -1560,7 +1464,6 @@ internal static class Data
             Memory = new Memory(8, MemoryType.Ddr4, Frequency.Mhz3200),
             Timing = "16-18-18-36"
         },
-
         new()
         {
             Brand = Brands["gskill"],
@@ -1572,7 +1475,6 @@ internal static class Data
             Memory = new Memory(16, MemoryType.Ddr4, Frequency.Mhz3600),
             Timing = "18-22-22-42"
         },
-
         new()
         {
             Brand = Brands["kingston"],
@@ -1584,7 +1486,6 @@ internal static class Data
             Memory = new Memory(8, MemoryType.Ddr4, Frequency.Mhz2666),
             Timing = "15-17-17-35"
         },
-
         new()
         {
             Brand = Brands["t-force"],
@@ -1596,7 +1497,6 @@ internal static class Data
             Memory = new Memory(16, MemoryType.Ddr4, Frequency.Mhz3200),
             Timing = "16-18-18-38"
         },
-
         new()
         {
             Brand = Brands["corsair"],
@@ -1608,7 +1508,6 @@ internal static class Data
             Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3600),
             Timing = "18-22-22-42"
         },
-
         new()
         {
             Brand = Brands["gskill"],
@@ -1620,7 +1519,6 @@ internal static class Data
             Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3600),
             Timing = "19-26-26-46"
         },
-
         new()
         {
             Brand = Brands["kingston"],
@@ -1632,7 +1530,6 @@ internal static class Data
             Memory = new Memory(16, MemoryType.Ddr4, Frequency.Mhz3600),
             Timing = "18-19-19-39"
         },
-
         new()
         {
             Brand = Brands["viper"],
@@ -1644,7 +1541,6 @@ internal static class Data
             Memory = new Memory(8, MemoryType.Ddr4, Frequency.Mhz3000),
             Timing = "16-18-18-36"
         },
-
         new()
         {
             Brand = Brands["corsair"],
@@ -1656,7 +1552,6 @@ internal static class Data
             Memory = new Memory(16, MemoryType.Ddr4, Frequency.Mhz3600),
             Timing = "18-22-22-42"
         },
-
         new()
         {
             Brand = Brands["t-force"],
@@ -1668,7 +1563,6 @@ internal static class Data
             Memory = new Memory(8, MemoryType.Ddr4, Frequency.Mhz3000),
             Timing = "16-18-18-36"
         },
-
         new()
         {
             Brand = Brands["gskill"],
@@ -1680,7 +1574,6 @@ internal static class Data
             Memory = new Memory(16, MemoryType.Ddr4, Frequency.Mhz3200),
             Timing = "16-18-18-38"
         },
-
         new()
         {
             Brand = Brands["kingston"],
@@ -1692,7 +1585,6 @@ internal static class Data
             Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3600),
             Timing = "36-36-36-72"
         },
-
         new()
         {
             Brand = Brands["t-force"],
@@ -1704,7 +1596,6 @@ internal static class Data
             Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3200),
             Timing = "16-18-18-38"
         },
-
         new()
         {
             Brand = Brands["corsair"],
@@ -1716,7 +1607,6 @@ internal static class Data
             Memory = new Memory(16, MemoryType.Ddr4, Frequency.Mhz3200),
             Timing = "16-18-18-36"
         },
-
         new()
         {
             Brand = Brands["gskill"],
@@ -1742,7 +1632,6 @@ internal static class Data
             Memory = new Memory(500, MemoryType.Ddr4, Frequency.Mhz3600),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["western-digital"],
@@ -1754,7 +1643,6 @@ internal static class Data
             Memory = new Memory(1000, MemoryType.Ddr4, Frequency.Mhz3200),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["crucial"],
@@ -1766,7 +1654,6 @@ internal static class Data
             Memory = new Memory(500, MemoryType.Ddr4, Frequency.Mhz3000),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["samsung"],
@@ -1778,7 +1665,6 @@ internal static class Data
             Memory = new Memory(1000, MemoryType.Ddr4, Frequency.Mhz3600),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["western-digital"],
@@ -1790,7 +1676,6 @@ internal static class Data
             Memory = new Memory(2000, MemoryType.Ddr4, Frequency.Mhz3600),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["seagate"],
@@ -1802,7 +1687,6 @@ internal static class Data
             Memory = new Memory(2000, MemoryType.Ddr4, Frequency.Mhz2500),
             Type = StorageType.Hdd
         },
-
         new()
         {
             Brand = Brands["western-digital"],
@@ -1814,7 +1698,6 @@ internal static class Data
             Memory = new Memory(1000, MemoryType.Ddr4, Frequency.Mhz2400),
             Type = StorageType.Hdd
         },
-
         new()
         {
             Brand = Brands["seagate"],
@@ -1826,7 +1709,6 @@ internal static class Data
             Memory = new Memory(4000, MemoryType.Ddr4, Frequency.Mhz2200),
             Type = StorageType.Hdd
         },
-
         new()
         {
             Brand = Brands["crucial"],
@@ -1838,7 +1720,6 @@ internal static class Data
             Memory = new Memory(1000, MemoryType.Ddr4, Frequency.Mhz3200),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["samsung"],
@@ -1850,7 +1731,6 @@ internal static class Data
             Memory = new Memory(2000, MemoryType.Ddr4, Frequency.Mhz3200),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["western-digital"],
@@ -1862,7 +1742,6 @@ internal static class Data
             Memory = new Memory(4000, MemoryType.Ddr4, Frequency.Mhz2200),
             Type = StorageType.Hdd
         },
-
         new()
         {
             Brand = Brands["seagate"],
@@ -1874,7 +1753,6 @@ internal static class Data
             Memory = new Memory(1000, MemoryType.Ddr4, Frequency.Mhz2400),
             Type = StorageType.Hdd
         },
-
         new()
         {
             Brand = Brands["kingston"],
@@ -1886,7 +1764,6 @@ internal static class Data
             Memory = new Memory(500, MemoryType.Ddr4, Frequency.Mhz3000),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["adata"],
@@ -1898,7 +1775,6 @@ internal static class Data
             Memory = new Memory(1000, MemoryType.Ddr4, Frequency.Mhz3200),
             Type = StorageType.Ssd
         },
-
         new()
         {
             Brand = Brands["toshiba"],
@@ -1926,7 +1802,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["evga"],
@@ -1940,7 +1815,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["seasonic"],
@@ -1954,7 +1828,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["cooler master"],
@@ -1968,7 +1841,6 @@ internal static class Data
             EfficiencyPercentage = 85,
             Modularity = Modularity.Semi
         },
-
         new()
         {
             Brand = Brands["thermaltake"],
@@ -1982,7 +1854,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.None
         },
-
         new()
         {
             Brand = Brands["corsair"],
@@ -1996,7 +1867,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["evga"],
@@ -2010,7 +1880,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["seasonic"],
@@ -2024,7 +1893,6 @@ internal static class Data
             EfficiencyPercentage = 90,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["thermaltake"],
@@ -2038,7 +1906,6 @@ internal static class Data
             EfficiencyPercentage = 85,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["cooler master"],
@@ -2052,7 +1919,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Semi
         },
-
         new()
         {
             Brand = Brands["corsair"],
@@ -2066,7 +1932,6 @@ internal static class Data
             EfficiencyPercentage = 85,
             Modularity = Modularity.Semi
         },
-
         new()
         {
             Brand = Brands["evga"],
@@ -2080,7 +1945,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.None
         },
-
         new()
         {
             Brand = Brands["seasonic"],
@@ -2094,7 +1958,6 @@ internal static class Data
             EfficiencyPercentage = 85,
             Modularity = Modularity.None
         },
-
         new()
         {
             Brand = Brands["thermaltake"],
@@ -2108,7 +1971,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.None
         },
-
         new()
         {
             Brand = Brands["corsair"],
@@ -2122,7 +1984,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["evga"],
@@ -2136,7 +1997,6 @@ internal static class Data
             EfficiencyPercentage = 80,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["seasonic"],
@@ -2150,7 +2010,6 @@ internal static class Data
             EfficiencyPercentage = 90,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["cooler master"],
@@ -2164,7 +2023,6 @@ internal static class Data
             EfficiencyPercentage = 90,
             Modularity = Modularity.Semi
         },
-
         new()
         {
             Brand = Brands["thermaltake"],
@@ -2178,7 +2036,6 @@ internal static class Data
             EfficiencyPercentage = 85,
             Modularity = Modularity.Full
         },
-
         new()
         {
             Brand = Brands["corsair"],
@@ -2201,21 +2058,18 @@ internal static class Data
             Cost = 25,
             Days = 2
         },
-
         new()
         {
             ShippingType = ShippingType.Standard,
             Cost = 10,
             Days = 5
         },
-
         new()
         {
             ShippingType = ShippingType.NextDay,
             Cost = 35,
             Days = 1
         },
-
         new()
         {
             ShippingType = ShippingType.SameDay,

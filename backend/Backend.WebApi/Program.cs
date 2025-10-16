@@ -3,18 +3,24 @@ using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var isInDevelopment = builder.Configuration["Environment"] == "Development";
 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
 builder.Services.AddOpenApi();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 
