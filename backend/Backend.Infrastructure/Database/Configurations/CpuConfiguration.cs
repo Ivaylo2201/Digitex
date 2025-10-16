@@ -10,8 +10,13 @@ public class CpuConfiguration : IEntityTypeConfiguration<Cpu>
     {
         builder.ComplexProperty(cpu => cpu.ClockSpeed, clockSpeed =>
         {
-            clockSpeed.Property(c => c.Base).HasColumnName("ClockSpeedBase");
-            clockSpeed.Property(c => c.Boost).HasColumnName("ClockSpeedBoost");
+            clockSpeed
+                .Property(c => c.Base)
+                .HasColumnName("ClockSpeedBase");
+            
+            clockSpeed
+                .Property(c => c.Boost)
+                .HasColumnName("ClockSpeedBoost");
         });
     }
 }

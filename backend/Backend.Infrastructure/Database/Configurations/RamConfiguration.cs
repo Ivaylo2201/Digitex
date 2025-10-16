@@ -12,9 +12,17 @@ public class RamConfiguration : IEntityTypeConfiguration<Ram>
     {
         builder.ComplexProperty(ram => ram.Memory, memory =>
         {
-            memory.Property(m => m.CapacityInGb).HasColumnName("MemoryCapacity");
-            memory.Property(m => m.Type).HasColumnName("MemoryType");
-            memory.Property(m => m.Frequency).HasColumnName("MemoryFrequency");
+            memory
+                .Property(m => m.CapacityInGb)
+                .HasColumnName("MemoryCapacity");
+            
+            memory
+                .Property(m => m.Type)
+                .HasColumnName("MemoryType");
+            
+            memory
+                .Property(m => m.Frequency)
+                .HasColumnName("MemoryFrequency");
         });
 
         builder

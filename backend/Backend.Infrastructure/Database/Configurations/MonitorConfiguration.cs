@@ -10,8 +10,13 @@ public class MonitorConfiguration : IEntityTypeConfiguration<Monitor>
     {
         builder.ComplexProperty(monitor => monitor.Resolution, resolution =>
         {
-            resolution.Property(r => r.Width).HasColumnName("ResolutionWidth");
-            resolution.Property(r => r.Height).HasColumnName("ResolutionHeight");
+            resolution
+                .Property(r => r.Width)
+                .HasColumnName("ResolutionWidth");
+            
+            resolution
+                .Property(r => r.Height)
+                .HasColumnName("ResolutionHeight");
         });
     }
 }

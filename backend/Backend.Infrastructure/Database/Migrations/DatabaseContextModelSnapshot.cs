@@ -53,7 +53,8 @@ namespace Backend.Infrastructure.Database.Migrations
 
                             b1.Property<string>("StreetName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)")
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
                                 .HasColumnName("StreetName");
                         });
 
@@ -63,7 +64,7 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Brand", b =>
@@ -121,7 +122,7 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("City");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Item", b =>
@@ -164,8 +165,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Instructions")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("ShippingId")
                         .HasColumnType("int");
@@ -231,8 +231,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comment")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -465,8 +464,11 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int>("FormFactor")
                         .HasColumnType("int");
 
-                    b.Property<double>("Power")
-                        .HasColumnType("float");
+                    b.Property<int>("Modularity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Wattage")
+                        .HasColumnType("int");
 
                     b.ToTable("PowerSupplies");
                 });

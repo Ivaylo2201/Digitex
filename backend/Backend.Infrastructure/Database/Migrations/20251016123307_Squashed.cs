@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Squashed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,19 @@ namespace Backend.Infrastructure.Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Brands", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CityName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,7 +59,8 @@ namespace Backend.Infrastructure.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -62,7 +76,8 @@ namespace Backend.Infrastructure.Database.Migrations
                     Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     InitialPrice = table.Column<double>(type: "float", nullable: false),
-                    DiscountPercentage = table.Column<int>(type: "int", nullable: false)
+                    DiscountPercentage = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,6 +86,36 @@ namespace Backend.Infrastructure.Database.Migrations
                         name: "FK_Products_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Floor = table.Column<int>(type: "int", nullable: true),
+                    ApartmentNumber = table.Column<int>(type: "int", nullable: true),
+                    StreetNumber = table.Column<int>(type: "int", nullable: false),
+                    StreetName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Addresses_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -102,7 +147,8 @@ namespace Backend.Infrastructure.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ShippingId = table.Column<int>(type: "int", nullable: false)
+                    ShippingId = table.Column<int>(type: "int", nullable: false),
+                    Instructions = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -219,9 +265,10 @@ namespace Backend.Infrastructure.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Power = table.Column<double>(type: "float", nullable: false),
+                    Wattage = table.Column<int>(type: "int", nullable: false),
                     FormFactor = table.Column<int>(type: "int", nullable: false),
-                    EfficiencyPercentage = table.Column<int>(type: "int", nullable: false)
+                    EfficiencyPercentage = table.Column<int>(type: "int", nullable: false),
+                    Modularity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,6 +277,30 @@ namespace Backend.Infrastructure.Database.Migrations
                         name: "FK_PowerSupplies_Products_Id",
                         column: x => x.Id,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductBaseUser",
+                columns: table => new
+                {
+                    LikedById = table.Column<int>(type: "int", nullable: false),
+                    LikedProductsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductBaseUser", x => new { x.LikedById, x.LikedProductsId });
+                    table.ForeignKey(
+                        name: "FK_ProductBaseUser_Products_LikedProductsId",
+                        column: x => x.LikedProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductBaseUser_Users_LikedById",
+                        column: x => x.LikedById,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -262,7 +333,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Rating = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Comment = table.Column<string>(type: "TEXT", nullable: true),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -340,6 +411,16 @@ namespace Backend.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Addresses_CityId",
+                table: "Addresses",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Addresses_UserId",
+                table: "Addresses",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",
                 table: "Carts",
                 column: "UserId",
@@ -369,6 +450,11 @@ namespace Backend.Infrastructure.Database.Migrations
                 name: "IX_Orders_UserId",
                 table: "Orders",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductBaseUser_LikedProductsId",
+                table: "ProductBaseUser",
+                column: "LikedProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
@@ -402,6 +488,9 @@ namespace Backend.Infrastructure.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Addresses");
+
+            migrationBuilder.DropTable(
                 name: "Cpus");
 
             migrationBuilder.DropTable(
@@ -420,6 +509,9 @@ namespace Backend.Infrastructure.Database.Migrations
                 name: "PowerSupplies");
 
             migrationBuilder.DropTable(
+                name: "ProductBaseUser");
+
+            migrationBuilder.DropTable(
                 name: "Rams");
 
             migrationBuilder.DropTable(
@@ -427,6 +519,9 @@ namespace Backend.Infrastructure.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Storages");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "Carts");

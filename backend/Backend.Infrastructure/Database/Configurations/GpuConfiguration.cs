@@ -10,15 +10,28 @@ public class GpuConfiguration : IEntityTypeConfiguration<Gpu>
     {
         builder.ComplexProperty(gpu => gpu.Memory, memory =>
         {
-            memory.Property(m => m.CapacityInGb).HasColumnName("MemoryCapacity");
-            memory.Property(m => m.Type).HasColumnName("MemoryType");
-            memory.Property(m => m.Frequency).HasColumnName("MemoryFrequency");
+            memory
+                .Property(m => m.CapacityInGb)
+                .HasColumnName("MemoryCapacity");
+            
+            memory
+                .Property(m => m.Type)
+                .HasColumnName("MemoryType");
+            
+            memory
+                .Property(m => m.Frequency)
+                .HasColumnName("MemoryFrequency");
         });
         
         builder.ComplexProperty(gpu => gpu.ClockSpeed, clockSpeed =>
         {
-            clockSpeed.Property(c => c.Base).HasColumnName("ClockSpeedBase");
-            clockSpeed.Property(c => c.Boost).HasColumnName("ClockSpeedBoost");
+            clockSpeed
+                .Property(c => c.Base)
+                .HasColumnName("ClockSpeedBase");
+            
+            clockSpeed
+                .Property(c => c.Boost)
+                .HasColumnName("ClockSpeedBoost");
         });
     }
 }

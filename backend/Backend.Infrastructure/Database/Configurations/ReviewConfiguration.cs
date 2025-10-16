@@ -6,8 +6,6 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class ReviewConfiguration : IEntityTypeConfiguration<Review>
 {
-    private const int CommentMaxLength = 250;
-    
     public void Configure(EntityTypeBuilder<Review> builder)
     {
         builder
@@ -19,9 +17,10 @@ public class ReviewConfiguration : IEntityTypeConfiguration<Review>
 
         builder
             .Property(review => review.Comment)
-            .HasMaxLength(CommentMaxLength);
-        
+            .HasColumnType("TEXT");
+
         builder
+        
             .HasOne(review => review.Product)
             .WithMany(product => product.Reviews)
             .HasForeignKey(review => review.ProductId)

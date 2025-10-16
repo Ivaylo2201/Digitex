@@ -13,8 +13,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20251013190654_Initial")]
-    partial class Initial
+    [Migration("20251016123307_Squashed")]
+    partial class Squashed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,50 @@ namespace Backend.Infrastructure.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Backend.Domain.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ApartmentNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Floor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.ComplexProperty<Dictionary<string, object>>("Street", "Backend.Domain.Entities.Address.Street#Street", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<int>("Number")
+                                .HasColumnType("int")
+                                .HasColumnName("StreetNumber");
+
+                            b1.Property<string>("StreetName")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)")
+                                .HasColumnName("StreetName");
+                        });
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Addresses");
+                });
 
             modelBuilder.Entity("Backend.Domain.Entities.Brand", b =>
                 {
@@ -66,6 +110,24 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.ToTable("Carts");
                 });
 
+            modelBuilder.Entity("Backend.Domain.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("Backend.Domain.Entities.Item", b =>
                 {
                     b.Property<int>("Id")
@@ -104,6 +166,9 @@ namespace Backend.Infrastructure.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Instructions")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("ShippingId")
                         .HasColumnType("int");
@@ -145,6 +210,9 @@ namespace Backend.Infrastructure.Database.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
@@ -166,8 +234,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comment")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -224,6 +291,10 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -235,6 +306,21 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ProductBaseUser", b =>
+                {
+                    b.Property<int>("LikedById")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("LikedProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LikedById", "LikedProductsId");
+
+                    b.HasIndex("LikedProductsId");
+
+                    b.ToTable("ProductBaseUser");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Cpu", b =>
@@ -381,8 +467,11 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int>("FormFactor")
                         .HasColumnType("int");
 
-                    b.Property<double>("Power")
-                        .HasColumnType("float");
+                    b.Property<int>("Modularity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Wattage")
+                        .HasColumnType("int");
 
                     b.ToTable("PowerSupplies");
                 });
@@ -441,6 +530,25 @@ namespace Backend.Infrastructure.Database.Migrations
                         });
 
                     b.ToTable("Storages");
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("Backend.Domain.Entities.City", "City")
+                        .WithMany("Addresses")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Domain.Entities.User", "User")
+                        .WithMany("Addresses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Cart", b =>
@@ -528,6 +636,21 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ProductBaseUser", b =>
+                {
+                    b.HasOne("Backend.Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("LikedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Domain.Entities.ProductBase", null)
+                        .WithMany()
+                        .HasForeignKey("LikedProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Backend.Domain.Entities.Cpu", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.ProductBase", null)
@@ -601,6 +724,11 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("Items");
                 });
 
+            modelBuilder.Entity("Backend.Domain.Entities.City", b =>
+                {
+                    b.Navigation("Addresses");
+                });
+
             modelBuilder.Entity("Backend.Domain.Entities.Order", b =>
                 {
                     b.Navigation("Items");
@@ -620,6 +748,8 @@ namespace Backend.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("Cart")
                         .IsRequired();
 

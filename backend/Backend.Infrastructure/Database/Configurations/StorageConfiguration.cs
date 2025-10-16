@@ -10,9 +10,17 @@ public class StorageConfiguration : IEntityTypeConfiguration<Storage>
     {
         builder.ComplexProperty(storage => storage.Memory, memory =>
         {
-            memory.Property(m => m.CapacityInGb).HasColumnName("MemoryCapacity");
-            memory.Property(m => m.Type).HasColumnName("MemoryType");
-            memory.Property(m => m.Frequency).HasColumnName("MemoryFrequency");
+            memory
+                .Property(m => m.CapacityInGb)
+                .HasColumnName("MemoryCapacity");
+            
+            memory
+                .Property(m => m.Type)
+                .HasColumnName("MemoryType");
+            
+            memory
+                .Property(m => m.Frequency)
+                .HasColumnName("MemoryFrequency");
         });
     }
 }

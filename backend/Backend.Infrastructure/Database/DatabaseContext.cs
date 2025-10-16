@@ -22,6 +22,8 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<Shipping> Shippings => Set<Shipping>();
     public DbSet<Storage> Storages => Set<Storage>();
     public DbSet<User> Users => Set<User>();
+    public DbSet<Address> Addresses => Set<Address>();
+    public DbSet<City> Cities => Set<City>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

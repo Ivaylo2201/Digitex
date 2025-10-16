@@ -6,6 +6,8 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class AddressConfiguration : IEntityTypeConfiguration<Address>
 {
+    private const int StreetNameMaxLength = 50;
+    
     public void Configure(EntityTypeBuilder<Address> builder)
     {
         builder
@@ -25,8 +27,14 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
 
         builder.ComplexProperty(address => address.Street, street =>
         {
-            street.Property(s => s.StreetName).HasColumnName("StreetName");
-            street.Property(s => s.Number).HasColumnName("StreetNumber");
+            street
+                .Property(s => s.StreetName)
+                .HasColumnName("StreetName")
+                .HasMaxLength(StreetNameMaxLength);
+            
+            street
+                .Property(s => s.Number)
+                .HasColumnName("StreetNumber");
         });
     }
 }
