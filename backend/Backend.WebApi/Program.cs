@@ -25,11 +25,10 @@ if (app.Environment.IsDevelopment())
 if (args.Contains("seed"))
 {
     using var scope = app.Services.CreateScope();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Seeder>>();
+    var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
 
-    await new Seeder(
-        scope.ServiceProvider.GetRequiredService<ILogger<Seeder>>(),
-        scope.ServiceProvider.GetRequiredService<DatabaseContext>()).RunAsync();
-    
+    await new Seeder(logger, context).RunAsync();
     return;
 }
 
