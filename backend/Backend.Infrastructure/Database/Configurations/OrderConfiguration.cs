@@ -6,9 +6,13 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
+    private const string TableName = "Orders";
+    
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        builder.HasKey(order => order.Id);
+        builder
+            .ToTable(TableName)
+            .HasKey(order => order.Id);
 
         builder
             .Property(order => order.Instructions)

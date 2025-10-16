@@ -5,6 +5,7 @@ public enum Socket
     Lga1151,
     Lga1200,
     Lga1700,
+    Lga2066,
     Am4,
     Am5,
     Tr4,

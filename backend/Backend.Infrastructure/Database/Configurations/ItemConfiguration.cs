@@ -6,9 +6,12 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class ItemConfiguration : IEntityTypeConfiguration<Item>
 {
+    private const string TableName = "Items";
+    
     public void Configure(EntityTypeBuilder<Item> builder)
     {
         builder
+            .ToTable(TableName)
             .HasKey(item => item.Id);
         
         builder

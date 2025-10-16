@@ -3,7 +3,7 @@ using Backend.Domain.Enums;
 using Backend.Domain.ValueObjects;
 using Monitor = Backend.Domain.Entities.Monitor;
 
-namespace Backend.Infrastructure.Database;
+namespace Backend.Infrastructure.Database.Seeder;
 
 internal static class Data
 {

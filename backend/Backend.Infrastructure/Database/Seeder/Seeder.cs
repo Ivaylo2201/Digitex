@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Infrastructure.Database;
+namespace Backend.Infrastructure.Database.Seeder;
 
 public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
 {
@@ -18,7 +18,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         }
         catch (Exception ex)
         {
-            throw ex;
+            logger.LogError("{ExceptionName} occurred while seeding the database. Exception message: {ExceptionMessage}", ex.GetType().Name, ex.Message);
         }
     }
     
@@ -62,6 +62,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Shippings.RemoveRange(context.Shippings);
         context.Users.RemoveRange(context.Users);
         context.Brands.RemoveRange(context.Brands);
+        context.Cities.RemoveRange(context.Cities);
+        context.Countries.RemoveRange(context.Countries);
     }
 
     private async Task ResetIndicesAsync()
@@ -77,5 +79,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Orders', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Items', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Reviews', RESEED, 0);");
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Cities', RESEED, 0);");
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Countries', RESEED, 0);");
     }
 } 

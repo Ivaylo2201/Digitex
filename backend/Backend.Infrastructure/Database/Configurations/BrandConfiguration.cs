@@ -6,11 +6,13 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {
+    private const string TableName = "Brands";
     private const int NameMaxLength = 25;
     
     public void Configure(EntityTypeBuilder<Brand> builder)
     {
         builder
+            .ToTable(TableName)
             .HasKey(brand => brand.Id);
         
         builder

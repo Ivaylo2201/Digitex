@@ -6,11 +6,13 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
+    private const string TableName = "Users";
     private const int UsernameMaxLength = 25;
     
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder
+            .ToTable(TableName)
             .HasKey(user => user.Id);
         
         builder

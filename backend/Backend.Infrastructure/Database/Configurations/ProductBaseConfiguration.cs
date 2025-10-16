@@ -6,12 +6,14 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
 {
+    private const string TableName = "Products";
     private const int ModelMaxLength = 100;
     private const int ImagePathMaxLength = 50;
     
     public void Configure(EntityTypeBuilder<ProductBase> builder)
     {
         builder
+            .ToTable(TableName)
             .UseTptMappingStrategy()
             .HasKey(productBase => productBase.Id);
         

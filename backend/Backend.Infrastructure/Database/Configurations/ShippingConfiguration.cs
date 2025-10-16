@@ -6,9 +6,12 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class ShippingConfiguration : IEntityTypeConfiguration<Shipping>
 {
+    private const string TableName = "Shippings";
+    
     public void Configure(EntityTypeBuilder<Shipping> builder)
     {
         builder
+            .ToTable(TableName)
             .HasKey(shipping => shipping.Id);
         
         builder

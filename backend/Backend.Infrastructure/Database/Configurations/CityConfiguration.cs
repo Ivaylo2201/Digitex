@@ -6,11 +6,14 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class CityConfiguration : IEntityTypeConfiguration<City>
 {
+    private const string TableName = "Cities";
     private const int NameMaxLength = 20;
     
     public void Configure(EntityTypeBuilder<City> builder)
     {
-        builder.HasKey(city => city.Id);
+        builder
+            .ToTable(TableName)
+            .HasKey(city => city.Id);
 
         builder
             .Property(city => city.CityName)

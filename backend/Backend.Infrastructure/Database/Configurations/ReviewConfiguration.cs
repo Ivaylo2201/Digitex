@@ -6,9 +6,12 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class ReviewConfiguration : IEntityTypeConfiguration<Review>
 {
+    private const string TableName = "Reviews";
+    
     public void Configure(EntityTypeBuilder<Review> builder)
     {
         builder
+            .ToTable(TableName)
             .HasKey(review => review.Id);
         
         builder

@@ -6,11 +6,13 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class AddressConfiguration : IEntityTypeConfiguration<Address>
 {
+    private const string TableName = "Addresses";
     private const int StreetNameMaxLength = 50;
     
     public void Configure(EntityTypeBuilder<Address> builder)
     {
         builder
+            .ToTable(TableName)
             .HasKey(address => address.Id);
         
         builder
