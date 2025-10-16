@@ -2,6 +2,7 @@ using Backend.Application;
 using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
+using Backend.Infrastructure.Database.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
