@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Backend.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Database.Seeder;
@@ -25,15 +26,17 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
     private void Seed()
     {
         logger.LogInformation("Seeding...");
+
+        
+        List<IEnumerable<ProductBase>> products =
+        [
+            Data.Gpus,
+            Data.Cpus
+        ];
+        
+        products.ForEach(context.AddRange);
         
         context.Brands.AddRange(Data.Brands.Values);
-        context.Gpus.AddRange(Data.Gpus);
-        context.Cpus.AddRange(Data.Cpus);
-        context.Motherboards.AddRange(Data.Motherboards);
-        context.Monitors.AddRange(Data.Monitors);
-        context.Rams.AddRange(Data.Rams);
-        context.Storages.AddRange(Data.Storages);
-        context.PowerSupplies.AddRange(Data.PowerSupplies);
         context.Shippings.AddRange(Data.Shippings);
         context.Countries.AddRange(Data.Countries.Values);
         context.Cities.AddRange(Data.Cities);

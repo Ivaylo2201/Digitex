@@ -1,7 +1,9 @@
 ﻿using System.Security.Claims;
 using System.Text;
+using Backend.Application.Interfaces;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
+using Backend.Infrastructure.Services;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -26,12 +28,12 @@ public static class DependencyInjection
             // .AddScoped<IOrderService, OrderService>()
             // .AddScoped<IOwnershipService, OwnershipService>()
             // .AddScoped<IAuthenticationService, AuthenticationService>()
-            // .AddSingleton<ITokenService, TokenService>()
-            .AddDbContext<DatabaseContext>(d =>
-            {
-                d.UseSqlServer(connectionString,
-                    s => s.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-            })
+            .AddSingleton<ITokenService, TokenService>()
+            .AddDbContext<DatabaseContext>(
+                optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptionsBuilder =>
+                {
+                    sqlServerOptionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                }))
             .AddCorsSupport(configuration)
             .AddJwtAuthentication(jwtSecretKey, jwtIssuer, jwtAudience);
     }

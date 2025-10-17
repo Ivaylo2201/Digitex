@@ -7,8 +7,7 @@ namespace Backend.Infrastructure.Database.Configurations;
 public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
 {
     private const string TableName = "Products";
-    private const int ModelMaxLength = 100;
-    private const int ImagePathMaxLength = 50;
+    private const int ModelNameMaxLength = 100;
     
     public void Configure(EntityTypeBuilder<ProductBase> builder)
     {
@@ -24,17 +23,17 @@ public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder
-            .Property(productBase => productBase.Model)
-            .HasMaxLength(ModelMaxLength)
+            .Property(productBase => productBase.ModelName)
+            .HasMaxLength(ModelNameMaxLength)
             .IsRequired();
         
         builder
-            .HasIndex(productBase => productBase.Model)
+            .HasIndex(productBase => productBase.ModelName)
             .IsUnique();
         
         builder
             .Property(productBase => productBase.ImagePath)
-            .HasMaxLength(ImagePathMaxLength)
+            .HasColumnType("TEXT")
             .IsRequired();
         
         builder

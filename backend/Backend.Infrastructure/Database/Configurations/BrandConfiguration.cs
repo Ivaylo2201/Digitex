@@ -7,7 +7,7 @@ namespace Backend.Infrastructure.Database.Configurations;
 public class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {
     private const string TableName = "Brands";
-    private const int NameMaxLength = 25;
+    private const int BrandNameMaxLength = 25;
     
     public void Configure(EntityTypeBuilder<Brand> builder)
     {
@@ -16,8 +16,8 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
             .HasKey(brand => brand.Id);
         
         builder
-            .Property(brand => brand.Name)
-            .HasMaxLength(NameMaxLength)
+            .Property(brand => brand.BrandName)
+            .HasMaxLength(BrandNameMaxLength)
             .IsRequired();
         
         builder

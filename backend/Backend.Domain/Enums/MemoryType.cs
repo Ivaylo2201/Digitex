@@ -1,10 +1,14 @@
-﻿namespace Backend.Domain.Enums;
+﻿using System.Text.Json.Serialization;
 
+namespace Backend.Domain.Enums;
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum MemoryType
 {
     Ddr4,
     Ddr5,
     Ddr6,
-    GDdr5X,
-    GDdr6X
+    GDdr5,
+    GDdr6,
+    GDdr7
 }
