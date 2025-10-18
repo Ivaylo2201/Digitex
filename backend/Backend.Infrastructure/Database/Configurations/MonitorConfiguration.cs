@@ -17,6 +17,10 @@ public class MonitorConfiguration : IEntityTypeConfiguration<Monitor>
             resolution
                 .Property(r => r.Height)
                 .HasColumnName("ResolutionHeight");
+            
+            resolution
+                .Property(r => r.Type)
+                .HasColumnName("ResolutionType");
         });
     }
 }

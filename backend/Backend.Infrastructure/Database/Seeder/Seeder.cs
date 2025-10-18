@@ -19,7 +19,10 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         }
         catch (Exception ex)
         {
-            logger.LogError("{ExceptionName} occurred while seeding the database. Exception message: {ExceptionMessage}", ex.GetType().Name, ex.Message);
+            var exceptionMessage = ex.InnerException is not null ? ex.InnerException.Message : ex.Message;
+            var exceptionType = ex.InnerException is not null ? ex.InnerException.GetType().Name : ex.GetType().Name;
+            
+            logger.LogError("{ExceptionName} occurred while seeding the database. Exception message: {ExceptionMessage}", exceptionType, exceptionMessage);
         }
     }
     
@@ -31,7 +34,9 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         List<IEnumerable<ProductBase>> products =
         [
             Data.Gpus,
-            Data.Cpus
+            Data.Cpus,
+            Data.Monitors,
+            Data.Rams
         ];
         
         products.ForEach(context.AddRange);

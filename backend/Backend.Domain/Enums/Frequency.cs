@@ -19,5 +19,8 @@ public enum Frequency
     Mhz3333 = 3333,
     Mhz3466 = 3466,
     Mhz3500 = 3500,
-    Mhz3600 = 3600
+    Mhz3600 = 3600,
+    Mhz5200 = 5200,
+    Mhz6000 = 6000,
+    Mhz6400 = 6400
 }

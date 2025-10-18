@@ -1,3 +1,5 @@
-﻿namespace Backend.Domain.ValueObjects;
+﻿using Backend.Domain.Enums;
 
-public record Resolution(int Width, int Height);
+namespace Backend.Domain.ValueObjects;
+
+public record Resolution(int Width, int Height, ResolutionType Type);
