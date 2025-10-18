@@ -20,7 +20,12 @@
 
     <ItemGroup>
       <Folder Include="Controllers\" />
-      <Folder Include="wwwroot\" />
+      <Folder Include="wwwroot\cpus\" />
+      <Folder Include="wwwroot\gpus\" />
+      <Folder Include="wwwroot\monitors\" />
+      <Folder Include="wwwroot\motherboards\" />
+      <Folder Include="wwwroot\rams\" />
+      <Folder Include="wwwroot\storages\" />
     </ItemGroup>
 
     <ItemGroup>

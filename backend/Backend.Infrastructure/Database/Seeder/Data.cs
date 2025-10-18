@@ -35,7 +35,7 @@ internal static class Data
          ["viper"] = new Brand { BrandName = "Viper" },
          ["xfx"] = new Brand { BrandName = "XFX" },
          ["sapphire"] = new Brand { BrandName = "Sapphire" },
-         ["powercolor"] = new Brand { BrandName = "PowerColor" },
+         ["powercolor"] = new Brand { BrandName = "PowerColor" }
     };
 
     internal static readonly List<Gpu> Gpus =
@@ -44,7 +44,7 @@ internal static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 4060 VENTUS 2X BLACK 8G OC",
-            ImagePath = "msi_geforce_rtx_4060_ventus_2x_black_8g_oc.png",
+            ImagePath = "gpus/msi_geforce_rtx_4060_ventus_2x_black_8g_oc.png",
             InitialPrice = 328.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -59,7 +59,7 @@ internal static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 4060 VENTUS 2X White 8G OC",
-            ImagePath = "msi_geforce_rtx_4060_ventus_2x_white_8g_oc.png",
+            ImagePath = "gpus/msi_geforce_rtx_4060_ventus_2x_white_8g_oc.png",
             InitialPrice = 328.00,
             DiscountPercentage = 10,
             Quantity = GetRandomQuantity(),
@@ -74,7 +74,7 @@ internal static class Data
         {
             Brand = Brands["asus"],
             ModelName = "Dual GeForce RTX 4060 EVO OC Edition 8GB",
-            ImagePath = "asus_dual_geforce_rtx_4060_evo_oc_edition_8gb.png",
+            ImagePath = "gpus/asus_dual_geforce_rtx_4060_evo_oc_edition_8gb.png",
             InitialPrice = 337.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -89,7 +89,7 @@ internal static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G SHADOW 2X OC",
-            ImagePath = "msi_geforce_rtx_5060_8g_shadow_2x_oc.png",
+            ImagePath = "gpus/msi_geforce_rtx_5060_8g_shadow_2x_oc.png",
             InitialPrice = 345.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -104,7 +104,7 @@ internal static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G VENTUS 2X OC",
-            ImagePath = "msi_geforce_rtx_5060_8g_ventus_2x_oc.jpg",
+            ImagePath = "gpus/msi_geforce_rtx_5060_8g_ventus_2x_oc.jpg",
             InitialPrice = 345.00,
             DiscountPercentage = 10,
             Quantity = GetRandomQuantity(),
@@ -119,7 +119,7 @@ internal static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G VENTUS 2X OC WHITE",
-            ImagePath = "msi_geforce_rtx_5060_8g_ventus_2x_oc_white.jpg",
+            ImagePath = "gpus/msi_geforce_rtx_5060_8g_ventus_2x_oc_white.jpg",
             InitialPrice = 346.00,
             DiscountPercentage = 40,
             Quantity = GetRandomQuantity(),
@@ -134,7 +134,7 @@ internal static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G GAMING OC",
-            ImagePath = "msi_geforce_rtx_5060_8g_gaming_oc.png",
+            ImagePath = "gpus/msi_geforce_rtx_5060_8g_gaming_oc.png",
             InitialPrice = 367.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -149,7 +149,7 @@ internal static class Data
         {
             Brand = Brands["palit"],
             ModelName = "GeForce RTX 4060 TI Dual 8GB",
-            ImagePath = "palit_geforce_rtx_4060_ti_dual_8gb.png",
+            ImagePath = "gpus/palit_geforce_rtx_4060_ti_dual_8gb.png",
             InitialPrice = 386.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -164,7 +164,7 @@ internal static class Data
         {
             Brand = Brands["inno3d"],
             ModelName = "GeForce RTX 4060 Ti 8GB Twin X2 OC White",
-            ImagePath = "inno3d_geforce_rtx_4060_ti_8gb_twin_x2_oc_white.jpg",
+            ImagePath = "gpus/inno3d_geforce_rtx_4060_ti_8gb_twin_x2_oc_white.jpg",
             InitialPrice = 456.00,
             DiscountPercentage = 50,
             Quantity = GetRandomQuantity(),
@@ -179,7 +179,7 @@ internal static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 Ti 16G SHADOW 2X OC PLUS",
-            ImagePath = "msi_geforce_rtx_5060_ti_16g_shadow_2x_oc_plus.png",
+            ImagePath = "gpus/msi_geforce_rtx_5060_ti_16g_shadow_2x_oc_plus.png",
             InitialPrice = 484.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -194,7 +194,7 @@ internal static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD Radeon RX 6600 Challenger White 8GB",
-            ImagePath = "asrock_amd_radeon_rx_6600_challenger_white_8gb.png",
+            ImagePath = "gpus/asrock_amd_radeon_rx_6600_challenger_white_8gb.png",
             InitialPrice = 233.00,
             DiscountPercentage = 50,
             Quantity = GetRandomQuantity(),
@@ -209,7 +209,7 @@ internal static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD RADEON RX 7600 Challenger OC",
-            ImagePath = "asrock_amd_radeon_rx_7600_challenger_oc.png",
+            ImagePath = "gpus/asrock_amd_radeon_rx_7600_challenger_oc.png",
             InitialPrice = 298.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -224,7 +224,7 @@ internal static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD RADEON RX 7600 Steel Legend OC",
-            ImagePath = "asrock_amd_radeon_rx_7600_steel_legend_oc.png",
+            ImagePath = "gpus/asrock_amd_radeon_rx_7600_steel_legend_oc.png",
             InitialPrice = 327.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -239,7 +239,7 @@ internal static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD Radeon RX 9060 XT Challenger 8GB OC",
-            ImagePath = "asrock_amd_radeon_rx_9060_xt_challenger_8gb_oc.png",
+            ImagePath = "gpus/asrock_amd_radeon_rx_9060_xt_challenger_8gb_oc.png",
             InitialPrice = 353.00,
             DiscountPercentage = 40,
             Quantity = GetRandomQuantity(),
@@ -254,7 +254,7 @@ internal static class Data
         {
             Brand = Brands["xfx"],
             ModelName = "Swift AMD Radeon RX 9060 XT OC Triple Fan Gaming Edition 16GB",
-            ImagePath = "xfx_swift_amd_radeon_rx_9060_xt_oc_triple_fan_gaming_edition_16gb.jpg",
+            ImagePath = "gpus/xfx_swift_amd_radeon_rx_9060_xt_oc_triple_fan_gaming_edition_16gb.jpg",
             InitialPrice = 443.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -269,7 +269,7 @@ internal static class Data
         {
             Brand = Brands["xfx"],
             ModelName = "Mercury AMD Radeon RX 9060 XT OC Gaming Edition 16GB",
-            ImagePath = "xfx_mercury_amd_radeon_rx_9060_xt_oc_gaming_edition_16gb.jpg",
+            ImagePath = "gpus/xfx_mercury_amd_radeon_rx_9060_xt_oc_gaming_edition_16gb.jpg",
             InitialPrice = 443.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -284,7 +284,7 @@ internal static class Data
         {
             Brand = Brands["asus"],
             ModelName = "TUF Gaming Radeon RX 9070 OC Edition 16GB",
-            ImagePath = "asus_tuf_gaming_radeon_rx_9070_oc_edition_16gb.png",
+            ImagePath = "gpus/asus_tuf_gaming_radeon_rx_9070_oc_edition_16gb.png",
             InitialPrice = 746.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -299,7 +299,7 @@ internal static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD Radeon RX 9070 XT Steel Legend 16GB",
-            ImagePath = "asrock_amd_radeon_rx_9070_xt_steel_legend_16gb.png",
+            ImagePath = "gpus/asrock_amd_radeon_rx_9070_xt_steel_legend_16gb.png",
             InitialPrice = 746.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -314,7 +314,7 @@ internal static class Data
         {
             Brand = Brands["asus"],
             ModelName = "Prime Radeon RX 9070 OC Edition 16GB",
-            ImagePath = "asus_prime_radeon_rx_9070_oc_edition_16gb.png",
+            ImagePath = "gpus/asus_prime_radeon_rx_9070_oc_edition_16gb.png",
             InitialPrice = 754.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -329,7 +329,7 @@ internal static class Data
         {
             Brand = Brands["powercolor"],
             ModelName = "Hellhound Spectral White AMD Radeon RX 9070 XT 16GB",
-            ImagePath = "powercolor_hellhound_spectral_white_amd_radeon_rx_9070_xt_16gb.png",
+            ImagePath = "gpus/powercolor_hellhound_spectral_white_amd_radeon_rx_9070_xt_16gb.png",
             InitialPrice = 824.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -344,7 +344,7 @@ internal static class Data
         {
             Brand = Brands["powercolor"],
             ModelName = "AMD Radeon R7 240 4GB 128BIT GDDR5",
-            ImagePath = "amd_radeon_r7_240_4gb_128bit_gddr5.png",
+            ImagePath = "gpus/amd_radeon_r7_240_4gb_128bit_gddr5.png",
             InitialPrice = 111.00,
             DiscountPercentage = 10,
             Quantity = GetRandomQuantity(),
@@ -359,7 +359,7 @@ internal static class Data
         {
             Brand = Brands["xfx"],
             ModelName = "SPEEDSTER SWFT 210 AMD Radeon RX 7600 Core Edition 8GB",
-            ImagePath = "xfx_speedster_swft_210_amd_radeon_rx_7600_core_edition_8gb.png",
+            ImagePath = "gpus/xfx_speedster_swft_210_amd_radeon_rx_7600_core_edition_8gb.png",
             InitialPrice = 305.00,
             DiscountPercentage = 15,
             Quantity = GetRandomQuantity(),
@@ -374,7 +374,7 @@ internal static class Data
         {
             Brand = Brands["sapphire"],
             ModelName = "PULSE AMD Radeon RX 9060 XT 8GB",
-            ImagePath = "sapphire_pulse_amd_radeon_rx_9060_xt_8gb.png",
+            ImagePath = "gpus/sapphire_pulse_amd_radeon_rx_9060_xt_8gb.png",
             InitialPrice = 369.00,
             DiscountPercentage = 10,
             Quantity = GetRandomQuantity(),
@@ -389,7 +389,7 @@ internal static class Data
         {
             Brand = Brands["powercolor"],
             ModelName = "Reaper AMD Radeon RX 9060 XT 8GB",
-            ImagePath = "powercolor_reaper_amd_radeon_rx_9060_xt_8gb.png",
+            ImagePath = "gpus/powercolor_reaper_amd_radeon_rx_9060_xt_8gb.png",
             InitialPrice = 384.00,
             DiscountPercentage = 15,
             Quantity = GetRandomQuantity(),
@@ -404,7 +404,7 @@ internal static class Data
         {
             Brand = Brands["gigabyte"],
             ModelName = "Radeon RX 9060 XT GAMING OC 8G",
-            ImagePath = "gigabyte_radeon_rx_9060_xt_gaming_oc_8g.png",
+            ImagePath = "gpus/gigabyte_radeon_rx_9060_xt_gaming_oc_8g.png",
             InitialPrice = 410.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -423,7 +423,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i3-12100 Tray",
-            ImagePath = "intel_core_i312100_tray.jpg",
+            ImagePath = "cpus/intel_core_i312100_tray.jpg",
             InitialPrice = 102.00,
             DiscountPercentage = 50,
             Quantity = GetRandomQuantity(),
@@ -437,7 +437,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i3-10105",
-            ImagePath = "intel_core_i310105_box.jpg",
+            ImagePath = "cpus/intel_core_i310105_box.jpg",
             InitialPrice = 102.00,
             DiscountPercentage = 8,
             Quantity = GetRandomQuantity(),
@@ -451,7 +451,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i5-13400F",
-            ImagePath = "intel_core_i513400f_box.jpg",
+            ImagePath = "cpus/intel_core_i513400f_box.jpg",
             InitialPrice = 138.00,
             DiscountPercentage = 20,
             Quantity = GetRandomQuantity(),
@@ -465,7 +465,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 7 5700X",
-            ImagePath = "amd_ryzen_7_5700x.jpg",
+            ImagePath = "cpus/amd_ryzen_7_5700x.jpg",
             InitialPrice = 184.00,
             DiscountPercentage = 15,
             Quantity = GetRandomQuantity(),
@@ -479,7 +479,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i5-14600KF",
-            ImagePath = "intel_core_i514600kf.jpg",
+            ImagePath = "cpus/intel_core_i514600kf.jpg",
             InitialPrice = 230.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -493,7 +493,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i7-14700KF",
-            ImagePath = "intel_core_i714700kf.jpg",
+            ImagePath = "cpus/intel_core_i714700kf.jpg",
             InitialPrice = 353.00,
             DiscountPercentage = 33,
             Quantity = GetRandomQuantity(),
@@ -507,7 +507,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 9 7900X",
-            ImagePath = "amd_ryzen_9_7900x.png",
+            ImagePath = "cpus/amd_ryzen_9_7900x.png",
             InitialPrice = 359.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -521,7 +521,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 9 9950X",
-            ImagePath = "amd_ryzen_9_9950x.jpg",
+            ImagePath = "cpus/amd_ryzen_9_9950x.jpg",
             InitialPrice = 598.00,
             DiscountPercentage = 40,
             Quantity = GetRandomQuantity(),
@@ -535,7 +535,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 9 9900X3D",
-            ImagePath = "amd_ryzen_9_9900x3d.jpg",
+            ImagePath = "cpus/amd_ryzen_9_9900x3d.jpg",
             InitialPrice = 640.00,
             DiscountPercentage = 50,
             Quantity = GetRandomQuantity(),
@@ -549,7 +549,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core Ultra 9 285K",
-            ImagePath = "intel_core_ultra_9_285k.jpg",
+            ImagePath = "cpus/intel_core_ultra_9_285k.jpg",
             InitialPrice = 640.00,
             DiscountPercentage = 10,
             Quantity = GetRandomQuantity(),
@@ -563,7 +563,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 3 4100",
-            ImagePath = "amd_ryzen_3_4100_box.jpg",
+            ImagePath = "cpus/amd_ryzen_3_4100_box.jpg",
             InitialPrice = 56.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -577,7 +577,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 5 3600",
-            ImagePath = "amd_ryzen_5_3600_.png",
+            ImagePath = "cpus/amd_ryzen_5_3600_.png",
             InitialPrice = 61.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -591,7 +591,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i3-12100F",
-            ImagePath = "intel_core_i312100f.jpg",
+            ImagePath = "cpus/intel_core_i312100f.jpg",
             InitialPrice = 81.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -605,7 +605,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 5 5600",
-            ImagePath = "amd_ryzen_5_5600.png",
+            ImagePath = "cpus/amd_ryzen_5_5600.png",
             InitialPrice = 117.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -619,7 +619,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 5 5500GT",
-            ImagePath = "amd_ryzen_5_5500gt.png",
+            ImagePath = "cpus/amd_ryzen_5_5500gt.png",
             InitialPrice = 128.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -633,7 +633,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 7 5700",
-            ImagePath = "amd_ryzen_7_5700.png",
+            ImagePath = "cpus/amd_ryzen_7_5700.png",
             InitialPrice = 138.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -647,7 +647,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 5 5600GT",
-            ImagePath = "amd_ryzen_5_5600gt.png",
+            ImagePath = "cpus/amd_ryzen_5_5600gt.png",
             InitialPrice = 143.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -661,7 +661,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i3-13100",
-            ImagePath = "intel_core_i313100.jpg",
+            ImagePath = "cpus/intel_core_i313100.jpg",
             InitialPrice = 153.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -675,7 +675,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 5 8400F",
-            ImagePath = "amd_ryzen_5_8400f.jpg",
+            ImagePath = "cpus/amd_ryzen_5_8400f.jpg",
             InitialPrice = 153.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -689,7 +689,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i3-14100",
-            ImagePath = "intel_core_i314100.png",
+            ImagePath = "cpus/intel_core_i314100.png",
             InitialPrice = 163.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -703,7 +703,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 7 5700G",
-            ImagePath = "amd_ryzen_7_5700g.png",
+            ImagePath = "cpus/amd_ryzen_7_5700g.png",
             InitialPrice = 169.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -717,7 +717,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i5-12400",
-            ImagePath = "intel_core_i512400.jpg",
+            ImagePath = "cpus/intel_core_i512400.jpg",
             InitialPrice = 194.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -731,7 +731,7 @@ internal static class Data
         {
             Brand = Brands["amd"],
             ModelName = "Ryzen 5 7600",
-            ImagePath = "amd_ryzen_5_7600_box.png",
+            ImagePath = "cpus/amd_ryzen_5_7600_box.png",
             InitialPrice = 199.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -745,7 +745,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i5-14400F",
-            ImagePath = "intel_core_i514400f.png",
+            ImagePath = "cpus/intel_core_i514400f.png",
             InitialPrice = 199.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -759,7 +759,7 @@ internal static class Data
         {
             Brand = Brands["intel"],
             ModelName = "Core i5-12600K",
-            ImagePath = "intel_core_i512600k.jpg",
+            ImagePath = "cpus/intel_core_i512600k.jpg",
             InitialPrice = 199.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -777,7 +777,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "EK251QEbi",
-            ImagePath = "acer_ek251qebi.png",
+            ImagePath = "monitors/acer_ek251qebi.png",
             InitialPrice = 86.00,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -794,7 +794,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "SA243YG0wi",
-            ImagePath = "acer_sa243yg0wi.png",
+            ImagePath = "monitors/acer_sa243yg0wi.png",
             InitialPrice = 91.00,
             DiscountPercentage = 42,
             Quantity = GetRandomQuantity(),
@@ -811,7 +811,7 @@ internal static class Data
         {
             Brand = Brands["asus"],
             ModelName = "TUF Gaming VG249Q3A",
-            ImagePath = "asus_tuf_gaming_vg249q3a.png",
+            ImagePath = "monitors/asus_tuf_gaming_vg249q3a.png",
             InitialPrice = 112.00,
             DiscountPercentage = 108,
             Quantity = GetRandomQuantity(),
@@ -828,7 +828,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro XF240YX1biiph",
-            ImagePath = "acer_nitro_xf240yx1biiph.png",
+            ImagePath = "monitors/acer_nitro_xf240yx1biiph.png",
             InitialPrice = 122.00,
             DiscountPercentage = 33,
             Quantity = GetRandomQuantity(),
@@ -845,7 +845,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "SH272Ebmihux",
-            ImagePath = "acer_sh272ebmihux.png",
+            ImagePath = "monitors/acer_sh272ebmihux.png",
             InitialPrice = 128.00,
             DiscountPercentage = 83,
             Quantity = GetRandomQuantity(),
@@ -862,7 +862,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro XF270X1biiph",
-            ImagePath = "acer_nitro_xf270x1biiph.png",
+            ImagePath = "monitors/acer_nitro_xf270x1biiph.png",
             InitialPrice = 148.00,
             DiscountPercentage = 58,
             Quantity = GetRandomQuantity(),
@@ -879,7 +879,7 @@ internal static class Data
         {
             Brand = Brands["asus"],
             ModelName = "TUF Gaming VG279QL3A",
-            ImagePath = "asus_tuf_gaming_vg279ql3a.png",
+            ImagePath = "monitors/asus_tuf_gaming_vg279ql3a.png",
             InitialPrice = 153.00,
             DiscountPercentage = 83,
             Quantity = GetRandomQuantity(),
@@ -896,7 +896,7 @@ internal static class Data
         {
             Brand = Brands["lg"],
             ModelName = "LG 27TQ615S-PZ",
-            ImagePath = "lg_27tq615spz.jpg",
+            ImagePath = "monitors/lg_27tq615spz.jpg",
             InitialPrice = 179.00,
             DiscountPercentage = 17,
             Quantity = GetRandomQuantity(),
@@ -913,7 +913,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Predator XB253QFbmiiprx",
-            ImagePath = "acer_predator_xb253qfbmiiprx.png",
+            ImagePath = "monitors/acer_predator_xb253qfbmiiprx.png",
             InitialPrice = 194.00,
             DiscountPercentage = 67,
             Quantity = GetRandomQuantity(),
@@ -930,7 +930,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro KG272KL1bmiipx",
-            ImagePath = "acer_nitro_kg272kl1bmiipx.png",
+            ImagePath = "monitors/acer_nitro_kg272kl1bmiipx.png",
             InitialPrice = 214.00,
             DiscountPercentage = 67,
             Quantity = GetRandomQuantity(),
@@ -947,7 +947,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro VG240YGbip",
-            ImagePath = "acer_nitro_vg240ygbip.png",
+            ImagePath = "monitors/acer_nitro_vg240ygbip.png",
             InitialPrice = 97.00,
             DiscountPercentage = 33,
             Quantity = GetRandomQuantity(),
@@ -964,7 +964,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro KG241YX3bip",
-            ImagePath = "acer_nitro_kg241yx3bip.png",
+            ImagePath = "monitors/acer_nitro_kg241yx3bip.png",
             InitialPrice = 102.00,
             DiscountPercentage = 8,
             Quantity = GetRandomQuantity(),
@@ -981,7 +981,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro KG251QX0biip",
-            ImagePath = "acer_nitro_kg251qx0biip.png",
+            ImagePath = "monitors/acer_nitro_kg251qx0biip.png",
             InitialPrice = 107.00,
             DiscountPercentage = 8,
             Quantity = GetRandomQuantity(),
@@ -998,7 +998,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro VG240YM3bmiipx",
-            ImagePath = "acer_nitro_vg240ym3bmiipx.png",
+            ImagePath = "monitors/acer_nitro_vg240ym3bmiipx.png",
             InitialPrice = 123.00,
             DiscountPercentage = 75,
             Quantity = GetRandomQuantity(),
@@ -1015,7 +1015,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro VG273bii",
-            ImagePath = "acer_nitro_vg273bii_UMHV3EE001.png",
+            ImagePath = "monitors/acer_nitro_vg273bii_UMHV3EE001.png",
             InitialPrice = 153.00,
             DiscountPercentage = 83,
             Quantity = GetRandomQuantity(),
@@ -1032,7 +1032,7 @@ internal static class Data
         {
             Brand = Brands["asus"],
             ModelName = "TUF Gaming VG27AQA1A",
-            ImagePath = "asus_tuf_gaming_vg27aqa1a.jpg",
+            ImagePath = "monitors/asus_tuf_gaming_vg27aqa1a.jpg",
             InitialPrice = 210.00,
             DiscountPercentage = 66,
             Quantity = GetRandomQuantity(),
@@ -1049,7 +1049,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Nitro XZ320QUS3bmiiphx",
-            ImagePath = "acer_nitro_xz320qus3bmiiphx.png",
+            ImagePath = "monitors/acer_nitro_xz320qus3bmiiphx.png",
             InitialPrice = 235.00,
             DiscountPercentage = 116,
             Quantity = GetRandomQuantity(),
@@ -1066,7 +1066,7 @@ internal static class Data
         {
             Brand = Brands["lg"],
             ModelName = "34WR55QK",
-            ImagePath = "lg_34wr55qk.jpg",
+            ImagePath = "monitors/lg_34wr55qk.jpg",
             InitialPrice = 337.00,
             DiscountPercentage = 41,
             Quantity = GetRandomQuantity(),
@@ -1083,7 +1083,7 @@ internal static class Data
         {
             Brand = Brands["lg"],
             ModelName = "24MR400-B",
-            ImagePath = "lg_24mr400b.jpg",
+            ImagePath = "monitors/lg_24mr400b.jpg",
             InitialPrice = 86.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1100,7 +1100,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "Vero V247YEbiv",
-            ImagePath = "acer_vero_v247yebiv.png",
+            ImagePath = "monitors/acer_vero_v247yebiv.png",
             InitialPrice = 91.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1117,7 +1117,7 @@ internal static class Data
         {
             Brand = Brands["lg"],
             ModelName = "22MR410-B",
-            ImagePath = "lg_22mr410b.jpg",
+            ImagePath = "monitors/lg_22mr410b.jpg",
             InitialPrice = 91.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1134,7 +1134,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "KA272E0bi",
-            ImagePath = "acer_ka272e0bi.png",
+            ImagePath = "monitors/acer_ka272e0bi.png",
             InitialPrice = 107.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1151,7 +1151,7 @@ internal static class Data
         {
             Brand = Brands["acer"],
             ModelName = "SH242YEbmihux",
-            ImagePath = "acer_sh242yebmihux.png",
+            ImagePath = "monitors/acer_sh242yebmihux.png",
             InitialPrice = 107.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1168,7 +1168,7 @@ internal static class Data
         {
             Brand = Brands["lg"],
             ModelName = "27MR400-B",
-            ImagePath = "lg_27mr400b.jpg",
+            ImagePath = "monitors/lg_27mr400b.jpg",
             InitialPrice = 117.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1185,7 +1185,7 @@ internal static class Data
         {
             Brand = Brands["lg"],
             ModelName = "24MS550-B",
-            ImagePath = "lg_24ms550b.jpg",
+            ImagePath = "monitors/lg_24ms550b.jpg",
             InitialPrice = 127.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1206,7 +1206,7 @@ internal static class Data
         {
             Brand = Brands["crucial"],
             ModelName = "32GB (2x16GB) DDR5 6000 MT/s Pro OC Gaming White",
-            ImagePath = "32gb_2x16gb_ddr5_6000_mts_crucial_pro_oc_gaming_white.jpg",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6000_mts_crucial_pro_oc_gaming_white.jpg",
             InitialPrice = 111.03,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -1217,7 +1217,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6000 MT/s Vengeance White CL36",
-            ImagePath = "32gb_2x16gb_ddr5_6000_mts_corsair_vengeance_rgb_whiteduplicate.jpg",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6000_mts_corsair_vengeance_rgb_whiteduplicate.jpg",
             InitialPrice = 111.03,
             DiscountPercentage = 33,
             Quantity = GetRandomQuantity(),
@@ -1228,7 +1228,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR4 3600MHz Vengeance RGB PRO SL White",
-            ImagePath = "32gb_2x16gb_ddr4_3600mhz_corsair_vengeance_rgb_pro_sl_white.png",
+            ImagePath = "rams/32gb_2x16gb_ddr4_3600mhz_corsair_vengeance_rgb_pro_sl_white.png",
             InitialPrice = 170.51,
             DiscountPercentage = 50,
             Quantity = GetRandomQuantity(),
@@ -1239,7 +1239,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "64GB (2x32GB) DDR5 6000MHz Vengeance RGB Black",
-            ImagePath = "64gb_2x32gb_ddr5_6000mhz_corsair_vengeance_rgb_black.jpg",
+            ImagePath = "rams/64gb_2x32gb_ddr5_6000mhz_corsair_vengeance_rgb_black.jpg",
             InitialPrice = 257.34,
             DiscountPercentage = 41,
             Quantity = GetRandomQuantity(),
@@ -1250,7 +1250,7 @@ internal static class Data
         {
             Brand = Brands["gskill"],
             ModelName = "96GB (2x48GB) DDR5 6000 MT/s Ripjaws M5 Neo RGB Black",
-            ImagePath = "96gb_2x48gb_ddr5_6000_mts_gskill_ripjaws_m5_neo_rgb_black.png",
+            ImagePath = "rams/96gb_2x48gb_ddr5_6000_mts_gskill_ripjaws_m5_neo_rgb_black.png",
             InitialPrice = 410.77,
             DiscountPercentage = 25,
             Quantity = GetRandomQuantity(),
@@ -1261,7 +1261,7 @@ internal static class Data
         {
             Brand = Brands["gskill"],
             ModelName = "8GB DDR4 3200 MT/s AEGIS",
-            ImagePath = "8gb_ddr4_3200mhz_gskill_aegis.png",
+            ImagePath = "rams/8gb_ddr4_3200mhz_gskill_aegis.png",
             InitialPrice = 7.49,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1272,7 +1272,7 @@ internal static class Data
         {
             Brand = Brands["gskill"],
             ModelName = "8GB DDR4 2400 MT/s Value",
-            ImagePath = "8gb_ddr4_2400_mts_gskill_value.png",
+            ImagePath = "rams/8gb_ddr4_2400_mts_gskill_value.png",
             InitialPrice = 7.49,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1283,7 +1283,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "16GB DDR5 6000 MT/s CL36 VENGEANCE Cool Grey",
-            ImagePath = "16gb_ddr5_6000_mts_cl36_corsair_vengeance_cool_grey.png",
+            ImagePath = "rams/16gb_ddr5_6000_mts_cl36_corsair_vengeance_cool_grey.png",
             InitialPrice = 65.38,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1294,7 +1294,7 @@ internal static class Data
         {
             Brand = Brands["gskill"],
             ModelName = "32GB (2x16GB) DDR4 3200 MT/s AEGIS",
-            ImagePath = "32gb_2x16gb_ddr4_3200mhz_gskill_aegis.jpg",
+            ImagePath = "rams/32gb_2x16gb_ddr4_3200mhz_gskill_aegis.jpg",
             InitialPrice = 86.09,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1305,7 +1305,7 @@ internal static class Data
         {
             Brand = Brands["crucial"],
             ModelName = "32GB (2x16GB) DDR5 6000 MT/s Pro OC Gaming Black",
-            ImagePath = "32gb_2x16gb_ddr5_6000_mts_crucial_pro_oc_gaming_black.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6000_mts_crucial_pro_oc_gaming_black.png",
             InitialPrice = 106.53,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1316,7 +1316,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "16GB (2x8GB) DDR4 3600MT/s Vengeance RGB PRO SL",
-            ImagePath = "16gb_2x8gb_ddr4_3600mhz_corsair_vengeance_rgb_pro_sl.png",
+            ImagePath = "rams/16gb_2x8gb_ddr4_3600mhz_corsair_vengeance_rgb_pro_sl.png",
             InitialPrice = 121.51,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1327,7 +1327,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6000 MT/s CL38 Vengeance Black",
-            ImagePath = "32gb_2x16gb_ddr5_6000_mts_cl38_corsair_vengeance_black.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6000_mts_cl38_corsair_vengeance_black.png",
             InitialPrice = 124.40,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1338,7 +1338,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6400 MT/s VENGEANCE Gray",
-            ImagePath = "32gb_2x16gb_ddr5_6400_mts_corsair_vengeance_gray.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6400_mts_corsair_vengeance_gray.png",
             InitialPrice = 124.40,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1349,7 +1349,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6400 MT/s CL36 Vengeance Black",
-            ImagePath = "32gb_2x16gb_ddr5_6400_mts_cl36_corsair_vengeance_black.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6400_mts_cl36_corsair_vengeance_black.png",
             InitialPrice = 124.40,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1360,7 +1360,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6400 MT/s CL36 Vengeance RGB Black",
-            ImagePath = "32gb_2x16gb_ddr5_6400_mts_corsair_vengeance_rgb_black.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6400_mts_corsair_vengeance_rgb_black.png",
             InitialPrice = 134.42,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1371,7 +1371,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6000 MT/s CL36 Vengeance RGB Black",
-            ImagePath = "32gb_2x16gb_ddr5_6000_mts_cl36_corsair_vengeance_rgb_black.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6000_mts_cl36_corsair_vengeance_rgb_black.png",
             InitialPrice = 139.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1382,7 +1382,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6400 MT/s CL36 VENGEANCE White",
-            ImagePath = "32gb_2x16gb_ddr5_6400_mts_cl36_corsair_vengeance_white.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6400_mts_cl36_corsair_vengeance_white.png",
             InitialPrice = 139.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1393,7 +1393,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 5200 MT/s Vengeance",
-            ImagePath = "32gb_2x16gb_ddr5_5200mhz_corsair_vengeance.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_5200mhz_corsair_vengeance.png",
             InitialPrice = 144.77,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1404,7 +1404,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR4 3200 MT/s Vengeance RGB RS",
-            ImagePath = "32gb_2x_16gb_ddr4_3200mhz_corsair_vengeance_rgb_rs.png",
+            ImagePath = "rams/32gb_2x_16gb_ddr4_3200mhz_corsair_vengeance_rgb_rs.png",
             InitialPrice = 144.77,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1415,7 +1415,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 5200 MT/s Vengeance Cool Grey",
-            ImagePath = "32gb_2x16gb_ddr5_5200_mts_corsair_vengeance_cool_grey.jpg",
+            ImagePath = "rams/32gb_2x16gb_ddr5_5200_mts_corsair_vengeance_cool_grey.jpg",
             InitialPrice = 144.77,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1426,7 +1426,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6400 MT/s CL32 VENGEANCE White",
-            ImagePath = "32gb_2x16gb_ddr5_6400_mts_cl32_corsair_vengeance_white.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6400_mts_cl32_corsair_vengeance_white.png",
             InitialPrice = 159.24,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1437,7 +1437,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6000 MT/s Vengeance RGB CL36",
-            ImagePath = "32gb_2x16gb_ddr5_6000_mts_corsair_vengeance_rgb_cl36.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6000_mts_corsair_vengeance_rgb_cl36.png",
             InitialPrice = 168.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1448,7 +1448,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6400 MT/s VENGEANCE RGB Grey",
-            ImagePath = "32gb_2x16gb_ddr5_6400_mts_corsair_vengeance_rgb_gray.png",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6400_mts_corsair_vengeance_rgb_gray.png",
             InitialPrice = 182.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1459,7 +1459,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR4 3600 MT/s Vengeance LPX",
-            ImagePath = "32gb_2x16gb_ddr4_3600mhz_corsair_vengeance_lpx.png",
+            ImagePath = "rams/32gb_2x16gb_ddr4_3600mhz_corsair_vengeance_lpx.png",
             InitialPrice = 182.00,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
@@ -1470,7 +1470,7 @@ internal static class Data
         {
             Brand = Brands["corsair"],
             ModelName = "32GB (2x16GB) DDR5 6400 MT/s CL32 VENGEANCE RGB Grey",
-            ImagePath = "32gb_2x16gb_ddr5_6400_mts_cl32_corsair_vengeance_rgb_grey",
+            ImagePath = "rams/32gb_2x16gb_ddr5_6400_mts_cl32_corsair_vengeance_rgb_grey",
             InitialPrice = 232.69,
             DiscountPercentage = 0,
             Quantity = GetRandomQuantity(),
