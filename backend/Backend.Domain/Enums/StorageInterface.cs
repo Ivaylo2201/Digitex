@@ -1,6 +1,6 @@
 ﻿namespace Backend.Domain.Enums;
 
-public enum InterfaceType
+public enum StorageInterface
 {
     Sas,
     Sata,

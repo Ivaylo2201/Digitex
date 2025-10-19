@@ -2,8 +2,7 @@
 
 public enum ResolutionType
 {
-    Hd,
     Fhd,
     Qhd,
-    Uhd,
+    Uhd
 }

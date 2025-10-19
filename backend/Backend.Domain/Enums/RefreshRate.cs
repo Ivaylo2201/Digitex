@@ -11,7 +11,5 @@ public enum RefreshRate
     Hz170 = 170,
     Hz180 = 180,
     Hz200 = 200,
-    Hz240 = 240,
-    Hz360 = 360,
-    Hz480 = 480
+    Hz240 = 240
 }

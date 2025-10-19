@@ -8,35 +8,31 @@ namespace Backend.Infrastructure.Database.Seeder;
 internal static class Data
 {
     private static readonly Random Random = new();
-    private static readonly List<int> DiscountPercentages = [10, 15, 20, 25, 30, 40, 45, 50];
     
     internal static readonly Dictionary<string, Brand> Brands = new()
     {
-         ["intel"] = new Brand { BrandName = "Intel" },
-         ["amd"] = new Brand { BrandName = "AMD" },
-         ["apple"] = new Brand { BrandName = "Apple" },
-         ["nvidia"] = new Brand { BrandName = "Nvidia" },
-         ["msi"] = new Brand { BrandName = "MSI" },
-         ["asus"] = new Brand { BrandName = "ASUS" },
-         ["gigabyte"] = new Brand { BrandName = "Gigabyte" },
-         ["palit"] = new Brand { BrandName = "Palit" },
-         ["inno3d"] = new Brand { BrandName = "Inno3D" },
-         ["corsair"] = new Brand { BrandName = "Corsair" },
-         ["gskill"] = new Brand { BrandName = "G.SKILL" },
-         ["lg"] = new Brand { BrandName = "LG" },
-         ["kingston"] = new Brand { BrandName = "Kingston" },
-         ["crucial"] = new Brand { BrandName = "Crucial" },
-         ["cooler master"] = new Brand { BrandName = "Cooler Master" },
-         ["be quiet!"] = new Brand { BrandName = "be quiet!" },
-         ["acer"] = new Brand { BrandName = "Acer" },
-         ["samsung"] = new Brand { BrandName = "Samsung" },
-         ["asrock"] = new Brand { BrandName = "ASRock" },
-         ["benq"] = new Brand { BrandName = "BenQ" },
-         ["t-force"] = new Brand { BrandName = "T-Force" },
-         ["viper"] = new Brand { BrandName = "Viper" },
-         ["xfx"] = new Brand { BrandName = "XFX" },
-         ["sapphire"] = new Brand { BrandName = "Sapphire" },
-         ["powercolor"] = new Brand { BrandName = "PowerColor" }
+        ["intel"] = new Brand { BrandName = "Intel" },
+        ["amd"] = new Brand { BrandName = "AMD" },
+        ["msi"] = new Brand { BrandName = "MSI" },
+        ["asus"] = new Brand { BrandName = "ASUS" },
+        ["gigabyte"] = new Brand { BrandName = "Gigabyte" },
+        ["palit"] = new Brand { BrandName = "Palit" },
+        ["lg"] = new Brand { BrandName = "LG" },
+        ["inno3d"] = new Brand { BrandName = "Inno3D" },
+        ["corsair"] = new Brand { BrandName = "Corsair" },
+        ["gskill"] = new Brand { BrandName = "G.SKILL" },
+        ["crucial"] = new Brand { BrandName = "Crucial" },
+        ["acer"] = new Brand { BrandName = "Acer" },
+        ["asrock"] = new Brand { BrandName = "ASRock" },
+        ["xfx"] = new Brand { BrandName = "XFX" },
+        ["sapphire"] = new Brand { BrandName = "Sapphire" },
+        ["powercolor"] = new Brand { BrandName = "PowerColor" },
+        ["thermaltake"] = new Brand { BrandName = "Thermaltake" },
+        ["thermalright"] = new Brand { BrandName = "Thermalright" },
+        ["deepcool"] = new Brand { BrandName = "DeepCool" },
+        ["adata"] = new Brand { BrandName = "ADATA" },
+        ["xpg"] = new Brand { BrandName = "XPG" },
+        ["seasonic"] = new Brand { BrandName = "Seasonic" }
     };
 
     internal static readonly List<Gpu> Gpus =
@@ -1831,6 +1827,324 @@ internal static class Data
             Chipset = "B760",
             RamSlots = 4,
             PcieSlots = 2
+        }
+    ];
+
+    internal static readonly List<Ssd> Ssds =
+    [
+        new()
+        {
+            Brand = Brands["corsair"],
+            ModelName = "MP600 Core XT 1TB",
+            ImagePath = "ssds/1tb_ssd_corsair_mp600_core_xt.jpg",
+            InitialPrice = 83.00,
+            DiscountPercentage = 25,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 4950, Write: 4250),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "P310 1TB",
+            ImagePath = "ssds/1tb_crucial_p310.jpg",
+            InitialPrice = 87.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "T500 1TB",
+            ImagePath = "ssds/1tb_crucial_t500.jpg",
+            InitialPrice = 101.00,
+            DiscountPercentage = 10,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 5500, Write: 5000),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "P510 1TB",
+            ImagePath = "ssds/1tb_crucial_p510.png",
+            InitialPrice = 111.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 5600, Write: 5100),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "T700 SSD Gen5 NVMe M.2 1TB",
+            ImagePath = "ssds/1tb_crucial_t700_gen5_nvme_m2_ssd.png",
+            InitialPrice = 127.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
+            Interface = StorageInterface.Pcie5,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "P310 2TB",
+            ImagePath = "ssds/2tb_crucial_p310.jpg",
+            InitialPrice = 133.00,
+            DiscountPercentage = 15,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 2000,
+            OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["corsair"],
+            ModelName = "MP700 PRO 1TB",
+            ImagePath = "ssds/1tb_corsair_mp700_pro.png",
+            InitialPrice = 147.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
+            Interface = StorageInterface.Pcie4,
+        },
+        new()
+        {
+            Brand = Brands["corsair"],
+            ModelName = "MP700 PRO 2TB",
+            ImagePath = "ssds/2tb_corsair_mp700_pro.png",
+            InitialPrice = 244.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 2000,
+            OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
+            Interface = StorageInterface.Pcie4,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "P310 500GB",
+            ImagePath = "ssds/500gb_crucial_p310.png",
+            InitialPrice = 60.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 500,
+            OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["corsair"],
+            ModelName = "MP700 ELITE 1TB",
+            ImagePath = "ssds/1tb_corsair_mp700_elite.png",
+            InitialPrice = 141.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
+            Interface = StorageInterface.Pcie4,
+        },
+        new()
+        {
+            Brand = Brands["corsair"],
+            ModelName = "MP600 CORE XT rev 2.0 2TB",
+            ImagePath = "ssds/2tb_corsair_mp600_core_xt_rev_20.jpg",
+            InitialPrice = 157.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 2000,
+            OperationSpeed = new OperationSpeed(Read: 4950, Write: 4250),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["corsair"],
+            ModelName = "MP600 PRO LPX 2TB",
+            ImagePath = "ssds/2tb_ssd_corsair_mp600_pro_lpx.png",
+            InitialPrice = 184.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 2000,
+            OperationSpeed = new OperationSpeed(Read: 5000, Write: 4500),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "P510 2TB",
+            ImagePath = "ssds/2tb_crucial_p510.png",
+            InitialPrice = 198.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 2000,
+            OperationSpeed = new OperationSpeed(Read: 5600, Write: 5100),
+            Interface = StorageInterface.Nvme,
+        },
+        new()
+        {
+            Brand = Brands["crucial"],
+            ModelName = "T710 1TB",
+            ImagePath = "ssds/1tb_crucial_t710.png",
+            InitialPrice = 218.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 1000,
+            OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
+            Interface = StorageInterface.Pcie5,
+        },
+        new()
+        {
+            Brand = Brands["corsair"],
+            ModelName = "MP600 CORE XT 4TB",
+            ImagePath = "ssds/4tb_corsair_mp600_core_xt.png",
+            InitialPrice = 331.00,
+            DiscountPercentage = 40,
+            Quantity = GetRandomQuantity(),
+            CapacityInGb = 4000,
+            OperationSpeed = new OperationSpeed(Read: 5500, Write: 4400),
+            Interface = StorageInterface.Pcie4
+        }
+    ];
+
+    internal static readonly List<PowerSupply> PowerSupplies =
+    [
+        new()
+        {
+            Brand = Brands["msi"],
+            ModelName = "MAG A650BN 650W Bronze",
+            ImagePath = "power-supplies/msi_mag_a650bn.png",
+            InitialPrice = 50.80,
+            DiscountPercentage = 40,
+            Quantity = GetRandomQuantity(),
+            Wattage = 650,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 85,
+            Modularity = Modularity.None
+        },
+        new()
+        {
+            Brand = Brands["xpg"],
+            ModelName = "PYLON 650B",
+            ImagePath = "power-supplies/adata_xpg_pylon_650b.png",
+            InitialPrice = 61.00,
+            DiscountPercentage = 25,
+            Quantity = GetRandomQuantity(),
+            Wattage = 650,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 85,
+            Modularity = Modularity.None
+        },
+        new()
+        {
+            Brand = Brands["deepcool"],
+            ModelName = "PK750D 750W Bronze",
+            ImagePath = "power-supplies/deepcool_pk750d_750w.jpg",
+            InitialPrice = 61.00,
+            DiscountPercentage = 15,
+            Quantity = GetRandomQuantity(),
+            Wattage = 750,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 85,
+            Modularity = Modularity.None
+        },
+        new()
+        {
+            Brand = Brands["thermalright"],
+            ModelName = "TB-650S ATX 3.0",
+            ImagePath = "power-supplies/thermalright_tb650s.jpg",
+            InitialPrice = 66.10,
+            DiscountPercentage = 10,
+            Quantity = GetRandomQuantity(),
+            Wattage = 650,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 87,
+            Modularity = Modularity.None
+        },
+        new()
+        {
+            Brand = Brands["xpg"],
+            ModelName = "PYLON 750B",
+            ImagePath = "power-supplies/adata_xpg_pylon_750b.png",
+            InitialPrice = 66.10,
+            DiscountPercentage = 25,
+            Quantity = GetRandomQuantity(),
+            Wattage = 750,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 87,
+            Modularity = Modularity.None
+        },
+        new()
+        {
+            Brand = Brands["deepcool"],
+            ModelName = "PL750D ATX 3.0",
+            ImagePath = "power-supplies/deepcool_pl750d_atx_30.png",
+            InitialPrice = 81.35,
+            DiscountPercentage = 10,
+            Quantity = GetRandomQuantity(),
+            Wattage = 750,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 88,
+            Modularity = Modularity.Semi
+        },
+        new()
+        {
+            Brand = Brands["msi"],
+            ModelName = "MAG A750GN PCIE5 ATX 3.1",
+            ImagePath = "power-supplies/msi_mag_a750gn_pcie5_atx_31.png",
+            InitialPrice = 86.45,
+            DiscountPercentage = 10,
+            Quantity = GetRandomQuantity(),
+            Wattage = 750,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 90,
+            Modularity = Modularity.Semi
+        },
+        new()
+        {
+            Brand = Brands["seasonic"],
+            ModelName = "CORE GX-750 ATX 3.1",
+            ImagePath = "power-supplies/seasonic_core_gx750_atx_31.png",
+            InitialPrice = 101.40,
+            DiscountPercentage = 25,
+            Quantity = GetRandomQuantity(),
+            Wattage = 750,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 92,
+            Modularity = Modularity.Full
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "CL-850G ATX 3.1",
+            ImagePath = "power-supplies/asrock_cl850g_atx_31.png",
+            InitialPrice = 106.35,
+            DiscountPercentage = 15,
+            Quantity = GetRandomQuantity(),
+            Wattage = 850,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 90,
+            Modularity = Modularity.Full
+        },
+        new()
+        {
+            Brand = Brands["thermaltake"],
+            ModelName = "Toughpower GF1 1200W - TT Premium Edition",
+            ImagePath = "power-supplies/thermaltake_toughpower_gf1_1200w_tt_premium_edition.jpg",
+            InitialPrice = 177.95,
+            DiscountPercentage = 50,
+            Quantity = GetRandomQuantity(),
+            Wattage = 1200,
+            FormFactor = FormFactor.Atx,
+            EfficiencyPercentage = 94,
+            Modularity = Modularity.Full
         }
     ];
     

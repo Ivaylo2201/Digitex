@@ -7,6 +7,5 @@ public class Ssd : ProductBase
 {
     public required int CapacityInGb { get; init; }
     public required OperationSpeed OperationSpeed { get; init; }
-    public required InterfaceType StorageInterface { get; init; }
-    public required StorageFormFactor FormFactor { get; init; }
+    public required StorageInterface Interface { get; init; }
 }

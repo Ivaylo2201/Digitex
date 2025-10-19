@@ -20,7 +20,6 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<Ram> Rams => Set<Ram>();
     public DbSet<Review> Reviews => Set<Review>();
     public DbSet<Shipping> Shippings => Set<Shipping>();
-    public DbSet<Hdd> Hdds => Set<Hdd>();
     public DbSet<Ssd> Ssds => Set<Ssd>();
     public DbSet<User> Users => Set<User>();
     public DbSet<Address> Addresses => Set<Address>();

@@ -37,7 +37,9 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
             Data.Cpus,
             Data.Monitors,
             Data.Rams,
-            Data.Motherboards
+            Data.Motherboards,
+            Data.Ssds,
+            Data.PowerSupplies
         ];
         
         products.ForEach(context.AddRange);
@@ -64,7 +66,6 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Motherboards.RemoveRange(context.Motherboards);
         context.PowerSupplies.RemoveRange(context.PowerSupplies);
         context.Rams.RemoveRange(context.Rams);
-        context.Hdds.RemoveRange(context.Hdds);
         context.Ssds.RemoveRange(context.Ssds);
         context.Products.RemoveRange(context.Products);
         context.Addresses.RemoveRange(context.Addresses);

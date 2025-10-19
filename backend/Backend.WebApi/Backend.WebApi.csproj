@@ -22,9 +22,9 @@
       <Folder Include="Controllers\" />
       <Folder Include="wwwroot\cpus\" />
       <Folder Include="wwwroot\gpus\" />
-      <Folder Include="wwwroot\hdds\" />
       <Folder Include="wwwroot\monitors\" />
       <Folder Include="wwwroot\motherboards\" />
+      <Folder Include="wwwroot\power-supplies\" />
       <Folder Include="wwwroot\rams\" />
       <Folder Include="wwwroot\ssds\" />
     </ItemGroup>
