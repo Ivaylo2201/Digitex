@@ -323,19 +323,19 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("ProductBaseUser", b =>
+            modelBuilder.Entity("UsersProducts", b =>
                 {
-                    b.Property<int>("LikedById")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("LikedProductsId")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("LikedById", "LikedProductsId");
+                    b.HasKey("UserId", "ProductId");
 
-                    b.HasIndex("LikedProductsId");
+                    b.HasIndex("ProductId");
 
-                    b.ToTable("ProductBaseUser");
+                    b.ToTable("UsersProducts");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Cpu", b =>
@@ -677,17 +677,17 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProductBaseUser", b =>
+            modelBuilder.Entity("UsersProducts", b =>
                 {
-                    b.HasOne("Backend.Domain.Entities.User", null)
+                    b.HasOne("Backend.Domain.Entities.ProductBase", null)
                         .WithMany()
-                        .HasForeignKey("LikedById")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Entities.ProductBase", null)
+                    b.HasOne("Backend.Domain.Entities.User", null)
                         .WithMany()
-                        .HasForeignKey("LikedProductsId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Initial_Squashed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace Backend.Infrastructure.Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
+                    BrandName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +30,7 @@ namespace Backend.Infrastructure.Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CountryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CountryName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,8 +59,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,8 +72,8 @@ namespace Backend.Infrastructure.Database.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ModelName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    ImagePath = table.Column<string>(type: "TEXT", nullable: false),
                     InitialPrice = table.Column<double>(type: "float", nullable: false),
                     DiscountPercentage = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
@@ -107,7 +106,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,7 +157,7 @@ namespace Backend.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cpus",
+                name: "CPUs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -171,20 +170,22 @@ namespace Backend.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cpus", x => x.Id);
+                    table.PrimaryKey("PK_CPUs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cpus_Products_Id",
+                        name: "FK_CPUs_Products_Id",
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Gpus",
+                name: "GPUs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BusWidth = table.Column<int>(type: "int", nullable: false),
+                    CudaCores = table.Column<int>(type: "int", nullable: false),
                     DirectXSupport = table.Column<int>(type: "int", nullable: false),
                     Tdp = table.Column<int>(type: "int", nullable: false),
                     ClockSpeedBase = table.Column<double>(type: "float", nullable: false),
@@ -195,13 +196,13 @@ namespace Backend.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gpus", x => x.Id);
+                    table.PrimaryKey("PK_GPUs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Gpus_Products_Id",
+                        name: "FK_GPUs_Products_Id",
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,12 +210,15 @@ namespace Backend.Infrastructure.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DisplayDiagonal = table.Column<int>(type: "int", nullable: false),
+                    DisplayDiagonal = table.Column<double>(type: "float", nullable: false),
                     RefreshRate = table.Column<int>(type: "int", nullable: false),
-                    Latency = table.Column<int>(type: "int", nullable: false),
+                    Latency = table.Column<double>(type: "float", nullable: false),
                     Matrix = table.Column<int>(type: "int", nullable: false),
                     PixelSize = table.Column<double>(type: "float", nullable: false),
+                    Brightness = table.Column<int>(type: "int", nullable: false),
+                    ColorSpectre = table.Column<int>(type: "int", nullable: false),
                     ResolutionHeight = table.Column<int>(type: "int", nullable: false),
+                    ResolutionType = table.Column<int>(type: "int", nullable: false),
                     ResolutionWidth = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -225,7 +229,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,7 +251,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -268,35 +272,11 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductBaseUser",
-                columns: table => new
-                {
-                    LikedById = table.Column<int>(type: "int", nullable: false),
-                    LikedProductsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductBaseUser", x => new { x.LikedById, x.LikedProductsId });
-                    table.ForeignKey(
-                        name: "FK_ProductBaseUser_Products_LikedProductsId",
-                        column: x => x.LikedProductsId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductBaseUser_Users_LikedById",
-                        column: x => x.LikedById,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rams",
+                name: "RAMs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -307,13 +287,13 @@ namespace Backend.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rams", x => x.Id);
+                    table.PrimaryKey("PK_RAMs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rams_Products_Id",
+                        name: "FK_RAMs_Products_Id",
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -346,24 +326,48 @@ namespace Backend.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Storages",
+                name: "SSDs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    MemoryCapacity = table.Column<int>(type: "int", nullable: false),
-                    MemoryFrequency = table.Column<int>(type: "int", nullable: false),
-                    MemoryType = table.Column<int>(type: "int", nullable: false)
+                    CapacityInGb = table.Column<int>(type: "int", nullable: false),
+                    Interface = table.Column<int>(type: "int", nullable: false),
+                    ReadSpeed = table.Column<int>(type: "int", nullable: false),
+                    WriteSpeed = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Storages", x => x.Id);
+                    table.PrimaryKey("PK_SSDs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Storages_Products_Id",
+                        name: "FK_SSDs_Products_Id",
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersProducts",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersProducts", x => new { x.UserId, x.ProductId });
+                    table.ForeignKey(
+                        name: "FK_UsersProducts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UsersProducts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -477,19 +481,14 @@ namespace Backend.Infrastructure.Database.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBaseUser_LikedProductsId",
-                table: "ProductBaseUser",
-                column: "LikedProductsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_Model",
+                name: "IX_Products_ModelName",
                 table: "Products",
-                column: "Model",
+                column: "ModelName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -507,6 +506,11 @@ namespace Backend.Infrastructure.Database.Migrations
                 table: "Users",
                 column: "Username",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersProducts_ProductId",
+                table: "UsersProducts",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
@@ -516,10 +520,10 @@ namespace Backend.Infrastructure.Database.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Cpus");
+                name: "CPUs");
 
             migrationBuilder.DropTable(
-                name: "Gpus");
+                name: "GPUs");
 
             migrationBuilder.DropTable(
                 name: "Items");
@@ -534,16 +538,16 @@ namespace Backend.Infrastructure.Database.Migrations
                 name: "PowerSupplies");
 
             migrationBuilder.DropTable(
-                name: "ProductBaseUser");
-
-            migrationBuilder.DropTable(
-                name: "Rams");
+                name: "RAMs");
 
             migrationBuilder.DropTable(
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "Storages");
+                name: "SSDs");
+
+            migrationBuilder.DropTable(
+                name: "UsersProducts");
 
             migrationBuilder.DropTable(
                 name: "Cities");

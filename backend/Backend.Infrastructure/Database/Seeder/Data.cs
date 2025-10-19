@@ -1488,7 +1488,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am5,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "A620",
+            Chipset = Chipset.A620,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1502,7 +1502,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1516,7 +1516,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1530,7 +1530,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am5,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B650",
+            Chipset = Chipset.B650,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1544,7 +1544,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am5,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B850",
+            Chipset = Chipset.B850,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1558,7 +1558,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1572,7 +1572,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am4,
             FormFactor = FormFactor.Atx,
-            Chipset = "B550",
+            Chipset = Chipset.B550,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1586,7 +1586,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1600,7 +1600,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am4,
             FormFactor = FormFactor.Atx,
-            Chipset = "B550",
+            Chipset = Chipset.B550,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1614,7 +1614,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am4,
             FormFactor = FormFactor.Atx,
-            Chipset = "B550",
+            Chipset = Chipset.B550,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1628,7 +1628,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B860",
+            Chipset = Chipset.B860,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1642,7 +1642,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1656,7 +1656,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am4,
             FormFactor = FormFactor.MiniItx,
-            Chipset = "B550",
+            Chipset = Chipset.B550,
             RamSlots = 2,
             PcieSlots = 1
         },
@@ -1670,7 +1670,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am5,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B650",
+            Chipset = Chipset.B650,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1684,7 +1684,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1698,7 +1698,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am5,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B650",
+            Chipset = Chipset.B650,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1712,7 +1712,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am4,
             FormFactor = FormFactor.Atx,
-            Chipset = "B550",
+            Chipset = Chipset.B550,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1726,7 +1726,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1740,7 +1740,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1754,7 +1754,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B840",
+            Chipset = Chipset.B840,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1768,7 +1768,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am5,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B650",
+            Chipset = Chipset.B650,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1782,7 +1782,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1796,7 +1796,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Am5,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B850",
+            Chipset = Chipset.B850,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1810,7 +1810,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.MicroAtx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         },
@@ -1824,7 +1824,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Socket = Socket.Lga1700,
             FormFactor = FormFactor.Atx,
-            Chipset = "B760",
+            Chipset = Chipset.B760,
             RamSlots = 4,
             PcieSlots = 2
         }
@@ -1842,7 +1842,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 4950, Write: 4250),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1854,7 +1854,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1866,7 +1866,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 5500, Write: 5000),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1878,7 +1878,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 5600, Write: 5100),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1890,7 +1890,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie5,
+            Interface = StorageInterface.Pcie5
         },
         new()
         {
@@ -1902,7 +1902,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1914,7 +1914,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie4,
+            Interface = StorageInterface.Pcie4
         },
         new()
         {
@@ -1926,7 +1926,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie4,
+            Interface = StorageInterface.Pcie4
         },
         new()
         {
@@ -1938,7 +1938,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 500,
             OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1950,7 +1950,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie4,
+            Interface = StorageInterface.Pcie4
         },
         new()
         {
@@ -1962,7 +1962,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 4950, Write: 4250),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1974,7 +1974,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 5000, Write: 4500),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1986,7 +1986,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 5600, Write: 5100),
-            Interface = StorageInterface.Nvme,
+            Interface = StorageInterface.Nvme
         },
         new()
         {
@@ -1998,7 +1998,7 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie5,
+            Interface = StorageInterface.Pcie5
         },
         new()
         {

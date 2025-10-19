@@ -13,8 +13,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20251017162408_Column_Name_Changes")]
-    partial class Column_Name_Changes
+    [Migration("20251019162722_Initial_Squashed")]
+    partial class Initial_Squashed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.City", b =>
@@ -143,11 +143,12 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     b.Property<string>("CountryName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Item", b =>
@@ -221,16 +222,15 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("InitialPrice")
                         .HasColumnType("float");
 
                     b.Property<string>("ModelName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -326,19 +326,19 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("ProductBaseUser", b =>
+            modelBuilder.Entity("UsersProducts", b =>
                 {
-                    b.Property<int>("LikedById")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("LikedProductsId")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("LikedById", "LikedProductsId");
+                    b.HasKey("UserId", "ProductId");
 
-                    b.HasIndex("LikedProductsId");
+                    b.HasIndex("ProductId");
 
-                    b.ToTable("ProductBaseUser");
+                    b.ToTable("UsersProducts");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Cpu", b =>
@@ -370,12 +370,18 @@ namespace Backend.Infrastructure.Database.Migrations
                                 .HasColumnName("ClockSpeedBoost");
                         });
 
-                    b.ToTable("Cpus");
+                    b.ToTable("CPUs", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Gpu", b =>
                 {
                     b.HasBaseType("Backend.Domain.Entities.ProductBase");
+
+                    b.Property<int>("BusWidth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CudaCores")
+                        .HasColumnType("int");
 
                     b.Property<int>("DirectXSupport")
                         .HasColumnType("int");
@@ -413,18 +419,24 @@ namespace Backend.Infrastructure.Database.Migrations
                                 .HasColumnName("MemoryType");
                         });
 
-                    b.ToTable("Gpus");
+                    b.ToTable("GPUs", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Monitor", b =>
                 {
                     b.HasBaseType("Backend.Domain.Entities.ProductBase");
 
-                    b.Property<int>("DisplayDiagonal")
+                    b.Property<int>("Brightness")
                         .HasColumnType("int");
 
-                    b.Property<int>("Latency")
+                    b.Property<int>("ColorSpectre")
                         .HasColumnType("int");
+
+                    b.Property<double>("DisplayDiagonal")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Latency")
+                        .HasColumnType("float");
 
                     b.Property<int>("Matrix")
                         .HasColumnType("int");
@@ -443,12 +455,16 @@ namespace Backend.Infrastructure.Database.Migrations
                                 .HasColumnType("int")
                                 .HasColumnName("ResolutionHeight");
 
+                            b1.Property<int>("Type")
+                                .HasColumnType("int")
+                                .HasColumnName("ResolutionType");
+
                             b1.Property<int>("Width")
                                 .HasColumnType("int")
                                 .HasColumnName("ResolutionWidth");
                         });
 
-                    b.ToTable("Monitors");
+                    b.ToTable("Monitors", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Motherboard", b =>
@@ -472,7 +488,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int>("Socket")
                         .HasColumnType("int");
 
-                    b.ToTable("Motherboards");
+                    b.ToTable("Motherboards", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.PowerSupply", b =>
@@ -491,7 +507,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int>("Wattage")
                         .HasColumnType("int");
 
-                    b.ToTable("PowerSupplies");
+                    b.ToTable("PowerSupplies", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Ram", b =>
@@ -520,34 +536,33 @@ namespace Backend.Infrastructure.Database.Migrations
                                 .HasColumnName("MemoryType");
                         });
 
-                    b.ToTable("Rams");
+                    b.ToTable("RAMs", (string)null);
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.Storage", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.Ssd", b =>
                 {
                     b.HasBaseType("Backend.Domain.Entities.ProductBase");
 
-                    b.Property<int>("Type")
+                    b.Property<int>("CapacityInGb")
                         .HasColumnType("int");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Memory", "Backend.Domain.Entities.Storage.Memory#Memory", b1 =>
+                    b.Property<int>("Interface")
+                        .HasColumnType("int");
+
+                    b.ComplexProperty<Dictionary<string, object>>("OperationSpeed", "Backend.Domain.Entities.Ssd.OperationSpeed#OperationSpeed", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<int>("CapacityInGb")
+                            b1.Property<int>("Read")
                                 .HasColumnType("int")
-                                .HasColumnName("MemoryCapacity");
+                                .HasColumnName("ReadSpeed");
 
-                            b1.Property<int>("Frequency")
+                            b1.Property<int>("Write")
                                 .HasColumnType("int")
-                                .HasColumnName("MemoryFrequency");
-
-                            b1.Property<int>("Type")
-                                .HasColumnType("int")
-                                .HasColumnName("MemoryType");
+                                .HasColumnName("WriteSpeed");
                         });
 
-                    b.ToTable("Storages");
+                    b.ToTable("SSDs", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Address", b =>
@@ -665,17 +680,17 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ProductBaseUser", b =>
+            modelBuilder.Entity("UsersProducts", b =>
                 {
-                    b.HasOne("Backend.Domain.Entities.User", null)
+                    b.HasOne("Backend.Domain.Entities.ProductBase", null)
                         .WithMany()
-                        .HasForeignKey("LikedById")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Entities.ProductBase", null)
+                    b.HasOne("Backend.Domain.Entities.User", null)
                         .WithMany()
-                        .HasForeignKey("LikedProductsId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -734,11 +749,11 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.Storage", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.Ssd", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.ProductBase", null)
                         .WithOne()
-                        .HasForeignKey("Backend.Domain.Entities.Storage", "Id")
+                        .HasForeignKey("Backend.Domain.Entities.Ssd", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

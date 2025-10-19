@@ -6,5 +6,5 @@ public enum StorageInterface
     Sata,
     Nvme,   
     Pcie4,
-    Pcie5,
+    Pcie5
 }

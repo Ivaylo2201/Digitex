@@ -7,7 +7,6 @@ public enum MemoryType
 {
     Ddr4,
     Ddr5,
-    Ddr6,
     GDdr5,
     GDdr6,
     GDdr7

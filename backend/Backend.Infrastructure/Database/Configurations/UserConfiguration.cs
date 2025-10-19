@@ -38,7 +38,21 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder
             .HasMany(user => user.LikedProducts)
-            .WithMany(product => product.LikedBy);
+            .WithMany(product => product.LikedBy)
+            .UsingEntity(
+                "UsersProducts",
+                product => product
+                    .HasOne(typeof(ProductBase))
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .HasPrincipalKey(nameof(ProductBase.Id)),
+                user => user
+                    .HasOne(typeof(User))
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .HasPrincipalKey(nameof(User.Id)),
+                junction => junction
+                    .HasKey("UserId", "ProductId"));
         
         builder
             .HasMany(user => user.Addresses)
