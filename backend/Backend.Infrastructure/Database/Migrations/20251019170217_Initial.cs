@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Squashed : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -106,7 +106,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,7 +176,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -202,7 +202,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -229,7 +229,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,7 +239,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Socket = table.Column<int>(type: "int", nullable: false),
                     FormFactor = table.Column<int>(type: "int", nullable: false),
-                    Chipset = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Chipset = table.Column<int>(type: "int", nullable: false),
                     RamSlots = table.Column<int>(type: "int", nullable: false),
                     PcieSlots = table.Column<int>(type: "int", nullable: false)
                 },
@@ -251,7 +251,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -272,7 +272,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -293,7 +293,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -343,7 +343,7 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -361,13 +361,13 @@ namespace Backend.Infrastructure.Database.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UsersProducts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

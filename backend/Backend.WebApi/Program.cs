@@ -1,3 +1,4 @@
+using System.Reflection;
 using Backend.Application;
 using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
@@ -7,7 +8,10 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var isInDevelopment = builder.Configuration["Environment"] == "Development";
+var serviceEnvironment = builder.Configuration["Environment"]!;
+var serviceUrl = builder.Configuration["Urls:Http"]!;
+var serviceName = Assembly.GetEntryAssembly()?.GetName().Name;
+var serviceVersion = Assembly.GetEntryAssembly()?.GetName().Version;
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -19,6 +23,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.WebHost.UseUrls(serviceUrl);
 
 builder.Host.UseSerilog();
 
@@ -40,9 +45,13 @@ if (args.Contains("seed"))
 }
 
 app.UseRouting();
-app.UseCors((isInDevelopment ? Policy.AllowAny : Policy.AllowFrontend).ToString());
+app.UseCors((serviceEnvironment == "Development" ? Policy.AllowAny : Policy.AllowFrontend).ToString());
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
 app.MapControllers();
+
+Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment} at version {ServiceVersion}...", serviceName, serviceEnvironment, serviceVersion);
+Log.Information("[{ServiceName}]: Web host listening on: {ServiceUrl}...", serviceName, serviceUrl);
+
 app.Run();

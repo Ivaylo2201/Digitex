@@ -13,8 +13,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20251019162722_Initial_Squashed")]
-    partial class Initial_Squashed
+    [Migration("20251019170217_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -471,10 +471,8 @@ namespace Backend.Infrastructure.Database.Migrations
                 {
                     b.HasBaseType("Backend.Domain.Entities.ProductBase");
 
-                    b.Property<string>("Chipset")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Chipset")
+                        .HasColumnType("int");
 
                     b.Property<int>("FormFactor")
                         .HasColumnType("int");

@@ -468,10 +468,8 @@ namespace Backend.Infrastructure.Database.Migrations
                 {
                     b.HasBaseType("Backend.Domain.Entities.ProductBase");
 
-                    b.Property<string>("Chipset")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<int>("Chipset")
+                        .HasColumnType("int");
 
                     b.Property<int>("FormFactor")
                         .HasColumnType("int");
