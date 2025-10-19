@@ -6,10 +6,14 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class RamConfiguration : IEntityTypeConfiguration<Ram>
 {
+    private const string TableName = "RAMs";
     private const int TimingMaxLength = 20;
     
     public void Configure(EntityTypeBuilder<Ram> builder)
     {
+        builder
+            .ToTable(TableName);
+        
         builder.ComplexProperty(ram => ram.Memory, memory =>
         {
             memory

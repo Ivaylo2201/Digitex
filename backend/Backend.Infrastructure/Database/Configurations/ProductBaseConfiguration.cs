@@ -7,7 +7,7 @@ namespace Backend.Infrastructure.Database.Configurations;
 public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
 {
     private const string TableName = "Products";
-    private const int ModelNameMaxLength = 100;
+    private const int ModelNameMaxLength = 150;
     
     public void Configure(EntityTypeBuilder<ProductBase> builder)
     {

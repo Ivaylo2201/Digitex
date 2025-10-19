@@ -6,8 +6,13 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class CpuConfiguration : IEntityTypeConfiguration<Cpu>
 {
+    private const string TableName = "CPUs";
+    
     public void Configure(EntityTypeBuilder<Cpu> builder)
     {
+        builder
+            .ToTable(TableName);
+        
         builder.ComplexProperty(cpu => cpu.ClockSpeed, clockSpeed =>
         {
             clockSpeed

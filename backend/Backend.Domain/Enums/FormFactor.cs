@@ -7,6 +7,5 @@ public enum FormFactor
 {
     Atx,
     MicroAtx,
-    MiniItx,
-    EAtx
+    MiniItx
 }

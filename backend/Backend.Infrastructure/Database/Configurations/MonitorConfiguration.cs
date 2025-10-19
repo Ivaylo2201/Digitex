@@ -6,8 +6,13 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class MonitorConfiguration : IEntityTypeConfiguration<Monitor>
 {
+    private const string TableName = "Monitors";
+    
     public void Configure(EntityTypeBuilder<Monitor> builder)
     {
+        builder
+            .ToTable(TableName);
+        
         builder.ComplexProperty(monitor => monitor.Resolution, resolution =>
         {
             resolution

@@ -6,8 +6,13 @@ namespace Backend.Infrastructure.Database.Configurations;
 
 public class GpuConfiguration : IEntityTypeConfiguration<Gpu>
 {
+    private const string TableName = "GPUs";
+    
     public void Configure(EntityTypeBuilder<Gpu> builder)
     {
+        builder
+            .ToTable(TableName);
+        
         builder.ComplexProperty(gpu => gpu.Memory, memory =>
         {
             memory

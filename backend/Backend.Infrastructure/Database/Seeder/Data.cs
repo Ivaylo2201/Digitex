@@ -8,6 +8,7 @@ namespace Backend.Infrastructure.Database.Seeder;
 internal static class Data
 {
     private static readonly Random Random = new();
+    private static readonly List<int> DiscountPercentages = [10, 15, 20, 25, 30, 40, 45, 50];
     
     internal static readonly Dictionary<string, Brand> Brands = new()
     {
@@ -1476,6 +1477,360 @@ internal static class Data
             Quantity = GetRandomQuantity(),
             Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
             Timing = "32-32-32"
+        }
+    ];
+
+    internal static readonly List<Motherboard> Motherboards =
+    [
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "A620AM Pro-A WiFi",
+            ImagePath = "motherboards/asrock_a620am_proa_wifi.png",
+            InitialPrice = 112.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am5,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "A620",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B760M D3HP",
+            ImagePath = "motherboards/gigabyte_b760m_d3hp.png",
+            InitialPrice = 112.00,
+            DiscountPercentage = 40,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["msi"],
+            ModelName = "PRO B760M-P",
+            ImagePath = "motherboards/msi_pro_b760mp.png",
+            InitialPrice = 112.00,
+            DiscountPercentage = 15,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["sapphire"],
+            ModelName = "B650M-E",
+            ImagePath = "motherboards/sapphire_b650me.jpg",
+            InitialPrice = 112.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am5,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B650",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "B850M-X R2.0",
+            ImagePath = "motherboards/asrock_b850mx_r20.png",
+            InitialPrice = 122.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am5,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B850",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B760M D3HP WIFI6",
+            ImagePath = "motherboards/gigabyte_b760m_d3hp_wifi6.png",
+            InitialPrice = 122.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["msi"],
+            ModelName = "MPG B550 GAMING PLUS",
+            ImagePath = "motherboards/msi_mpg_b550_gaming_plus.png",
+            InitialPrice = 122.00,
+            DiscountPercentage = 10,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am4,
+            FormFactor = FormFactor.Atx,
+            Chipset = "B550",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B760M DS3H GEN5",
+            ImagePath = "motherboards/gigabyte_b760m_ds3h_gen5.png",
+            InitialPrice = 122.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B550 EAGLE WIFI6",
+            ImagePath = "motherboards/gigabyte_b550_eagle_wifi6.png",
+            InitialPrice = 127.00,
+            DiscountPercentage = 15,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am4,
+            FormFactor = FormFactor.Atx,
+            Chipset = "B550",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B550 GAMING X V2 (rev. 1.3)",
+            ImagePath = "motherboards/gigabyte_b550_gaming_x_v2_rev_13.png",
+            InitialPrice = 127.00,
+            DiscountPercentage = 20,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am4,
+            FormFactor = FormFactor.Atx,
+            Chipset = "B550",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "B860M-X",
+            ImagePath = "motherboards/asrock_b860mx.png",
+            InitialPrice = 127.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B860",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B760M GAMING PLUS WIFI DDR4",
+            ImagePath = "motherboards/gigabyte_b760m_gaming_plus_wifi_ddr4.png",
+            InitialPrice = 127.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "B550M-ITX/ac",
+            ImagePath = "motherboards/asrock_b550mitxac.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 20,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am4,
+            FormFactor = FormFactor.MiniItx,
+            Chipset = "B550",
+            RamSlots = 2,
+            PcieSlots = 1
+        },
+        new()
+        {
+            Brand = Brands["msi"],
+            ModelName = "PRO B650M-P",
+            ImagePath = "motherboards/msi_pro_b650mp.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 15,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am5,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B650",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B760 DS3H AX DDR4",
+            ImagePath = "motherboards/gigabyte_b760_ds3h_ax.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "B650M PG Lightning",
+            ImagePath = "motherboards/asrock_b650m_pg_lightning.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am5,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B650",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "B550 Pro4",
+            ImagePath = "motherboards/asrock_b550_pro4.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am4,
+            FormFactor = FormFactor.Atx,
+            Chipset = "B550",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["msi"],
+            ModelName = "PRO B760-P II",
+            ImagePath = "motherboards/msi_pro_b760p_ii.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B760 DS3H GEN5",
+            ImagePath = "motherboards/gigabyte_b760_ds3h_gen5.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 10,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B840M DS3H",
+            ImagePath = "motherboards/gigabyte_b840m_ds3h.png",
+            InitialPrice = 133.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B840",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B650M D3HP AX",
+            ImagePath = "motherboards/gigabyte_b650m_d3hp_ax.png",
+            InitialPrice = 138.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am5,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B650",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["msi"],
+            ModelName = "PRO B760M-A WIFI DDR4",
+            ImagePath = "motherboards/msi_pro_b760ma_wifi_ddr4.png",
+            InitialPrice = 138.00,
+            DiscountPercentage = 20,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "B850M Pro-A",
+            ImagePath = "motherboards/asrock_b850m_proa.png",
+            InitialPrice = 138.00,
+            DiscountPercentage = 25,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Am5,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B850",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["asrock"],
+            ModelName = "B760M PRO RS",
+            ImagePath = "motherboards/asrock_b760m_pro_rs.png",
+            InitialPrice = 138.00,
+            DiscountPercentage = 0,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.MicroAtx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
+        },
+        new()
+        {
+            Brand = Brands["gigabyte"],
+            ModelName = "B760 GAMING X DDR4",
+            ImagePath = "motherboard/gigabyte_b760_gaming_x_ddr4.png",
+            InitialPrice = 138.00,
+            DiscountPercentage = 15,
+            Quantity = GetRandomQuantity(),
+            Socket = Socket.Lga1700,
+            FormFactor = FormFactor.Atx,
+            Chipset = "B760",
+            RamSlots = 4,
+            PcieSlots = 2
         }
     ];
     

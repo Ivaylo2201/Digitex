@@ -19,8 +19,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         }
         catch (Exception ex)
         {
-            var exceptionMessage = ex.InnerException is not null ? ex.InnerException.Message : ex.Message;
-            var exceptionType = ex.InnerException is not null ? ex.InnerException.GetType().Name : ex.GetType().Name;
+            var exceptionMessage = ex.InnerException?.Message ?? ex.Message;
+            var exceptionType = ex.InnerException?.GetType().Name ?? ex.GetType().Name;
             
             logger.LogError("{ExceptionName} occurred while seeding the database. Exception message: {ExceptionMessage}", exceptionType, exceptionMessage);
         }
@@ -36,7 +36,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
             Data.Gpus,
             Data.Cpus,
             Data.Monitors,
-            Data.Rams
+            Data.Rams,
+            Data.Motherboards
         ];
         
         products.ForEach(context.AddRange);
@@ -63,7 +64,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Motherboards.RemoveRange(context.Motherboards);
         context.PowerSupplies.RemoveRange(context.PowerSupplies);
         context.Rams.RemoveRange(context.Rams);
-        context.Storages.RemoveRange(context.Storages);
+        context.Hdds.RemoveRange(context.Hdds);
+        context.Ssds.RemoveRange(context.Ssds);
         context.Products.RemoveRange(context.Products);
         context.Addresses.RemoveRange(context.Addresses);
         context.Cities.RemoveRange(context.Cities);
