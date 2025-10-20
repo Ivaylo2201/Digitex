@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using DotNetEnv;
 using Microsoft.IdentityModel.Tokens;

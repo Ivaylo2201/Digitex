@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Text;
-using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Interfaces.Repositories;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
@@ -102,7 +102,8 @@ public static class InfrastructureDependencyInjection
     {
         return services
             .AddScoped<IMotherboardRepository, MotherboardRepository>()
-            .AddScoped<ICpuRepository, CpuRepository>();
+            .AddScoped<ICpuRepository, CpuRepository>()
+            .AddScoped<IGpuRepository, GpuRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)

@@ -3,6 +3,6 @@ using Backend.Domain.Interfaces.Repositories.Generic;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface ICpuRepository : 
-    ISingleReadable<Cpu, Guid>,
-    IMultipleReadable<Cpu>;
+public interface IGpuRepository : 
+    ISingleReadable<Gpu, Guid>,
+    IMultipleReadable<Gpu>;
