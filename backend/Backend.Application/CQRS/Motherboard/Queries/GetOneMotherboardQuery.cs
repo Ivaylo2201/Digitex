@@ -1,7 +1,7 @@
 ﻿using Backend.Domain.Common;
 using MediatR;
 
-namespace Backend.Application.CQRS.Motherboard.Queries.GetOneMotherboard;
+namespace Backend.Application.CQRS.Motherboard.Queries;
 
 using Motherboard = Domain.Entities.Motherboard;
 

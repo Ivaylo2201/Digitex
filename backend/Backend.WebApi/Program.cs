@@ -52,6 +52,6 @@ app.UseStaticFiles();
 app.MapControllers();
 
 Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment} at version {ServiceVersion}...", serviceName, serviceEnvironment, serviceVersion);
-Log.Information("[{ServiceName}]: Web host listening on: {ServiceUrl}...", serviceName, serviceUrl);
+Log.Information("[{ServiceName}]: Web host listening on: {ServiceUrl}...", serviceName, $"{serviceUrl}/api");
 
 app.Run();

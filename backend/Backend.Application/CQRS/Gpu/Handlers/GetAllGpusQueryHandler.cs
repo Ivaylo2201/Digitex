@@ -2,15 +2,21 @@
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces.Repositories;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Backend.Application.CQRS.Gpu.Handlers;
 
 using Gpu = Domain.Entities.Gpu;
 
-public class GetAllGpusQueryHandler(IGpuRepository gpuRepository) : IRequestHandler<GetAllGpusQuery, Result<IEnumerable<Gpu>>>
+public class GetAllGpusQueryHandler(
+    ILogger<GetAllGpusQueryHandler> logger,
+    IGpuRepository gpuRepository) : IRequestHandler<GetAllGpusQuery, Result<IEnumerable<Gpu>>>
 {
+    private const string HandlerName = nameof(GetAllGpusQueryHandler);
+    
     public async Task<Result<IEnumerable<Gpu>>> Handle(GetAllGpusQuery request, CancellationToken cancellationToken)
     {
-        return Result.Success(await gpuRepository.GetAllAsync());
+        logger.LogInformation("[{HandlerName}]: Getting all {EntityType} objects.", HandlerName, "GPU");
+        return Result<IEnumerable<Gpu>>.Success(await gpuRepository.GetAllAsync());
     }
 }

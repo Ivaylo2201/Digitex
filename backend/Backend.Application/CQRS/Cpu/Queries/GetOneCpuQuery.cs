@@ -5,4 +5,4 @@ namespace Backend.Application.CQRS.Cpu.Queries;
 
 using Cpu = Domain.Entities.Cpu;
 
-public record GetAllCpusQuery : IRequest<Result<IEnumerable<Cpu>>>;
+public record GetOneCpuQuery(Guid Id) : IRequest<Result<Cpu?>>;

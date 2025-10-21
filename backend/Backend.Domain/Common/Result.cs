@@ -1,29 +1,27 @@
-﻿namespace Backend.Domain.Common;
+﻿using Backend.Domain.Enums;
 
-public class Result
+namespace Backend.Domain.Common;
+
+public class Result<T>
 {
-    public bool IsSuccess { get; }
-    public string? Error { get; }
-    public object? ErrorObject { get; }
+    public readonly bool IsSuccess;
+    public readonly string? ErrorMessage;
+    public readonly T? Value;
 
-    protected Result(bool isSuccess, string? error)
+    private Result(bool isSuccess, T? value, string? errorMessage)
     {
-        if ((isSuccess && error != null) || (!isSuccess && error == null))
-            throw new InvalidOperationException("Invalid result state.");
-        
         IsSuccess = isSuccess;
-        Error = error;
-        ErrorObject = new { message = error };
+        Value = value;
+        ErrorMessage = errorMessage;
     }
-
-    public static Result Success() => new(true, null);
-    public static Result Failure(string? error) => new(false, error);
-    public static Result<T> Success<T>(T value) => new(true, null, value);
-    public static Result<T> Failure<T>(string? error) => new(false, error, default!);
     
-}
-
-public class Result<T>(bool isSuccess, string? error, T value) : Result(isSuccess, error)
-{
-    public T Value { get; private init; } = value;
+    public static Result<T> Success(T value) => new(true, value, null);
+    
+    public static Result<T> Failure(ErrorType errorType) => new(false, default, errorType switch
+    {
+        ErrorType.NotFound => "Resource not found.",
+        ErrorType.Forbidden => "Access forbidden.",
+        ErrorType.Unauthorized => "Unauthorized access.",
+        _ => "An error occurred."
+    });
 }
