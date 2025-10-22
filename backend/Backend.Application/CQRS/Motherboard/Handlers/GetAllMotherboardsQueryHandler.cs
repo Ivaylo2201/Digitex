@@ -13,10 +13,11 @@ public class GetAllMotherboardsQueryHandler(
     IMotherboardRepository motherboardRepository) : IRequestHandler<GetAllMotherboardsQuery, Result<IEnumerable<Motherboard>>>
 {
     private const string HandlerName = nameof(GetAllMotherboardsQueryHandler);
+    private const string EntityType = "Motherboard";
     
     public async Task<Result<IEnumerable<Motherboard>>> Handle(GetAllMotherboardsQuery request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("[{HandlerName}]: Getting all {EntityType} objects.", HandlerName, "Motherboard");
+        logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
         return Result<IEnumerable<Motherboard>>.Success(await motherboardRepository.GetAllAsync());
     }
 }

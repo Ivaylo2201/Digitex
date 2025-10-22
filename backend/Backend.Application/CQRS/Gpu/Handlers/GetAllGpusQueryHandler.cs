@@ -13,10 +13,11 @@ public class GetAllGpusQueryHandler(
     IGpuRepository gpuRepository) : IRequestHandler<GetAllGpusQuery, Result<IEnumerable<Gpu>>>
 {
     private const string HandlerName = nameof(GetAllGpusQueryHandler);
+    private const string EntityType = "GPU";
     
     public async Task<Result<IEnumerable<Gpu>>> Handle(GetAllGpusQuery request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("[{HandlerName}]: Getting all {EntityType} objects.", HandlerName, "GPU");
+        logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
         return Result<IEnumerable<Gpu>>.Success(await gpuRepository.GetAllAsync());
     }
 }

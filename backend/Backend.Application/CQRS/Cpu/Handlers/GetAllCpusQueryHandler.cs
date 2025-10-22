@@ -13,10 +13,11 @@ public class GetAllCpusQueryHandler(
     ICpuRepository cpuRepository) : IRequestHandler<GetAllCpusQuery, Result<IEnumerable<Cpu>>>
 {
     private const string HandlerName = nameof(GetAllCpusQueryHandler);
+    private const string EntityType = "CPU";
     
     public async Task<Result<IEnumerable<Cpu>>> Handle(GetAllCpusQuery request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("[{HandlerName}]: Getting all {EntityType} objects.", HandlerName, "CPU");
+        logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
         return Result<IEnumerable<Cpu>>.Success(await cpuRepository.GetAllAsync());
     }
 }

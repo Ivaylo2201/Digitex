@@ -1,0 +1,11 @@
+﻿using Backend.Domain.Entities;
+using Backend.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+namespace Backend.Infrastructure.Database.Repositories;
+
+public class SsdRepository(DatabaseContext context) : ISsdRepository
+{
+    public async Task<Ssd?> GetOneAsync(Guid id) => await context.Ssds.FindAsync(id);
+    public async Task<IEnumerable<Ssd>> GetAllAsync() => await context.Ssds.ToListAsync();
+}

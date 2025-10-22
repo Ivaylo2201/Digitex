@@ -14,15 +14,16 @@ public class GetOneCpuQueryHandler(
     ICpuRepository cpuRepository) : IRequestHandler<GetOneCpuQuery, Result<Cpu?>>
 {
     private const string HandlerName = nameof(GetOneCpuQueryHandler);
-
+    private const string EntityType = "CPU";
+    
     public async Task<Result<Cpu?>> Handle(GetOneCpuQuery request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={MotherboardId}.", HandlerName, "CPU", request.Id);
+        logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={CpuId}.", HandlerName, EntityType, request.Id);
         var cpu = await cpuRepository.GetOneAsync(request.Id);
 
         if (cpu is null)
         {
-            logger.LogError("[{HandlerName}]: {EntityType} record with Id={GpuId} not found.", "CPU", HandlerName, request.Id);
+            logger.LogError("[{HandlerName}]: {EntityType} record with Id={CpuId} not found.", HandlerName, EntityType, request.Id);
             return Result<Cpu?>.Failure(ErrorType.NotFound);       
         }
         

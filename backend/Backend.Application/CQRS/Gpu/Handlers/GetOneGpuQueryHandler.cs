@@ -14,15 +14,16 @@ public class GetOneGpuQueryHandler(
     IGpuRepository gpuRepository) : IRequestHandler<GetOneGpuQuery, Result<Gpu?>>
 {
     private const string HandlerName = nameof(GetOneGpuQueryHandler);
+    private const string EntityType = "GPU";
     
     public async Task<Result<Gpu?>> Handle(GetOneGpuQuery request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={MotherboardId}.", HandlerName, "GPU", request.Id);
+        logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={GpuId}.", HandlerName, EntityType, request.Id);
         var gpu = await gpuRepository.GetOneAsync(request.Id);
 
         if (gpu is null)
         {
-            logger.LogError("[{HandlerName}]: {EntityType} record with Id={GpuId} not found.", "GPU", HandlerName, request.Id);
+            logger.LogError("[{HandlerName}]: {EntityType} record with Id={GpuId} not found.", HandlerName, EntityType, request.Id);
             return Result<Gpu?>.Failure(ErrorType.NotFound);       
         }
         

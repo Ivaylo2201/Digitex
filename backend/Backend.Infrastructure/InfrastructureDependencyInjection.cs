@@ -103,7 +103,10 @@ public static class InfrastructureDependencyInjection
         return services
             .AddScoped<IMotherboardRepository, MotherboardRepository>()
             .AddScoped<ICpuRepository, CpuRepository>()
-            .AddScoped<IGpuRepository, GpuRepository>();
+            .AddScoped<IGpuRepository, GpuRepository>()
+            .AddScoped<IRamRepository, RamRepository>()
+            .AddScoped<ISsdRepository, SsdRepository>()
+            .AddScoped<IMonitorRepository, MonitorRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
