@@ -6,6 +6,9 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class SsdRepository(DatabaseContext context) : ISsdRepository
 {
-    public async Task<Ssd?> GetOneAsync(Guid id) => await context.Ssds.FindAsync(id);
-    public async Task<IEnumerable<Ssd>> GetAllAsync() => await context.Ssds.ToListAsync();
+    public async Task<Ssd?> GetOneAsync(Guid id) 
+        => await context.Ssds.Where(ssd => ssd.Id == id).FirstOrDefaultAsync();
+    
+    public async Task<IEnumerable<Ssd>> GetAllAsync()
+        => await context.Ssds.ToListAsync();
 }

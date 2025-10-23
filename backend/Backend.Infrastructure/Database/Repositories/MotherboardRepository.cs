@@ -6,6 +6,9 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class MotherboardRepository(DatabaseContext context) : IMotherboardRepository
 {
-    public async Task<Motherboard?> GetOneAsync(Guid id) => await context.Motherboards.FindAsync(id);
-    public async Task<IEnumerable<Motherboard>> GetAllAsync() => await context.Motherboards.ToListAsync();
+    public async Task<Motherboard?> GetOneAsync(Guid id) 
+        => await context.Motherboards.Where(motherboard => motherboard.Id == id).FirstOrDefaultAsync();
+    
+    public async Task<IEnumerable<Motherboard>> GetAllAsync() 
+        => await context.Motherboards.ToListAsync();
 }

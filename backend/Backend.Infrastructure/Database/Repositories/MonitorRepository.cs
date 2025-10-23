@@ -6,6 +6,9 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class MonitorRepository(DatabaseContext context) : IMonitorRepository
 {
-    public async Task<Monitor?> GetOneAsync(Guid id) => await context.Monitors.FindAsync(id);
-    public async Task<IEnumerable<Monitor>> GetAllAsync() => await context.Monitors.ToListAsync();
+    public async Task<Monitor?> GetOneAsync(Guid id) 
+        => await context.Monitors.Where(monitor => monitor.Id == id).FirstOrDefaultAsync();
+    
+    public async Task<IEnumerable<Monitor>> GetAllAsync()
+        => await context.Monitors.ToListAsync();
 }

@@ -106,7 +106,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IGpuRepository, GpuRepository>()
             .AddScoped<IRamRepository, RamRepository>()
             .AddScoped<ISsdRepository, SsdRepository>()
-            .AddScoped<IMonitorRepository, MonitorRepository>();
+            .AddScoped<IMonitorRepository, MonitorRepository>()
+            .AddScoped<IShippingRepository, ShippingRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)

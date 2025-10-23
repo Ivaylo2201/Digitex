@@ -6,6 +6,9 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class CpuRepository(DatabaseContext context) : ICpuRepository
 {
-    public async Task<Cpu?> GetOneAsync(Guid id) => await context.Cpus.FindAsync(id);
-    public async Task<IEnumerable<Cpu>> GetAllAsync() => await context.Cpus.ToListAsync();
+    public async Task<Cpu?> GetOneAsync(Guid id) 
+        => await context.Cpus.Where(cpu => cpu.Id == id).FirstOrDefaultAsync();
+    
+    public async Task<IEnumerable<Cpu>> GetAllAsync() 
+        => await context.Cpus.ToListAsync();
 }
