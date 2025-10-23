@@ -1,8 +1,8 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Ram.Queries;
 
 using Ram = Domain.Entities.Ram;
 
-public record GetAllRamsQuery : IRequest<Result<IEnumerable<Ram>>>;
+public class GetAllRamsQuery : Query<Result<IEnumerable<Ram>>>;

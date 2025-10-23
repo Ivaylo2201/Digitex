@@ -1,8 +1,8 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Cpu.Queries;
 
 using Cpu = Domain.Entities.Cpu;
 
-public record GetAllCpusQuery : IRequest<Result<IEnumerable<Cpu>>>;
+public class GetAllCpusQuery : Query<Result<IEnumerable<Cpu>>>;

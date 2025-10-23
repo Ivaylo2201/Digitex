@@ -1,8 +1,11 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Ram.Queries;
 
 using Ram = Domain.Entities.Ram;
 
-public record GetOneRamQuery(Guid Id) : IRequest<Result<Ram?>>;
+public class GetOneRamQuery : Query<Result<Ram?>>
+{
+    public required Guid EntityId { get; init; }
+}

@@ -9,8 +9,11 @@
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="12.0.0" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
-        <PackageReference Include="MediatR" Version="13.0.0" />
         <PackageReference Include="Serilog" Version="4.2.0" />
+        <PackageReference Include="SimpleSoft.Mediator" Version="2.2.0" />
+        <PackageReference Include="SimpleSoft.Mediator.Abstractions" Version="2.2.0" />
+        <PackageReference Include="SimpleSoft.Mediator.Microsoft.Extensions" Version="2.2.0" />
+        <PackageReference Include="SimpleSoft.Mediator.Microsoft.Extensions.ValidationPipeline" Version="2.2.0" />
     </ItemGroup>
 
     <ItemGroup>

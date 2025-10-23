@@ -1,8 +1,11 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Ssd.Queries;
 
 using Ssd = Domain.Entities.Ssd;
 
-public record GetOneSsdQuery(Guid Id) : IRequest<Result<Ssd?>>;
+public class GetOneSsdQuery : Query<Result<Ssd?>>
+{
+    public required Guid EntityId { get; init; }
+}

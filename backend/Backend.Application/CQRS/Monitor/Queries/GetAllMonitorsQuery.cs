@@ -1,8 +1,8 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Monitor.Queries;
 
 using Monitor = Domain.Entities.Monitor;
 
-public record GetAllMonitorsQuery : IRequest<Result<IEnumerable<Monitor>>>;
+public class GetAllMonitorsQuery : Query<Result<IEnumerable<Monitor>>>;

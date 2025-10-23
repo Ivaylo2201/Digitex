@@ -1,8 +1,8 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Ssd.Queries;
 
 using Ssd = Domain.Entities.Ssd;
 
-public record GetAllSsdsQuery : IRequest<Result<IEnumerable<Ssd>>>;
+public class GetAllSsdsQuery : Query<Result<IEnumerable<Ssd>>>;

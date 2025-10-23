@@ -1,8 +1,8 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Gpu.Queries;
 
 using Gpu = Domain.Entities.Gpu;
 
-public record GetAllGpusQuery : IRequest<Result<IEnumerable<Gpu>>>;
+public class GetAllGpusQuery : Query<Result<IEnumerable<Gpu>>>;

@@ -1,8 +1,11 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Motherboard.Queries;
 
 using Motherboard = Domain.Entities.Motherboard;
 
-public record GetOneMotherboardQuery(Guid Id) : IRequest<Result<Motherboard?>>;
+public class GetOneMotherboardQuery : Query<Result<Motherboard?>>
+{
+    public required Guid EntityId { get; init; }
+}

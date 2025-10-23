@@ -1,8 +1,11 @@
 ﻿using Backend.Domain.Common;
-using MediatR;
+using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Cpu.Queries;
 
 using Cpu = Domain.Entities.Cpu;
 
-public record GetOneCpuQuery(Guid Id) : IRequest<Result<Cpu?>>;
+public class GetOneCpuQuery : Query<Result<Cpu?>>
+{
+    public required Guid EntityId { get; init; }
+}

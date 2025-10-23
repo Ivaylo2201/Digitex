@@ -18,7 +18,7 @@ namespace Backend.Infrastructure;
 
 public static class InfrastructureDependencyInjection
 {
-    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         try
         {
@@ -42,6 +42,8 @@ public static class InfrastructureDependencyInjection
         {
             Log.Error("[{ClassName}]: {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}", nameof(InfrastructureDependencyInjection), ex.GetType().Name, ex.Message);
         }
+        
+        return services;
     }
 
     private static IServiceCollection AddDbContext(this IServiceCollection services, string? connectionString)
