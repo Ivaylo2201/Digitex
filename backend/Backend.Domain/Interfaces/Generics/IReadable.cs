@@ -2,6 +2,6 @@
 
 public interface IReadable<TEntity, in TKey>
 {
-    Task<IEnumerable<TEntity>> GetAllAsync();
+    Task<IEnumerable<TEntity>> ListAllAsync();
     Task<TEntity?> GetOneAsync(TKey id);
 }

@@ -9,6 +9,6 @@ public class CpuRepository(DatabaseContext context) : ICpuRepository
     public async Task<Cpu?> GetOneAsync(Guid id) 
         => await context.Cpus.Where(cpu => cpu.Id == id).FirstOrDefaultAsync();
     
-    public async Task<IEnumerable<Cpu>> GetAllAsync() 
+    public async Task<IEnumerable<Cpu>> ListAllAsync() 
         => await context.Cpus.ToListAsync();
 }

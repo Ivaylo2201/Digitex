@@ -18,6 +18,6 @@ public class GetAllGpusQueryHandler(
     public async Task<Result<IEnumerable<Gpu>>> HandleAsync(GetAllGpusQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
-        return Result<IEnumerable<Gpu>>.Success(await gpuRepository.GetAllAsync());
+        return Result<IEnumerable<Gpu>>.Success(await gpuRepository.ListAllAsync());
     }
 }

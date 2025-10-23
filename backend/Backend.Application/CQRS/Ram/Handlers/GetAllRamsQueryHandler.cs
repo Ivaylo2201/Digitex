@@ -18,6 +18,6 @@ public class GetAllRamsQueryHandler(
     public async Task<Result<IEnumerable<Ram>>> HandleAsync(GetAllRamsQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
-        return Result<IEnumerable<Ram>>.Success(await ramRepository.GetAllAsync());
+        return Result<IEnumerable<Ram>>.Success(await ramRepository.ListAllAsync());
     }
 }

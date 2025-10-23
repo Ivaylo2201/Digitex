@@ -18,6 +18,6 @@ public class GetAllSsdsQueryHandler(
     public async Task<Result<IEnumerable<Ssd>>> HandleAsync(GetAllSsdsQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
-        return Result<IEnumerable<Ssd>>.Success(await ssdRepository.GetAllAsync());
+        return Result<IEnumerable<Ssd>>.Success(await ssdRepository.ListAllAsync());
     }
 }

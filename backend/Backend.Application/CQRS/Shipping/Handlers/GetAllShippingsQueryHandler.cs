@@ -14,6 +14,6 @@ public class GetAllShippingsQueryHandler(
 {
     public async Task<Result<IEnumerable<Shipping>>> HandleAsync(GetAllShippingsQuery request, CancellationToken cancellationToken)
     {
-        return Result<IEnumerable<Shipping>>.Success(await shippingRepository.GetAllAsync());
+        return Result<IEnumerable<Shipping>>.Success(await shippingRepository.ListAllAsync());
     }
 }

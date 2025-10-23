@@ -9,6 +9,6 @@ public class MotherboardRepository(DatabaseContext context) : IMotherboardReposi
     public async Task<Motherboard?> GetOneAsync(Guid id) 
         => await context.Motherboards.Where(motherboard => motherboard.Id == id).FirstOrDefaultAsync();
     
-    public async Task<IEnumerable<Motherboard>> GetAllAsync() 
+    public async Task<IEnumerable<Motherboard>> ListAllAsync() 
         => await context.Motherboards.ToListAsync();
 }

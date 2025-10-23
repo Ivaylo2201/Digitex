@@ -18,6 +18,6 @@ public class GetAllMotherboardsQueryHandler(
     public async Task<Result<IEnumerable<Motherboard>>> HandleAsync(GetAllMotherboardsQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
-        return Result<IEnumerable<Motherboard>>.Success(await motherboardRepository.GetAllAsync());
+        return Result<IEnumerable<Motherboard>>.Success(await motherboardRepository.ListAllAsync());
     }
 }

@@ -18,6 +18,6 @@ public class GetAllMonitorsQueryHandler(
     public async Task<Result<IEnumerable<Monitor>>> HandleAsync(GetAllMonitorsQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
-        return Result<IEnumerable<Monitor>>.Success(await monitorRepository.GetAllAsync());
+        return Result<IEnumerable<Monitor>>.Success(await monitorRepository.ListAllAsync());
     }
 }

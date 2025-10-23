@@ -9,6 +9,6 @@ public class MonitorRepository(DatabaseContext context) : IMonitorRepository
     public async Task<Monitor?> GetOneAsync(Guid id) 
         => await context.Monitors.Where(monitor => monitor.Id == id).FirstOrDefaultAsync();
     
-    public async Task<IEnumerable<Monitor>> GetAllAsync()
+    public async Task<IEnumerable<Monitor>> ListAllAsync()
         => await context.Monitors.ToListAsync();
 }

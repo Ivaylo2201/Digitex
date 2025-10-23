@@ -9,6 +9,6 @@ public class ShippingRepository(DatabaseContext context) : IShippingRepository
     public async Task<Shipping?> GetOneAsync(int id) 
         => await context.Shippings.Where(shipping => shipping.Id == id).FirstOrDefaultAsync();
     
-    public async Task<IEnumerable<Shipping>> GetAllAsync() 
+    public async Task<IEnumerable<Shipping>> ListAllAsync() 
         => await context.Shippings.ToListAsync();
 }

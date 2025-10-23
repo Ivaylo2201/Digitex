@@ -9,6 +9,6 @@ public class RamRepository(DatabaseContext context) : IRamRepository
     public async Task<Ram?> GetOneAsync(Guid id)
         => await context.Rams.Where(ram => ram.Id == id).FirstOrDefaultAsync();
     
-    public async Task<IEnumerable<Ram>> GetAllAsync() 
+    public async Task<IEnumerable<Ram>> ListAllAsync() 
         => await context.Rams.ToListAsync();
 }
