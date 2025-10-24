@@ -1,5 +1,5 @@
 ﻿using Backend.Application.CQRS.Cpu.Queries;
-using Backend.Application.Generic;
+using Backend.Application.Generic.Handlers;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 

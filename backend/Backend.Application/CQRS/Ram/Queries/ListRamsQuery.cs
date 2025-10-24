@@ -1,8 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Ram.Queries;
 
 using Ram = Domain.Entities.Ram;
 
-public class ListRamsQuery : Query<Result<IEnumerable<Ram>>>;
+public class ListRamsQuery : ListEntitiesQuery<Ram>;

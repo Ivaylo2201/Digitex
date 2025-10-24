@@ -1,8 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Ssd.Queries;
 
 using Ssd = Domain.Entities.Ssd;
 
-public class ListSsdsQuery : Query<Result<IEnumerable<Ssd>>>;
+public class ListSsdsQuery : ListEntitiesQuery<Ssd>;

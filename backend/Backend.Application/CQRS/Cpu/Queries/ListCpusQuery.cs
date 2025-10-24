@@ -1,4 +1,4 @@
-﻿using Backend.Application.Generic;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Cpu.Queries;
 

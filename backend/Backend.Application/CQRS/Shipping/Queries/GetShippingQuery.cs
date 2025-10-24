@@ -1,11 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Shipping.Queries;
 
 using Shipping = Domain.Entities.Shipping;
 
-public class GetShippingQuery : Query<Result<Shipping?>>
-{
-    public required int EntityId { get; init; }
-}
+public class GetShippingQuery : GetEntityQuery<Shipping, int>;

@@ -1,8 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Gpu.Queries;
 
 using Gpu = Domain.Entities.Gpu;
 
-public class ListGpusQuery : Query<Result<IEnumerable<Gpu>>>;
+public class ListGpusQuery : ListEntitiesQuery<Gpu>;

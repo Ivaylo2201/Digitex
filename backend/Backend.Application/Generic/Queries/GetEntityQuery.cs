@@ -1,7 +1,7 @@
 ﻿using Backend.Domain.Common;
 using SimpleSoft.Mediator;
 
-namespace Backend.Application.Generic;
+namespace Backend.Application.Generic.Queries;
 
 public class GetEntityQuery<TEntity, TKey> : Query<Result<TEntity?>>
 {

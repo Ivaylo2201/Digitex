@@ -1,8 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Motherboard.Queries;
 
 using Motherboard = Domain.Entities.Motherboard;
 
-public class ListMotherboardsQuery : Query<Result<IEnumerable<Motherboard>>>;
+public class ListMotherboardsQuery : ListEntitiesQuery<Motherboard>;

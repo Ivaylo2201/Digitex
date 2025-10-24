@@ -1,6 +1,6 @@
 using System.Reflection;
 using Backend.Application;
-using Backend.Application.CQRS.Cpu.Queries;
+using Backend.Application.CQRS.Shipping.Queries;
 using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
@@ -56,9 +56,9 @@ app.UseStaticFiles();
 app.UseMiddleware<RequestPipelineMiddleware>();
 app.MapControllers();
 
-app.MapGet("/", async (IMediator mediator, CancellationToken ct) =>
+app.MapGet("/{id:int}", async (int id, IMediator mediator, CancellationToken ct) =>
 {
-    var res = await mediator.FetchAsync(new ListCpusQuery(), ct);
+    var res = await mediator.FetchAsync(new GetShippingQuery { EntityId = id }, ct);
     return Results.Ok(res.Value);   
 });
 

@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
+using Backend.Application.Generic.Queries;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces.Generics;
 using Microsoft.Extensions.Logging;
 using SimpleSoft.Mediator;
 
-namespace Backend.Application.Generic;
+namespace Backend.Application.Generic.Handlers;
 
 public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey>(
     ILogger logger,

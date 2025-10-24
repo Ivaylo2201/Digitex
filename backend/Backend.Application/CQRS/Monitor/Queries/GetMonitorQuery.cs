@@ -1,11 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Monitor.Queries;
 
 using Monitor = Domain.Entities.Monitor;
 
-public class GetMonitorQuery : Query<Result<Monitor?>>
-{
-    public required Guid EntityId { get; init; }
-}
+public class GetMonitorQuery : GetEntityQuery<Monitor, Guid>;

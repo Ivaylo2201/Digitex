@@ -1,11 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Ram.Queries;
 
 using Ram = Domain.Entities.Ram;
 
-public class GetRamQuery : Query<Result<Ram?>>
-{
-    public required Guid EntityId { get; init; }
-}
+public class GetRamQuery : GetEntityQuery<Ram, Guid>;

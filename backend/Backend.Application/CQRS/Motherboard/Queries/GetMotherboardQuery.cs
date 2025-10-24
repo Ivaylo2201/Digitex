@@ -1,11 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Motherboard.Queries;
 
 using Motherboard = Domain.Entities.Motherboard;
 
-public class GetMotherboardQuery : Query<Result<Motherboard?>>
-{
-    public required Guid EntityId { get; init; }
-}
+public class GetMotherboardQuery : GetEntityQuery<Motherboard, Guid>;

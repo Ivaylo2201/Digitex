@@ -1,11 +1,7 @@
-﻿using Backend.Domain.Common;
-using SimpleSoft.Mediator;
+﻿using Backend.Application.Generic.Queries;
 
 namespace Backend.Application.CQRS.Gpu.Queries;
 
 using Gpu = Domain.Entities.Gpu;
 
-public class GetGpuQuery : Query<Result<Gpu?>>
-{
-    public required Guid EntityId { get; init; }
-}
+public class GetGpuQuery : GetEntityQuery<Gpu, Guid>;
