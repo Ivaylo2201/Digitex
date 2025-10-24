@@ -9,9 +9,9 @@ public class MonitorRepository(ILogger<MonitorRepository> logger, DatabaseContex
 {
     private readonly ReadableRepository<Monitor, Guid> _repository = new(logger, context);
     
-    public async Task<Monitor?> GetOneAsync(Guid id, CancellationToken cancellationToken = default) 
-        => await _repository.GetOneAsync(id, cancellationToken);
-    
-    public async Task<List<Monitor>> ListAllAsync(CancellationToken cancellationToken = default)
-        => await _repository.ListAllAsync(cancellationToken);
+    public async Task<Monitor?> GetOneAsync(Guid id, Func<IQueryable<Monitor>, IQueryable<Monitor>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.GetOneAsync(id, include, cancellationToken);
+
+    public async Task<List<Monitor>> ListAllAsync(Func<IQueryable<Monitor>, IQueryable<Monitor>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.ListAllAsync(include, cancellationToken);
 }

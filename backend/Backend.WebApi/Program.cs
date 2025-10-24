@@ -6,6 +6,7 @@ using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
 using Backend.WebApi.Middlewares;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SimpleSoft.Mediator;
 

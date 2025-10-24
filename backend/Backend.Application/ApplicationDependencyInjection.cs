@@ -1,4 +1,7 @@
 ﻿using System.Reflection;
+using Backend.Application.DTOs;
+using Backend.Domain.Entities;
+using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
@@ -10,15 +13,20 @@ public static class ApplicationDependencyInjection
     {
         try
         {
-            services.AddMediator(options =>
-            {
-                var assembly = Assembly.GetExecutingAssembly();
+            services
+                .AddMapsterTypeConfigs()
+                .AddMediator(options =>
+                {
+                    var assembly = Assembly.GetExecutingAssembly();
 
-                options
-                    .AddHandlersFromAssembly(assembly)
-                    .AddValidatorsFromAssembly(assembly)
-                    .AddPipelineForValidation();
-            });
+                    TypeAdapterConfig<Cpu, CpuDto>.NewConfig()
+                        .Map(dest => dest.Brand, src => src.Brand.BrandName);
+
+                    options
+                        .AddHandlersFromAssembly(assembly)
+                        .AddValidatorsFromAssembly(assembly)
+                        .AddPipelineForValidation();
+                });
             
             Log.Information("[{ClassName}]: Application services successfully initialized.", nameof(ApplicationDependencyInjection));
         }
@@ -26,6 +34,14 @@ public static class ApplicationDependencyInjection
         {
             Log.Error("[{ClassName}]: {ExceptionType} occurred while configuring DI for Application. Exception message: {ExceptionMessage}", nameof(ApplicationDependencyInjection), ex.GetType().Name, ex.Message);
         }
+        
+        return services;       
+    }
+
+    private static IServiceCollection AddMapsterTypeConfigs(this IServiceCollection services)
+    {
+        TypeAdapterConfig<Cpu, CpuDto>.NewConfig()
+            .Map(dest => dest.Brand, src => src.Brand.BrandName);
         
         return services;       
     }

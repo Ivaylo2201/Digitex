@@ -9,9 +9,9 @@ public class MotherboardRepository(ILogger<Motherboard> logger, DatabaseContext 
 {
     private readonly ReadableRepository<Motherboard, Guid> _repository = new(logger, context);
     
-    public async Task<Motherboard?> GetOneAsync(Guid id, CancellationToken cancellationToken = default) 
-        => await _repository.GetOneAsync(id, cancellationToken);
-    
-    public async Task<List<Motherboard>> ListAllAsync(CancellationToken cancellationToken = default) 
-        => await _repository.ListAllAsync(cancellationToken);
+    public async Task<Motherboard?> GetOneAsync(Guid id, Func<IQueryable<Motherboard>, IQueryable<Motherboard>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.GetOneAsync(id, include, cancellationToken);
+
+    public async Task<List<Motherboard>> ListAllAsync(Func<IQueryable<Motherboard>, IQueryable<Motherboard>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.ListAllAsync(include, cancellationToken);
 }

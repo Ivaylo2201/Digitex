@@ -9,9 +9,9 @@ public class GpuRepository(ILogger<GpuRepository> logger, DatabaseContext contex
 {
     private readonly ReadableRepository<Gpu, Guid> _repository = new(logger, context);
     
-    public async Task<Gpu?> GetOneAsync(Guid id, CancellationToken cancellationToken = default) 
-        => await _repository.GetOneAsync(id, cancellationToken);
-    
-    public async Task<List<Gpu>> ListAllAsync(CancellationToken cancellationToken = default) 
-        => await _repository.ListAllAsync(cancellationToken);
+    public async Task<Gpu?> GetOneAsync(Guid id, Func<IQueryable<Gpu>, IQueryable<Gpu>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.GetOneAsync(id, include, cancellationToken);
+
+    public async Task<List<Gpu>> ListAllAsync(Func<IQueryable<Gpu>, IQueryable<Gpu>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.ListAllAsync(include, cancellationToken);
 }

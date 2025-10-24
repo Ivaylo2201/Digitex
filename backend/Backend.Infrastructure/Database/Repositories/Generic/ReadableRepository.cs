@@ -11,25 +11,43 @@ public class ReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext c
     private readonly string _source = $"{nameof(ReadableRepository<TEntity, TKey>)}<{typeof(TEntity).Name}, {typeof(TKey).Name}>";
     private readonly Type _entityType = typeof(TEntity);
     
-    public async Task<List<TEntity>> ListAllAsync(CancellationToken stoppingToken = default)
+    public async Task<List<TEntity>> ListAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>>? include, CancellationToken cancellationToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
+        context.Gpus.Include(gpu => gpu.Brand);
         
         logger.LogInformation("[{Source}]: Retrieving all {EntityName} entities...", _source, _entityType.Name);
-        var entities = await context.Set<TEntity>().ToListAsync(stoppingToken);
+        
+        IQueryable<TEntity> queryable = context.Set<TEntity>();
+
+        if (include is not null)
+            queryable = include(queryable);
+        
+        var entities = await queryable.ToListAsync(cancellationToken);
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: Retrieved {Count} {EntityName} entities in {Duration}ms.", _source, entities.Count, _entityType.Name, stopwatch.ElapsedMilliseconds);
         return entities;
     }
 
-    public async Task<TEntity?> GetOneAsync(TKey id, CancellationToken stoppingToken = default)
+    public async Task<TEntity?> GetOneAsync(TKey id, Func<IQueryable<TEntity>, IQueryable<TEntity>>? include, CancellationToken cancellationToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogInformation("[{Source}]: Getting {EntityName} entity with Id={EntityId}", _source, _entityType.Name, id);
         
-        var entity = await context.Set<TEntity>().FirstOrDefaultAsync(GetEqualityLambda(id), stoppingToken);
+        IQueryable<TEntity> queryable = context.Set<TEntity>();
+
+        if (include is not null)
+            queryable = include(queryable);
+        
+        var entity = await queryable.FirstOrDefaultAsync(GetEqualityLambda(id), cancellationToken);
+
+        if (entity is null)
+        {
+            logger.LogWarning("[{Source}]: {EntityName} entity with Id={EntityId} not found.", _source, _entityType.Name, id);
+            return null;
+        }
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: {EntityName} entity with Id={EntityId} retrieved in {Duration}ms.", _source, _entityType.Name, id, stopwatch.ElapsedMilliseconds);

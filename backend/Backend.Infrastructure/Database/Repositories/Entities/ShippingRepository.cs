@@ -9,9 +9,9 @@ public class ShippingRepository(ILogger<ShippingRepository> logger, DatabaseCont
 {
     private readonly ReadableRepository<Shipping, int> _repository = new(logger, context);
 
-    public async Task<Shipping?> GetOneAsync(int id, CancellationToken cancellationToken = default)
-        => await _repository.GetOneAsync(id, cancellationToken);
-    
-    public async Task<List<Shipping>> ListAllAsync(CancellationToken cancellationToken = default) 
-        => await _repository.ListAllAsync(cancellationToken);
+    public async Task<List<Shipping>> ListAllAsync(Func<IQueryable<Shipping>, IQueryable<Shipping>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.ListAllAsync(include, cancellationToken);
+
+    public async Task<Shipping?> GetOneAsync(int id, Func<IQueryable<Shipping>, IQueryable<Shipping>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.GetOneAsync(id, include, cancellationToken);
 }

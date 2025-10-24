@@ -9,9 +9,9 @@ public class SsdRepository(ILogger<SsdRepository> logger, DatabaseContext contex
 {
     private readonly ReadableRepository<Ssd, Guid> _repository = new(logger, context);
     
-    public async Task<Ssd?> GetOneAsync(Guid id, CancellationToken cancellationToken = default) 
-        => await _repository.GetOneAsync(id, cancellationToken);
-    
-    public async Task<List<Ssd>> ListAllAsync(CancellationToken cancellationToken = default)
-        => await _repository.ListAllAsync(cancellationToken);
+    public async Task<Ssd?> GetOneAsync(Guid id, Func<IQueryable<Ssd>, IQueryable<Ssd>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.GetOneAsync(id, include, cancellationToken);
+
+    public async Task<List<Ssd>> ListAllAsync(Func<IQueryable<Ssd>, IQueryable<Ssd>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.ListAllAsync(include, cancellationToken);
 }
