@@ -1,5 +1,5 @@
-﻿using Backend.Application.CQRS.Shipping.Queries;
-using Backend.Application.Generic.Handlers;
+﻿using Backend.Application.CQRS.Generic.Handlers;
+using Backend.Application.CQRS.Shipping.Queries;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 

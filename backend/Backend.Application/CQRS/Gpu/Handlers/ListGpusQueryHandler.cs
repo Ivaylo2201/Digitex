@@ -1,6 +1,6 @@
 ﻿using Backend.Application.CQRS.Cpu.Handlers;
+using Backend.Application.CQRS.Generic.Handlers;
 using Backend.Application.CQRS.Gpu.Queries;
-using Backend.Application.Generic.Handlers;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 

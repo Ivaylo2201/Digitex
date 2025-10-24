@@ -5,6 +5,7 @@ using Backend.Domain.Interfaces.Repositories;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Repositories;
+using Backend.Infrastructure.Database.Repositories.Entities;
 using Backend.Infrastructure.Services;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

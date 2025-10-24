@@ -4,7 +4,7 @@ using Backend.Domain.Interfaces.Generics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Infrastructure.Database.Repositories.Base;
+namespace Backend.Infrastructure.Database.Repositories.Generic;
 
 public class ReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext context) : IReadable<TEntity, TKey> where TEntity : class, IEntity<TKey>
 {

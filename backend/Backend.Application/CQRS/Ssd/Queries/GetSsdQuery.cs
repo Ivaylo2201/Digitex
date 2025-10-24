@@ -1,4 +1,4 @@
-﻿using Backend.Application.Generic.Queries;
+﻿using Backend.Application.CQRS.Generic.Queries;
 
 namespace Backend.Application.CQRS.Ssd.Queries;
 
