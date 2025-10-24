@@ -6,9 +6,9 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class RamRepository(DatabaseContext context) : IRamRepository
 {
-    public async Task<Ram?> GetOneAsync(Guid id)
-        => await context.Rams.Where(ram => ram.Id == id).FirstOrDefaultAsync();
+    public async Task<Ram?> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
+        => await context.Rams.Where(ram => ram.Id == id).FirstOrDefaultAsync(stoppingToken);
     
-    public async Task<IEnumerable<Ram>> ListAllAsync() 
-        => await context.Rams.ToListAsync();
+    public async Task<List<Ram>> ListAllAsync(CancellationToken stoppingToken = default) 
+        => await context.Rams.ToListAsync(stoppingToken);
 }

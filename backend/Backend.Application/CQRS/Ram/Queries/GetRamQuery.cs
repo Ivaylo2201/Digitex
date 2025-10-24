@@ -5,4 +5,7 @@ namespace Backend.Application.CQRS.Ram.Queries;
 
 using Ram = Domain.Entities.Ram;
 
-public class GetAllRamsQuery : Query<Result<IEnumerable<Ram>>>;
+public class GetRamQuery : Query<Result<Ram?>>
+{
+    public required Guid EntityId { get; init; }
+}

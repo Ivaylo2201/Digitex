@@ -2,6 +2,6 @@
 
 public interface IReadable<TEntity, in TKey>
 {
-    Task<IEnumerable<TEntity>> ListAllAsync();
-    Task<TEntity?> GetOneAsync(TKey id);
+    Task<List<TEntity>> ListAllAsync(CancellationToken cancellationToken = default);
+    Task<TEntity?> GetOneAsync(TKey id, CancellationToken cancellationToken = default);
 }

@@ -8,11 +8,11 @@ namespace Backend.Application.CQRS.Shipping.Handlers;
 
 using Shipping = Domain.Entities.Shipping;
 
-public class GetAllShippingsQueryHandler(
-    ILogger<GetAllShippingsQueryHandler> logger,
-    IShippingRepository shippingRepository) : IQueryHandler<GetAllShippingsQuery, Result<IEnumerable<Shipping>>>
+public class ListShippingsQueryHandler(
+    ILogger<ListShippingsQueryHandler> logger,
+    IShippingRepository shippingRepository) : IQueryHandler<ListShippingsQuery, Result<IEnumerable<Shipping>>>
 {
-    public async Task<Result<IEnumerable<Shipping>>> HandleAsync(GetAllShippingsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<Shipping>>> HandleAsync(ListShippingsQuery request, CancellationToken cancellationToken)
     {
         return Result<IEnumerable<Shipping>>.Success(await shippingRepository.ListAllAsync());
     }

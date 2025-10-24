@@ -5,4 +5,4 @@ namespace Backend.Application.CQRS.Gpu.Queries;
 
 using Gpu = Domain.Entities.Gpu;
 
-public class GetAllGpusQuery : Query<Result<IEnumerable<Gpu>>>;
+public class ListGpusQuery : Query<Result<IEnumerable<Gpu>>>;

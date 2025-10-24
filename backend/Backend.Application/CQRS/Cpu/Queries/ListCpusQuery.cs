@@ -4,4 +4,4 @@ namespace Backend.Application.CQRS.Cpu.Queries;
 
 using Cpu = Domain.Entities.Cpu;
 
-public class ListAllCpusQuery : ListEntitiesQuery<Cpu>;
+public class ListCpusQuery : ListEntitiesQuery<Cpu>;

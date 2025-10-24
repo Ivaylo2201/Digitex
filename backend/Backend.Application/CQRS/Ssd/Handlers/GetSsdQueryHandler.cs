@@ -9,14 +9,14 @@ namespace Backend.Application.CQRS.Ssd.Handlers;
 
 using Ssd = Domain.Entities.Ssd;
 
-public class GetOneSsdQueryHandler(
-    ILogger<GetOneSsdQueryHandler> logger,
-    ISsdRepository ssdRepository) : IQueryHandler<GetOneSsdQuery, Result<Ssd?>>
+public class GetSsdQueryHandler(
+    ILogger<GetSsdQueryHandler> logger,
+    ISsdRepository ssdRepository) : IQueryHandler<GetSsdQuery, Result<Ssd?>>
 {
-    private const string HandlerName = nameof(GetOneSsdQueryHandler);
+    private const string HandlerName = nameof(GetSsdQueryHandler);
     private const string EntityType = "SSD";
     
-    public async Task<Result<Ssd?>> HandleAsync(GetOneSsdQuery query, CancellationToken cancellationToken)
+    public async Task<Result<Ssd?>> HandleAsync(GetSsdQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={SsdId}.", HandlerName, EntityType, query.EntityId);
         var ssd = await ssdRepository.GetOneAsync(query.EntityId);

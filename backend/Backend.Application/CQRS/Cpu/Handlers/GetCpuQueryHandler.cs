@@ -9,14 +9,14 @@ namespace Backend.Application.CQRS.Cpu.Handlers;
 
 using Cpu = Domain.Entities.Cpu;
 
-public class GetOneCpuQueryHandler(
-    ILogger<GetOneCpuQueryHandler> logger,
-    ICpuRepository cpuRepository) : IQueryHandler<GetOneCpuQuery, Result<Cpu?>>
+public class GetCpuQueryHandler(
+    ILogger<GetCpuQueryHandler> logger,
+    ICpuRepository cpuRepository) : IQueryHandler<GetCpuQuery, Result<Cpu?>>
 {
-    private const string HandlerName = nameof(GetOneCpuQueryHandler);
+    private const string HandlerName = nameof(GetCpuQueryHandler);
     private const string EntityType = "CPU";
     
-    public async Task<Result<Cpu?>> HandleAsync(GetOneCpuQuery query, CancellationToken cancellationToken)
+    public async Task<Result<Cpu?>> HandleAsync(GetCpuQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={CpuId}.", HandlerName, EntityType, query.EntityId);
         var cpu = await cpuRepository.GetOneAsync(query.EntityId);

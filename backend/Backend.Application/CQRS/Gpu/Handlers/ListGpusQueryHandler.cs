@@ -8,14 +8,14 @@ namespace Backend.Application.CQRS.Gpu.Handlers;
 
 using Gpu = Domain.Entities.Gpu;
 
-public class GetAllGpusQueryHandler(
-    ILogger<GetAllGpusQueryHandler> logger,
-    IGpuRepository gpuRepository) : IQueryHandler<GetAllGpusQuery, Result<IEnumerable<Gpu>>>
+public class ListGpusQueryHandler(
+    ILogger<ListGpusQueryHandler> logger,
+    IGpuRepository gpuRepository) : IQueryHandler<ListGpusQuery, Result<IEnumerable<Gpu>>>
 {
-    private const string HandlerName = nameof(GetAllGpusQueryHandler);
+    private const string HandlerName = nameof(ListGpusQueryHandler);
     private const string EntityType = "GPU";
     
-    public async Task<Result<IEnumerable<Gpu>>> HandleAsync(GetAllGpusQuery request, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<Gpu>>> HandleAsync(ListGpusQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
         return Result<IEnumerable<Gpu>>.Success(await gpuRepository.ListAllAsync());

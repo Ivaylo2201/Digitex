@@ -8,14 +8,14 @@ namespace Backend.Application.CQRS.Ram.Handlers;
 
 using Ram = Domain.Entities.Ram;
 
-public class GetAllRamsQueryHandler(
-    ILogger<GetAllRamsQueryHandler> logger,
-    IRamRepository ramRepository) : IQueryHandler<GetAllRamsQuery, Result<IEnumerable<Ram>>>
+public class ListRamsQueryHandler(
+    ILogger<ListRamsQueryHandler> logger,
+    IRamRepository ramRepository) : IQueryHandler<ListRamsQuery, Result<IEnumerable<Ram>>>
 {
-    private const string HandlerName = nameof(GetAllRamsQueryHandler);
+    private const string HandlerName = nameof(ListRamsQueryHandler);
     private const string EntityType = "RAM";
     
-    public async Task<Result<IEnumerable<Ram>>> HandleAsync(GetAllRamsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<Ram>>> HandleAsync(ListRamsQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting all {EntityType} records.", HandlerName, EntityType);
         return Result<IEnumerable<Ram>>.Success(await ramRepository.ListAllAsync());

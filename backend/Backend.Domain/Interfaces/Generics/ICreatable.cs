@@ -2,5 +2,5 @@
 
 public interface ICreatable<TEntity>
 {
-    Task<TEntity> CreateAsync(TEntity item);
+    Task<TEntity> CreateAsync(TEntity item, CancellationToken stoppingToken = default);
 }

@@ -9,14 +9,14 @@ namespace Backend.Application.CQRS.Monitor.Handlers;
 
 using Monitor = Domain.Entities.Monitor;
 
-public class GetOneMonitorQueryHandler(
-    ILogger<GetOneMonitorQueryHandler> logger,
-    IMonitorRepository monitorRepository) : IQueryHandler<GetOneMonitorQuery, Result<Monitor?>>
+public class GetMonitorQueryHandler(
+    ILogger<GetMonitorQueryHandler> logger,
+    IMonitorRepository monitorRepository) : IQueryHandler<GetMonitorQuery, Result<Monitor?>>
 {
-    private const string HandlerName = nameof(GetOneMonitorQueryHandler);
+    private const string HandlerName = nameof(GetMonitorQueryHandler);
     private const string EntityType = "Monitor";
     
-    public async Task<Result<Monitor?>> HandleAsync(GetOneMonitorQuery query, CancellationToken cancellationToken)
+    public async Task<Result<Monitor?>> HandleAsync(GetMonitorQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={MotherboardId}.", HandlerName, EntityType, query.EntityId);
         var monitor = await monitorRepository.GetOneAsync(query.EntityId);

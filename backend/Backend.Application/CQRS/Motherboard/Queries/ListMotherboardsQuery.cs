@@ -5,7 +5,4 @@ namespace Backend.Application.CQRS.Motherboard.Queries;
 
 using Motherboard = Domain.Entities.Motherboard;
 
-public class GetOneMotherboardQuery : Query<Result<Motherboard?>>
-{
-    public required Guid EntityId { get; init; }
-}
+public class ListMotherboardsQuery : Query<Result<IEnumerable<Motherboard>>>;

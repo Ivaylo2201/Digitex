@@ -9,14 +9,14 @@ namespace Backend.Application.CQRS.Ram.Handlers;
 
 using Ram = Domain.Entities.Ram;
 
-public class GetOneRamQueryHandler(
-    ILogger<GetOneRamQueryHandler> logger,
-    IRamRepository ramRepository) : IQueryHandler<GetOneRamQuery, Result<Ram?>>
+public class GetRamQueryHandler(
+    ILogger<GetRamQueryHandler> logger,
+    IRamRepository ramRepository) : IQueryHandler<GetRamQuery, Result<Ram?>>
 {
-    private const string HandlerName = nameof(GetOneRamQueryHandler);
+    private const string HandlerName = nameof(GetRamQueryHandler);
     private const string EntityType = "RAM";
     
-    public async Task<Result<Ram?>> HandleAsync(GetOneRamQuery query, CancellationToken cancellationToken)
+    public async Task<Result<Ram?>> HandleAsync(GetRamQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("[{HandlerName}]: Getting {EntityType} record with Id={RamId}.", HandlerName, EntityType, query.EntityId);
         var ram = await ramRepository.GetOneAsync(query.EntityId);

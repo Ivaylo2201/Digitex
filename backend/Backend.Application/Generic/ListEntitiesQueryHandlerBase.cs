@@ -10,22 +10,17 @@ public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TKey>(
     ILogger logger,
     IReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<IEnumerable<TEntity>>> where TQuery : ListEntitiesQuery<TEntity>
 {
-    public async Task<Result<IEnumerable<TEntity>>> HandleAsync(TQuery query, CancellationToken ct)
+    public async Task<Result<IEnumerable<TEntity>>> HandleAsync(TQuery query, CancellationToken stoppingToken)
     {
         var source = GetType().Name;
         var entityType = typeof(TEntity).Name;
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogInformation("[{Source}]: Retrieving all {EntityType} entities...", source, entityType);
-        var entities = await repository.ListAllAsync();
+        var entities = await repository.ListAllAsync(stoppingToken);
         
         stopwatch.Stop();
-
-        var count = entities.ToList().Count;
-        var duration = stopwatch.ElapsedMilliseconds;
-        
-        logger.LogInformation("[{Source}]: Retrieved {Count} {EntityType} entities in {Duration}ms.", source, count, entityType, duration);
-        
+        logger.LogInformation("[{Source}]: Retrieved {Count} {EntityType} entities in {Duration}ms.", source, entities.Count, entityType, stopwatch.ElapsedMilliseconds);
         return Result<IEnumerable<TEntity>>.Success(entities);
     }
 }

@@ -58,7 +58,7 @@ app.MapControllers();
 
 app.MapGet("/", async (IMediator mediator, CancellationToken ct) =>
 {
-    var res = await mediator.FetchAsync(new ListAllCpusQuery(), ct);
+    var res = await mediator.FetchAsync(new ListCpusQuery(), ct);
     return Results.Ok(res.Value);   
 });
 

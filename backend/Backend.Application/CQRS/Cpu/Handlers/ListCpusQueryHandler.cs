@@ -7,6 +7,6 @@ namespace Backend.Application.CQRS.Cpu.Handlers;
 
 using Cpu = Domain.Entities.Cpu;
 
-public class ListAllCpusQueryHandler(
-    ILogger<ListAllCpusQueryHandler> logger,
-    ICpuRepository cpuRepository) : ListEntitiesQueryHandlerBase<ListAllCpusQuery, Cpu, Guid>(logger, cpuRepository);
+public class ListCpusQueryHandler(
+    ILogger<ListCpusQueryHandler> logger,
+    ICpuRepository cpuRepository) : ListEntitiesQueryHandlerBase<ListCpusQuery, Cpu, Guid>(logger, cpuRepository);
