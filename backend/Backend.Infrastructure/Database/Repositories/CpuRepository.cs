@@ -1,14 +1,17 @@
 ﻿using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Backend.Infrastructure.Database.Repositories.Base;
+using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Database.Repositories;
 
-public class CpuRepository(DatabaseContext context) : ICpuRepository
+public class CpuRepository(ILogger<CpuRepository> logger, DatabaseContext context) : ICpuRepository
 {
-    public async Task<Cpu?> GetOneAsync(Guid id, CancellationToken stoppingToken = default) 
-        => await context.Cpus.Where(cpu => cpu.Id == id).FirstOrDefaultAsync(stoppingToken);
+    private readonly ReadableRepository<Cpu, Guid> _repository = new(logger, context);
     
-    public async Task<List<Cpu>> ListAllAsync(CancellationToken stoppingToken = default) 
-        => await context.Cpus.ToListAsync(stoppingToken);
+    public async Task<List<Cpu>> ListAllAsync(CancellationToken cancellationToken = default) =>
+        await _repository.ListAllAsync(cancellationToken);
+
+    public async Task<Cpu?> GetOneAsync(Guid id, CancellationToken cancellationToken = default) =>
+        await _repository.GetOneAsync(id, cancellationToken);
 }

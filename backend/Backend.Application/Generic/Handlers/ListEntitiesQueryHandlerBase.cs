@@ -14,14 +14,14 @@ public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TKey>(
     public async Task<Result<IEnumerable<TEntity>>> HandleAsync(TQuery query, CancellationToken stoppingToken)
     {
         var source = GetType().Name;
-        var entityType = typeof(TEntity).Name;
+        var queryType = typeof(TQuery).Name;
         var stopwatch = Stopwatch.StartNew();
         
-        logger.LogInformation("[{Source}]: Retrieving all {EntityType} entities...", source, entityType);
+        logger.LogInformation("[{Source}]: Executing {QueryType}...", source, queryType);
         var entities = await repository.ListAllAsync(stoppingToken);
         
         stopwatch.Stop();
-        logger.LogInformation("[{Source}]: Retrieved {Count} {EntityType} entities in {Duration}ms.", source, entities.Count, entityType, stopwatch.ElapsedMilliseconds);
+        logger.LogInformation("[{Source}]: {QueryType} executed in {Duration}ms.", source, queryType, stopwatch.ElapsedMilliseconds);
         return Result<IEnumerable<TEntity>>.Success(entities);
     }
 }

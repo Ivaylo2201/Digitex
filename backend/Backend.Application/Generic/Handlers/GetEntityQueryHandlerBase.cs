@@ -14,14 +14,15 @@ public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey>(
     public async Task<Result<TEntity?>> HandleAsync(TQuery query, CancellationToken stoppingToken)
     {
         var source = GetType().Name;
-        var entityType = typeof(TEntity).Name;
+        var queryType = typeof(TQuery).Name;
         var stopwatch = Stopwatch.StartNew();
         
-        logger.LogInformation("[{Source}]: Getting {EntityType} entity with Id={EntityId}", source, entityType, query.EntityId);
+        logger.LogInformation("[{Source}]: Executing {QueryType} with Id={EntityId}...", source, queryType, query.EntityId);
         var entity = await repository.GetOneAsync(query.EntityId, stoppingToken);
         
         stopwatch.Stop();
-        logger.LogInformation("[{Source}]: {EntityType} entity with Id={EntityId} retrieved in {Duration}ms.", source, entityType, query.EntityId, stopwatch.ElapsedMilliseconds);
+        logger.LogInformation("[{Source}]: {QueryType} executed in {Duration}ms.", source, queryType, stopwatch.ElapsedMilliseconds);
+        
         return Result<TEntity?>.Success(entity);
     }
 }
