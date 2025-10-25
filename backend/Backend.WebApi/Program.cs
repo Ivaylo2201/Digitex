@@ -4,6 +4,7 @@ using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
+using Backend.WebApi.Extensions;
 using Backend.WebApi.Middlewares;
 using Serilog;
 
@@ -53,6 +54,7 @@ app.UseRouting();
 app.UseCors((app.Environment.IsDevelopment() ? Policy.AllowAny : Policy.AllowFrontend).ToString());
 app.UseStaticFiles();
 app.UseMiddleware<RequestPipelineMiddleware>();
+app.UseGlobalExceptionHandler();
 app.MapControllers();
 
 Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment} at version {ServiceVersion}...", serviceName, app.Environment.EnvironmentName, serviceVersion);
