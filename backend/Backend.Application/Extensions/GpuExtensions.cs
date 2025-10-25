@@ -25,7 +25,8 @@ public static class GpuExtensions
             BusWidth = gpu.BusWidth,
             CudaCores = gpu.CudaCores,
             DirectXSupport = gpu.DirectXSupport,
-            Tdp = gpu.Tdp
+            Tdp = gpu.Tdp,
+            Rating = gpu.GetRating()
         };
     }
 }

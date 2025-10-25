@@ -6,25 +6,26 @@ namespace Backend.Application.Extensions;
 
 public static class CpuExtensions
 {
-    public static CpuDto ToCpuDto(this Cpu entity)
+    public static CpuDto ToCpuDto(this Cpu cpu)
     {
         return new CpuDto
         {
-            Id = entity.Id,
-            BrandName = entity.Brand.BrandName,
-            ModelName = entity.ModelName,
-            ImagePath = entity.ImagePath,
+            Id = cpu.Id,
+            BrandName = cpu.Brand.BrandName,
+            ModelName = cpu.ModelName,
+            ImagePath = cpu.ImagePath,
             Price = new Price
             {
-                Initial = entity.InitialPrice,
-                Discounted = entity.Price
+                Initial = cpu.InitialPrice,
+                Discounted = cpu.Price
             },
-            DiscountPercentage = entity.DiscountPercentage,
-            Cores = entity.Cores,
-            Threads = entity.Threads,
-            ClockSpeed = entity.ClockSpeed,
-            Socket = entity.Socket,
-            Tdp = entity.Tdp
+            DiscountPercentage = cpu.DiscountPercentage,
+            Cores = cpu.Cores,
+            Threads = cpu.Threads,
+            ClockSpeed = cpu.ClockSpeed,
+            Socket = cpu.Socket,
+            Tdp = cpu.Tdp,
+            Rating = cpu.GetRating()
         };
     }
 }

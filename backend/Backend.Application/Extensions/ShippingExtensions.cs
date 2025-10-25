@@ -1,5 +1,6 @@
 ﻿using Backend.Application.DTOs;
 using Backend.Domain.Entities;
+
 namespace Backend.Application.Extensions;
 
 public static class ShippingExtensions

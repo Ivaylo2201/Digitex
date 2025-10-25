@@ -45,7 +45,7 @@ public class ReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext c
 
         if (entity is null)
         {
-            logger.LogWarning("[{Source}]: {EntityName} entity with Id={EntityId} not found.", _source, _entityType.Name, id);
+            logger.LogError("[{Source}]: {EntityName} entity with Id={EntityId} not found.", _source, _entityType.Name, id);
             return null;
         }
         

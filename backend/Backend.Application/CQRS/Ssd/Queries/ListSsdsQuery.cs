@@ -10,7 +10,9 @@ using Ssd = Domain.Entities.Ssd;
 public class ListSsdsQuery : ListEntitiesQuery<Ssd, ProductDto>
 {
     public override IQueryable<Ssd> Include(IQueryable<Ssd> queryable)
-        => queryable.Include(ssd => ssd.Brand);
+        => queryable
+            .Include(ssd => ssd.Brand)
+            .Include(ssd => ssd.Reviews);
 
     public override ProductDto Project(Ssd ssd)
         => ssd.ToProductDto();

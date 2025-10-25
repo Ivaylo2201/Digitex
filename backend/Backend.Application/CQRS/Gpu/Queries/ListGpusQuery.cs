@@ -10,7 +10,9 @@ using Gpu = Domain.Entities.Gpu;
 public class ListGpusQuery : ListEntitiesQuery<Gpu, ProductDto>
 {
     public override IQueryable<Gpu> Include(IQueryable<Gpu> queryable)
-        => queryable.Include(gpu => gpu.Brand);
+        => queryable
+            .Include(gpu => gpu.Brand)
+            .Include(gpu => gpu.Reviews);
 
     public override ProductDto Project(Gpu gpu)
         => gpu.ToProductDto();

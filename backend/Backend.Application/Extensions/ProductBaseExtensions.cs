@@ -16,10 +16,16 @@ public static class ProductBaseExtensions
             ImagePath = product.ImagePath,
             Price = new Price
             {
-                Initial = product.InitialPrice,
-                Discounted = product.Price
+                Initial = Math.Round(product.InitialPrice, 2),
+                Discounted = Math.Round(product.Price, 2)
             },
             DiscountPercentage = product.DiscountPercentage,
+            Rating = product.GetRating()
         };
+    }
+
+    public static int GetRating(this ProductBase product)
+    {
+        return product.Reviews.Count > 0 ? (int)product.Reviews.Average(review => review.Rating) : 0;   
     }
 }

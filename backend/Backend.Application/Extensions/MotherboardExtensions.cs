@@ -24,7 +24,8 @@ public static class MotherboardExtensions
             FormFactor = motherboard.FormFactor,
             Chipset = motherboard.Chipset,
             RamSlots = motherboard.RamSlots,
-            PcieSlots = motherboard.PcieSlots
+            PcieSlots = motherboard.PcieSlots,
+            Rating = motherboard.GetRating()
         };
     }
 }

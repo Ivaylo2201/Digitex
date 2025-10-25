@@ -10,7 +10,9 @@ using Motherboard = Domain.Entities.Motherboard;
 public class ListMotherboardsQuery : ListEntitiesQuery<Motherboard, ProductDto>
 {
     public override IQueryable<Motherboard> Include(IQueryable<Motherboard> queryable)
-        => queryable.Include(motherboard => motherboard.Brand);
+        => queryable
+            .Include(motherboard => motherboard.Brand)
+            .Include(motherboard => motherboard.Reviews);
 
     public override ProductDto Project(Motherboard motherboard)
         => motherboard.ToProductDto();

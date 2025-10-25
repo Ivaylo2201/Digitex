@@ -10,7 +10,9 @@ using Ram = Domain.Entities.Ram;
 public class ListRamsQuery : ListEntitiesQuery<Ram, ProductDto>
 {
     public override IQueryable<Ram> Include(IQueryable<Ram> queryable)
-        => queryable.Include(ram => ram.Brand);
+        => queryable
+            .Include(ram => ram.Brand)
+            .Include(ram => ram.Reviews);
 
     public override ProductDto Project(Ram ram)
         => ram.ToProductDto();

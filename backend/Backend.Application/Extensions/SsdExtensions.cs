@@ -22,7 +22,8 @@ public static class SsdExtensions
             DiscountPercentage = ssd.DiscountPercentage,
             CapacityInGb = ssd.CapacityInGb,
             OperationSpeed = ssd.OperationSpeed,
-            Interface = ssd.Interface
+            Interface = ssd.Interface,
+            Rating = ssd.GetRating()
         };
     }
 }

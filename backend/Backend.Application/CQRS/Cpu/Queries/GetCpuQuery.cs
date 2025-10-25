@@ -11,7 +11,9 @@ using Cpu = Domain.Entities.Cpu;
 public class GetCpuQuery : GetEntityQuery<Cpu, Guid, CpuDto>
 {
     public override IQueryable<Cpu> Include(IQueryable<Cpu> queryable)
-        => queryable.Include(cpu => cpu.Brand);
+        => queryable
+            .Include(cpu => cpu.Brand)
+            .Include(cpu => cpu.Reviews);
 
     public override CpuDto Project(Cpu cpu)
         => cpu.ToCpuDto();

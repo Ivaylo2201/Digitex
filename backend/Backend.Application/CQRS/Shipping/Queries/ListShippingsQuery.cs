@@ -1,5 +1,6 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
 using Backend.Application.DTOs;
+using Backend.Application.Extensions;
 
 namespace Backend.Application.CQRS.Shipping.Queries;
 
@@ -8,12 +9,8 @@ using Shipping = Domain.Entities.Shipping;
 public class ListShippingsQuery : ListEntitiesQuery<Shipping, ShippingDto>
 {
     public override IQueryable<Shipping> Include(IQueryable<Shipping> queryable)
-    {
-        throw new NotImplementedException();
-    }
+        => queryable;
 
-    public override ShippingDto Project(Shipping entity)
-    {
-        throw new NotImplementedException();
-    }
+    public override ShippingDto Project(Shipping shipping)
+        => shipping.ToShippingDto();
 }

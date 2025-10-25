@@ -27,7 +27,8 @@ public static class MonitorExtensions
             Resolution = monitor.Resolution,
             PixelSize = monitor.PixelSize,
             Brightness = monitor.Brightness,
-            ColorSpectre = monitor.ColorSpectre
+            ColorSpectre = monitor.ColorSpectre,
+            Rating = monitor.GetRating()
         };
     }
 }

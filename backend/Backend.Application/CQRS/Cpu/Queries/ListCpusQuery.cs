@@ -10,7 +10,9 @@ using Cpu = Domain.Entities.Cpu;
 public class ListCpusQuery : ListEntitiesQuery<Cpu, ProductDto>
 {
     public override IQueryable<Cpu> Include(IQueryable<Cpu> queryable)
-        => queryable.Include(cpu => cpu.Brand);
+        => queryable
+            .Include(cpu => cpu.Brand)
+            .Include(cpu => cpu.Reviews);
 
     public override ProductDto Project(Cpu cpu) 
         => cpu.ToProductDto();

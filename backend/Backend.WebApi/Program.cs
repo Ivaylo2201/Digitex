@@ -1,14 +1,11 @@
 using System.Reflection;
 using Backend.Application;
-using Backend.Application.CQRS.Cpu.Queries;
 using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
 using Backend.WebApi.Middlewares;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
-using SimpleSoft.Mediator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,12 +53,6 @@ app.UseCors((app.Environment.IsDevelopment() ? Policy.AllowAny : Policy.AllowFro
 app.UseStaticFiles();
 app.UseMiddleware<RequestPipelineMiddleware>();
 app.MapControllers();
-
-app.MapGet("/{id:guid}", async (Guid id, IMediator mediator, CancellationToken ct) =>
-{
-    var res = await mediator.FetchAsync(new GetCpuQuery { EntityId = id }, ct);
-    return Results.Ok(res.Value);   
-});
 
 Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment} at version {ServiceVersion}...", serviceName, app.Environment.EnvironmentName, serviceVersion);
 Log.Information("[{ServiceName}]: Web host listening on: {ApiUrl}.", serviceName, $"{serviceUrl}/api");

@@ -21,7 +21,8 @@ public static class RamExtensions
             },
             DiscountPercentage = ram.DiscountPercentage,
             Memory = ram.Memory,
-            Timing = ram.Timing
+            Timing = ram.Timing,
+            Rating = ram.GetRating()
         };
     }
 }

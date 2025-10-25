@@ -10,7 +10,9 @@ using Monitor = Domain.Entities.Monitor;
 public class GetMonitorQuery : GetEntityQuery<Monitor, Guid, MonitorDto>
 {
     public override IQueryable<Monitor> Include(IQueryable<Monitor> queryable)
-        => queryable.Include(monitor => monitor.Brand);
+        => queryable
+            .Include(monitor => monitor.Brand)
+            .Include(monitor => monitor.Reviews);
 
     public override MonitorDto Project(Monitor monitor)
         => monitor.ToMonitorDto();

@@ -10,7 +10,9 @@ using Motherboard = Domain.Entities.Motherboard;
 public class GetMotherboardQuery : GetEntityQuery<Motherboard, Guid, MotherboardDto>
 {
     public override IQueryable<Motherboard> Include(IQueryable<Motherboard> queryable)
-        => queryable.Include(motherboard => motherboard.Brand);
+        => queryable
+            .Include(motherboard => motherboard.Brand)
+            .Include(motherboard => motherboard.Reviews);
 
     public override MotherboardDto Project(Motherboard motherboard)
         => motherboard.ToMotherboardDto();

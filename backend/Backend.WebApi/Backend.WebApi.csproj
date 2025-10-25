@@ -19,7 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
       <Folder Include="wwwroot\cpus\" />
       <Folder Include="wwwroot\gpus\" />
       <Folder Include="wwwroot\monitors\" />
