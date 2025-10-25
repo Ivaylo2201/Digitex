@@ -10,15 +10,15 @@ public static class ApplicationDependencyInjection
     {
         try
         {
+            var assembly = Assembly.GetExecutingAssembly();
+            
             services
                 .AddMediator(options =>
                 {
-                    var assembly = Assembly.GetExecutingAssembly();
-
                     options
                         .AddHandlersFromAssembly(assembly)
                         .AddValidatorsFromAssembly(assembly)
-                        .AddPipelineForValidation();
+                        .AddPipelineForValidation(pipeline => pipeline.ValidateCommand = true);
                 });
             
             Log.Information("[{ClassName}]: Application services successfully initialized.", nameof(ApplicationDependencyInjection));

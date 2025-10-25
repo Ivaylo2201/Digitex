@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Backend.Application.CQRS.Generic.Queries;
+using Backend.Application.Extensions;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces.Generics;
 using Microsoft.Extensions.Logging;
@@ -18,14 +19,11 @@ public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TKey, TProje
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
-        logger.LogInformation("[{Source}]: Executing {QueryName}...", source, _queryName);
-        
+        logger.LogQueryExecutionStart(source, _queryName);
         var entities = await repository.ListAllAsync(query.Include, cancellationToken);
         var projections = entities.Select(query.Project).ToList();
-        
-        stopwatch.Stop();
-        
-        logger.LogInformation("[{Source}]: {QueryName} executed in {Duration}ms.", source, _queryName, stopwatch.ElapsedMilliseconds);
+        logger.LogQueryExecutionDuration(source, _queryName, stopwatch);
+
         return Result<List<TProjection>>.Success(projections);
     }
 }

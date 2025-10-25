@@ -4,5 +4,7 @@ public enum ErrorType
 {
     NotFound,
     Unauthorized,
-    Forbidden
+    Forbidden,
+    UsernameTaken,
+    InvalidCredentials
 }

@@ -1,8 +1,10 @@
-﻿namespace Backend.Domain.Entities;
+﻿using Backend.Domain.Interfaces.Generics;
 
-public class User
+namespace Backend.Domain.Entities;
+
+public class User : IEntity<int>
 {
-    public int Id { get; init; }
+    public int Id { get; set; }
     public required string Username { get; init; }
     public required string Password { get; set; }
     public Cart Cart { get; init; } = null!;

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Backend.Application.CQRS.Generic.Queries;
+using Backend.Application.Extensions;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces.Generics;
@@ -17,11 +18,9 @@ public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey, TProjecti
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
-        logger.LogInformation("[{Source}]: Executing {QueryName} with Id={EntityId}...", source, _queryName, query.EntityId);
+        logger.LogQueryExecutionStart(source, _queryName, $" with Id={query.EntityId}");
         var entity = await repository.GetOneAsync(query.EntityId, query.Include, cancellationToken);
-        
-        stopwatch.Stop();
-        logger.LogInformation("[{Source}]: {QueryName} executed in {Duration}ms.", source, _queryName, stopwatch.ElapsedMilliseconds);
+        logger.LogQueryExecutionDuration(source, _queryName, stopwatch);
 
         if (entity is null)
             return Result<TProjection?>.Failure(ErrorType.NotFound);       

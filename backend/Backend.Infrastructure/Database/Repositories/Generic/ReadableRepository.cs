@@ -18,7 +18,7 @@ public class ReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext c
         
         logger.LogInformation("[{Source}]: Retrieving all {EntityName} entities...", _source, _entityType.Name);
         
-        IQueryable<TEntity> queryable = context.Set<TEntity>();
+        var queryable = context.Set<TEntity>().AsNoTracking();
 
         if (include is not null)
             queryable = include(queryable);
@@ -36,7 +36,7 @@ public class ReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext c
         
         logger.LogInformation("[{Source}]: Getting {EntityName} entity with Id={EntityId}", _source, _entityType.Name, id);
         
-        IQueryable<TEntity> queryable = context.Set<TEntity>();
+        var queryable = context.Set<TEntity>().AsNoTracking();
 
         if (include is not null)
             queryable = include(queryable);

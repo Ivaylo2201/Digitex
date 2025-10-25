@@ -110,7 +110,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<ISsdRepository, SsdRepository>()
             .AddScoped<IMonitorRepository, MonitorRepository>()
             .AddScoped<IShippingRepository, ShippingRepository>()
-            .AddScoped<IPowerSupplyRepository, PowerSupplyRepository>();
+            .AddScoped<IPowerSupplyRepository, PowerSupplyRepository>()
+            .AddScoped<IUserRepository, UserRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -118,7 +119,6 @@ public static class InfrastructureDependencyInjection
         return services
             // .AddScoped<IOrderService, OrderService>()
             // .AddScoped<IOwnershipService, OwnershipService>()
-            // .AddScoped<IAuthenticationService, AuthenticationService>()
             .AddSingleton<ITokenService, TokenService>();
     }
 }

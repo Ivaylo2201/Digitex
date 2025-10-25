@@ -24,6 +24,8 @@ public class Result<T>
             ErrorType.NotFound => "Resource not found.",
             ErrorType.Forbidden => "Access forbidden.",
             ErrorType.Unauthorized => "Unauthorized access.",
+            ErrorType.UsernameTaken => "Username already taken.",
+            ErrorType.InvalidCredentials => "Invalid credentials.",
             _ => "An unknown error occurred."
         }
     });

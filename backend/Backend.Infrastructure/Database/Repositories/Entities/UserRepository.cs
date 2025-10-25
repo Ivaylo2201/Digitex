@@ -1,0 +1,90 @@
+﻿using System.Diagnostics;
+using Backend.Domain.Entities;
+using Backend.Domain.Interfaces.Repositories;
+using Backend.Infrastructure.Database.Repositories.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
+namespace Backend.Infrastructure.Database.Repositories.Entities;
+
+public class UserRepository(ILogger<UserRepository> logger, DatabaseContext context) : IUserRepository
+{
+    private readonly ReadableRepository<User, int> _repository = new(logger, context);
+    private const string Source = nameof(UserRepository);
+    
+    public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        logger.LogInformation("[{Source}]: Hashing password...", Source);
+        user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+        
+        await context.Users.AddAsync(user, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+        
+        stopwatch.Stop();
+        logger.LogInformation("[{Source}]: User entity with Username={Username} created in {Duration}ms.", Source, user.Username, stopwatch.ElapsedMilliseconds);
+        return user;
+    }
+    
+    public async Task<bool> IsUsernameAvailableAsync(string username, CancellationToken cancellationToken = default)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        logger.LogInformation("[{Source}]: Checking whether Username={Username} is available...", Source, username);
+        
+        var entity = await context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Username == username, cancellationToken);
+
+        if (entity is null)
+        {
+            logger.LogInformation("[{Source}]: Username={Username} is available.", Source, username);
+            LogUsernameCheckDuration(stopwatch, username);
+            return true;
+        }
+        
+        logger.LogInformation("[{Source}]: Username={Username} is not available.", Source, username);
+        LogUsernameCheckDuration(stopwatch, username);
+        return false;
+    }
+
+    public async Task<User?> GetOneByCredentialsAsync(string username, string password, CancellationToken cancellationToken = default)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        logger.LogInformation("[{Source}]: Getting User entity with Username={Username}", Source, username);
+        
+        var entity = await context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(user => user.Username == username, cancellationToken);
+        
+        if (entity is null)
+        {
+            logger.LogError("[{Source}]: User entity with Username={Username} not found.", Source, username);
+            return null;
+        }
+
+        if (!BCrypt.Net.BCrypt.Verify(password, entity.Password))
+        {
+            logger.LogError("[{Source}]: Incorrect password provided for User with Username={Username}.", Source, username);
+            return null;
+        }
+        
+        stopwatch.Stop();
+        logger.LogInformation("[{Source}]: User entity with Username={Username} retrieved in {Duration}ms.", Source, username, stopwatch.ElapsedMilliseconds);
+        return entity;
+    }
+    
+    public async Task<User?> GetOneAsync(int id, Func<IQueryable<User>, IQueryable<User>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.GetOneAsync(id, include, cancellationToken);
+
+    public async Task<List<User>> ListAllAsync(Func<IQueryable<User>, IQueryable<User>>? include = null, CancellationToken cancellationToken = default)
+        => await _repository.ListAllAsync(include, cancellationToken);
+
+    private void LogUsernameCheckDuration(Stopwatch stopwatch, string username)
+    {
+        stopwatch.Stop();
+        logger.LogInformation("[{Source}]: Username={Username} availability check done in {Duration}ms.", Source, username, stopwatch.ElapsedMilliseconds);
+    }
+}
