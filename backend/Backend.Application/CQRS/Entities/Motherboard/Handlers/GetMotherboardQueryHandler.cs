@@ -1,10 +1,11 @@
-﻿using Backend.Application.CQRS.Generic.Handlers;
-using Backend.Application.CQRS.Motherboard.Queries;
+﻿using Backend.Application.CQRS.Entities.Motherboard.Queries;
+using Backend.Application.CQRS.Generic.Handlers;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Motherboard;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Application.CQRS.Motherboard.Handlers;
+namespace Backend.Application.CQRS.Entities.Motherboard.Handlers;
 
 using Motherboard = Domain.Entities.Motherboard;
 

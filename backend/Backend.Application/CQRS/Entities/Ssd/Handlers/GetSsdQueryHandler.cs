@@ -1,10 +1,11 @@
-﻿using Backend.Application.CQRS.Generic.Handlers;
-using Backend.Application.CQRS.Ssd.Queries;
+﻿using Backend.Application.CQRS.Entities.Ssd.Queries;
+using Backend.Application.CQRS.Generic.Handlers;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Ssd;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Application.CQRS.Ssd.Handlers;
+namespace Backend.Application.CQRS.Entities.Ssd.Handlers;
 
 using Ssd = Domain.Entities.Ssd;
 

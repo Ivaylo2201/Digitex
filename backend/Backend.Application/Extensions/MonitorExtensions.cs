@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs;
+﻿using Backend.Application.DTOs.Monitor;
 using Backend.Domain.ValueObjects;
 using Monitor = Backend.Domain.Entities.Monitor;
 

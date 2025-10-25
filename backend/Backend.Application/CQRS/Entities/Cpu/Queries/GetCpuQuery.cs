@@ -1,10 +1,10 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Cpu;
 using Backend.Application.Extensions;
-using Backend.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Application.CQRS.Cpu.Queries;
+namespace Backend.Application.CQRS.Entities.Cpu.Queries;
 
 using Cpu = Domain.Entities.Cpu;
 

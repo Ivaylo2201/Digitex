@@ -1,5 +1,6 @@
-﻿using Backend.Application.CQRS.Monitor.Queries;
-using Backend.Application.DTOs;
+﻿using Backend.Application.CQRS.Entities.Monitor.Queries;
+using Backend.Application.DTOs.Monitor;
+using Backend.Application.DTOs.Product;
 using Backend.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSoft.Mediator;

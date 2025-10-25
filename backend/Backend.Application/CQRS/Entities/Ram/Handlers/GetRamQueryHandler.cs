@@ -1,10 +1,11 @@
-﻿using Backend.Application.CQRS.Generic.Handlers;
-using Backend.Application.CQRS.Ram.Queries;
+﻿using Backend.Application.CQRS.Entities.Ram.Queries;
+using Backend.Application.CQRS.Generic.Handlers;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Ram;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Application.CQRS.Ram.Handlers;
+namespace Backend.Application.CQRS.Entities.Ram.Handlers;
 
 using Ram = Domain.Entities.Ram;
 

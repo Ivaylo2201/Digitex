@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs;
+﻿using Backend.Application.DTOs.Gpu;
 using Backend.Domain.Entities;
 using Backend.Domain.ValueObjects;
 

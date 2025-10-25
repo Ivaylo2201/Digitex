@@ -1,9 +1,10 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Product;
 using Backend.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Application.CQRS.Motherboard.Queries;
+namespace Backend.Application.CQRS.Entities.Motherboard.Queries;
 
 using Motherboard = Domain.Entities.Motherboard;
 

@@ -1,9 +1,10 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Ram;
 using Backend.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Application.CQRS.Ram.Queries;
+namespace Backend.Application.CQRS.Entities.Ram.Queries;
 
 using Ram = Domain.Entities.Ram;
 

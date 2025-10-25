@@ -1,6 +1,7 @@
-﻿using Backend.Domain.Enums;
+﻿using Backend.Application.DTOs.Product;
+using Backend.Domain.Enums;
 
-namespace Backend.Application.DTOs;
+namespace Backend.Application.DTOs.Motherboard;
 
 public record MotherboardDto : ProductDto
 {

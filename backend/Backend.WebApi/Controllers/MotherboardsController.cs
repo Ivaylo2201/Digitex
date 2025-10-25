@@ -1,5 +1,6 @@
-﻿using Backend.Application.CQRS.Motherboard.Queries;
-using Backend.Application.DTOs;
+﻿using Backend.Application.CQRS.Entities.Motherboard.Queries;
+using Backend.Application.DTOs.Motherboard;
+using Backend.Application.DTOs.Product;
 using Backend.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSoft.Mediator;

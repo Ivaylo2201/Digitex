@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs;
+﻿using Backend.Application.DTOs.Shipping;
 using Backend.Domain.Entities;
 
 namespace Backend.Application.Extensions;

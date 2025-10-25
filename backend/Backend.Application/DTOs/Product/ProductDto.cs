@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.ValueObjects;
 
-namespace Backend.Application.DTOs;
+namespace Backend.Application.DTOs.Product;
 
 public record ProductDto
 {

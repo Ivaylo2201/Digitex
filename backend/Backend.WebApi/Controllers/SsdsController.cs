@@ -1,5 +1,6 @@
-﻿using Backend.Application.CQRS.Ssd.Queries;
-using Backend.Application.DTOs;
+﻿using Backend.Application.CQRS.Entities.Ssd.Queries;
+using Backend.Application.DTOs.Product;
+using Backend.Application.DTOs.Ssd;
 using Backend.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSoft.Mediator;

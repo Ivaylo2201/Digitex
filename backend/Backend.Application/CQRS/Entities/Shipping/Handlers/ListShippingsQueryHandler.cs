@@ -1,10 +1,11 @@
-﻿using Backend.Application.CQRS.Generic.Handlers;
-using Backend.Application.CQRS.Shipping.Queries;
+﻿using Backend.Application.CQRS.Entities.Shipping.Queries;
+using Backend.Application.CQRS.Generic.Handlers;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Shipping;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Application.CQRS.Shipping.Handlers;
+namespace Backend.Application.CQRS.Entities.Shipping.Handlers;
 
 using Shipping = Domain.Entities.Shipping;
 

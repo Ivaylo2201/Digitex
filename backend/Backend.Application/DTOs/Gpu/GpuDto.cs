@@ -1,7 +1,8 @@
-﻿using Backend.Domain.Enums;
+﻿using Backend.Application.DTOs.Product;
+using Backend.Domain.Enums;
 using Backend.Domain.ValueObjects;
 
-namespace Backend.Application.DTOs;
+namespace Backend.Application.DTOs.Gpu;
 
 public record GpuDto : ProductDto
 {

@@ -1,10 +1,11 @@
-﻿using Backend.Application.CQRS.Generic.Handlers;
-using Backend.Application.CQRS.Gpu.Queries;
+﻿using Backend.Application.CQRS.Entities.Gpu.Queries;
+using Backend.Application.CQRS.Generic.Handlers;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Gpu;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Application.CQRS.Gpu.Handlers;
+namespace Backend.Application.CQRS.Entities.Gpu.Handlers;
 
 using Gpu = Domain.Entities.Gpu;
 

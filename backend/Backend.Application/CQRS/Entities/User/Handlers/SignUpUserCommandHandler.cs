@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Backend.Application.CQRS.User.Commands;
+using Backend.Application.CQRS.Entities.User.Commands;
 using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
@@ -8,7 +8,7 @@ using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 using SimpleSoft.Mediator;
 
-namespace Backend.Application.CQRS.User.Handlers;
+namespace Backend.Application.CQRS.Entities.User.Handlers;
 
 using User = Domain.Entities.User;
 

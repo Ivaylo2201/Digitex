@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.Enums;
 
-namespace Backend.Application.DTOs;
+namespace Backend.Application.DTOs.Shipping;
 
 public record ShippingDto
 {

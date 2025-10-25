@@ -1,4 +1,4 @@
-﻿namespace Backend.Application.DTOs;
+﻿namespace Backend.Application.DTOs.User;
 
 public class SignInUserDto
 {

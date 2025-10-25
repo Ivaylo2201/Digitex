@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs;
+﻿using Backend.Application.DTOs.Ram;
 using Backend.Domain.Entities;
 using Backend.Domain.ValueObjects;
 

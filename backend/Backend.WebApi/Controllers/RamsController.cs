@@ -1,5 +1,6 @@
-﻿using Backend.Application.CQRS.Ram.Queries;
-using Backend.Application.DTOs;
+﻿using Backend.Application.CQRS.Entities.Ram.Queries;
+using Backend.Application.DTOs.Product;
+using Backend.Application.DTOs.Ram;
 using Backend.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSoft.Mediator;

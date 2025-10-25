@@ -1,8 +1,9 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Shipping;
 using Backend.Application.Extensions;
 
-namespace Backend.Application.CQRS.Shipping.Queries;
+namespace Backend.Application.CQRS.Entities.Shipping.Queries;
 
 using Shipping = Domain.Entities.Shipping;
 

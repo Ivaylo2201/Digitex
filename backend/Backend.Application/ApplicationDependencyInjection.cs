@@ -6,6 +6,8 @@ namespace Backend.Application;
 
 public static class ApplicationDependencyInjection
 {
+    private const string Source = nameof(ApplicationDependencyInjection);
+    
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         try
@@ -21,11 +23,11 @@ public static class ApplicationDependencyInjection
                         .AddPipelineForValidation(pipeline => pipeline.ValidateCommand = true);
                 });
             
-            Log.Information("[{ClassName}]: Application services successfully initialized.", nameof(ApplicationDependencyInjection));
+            Log.Information("[{Source}]: Application services successfully initialized.", Source);
         }
         catch (Exception ex)
         {
-            Log.Error("[{ClassName}]: {ExceptionType} occurred while configuring DI for Application. Exception message: {ExceptionMessage}", nameof(ApplicationDependencyInjection), ex.GetType().Name, ex.Message);
+            Log.Error("[{Source}]: {ExceptionType} occurred while configuring DI for Application. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
         }
         
         return services;       

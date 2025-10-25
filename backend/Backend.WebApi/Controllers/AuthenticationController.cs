@@ -1,5 +1,5 @@
-﻿using Backend.Application.CQRS.User.Commands;
-using Backend.Application.DTOs;
+﻿using Backend.Application.CQRS.Entities.User.Commands;
+using Backend.Application.DTOs.User;
 using Backend.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using SimpleSoft.Mediator;
@@ -20,11 +20,11 @@ public class AuthenticationController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("sign-in")]
-    [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> SignIn([FromBody] SignInUserDto body, CancellationToken cancellationToken = default)
     {
         var result = await mediator.SendAsync(new SignInUserCommand(body), cancellationToken);
-        return result.IsSuccess ? Created(string.Empty, result.Value) : BadRequest(result.ErrorObject);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorObject);
     }
 }
