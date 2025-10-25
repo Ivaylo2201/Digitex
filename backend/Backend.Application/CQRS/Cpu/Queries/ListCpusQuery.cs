@@ -1,12 +1,17 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
+using Backend.Application.DTOs;
+using Backend.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Application.CQRS.Cpu.Queries;
 
 using Cpu = Domain.Entities.Cpu;
 
-public class ListCpusQuery : ListEntitiesQuery<Cpu>
+public class ListCpusQuery : ListEntitiesQuery<Cpu, ProductDto>
 {
-    public override Func<IQueryable<Cpu>, IQueryable<Cpu>> Include 
-        => query => query.Include(cpu => cpu.Brand);
+    public override IQueryable<Cpu> Include(IQueryable<Cpu> queryable)
+        => queryable.Include(cpu => cpu.Brand);
+
+    public override ProductDto Project(Cpu cpu) 
+        => cpu.ToProductDto();
 }

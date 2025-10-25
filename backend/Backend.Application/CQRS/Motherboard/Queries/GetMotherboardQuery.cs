@@ -1,12 +1,17 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
+using Backend.Application.DTOs;
+using Backend.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Application.CQRS.Motherboard.Queries;
 
 using Motherboard = Domain.Entities.Motherboard;
 
-public class GetMotherboardQuery : GetEntityQuery<Motherboard, Guid>
+public class GetMotherboardQuery : GetEntityQuery<Motherboard, Guid, MotherboardDto>
 {
-    public override Func<IQueryable<Motherboard>, IQueryable<Motherboard>> Include 
-        => query => query.Include(cpu => cpu.Brand);
+    public override IQueryable<Motherboard> Include(IQueryable<Motherboard> queryable)
+        => queryable.Include(motherboard => motherboard.Brand);
+
+    public override MotherboardDto Project(Motherboard motherboard)
+        => motherboard.ToMotherboardDto();
 }

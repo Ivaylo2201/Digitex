@@ -1,12 +1,17 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
+using Backend.Application.DTOs;
+using Backend.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Application.CQRS.Gpu.Queries;
 
 using Gpu = Domain.Entities.Gpu;
 
-public class GetGpuQuery : GetEntityQuery<Gpu, Guid>
+public class GetGpuQuery : GetEntityQuery<Gpu, Guid, GpuDto>
 {
-    public override Func<IQueryable<Gpu>, IQueryable<Gpu>> Include 
-        => query => query.Include(cpu => cpu.Brand);
+    public override IQueryable<Gpu> Include(IQueryable<Gpu> queryable)
+        => queryable.Include(gpu => gpu.Brand);
+
+    public override GpuDto Project(Gpu gpu) 
+        => gpu.ToGpuDto();
 }

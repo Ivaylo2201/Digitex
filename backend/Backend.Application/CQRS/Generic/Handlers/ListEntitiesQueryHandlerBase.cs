@@ -7,22 +7,25 @@ using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Generic.Handlers;
 
-public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TKey>(
+public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TKey, TProjection>(
     ILogger logger,
-    IReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<IEnumerable<TEntity>>> where TQuery : ListEntitiesQuery<TEntity>
+    IReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<List<TProjection>>> where TQuery : ListEntitiesQuery<TEntity, TProjection>
 {
     private readonly string _queryName = typeof(TQuery).Name;
     
-    public async Task<Result<IEnumerable<TEntity>>> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public async Task<Result<List<TProjection>>> HandleAsync(TQuery query, CancellationToken cancellationToken)
     {
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogInformation("[{Source}]: Executing {QueryName}...", source, _queryName);
+        
         var entities = await repository.ListAllAsync(query.Include, cancellationToken);
+        var projections = entities.Select(query.Project).ToList();
         
         stopwatch.Stop();
+        
         logger.LogInformation("[{Source}]: {QueryName} executed in {Duration}ms.", source, _queryName, stopwatch.ElapsedMilliseconds);
-        return Result<IEnumerable<TEntity>>.Success(entities);
+        return Result<List<TProjection>>.Success(projections);
     }
 }

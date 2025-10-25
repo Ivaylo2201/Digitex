@@ -6,5 +6,6 @@ namespace Backend.Application.CQRS.Generic.Queries;
 public abstract class GetEntityQuery<TEntity, TKey, TProjection> : Query<Result<TProjection?>>
 {
     public required TKey EntityId { get; init; }
-    public abstract Func<IQueryable<TEntity>, IQueryable<TEntity>> Include { get; }
+    public abstract IQueryable<TEntity> Include(IQueryable<TEntity> queryable);
+    public abstract TProjection Project(TEntity entity);   
 }

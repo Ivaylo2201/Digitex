@@ -3,15 +3,12 @@ using Backend.Application.CQRS.Generic.Queries;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces.Generics;
-using Mapster;
 using Microsoft.Extensions.Logging;
 using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Generic.Handlers;
 
-public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey, TProjection>(
-    ILogger logger,
-    IReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<TProjection?>> where TQuery : GetEntityQuery<TEntity, TKey, TProjection>
+public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey, TProjection>(ILogger logger, IReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<TProjection?>> where TQuery : GetEntityQuery<TEntity, TKey, TProjection>
 {
     private readonly string _queryName = typeof(TQuery).Name;
     
@@ -25,9 +22,11 @@ public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey, TProjecti
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: {QueryName} executed in {Duration}ms.", source, _queryName, stopwatch.ElapsedMilliseconds);
+
+        if (entity is null)
+            return Result<TProjection?>.Failure(ErrorType.NotFound);       
         
-        return entity is null 
-            ? Result<TProjection?>.Failure(ErrorType.NotFound) 
-            : Result<TProjection?>.Success(entity.Adapt<TProjection>());
+        var projection = query.Project(entity);
+        return Result<TProjection?>.Success(projection);   
     }
 }
