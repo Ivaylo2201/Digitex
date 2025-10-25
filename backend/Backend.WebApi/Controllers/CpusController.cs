@@ -7,8 +7,8 @@ using SimpleSoft.Mediator;
 namespace Backend.WebApi.Controllers;
 
 [ApiController]
-[Route("api/products/cpus")]
-public class CpuController(IMediator mediator) : ControllerBase
+[Route("api/products/[controller]")]
+public class CpusController(IMediator mediator) : ControllerBase
 {
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(CpuDto), StatusCodes.Status200OK)]
@@ -16,13 +16,7 @@ public class CpuController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetOne(Guid id, CancellationToken cancellationToken = default)
     {
         var result = await mediator.FetchAsync(new GetCpuQuery { EntityId = id }, cancellationToken);
-
-        if (!result.IsSuccess)
-        {
-            return NotFound(result.ErrorObject);
-        }
-        
-        return Ok(result.Value);   
+        return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);   
     }
     
     [HttpGet]

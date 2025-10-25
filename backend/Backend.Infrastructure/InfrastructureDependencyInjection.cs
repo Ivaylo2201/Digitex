@@ -4,7 +4,6 @@ using Backend.Application.Interfaces.Services;
 using Backend.Domain.Interfaces.Repositories;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
-using Backend.Infrastructure.Database.Repositories;
 using Backend.Infrastructure.Database.Repositories.Entities;
 using Backend.Infrastructure.Services;
 using DotNetEnv;
@@ -110,7 +109,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IRamRepository, RamRepository>()
             .AddScoped<ISsdRepository, SsdRepository>()
             .AddScoped<IMonitorRepository, MonitorRepository>()
-            .AddScoped<IShippingRepository, ShippingRepository>();
+            .AddScoped<IShippingRepository, ShippingRepository>()
+            .AddScoped<IPowerSupplyRepository, PowerSupplyRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)

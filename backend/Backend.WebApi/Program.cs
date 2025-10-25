@@ -24,6 +24,7 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
+    .AddRouting(options => options.LowercaseUrls = true)
     .AddControllers();
 
 builder.WebHost.UseUrls(serviceUrl);
