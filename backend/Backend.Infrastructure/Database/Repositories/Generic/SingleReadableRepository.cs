@@ -6,36 +6,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Database.Repositories.Generic;
 
-public class ReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext context) : IReadable<TEntity, TKey> where TEntity : class, IEntity<TKey>
+public class SingleReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext context) : ISingleReadable<TEntity, TKey> where TEntity : class
 {
-    private readonly string _source = $"{nameof(ReadableRepository<TEntity, TKey>)}<{typeof(TEntity).Name}, {typeof(TKey).Name}>";
+    private readonly string _source = $"{nameof(SingleReadableRepository<TEntity, TKey>)}<{typeof(TEntity).Name}, {typeof(TKey).Name}>";
     private readonly Type _entityType = typeof(TEntity);
     
-    public async Task<List<TEntity>> ListAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>>? include, CancellationToken cancellationToken = default)
-    {
-        var stopwatch = Stopwatch.StartNew();
-        context.Gpus.Include(gpu => gpu.Brand);
-        
-        logger.LogInformation("[{Source}]: Retrieving all {EntityName} entities...", _source, _entityType.Name);
-        
-        var queryable = context.Set<TEntity>().AsNoTracking();
-
-        if (include is not null)
-            queryable = include(queryable);
-        
-        var entities = await queryable.ToListAsync(cancellationToken);
-        
-        stopwatch.Stop();
-        logger.LogInformation("[{Source}]: Retrieved {Count} {EntityName} entities in {Duration}ms.", _source, entities.Count, _entityType.Name, stopwatch.ElapsedMilliseconds);
-        return entities;
-    }
-
     public async Task<TEntity?> GetOneAsync(TKey id, Func<IQueryable<TEntity>, IQueryable<TEntity>>? include, CancellationToken cancellationToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogInformation("[{Source}]: Getting {EntityName} entity with Id={EntityId}", _source, _entityType.Name, id);
-        
+
         var queryable = context.Set<TEntity>().AsNoTracking();
 
         if (include is not null)
@@ -53,7 +34,7 @@ public class ReadableRepository<TEntity, TKey>(ILogger logger, DatabaseContext c
         logger.LogInformation("[{Source}]: {EntityName} entity with Id={EntityId} retrieved in {Duration}ms.", _source, _entityType.Name, id, stopwatch.ElapsedMilliseconds);
         return entity;
     }
-
+    
     private Expression<Func<TEntity,bool>> GetEqualityLambda(TKey id)
     {
         var parameter = Expression.Parameter(_entityType, "entity");

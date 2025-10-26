@@ -1,9 +1,10 @@
 ﻿using Backend.Domain.Enums;
+using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Entities;
 
-public class Shipping : IEntity<int>
+public class Shipping
 {
     public int Id { get; set; }
     public required ShippingType ShippingType { get; init; }

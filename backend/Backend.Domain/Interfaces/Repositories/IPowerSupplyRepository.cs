@@ -3,4 +3,4 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface IPowerSupplyRepository : IReadable<PowerSupply, Guid>;
+public interface IPowerSupplyRepository : ISingleReadable<PowerSupply, Guid>, IMultipleReadable<PowerSupply>;

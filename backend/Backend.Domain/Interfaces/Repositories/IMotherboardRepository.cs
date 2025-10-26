@@ -3,4 +3,4 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface IMotherboardRepository : IReadable<Motherboard, Guid>;
+public interface IMotherboardRepository : ISingleReadable<Motherboard, Guid>, IMultipleReadable<Motherboard>;

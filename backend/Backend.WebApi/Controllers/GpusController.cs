@@ -16,7 +16,7 @@ public class GpusController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var result = await mediator.FetchAsync(new GetGpuQuery { EntityId = id }, cancellationToken);
+        var result = await mediator.FetchAsync(new GetGpuQueryBase { EntityId = id }, cancellationToken);
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);
     }
     
@@ -24,7 +24,7 @@ public class GpusController(IMediator mediator) : ControllerBase
     [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        var result = await mediator.FetchAsync(new ListGpusQuery(), cancellationToken);
+        var result = await mediator.FetchAsync(new ListGpusQueryBase(), cancellationToken);
         return Ok(result.Value);   
     }
 }

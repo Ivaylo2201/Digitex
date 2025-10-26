@@ -3,4 +3,4 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface ICpuRepository : IReadable<Cpu, Guid>;
+public interface ICpuRepository : ISingleReadable<Cpu, Guid>, IMultipleReadable<Cpu>;

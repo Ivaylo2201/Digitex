@@ -3,6 +3,7 @@ using Backend.Application.CQRS.Entities.User.Commands;
 using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
+using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,8 @@ public class SignUpUserCommandHandler(ILogger<SignUpUserCommandHandler> logger, 
         var user = new User
         {
             Username = command.Dto.Username,
-            Password = command.Dto.Password
+            Password = command.Dto.Password,
+            Cart = new Cart()
         };
 
         await userRepository.CreateAsync(user, cancellationToken);

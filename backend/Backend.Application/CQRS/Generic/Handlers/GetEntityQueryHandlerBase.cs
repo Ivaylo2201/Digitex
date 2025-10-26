@@ -9,7 +9,7 @@ using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Generic.Handlers;
 
-public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey, TProjection>(ILogger logger, IReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<TProjection?>> where TQuery : GetEntityQuery<TEntity, TKey, TProjection>
+public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey, TProjection>(ILogger logger, ISingleReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<TProjection?>> where TQuery : GetEntityQueryBase<TEntity, TKey, TProjection>
 {
     private readonly string _queryName = typeof(TQuery).Name;
     

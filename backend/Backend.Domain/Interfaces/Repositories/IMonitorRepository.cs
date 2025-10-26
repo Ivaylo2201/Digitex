@@ -3,4 +3,4 @@ using Monitor = Backend.Domain.Entities.Monitor;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface IMonitorRepository : IReadable<Monitor, Guid>;
+public interface IMonitorRepository : ISingleReadable<Monitor, Guid>, IMultipleReadable<Monitor>;

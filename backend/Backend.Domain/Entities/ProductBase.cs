@@ -1,8 +1,6 @@
-﻿using Backend.Domain.Interfaces.Generics;
+﻿namespace Backend.Domain.Entities;
 
-namespace Backend.Domain.Entities;
-
-public abstract class ProductBase : IEntity<Guid>
+public abstract class ProductBase
 {
     public Guid Id { get; set; }
     public int BrandId { get; init; }

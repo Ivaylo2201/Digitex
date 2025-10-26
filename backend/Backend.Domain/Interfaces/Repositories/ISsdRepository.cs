@@ -3,4 +3,4 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface ISsdRepository : IReadable<Ssd, Guid>;
+public interface ISsdRepository : ISingleReadable<Ssd, Guid>, IMultipleReadable<Ssd>;

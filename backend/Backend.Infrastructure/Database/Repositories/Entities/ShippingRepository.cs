@@ -7,11 +7,12 @@ namespace Backend.Infrastructure.Database.Repositories.Entities;
 
 public class ShippingRepository(ILogger<ShippingRepository> logger, DatabaseContext context) : IShippingRepository
 {
-    private readonly ReadableRepository<Shipping, int> _repository = new(logger, context);
-
-    public async Task<List<Shipping>> ListAllAsync(Func<IQueryable<Shipping>, IQueryable<Shipping>>? include = null, CancellationToken cancellationToken = default)
-        => await _repository.ListAllAsync(include, cancellationToken);
+    private readonly SingleReadableRepository<Shipping, int> _singleReadableRepository = new(logger, context);
+    private readonly MultipleReadableRepository<Shipping> _multipleRepository = new(logger, context);
 
     public async Task<Shipping?> GetOneAsync(int id, Func<IQueryable<Shipping>, IQueryable<Shipping>>? include = null, CancellationToken cancellationToken = default)
-        => await _repository.GetOneAsync(id, include, cancellationToken);
+        => await _singleReadableRepository.GetOneAsync(id, include, cancellationToken);
+    
+    public async Task<List<Shipping>> ListAllAsync(Func<IQueryable<Shipping>, IQueryable<Shipping>>? include = null, CancellationToken cancellationToken = default)
+        => await _multipleRepository.ListAllAsync(include, cancellationToken);
 }

@@ -7,11 +7,12 @@ namespace Backend.Infrastructure.Database.Repositories.Entities;
 
 public class GpuRepository(ILogger<GpuRepository> logger, DatabaseContext context) : IGpuRepository
 {
-    private readonly ReadableRepository<Gpu, Guid> _repository = new(logger, context);
+    private readonly SingleReadableRepository<Gpu, Guid> _singleReadableRepository = new(logger, context);
+    private readonly MultipleReadableRepository<Gpu> _multipleRepository = new(logger, context);
     
     public async Task<Gpu?> GetOneAsync(Guid id, Func<IQueryable<Gpu>, IQueryable<Gpu>>? include = null, CancellationToken cancellationToken = default)
-        => await _repository.GetOneAsync(id, include, cancellationToken);
+        => await _singleReadableRepository.GetOneAsync(id, include, cancellationToken);
 
     public async Task<List<Gpu>> ListAllAsync(Func<IQueryable<Gpu>, IQueryable<Gpu>>? include = null, CancellationToken cancellationToken = default)
-        => await _repository.ListAllAsync(include, cancellationToken);
+        => await _multipleRepository.ListAllAsync(include, cancellationToken);
 }

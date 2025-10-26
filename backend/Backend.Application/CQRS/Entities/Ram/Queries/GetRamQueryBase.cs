@@ -1,5 +1,4 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
-using Backend.Application.DTOs;
 using Backend.Application.DTOs.Ram;
 using Backend.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,7 @@ namespace Backend.Application.CQRS.Entities.Ram.Queries;
 
 using Ram = Domain.Entities.Ram;
 
-public class GetRamQuery : GetEntityQuery<Ram, Guid, RamDto>
+public class GetRamQueryBase : GetEntityQueryBase<Ram, Guid, RamDto>
 {
     public override IQueryable<Ram> Include(IQueryable<Ram> queryable)
         => queryable

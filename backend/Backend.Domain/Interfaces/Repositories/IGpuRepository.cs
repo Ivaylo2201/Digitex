@@ -3,4 +3,4 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface IGpuRepository : IReadable<Gpu, Guid>;
+public interface IGpuRepository : ISingleReadable<Gpu, Guid>, IMultipleReadable<Gpu>;

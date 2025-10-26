@@ -1,8 +1,6 @@
-﻿using Backend.Domain.Interfaces.Generics;
+﻿namespace Backend.Domain.Entities;
 
-namespace Backend.Domain.Entities;
-
-public class User : IEntity<int>
+public class User
 {
     public int Id { get; set; }
     public required string Username { get; init; }

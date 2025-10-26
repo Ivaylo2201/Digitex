@@ -3,4 +3,4 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface IRamRepository : IReadable<Ram, Guid>;
+public interface IRamRepository : ISingleReadable<Ram, Guid>, IMultipleReadable<Ram>;

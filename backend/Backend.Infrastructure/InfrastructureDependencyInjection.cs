@@ -18,6 +18,8 @@ namespace Backend.Infrastructure;
 
 public static class InfrastructureDependencyInjection
 {
+    private const string Source = nameof(InfrastructureDependencyInjection);
+    
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         try
@@ -36,11 +38,11 @@ public static class InfrastructureDependencyInjection
                 .AddCors(configuration)
                 .AddAuthentication(jwtSecretKey, jwtIssuer, jwtAudience);
             
-            Log.Information("[{ClassName}]: Infrastructure services successfully initialized.", nameof(InfrastructureDependencyInjection));
+            Log.Information("[{Source}]: Infrastructure services successfully initialized.", Source);
         }
         catch (Exception ex)
         {
-            Log.Error("[{ClassName}]: {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}", nameof(InfrastructureDependencyInjection), ex.GetType().Name, ex.Message);
+            Log.Error("[{Source}]: {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
         }
         
         return services;

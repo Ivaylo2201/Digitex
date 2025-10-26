@@ -1,6 +1,5 @@
 ﻿using Backend.Application.CQRS.Generic.Queries;
-using Backend.Application.DTOs;
-using Backend.Application.DTOs.Gpu;
+using Backend.Application.DTOs.Product;
 using Backend.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,13 +7,13 @@ namespace Backend.Application.CQRS.Entities.Gpu.Queries;
 
 using Gpu = Domain.Entities.Gpu;
 
-public class GetGpuQuery : GetEntityQuery<Gpu, Guid, GpuDto>
+public class ListGpusQueryBase : ListEntitiesQueryBase<Gpu, ProductDto>
 {
     public override IQueryable<Gpu> Include(IQueryable<Gpu> queryable)
         => queryable
             .Include(gpu => gpu.Brand)
             .Include(gpu => gpu.Reviews);
 
-    public override GpuDto Project(Gpu gpu) 
-        => gpu.ToGpuDto();
+    public override ProductDto Project(Gpu gpu)
+        => gpu.ToProductDto();
 }

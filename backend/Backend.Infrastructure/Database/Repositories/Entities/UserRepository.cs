@@ -9,7 +9,7 @@ namespace Backend.Infrastructure.Database.Repositories.Entities;
 
 public class UserRepository(ILogger<UserRepository> logger, DatabaseContext context) : IUserRepository
 {
-    private readonly ReadableRepository<User, int> _repository = new(logger, context);
+    private readonly SingleReadableRepository<User, int> _singleRepository = new(logger, context);
     private const string Source = nameof(UserRepository);
     
     public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
@@ -77,10 +77,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
     }
     
     public async Task<User?> GetOneAsync(int id, Func<IQueryable<User>, IQueryable<User>>? include = null, CancellationToken cancellationToken = default)
-        => await _repository.GetOneAsync(id, include, cancellationToken);
-
-    public async Task<List<User>> ListAllAsync(Func<IQueryable<User>, IQueryable<User>>? include = null, CancellationToken cancellationToken = default)
-        => await _repository.ListAllAsync(include, cancellationToken);
+        => await _singleRepository.GetOneAsync(id, include, cancellationToken);
 
     private void LogUsernameCheckDuration(Stopwatch stopwatch, string username)
     {

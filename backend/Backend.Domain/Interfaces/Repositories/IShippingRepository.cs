@@ -3,4 +3,4 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces.Repositories;
 
-public interface IShippingRepository : IReadable<Shipping, int>;
+public interface IShippingRepository : ISingleReadable<Shipping, int>, IMultipleReadable<Shipping>;

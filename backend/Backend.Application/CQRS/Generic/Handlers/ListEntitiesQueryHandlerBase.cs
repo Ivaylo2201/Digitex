@@ -8,9 +8,9 @@ using SimpleSoft.Mediator;
 
 namespace Backend.Application.CQRS.Generic.Handlers;
 
-public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TKey, TProjection>(
+public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TProjection>(
     ILogger logger,
-    IReadable<TEntity, TKey> repository) : IQueryHandler<TQuery, Result<List<TProjection>>> where TQuery : ListEntitiesQuery<TEntity, TProjection>
+    IMultipleReadable<TEntity> repository) : IQueryHandler<TQuery, Result<List<TProjection>>> where TQuery : ListEntitiesQueryBase<TEntity, TProjection>
 {
     private readonly string _queryName = typeof(TQuery).Name;
     
