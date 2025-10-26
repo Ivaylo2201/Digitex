@@ -1,7 +1,7 @@
 ﻿using Backend.Application.CQRS.Entities.User.Commands;
 using FluentValidation;
 
-namespace Backend.Application.CQRS.Entities.User.Validators;
+namespace Backend.Application.Validation.Validators.User;
 
 public class SignUpUserCommandValidator : AbstractValidator<SignUpUserCommand>
 {

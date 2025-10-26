@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using SimpleSoft.Mediator;
+using ValidationPipeline = Backend.Application.Validation.ValidationPipeline;
 
 namespace Backend.Application;
 
@@ -15,12 +17,13 @@ public static class ApplicationDependencyInjection
             var assembly = Assembly.GetExecutingAssembly();
             
             services
+                .AddSingleton(_ => new ValidationPipelineOptions { ValidateCommand = true })
                 .AddMediator(options =>
                 {
                     options
                         .AddHandlersFromAssembly(assembly)
                         .AddValidatorsFromAssembly(assembly)
-                        .AddPipelineForValidation(pipeline => pipeline.ValidateCommand = true);
+                        .AddPipeline<ValidationPipeline>();
                 });
             
             Log.Information("[{Source}]: Application services successfully initialized.", Source);
