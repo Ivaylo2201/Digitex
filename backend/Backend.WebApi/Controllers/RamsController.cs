@@ -14,17 +14,17 @@ public class RamsController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(RamDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new GetRamQueryBase { EntityId = id }, cancellationToken);
-        return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);
+        var ram = await mediator.FetchAsync(new GetRamQueryBase { EntityId = id }, ct);
+        return ram.IsSuccess ? Ok(ram.Value) : NotFound(ram.ErrorObject);
     }
     
     [HttpGet]
     [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetAllAsync(CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new ListRamsQueryBase(), cancellationToken);
-        return Ok(result.Value);   
+        var rams = await mediator.FetchAsync(new ListRamsQueryBase(), ct);
+        return Ok(rams.Value);   
     }
 }

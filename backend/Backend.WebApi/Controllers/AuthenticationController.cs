@@ -13,18 +13,18 @@ public class AuthenticationController(IMediator mediator) : ControllerBase
     [HttpPost("sign-up")]
     [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> SignUpAsync([FromBody] SignUpUserDto body, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> SignUpAsync([FromBody] SignUpUserDto body, CancellationToken ct = default)
     {
-        var result = await mediator.SendAsync(new SignUpUserCommand(body), cancellationToken);
+        var result = await mediator.SendAsync(new SignUpUserCommand(body), ct);
         return result.IsSuccess ? Created(string.Empty, result.Value) : BadRequest(result.ErrorObject);
     }
 
     [HttpPost("sign-in")]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> SignIn([FromBody] SignInUserDto body, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> SignIn([FromBody] SignInUserDto body, CancellationToken ct = default)
     {
-        var result = await mediator.SendAsync(new SignInUserCommand(body), cancellationToken);
+        var result = await mediator.SendAsync(new SignInUserCommand(body), ct);
         return result.IsSuccess ? Ok(result.Value) : BadRequest(result.ErrorObject);
     }
 }

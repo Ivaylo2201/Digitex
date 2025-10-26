@@ -14,17 +14,17 @@ public class PowerSuppliesController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(PowerSupplyDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new GetPowerSupplyQueryBase { EntityId = id }, cancellationToken);
-        return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);
+        var powerSupply = await mediator.FetchAsync(new GetPowerSupplyQueryBase { EntityId = id }, ct);
+        return powerSupply.IsSuccess ? Ok(powerSupply.Value) : NotFound(powerSupply.ErrorObject);
     }
     
     [HttpGet]
     [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetAllAsync(CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new ListPowerSuppliesQueryBase(), cancellationToken);
-        return Ok(result.Value);   
+        var powerSupplies = await mediator.FetchAsync(new ListPowerSuppliesQueryBase(), ct);
+        return Ok(powerSupplies.Value);   
     }
 }

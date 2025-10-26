@@ -1,4 +1,5 @@
-﻿using Backend.Domain.Entities;
+﻿using Backend.Domain.Common;
+using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
 using Backend.Infrastructure.Database.Repositories.Generic;
 using Microsoft.Extensions.Logging;
@@ -10,9 +11,9 @@ public class CpuRepository(ILogger<CpuRepository> logger, DatabaseContext contex
     private readonly SingleReadableRepository<Cpu, Guid> _singleReadableRepository = new(logger, context);
     private readonly MultipleReadableRepository<Cpu> _multipleRepository = new(logger, context);
     
-    public async Task<Cpu?> GetOneAsync(Guid id, Func<IQueryable<Cpu>, IQueryable<Cpu>>? include, CancellationToken cancellationToken = default) 
-        => await _singleReadableRepository.GetOneAsync(id, include, cancellationToken);
+    public async Task<Cpu?> GetOneAsync(Guid id, IncludeQuery<Cpu>? include, CancellationToken ct = default) 
+        => await _singleReadableRepository.GetOneAsync(id, include, ct);
     
-    public async Task<List<Cpu>> ListAllAsync(Func<IQueryable<Cpu>, IQueryable<Cpu>>? include, CancellationToken cancellationToken = default)
-        => await _multipleRepository.ListAllAsync(include, cancellationToken);
+    public async Task<List<Cpu>> ListAllAsync(IncludeQuery<Cpu>? include, FilterQuery<Cpu>? filter, CancellationToken ct = default)
+        => await _multipleRepository.ListAllAsync(include, filter, ct);
 }

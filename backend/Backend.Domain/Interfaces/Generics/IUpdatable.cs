@@ -2,5 +2,5 @@
 
 public interface IUpdatable<in TEntity>
 {
-    Task UpdateAsync(TEntity item, CancellationToken cancellationToken = default);
+    Task UpdateAsync(TEntity item, CancellationToken ct = default);
 }

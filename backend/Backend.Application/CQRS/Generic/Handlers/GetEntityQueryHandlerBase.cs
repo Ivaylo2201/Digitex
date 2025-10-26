@@ -13,13 +13,13 @@ public abstract class GetEntityQueryHandlerBase<TQuery, TEntity, TKey, TProjecti
 {
     private readonly string _queryName = typeof(TQuery).Name;
     
-    public async Task<Result<TProjection?>> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TProjection?>> HandleAsync(TQuery query, CancellationToken ct)
     {
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogQueryExecutionStart(source, _queryName, $" with Id={query.EntityId}");
-        var entity = await repository.GetOneAsync(query.EntityId, query.Include, cancellationToken);
+        var entity = await repository.GetOneAsync(query.EntityId, query.Include, ct);
         logger.LogQueryExecutionDuration(source, _queryName, stopwatch);
 
         if (entity is null)

@@ -2,5 +2,5 @@
 
 public interface IDeletable<in TKey>
 {
-    Task DeleteAsync(TKey id, CancellationToken cancellationToken = default);
+    Task DeleteAsync(TKey id, CancellationToken ct = default);
 }

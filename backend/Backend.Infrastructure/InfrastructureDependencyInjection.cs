@@ -1,6 +1,8 @@
 ﻿using System.Security.Claims;
 using System.Text;
+using Backend.Application.Interfaces.Builders;
 using Backend.Application.Interfaces.Services;
+using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
@@ -113,7 +115,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IMonitorRepository, MonitorRepository>()
             .AddScoped<IShippingRepository, ShippingRepository>()
             .AddScoped<IPowerSupplyRepository, PowerSupplyRepository>()
-            .AddScoped<IUserRepository, UserRepository>();
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IReviewRepository, ReviewRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -121,6 +124,8 @@ public static class InfrastructureDependencyInjection
         return services
             // .AddScoped<IOrderService, OrderService>()
             // .AddScoped<IOwnershipService, OwnershipService>()
+            .AddTransient<IFilterBuilder<Ssd>, SsdFilterBuilder>()
+            .AddTransient<IFilterProviderService, FilterProviderService>()
             .AddSingleton<ITokenService, TokenService>();
     }
 }

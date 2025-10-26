@@ -14,17 +14,17 @@ public class CpusController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(CpuDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new GetCpuQueryBase { EntityId = id }, cancellationToken);
-        return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);   
+        var cpu = await mediator.FetchAsync(new GetCpuQueryBase { EntityId = id }, ct);
+        return cpu.IsSuccess ? Ok(cpu.Value) : NotFound(cpu.ErrorObject);   
     }
     
     [HttpGet]
     [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetAllAsync(CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new ListCpusQueryBase(), cancellationToken);
-        return Ok(result.Value);   
+        var cpus = await mediator.FetchAsync(new ListCpusQueryBase(), ct);
+        return Ok(cpus.Value);   
     }
 }

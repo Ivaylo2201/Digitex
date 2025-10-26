@@ -18,12 +18,12 @@ public class SignInUserCommandHandler(
     private const string QueryName = nameof(SignInUserCommand);
     private const string Source = nameof(SignInUserCommandHandler);
     
-    public async Task<Result<string>> HandleAsync(SignInUserCommand command, CancellationToken cancellationToken)
+    public async Task<Result<string>> HandleAsync(SignInUserCommand command, CancellationToken ct)
     {
         var stopwatch = Stopwatch.StartNew();
         logger.LogQueryExecutionStart(Source, QueryName);
         
-        var user = await userRepository.GetOneByCredentialsAsync(command.Dto.Username, command.Dto.Password, cancellationToken);
+        var user = await userRepository.GetOneByCredentialsAsync(command.Dto.Username, command.Dto.Password, ct);
 
         if (user is null)
         {

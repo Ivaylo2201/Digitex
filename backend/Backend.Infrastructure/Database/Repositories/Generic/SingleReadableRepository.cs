@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq.Expressions;
+using Backend.Domain.Common;
 using Backend.Domain.Interfaces.Generics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,7 +12,7 @@ public class SingleReadableRepository<TEntity, TKey>(ILogger logger, DatabaseCon
     private readonly string _source = $"{nameof(SingleReadableRepository<TEntity, TKey>)}<{typeof(TEntity).Name}, {typeof(TKey).Name}>";
     private readonly Type _entityType = typeof(TEntity);
     
-    public async Task<TEntity?> GetOneAsync(TKey id, Func<IQueryable<TEntity>, IQueryable<TEntity>>? include, CancellationToken cancellationToken = default)
+    public async Task<TEntity?> GetOneAsync(TKey id, IncludeQuery<TEntity>? include, CancellationToken ct = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
@@ -22,7 +23,7 @@ public class SingleReadableRepository<TEntity, TKey>(ILogger logger, DatabaseCon
         if (include is not null)
             queryable = include(queryable);
         
-        var entity = await queryable.FirstOrDefaultAsync(GetEqualityLambda(id), cancellationToken);
+        var entity = await queryable.FirstOrDefaultAsync(GetEqualityLambda(id), ct);
 
         if (entity is null)
         {

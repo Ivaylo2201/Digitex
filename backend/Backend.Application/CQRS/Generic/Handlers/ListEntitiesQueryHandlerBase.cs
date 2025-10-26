@@ -14,13 +14,13 @@ public abstract class ListEntitiesQueryHandlerBase<TQuery, TEntity, TProjection>
 {
     private readonly string _queryName = typeof(TQuery).Name;
     
-    public async Task<Result<List<TProjection>>> HandleAsync(TQuery query, CancellationToken cancellationToken)
+    public async Task<Result<List<TProjection>>> HandleAsync(TQuery query, CancellationToken ct)
     {
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogQueryExecutionStart(source, _queryName);
-        var entities = await repository.ListAllAsync(query.Include, cancellationToken);
+        var entities = await repository.ListAllAsync(query.Include, query.Filters, ct);
         var projections = entities.Select(query.Project).ToList();
         logger.LogQueryExecutionDuration(source, _queryName, stopwatch);
 

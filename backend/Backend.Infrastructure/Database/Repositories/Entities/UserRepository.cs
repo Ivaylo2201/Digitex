@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
 using Backend.Infrastructure.Database.Repositories.Generic;
@@ -12,22 +13,22 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
     private readonly SingleReadableRepository<User, int> _singleRepository = new(logger, context);
     private const string Source = nameof(UserRepository);
     
-    public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
+    public async Task<User> CreateAsync(User user, CancellationToken ct = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogInformation("[{Source}]: Hashing password...", Source);
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         
-        await context.Users.AddAsync(user, cancellationToken);
-        await context.SaveChangesAsync(cancellationToken);
+        await context.Users.AddAsync(user, ct);
+        await context.SaveChangesAsync(ct);
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: User entity with Username={Username} created in {Duration}ms.", Source, user.Username, stopwatch.ElapsedMilliseconds);
         return user;
     }
     
-    public async Task<bool> IsUsernameAvailableAsync(string username, CancellationToken cancellationToken = default)
+    public async Task<bool> IsUsernameAvailableAsync(string username, CancellationToken ct = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
@@ -35,7 +36,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         
         var entity = await context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(u => u.Username == username, cancellationToken);
+            .FirstOrDefaultAsync(u => u.Username == username, ct);
 
         if (entity is null)
         {
@@ -49,7 +50,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         return false;
     }
 
-    public async Task<User?> GetOneByCredentialsAsync(string username, string password, CancellationToken cancellationToken = default)
+    public async Task<User?> GetOneByCredentialsAsync(string username, string password, CancellationToken ct = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
@@ -57,7 +58,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         
         var entity = await context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Username == username, cancellationToken);
+            .FirstOrDefaultAsync(user => user.Username == username, ct);
         
         if (entity is null)
         {
@@ -76,8 +77,8 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         return entity;
     }
     
-    public async Task<User?> GetOneAsync(int id, Func<IQueryable<User>, IQueryable<User>>? include = null, CancellationToken cancellationToken = default)
-        => await _singleRepository.GetOneAsync(id, include, cancellationToken);
+    public async Task<User?> GetOneAsync(int id, IncludeQuery<User>? include = null, CancellationToken ct = default)
+        => await _singleRepository.GetOneAsync(id, include, ct);
 
     private void LogUsernameCheckDuration(Stopwatch stopwatch, string username)
     {

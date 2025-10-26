@@ -5,6 +5,6 @@ namespace Backend.Domain.Interfaces.Repositories;
 
 public interface IUserRepository : ICreatable<User>, ISingleReadable<User, int>
 {
-    Task<bool> IsUsernameAvailableAsync(string username, CancellationToken cancellationToken = default);
-    Task<User?> GetOneByCredentialsAsync(string username, string password, CancellationToken cancellationToken = default);
+    Task<bool> IsUsernameAvailableAsync(string username, CancellationToken ct = default);
+    Task<User?> GetOneByCredentialsAsync(string username, string password, CancellationToken ct = default);
 }

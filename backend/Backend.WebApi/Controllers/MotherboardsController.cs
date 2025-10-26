@@ -14,17 +14,17 @@ public class MotherboardsController(IMediator mediator) : ControllerBase
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(MotherboardDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new GetMotherboardQueryBase { EntityId = id }, cancellationToken);
-        return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);
+        var motherboard = await mediator.FetchAsync(new GetMotherboardQueryBase { EntityId = id }, ct);
+        return motherboard.IsSuccess ? Ok(motherboard.Value) : NotFound(motherboard.ErrorObject);
     }
     
     [HttpGet]
     [ProducesResponseType(typeof(List<ProductDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetAllAsync(CancellationToken ct = default)
     {
-        var result = await mediator.FetchAsync(new ListMotherboardsQueryBase(), cancellationToken);
-        return Ok(result.Value);   
+        var motherboards = await mediator.FetchAsync(new ListMotherboardsQueryBase(), ct);
+        return Ok(motherboards.Value);   
     }
 }

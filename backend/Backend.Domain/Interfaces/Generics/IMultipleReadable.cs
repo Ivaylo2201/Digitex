@@ -1,8 +1,8 @@
-﻿namespace Backend.Domain.Interfaces.Generics;
+﻿using Backend.Domain.Common;
+
+namespace Backend.Domain.Interfaces.Generics;
 
 public interface IMultipleReadable<TEntity>
 {
-    Task<List<TEntity>> ListAllAsync(
-        Func<IQueryable<TEntity>, IQueryable<TEntity>>? include,
-        CancellationToken cancellationToken = default);
+    Task<List<TEntity>> ListAllAsync(IncludeQuery<TEntity>? include, FilterQuery<TEntity>? filters, CancellationToken ct = default);
 }

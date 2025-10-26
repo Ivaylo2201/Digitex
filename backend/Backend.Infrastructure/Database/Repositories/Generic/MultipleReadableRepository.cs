@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Backend.Domain.Common;
 using Backend.Domain.Interfaces.Generics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -10,7 +11,7 @@ public class MultipleReadableRepository<TEntity>(ILogger logger, DatabaseContext
     private readonly string _source = $"{nameof(MultipleReadableRepository<TEntity>)}<{typeof(TEntity).Name}>";
     private readonly Type _entityType = typeof(TEntity);
     
-    public async Task<List<TEntity>> ListAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>>? include, CancellationToken cancellationToken = default)
+    public async Task<List<TEntity>> ListAllAsync(IncludeQuery<TEntity>? include, FilterQuery<TEntity>? filter, CancellationToken ct = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
@@ -21,7 +22,10 @@ public class MultipleReadableRepository<TEntity>(ILogger logger, DatabaseContext
         if (include is not null)
             queryable = include(queryable);
         
-        var entities = await queryable.ToListAsync(cancellationToken);
+        if (filter is not null)
+            queryable = filter(queryable);
+        
+        var entities = await queryable.ToListAsync(ct);
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: Retrieved {Count} {EntityName} entities in {Duration}ms.", _source, entities.Count, _entityType.Name, stopwatch.ElapsedMilliseconds);

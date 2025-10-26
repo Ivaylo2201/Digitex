@@ -18,12 +18,12 @@ public class SignUpUserCommandHandler(ILogger<SignUpUserCommandHandler> logger, 
     private const string QueryName = nameof(SignUpUserCommand);
     private const string Source = nameof(SignUpUserCommandHandler);
 
-    public async Task<Result<string>> HandleAsync(SignUpUserCommand command, CancellationToken cancellationToken)
+    public async Task<Result<string>> HandleAsync(SignUpUserCommand command, CancellationToken ct)
     {
         var stopwatch = Stopwatch.StartNew();
         logger.LogQueryExecutionStart(Source, QueryName);
         
-        var isUsernameAvailable = await userRepository.IsUsernameAvailableAsync(command.Dto.Username, cancellationToken);
+        var isUsernameAvailable = await userRepository.IsUsernameAvailableAsync(command.Dto.Username, ct);
 
         if (!isUsernameAvailable)
         {
@@ -31,14 +31,13 @@ public class SignUpUserCommandHandler(ILogger<SignUpUserCommandHandler> logger, 
             return Result<string>.Failure(ErrorType.UsernameTaken);
         }
         
-        var user = new User
+        var user = await userRepository.CreateAsync(new User
         {
             Username = command.Dto.Username,
             Password = command.Dto.Password,
             Cart = new Cart()
-        };
-
-        await userRepository.CreateAsync(user, cancellationToken);
+        }, ct);
+        
         logger.LogQueryExecutionDuration(Source, QueryName, stopwatch);
         
         return Result<string>.Success(tokenService.GenerateToken(user));
