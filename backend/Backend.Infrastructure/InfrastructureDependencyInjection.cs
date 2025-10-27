@@ -1,14 +1,21 @@
 ﻿using System.Security.Claims;
 using System.Text;
+using Backend.Application.DTOs.Cpu;
+using Backend.Application.DTOs.Gpu;
 using Backend.Application.DTOs.Monitor;
+using Backend.Application.DTOs.Motherboard;
+using Backend.Application.DTOs.PowerSupply;
+using Backend.Application.DTOs.Ram;
+using Backend.Application.DTOs.Ssd;
 using Backend.Application.Interfaces.Services;
+using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Repositories.Entities;
-using Backend.Infrastructure.Services;
 using Backend.Infrastructure.Services.Common;
 using Backend.Infrastructure.Services.Common.Filters;
+using Backend.Infrastructure.Services.Entities;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -36,21 +43,18 @@ public static class InfrastructureDependencyInjection
             var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
             var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
             
-            services
+            return services
                 .AddDbContext(connectionString)
                 .AddServices()
                 .AddRepositories()
                 .AddCors(configuration)
                 .AddAuthentication(jwtSecretKey, jwtIssuer, jwtAudience);
-            
-            Log.Information("[{Source}]: Infrastructure services successfully initialized.", Source);
         }
         catch (Exception ex)
         {
             Log.Error("[{Source}]: {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
+            return services;
         }
-        
-        return services;
     }
 
     private static IServiceCollection AddDbContext(this IServiceCollection services, string? connectionString)
@@ -110,19 +114,35 @@ public static class InfrastructureDependencyInjection
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         return services
-            .AddScoped<IProductRepository<Monitor>, MonitorRepository>();
+            .AddScoped<IProductRepository<Monitor>, MonitorRepository>()
+            .AddScoped<IProductRepository<Ram>, RamRepository>()
+            .AddScoped<IProductRepository<Cpu>, CpuRepository>()
+            .AddScoped<IProductRepository<Gpu>, GpuRepository>()
+            .AddScoped<IProductRepository<Ssd>, SsdRepository>()
+            .AddScoped<IProductRepository<Motherboard>, MotherboardRepository>()
+            .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
         return services
-            // .AddScoped<IOrderService, OrderService>()
-            // .AddScoped<IOwnershipService, OwnershipService>()
-            
             .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
-            .AddScoped<IProductRepository<Monitor>, MonitorRepository>()
+            .AddScoped<IProductService<Ram, RamDto>, RamService>()
+            .AddScoped<IProductService<Cpu, CpuDto>, CpuService>()
+            .AddScoped<IProductService<Gpu, GpuDto>, GpuService>()
+            .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
+            .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
+            .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
+            
             .AddScoped<IBrandProviderService, BrandProviderService>()
+            
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
+            .AddTransient<IFilterService<Ram>, RamFilterService>()
+            .AddTransient<IFilterService<Cpu>, CpuFilterService>()
+            .AddTransient<IFilterService<Gpu>, GpuFilterService>()
+            .AddTransient<IFilterService<Ssd>, SsdFilterService>()
+            .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
+            .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
             
             .AddSingleton<ITokenService, TokenService>();
     }

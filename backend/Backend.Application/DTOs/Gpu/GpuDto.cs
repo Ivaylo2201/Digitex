@@ -4,7 +4,9 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.DTOs.Gpu;
 
-public record GpuDto : ProductDto
+using Gpu = Backend.Domain.Entities.Gpu;
+
+public class GpuDto(Gpu gpu) : ProductLongDto(gpu)
 {
     public required Memory Memory { get; init; }
     public required ClockSpeed ClockSpeed { get; init; }

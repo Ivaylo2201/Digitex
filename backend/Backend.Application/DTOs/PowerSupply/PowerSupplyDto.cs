@@ -3,7 +3,9 @@ using Backend.Domain.Enums;
 
 namespace Backend.Application.DTOs.PowerSupply;
 
-public record PowerSupplyDto : ProductDto
+using PowerSupply = Backend.Domain.Entities.PowerSupply;
+
+public class PowerSupplyDto(PowerSupply powerSupply) : ProductLongDto(powerSupply)
 {
     public required int Wattage { get; init; }
     public required FormFactor FormFactor { get; init; }

@@ -4,7 +4,9 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.DTOs.Monitor;
 
-public record MonitorDto : ProductDto
+using Monitor = Backend.Domain.Entities.Monitor;
+
+public class MonitorDto(Monitor monitor) : ProductLongDto(monitor)
 {
     public required double DisplayDiagonal { get; init; }
     public required RefreshRate RefreshRate { get; init; }

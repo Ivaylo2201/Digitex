@@ -3,7 +3,9 @@ using Backend.Domain.Enums;
 
 namespace Backend.Application.DTOs.Motherboard;
 
-public record MotherboardDto : ProductDto
+using Motherboard = Backend.Domain.Entities.Motherboard;
+
+public class MotherboardDto(Motherboard motherboard) : ProductLongDto(motherboard)
 {
     public required Socket Socket { get; init; }
     public required FormFactor FormFactor { get; init; }

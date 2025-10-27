@@ -5,7 +5,7 @@ using Backend.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Infrastructure.Database.Repositories;
+namespace Backend.Infrastructure.Database.Repositories.Base;
 
 public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext context) : IProductRepository<TEntity> where TEntity : ProductBase
 {
@@ -23,6 +23,7 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
             .AsNoTracking()
             .Include(entity => entity.Brand)
             .Include(entity => entity.Reviews)
+            .ThenInclude(review => review.User)
             .FirstOrDefaultAsync(entity => entity.Id == id, ct);
         
         stopwatch.Stop();

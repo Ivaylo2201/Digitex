@@ -1,12 +1,15 @@
-﻿using Backend.Application.Interfaces.Services;
+﻿using Backend.Application.DTOs.Product;
+using Backend.Application.Extensions;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
+using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Base;
 
-public class ProductServiceBase<TEntity, TProjection>(ILogger logger, IProductRepository<TEntity> repository) : IProductService<TEntity, TProjection>
+public class ProductServiceBase<TEntity, TProjection>(ILogger logger, IProductRepository<TEntity> repository) : IProductService<TEntity, TProjection> where TEntity : ProductBase
 {
     private readonly string _entityName = typeof(TEntity).Name;
     private readonly string _projectionName = typeof(TProjection).Name;
@@ -23,14 +26,14 @@ public class ProductServiceBase<TEntity, TProjection>(ILogger logger, IProductRe
         return Result<TProjection?>.Success(project(entity));   
     }
 
-    public async Task<Result<List<TProjection>>> ListAllAsync(Filter<TEntity> filter, Func<TEntity, TProjection> project, CancellationToken ct = default)
+    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter, CancellationToken ct = default)
     {
         var source = GetType().Name;
         var entities = await repository.ListAllAsync(filter, ct);
         
         logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
-        var projections = entities.Select(project).ToList();
+        var projections = entities.Select(entity => entity.ToProductDto()).ToList();
         
-        return Result<List<TProjection>>.Success(projections);   
+        return Result<List<ProductShortDto>>.Success(projections);   
     }
 }

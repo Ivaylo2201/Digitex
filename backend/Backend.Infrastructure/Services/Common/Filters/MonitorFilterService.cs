@@ -7,12 +7,12 @@ using Monitor = Backend.Domain.Entities.Monitor;
 
 public class MonitorFilterService(IBrandProviderService brandProviderService) : IFilterService<Monitor>
 {
-    public Filter<Monitor> Build(IDictionary<string, string> criteria)
+    public Filter<Monitor> BuildFilter(IDictionary<string, string> criteria)
     {
         return monitor => monitor;
     }
 
-    public object Get() => new
+    public object GetFilters() => new
     {
         Brands = brandProviderService.GetBrands<Monitor>()
     };

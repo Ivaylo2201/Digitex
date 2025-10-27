@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Backend.Infrastructure.Database.Repositories.Base;
+using Microsoft.Extensions.Logging;
 using Monitor = Backend.Domain.Entities.Monitor;
 
 namespace Backend.Infrastructure.Database.Repositories.Entities;
