@@ -1,5 +1,4 @@
-﻿using Backend.Application.Extensions;
-using Backend.Domain.Entities;
+﻿using Backend.Domain.Entities;
 using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.DTOs.Product;
@@ -15,7 +14,6 @@ public class ProductShortDto(ProductBase product)
         Initial = product.InitialPrice,
         Discounted = product.Price
     };
-
     public int DiscountPercentage { get; init; } = product.DiscountPercentage;
-    public int Rating { get; init; } = product.GetRating();
+    public int Rating { get; init; } = product.Rating;
 }

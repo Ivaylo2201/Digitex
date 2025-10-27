@@ -120,7 +120,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductRepository<Gpu>, GpuRepository>()
             .AddScoped<IProductRepository<Ssd>, SsdRepository>()
             .AddScoped<IProductRepository<Motherboard>, MotherboardRepository>()
-            .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>();
+            .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>()
+            .AddScoped<IReviewRepository, ReviewRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -133,6 +134,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
             .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
             .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
+            .AddScoped<IReviewService, ReviewService>()
             
             .AddScoped<IBrandProviderService, BrandProviderService>()
             

@@ -10,6 +10,10 @@ public class ProductLongDto : ProductShortDto
 
     protected ProductLongDto(ProductBase product) : base(product)
     {
-        Reviews = product.Reviews.Select(review => review.ToReviewDto()).ToList();
+        Reviews = product.Reviews
+            .OrderByDescending(review => review.CreatedAt)
+            .Take(10)
+            .Select(r => r.ToReviewDto())
+            .ToList();
     }
 }

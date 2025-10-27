@@ -1,6 +1,6 @@
 ﻿namespace Backend.Domain.Interfaces.Generics;
 
-public interface IUpdatable<in TEntity>
+public interface IUpdatable<in TEntity, in TKey>
 {
-    Task UpdateAsync(TEntity item, CancellationToken ct = default);
+    Task UpdateAsync(TKey id, TEntity item, CancellationToken stoppingToken = default);
 }

@@ -13,6 +13,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
             TruncateTables();
             await ResetIndicesAsync();
             Seed();
+            await ConfigureTriggersAsync();
             await context.SaveChangesAsync();
             
             logger.LogInformation("Seeding complete.");
@@ -92,5 +93,28 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Reviews', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Cities', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Countries', RESEED, 0);");
+    }
+
+    private async Task ConfigureTriggersAsync()
+    {
+        await context.Database.ExecuteSqlRawAsync(
+            """
+            IF OBJECT_ID('dbo.trg_update_product_rating', 'TR') IS NOT NULL
+                DROP TRIGGER dbo.trg_update_product_rating;
+            """);
+        
+        await context.Database.ExecuteSqlRawAsync(
+            """
+            CREATE TRIGGER trg_update_product_rating
+            ON [dbo].Reviews
+            AFTER INSERT
+            AS
+            BEGIN
+                DECLARE @ProductId VARCHAR = (SELECT ProductId FROM INSERTED)
+                UPDATE dbo.Products
+                SET Rating = (SELECT AVG(Rating) FROM dbo.Reviews WHERE ProductId = @ProductId)
+                WHERE Id = @ProductId
+            END
+            """);
     }
 } 

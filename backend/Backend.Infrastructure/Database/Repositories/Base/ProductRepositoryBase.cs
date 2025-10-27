@@ -11,20 +11,20 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
 {
     private readonly string _entity = typeof(TEntity).Name;
     
-    public async Task<TEntity?> GetOneAsync(Guid id, CancellationToken ct = default)
+    public async Task<TEntity?> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogInformation("[{Source}]: Getting {Entity} entity with Id of {EntityId}...", source, _entity, id);
-        
+
         var entity = await context
             .Set<TEntity>()
             .AsNoTracking()
             .Include(entity => entity.Brand)
             .Include(entity => entity.Reviews)
             .ThenInclude(review => review.User)
-            .FirstOrDefaultAsync(entity => entity.Id == id, ct);
+            .FirstOrDefaultAsync(entity => entity.Id == id, stoppingToken);
         
         stopwatch.Stop();
 
@@ -40,7 +40,7 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
         return entity;
     }
 
-    public async Task<List<TEntity>> ListAllAsync(Filter<TEntity>? filter, CancellationToken ct = default)
+    public async Task<List<TEntity>> ListAllAsync(Filter<TEntity>? filter, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
@@ -50,13 +50,12 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
         IQueryable<TEntity> queryable = context
             .Set<TEntity>()
             .AsNoTracking()
-            .Include(entity => entity.Brand)
-            .Include(entity => entity.Reviews);
+            .Include(entity => entity.Brand);
 
         if (filter is not null)
             queryable = filter(queryable);
         
-        var entities = await queryable.ToListAsync(ct);
+        var entities = await queryable.ToListAsync(stoppingToken);
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: {Count} {Entity} entities listed in {Duration}ms", source, entities.Count, _entity, stopwatch.ElapsedMilliseconds);

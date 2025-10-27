@@ -10,6 +10,7 @@ public abstract class ProductBase
     public required double InitialPrice { get; init; }
     public int DiscountPercentage { get; init; }
     public required int Quantity { get; set; }
+    public int Rating { get; init; }
     
     public ICollection<Item> Items { get; init; } = [];
     public ICollection<Review> Reviews { get; init; } = [];

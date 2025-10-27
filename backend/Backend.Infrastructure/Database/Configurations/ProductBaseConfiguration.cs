@@ -8,6 +8,7 @@ public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
 {
     private const string TableName = "Products";
     private const int ModelNameMaxLength = 150;
+    private const int RatingDefaultValue = 0;
     
     public void Configure(EntityTypeBuilder<ProductBase> builder)
     {
@@ -39,5 +40,9 @@ public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
         builder
             .Property(productBase => productBase.InitialPrice)
             .IsRequired();
+
+        builder
+            .Property(productBase => productBase.Rating)
+            .HasDefaultValue(RatingDefaultValue);
     }
 }
