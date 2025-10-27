@@ -1,8 +1,6 @@
-﻿using Backend.Domain.Common;
-
-namespace Backend.Domain.Interfaces.Generics;
+﻿namespace Backend.Domain.Interfaces.Generics;
 
 public interface ISingleReadable<TEntity, in TKey>
 {
-    Task<TEntity?> GetOneAsync(TKey id, IncludeQuery<TEntity>? include, CancellationToken ct = default);
+    Task<TEntity?> GetOneAsync(TKey id, CancellationToken ct = default);
 }

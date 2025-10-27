@@ -1,13 +1,14 @@
 ﻿using System.Security.Claims;
 using System.Text;
-using Backend.Application.Interfaces.Builders;
+using Backend.Application.DTOs.Monitor;
 using Backend.Application.Interfaces.Services;
-using Backend.Domain.Entities;
-using Backend.Domain.Interfaces.Repositories;
+using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Repositories.Entities;
 using Backend.Infrastructure.Services;
+using Backend.Infrastructure.Services.Common;
+using Backend.Infrastructure.Services.Common.Filters;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using Monitor = Backend.Domain.Entities.Monitor;
+using MonitorService = Backend.Infrastructure.Services.Entities.MonitorService;
 
 namespace Backend.Infrastructure;
 
@@ -107,16 +110,7 @@ public static class InfrastructureDependencyInjection
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         return services
-            .AddScoped<IMotherboardRepository, MotherboardRepository>()
-            .AddScoped<ICpuRepository, CpuRepository>()
-            .AddScoped<IGpuRepository, GpuRepository>()
-            .AddScoped<IRamRepository, RamRepository>()
-            .AddScoped<ISsdRepository, SsdRepository>()
-            .AddScoped<IMonitorRepository, MonitorRepository>()
-            .AddScoped<IShippingRepository, ShippingRepository>()
-            .AddScoped<IPowerSupplyRepository, PowerSupplyRepository>()
-            .AddScoped<IUserRepository, UserRepository>()
-            .AddScoped<IReviewRepository, ReviewRepository>();
+            .AddScoped<IProductRepository<Monitor>, MonitorRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -124,8 +118,12 @@ public static class InfrastructureDependencyInjection
         return services
             // .AddScoped<IOrderService, OrderService>()
             // .AddScoped<IOwnershipService, OwnershipService>()
-            .AddTransient<IFilterBuilder<Ssd>, SsdFilterBuilder>()
-            .AddTransient<IFilterProviderService, FilterProviderService>()
+            
+            .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
+            .AddScoped<IProductRepository<Monitor>, MonitorRepository>()
+            .AddScoped<IBrandProviderService, BrandProviderService>()
+            .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
+            
             .AddSingleton<ITokenService, TokenService>();
     }
 }

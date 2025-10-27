@@ -1,5 +1,4 @@
 using System.Reflection;
-using Backend.Application;
 using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
@@ -21,7 +20,6 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services
     .AddOpenApi()
-    .AddApplication()
     .AddInfrastructure(builder.Configuration)
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()

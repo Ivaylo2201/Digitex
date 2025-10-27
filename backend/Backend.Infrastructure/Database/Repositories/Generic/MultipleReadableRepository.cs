@@ -11,16 +11,13 @@ public class MultipleReadableRepository<TEntity>(ILogger logger, DatabaseContext
     private readonly string _source = $"{nameof(MultipleReadableRepository<TEntity>)}<{typeof(TEntity).Name}>";
     private readonly Type _entityType = typeof(TEntity);
     
-    public async Task<List<TEntity>> ListAllAsync(IncludeQuery<TEntity>? include, FilterQuery<TEntity>? filter, CancellationToken ct = default)
+    public async Task<List<TEntity>> ListAllAsync(Filter<TEntity>? filter, CancellationToken ct = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
         logger.LogInformation("[{Source}]: Retrieving all {EntityName} entities...", _source, _entityType.Name);
         
         var queryable = context.Set<TEntity>().AsNoTracking();
-
-        if (include is not null)
-            queryable = include(queryable);
         
         if (filter is not null)
             queryable = filter(queryable);

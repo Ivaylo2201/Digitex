@@ -1,6 +1,6 @@
 ﻿using Backend.Application.Filters;
 using Backend.Application.Filters.Common;
-using Backend.Application.Interfaces.Services;
+
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Infrastructure.Database;
@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Services;
 
-public class FilterProviderService(DatabaseContext context) : IFilterProviderService
+// TODO: DELETE THIS FILE
+public class FilterProviderService(DatabaseContext context)
 {
     public CpuFilters GetCpuFilters()
     {
