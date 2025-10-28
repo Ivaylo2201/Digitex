@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Net;
+using System.Net.Mail;
+using System.Security.Claims;
 using System.Text;
 using Backend.Application.DTOs.Cpu;
 using Backend.Application.DTOs.Gpu;
@@ -128,7 +130,12 @@ public static class InfrastructureDependencyInjection
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
+        var email = Environment.GetEnvironmentVariable("SENDER_EMAIL");
+        var password = Environment.GetEnvironmentVariable("SENDER_PASSWORD");
+        var username = Environment.GetEnvironmentVariable("SENDER_USERNAME");
+
         return services
+            .AddEmail(email, username, password)
             .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
             .AddScoped<IProductService<Ram, RamDto>, RamService>()
             .AddScoped<IProductService<Cpu, CpuDto>, CpuService>()
@@ -147,6 +154,26 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<Ssd>, SsdFilterService>()
             .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
-            .AddSingleton<ITokenService, TokenService>();
+            .AddSingleton<ITokenService, TokenService>()
+            .AddSingleton<IEmailCryptoService, EmailCryptoService>()
+            .AddSingleton<IEmailSendingService, EmailSendingService>();
+    }
+
+    private static IServiceCollection AddEmail(this IServiceCollection services, string? email, string? username, string? password)
+    {
+        ArgumentNullException.ThrowIfNull(email);
+        ArgumentNullException.ThrowIfNull(username);
+        ArgumentNullException.ThrowIfNull(password);
+        
+        services
+            .AddFluentEmail(email, username)
+            .AddSmtpSender(() => new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(email, password),
+                EnableSsl = true
+            });
+        
+        return services;
     }
 }
