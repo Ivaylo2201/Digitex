@@ -1,9 +1,8 @@
 ﻿using Backend.Domain.Common;
-using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces;
 
-public interface IProductRepository<TEntity> : ISingleReadable<TEntity, Guid>, IMultipleReadable<TEntity>
+public interface IProductBaseRepository
 {
     Task<Result> UpdateRatingAsync(Guid id, int newRating, CancellationToken stoppingToken = default);
 }

@@ -121,7 +121,9 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductRepository<Ssd>, SsdRepository>()
             .AddScoped<IProductRepository<Motherboard>, MotherboardRepository>()
             .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>()
-            .AddScoped<IReviewRepository, ReviewRepository>();
+            .AddScoped<IReviewRepository, ReviewRepository>()
+            .AddScoped<IProductBaseRepository, ProductBaseRepository>()
+            .AddScoped<IUserRepository, UserRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -135,9 +137,9 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
             .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
             .AddScoped<IReviewService, ReviewService>()
-            
+            .AddScoped<IProductBaseService, ProductBaseService>()
+            .AddScoped<IUserService, UserService>()
             .AddScoped<IBrandProviderService, BrandProviderService>()
-            
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
             .AddTransient<IFilterService<Ram>, RamFilterService>()
             .AddTransient<IFilterService<Cpu>, CpuFilterService>()
@@ -145,7 +147,6 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<Ssd>, SsdFilterService>()
             .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
-            
             .AddSingleton<ITokenService, TokenService>();
     }
 }

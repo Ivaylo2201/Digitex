@@ -1,32 +1,42 @@
 ﻿using Backend.Domain.Enums;
+using Backend.Domain.Extensions;
 
 namespace Backend.Domain.Common;
 
-public class Result<T>
+public class Result
 {
     public readonly bool IsSuccess;
     public readonly ErrorObject? ErrorObject;
-    public readonly T? Value;
 
-    private Result(bool isSuccess, T? value, ErrorObject? errorObject)
+    protected Result(bool isSuccess, ErrorObject? errorObject)
     {
         IsSuccess = isSuccess;
-        Value = value;
         ErrorObject = errorObject;
     }
-    
-    public static Result<T> Success(T value) => new(true, value, null);
-    
-    public static Result<T> Failure(ErrorType errorType) => new(false, default, new ErrorObject
+
+    public static Result Success() => new(true, null);
+
+    public static Result Failure(ErrorType errorType, object? details = null) => new(false, new ErrorObject
     {
-        Message = errorType switch
-        {
-            ErrorType.NotFound => "Resource not found.",
-            ErrorType.Forbidden => "Access forbidden.",
-            ErrorType.Unauthorized => "Unauthorized access.",
-            ErrorType.UsernameTaken => "Username already taken.",
-            ErrorType.InvalidCredentials => "Invalid credentials.",
-            _ => "An unknown error occurred."
-        }
+        Message = errorType.ToMessage(),
+        Details = details
+    });
+}
+
+public class Result<T> : Result
+{
+    public readonly T? Value;
+
+    private Result(bool isSuccess, T? value, ErrorObject? errorObject) : base(isSuccess, errorObject)
+    {
+        Value = value;
+    }
+
+    public static Result<T> Success(T value) => new(true, value, null);
+
+    public new static Result<T> Failure(ErrorType errorType, object? details = null) => new(false, default, new ErrorObject
+    {
+        Message = errorType.ToMessage(),
+        Details = details   
     });
 }

@@ -1,5 +1,7 @@
 ﻿using Backend.Application.DTOs.Review;
-using Backend.Domain.Entities;
+using Backend.Application.Interfaces.Services;
+using Backend.Domain.Common;
+using Backend.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,20 +9,20 @@ namespace Backend.WebApi.Controllers;
 
 [ApiController]
 [Route("api/products/{productId:guid}/reviews")]
-public class ReviewsController : ControllerBase
+public class ReviewsController(IReviewService reviewService, IProductBaseService productBaseService) : ControllerBase
 {
     [HttpPost]
     [Authorize]
-    [ProducesResponseType(typeof(Review), StatusCodes.Status200OK)]
-    public async Task<IActionResult> AddReviewAsync(Guid productId, [FromBody] AddReviewDto body, CancellationToken ct = default)
+    [ProducesResponseType(typeof(ReviewDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> AddReviewAsync(Guid productId, [FromBody] AddReviewDto body, CancellationToken stoppingToken = default)
     {
-        throw new NotImplementedException();
-    }
-    
-    [HttpGet]
-    [ProducesResponseType(typeof(List<ReviewDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetReviewsAsync(Guid productId, CancellationToken ct = default)
-    {
-        throw new NotImplementedException();
+        body.UserId = User.GetId();
+        body.ProductId = productId;
+        
+        var review = await reviewService.AddReviewAsync(body, stoppingToken);
+        await productBaseService.UpdateRatingAsync(productId, HttpContext.RequestServices, stoppingToken);
+        
+        return review.IsSuccess ? Ok(review.Value) : BadRequest(review.ErrorObject);
     }
 }

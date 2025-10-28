@@ -6,5 +6,6 @@ public enum ErrorType
     Unauthorized,
     Forbidden,
     UsernameTaken,
-    InvalidCredentials
+    InvalidCredentials,
+    ValidationFailed
 }

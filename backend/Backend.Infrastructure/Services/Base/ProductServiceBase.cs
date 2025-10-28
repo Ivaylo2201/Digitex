@@ -5,11 +5,12 @@ using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Base;
 
-public class ProductServiceBase<TEntity, TProjection>(ILogger logger, IProductRepository<TEntity> repository) : IProductService<TEntity, TProjection> where TEntity : ProductBase
+public class ProductServiceBase<TEntity, TProjection>(ILogger logger, IProductRepository<TEntity> productRepository) : IProductService<TEntity, TProjection> where TEntity : ProductBase
 {
     private readonly string _entityName = typeof(TEntity).Name;
     private readonly string _projectionName = typeof(TProjection).Name;
@@ -17,7 +18,7 @@ public class ProductServiceBase<TEntity, TProjection>(ILogger logger, IProductRe
     public async Task<Result<TProjection?>> GetOneAsync(Guid id, Func<TEntity, TProjection> project, CancellationToken ct = default)
     {
         var source = GetType().Name;
-        var entity = await repository.GetOneAsync(id, ct);
+        var entity = await productRepository.GetOneAsync(id, ct);
         
         if (entity is null)
             return Result<TProjection?>.Failure(ErrorType.NotFound);
@@ -29,7 +30,7 @@ public class ProductServiceBase<TEntity, TProjection>(ILogger logger, IProductRe
     public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter, CancellationToken ct = default)
     {
         var source = GetType().Name;
-        var entities = await repository.ListAllAsync(filter, ct);
+        var entities = await productRepository.ListAllAsync(filter, ct);
         
         logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
         var projections = entities.Select(entity => entity.ToProductDto()).ToList();
