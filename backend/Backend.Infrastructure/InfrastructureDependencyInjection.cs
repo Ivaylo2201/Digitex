@@ -156,7 +156,8 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
             .AddSingleton<ITokenService, TokenService>()
             .AddSingleton<IEmailCryptoService, EmailCryptoService>()
-            .AddSingleton<IEmailSendingService, EmailSendingService>();
+            .AddSingleton<IEmailSendingService, EmailSendingService>()
+            .AddTransient(typeof(ICurrencyService<>), typeof(CurrencyService<>));
     }
 
     private static IServiceCollection AddEmail(this IServiceCollection services, string? email, string? username, string? password)

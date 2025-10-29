@@ -33,7 +33,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         
         var user = await context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Email == email, stoppingToken);
+            .FirstOrDefaultAsync(user => user.IsVerified && user.Email == email, stoppingToken);
         
         if (user is null)
         {
@@ -58,7 +58,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         
         var user = await context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Email == email, stoppingToken);
+            .FirstOrDefaultAsync(user => !user.IsVerified && user.Email == email, stoppingToken);
         
         if (user is null)
         {
@@ -74,5 +74,5 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
     }
 
     public async Task<User?> GetOneAsync(int id, CancellationToken stoppingToken = default)
-        => await context.Users.FirstOrDefaultAsync(user => user.Id == id, stoppingToken);   
+        => await context.Users.FirstOrDefaultAsync(user => user.IsVerified && user.Id == id, stoppingToken);   
 }
