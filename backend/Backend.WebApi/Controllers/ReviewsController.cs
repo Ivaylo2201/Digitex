@@ -21,7 +21,7 @@ public class ReviewsController(IReviewService reviewService, IProductBaseService
         body.ProductId = productId;
         
         var review = await reviewService.AddReviewAsync(body, stoppingToken);
-        await productBaseService.UpdateRatingAsync(productId, HttpContext.RequestServices, stoppingToken);
+        await productBaseService.UpdateRatingAsync(productId, stoppingToken);
         
         return review.IsSuccess ? Ok(review.Value) : BadRequest(review.ErrorObject);
     }

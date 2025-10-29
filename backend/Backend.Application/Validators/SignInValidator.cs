@@ -5,16 +5,14 @@ namespace Backend.Application.Validators;
 
 public class SignInValidator : AbstractValidator<SignInDto>
 {
-    private const int UsernameMinLength = 5;
-    private const int UsernameMaxLength = 25;
     private const int PasswordMinLength = 5;
     private const string PasswordRegex = @"^(?=.*[A-Za-z])(?=.*\d).+$";
 
     public SignInValidator()
     {
-        RuleFor(x => x.Username)
-            .NotEmpty().WithMessage("Username must be provided.")
-            .Length(UsernameMinLength, UsernameMaxLength).WithMessage($"Username must be between {UsernameMinLength} and {UsernameMaxLength} characters.");
+        RuleFor(x => x.Email)
+            .NotEmpty().WithMessage("Email must be provided.")
+            .EmailAddress().WithMessage("Email must be a valid email address.");
 
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password must be provided.")

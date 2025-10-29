@@ -9,7 +9,7 @@ public static class ErrorTypeExtensions
         ErrorType.NotFound => "Resource not found.",
         ErrorType.Forbidden => "Access forbidden.",
         ErrorType.Unauthorized => "Unauthorized access.",
-        ErrorType.UsernameTaken => "Username already taken.",
+        ErrorType.EmailTaken => "Email already taken.",
         ErrorType.InvalidCredentials => "Invalid credentials.",
         ErrorType.ValidationFailed => "Validation failed.",
         _ => "An unknown error occurred."

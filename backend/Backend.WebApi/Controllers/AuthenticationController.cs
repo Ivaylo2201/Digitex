@@ -26,4 +26,13 @@ public class AuthenticationController(IUserService userService) : ControllerBase
         var result = await userService.SignInAsync(body, stoppingToken);
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);
     }
+
+    [HttpPatch("verify")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> VerifyUserAsync([FromQuery] string token, CancellationToken stoppingToken = default)
+    {
+        var result = await userService.VerifyUserAsync(token, stoppingToken);
+        return result.IsSuccess ? NoContent() : NotFound(result.ErrorObject);
+    }
 }

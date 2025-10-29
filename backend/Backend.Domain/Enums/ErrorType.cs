@@ -5,7 +5,8 @@ public enum ErrorType
     NotFound,
     Unauthorized,
     Forbidden,
-    UsernameTaken,
+    EmailTaken,
     InvalidCredentials,
-    ValidationFailed
+    ValidationFailed,
+    Other
 }

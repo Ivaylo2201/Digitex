@@ -8,6 +8,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     private const string TableName = "Users";
     private const int UsernameMaxLength = 25;
+    private const int EmailMaxLength = 125;
+    private const bool IsVerifiedDefaultValue = false;
     
     public void Configure(EntityTypeBuilder<User> builder)
     {
@@ -19,9 +21,18 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .Property(user => user.Username)
             .HasMaxLength(UsernameMaxLength)
             .IsRequired();
+        
+        builder
+            .Property(user => user.Email)
+            .HasMaxLength(EmailMaxLength)
+            .IsRequired();
 
         builder
-            .HasIndex(user => user.Username)
+            .Property(user => user.IsVerified)
+            .HasDefaultValue(IsVerifiedDefaultValue);
+
+        builder
+            .HasIndex(user => user.Email)
             .IsUnique();
         
         builder
