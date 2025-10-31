@@ -122,7 +122,9 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>()
             .AddScoped<IReviewRepository, ReviewRepository>()
             .AddScoped<IProductBaseRepository, ProductBaseRepository>()
-            .AddScoped<IUserRepository, UserRepository>();
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<ICartRepository, CartRepository>()
+            .AddScoped<IItemRepository, ItemRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -141,6 +143,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductBaseService, ProductBaseService>()
             .AddScoped<IUserService, UserService>()
             .AddScoped<IBrandProviderService, BrandProviderService>()
+            .AddScoped<IEmailSendingService, EmailSendingService>()
+            .AddScoped<ICartService, CartService>()
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
             .AddTransient<IFilterService<Ram>, RamFilterService>()
             .AddTransient<IFilterService<Cpu>, CpuFilterService>()
@@ -149,8 +153,7 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
             .AddSingleton<ITokenService, TokenService>()
-            .AddSingleton<IEmailCryptoService, EmailCryptoService>()
-            .AddScoped<IEmailSendingService, EmailSendingService>();
+            .AddSingleton<IEmailCryptoService, EmailCryptoService>();
     }
 
     private static IServiceCollection AddEmail(this IServiceCollection services)
