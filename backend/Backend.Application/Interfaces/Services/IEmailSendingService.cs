@@ -4,5 +4,5 @@ namespace Backend.Application.Interfaces.Services;
 
 public interface IEmailSendingService
 {
-    Task SendWelcomeEmailAsync(User user, CancellationToken stoppingToken = default);
+    Task SendVerificationMailAsync(User user, CancellationToken stoppingToken = default);
 }

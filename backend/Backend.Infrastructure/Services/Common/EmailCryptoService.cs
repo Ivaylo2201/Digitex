@@ -1,23 +1,29 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Backend.Application.Interfaces.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Common;
 
 public class EmailCryptoService : IEmailCryptoService
 {
+    private const string Source = nameof(EmailCryptoService);
     private readonly byte[] _key;
     private readonly byte[] _iv;
+    private readonly ILogger<EmailCryptoService> _logger;
 
-    public EmailCryptoService()
+    public EmailCryptoService(ILogger<EmailCryptoService> logger)
     {
         using var aes = Aes.Create();
         _key = aes.Key;
         _iv = aes.IV;
+        _logger = logger;
     }
 
     public string Encrypt(string email)
     {
+        _logger.LogInformation("[{Source}]: Encrypting email...", Source);
+        
         using var aes = Aes.Create();
         aes.Key = _key;
         aes.IV = _iv;
@@ -36,6 +42,8 @@ public class EmailCryptoService : IEmailCryptoService
 
     public string Decrypt(string encrypted)
     {
+        _logger.LogInformation("[{Source}]: Decrypting email...", Source);
+        
         using var aes = Aes.Create();
         aes.Key = _key;
         aes.IV = _iv;

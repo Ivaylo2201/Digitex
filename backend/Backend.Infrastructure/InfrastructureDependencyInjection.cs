@@ -40,17 +40,15 @@ public static class InfrastructureDependencyInjection
         {
             Env.Load();
             
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            var jwtSecretKey = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
-            var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
-            var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
-            
-            return services
-                .AddDbContext(connectionString)
+            services
+                .AddDbContext(configuration.GetConnectionString("DefaultConnection"))
                 .AddServices()
                 .AddRepositories()
-                .AddCors(configuration)
-                .AddAuthentication(jwtSecretKey, jwtIssuer, jwtAudience);
+                .AddCors(configuration["Urls:Frontend"])
+                .AddAuthentication();
+            
+            Log.Information("[{Source}]: Infrastructure services successfully initialized.", Source);
+            return services;
         }
         catch (Exception ex)
         {
@@ -70,10 +68,11 @@ public static class InfrastructureDependencyInjection
                     => sqlServerOptionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
     }
 
-    private static IServiceCollection AddAuthentication(this IServiceCollection services, string? secretKey, string? issuer, string? audience)
+    private static IServiceCollection AddAuthentication(this IServiceCollection services)
     {
-        if (string.IsNullOrEmpty(secretKey))
-            throw new InvalidOperationException("Secret key is null or empty.");
+        var jwtSecretKey = GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY");
+        var jwtIssuer =  GetRequiredEnvironmentVariable<string>("JWT_ISSUER");
+        var jwtAudience = GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE");
         
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(o =>
@@ -85,21 +84,19 @@ public static class InfrastructureDependencyInjection
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = issuer,
-                    ValidAudience = audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                    ValidIssuer = jwtIssuer,
+                    ValidAudience = jwtAudience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey))
                 };
             });
         
         return services.AddAuthorization();
     }
 
-    private static IServiceCollection AddCors(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddCors(this IServiceCollection services, string? frontendUrl)
     {
-        var frontendUrl = configuration["Urls:Frontend"];
-        
         if (frontendUrl is null)
-            throw new InvalidOperationException("Missing frontend URL.");
+            throw new InvalidOperationException("Missing frontend url.");
         
         return services.AddCors(corsOptions =>
         {
@@ -130,12 +127,9 @@ public static class InfrastructureDependencyInjection
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
-        var email = Environment.GetEnvironmentVariable("SENDER_EMAIL");
-        var password = Environment.GetEnvironmentVariable("SENDER_PASSWORD");
-        var username = Environment.GetEnvironmentVariable("SENDER_USERNAME");
 
         return services
-            .AddEmail(email, username, password)
+            .AddEmail()
             .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
             .AddScoped<IProductService<Ram, RamDto>, RamService>()
             .AddScoped<IProductService<Cpu, CpuDto>, CpuService>()
@@ -156,25 +150,36 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
             .AddSingleton<ITokenService, TokenService>()
             .AddSingleton<IEmailCryptoService, EmailCryptoService>()
-            .AddSingleton<IEmailSendingService, EmailSendingService>()
-            .AddTransient(typeof(ICurrencyService<>), typeof(CurrencyService<>));
+            .AddScoped<IEmailSendingService, EmailSendingService>();
     }
 
-    private static IServiceCollection AddEmail(this IServiceCollection services, string? email, string? username, string? password)
+    private static IServiceCollection AddEmail(this IServiceCollection services)
     {
-        ArgumentNullException.ThrowIfNull(email);
-        ArgumentNullException.ThrowIfNull(username);
-        ArgumentNullException.ThrowIfNull(password);
+        var email = GetRequiredEnvironmentVariable<string>("SENDER_EMAIL");
+        var password = GetRequiredEnvironmentVariable<string>("SENDER_PASSWORD");
+        var username = GetRequiredEnvironmentVariable<string>("SENDER_USERNAME");
+        var smtpProvider = GetRequiredEnvironmentVariable<string>("SMTP_PROVIDER");
+        var smtpPort = GetRequiredEnvironmentVariable<int>("SMTP_PORT");
         
         services
             .AddFluentEmail(email, username)
-            .AddSmtpSender(() => new SmtpClient("smtp.gmail.com")
+            .AddSmtpSender(() => new SmtpClient(smtpProvider)
             {
-                Port = 587,
+                Port = smtpPort,
                 Credentials = new NetworkCredential(email, password),
                 EnableSsl = true
             });
         
         return services;
+    }
+
+    private static T GetRequiredEnvironmentVariable<T>(string variableName)
+    {
+        var variable = Environment.GetEnvironmentVariable(variableName);
+        
+        if (string.IsNullOrEmpty(variable))
+            throw new InvalidOperationException($"Missing {variableName}.");
+        
+        return (T)Convert.ChangeType(variable, typeof(T));
     }
 }

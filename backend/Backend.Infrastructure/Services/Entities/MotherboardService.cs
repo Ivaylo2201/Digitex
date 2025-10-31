@@ -1,5 +1,4 @@
 ﻿using Backend.Application.DTOs.Motherboard;
-using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services.Base;
@@ -9,5 +8,4 @@ namespace Backend.Infrastructure.Services.Entities;
 
 public class MotherboardService(
     ILogger<MotherboardService> logger,
-    IProductRepository<Motherboard> motherboardRepository,
-    ICurrencyService<Motherboard> currencyService) : ProductServiceBase<Motherboard, MotherboardDto>(logger, motherboardRepository, currencyService);
+    IProductRepository<Motherboard> motherboardRepository) : ProductServiceBase<Motherboard, MotherboardDto>(logger, motherboardRepository);

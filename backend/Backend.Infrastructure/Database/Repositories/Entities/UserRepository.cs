@@ -56,17 +56,22 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
     {
         var stopwatch = Stopwatch.StartNew();
         
-        var user = await context.Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(user => !user.IsVerified && user.Email == email, stoppingToken);
+        var user = await context.Users.FirstOrDefaultAsync(user => !user.IsVerified && user.Email == email, stoppingToken);
         
         if (user is null)
         {
             logger.LogError("[{Source}]: User entity with Email={Email} not found.", Source, email);
             return false;
         }
+
+        if (user.IsVerified)
+        {
+            logger.LogError("[{Source}]: User entity with Email={Email} already verified.", Source, email);
+            return false;       
+        }
         
         user.IsVerified = true;
+        await context.SaveChangesAsync(stoppingToken);
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: User entity with Email={Email} verified in {Duration}ms.", Source, email, stopwatch.ElapsedMilliseconds);
@@ -74,5 +79,5 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
     }
 
     public async Task<User?> GetOneAsync(int id, CancellationToken stoppingToken = default)
-        => await context.Users.FirstOrDefaultAsync(user => user.IsVerified && user.Id == id, stoppingToken);   
+        => await context.Users.FirstOrDefaultAsync(user => user.IsVerified && user.Id == id, stoppingToken);
 }

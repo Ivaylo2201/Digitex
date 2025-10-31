@@ -10,7 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Services.Entities;
 
-public class UserService(IUserRepository userRepository, ITokenService tokenService, IEmailCryptoService emailCryptoService) : IUserService
+public class UserService(
+    IUserRepository userRepository,
+    ITokenService tokenService,
+    IEmailCryptoService emailCryptoService,
+    IEmailSendingService emailSendingService) : IUserService
 {
     public async Task<Result<string>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default)
     {
@@ -27,7 +31,7 @@ public class UserService(IUserRepository userRepository, ITokenService tokenServ
         return Result<string>.Success(tokenService.GenerateToken(user));
     }
 
-    public async Task<Result<string>> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
+    public async Task<Result> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
     {
         var validationResult = await new SignUpValidator().ValidateAsync(signUpDto, stoppingToken);
 
@@ -43,16 +47,18 @@ public class UserService(IUserRepository userRepository, ITokenService tokenServ
                 Email = signUpDto.Email,
                 Cart = new Cart()
             }, stoppingToken);
+            
+            await emailSendingService.SendVerificationMailAsync(user, stoppingToken);
 
-            return Result<string>.Success(tokenService.GenerateToken(user));
+            return Result.Success();
         }
         catch (DbUpdateException)
         {
-            return Result<string>.Failure(ErrorType.EmailTaken);       
+            return Result.Failure(ErrorType.EmailTaken);       
         }
         catch (Exception)
         {
-            return Result<string>.Failure(ErrorType.Other);
+            return Result.Failure(ErrorType.Other);
         }
     }
 

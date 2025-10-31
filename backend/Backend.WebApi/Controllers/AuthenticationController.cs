@@ -15,7 +15,7 @@ public class AuthenticationController(IUserService userService) : ControllerBase
     public async Task<IActionResult> SignUpAsync([FromBody] SignUpDto body, CancellationToken stoppingToken = default)
     {
         var result = await userService.SignUpAsync(body, stoppingToken);
-        return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);
+        return result.IsSuccess ? Ok() : NotFound(result.ErrorObject);
     }
 
     [HttpPost("sign-in")]
