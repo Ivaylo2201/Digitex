@@ -7,9 +7,9 @@ public class Item
     public ProductBase Product { get; init; } = null!;
     public required int Quantity { get; init; }
     public int? CartId { get; set; }
-    public Cart? Cart { get; set; }
+    public Cart Cart { get; set; } = null!;
     public int? OrderId { get; set; }
-    public Order? Order { get; set; }
+    public Order Order { get; set; } = null!;
 
     public double Price => Product.Price * Quantity;
 }

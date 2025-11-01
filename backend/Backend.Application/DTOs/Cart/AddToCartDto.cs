@@ -2,7 +2,7 @@
 
 public record AddToCartDto
 {
-    public Guid ProductId { get; set; }
-    public int Quantity { get; set; }
-    public int UserId { get; set; }  
+    public required Guid ProductId { get; set; }
+    public required int Quantity { get; set; }
+    public int? UserId { get; set; }  
 }

@@ -145,6 +145,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IBrandProviderService, BrandProviderService>()
             .AddScoped<IEmailSendingService, EmailSendingService>()
             .AddScoped<ICartService, CartService>()
+            .AddScoped<IItemService, ItemService>()
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
             .AddTransient<IFilterService<Ram>, RamFilterService>()
             .AddTransient<IFilterService<Cpu>, CpuFilterService>()

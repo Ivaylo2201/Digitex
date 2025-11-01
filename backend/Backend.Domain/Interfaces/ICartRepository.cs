@@ -4,5 +4,5 @@ namespace Backend.Domain.Interfaces;
 
 public interface ICartRepository
 {
-    Task<Cart?> GetCartForUserAsync(int userId, CancellationToken stoppingToken = default);
+    Task<Cart?> GetCartForUserAsync(int? userId, CancellationToken stoppingToken = default);
 }

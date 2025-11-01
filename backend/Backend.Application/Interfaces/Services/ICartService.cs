@@ -8,5 +8,6 @@ public interface ICartService
 {
     Task<Result> AddToCartAsync(AddToCartDto cartDto, CancellationToken stoppingToken = default);
     
-    Task<Result<List<ItemDto>>> ListItemsAsync(int cartId, CancellationToken stoppingToken = default);
+    Task<Result<List<ItemDto>>> ListItemsInCartAsync(ListItemsInCartDto cartDto, CancellationToken stoppingToken = default);
+    Task<Result> RemoveFromCartAsync(RemoveFromCartDto cartDto, CancellationToken stoppingToken = default);
 }

@@ -29,14 +29,18 @@ public class CartService(ICartRepository cartRepository, IItemRepository itemRep
         return Result.Success();
     }
 
-    public async Task<Result<List<ItemDto>>> ListItemsAsync(int cartId, CancellationToken stoppingToken = default)
+    public async Task<Result<List<ItemDto>>> ListItemsInCartAsync(ListItemsInCartDto cartDto, CancellationToken stoppingToken = default)
     {
-        var items = await itemRepository.ListItemsInCartAsync(cartId, stoppingToken);
-        
-        if (items is null)
-            return Result<List<ItemDto>>.Failure(ErrorType.NotFound);
-
+        var items = await itemRepository.GetItemsInUserCartAsync(cartDto.UserId, stoppingToken);
         var projections = items.Select(item => item.ToDto()).ToList();
-        return Result<List<ItemDto>>.Success(projections);
+        return Result<List<ItemDto>>.Success(projections);       
     }
+
+    public async Task<Result> RemoveFromCartAsync(RemoveFromCartDto cartDto, CancellationToken stoppingToken = default)
+    {
+        await itemRepository.DeleteAsync(cartDto.ItemId, stoppingToken);
+        return Result.Success();       
+    }
+
+    
 }
