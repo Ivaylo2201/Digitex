@@ -1,11 +1,11 @@
 ﻿using Backend.Application.DTOs.Cart;
 using Backend.Application.DTOs.Item;
-using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
+using Mapster;
 
 namespace Backend.Infrastructure.Services.Entities;
 
@@ -32,7 +32,7 @@ public class CartService(ICartRepository cartRepository, IItemRepository itemRep
     public async Task<Result<List<ItemDto>>> ListItemsInCartAsync(ListItemsInCartDto cartDto, CancellationToken stoppingToken = default)
     {
         var items = await itemRepository.GetItemsInUserCartAsync(cartDto.UserId, stoppingToken);
-        var projections = items.Select(item => item.ToDto()).ToList();
+        var projections = items.Select(item => item.Adapt<ItemDto>()).ToList();
         return Result<List<ItemDto>>.Success(projections);       
     }
 

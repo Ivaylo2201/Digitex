@@ -4,14 +4,19 @@ using System.Security.Claims;
 using System.Text;
 using Backend.Application.DTOs.Cpu;
 using Backend.Application.DTOs.Gpu;
+using Backend.Application.DTOs.Item;
 using Backend.Application.DTOs.Monitor;
 using Backend.Application.DTOs.Motherboard;
 using Backend.Application.DTOs.PowerSupply;
+using Backend.Application.DTOs.Product;
 using Backend.Application.DTOs.Ram;
+using Backend.Application.DTOs.Review;
+using Backend.Application.DTOs.Shipping;
 using Backend.Application.DTOs.Ssd;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
+using Backend.Domain.ValueObjects;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Repositories.Entities;
@@ -19,6 +24,7 @@ using Backend.Infrastructure.Services.Common;
 using Backend.Infrastructure.Services.Common.Filters;
 using Backend.Infrastructure.Services.Entities;
 using DotNetEnv;
+using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,13 +45,14 @@ public static class InfrastructureDependencyInjection
         try
         {
             Env.Load();
-            
+
             services
                 .AddDbContext(configuration.GetConnectionString("DefaultConnection"))
                 .AddServices()
                 .AddRepositories()
                 .AddCors(configuration["Urls:Frontend"])
-                .AddAuthentication();
+                .AddAuthentication()
+                .AddMapsterConfigurations();
             
             Log.Information("[{Source}]: Infrastructure services successfully initialized.", Source);
             return services;
@@ -155,6 +162,104 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
             .AddSingleton<ITokenService, TokenService>()
             .AddSingleton<IEmailCryptoService, EmailCryptoService>();
+    }
+
+    private static IServiceCollection AddMapsterConfigurations(this IServiceCollection services)
+    {
+        TypeAdapterConfig<ProductBase, ProductShortDto>.NewConfig()
+            .Map(dest => dest.BrandName, src => src.Brand.BrandName)
+            .Map(dest => dest.Price, src => new Price
+            {
+                Initial = src.InitialPrice,
+                Discounted = src.Price
+            })
+            .Map(dest => dest.IsTop, src => src.Rating >= 4);
+
+        TypeAdapterConfig<ProductBase, ProductLongDto>.NewConfig()
+            .Inherits<ProductBase, ProductShortDto>()
+            .Map(dest => dest.Reviews, src => src.Reviews
+                .OrderByDescending(r => r.CreatedAt)
+                .Take(10)
+                .Adapt<IEnumerable<ReviewDto>>());
+        
+        TypeAdapterConfig<Item, ItemDto>.NewConfig()
+            .Map(dest => dest.Product, src => new ProductItemDto
+            {
+                Sku = src.Product.Sku,
+                BrandName = src.Product.Brand.BrandName,
+                ModelName = src.Product.ModelName,
+                Price = src.Product.Price,
+                ImagePath = src.Product.ImagePath
+            })
+            .Map(dest => dest.Price, src => src.Product.Price * src.Quantity);
+        
+        TypeAdapterConfig<Cpu, CpuDto>.NewConfig()
+            .Inherits<ProductBase, ProductLongDto>()
+            .Map(dest => dest.Cores, src => src.Cores)
+            .Map(dest => dest.Threads, src => src.Threads)
+            .Map(dest => dest.ClockSpeed, src => src.ClockSpeed)
+            .Map(dest => dest.Socket, src => src.Socket)
+            .Map(dest => dest.Tdp, src => src.Tdp);
+        
+        TypeAdapterConfig<Gpu, GpuDto>.NewConfig()
+            .Inherits<ProductBase, ProductLongDto>()
+            .Map(dest => dest.Memory, src => src.Memory)
+            .Map(dest => dest.ClockSpeed, src => src.ClockSpeed)
+            .Map(dest => dest.BusWidth, src => src.BusWidth)
+            .Map(dest => dest.CudaCores, src => src.CudaCores)
+            .Map(dest => dest.DirectXSupport, src => src.DirectXSupport)
+            .Map(dest => dest.Tdp, src => src.Tdp);
+        
+        TypeAdapterConfig<Monitor, MonitorDto>.NewConfig()
+            .Inherits<ProductBase, ProductLongDto>()
+            .Map(dest => dest.DisplayDiagonal, src => src.DisplayDiagonal)
+            .Map(dest => dest.RefreshRate, src => src.RefreshRate)
+            .Map(dest => dest.Latency, src => src.Latency)
+            .Map(dest => dest.Matrix, src => src.Matrix)
+            .Map(dest => dest.Resolution, src => src.Resolution)
+            .Map(dest => dest.PixelSize, src => src.PixelSize)
+            .Map(dest => dest.Brightness, src => src.Brightness)
+            .Map(dest => dest.ColorSpectre, src => src.ColorSpectre);
+        
+        TypeAdapterConfig<Motherboard, MotherboardDto>.NewConfig()
+            .Inherits<ProductBase, ProductLongDto>()
+            .Map(dest => dest.Socket, src => src.Socket)
+            .Map(dest => dest.FormFactor, src => src.FormFactor)
+            .Map(dest => dest.Chipset, src => src.Chipset)
+            .Map(dest => dest.RamSlots, src => src.RamSlots)
+            .Map(dest => dest.PcieSlots, src => src.PcieSlots);
+
+        TypeAdapterConfig<PowerSupply, PowerSupplyDto>.NewConfig()
+            .Inherits<ProductBase, ProductLongDto>()
+            .Map(dest => dest.Wattage, src => src.Wattage)
+            .Map(dest => dest.FormFactor, src => src.FormFactor)
+            .Map(dest => dest.EfficiencyPercentage, src => src.EfficiencyPercentage)
+            .Map(dest => dest.Modularity, src => src.Modularity);
+        
+        TypeAdapterConfig<Ram, RamDto>.NewConfig()
+            .Inherits<ProductBase, ProductLongDto>()
+            .Map(dest => dest.Memory, src => src.Memory)
+            .Map(dest => dest.Timing, src => src.Timing);
+        
+        TypeAdapterConfig<Ssd, SsdDto>.NewConfig()
+            .Inherits<ProductBase, ProductLongDto>()
+            .Map(dest => dest.CapacityInGb, src => src.CapacityInGb)
+            .Map(dest => dest.OperationSpeed, src => src.OperationSpeed)
+            .Map(dest => dest.Interface, src => src.Interface);
+        
+        TypeAdapterConfig<Review, ReviewDto>.NewConfig()
+            .Map(dest => dest.Rating, src => src.Rating)
+            .Map(dest => dest.Comment, src => src.Comment)
+            .Map(dest => dest.Username, src => src.User.Username)
+            .Map(dest => dest.CreatedAt, src => src.CreatedAt);
+        
+        TypeAdapterConfig<Shipping, ShippingDto>.NewConfig()
+            .Map(dest => dest.Id, src => src.Id)
+            .Map(dest => dest.ShippingType, src => src.ShippingType)
+            .Map(dest => dest.Cost, src => src.Cost)
+            .Map(dest => dest.Days, src => src.Days);
+        
+        return services;
     }
 
     private static IServiceCollection AddEmail(this IServiceCollection services)

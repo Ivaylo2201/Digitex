@@ -1,10 +1,10 @@
 ﻿using Backend.Application.DTOs.Product;
-using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
+using Mapster;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Base;
@@ -34,7 +34,7 @@ public class ProductServiceBase<TEntity, TProjection>(
         var entities = await productRepository.ListAllAsync(filter, stoppingToken);
         
         logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
-        var projections = entities.Select(entity => entity.ToProductDto()).ToList();
+        var projections = entities.Select(entity => entity.Adapt<ProductShortDto>()).ToList();
         
         return Result<List<ProductShortDto>>.Success(projections);   
     }

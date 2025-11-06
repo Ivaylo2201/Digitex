@@ -2,12 +2,13 @@
 
 public abstract class ProductBase
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
+    public string Sku { get; init; } = GenerateSku();
     public int BrandId { get; init; }
     public Brand Brand { get; init; } = null!;
     public required string ModelName { get; init; }
     public required string ImagePath { get; init; }
-    public required double InitialPrice { get; set; }
+    public required double InitialPrice { get; init; }
     public int DiscountPercentage { get; init; }
     public required int Quantity { get; set; }
     public int Rating { get; set; }
@@ -18,4 +19,6 @@ public abstract class ProductBase
 
     public double Price => InitialPrice * (1 - DiscountPercentage / 100.0);
     public bool IsOutOfStock => Quantity is 0;
+    
+    private static string GenerateSku() => Guid.NewGuid().ToString("N")[..8].ToUpper();
 }

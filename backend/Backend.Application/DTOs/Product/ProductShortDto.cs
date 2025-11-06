@@ -1,19 +1,16 @@
-﻿using Backend.Domain.Entities;
-using Backend.Domain.ValueObjects;
+﻿using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.DTOs.Product;
 
-public class ProductShortDto(ProductBase product)
+public record ProductShortDto
 {
-    public Guid Id { get; init; } = product.Id;
-    public string BrandName { get; init; } = product.Brand.BrandName;
-    public string ModelName { get; init; } = product.ModelName;
-    public string ImagePath { get; init; } = product.ImagePath;
-    public Price Price { get; init; } = new()
-    {
-        Initial = product.InitialPrice,
-        Discounted = product.Price
-    };
-    public int DiscountPercentage { get; init; } = product.DiscountPercentage;
-    public int Rating { get; init; } = product.Rating;
+    public required Guid Id { get; init; }
+    public required string Sku { get; init; }
+    public required string BrandName { get; init; }
+    public required string ModelName { get; init; }
+    public required string ImagePath { get; init; }
+    public required Price Price { get; init; }
+    public required int DiscountPercentage { get; init; }
+    public required int Rating { get; init; }
+    public required bool IsTop { get; init; }
 }

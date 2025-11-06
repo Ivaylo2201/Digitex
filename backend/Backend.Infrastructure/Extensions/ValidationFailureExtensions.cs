@@ -8,7 +8,11 @@ public static class ValidationFailureExtensions
     {
         return new
         {
-            Errors = failures.Select(failure => new { failure.PropertyName, failure.ErrorMessage })
+            Errors = failures.Select(failure => new
+            {
+                failure.PropertyName,
+                failure.ErrorMessage
+            })
         };
     }
 }

@@ -4,10 +4,7 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.DTOs.Cpu;
 
-using Cpu = Backend.Domain.Entities.Cpu;
-using Review = Backend.Domain.Entities.Review;
-
-public class CpuDto(Cpu gpu) : ProductLongDto(gpu)
+public record CpuDto : ProductLongDto
 {
     public required int Cores { get; init; }
     public required int Threads { get; init; }
