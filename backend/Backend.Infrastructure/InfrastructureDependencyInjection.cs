@@ -130,7 +130,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductBaseRepository, ProductBaseRepository>()
             .AddScoped<IUserRepository, UserRepository>()
             .AddScoped<ICartRepository, CartRepository>()
-            .AddScoped<IItemRepository, ItemRepository>();
+            .AddScoped<IItemRepository, ItemRepository>()
+            .AddScoped<IShippingRepository, ShippingRepository>();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
@@ -152,6 +153,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IEmailSendingService, EmailSendingService>()
             .AddScoped<ICartService, CartService>()
             .AddScoped<IItemService, ItemService>()
+            .AddScoped<IShippingService, ShippingService>()
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
             .AddTransient<IFilterService<Ram>, RamFilterService>()
             .AddTransient<IFilterService<Cpu>, CpuFilterService>()
@@ -190,7 +192,7 @@ public static class InfrastructureDependencyInjection
             .Map(dest => dest.Reviews, src => src.Reviews
                 .OrderByDescending(r => r.CreatedAt)
                 .Take(10)
-                .Adapt<IEnumerable<ReviewDto>>());
+                .Adapt<List<ReviewDto>>());
 
         TypeAdapterConfig<Cpu, CpuDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Gpu, GpuDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
