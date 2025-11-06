@@ -31,11 +31,11 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
 
         if (entity is null)
         {
-            logger.LogWarning("[{Source}]: {Entity} entity not found in {Duration}ms", source, _entity, stopwatch.ElapsedMilliseconds);
+            logger.LogWarning("[{Source}]: {Entity} with Id of {EntityId} entity not found in {Duration}ms", source, _entity, id, stopwatch.ElapsedMilliseconds);
         }
         else
         {
-            logger.LogInformation("[{Source}]: {Entity} entity found in {Duration}ms", source, _entity, stopwatch.ElapsedMilliseconds);
+            logger.LogInformation("[{Source}]: {Entity} entity with Id of {EntityId} found in {Duration}ms", source, _entity, id, stopwatch.ElapsedMilliseconds);
         }
         
         return entity;
