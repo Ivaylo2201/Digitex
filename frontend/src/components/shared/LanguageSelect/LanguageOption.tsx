@@ -1,8 +1,8 @@
-type LanguageProps = {
+type LanguageOptionProps = {
   code: string;
 };
 
-export default function Language({ code }: LanguageProps) {
+export default function LanguageOption({ code }: LanguageOptionProps) {
   return (
     <div className='w-14 flex items-center gap-2 font-montserrat text-xs'>
       <img

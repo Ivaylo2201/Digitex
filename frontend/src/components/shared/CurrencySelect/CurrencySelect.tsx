@@ -5,29 +5,28 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { useState } from 'react';
-import Currency from './Currency';
 
-const currencies = ['eur', 'usd', 'gbp', 'bgn'];
+import { useCurrency } from '@/lib/stores/useCurrency';
+import CurrencyOption from '@/components/shared/CurrencySelect/CurrencyOption';
 
 export default function LanguageSelect() {
-  const [selectedCurrency, setselectedCurrency] = useState<string>(currencies[0]);
-
-  const handleCurrencyChange = (currency: string) => {
-    setselectedCurrency(currency);
-  };
+  const { currency, currencies, changeCurrency } = useCurrency();
 
   return (
-    <Select value={selectedCurrency} onValueChange={handleCurrencyChange}>
+    <Select value={currency} onValueChange={changeCurrency}>
       <SelectTrigger className='font-montserrat text-xs shadow-none ring-0 outline-none border-0 focus-visible:ring-0 data-[state=open]:ring-0 data-[state=open]:border-0 cursor-pointer'>
         <SelectValue>
-          <Currency code={selectedCurrency} />
+          <CurrencyOption code={currency} />
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
         {currencies.map((currency) => (
-          <SelectItem className='cursor-pointer' key={currency} value={currency}>
-            <Currency code={currency} />
+          <SelectItem
+            className='cursor-pointer'
+            key={currency}
+            value={currency}
+          >
+            <CurrencyOption code={currency} />
           </SelectItem>
         ))}
       </SelectContent>
