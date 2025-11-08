@@ -4,5 +4,5 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Database.Repositories.Entities;
 
-public class GpuRepository(ILogger<GpuRepository> logger, DatabaseContext context) 
-    : ProductRepositoryBase<Gpu>(logger, context);
+public class GraphicCardRepository(ILogger<GraphicCardRepository> logger, DatabaseContext context) 
+    : ProductRepositoryBase<GraphicCard>(logger, context);

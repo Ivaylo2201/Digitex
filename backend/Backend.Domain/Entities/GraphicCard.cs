@@ -1,10 +1,9 @@
-﻿using Backend.Application.DTOs.Product;
-using Backend.Domain.Enums;
+﻿using Backend.Domain.Enums;
 using Backend.Domain.ValueObjects;
 
-namespace Backend.Application.DTOs.Gpu;
+namespace Backend.Domain.Entities;
 
-public record GpuDto : ProductLongDto
+public class GraphicCard : ProductBase
 {
     public required Memory Memory { get; init; }
     public required ClockSpeed ClockSpeed { get; init; }

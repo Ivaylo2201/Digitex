@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Backend.Infrastructure.Database.Configurations;
 
-public class CpuConfiguration : IEntityTypeConfiguration<Cpu>
+public class ProcessorConfiguration : IEntityTypeConfiguration<Processor>
 {
-    private const string TableName = "CPUs";
+    private const string TableName = "Processors";
     
-    public void Configure(EntityTypeBuilder<Cpu> builder)
+    public void Configure(EntityTypeBuilder<Processor> builder)
     {
         builder
             .ToTable(TableName);
         
-        builder.ComplexProperty(cpu => cpu.ClockSpeed, clockSpeed =>
+        builder.ComplexProperty(processor => processor.ClockSpeed, clockSpeed =>
         {
             clockSpeed
                 .Property(c => c.Base)

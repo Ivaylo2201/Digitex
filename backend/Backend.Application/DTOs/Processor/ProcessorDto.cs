@@ -1,9 +1,10 @@
-﻿using Backend.Domain.Enums;
+﻿using Backend.Application.DTOs.Product;
+using Backend.Domain.Enums;
 using Backend.Domain.ValueObjects;
 
-namespace Backend.Domain.Entities;
+namespace Backend.Application.DTOs.Processor;
 
-public class Cpu : ProductBase
+public record ProcessorDto : ProductLongDto
 {
     public required int Cores { get; init; }
     public required int Threads { get; init; }

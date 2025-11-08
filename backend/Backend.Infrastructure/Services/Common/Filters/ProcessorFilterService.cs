@@ -6,11 +6,11 @@ using Backend.Infrastructure.Services.Base;
 
 namespace Backend.Infrastructure.Services.Common.Filters;
 
-public class CpuFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<Cpu>(brandProviderService)
+public class ProcessorFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<Processor>(brandProviderService)
 {
-    public override Filter<Cpu> BuildFilter(IDictionary<string, string> criteria)
+    public override Filter<Processor> BuildFilter(IDictionary<string, string> criteria)
     {
-        return cpu => cpu;
+        return processor => processor;
     }
 
     public override object GetFilters()

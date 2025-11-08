@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Backend.Infrastructure.Database.Configurations;
 
-public class GpuConfiguration : IEntityTypeConfiguration<Gpu>
+public class GraphicCardConfiguration : IEntityTypeConfiguration<GraphicCard>
 {
-    private const string TableName = "GPUs";
+    private const string TableName = "GraphicCards";
     
-    public void Configure(EntityTypeBuilder<Gpu> builder)
+    public void Configure(EntityTypeBuilder<GraphicCard> builder)
     {
         builder
             .ToTable(TableName);
         
-        builder.ComplexProperty(gpu => gpu.Memory, memory =>
+        builder.ComplexProperty(graphicCard => graphicCard.Memory, memory =>
         {
             memory
                 .Property(m => m.CapacityInGb)
@@ -28,7 +28,7 @@ public class GpuConfiguration : IEntityTypeConfiguration<Gpu>
                 .HasColumnName("MemoryFrequency");
         });
         
-        builder.ComplexProperty(gpu => gpu.ClockSpeed, clockSpeed =>
+        builder.ComplexProperty(graphicCard => graphicCard.ClockSpeed, clockSpeed =>
         {
             clockSpeed
                 .Property(c => c.Base)

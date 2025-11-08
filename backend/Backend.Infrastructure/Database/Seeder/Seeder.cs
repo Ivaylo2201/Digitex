@@ -33,8 +33,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         
         List<IEnumerable<ProductBase>> products =
         [
-            Data.Gpus,
-            Data.Cpus,
+            Data.GraphicCards,
+            Data.Processors,
             Data.Monitors,
             Data.Rams,
             Data.Motherboards,
@@ -60,8 +60,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Carts.RemoveRange(context.Carts);
         context.Orders.RemoveRange(context.Orders);
         context.Products.RemoveRange(context.Products);
-        context.Cpus.RemoveRange(context.Cpus);
-        context.Gpus.RemoveRange(context.Gpus);
+        context.Processors.RemoveRange(context.Processors);
+        context.GraphicCards.RemoveRange(context.GraphicCards);
         context.Monitors.RemoveRange(context.Monitors);
         context.Motherboards.RemoveRange(context.Motherboards);
         context.PowerSupplies.RemoveRange(context.PowerSupplies);

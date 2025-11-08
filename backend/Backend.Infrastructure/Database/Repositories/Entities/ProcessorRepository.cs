@@ -4,5 +4,5 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Database.Repositories.Entities;
 
-public class CpuRepository(ILogger<CpuRepository> logger, DatabaseContext context) 
-    : ProductRepositoryBase<Cpu>(logger, context);
+public class ProcessorRepository(ILogger<ProcessorRepository> logger, DatabaseContext context) 
+    : ProductRepositoryBase<Processor>(logger, context);

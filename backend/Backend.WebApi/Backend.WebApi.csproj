@@ -19,8 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\cpus\" />
-      <Folder Include="wwwroot\gpus\" />
+      <Folder Include="wwwroot\processors\" />
+      <Folder Include="wwwroot\graphic-cards\" />
       <Folder Include="wwwroot\monitors\" />
       <Folder Include="wwwroot\motherboards\" />
       <Folder Include="wwwroot\power-supplies\" />
