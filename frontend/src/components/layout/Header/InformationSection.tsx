@@ -3,8 +3,12 @@ import CurrencySelect from '@/components/shared/CurrencySelect/CurrencySelect';
 import { useTranslation } from '@/lib/stores/useTranslation';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import React from 'react';
+import SignOutButton from '@/components/shared/SignOutButton';
+import { useAuth } from '@/lib/stores/useAuth';
+import SignInButton from '@/components/shared/SignInButton';
 
 export default function InformationSection() {
+  const { isAuthenticated } = useAuth();
   const translation = useTranslation();
 
   return (
@@ -26,6 +30,7 @@ export default function InformationSection() {
       <ul className='flex'>
         <CurrencySelect />
         <LanguageSelect />
+        {isAuthenticated ? <SignOutButton /> : <SignInButton />}
       </ul>
     </React.Fragment>
   );

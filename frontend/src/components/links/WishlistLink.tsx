@@ -9,7 +9,7 @@ export default function WishlistLink() {
   return (
     <Link
       className='relative flex flex-col gap-0.5 justify-center items-center cursor-pointer'
-      to='/'
+      to='/wishlist'
     >
       <div className='relative'>
         <Heart size={19} />

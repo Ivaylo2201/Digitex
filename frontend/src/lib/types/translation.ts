@@ -11,6 +11,8 @@ export type Translation = {
   ssds: string;
   motherboards: string;
   monitors: string;
+  signIn: string;
+  signOut: string;
 };
 
 export const initialTranslation: Translation = {
@@ -25,5 +27,7 @@ export const initialTranslation: Translation = {
   rams: 'RAMs',
   ssds: 'SSDs',
   motherboards: 'Motherboards',
-  monitors: 'Monitors'
+  monitors: 'Monitors',
+  signIn: 'Sign in',
+  signOut: 'Sign out'
 };

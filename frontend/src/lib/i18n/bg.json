@@ -7,8 +7,10 @@
   "processors": "Процесори",
   "graphicCards": "Видео карти",
   "powerSupplies": "Захранвания",
-  "rams": "Памет",
+  "rams": "RAM Памет",
   "ssds": "SSD дискове",
   "motherboards": "Дънни платки",
-  "monitors": "Монитори"
+  "monitors": "Монитори",
+  "signIn": "Вход",
+  "signOut": "Изход"
 }

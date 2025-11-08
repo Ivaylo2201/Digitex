@@ -10,5 +10,7 @@
   "rams": "Arbeitsspeicher",
   "ssds": "SSDs",
   "motherboards": "Mainboards",
-  "monitors": "Monitore"
+  "monitors": "Monitore",
+  "signIn": "Anmelden",
+  "signOut": "Abmelden"
 }

@@ -9,7 +9,7 @@ export default function CartLink() {
   return (
     <Link
       className='relative flex flex-col gap-0.5 justify-center items-center cursor-pointer'
-      to='/'
+      to='/cart'
     >
       <div className='relative'>
         <ShoppingCart size={19} />

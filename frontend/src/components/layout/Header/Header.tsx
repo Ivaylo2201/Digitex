@@ -13,7 +13,7 @@ export default function Header() {
         <MainSection />
       </section>
 
-      <section className='border-b text-sm py-3 flex flex-col md:flex-row gap-8 justify-center items-center border-gray-300 text-black'>
+      <section className='border-b bg-theme-white text-sm flex flex-col md:flex-row gap-6 justify-center items-center border-gray-300 text-black'>
         <CategoriesSection />
       </section>
     </header>

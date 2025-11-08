@@ -6,19 +6,19 @@ export default function CategoriesSection() {
   const translation = useTranslation();
 
   const categories = [
-    { label: translation.processors, route: 'processors' },
-    { label: translation.graphicCards, route: 'graphic-cards' },
-    { label: translation.powerSupplies, route: 'power-supplies' },
-    { label: translation.rams, route: 'rams' },
-    { label: translation.ssds, route: 'ssds' },
-    { label: translation.motherboards, route: 'motherboards' },
-    { label: translation.monitors, route: 'monitors' }
+    { name: translation.processors, route: 'processors' },
+    { name: translation.graphicCards, route: 'graphic-cards' },
+    { name: translation.motherboards, route: 'motherboards' },
+    { name: translation.rams, route: 'rams' },
+    { name: translation.ssds, route: 'ssds' },
+    { name: translation.powerSupplies, route: 'power-supplies' },
+    { name: translation.monitors, route: 'monitors' }
   ];
 
   return (
     <React.Fragment>
-      {categories.map(({ label, route }, idx) => (
-        <CategoryLink key={idx} category={label} to={route} />
+      {categories.map((category, idx) => (
+        <CategoryLink key={idx} category={category.name} to={category.route} />
       ))}
     </React.Fragment>
   );

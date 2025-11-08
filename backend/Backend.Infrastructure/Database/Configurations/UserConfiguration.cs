@@ -48,7 +48,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder
-            .HasMany(user => user.LikedProducts)
+            .HasMany(user => user.Wishlist)
             .WithMany(product => product.LikedBy)
             .UsingEntity(
                 "UsersProducts",
