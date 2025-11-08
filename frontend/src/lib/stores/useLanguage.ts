@@ -1,10 +1,11 @@
 import { create } from 'zustand'
 import getLanguages from '../helpers/getLanguages';
+import type { Language } from '../types/language';
 
 type LanguageStore = {
-  language: string,
-  languages: string[]
-  changeLanguage: (language: string) => void;
+  language: Language,
+  languages: Language[]
+  changeLanguage: (language: Language) => void;
 }
 
 export const useLanguage = create<LanguageStore>((set) => {

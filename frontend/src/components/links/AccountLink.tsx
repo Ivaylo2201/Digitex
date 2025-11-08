@@ -1,4 +1,4 @@
-import useTranslation from '@/lib/hooks/useTranslation';
+import { useTranslation } from '@/lib/stores/useTranslation';
 import { User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export default function AccountLink() {
     >
       <User size={19} />
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation?.account}
+        {translation.account}
       </span>
     </Link>
   );

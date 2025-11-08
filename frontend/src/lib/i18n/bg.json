@@ -2,5 +2,13 @@
   "address": "София, бул. Витоша 76",
   "cart": "Количка",
   "account": "Профил",
-  "productSearch": "Търсене на продукти..."
+  "productSearch": "Търсене на продукти...",
+  "wishlist": "Любими",
+  "processors": "Процесори",
+  "graphicCards": "Видео карти",
+  "powerSupplies": "Захранвания",
+  "rams": "Памет",
+  "ssds": "SSD дискове",
+  "motherboards": "Дънни платки",
+  "monitors": "Монитори"
 }

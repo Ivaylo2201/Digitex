@@ -1,6 +1,14 @@
 {
-  "address": "Sofia, Vitoscha Blvd. 76",
+  "address": "Sofia, Vitosha Blvd. 76",
   "cart": "Warenkorb",
   "account": "Konto",
-  "productSearch": "Produktsuche..."
+  "productSearch": "Produktsuche...",
+  "wishlist": "Wunschliste",
+  "processors": "Prozessoren",
+  "graphicCards": "Grafikkarten",
+  "powerSupplies": "Netzteile",
+  "rams": "Arbeitsspeicher",
+  "ssds": "SSDs",
+  "motherboards": "Mainboards",
+  "monitors": "Monitore"
 }

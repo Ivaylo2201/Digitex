@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import getCurrencies from '../helpers/getCurrencies';
+import type { Currency } from '../types/currency';
 
 type CurrencyStore = {
-  currency: string;
-  currencies: string[];
-  changeCurrency: (currency: string) => void;
+  currency: Currency;
+  currencies: Currency[];
+  changeCurrency: (currency: Currency) => void;
 };
 
 export const useCurrency = create<CurrencyStore>((set) => {
