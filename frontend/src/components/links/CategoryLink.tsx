@@ -8,7 +8,7 @@ type CategoryLinkProps = {
 export default function CategoryLink({ category, to }: CategoryLinkProps) {
   return (
     <NavLink
-      to={`/products/${to}`}
+      to={`/products/category/${to}`}
       className={({ isActive }) =>
         `transition-colors duration-200 font-semibold py-3.5 px-2 ${
           isActive

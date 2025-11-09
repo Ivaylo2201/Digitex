@@ -5,15 +5,17 @@ import WishlistPage from '@/components/pages/WishlistPage';
 import SignInPage from '@/components/pages/SignInPage';
 import SignUpPage from '@/components/pages/SignUpPage';
 import Page from '@/components/pages/Page';
+import ProductCard from '@/components/shared/productCard/ProductCard';
+import a from '@/assets/a.png';
+import ProductsPage from './pages/ProductsPage';
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Page></Page>} />
-        <Route path='/products' element={<Page />}>
-          <Route path=':category' element={<Page />} />
-        </Route>
+        <Route path='/products/category/:category' element={<ProductsPage />} />
+        <Route path='/products/:id' element={<Page />} />
         <Route path='/auth'>
           <Route
             path='account'

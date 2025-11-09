@@ -8,6 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.WebApi.Controllers.Products;
 
 [ApiController]
-[Route("api/products/[controller]")]
+[Route("api/products/graphic-cards")]
 public class GraphicCardsController(IProductService<GraphicCard, GraphicCardDto> productService, IFilterService<GraphicCard> filterService) 
     : ProductControllerBase<GraphicCard, GraphicCardDto>(productService, filterService, graphicCard => graphicCard.Adapt<GraphicCardDto>());

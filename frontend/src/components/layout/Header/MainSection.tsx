@@ -3,7 +3,7 @@ import CartLink from '@/components/links/CartLink';
 import LogoLink from '@/components/links/LogoLink';
 import WishlistLink from '@/components/links/WishlistLink';
 import React from 'react';
-import Searchbox from './Searchbox';
+import Searchbox from '@/components/layout/header/Searchbox';
 
 export default function MainSection() {
   return (

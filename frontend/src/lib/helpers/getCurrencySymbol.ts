@@ -1,8 +1,10 @@
-// TODO: maek a $ | £ ... type
-export default function getCurrencySymbol(currencyCode: string): string {
+import type { Currency } from '../types/currency';
+
+export default function getCurrencySymbol(
+  currencyCode: Currency | string
+): string {
   const symbols: Record<string, string> = {
     usd: '$',
-    bgn: 'лв.',
     gbp: '£',
     eur: '€'
   };

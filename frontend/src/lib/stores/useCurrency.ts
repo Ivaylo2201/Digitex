@@ -5,7 +5,7 @@ import type { Currency } from '../types/currency';
 type CurrencyStore = {
   currency: Currency;
   currencies: Currency[];
-  changeCurrency: (currency: Currency) => void;
+  changeCurrency: (currency: Currency) => void
 };
 
 export const useCurrency = create<CurrencyStore>((set) => {
