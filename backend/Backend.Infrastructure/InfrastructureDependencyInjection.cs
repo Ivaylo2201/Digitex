@@ -169,7 +169,6 @@ public static class InfrastructureDependencyInjection
     {
         TypeAdapterConfig<ProductBase, ProductShortDto>.NewConfig()
             .Map(dest => dest.BrandName, src => src.Brand.BrandName)
-            .Map(dest => dest.Sku, src => src.Sku.ToUpper())
             .Map(dest => dest.Price, src => new Price
             {
                 Initial = src.InitialPrice,
@@ -189,6 +188,7 @@ public static class InfrastructureDependencyInjection
             .Map(dest => dest.Price, src => src.Product.Price * src.Quantity);
         
         TypeAdapterConfig<ProductBase, ProductLongDto>.NewConfig().Inherits<ProductBase, ProductShortDto>()
+            .Map(dest => dest.Sku, src => src.Sku.ToUpper())
             .Map(dest => dest.Reviews, src => src.Reviews
                 .OrderByDescending(r => r.CreatedAt)
                 .Take(10)
@@ -207,9 +207,9 @@ public static class InfrastructureDependencyInjection
 
     private static IServiceCollection AddEmail(this IServiceCollection services)
     {
-        var email = GetRequiredEnvironmentVariable<string>("SENDER_EMAIL");
-        var password = GetRequiredEnvironmentVariable<string>("SENDER_PASSWORD");
-        var username = GetRequiredEnvironmentVariable<string>("SENDER_USERNAME");
+        var email = GetRequiredEnvironmentVariable<string>("MERCHANT_EMAIL");
+        var appPassword = GetRequiredEnvironmentVariable<string>("MERCHANT_APP_PASSWORD");
+        var username = GetRequiredEnvironmentVariable<string>("MERCHANT_USERNAME");
         var smtpProvider = GetRequiredEnvironmentVariable<string>("SMTP_PROVIDER");
         var smtpPort = GetRequiredEnvironmentVariable<int>("SMTP_PORT");
         
@@ -218,7 +218,7 @@ public static class InfrastructureDependencyInjection
             .AddSmtpSender(() => new SmtpClient(smtpProvider)
             {
                 Port = smtpPort,
-                Credentials = new NetworkCredential(email, password),
+                Credentials = new NetworkCredential(email, appPassword),
                 EnableSsl = true
             });
         

@@ -1,8 +1,7 @@
-import type { Price } from "./Price";
+import type { Price } from "@/lib/models/Price";
 
 export interface ProductShortDto {
   id: string;               
-  sku: string;
   brandName: string;
   modelName: string;
   imagePath: string;

@@ -56,7 +56,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
     {
         var stopwatch = Stopwatch.StartNew();
         
-        var user = await context.Users.FirstOrDefaultAsync(user => !user.IsVerified && user.Email == email, stoppingToken);
+        var user = await context.Users.FirstOrDefaultAsync(user => user.Email == email, stoppingToken);
         
         if (user is null)
         {

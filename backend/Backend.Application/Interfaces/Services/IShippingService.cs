@@ -5,5 +5,5 @@ namespace Backend.Application.Interfaces.Services;
 
 public interface IShippingService
 {
-    Task<Result<List<ShippingDto>>> ListAllAsync(CancellationToken cancellationToken = default);
+    Task<Result<List<ShippingDto>>> ListAllAsync(CancellationToken stoppingToken = default);
 }

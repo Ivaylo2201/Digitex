@@ -5,7 +5,6 @@ namespace Backend.Application.DTOs.Product;
 public record ProductShortDto
 {
     public required Guid Id { get; init; }
-    public required string Sku { get; init; }
     public required string BrandName { get; init; }
     public required string ModelName { get; init; }
     public required string ImagePath { get; init; }

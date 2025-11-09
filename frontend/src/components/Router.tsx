@@ -5,9 +5,8 @@ import WishlistPage from '@/components/pages/WishlistPage';
 import SignInPage from '@/components/pages/SignInPage';
 import SignUpPage from '@/components/pages/SignUpPage';
 import Page from '@/components/pages/Page';
-import ProductCard from '@/components/shared/productCard/ProductCard';
-import a from '@/assets/a.png';
-import ProductsPage from './pages/ProductsPage';
+import ProductsPage from '@/components/pages/ProductsPage';
+import AccountVerifiedPage from './pages/AccountVerifiedPage';
 
 export default function Router() {
   return (
@@ -27,6 +26,7 @@ export default function Router() {
           />
           <Route path='sign-in' element={<SignInPage />} />
           <Route path='sign-up' element={<SignUpPage />} />
+          <Route path='verify' element={<AccountVerifiedPage />} />
         </Route>
         <Route
           path='/wishlist'

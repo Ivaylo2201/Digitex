@@ -1,5 +1,5 @@
 import useCurrencyExchange from '@/lib/hooks/useCurrencyExchange';
-import Rating from './Rating';
+import Rating from '@/components/shared/productCard/Rating';
 import { Link } from 'react-router';
 import type { ProductShortDto } from '@/lib/models/productShortDto';
 
@@ -7,7 +7,6 @@ type ProductCardProps = ProductShortDto;
 
 export default function ProductCard({
   id,
-  sku,
   brandName,
   modelName,
   imagePath,
@@ -21,7 +20,7 @@ export default function ProductCard({
   return (
     <Link
       to={`/products/${id}`}
-      className='w-[345px] h-[375px] flex flex-col font-montserrat px-6 py-3'
+      className='w-[345px] h-[375px] flex flex-col font-montserrat px-6 py-3 gap-5'
     >
       <img src={`${import.meta.env.VITE_STATIC_FILES_URL}/${imagePath}`} className='object-contain' />
       <div className='flex flex-col items-center gap-1'>

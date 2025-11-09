@@ -1,13 +1,11 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { http } from "../http";
-import type { ProductShortDto } from "../models/productShortDto";
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { http } from '@/lib/http';
+import type { ProductShortDto } from '@/lib/models/productShortDto';
 
 type UseProductsResponse = ProductShortDto[];
 
 async function getProducts(category: string | undefined) {
-  const res = await http.get<UseProductsResponse>(
-    `/products/${category}`
-  );
+  const res = await http.get<UseProductsResponse>(`/products/${category}`);
   return res.data;
 }
 

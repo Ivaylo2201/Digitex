@@ -1,4 +1,5 @@
-﻿using Backend.Application.DTOs.User;
+﻿using System.Web;
+using Backend.Application.DTOs.User;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -26,13 +27,13 @@ public class AuthenticationController(IUserService userService) : ControllerBase
         var result = await userService.SignInAsync(body, stoppingToken);
         return result.IsSuccess ? Ok(result.Value) : NotFound(result.ErrorObject);
     }
-
-    [HttpPatch("verify")]
+    // TODO: Fix double call
+    [HttpGet("verify")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> VerifyUserAsync([FromQuery] string token, CancellationToken stoppingToken = default)
     {
-        var result = await userService.VerifyUserAsync(token, stoppingToken);
+        var result = await userService.VerifyUserAsync(HttpUtility.UrlDecode(token), stoppingToken);
         return result.IsSuccess ? NoContent() : NotFound(result.ErrorObject);
     }
 }
