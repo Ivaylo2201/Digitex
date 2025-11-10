@@ -184,6 +184,7 @@ public static class InfrastructureDependencyInjection
             
             .AddSingleton<IEmailCryptoService>(sp => new EmailCryptoService(
                 sp.GetRequiredService<ILogger<EmailCryptoService>>(),
+                sp.GetRequiredService<IWebHostEnvironment>(),
                 Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("CRYPTOGRAPHY_KEY")),
                 Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("CRYPTOGRAPHY_IV"))));
     }

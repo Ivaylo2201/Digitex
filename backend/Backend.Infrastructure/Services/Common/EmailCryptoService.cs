@@ -2,11 +2,17 @@
 using System.Security.Cryptography;
 using System.Text;
 using Backend.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Common;
 
-public class EmailCryptoService(ILogger<EmailCryptoService> logger, byte[] key, byte[] iv) : IEmailCryptoService
+public class EmailCryptoService(
+    ILogger<EmailCryptoService> logger,
+    IWebHostEnvironment environment,
+    byte[] key,
+    byte[] iv) : IEmailCryptoService
 {
     private const string Source = nameof(EmailCryptoService);
 
@@ -29,11 +35,17 @@ public class EmailCryptoService(ILogger<EmailCryptoService> logger, byte[] key, 
             cryptoStream.FlushFinalBlock();
         }
 
-        var encryptedEmail = Convert.ToBase64String(memoryStream.ToArray()); logger.LogInformation("[{Source}]: Email encryption done in {Duration}ms", Source, stopwatch.ElapsedMilliseconds);
-        return encryptedEmail;
+        var token = Convert.ToBase64String(memoryStream.ToArray());
+
+        if (environment.IsDevelopment())
+        {
+            logger.LogInformation("[{Source}]: Email encrypted to {Token} in {Duration}ms", Source, token, stopwatch.ElapsedMilliseconds);
+        }
+
+        return token;
     }
 
-    public string Decrypt(string encryptedEmail)
+    public string Decrypt(string token)
     {
         logger.LogInformation("[{Source}]: Decrypting email...", Source);
         var stopwatch = Stopwatch.StartNew();
@@ -43,13 +55,17 @@ public class EmailCryptoService(ILogger<EmailCryptoService> logger, byte[] key, 
         aes.IV = iv;
 
         var decryptor = aes.CreateDecryptor();
-        using var memoryStream = new MemoryStream(Convert.FromBase64String(encryptedEmail.Trim()));
+        using var memoryStream = new MemoryStream(Convert.FromBase64String(token.Trim()));
         using var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
         using var reader = new StreamReader(cryptoStream, Encoding.UTF8);
         
-        var decryptedEmail = reader.ReadToEnd();
-        logger.LogInformation("[{Source}]: Email decryption resolved to {DecryptedEmail} in {Duration}ms", Source, decryptedEmail, stopwatch.ElapsedMilliseconds);
+        var email = reader.ReadToEnd();
+        
+        if (environment.IsDevelopment())
+        {
+            logger.LogInformation("[{Source}]: Token decrypted to {Email} in {Duration}ms", Source, email, stopwatch.ElapsedMilliseconds);
+        }
 
-        return decryptedEmail;
+        return email;
     }
 }

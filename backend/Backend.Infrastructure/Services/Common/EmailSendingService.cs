@@ -43,7 +43,7 @@ public class EmailSendingService(
     {
         logger.LogInformation("[{Source}]: Building verification email body...", Source);
 
-        var encryptedEmail = HttpUtility.UrlEncode(emailCryptoService.Encrypt(user.Email));
+        var encryptedEmail = emailCryptoService.Encrypt(user.Email);
         var verificationUrl = $"{frontendUrl}/auth/verify?token={encryptedEmail}";
         
         if (environment.IsDevelopment())
