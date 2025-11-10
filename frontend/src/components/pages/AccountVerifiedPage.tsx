@@ -3,10 +3,6 @@ import Page from "./Page";
 import { http } from "@/lib/http";
 import { useSearchParams } from "react-router";
 
-async function verifyAccount(token: string) {
-  await http.get(`/auth/verify?token=${token}`)
-}
-
 export default function AccountVerifiedPage() {
   const [searchParams] = useSearchParams();
 
@@ -14,7 +10,7 @@ export default function AccountVerifiedPage() {
     const token = searchParams.get('token');
 
     if (token) {
-      verifyAccount(token);
+      http.get(`/auth/verify?token=${encodeURIComponent(token)}`)
     }
   }, []);
 

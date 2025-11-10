@@ -23,11 +23,13 @@ using Backend.Infrastructure.Services.Common;
 using Backend.Infrastructure.Services.Common.Filters;
 using Backend.Infrastructure.Services.Entities;
 using DotNetEnv;
+using FluentEmail.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Monitor = Backend.Domain.Entities.Monitor;
@@ -38,27 +40,35 @@ namespace Backend.Infrastructure;
 public static class InfrastructureDependencyInjection
 {
     private const string Source = nameof(InfrastructureDependencyInjection);
-    
+
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         try
         {
             Env.Load();
+            
+            var frontendUrl = configuration["Urls:Frontend"];
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            
+            if (frontendUrl is null)
+                throw new InvalidOperationException("Missing frontend url.");
 
             services
-                .AddDbContext(configuration.GetConnectionString("DefaultConnection"))
-                .AddServices()
+                .AddDbContext(connectionString)
+                .AddServices(frontendUrl)
                 .AddRepositories()
-                .AddCors(configuration["Urls:Frontend"])
+                .AddCors(frontendUrl)
                 .AddAuthentication()
                 .AddMapsterConfigurations();
-            
+
             Log.Information("[{Source}]: Infrastructure services successfully initialized.", Source);
             return services;
         }
         catch (Exception ex)
         {
-            Log.Error("[{Source}]: {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
+            Log.Error(
+                "[{Source}]: {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}",
+                Source, ex.GetType().Name, ex.Message);
             return services;
         }
     }
@@ -67,19 +77,19 @@ public static class InfrastructureDependencyInjection
     {
         if (string.IsNullOrEmpty(connectionString))
             throw new InvalidOperationException("Connection string is null or empty.");
-        
+
         return services
-            .AddDbContext<DatabaseContext>(optionsBuilder 
-                => optionsBuilder.UseSqlServer(connectionString, sqlServerOptionsBuilder 
+            .AddDbContext<DatabaseContext>(optionsBuilder
+                => optionsBuilder.UseSqlServer(connectionString, sqlServerOptionsBuilder
                     => sqlServerOptionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
     }
 
     private static IServiceCollection AddAuthentication(this IServiceCollection services)
     {
         var jwtSecretKey = GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY");
-        var jwtIssuer =  GetRequiredEnvironmentVariable<string>("JWT_ISSUER");
+        var jwtIssuer = GetRequiredEnvironmentVariable<string>("JWT_ISSUER");
         var jwtAudience = GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE");
-        
+
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(o =>
             {
@@ -95,23 +105,20 @@ public static class InfrastructureDependencyInjection
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey))
                 };
             });
-        
+
         return services.AddAuthorization();
     }
 
-    private static IServiceCollection AddCors(this IServiceCollection services, string? frontendUrl)
+    private static IServiceCollection AddCors(this IServiceCollection services, string frontendUrl)
     {
-        if (frontendUrl is null)
-            throw new InvalidOperationException("Missing frontend url.");
-        
         return services.AddCors(corsOptions =>
         {
             corsOptions.AddPolicy(
-                nameof(Policy.AllowFrontend), 
+                nameof(Policy.AllowFrontend),
                 policyBuilder => policyBuilder.WithOrigins(frontendUrl).AllowAnyHeader().AllowAnyMethod());
 
             corsOptions.AddPolicy(
-                nameof(Policy.AllowAny), 
+                nameof(Policy.AllowAny),
                 policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         });
     }
@@ -134,9 +141,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IShippingRepository, ShippingRepository>();
     }
 
-    private static IServiceCollection AddServices(this IServiceCollection services)
+    private static IServiceCollection AddServices(this IServiceCollection services, string frontendUrl)
     {
-
         return services
             .AddEmail()
             .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
@@ -150,7 +156,13 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductBaseService, ProductBaseService>()
             .AddScoped<IUserService, UserService>()
             .AddScoped<IBrandProviderService, BrandProviderService>()
-            .AddScoped<IEmailSendingService, EmailSendingService>()
+            
+            .AddScoped<IEmailSendingService>(sp => new EmailSendingService(
+                sp.GetRequiredService<ILogger<EmailSendingService>>(),
+                sp.GetRequiredService<IFluentEmail>(),
+                sp.GetRequiredService<IEmailCryptoService>(),
+                frontendUrl))
+            
             .AddScoped<ICartService, CartService>()
             .AddScoped<IItemService, ItemService>()
             .AddScoped<IShippingService, ShippingService>()
@@ -161,8 +173,17 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<Ssd>, SsdFilterService>()
             .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
-            .AddSingleton<ITokenService, TokenService>()
-            .AddSingleton<IEmailCryptoService, EmailCryptoService>();
+            
+            .AddSingleton<ITokenService>(_ => new TokenService(
+                Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY")),
+                GetRequiredEnvironmentVariable<string>("JWT_ISSUER"),
+                GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE")
+            ))
+            
+            .AddSingleton<IEmailCryptoService>(sp => new EmailCryptoService(
+                sp.GetRequiredService<ILogger<EmailCryptoService>>(),
+                Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("CRYPTOGRAPHY_KEY")),
+                Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("CRYPTOGRAPHY_IV"))));
     }
 
     private static IServiceCollection AddMapsterConfigurations(this IServiceCollection services)
@@ -175,7 +196,7 @@ public static class InfrastructureDependencyInjection
                 Discounted = src.Price
             })
             .Map(dest => dest.IsTop, src => src.Rating >= 4);
-        
+
         TypeAdapterConfig<Item, ItemDto>.NewConfig()
             .Map(dest => dest.Product, src => new ProductItemDto
             {
@@ -186,7 +207,7 @@ public static class InfrastructureDependencyInjection
                 ImagePath = src.Product.ImagePath
             })
             .Map(dest => dest.Price, src => src.Product.Price * src.Quantity);
-        
+
         TypeAdapterConfig<ProductBase, ProductLongDto>.NewConfig().Inherits<ProductBase, ProductShortDto>()
             .Map(dest => dest.Sku, src => src.Sku.ToUpper())
             .Map(dest => dest.Reviews, src => src.Reviews
@@ -201,7 +222,7 @@ public static class InfrastructureDependencyInjection
         TypeAdapterConfig<PowerSupply, PowerSupplyDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Ram, RamDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Ssd, SsdDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-        
+
         return services;
     }
 
@@ -212,7 +233,7 @@ public static class InfrastructureDependencyInjection
         var username = GetRequiredEnvironmentVariable<string>("MERCHANT_USERNAME");
         var smtpProvider = GetRequiredEnvironmentVariable<string>("SMTP_PROVIDER");
         var smtpPort = GetRequiredEnvironmentVariable<int>("SMTP_PORT");
-        
+
         services
             .AddFluentEmail(email, username)
             .AddSmtpSender(() => new SmtpClient(smtpProvider)
@@ -221,17 +242,17 @@ public static class InfrastructureDependencyInjection
                 Credentials = new NetworkCredential(email, appPassword),
                 EnableSsl = true
             });
-        
+
         return services;
     }
 
     private static T GetRequiredEnvironmentVariable<T>(string variableName)
     {
         var variable = Environment.GetEnvironmentVariable(variableName);
-        
+
         if (string.IsNullOrEmpty(variable))
             throw new InvalidOperationException($"Missing {variableName}.");
-        
+
         return (T)Convert.ChangeType(variable, typeof(T));
     }
 }

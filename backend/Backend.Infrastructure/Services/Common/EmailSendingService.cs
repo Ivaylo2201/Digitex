@@ -1,7 +1,6 @@
 ﻿using System.Web;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
-using DotNetEnv;
 using FluentEmail.Core;
 using Microsoft.Extensions.Logging;
 
@@ -10,7 +9,8 @@ namespace Backend.Infrastructure.Services.Common;
 public class EmailSendingService(
     ILogger<EmailSendingService> logger,
     IFluentEmail fluentEmail,
-    IEmailCryptoService emailCryptoService) : IEmailSendingService
+    IEmailCryptoService emailCryptoService,
+    string frontendUrl) : IEmailSendingService
 {
     private const string Source = nameof(EmailSendingService);
 
@@ -38,11 +38,10 @@ public class EmailSendingService(
 
     private string GetEmailBody(User user)
     {
-        Env.Load();
         logger.LogInformation("[{Source}]: Building verification email body...", Source);
 
         var encryptedEmail = HttpUtility.UrlEncode(emailCryptoService.Encrypt(user.Email));
-        var verificationUrl = $"{Environment.GetEnvironmentVariable("FRONTEND_URL")}/auth/verify?token={encryptedEmail}";
+        var verificationUrl = $"{frontendUrl}/auth/verify?token={encryptedEmail}";
 
         return $"""
 

@@ -3,5 +3,5 @@
 public interface IEmailCryptoService
 {
     string Encrypt(string email);
-    string Decrypt(string encrypted);
+    string Decrypt(string encryptedEmail);
 }
