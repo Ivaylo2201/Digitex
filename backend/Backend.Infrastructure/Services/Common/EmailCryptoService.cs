@@ -12,7 +12,7 @@ public class EmailCryptoService(ILogger<EmailCryptoService> logger, byte[] key, 
 
     public string Encrypt(string email)
     {
-        logger.LogInformation("[{Source}]: Encrypting email...", Source);
+        logger.LogInformation("[{Source}]: Encrypting email={Email}", Source, email);
         var stopwatch = Stopwatch.StartNew();
         
         using var aes = Aes.Create();

@@ -2,6 +2,8 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using FluentEmail.Core;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Common;
@@ -10,6 +12,7 @@ public class EmailSendingService(
     ILogger<EmailSendingService> logger,
     IFluentEmail fluentEmail,
     IEmailCryptoService emailCryptoService,
+    IWebHostEnvironment environment,
     string frontendUrl) : IEmailSendingService
 {
     private const string Source = nameof(EmailSendingService);
@@ -25,7 +28,7 @@ public class EmailSendingService(
                 .To(user.Email, user.Username)
                 .Subject(subject)
                 .Body(GetEmailBody(user), isHtml: true)
-                .SendAsync();
+                .SendAsync(stoppingToken);
 
             logger.LogInformation("[{Source}]: Verification email sent successfully to {Email}.", Source, user.Email);
         }
@@ -42,6 +45,9 @@ public class EmailSendingService(
 
         var encryptedEmail = HttpUtility.UrlEncode(emailCryptoService.Encrypt(user.Email));
         var verificationUrl = $"{frontendUrl}/auth/verify?token={encryptedEmail}";
+        
+        if (environment.IsDevelopment())
+            logger.LogInformation("[{Source}]: {Username} must visit {VerificationUrl} to confirm their account.", Source, user.Username, verificationUrl);
 
         return $"""
 

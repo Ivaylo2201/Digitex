@@ -7,15 +7,19 @@ using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Entities;
 
 public class UserService(
+    ILogger<UserService> logger,
     IUserRepository userRepository,
     ITokenService tokenService,
     IEmailCryptoService emailCryptoService,
     IEmailSendingService emailSendingService) : IUserService
 {
+    private const string Source = nameof(UserService);
+    
     public async Task<Result<string>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default)
     {
         var validationResult = await new SignInValidator().ValidateAsync(signInDto, stoppingToken);
@@ -54,18 +58,23 @@ public class UserService(
         }
         catch (DbUpdateException)
         {
+            logger.LogError("[{Source}]: Email={Email} is already taken.", Source, signUpDto.Email);
             return Result.Failure(ErrorType.EmailTaken);       
-        }
-        catch (Exception)
-        {
-            return Result.Failure(ErrorType.Other);
         }
     }
 
     public async Task<Result> VerifyUserAsync(string token, CancellationToken stoppingToken = default)
     {
-        var email = emailCryptoService.Decrypt(token);
-        var isVerificationSuccessful = await userRepository.VerifyUserAsync(email, stoppingToken);
-        return isVerificationSuccessful ? Result.Success() : Result.Failure(ErrorType.InvalidCredentials);       
+        try
+        {
+            var email = emailCryptoService.Decrypt(token);
+            var isVerificationSuccessful = await userRepository.VerifyUserAsync(email, stoppingToken);
+            return isVerificationSuccessful ? Result.Success() : Result.Failure(ErrorType.InvalidCredentials);    
+        }
+        catch (Exception ex)
+        {
+            logger.LogError("[{Source}]: {ExceptionName} occurred while decrypting email. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
+            return Result.Failure(ErrorType.CryptographyError);
+        }
     }
 }

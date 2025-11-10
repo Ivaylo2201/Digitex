@@ -26,6 +26,7 @@ using DotNetEnv;
 using FluentEmail.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -161,6 +162,7 @@ public static class InfrastructureDependencyInjection
                 sp.GetRequiredService<ILogger<EmailSendingService>>(),
                 sp.GetRequiredService<IFluentEmail>(),
                 sp.GetRequiredService<IEmailCryptoService>(),
+                sp.GetRequiredService<IWebHostEnvironment>(),
                 frontendUrl))
             
             .AddScoped<ICartService, CartService>()
