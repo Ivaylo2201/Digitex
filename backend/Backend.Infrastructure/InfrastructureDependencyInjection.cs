@@ -91,7 +91,8 @@ public static class InfrastructureDependencyInjection
         var jwtIssuer = GetRequiredEnvironmentVariable<string>("JWT_ISSUER");
         var jwtAudience = GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE");
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(o =>
             {
                 o.TokenValidationParameters = new TokenValidationParameters
@@ -106,7 +107,7 @@ public static class InfrastructureDependencyInjection
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey))
                 };
             });
-
+        
         return services.AddAuthorization();
     }
 
@@ -157,14 +158,14 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductBaseService, ProductBaseService>()
             .AddScoped<IUserService, UserService>()
             .AddScoped<IBrandProviderService, BrandProviderService>()
-            
+
             .AddScoped<IEmailSendingService>(sp => new EmailSendingService(
                 sp.GetRequiredService<ILogger<EmailSendingService>>(),
                 sp.GetRequiredService<IFluentEmail>(),
                 sp.GetRequiredService<IEmailCryptoService>(),
                 sp.GetRequiredService<IWebHostEnvironment>(),
                 frontendUrl))
-            
+
             .AddScoped<ICartService, CartService>()
             .AddScoped<IItemService, ItemService>()
             .AddScoped<IShippingService, ShippingService>()
@@ -175,13 +176,11 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<Ssd>, SsdFilterService>()
             .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
-            
             .AddSingleton<ITokenService>(_ => new TokenService(
                 Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY")),
                 GetRequiredEnvironmentVariable<string>("JWT_ISSUER"),
                 GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE")
             ))
-            
             .AddSingleton<IEmailCryptoService>(sp => new EmailCryptoService(
                 sp.GetRequiredService<ILogger<EmailCryptoService>>(),
                 sp.GetRequiredService<IWebHostEnvironment>(),
@@ -189,7 +188,7 @@ public static class InfrastructureDependencyInjection
                 Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("CRYPTOGRAPHY_IV"))));
     }
 
-    private static IServiceCollection AddMapsterConfigurations(this IServiceCollection services)
+    private static void AddMapsterConfigurations(this IServiceCollection _)
     {
         TypeAdapterConfig<ProductBase, ProductShortDto>.NewConfig()
             .Map(dest => dest.BrandName, src => src.Brand.BrandName)
@@ -197,8 +196,7 @@ public static class InfrastructureDependencyInjection
             {
                 Initial = src.InitialPrice,
                 Discounted = src.Price
-            })
-            .Map(dest => dest.IsTop, src => src.Rating >= 4);
+            });
 
         TypeAdapterConfig<Item, ItemDto>.NewConfig()
             .Map(dest => dest.Product, src => new ProductItemDto
@@ -225,8 +223,6 @@ public static class InfrastructureDependencyInjection
         TypeAdapterConfig<PowerSupply, PowerSupplyDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Ram, RamDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Ssd, SsdDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-
-        return services;
     }
 
     private static IServiceCollection AddEmail(this IServiceCollection services)

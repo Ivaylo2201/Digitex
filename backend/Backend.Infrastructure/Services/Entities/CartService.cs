@@ -9,7 +9,7 @@ using Mapster;
 
 namespace Backend.Infrastructure.Services.Entities;
 
-public class CartService(ICartRepository cartRepository, IItemRepository itemRepository) : ICartService
+public class CartService(ICartRepository cartRepository, IItemRepository itemRepository, IProductBaseRepository productBaseRepository) : ICartService
 {
     public async Task<Result> AddToCartAsync(AddToCartDto cartDto, CancellationToken stoppingToken = default)
     {
@@ -18,13 +18,17 @@ public class CartService(ICartRepository cartRepository, IItemRepository itemRep
         if (cart is null)
             return Result.Failure(ErrorType.NotFound);
         
+        if (!await productBaseRepository.IsInStockAsync(cartDto.ProductId, stoppingToken))
+            return Result.Failure(ErrorType.OutOfStock);
+        
         var item = new Item
         {
             ProductId = cartDto.ProductId,
             Quantity = cartDto.Quantity,
             Cart = cart
         };
-        
+
+        await productBaseRepository.DecreaseQuantityAsync(cartDto.ProductId, stoppingToken);
         await itemRepository.CreateAsync(item, stoppingToken);
         return Result.Success();
     }

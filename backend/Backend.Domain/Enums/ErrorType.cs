@@ -8,5 +8,6 @@ public enum ErrorType
     EmailTaken,
     InvalidCredentials,
     ValidationFailed,
-    CryptographyError
+    CryptographyError,
+    OutOfStock
 }

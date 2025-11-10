@@ -11,5 +11,4 @@ public record ProductShortDto
     public required Price Price { get; init; }
     public required int DiscountPercentage { get; init; }
     public required int Rating { get; init; }
-    public required bool IsTop { get; init; }
 }

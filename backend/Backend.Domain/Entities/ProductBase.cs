@@ -18,5 +18,5 @@ public abstract class ProductBase
     public ICollection<User> LikedBy { get; init; } = [];
 
     public double Price => InitialPrice * (1 - DiscountPercentage / 100.0);
-    public bool IsOutOfStock => Quantity is 0;
+    public bool IsInStock => Quantity is not 0;
 }

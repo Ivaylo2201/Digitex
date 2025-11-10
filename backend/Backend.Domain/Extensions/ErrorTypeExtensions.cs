@@ -12,6 +12,8 @@ public static class ErrorTypeExtensions
         ErrorType.EmailTaken => "Email already taken.",
         ErrorType.InvalidCredentials => "Invalid credentials.",
         ErrorType.ValidationFailed => "Validation failed.",
+        ErrorType.CryptographyError => "Cryptography operation failed.",
+        ErrorType.OutOfStock => "Product is out of stock.",
         _ => "An unknown error occurred."
     };
 }

@@ -1,6 +1,4 @@
-﻿using Backend.Domain.Common;
-using Backend.Domain.Enums;
-using Backend.Domain.Interfaces;
+﻿using Backend.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -10,16 +8,35 @@ public class ProductBaseRepository(ILogger<ProductBaseRepository> logger, Databa
 {
     private const string Source = nameof(ProductBaseRepository);
     
-    public async Task<Result> UpdateRatingAsync(Guid id, int newRating, CancellationToken stoppingToken = default)
+    public async Task UpdateRatingAsync(Guid id, int newRating, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Updating rating of product with Id of {ProductId}...", Source, id);
         var product = await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
 
         if (product is null)
-            return Result.Failure(ErrorType.NotFound);
+            return;
         
         product.Rating = newRating;
         await context.SaveChangesAsync(stoppingToken);
-        return Result.Success();
+    }
+
+    public async Task DecreaseQuantityAsync(Guid id, CancellationToken stoppingToken = default)
+    {
+        logger.LogInformation("[{Source}]: Decreasing quantity of product with Id of {ProductId}...", Source, id);
+        var product = await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
+
+        if (product is null)
+            return;
+
+        product.Quantity -= 1;
+        await context.SaveChangesAsync(stoppingToken);
+    }
+
+    public async Task<bool> IsInStockAsync(Guid id, CancellationToken stoppingToken = default)
+    {
+        logger.LogInformation("[{Source}]: Checking if product with Id of {ProductId} is in stock", Source, id);
+        var product = await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
+
+        return product?.IsInStock ?? false;
     }
 }
