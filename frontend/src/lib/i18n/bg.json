@@ -1,16 +1,23 @@
 {
+  "user": {
+    "cart": "Количка",
+    "account": "Профил",
+    "wishlist": "Любими"
+  },
+  "products": {
+    "processors": "Процесори",
+    "graphicsCards": "Графични карти",
+    "powerSupplies": "Захранвания",
+    "rams": "RAM Памет",
+    "ssds": "SSD дискове",
+    "motherboards": "Дънни платки",
+    "monitors": "Монитори"
+  },
+  "auth": {
+    "signIn": "Вход",
+    "signOut": "Изход",
+    "verify": ""
+  },
   "address": "София, бул. Витоша 76",
-  "cart": "Количка",
-  "account": "Профил",
-  "productSearch": "Търсене на продукти...",
-  "wishlist": "Любими",
-  "processors": "Процесори",
-  "graphicCards": "Видео карти",
-  "powerSupplies": "Захранвания",
-  "rams": "RAM Памет",
-  "ssds": "SSD дискове",
-  "motherboards": "Дънни платки",
-  "monitors": "Монитори",
-  "signIn": "Вход",
-  "signOut": "Изход"
+  "productSearch": "Търсене на продукти..."
 }

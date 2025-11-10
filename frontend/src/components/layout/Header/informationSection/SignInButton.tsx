@@ -11,7 +11,7 @@ export default function SignInButton() {
       className='flex justify-center items-center gap-1.5 cursor-pointer'
     >
       <LogIn className='text-theme-crimson' size={15} />
-      <span>{translation.signIn}</span>
+      <span>{translation.auth.signIn}</span>
     </Link>
   );
 }

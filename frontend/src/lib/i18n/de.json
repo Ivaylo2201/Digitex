@@ -1,16 +1,23 @@
 {
+  "user": {
+    "cart": "Warenkorb",
+    "account": "Konto",
+    "wishlist": "Wunschliste"
+  },
+  "products": {
+    "processors": "Prozessoren",
+    "graphicsCards": "Grafikkarten",
+    "powerSupplies": "Netzteile",
+    "rams": "Arbeitsspeicher",
+    "ssds": "SSDs",
+    "motherboards": "Mainboards",
+    "monitors": "Monitore"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "verify": ""
+  },
   "address": "Sofia, Vitosha Blvd. 76",
-  "cart": "Warenkorb",
-  "account": "Konto",
-  "productSearch": "Produktsuche...",
-  "wishlist": "Wunschliste",
-  "processors": "Prozessoren",
-  "graphicCards": "Grafikkarten",
-  "powerSupplies": "Netzteile",
-  "rams": "Arbeitsspeicher",
-  "ssds": "SSDs",
-  "motherboards": "Mainboards",
-  "monitors": "Monitore",
-  "signIn": "Anmelden",
-  "signOut": "Abmelden"
+  "productSearch": "Produktsuche..."
 }

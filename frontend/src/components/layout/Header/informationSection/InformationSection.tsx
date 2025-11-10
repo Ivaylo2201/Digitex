@@ -1,11 +1,11 @@
-import LanguageSelect from '@/components/shared/LanguageSelect/LanguageSelect';
-import CurrencySelect from '@/components/shared/CurrencySelect/CurrencySelect';
 import { useTranslation } from '@/lib/stores/useTranslation';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import React from 'react';
-import SignOutButton from '@/components/shared/SignOutButton';
+import SignOutButton from '@/components/layout/header/informationSection/SignOutButton';
 import { useAuth } from '@/lib/stores/useAuth';
-import SignInButton from '@/components/shared/SignInButton';
+import SignInButton from '@/components/layout/header/informationSection/SignInButton';
+import CurrencySelect from '@/components/layout/header/informationSection/CurrencySelect';
+import LanguageSelect from '@/components/layout/header/informationSection/LanguageSelect';
 
 export default function InformationSection() {
   const { isAuthenticated } = useAuth();

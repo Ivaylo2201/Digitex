@@ -7,6 +7,7 @@ import SignUpPage from '@/components/pages/SignUpPage';
 import Page from '@/components/pages/Page';
 import ProductsPage from '@/components/pages/ProductsPage';
 import AccountVerifiedPage from './pages/AccountVerifiedPage';
+import CartPage from './pages/CartPage';
 
 export default function Router() {
   return (
@@ -28,6 +29,14 @@ export default function Router() {
           <Route path='sign-up' element={<SignUpPage />} />
           <Route path='verify' element={<AccountVerifiedPage />} />
         </Route>
+        <Route
+          path='/cart'
+          element={
+            <AuthenticationRequired>
+              <CartPage />
+            </AuthenticationRequired>
+          }
+        />
         <Route
           path='/wishlist'
           element={

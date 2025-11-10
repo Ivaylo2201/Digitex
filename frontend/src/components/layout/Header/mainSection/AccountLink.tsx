@@ -12,7 +12,7 @@ export default function AccountLink() {
     >
       <User size={19} />
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.account}
+        {translation.user.account}
       </span>
     </Link>
   );

@@ -1,4 +1,4 @@
-import type { Price } from "@/lib/models/Price";
+import type { Price } from "@/lib/models/price";
 
 export interface ProductShortDto {
   id: string;               

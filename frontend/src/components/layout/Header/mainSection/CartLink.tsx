@@ -20,7 +20,7 @@ export default function CartLink() {
         )}
       </div>
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.cart}
+        {translation.user.cart}
       </span>
     </Link>
   );

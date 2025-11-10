@@ -5,9 +5,9 @@ using Backend.Infrastructure.Services.Base;
 
 namespace Backend.Infrastructure.Services.Common.Filters;
 
-public class GraphicCardFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<GraphicCard>(brandProviderService)
+public class GraphicsCardFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<GraphicsCard>(brandProviderService)
 {
-    public override Filter<GraphicCard> BuildFilter(IDictionary<string, string> criteria)
+    public override Filter<GraphicsCard> BuildFilter(IDictionary<string, string> criteria)
     {
         return filter => filter;
     }

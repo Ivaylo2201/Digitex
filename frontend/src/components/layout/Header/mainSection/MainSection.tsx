@@ -1,9 +1,9 @@
-import AccountLink from '@/components/links/AccountLink';
-import CartLink from '@/components/links/CartLink';
-import LogoLink from '@/components/links/LogoLink';
-import WishlistLink from '@/components/links/WishlistLink';
+import AccountLink from '@/components/layout/header/mainSection/AccountLink';
+import CartLink from '@/components/layout/header/mainSection/CartLink';
+import LogoLink from '@/components/layout/header/mainSection/LogoLink';
+import WishlistLink from '@/components/layout/header/mainSection/WishlistLink';
 import React from 'react';
-import Searchbox from '@/components/layout/header/Searchbox';
+import Searchbox from '@/components/layout/header/mainSection/Searchbox';
 
 export default function MainSection() {
   return (

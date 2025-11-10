@@ -35,7 +35,7 @@ internal static class Data
         ["seasonic"] = new Brand { BrandName = "Seasonic" }
     };
 
-    internal static readonly List<GraphicCard> GraphicCards =
+    internal static readonly List<GraphicsCard> GraphicsCards =
     [
         new()
         {
@@ -2276,6 +2276,11 @@ internal static class Data
 
     private static int GetRandomDiscountPercentage()
     {
+        var isDiscounted = Random.Next(1, 10) > 5;
+
+        if (!isDiscounted)
+            return 0;
+        
         var discounts = new[] { 10, 20, 30, 40, 50 };
         return discounts[Random.Next(discounts.Length)];
     }

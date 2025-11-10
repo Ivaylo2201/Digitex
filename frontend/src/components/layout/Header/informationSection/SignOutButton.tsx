@@ -12,7 +12,7 @@ export default function SignOutButton() {
       className='flex justify-center items-center gap-1.5 cursor-pointer'
     >
       <LogOut className='text-theme-crimson' size={15} />
-      <span>{translation.signOut}</span>
+      <span>{translation.auth.signOut}</span>
     </button>
   );
 }

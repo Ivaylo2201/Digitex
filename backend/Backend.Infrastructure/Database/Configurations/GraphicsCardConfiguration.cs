@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Backend.Infrastructure.Database.Configurations;
 
-public class GraphicCardConfiguration : IEntityTypeConfiguration<GraphicCard>
+public class GraphicsCardConfiguration : IEntityTypeConfiguration<GraphicsCard>
 {
-    private const string TableName = "GraphicCards";
+    private const string TableName = "GraphicsCards";
     
-    public void Configure(EntityTypeBuilder<GraphicCard> builder)
+    public void Configure(EntityTypeBuilder<GraphicsCard> builder)
     {
         builder
             .ToTable(TableName);

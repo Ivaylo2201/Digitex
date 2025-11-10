@@ -20,7 +20,7 @@ export default function WishlistLink() {
         )}
       </div>
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.wishlist}
+        {translation.user.wishlist}
       </span>
     </Link>
   );

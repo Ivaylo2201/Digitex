@@ -2,7 +2,7 @@
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
-using Backend.Application.DTOs.GraphicCards;
+using Backend.Application.DTOs.GraphicsCards;
 using Backend.Application.DTOs.Item;
 using Backend.Application.DTOs.Monitor;
 using Backend.Application.DTOs.Motherboard;
@@ -122,7 +122,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductRepository<Monitor>, MonitorRepository>()
             .AddScoped<IProductRepository<Ram>, RamRepository>()
             .AddScoped<IProductRepository<Processor>, ProcessorRepository>()
-            .AddScoped<IProductRepository<GraphicCard>, GraphicCardRepository>()
+            .AddScoped<IProductRepository<GraphicsCard>, GraphicsCardRepository>()
             .AddScoped<IProductRepository<Ssd>, SsdRepository>()
             .AddScoped<IProductRepository<Motherboard>, MotherboardRepository>()
             .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>()
@@ -142,7 +142,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
             .AddScoped<IProductService<Ram, RamDto>, RamService>()
             .AddScoped<IProductService<Processor, ProcessorDto>, ProcessorService>()
-            .AddScoped<IProductService<GraphicCard, GraphicCardDto>, GraphicCardService>()
+            .AddScoped<IProductService<GraphicsCard, GraphicsCardDto>, GraphicsCardService>()
             .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
             .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
             .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
@@ -157,7 +157,7 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
             .AddTransient<IFilterService<Ram>, RamFilterService>()
             .AddTransient<IFilterService<Processor>, ProcessorFilterService>()
-            .AddTransient<IFilterService<GraphicCard>, GraphicCardFilterService>()
+            .AddTransient<IFilterService<GraphicsCard>, GraphicsCardFilterService>()
             .AddTransient<IFilterService<Ssd>, SsdFilterService>()
             .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
@@ -195,7 +195,7 @@ public static class InfrastructureDependencyInjection
                 .Adapt<List<ReviewDto>>());
 
         TypeAdapterConfig<Processor, ProcessorDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-        TypeAdapterConfig<GraphicCard, GraphicCardDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
+        TypeAdapterConfig<GraphicsCard, GraphicsCardDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Monitor, MonitorDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Motherboard, MotherboardDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<PowerSupply, PowerSupplyDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();

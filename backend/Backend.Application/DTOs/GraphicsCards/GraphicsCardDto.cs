@@ -2,9 +2,9 @@
 using Backend.Domain.Enums;
 using Backend.Domain.ValueObjects;
 
-namespace Backend.Application.DTOs.GraphicCards;
+namespace Backend.Application.DTOs.GraphicsCards;
 
-public record GraphicCardDto : ProductLongDto
+public record GraphicsCardDto : ProductLongDto
 {
     public required Memory Memory { get; init; }
     public required ClockSpeed ClockSpeed { get; init; }

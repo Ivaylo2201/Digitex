@@ -1,33 +1,47 @@
 export type Translation = {
-  address: string;
-  cart: string;
-  account: string;
+  products: {
+    processors: string;
+    graphicsCards: string;
+    powerSupplies: string;
+    rams: string;
+    ssds: string;
+    motherboards: string;
+    monitors: string;
+  };
+  user: {
+    cart: string;
+    account: string;
+    wishlist: string;
+  };
+  auth: {
+    signIn: string;
+    signOut: string;
+    verify: string;
+  };
   productSearch: string;
-  wishlist: string;
-  processors: string;
-  graphicCards: string;
-  powerSupplies: string;
-  rams: string;
-  ssds: string;
-  motherboards: string;
-  monitors: string;
-  signIn: string;
-  signOut: string;
+  address: string;
 };
 
 export const initialTranslation: Translation = {
+  user: {
+    cart: 'Cart',
+    account: 'Account',
+    wishlist: 'Wishlist'
+  },
+  products: {
+    processors: 'Processors',
+    graphicsCards: 'Graphics cards',
+    powerSupplies: 'Power supplies',
+    rams: 'RAMs',
+    ssds: 'SSDs',
+    motherboards: 'Motherboards',
+    monitors: 'Monitors'
+  },
+  auth: {
+    signIn: 'Sign in',
+    signOut: 'Sign out',
+    verify: ''
+  },
   address: 'Sofia, Vitosha Blvd. 76',
-  cart: 'Cart',
-  account: 'Account',
-  productSearch: 'Search for products...',
-  wishlist: 'Wishlist',
-  processors: 'Processors',
-  graphicCards: 'Graphic cards',
-  powerSupplies: 'Power supplies',
-  rams: 'RAMs',
-  ssds: 'SSDs',
-  motherboards: 'Motherboards',
-  monitors: 'Monitors',
-  signIn: 'Sign in',
-  signOut: 'Sign out'
+  productSearch: 'Search for products...'
 };

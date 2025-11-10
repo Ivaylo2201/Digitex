@@ -7,6 +7,7 @@ namespace Backend.Infrastructure.Database.Configurations;
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     private const string TableName = "Users";
+    private const string WishlistTableName = "Wishlist";
     private const int UsernameMaxLength = 25;
     private const int EmailMaxLength = 125;
     private const bool IsVerifiedDefaultValue = false;
@@ -51,7 +52,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMany(user => user.Wishlist)
             .WithMany(product => product.LikedBy)
             .UsingEntity(
-                "UsersProducts",
+                WishlistTableName,
                 product => product
                     .HasOne(typeof(ProductBase))
                     .WithMany()

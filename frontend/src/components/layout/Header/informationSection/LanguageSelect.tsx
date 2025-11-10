@@ -5,7 +5,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import LanguageOption from '@/components/shared/LanguageSelect/LanguageOption';
+
 import { useLanguage } from '@/lib/stores/useLanguage';
 
 export default function LanguageSelect() {
@@ -19,16 +19,25 @@ export default function LanguageSelect() {
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
-        {languages.map((language) => (
-          <SelectItem
-            className='cursor-pointer'
-            key={language}
-            value={language}
-          >
+        {languages.map((language, idx) => (
+          <SelectItem className='cursor-pointer' key={idx} value={language}>
             <LanguageOption code={language} />
           </SelectItem>
         ))}
       </SelectContent>
     </Select>
+  );
+}
+
+function LanguageOption({ code }: { code: string }) {
+  return (
+    <div className='flex items-center gap-2 font-montserrat text-xs'>
+      <img
+        src={new URL(`/src/assets/flags/${code}.png`, import.meta.url).href}
+        alt={`${code}-flag`}
+        className='size-4.5 rounded-full object-cover'
+      />
+      <span>{code.toUpperCase()}</span>
+    </div>
   );
 }

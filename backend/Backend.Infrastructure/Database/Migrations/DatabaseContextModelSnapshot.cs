@@ -342,7 +342,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("UsersProducts", b =>
+            modelBuilder.Entity("Wishlist", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -354,10 +354,10 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("UsersProducts");
+                    b.ToTable("Wishlist");
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.GraphicCard", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.GraphicsCard", b =>
                 {
                     b.HasBaseType("Backend.Domain.Entities.ProductBase");
 
@@ -373,7 +373,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int>("Tdp")
                         .HasColumnType("int");
 
-                    b.ComplexProperty<Dictionary<string, object>>("ClockSpeed", "Backend.Domain.Entities.GraphicCard.ClockSpeed#ClockSpeed", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("ClockSpeed", "Backend.Domain.Entities.GraphicsCard.ClockSpeed#ClockSpeed", b1 =>
                         {
                             b1.IsRequired();
 
@@ -386,7 +386,7 @@ namespace Backend.Infrastructure.Database.Migrations
                                 .HasColumnName("ClockSpeedBoost");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("Memory", "Backend.Domain.Entities.GraphicCard.Memory#Memory", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Memory", "Backend.Domain.Entities.GraphicsCard.Memory#Memory", b1 =>
                         {
                             b1.IsRequired();
 
@@ -403,7 +403,7 @@ namespace Backend.Infrastructure.Database.Migrations
                                 .HasColumnName("MemoryType");
                         });
 
-                    b.ToTable("GraphicCards", (string)null);
+                    b.ToTable("GraphicsCards", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Monitor", b =>
@@ -694,7 +694,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("UsersProducts", b =>
+            modelBuilder.Entity("Wishlist", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.ProductBase", null)
                         .WithMany()
@@ -709,11 +709,11 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.GraphicCard", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.GraphicsCard", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.ProductBase", null)
                         .WithOne()
-                        .HasForeignKey("Backend.Domain.Entities.GraphicCard", "Id")
+                        .HasForeignKey("Backend.Domain.Entities.GraphicsCard", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

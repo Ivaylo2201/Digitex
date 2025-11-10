@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import getLanguages from '../helpers/getLanguages';
 import type { Language } from '../types/language';
 
 type LanguageStore = {
@@ -9,7 +8,7 @@ type LanguageStore = {
 }
 
 export const useLanguage = create<LanguageStore>((set) => {
-  const languages = getLanguages();
+  const languages = (import.meta.env.VITE_APP_LANGUAGES as string).split(',') as Language[];
 
   return ({
     language: languages[0],

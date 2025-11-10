@@ -1,6 +1,6 @@
-import CategoriesSection from '@/components/layout/header/CategoriesSection';
-import MainSection from '@/components/layout/header/MainSection';
-import InformationSection from '@/components/layout/header/InformationSection';
+import CategoriesSection from '@/components/layout/header/categoriesSection/CategoriesSection';
+import MainSection from '@/components/layout/header/mainSection/MainSection';
+import InformationSection from '@/components/layout/header/informationSection/InformationSection';
 
 export default function Header() {
   return (

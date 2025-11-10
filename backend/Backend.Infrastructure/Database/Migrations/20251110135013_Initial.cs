@@ -161,7 +161,7 @@ namespace Backend.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GraphicCards",
+                name: "GraphicsCards",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -177,9 +177,9 @@ namespace Backend.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GraphicCards", x => x.Id);
+                    table.PrimaryKey("PK_GraphicsCards", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GraphicCards_Products_Id",
+                        name: "FK_GraphicsCards_Products_Id",
                         column: x => x.Id,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -351,7 +351,7 @@ namespace Backend.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersProducts",
+                name: "Wishlist",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false),
@@ -359,15 +359,15 @@ namespace Backend.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersProducts", x => new { x.UserId, x.ProductId });
+                    table.PrimaryKey("PK_Wishlist", x => new { x.UserId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_UsersProducts_Products_ProductId",
+                        name: "FK_Wishlist_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersProducts_Users_UserId",
+                        name: "FK_Wishlist_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -512,8 +512,8 @@ namespace Backend.Infrastructure.Database.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersProducts_ProductId",
-                table: "UsersProducts",
+                name: "IX_Wishlist_ProductId",
+                table: "Wishlist",
                 column: "ProductId");
         }
 
@@ -524,7 +524,7 @@ namespace Backend.Infrastructure.Database.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "GraphicCards");
+                name: "GraphicsCards");
 
             migrationBuilder.DropTable(
                 name: "Items");
@@ -551,7 +551,7 @@ namespace Backend.Infrastructure.Database.Migrations
                 name: "SSDs");
 
             migrationBuilder.DropTable(
-                name: "UsersProducts");
+                name: "Wishlist");
 
             migrationBuilder.DropTable(
                 name: "Cities");

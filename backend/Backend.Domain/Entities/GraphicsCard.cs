@@ -3,7 +3,7 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Domain.Entities;
 
-public class GraphicCard : ProductBase
+public class GraphicsCard : ProductBase
 {
     public required Memory Memory { get; init; }
     public required ClockSpeed ClockSpeed { get; init; }

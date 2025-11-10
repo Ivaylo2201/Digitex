@@ -10,7 +10,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<Brand> Brands => Set<Brand>();
     public DbSet<Cart> Carts => Set<Cart>();
     public DbSet<Processor> Processors => Set<Processor>();
-    public DbSet<GraphicCard> GraphicCards => Set<GraphicCard>();
+    public DbSet<GraphicsCard> GraphicsCards => Set<GraphicsCard>();
     public DbSet<Item> Items => Set<Item>();
     public DbSet<Monitor> Monitors => Set<Monitor>();
     public DbSet<Motherboard> Motherboards => Set<Motherboard>();
