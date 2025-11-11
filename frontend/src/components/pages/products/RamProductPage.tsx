@@ -3,7 +3,7 @@ import ProductPage from "../base/ProductPage";
 import useProduct from "@/lib/hooks/useProduct";
 
 export default function RamProductPage() {
-  const { data: product } = useProduct<Ram>();
+  const { data: product } = useProduct<Ram>("rams");
 
-  return <ProductPage product={product}>Processor-specific stuff</ProductPage>;
+  return <ProductPage product={product} data={{}} />
 }

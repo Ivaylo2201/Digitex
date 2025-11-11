@@ -5,13 +5,26 @@
     "wishlist": "Wunschliste"
   },
   "products": {
-    "processors": "Prozessoren",
+    "mainSpecifications": "Hauptspezifikationen",
+    "monitors": {
+      "category": "Monitore",
+      "specs": {
+        "displayDiagonal": "Bildschirmdiagonale",
+        "refreshRate": "Bildwiederholfrequenz",
+        "latency": "Latenz",
+        "matrix": "Matrix",
+        "resolution": "Auflösung",
+        "pixelSize": "Pixelgröße",
+        "brightness": "Helligkeit",
+        "colorSpectre": "Farbspektrum"
+      }
+    },
     "graphicsCards": "Grafikkarten",
     "powerSupplies": "Netzteile",
     "rams": "Arbeitsspeicher",
     "ssds": "SSDs",
     "motherboards": "Mainboards",
-    "monitors": "Monitore"
+    "processors": "Prozessoren"
   },
   "auth": {
     "signIn": "Anmelden",

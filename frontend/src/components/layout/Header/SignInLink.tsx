@@ -2,7 +2,7 @@ import { useTranslation } from '@/lib/stores/useTranslation';
 import { LogIn } from 'lucide-react';
 import { Link } from 'react-router';
 
-export default function SignInButton() {
+export default function SignInLink() {
   const translation = useTranslation();
 
   return (

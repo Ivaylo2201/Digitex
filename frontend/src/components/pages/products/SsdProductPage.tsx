@@ -3,7 +3,7 @@ import type { Ssd } from "@/lib/models/products/Ssd";
 import ProductPage from "../base/ProductPage";
 
 export default function SsdProductPage() {
-  const { data: product } = useProduct<Ssd>();
+  const { data: product } = useProduct<Ssd>("ssds");
 
-  return <ProductPage product={product}>Processor-specific stuff</ProductPage>;
+  return <ProductPage product={product} data={{}} />
 }

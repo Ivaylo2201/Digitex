@@ -1,22 +1,41 @@
-import type { ProductLong } from "@/lib/models/products/ProductLong";
-import Page from "./Page";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableRow
+} from '@/components/ui/table';
+import type { ProductLong } from '@/lib/models/products/ProductLong';
+import Page from './Page';
+import { useTranslation } from '@/lib/stores/useTranslation';
 
 type ProductPageProps = {
   product: ProductLong;
-  formattedData: Record<string, string>;
+  data: Record<string, string>;
 };
 
 export default function ProductPage({
   product,
-  formattedData,
+  data
 }: ProductPageProps) {
+  const translation = useTranslation();
+
   return (
     <Page>
-      {Object.entries(formattedData).map(([key, value]) => (
-        <div key={key}>
-          <strong>{key}:</strong> {value}
-        </div>
-      ))}
+      <Table className='w-1/2 font-montserrat border border-gray-200'>
+      <TableCaption>{translation.products.mainSpecifications}</TableCaption>
+      <TableBody className='text-theme-gunmetal'>
+        {Object.entries(data).map(([key, value], idx) => (
+          <TableRow
+            key={idx}
+            className={`${idx % 2 === 0 ? 'bg-gray-300' : ''}`}
+          >
+            <TableCell className='w-1/2'>{key}</TableCell>
+            <TableCell className='w-1/2 font-medium'>{value}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
     </Page>
   );
 }

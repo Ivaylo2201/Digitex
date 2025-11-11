@@ -5,5 +5,5 @@ import ProductPage from "../base/ProductPage";
 export default function MotherboardProductPage() {
   const { data: product } = useProduct<Motherboard>();
 
-  return <ProductPage product={product}>Processor-specific stuff</ProductPage>;
+  return <ProductPage product={product} formattedData={{}} />
 }

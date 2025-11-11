@@ -5,13 +5,26 @@
     "wishlist": "Любими"
   },
   "products": {
-    "processors": "Процесори",
+    "mainSpecifications": "Основни характеристики",
+    "monitors": {
+      "category": "Монитори",
+      "specs": {
+        "displayDiagonal": "Диагонал на екрана",
+        "refreshRate": "Честота на опресняване",
+        "latency": "Латентност",
+        "matrix": "Матрица",
+        "resolution": "Резолюция",
+        "pixelSize": "Размер на пиксела",
+        "brightness": "Яркост",
+        "colorSpectre": "Цветови спектър"
+      }
+    },
     "graphicsCards": "Графични карти",
     "powerSupplies": "Захранвания",
     "rams": "RAM Памет",
     "ssds": "SSD дискове",
     "motherboards": "Дънни платки",
-    "monitors": "Монитори"
+    "processors": "Процесори"
   },
   "auth": {
     "signIn": "Вход",

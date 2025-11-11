@@ -7,8 +7,8 @@ async function getProduct<T>(category?: string, id?: string) {
   return res.data;
 }
 
-export default function useProduct<T>() {
-  const { category, id } = useParams<{ category: string; id: string }>();
+export default function useProduct<T>(category: string) {
+  const id = useParams<{ id: string }>().id;
 
   return useSuspenseQuery({
     queryKey: [category, id],
