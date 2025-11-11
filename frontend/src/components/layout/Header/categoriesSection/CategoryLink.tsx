@@ -1,14 +1,14 @@
 import { NavLink } from 'react-router';
 
 type CategoryLinkProps = {
-  category: string;
-  to: string;
+  categoryName: string;
+  route: string;
 };
 
-export default function CategoryLink({ category, to }: CategoryLinkProps) {
+export default function CategoryLink({ categoryName, route }: CategoryLinkProps) {
   return (
     <NavLink
-      to={`/products/category/${to}`}
+      to={`/products/categories${route}`}
       className={({ isActive }) =>
         `transition-colors duration-200 font-semibold py-3.5 px-2 ${
           isActive
@@ -17,7 +17,7 @@ export default function CategoryLink({ category, to }: CategoryLinkProps) {
         }`
       }
     >
-      {category}
+      {categoryName}
     </NavLink>
   );
 }

@@ -4,12 +4,12 @@ import type { ProductShortDto } from '@/lib/models/productShortDto';
 
 type UseProductsResponse = ProductShortDto[];
 
-async function getProducts(category: string | undefined) {
+async function getProducts(category: string) {
   const res = await http.get<UseProductsResponse>(`/products/${category}`);
   return res.data;
 }
 
-export default function useProducts(category: string | undefined) {
+export default function useProducts(category: string) {
   return useSuspenseQuery({
     queryKey: ['products', category],
     queryFn: () => getProducts(category),

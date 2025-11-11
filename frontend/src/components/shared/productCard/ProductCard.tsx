@@ -1,10 +1,10 @@
-import Rating from '@/components/shared/Rating';
-import { Link } from 'react-router';
-import type { ProductShortDto } from '@/lib/models/productShortDto';
-import Price from './Price';
-import DiscountLabel from './DiscountLabel';
+import Rating from "@/components/shared/Rating";
+import { Link } from "react-router";
+import type { ProductShortDto } from "@/lib/models/productShortDto";
+import Price from "./Price";
+import DiscountLabel from "./DiscountLabel";
 
-type ProductCardProps = ProductShortDto;
+type ProductCardProps = ProductShortDto & { category: string };
 
 export default function ProductCard({
   id,
@@ -13,11 +13,12 @@ export default function ProductCard({
   imagePath,
   price,
   discountPercentage,
-  rating
+  rating,
+  category,
 }: ProductCardProps) {
   return (
     <Link
-      to={`/products/${id}`}
+      to={`/products/${category}/${id}`}
       className='w-[345px] h-[375px] flex flex-col font-montserrat px-6 py-3 gap-5 relative group'
     >
       <DiscountLabel discountPercentage={discountPercentage} />
