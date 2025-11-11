@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.GraphicsCards;
+﻿using Backend.Application.Dtos.GraphicsCards;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services.Base;

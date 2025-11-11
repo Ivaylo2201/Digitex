@@ -4,11 +4,11 @@ import AccountPage from "@/components/pages/AccountPage";
 import WishlistPage from "@/components/pages/WishlistPage";
 import SignInPage from "@/components/pages/SignInPage";
 import SignUpPage from "@/components/pages/SignUpPage";
-import Page from "@/components/pages/Page";
+import Page from "@/components/pages/base/Page";
 import ProductsPage from "@/components/pages/ProductsPage";
 import AccountVerifiedPage from "./pages/AccountVerifiedPage";
 import CartPage from "./pages/CartPage";
-import ProductPage from "./pages/ProductPage";
+import ProductPage from "./pages/base/ProductPage";
 
 export default function Router() {
   return (

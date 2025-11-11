@@ -1,6 +1,5 @@
-﻿using Backend.Application.DTOs.Product;
+﻿using Backend.Application.Dtos.Product;
 using Backend.Domain.Common;
-using Backend.Domain.Enums;
 
 namespace Backend.Application.Interfaces.Services;
 

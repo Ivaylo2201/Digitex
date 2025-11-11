@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.Processor;
+﻿using Backend.Application.Dtos.Processor;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services.Base;

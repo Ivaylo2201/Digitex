@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.Shipping;
+﻿using Backend.Application.Dtos.Shipping;
 using Backend.Domain.Common;
 
 namespace Backend.Application.Interfaces.Services;

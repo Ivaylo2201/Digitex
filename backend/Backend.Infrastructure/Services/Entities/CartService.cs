@@ -1,5 +1,5 @@
-﻿using Backend.Application.DTOs.Cart;
-using Backend.Application.DTOs.Item;
+﻿using Backend.Application.Dtos.Cart;
+using Backend.Application.Dtos.Item;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;

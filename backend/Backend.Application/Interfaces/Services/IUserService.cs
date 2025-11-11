@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.User;
+﻿using Backend.Application.Dtos.User;
 using Backend.Domain.Common;
 
 namespace Backend.Application.Interfaces.Services;

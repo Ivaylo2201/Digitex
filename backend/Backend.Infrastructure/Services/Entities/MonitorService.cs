@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.Monitor;
+﻿using Backend.Application.Dtos.Monitor;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services.Base;
 using Microsoft.Extensions.Logging;

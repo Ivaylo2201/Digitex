@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.Product;
+﻿using Backend.Application.Dtos.Product;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;

@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import Page from "@/components/pages/Page";
+import Page from "@/components/pages/base/Page";
 import useProducts from "@/lib/hooks/useProducts";
 import ProductCard from "@/components/shared/productCard/ProductCard";
 

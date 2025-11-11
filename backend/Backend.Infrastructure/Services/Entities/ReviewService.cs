@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.Review;
+﻿using Backend.Application.Dtos.Review;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;

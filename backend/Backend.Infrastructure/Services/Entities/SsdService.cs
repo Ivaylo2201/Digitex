@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.Ssd;
+﻿using Backend.Application.Dtos.Ssd;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services.Base;

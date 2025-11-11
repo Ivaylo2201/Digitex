@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.PowerSupply;
+﻿using Backend.Application.Dtos.PowerSupply;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services.Base;

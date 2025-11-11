@@ -1,6 +1,6 @@
 import Rating from "@/components/shared/Rating";
 import { Link } from "react-router";
-import type { ProductShortDto } from "@/lib/models/productShortDto";
+import type { ProductShortDto } from "@/lib/models/dtos/productShortDto";
 import Price from "./Price";
 import DiscountLabel from "./DiscountLabel";
 

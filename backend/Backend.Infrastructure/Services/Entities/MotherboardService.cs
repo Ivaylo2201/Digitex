@@ -1,4 +1,4 @@
-﻿using Backend.Application.DTOs.Motherboard;
+﻿using Backend.Application.Dtos.Motherboard;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Services.Base;
