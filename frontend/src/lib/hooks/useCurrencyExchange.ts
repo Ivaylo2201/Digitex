@@ -1,4 +1,4 @@
-import getCurrencySymbol from '../helpers/getCurrencySymbol';
+import { getCurrencySymbol } from '../helpers';
 import { useCurrency } from '../stores/useCurrency';
 import type { Currency } from '../types/currency';
 

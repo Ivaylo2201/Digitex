@@ -1,7 +1,4 @@
-type Price = {
-  initial: number;
-  discounted: number;
-}
+import type { Price } from "../shared/Price";
 
 export type ProductShort = {
   id: string;               

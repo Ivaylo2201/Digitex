@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import Page from "./base/Page";
-import { http } from "@/lib/http";
-import { Link, useSearchParams } from "react-router";
-import { Check } from "lucide-react";
+import { useEffect } from 'react';
+import Page from './Page';
+import { http } from '@/lib/http';
+import { Link, useSearchParams } from 'react-router';
+import { Check } from 'lucide-react';
 
 export default function AccountVerifiedPage() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const token = searchParams.get("token");
+    const token = searchParams.get('token');
 
     if (token) {
       http.get(`/auth/verify?token=${encodeURIComponent(token)}`);

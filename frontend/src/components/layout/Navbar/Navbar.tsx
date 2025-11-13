@@ -5,13 +5,13 @@ export default function Navbar() {
   const translation = useTranslation();
 
   const links = [
-    { content: translation.products.processors, to: '/processors' },
-    { content: translation.products.graphicsCards, to: '/graphics-cards' },
-    { content: translation.products.motherboards, to: '/motherboards' },
-    { content: translation.products.rams, to: '/rams' },
-    { content: translation.products.ssds, to: '/ssds' },
-    { content: translation.products.powerSupplies, to: '/power-supplies' },
-    { content: translation.products.monitors.category, to: '/monitors' }
+    { content: translation.routing.processors, to: '/processors' },
+    { content: translation.routing.graphicsCards, to: '/graphics-cards' },
+    { content: translation.routing.motherboards, to: '/motherboards' },
+    { content: translation.routing.rams, to: '/rams' },
+    { content: translation.routing.ssds, to: '/ssds' },
+    { content: translation.routing.powerSupplies, to: '/power-supplies' },
+    { content: translation.routing.monitors, to: '/monitors' }
   ];
 
   return (

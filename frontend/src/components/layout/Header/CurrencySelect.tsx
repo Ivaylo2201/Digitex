@@ -6,7 +6,7 @@ import {
   SelectValue
 } from '@/components/ui/select';
 
-import getCurrencySymbol from '@/lib/helpers/getCurrencySymbol';
+import { getCurrencySymbol } from '@/lib/helpers';
 import { useCurrency } from '@/lib/stores/useCurrency';
 
 export default function LanguageSelect() {

@@ -29,7 +29,7 @@ export default function Header() {
           </li>
           <li className='flex justify-center md:justify-start items-center gap-1.5'>
             <MapPin size={16} className='text-theme-crimson' />
-            {translation.address}
+            {translation.keywords.address}
           </li>
         </ul>
         <ul className='flex'>

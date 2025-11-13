@@ -1,13 +1,13 @@
-import { useParams } from "react-router";
-import Page from "@/components/pages/base/Page";
-import useProducts from "@/lib/hooks/useProducts";
-import ProductCard from "@/components/shared/productCard/ProductCard";
+import { useParams } from 'react-router';
+import Page from '@/components/pages/Page';
+import useProducts from '@/lib/hooks/useProducts';
+import ProductCard from '@/components/shared/ProductCard';
 
 export default function ProductsPage() {
   const { category } = useParams<{ category: string | undefined }>();
 
   if (!category) {
-    console.warn("The category of the matched route is undefined.");
+    console.warn('The category of the matched route is undefined.');
     return;
   }
 

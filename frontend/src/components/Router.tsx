@@ -1,20 +1,14 @@
-import { BrowserRouter, Route, Routes } from "react-router";
-import AuthenticationRequired from "@/components/auth/AuthenticationRequired";
-import AccountPage from "@/components/pages/AccountPage";
-import WishlistPage from "@/components/pages/WishlistPage";
-import SignInPage from "@/components/pages/SignInPage";
-import SignUpPage from "@/components/pages/SignUpPage";
-import Page from "@/components/pages/base/Page";
-import ProductsPage from "@/components/pages/ProductsPage";
-import AccountVerifiedPage from "./pages/AccountVerifiedPage";
-import CartPage from "./pages/CartPage";
-import ProcessorProductPage from "./pages/products/ProcessorProductPage";
-import GraphicsCardProductPage from "./pages/products/GraphicsCardProductPage";
-import MonitorProductPage from "./pages/products/MonitorProductPage";
-import MotherboardProductPage from "./pages/products/MotherboardProductPage";
-import PowerSupplyProductPage from "./pages/products/PowerSupplyProductPage";
-import RamProductPage from "./pages/products/RamProductPage";
-import SsdProductPage from "./pages/products/SsdProductPage";
+import { BrowserRouter, Route, Routes } from 'react-router';
+import AuthenticationRequired from '@/components/auth/AuthenticationRequired';
+import AccountPage from '@/components/pages/AccountPage';
+import WishlistPage from '@/components/pages/WishlistPage';
+import SignInPage from '@/components/pages/SignInPage';
+import SignUpPage from '@/components/pages/SignUpPage';
+import Page from '@/components/pages/Page';
+import ProductsPage from '@/components/pages/ProductsPage';
+import AccountVerifiedPage from './pages/AccountVerifiedPage';
+import CartPage from './pages/CartPage';
+import ProductPageRouter from './ProductRouter';
 
 export default function Router() {
   return (
@@ -27,29 +21,7 @@ export default function Router() {
           element={<ProductsPage />}
         />
 
-        <Route
-          path='/products/processors/:id'
-          element={<ProcessorProductPage />}
-        />
-        <Route
-          path='/products/graphics-cards/:id'
-          element={<GraphicsCardProductPage />}
-        />
-        <Route
-          path='/products/monitors/:id'
-          element={<MonitorProductPage />}
-        />
-        <Route
-          path='/products/power-supplies/:id'
-          element={<PowerSupplyProductPage />}
-        />
-        <Route
-          path='/products/motherboards/:id'
-          element={<MotherboardProductPage />}
-        />
-        
-        <Route path='/products/rams/:id' element={<RamProductPage />} />
-        <Route path='/products/ssds/:id' element={<SsdProductPage />} />
+        <Route path='/products/:category/:id' element={<ProductPageRouter />} />
 
         <Route path='/auth'>
           <Route
