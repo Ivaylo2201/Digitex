@@ -6,7 +6,7 @@ import {
   SelectValue
 } from '@/components/ui/select';
 
-import { useLanguage } from '@/lib/stores/useLanguage';
+import { useLanguage } from '@/lib/i18n/hooks/useLanguage';
 
 export default function LanguageSelect() {
   const { language, languages, changeLanguage } = useLanguage();

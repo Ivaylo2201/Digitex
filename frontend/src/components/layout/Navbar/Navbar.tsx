@@ -1,4 +1,4 @@
-import { useTranslation } from '@/lib/stores/useTranslation';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import NavbarLink from './NavbarLink';
 
 export default function Navbar() {

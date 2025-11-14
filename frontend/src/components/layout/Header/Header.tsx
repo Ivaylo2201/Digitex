@@ -3,13 +3,13 @@ import AccountLink from './AccountLink';
 import CartLink from './CartLink';
 import LogoLink from './LogoLink';
 import Searchbox from './Searchbox';
-import WishlistLink from './WishlistLink';
-import { useTranslation } from '@/lib/stores/useTranslation';
+import FavoritesLink from './FavoritesLink';
 import CurrencySelect from './CurrencySelect';
 import LanguageSelect from './LanguageSelect';
 import SignOutButton from './SignOutButton';
 import SignInLink from './SignInLink';
-import { useAuth } from '@/lib/stores/useAuth';
+import { useAuth } from '@/features/auth/stores/useAuth';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
@@ -49,7 +49,7 @@ export default function Header() {
         <div className='md:w-1/3 flex justify-center items-center gap-6 pt-2.5 md:pt-0'>
           <AccountLink />
           <CartLink />
-          <WishlistLink />
+          <FavoritesLink />
         </div>
       </section>
     </header>

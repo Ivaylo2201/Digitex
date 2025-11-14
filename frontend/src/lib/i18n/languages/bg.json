@@ -1,0 +1,84 @@
+{
+  "user": {
+    "cart": "Количка",
+    "account": "Профил",
+    "favorites": "Любими"
+  },
+  "units": {
+    "gb": "Гигабайта",
+    "hz": "Hz",
+    "ms": "милисекунди",
+    "mm": "мм",
+    "nits": "нита",
+    "w": "W"
+  },
+  "specs": {
+    "monitors": {
+      "displayDiagonal": "Диагонал на екрана",
+      "refreshRate": "Честота на опресняване",
+      "latency": "Латентност",
+      "matrix": "Матрица",
+      "resolution": "Резолюция",
+      "pixelSize": "Размер на пиксела",
+      "brightness": "Яркост",
+      "colorSpectre": "Цветови спектър"
+    },
+    "processors": {
+      "cores": "Ядра",
+      "threads": "Нишки",
+      "baseClockSpeed": "Базова тактова честота",
+      "boostClockSpeed": "Максимална тактова честота",
+      "socket": "Сокет",
+      "tdp": "Мощност"
+    },
+    "graphicsCards": {
+      "memory": "Памет",
+      "clockSpeed": "Честота",
+      "busWidth": "Шина",
+      "cudaCores": "CUDA ядра",
+      "directXSupport": "DirectX поддръжка",
+      "tdp": "TDP"
+    },
+    "motherboards": {
+      "socket": "Сокет",
+      "formFactor": "Форм фактор",
+      "chipset": "Чипсет",
+      "ramSlots": "RAM слотове",
+      "pcieSlots": "PCIe слотове"
+    },
+    "powerSupplies": {
+      "wattage": "Мощност",
+      "formFactor": "Форм фактор",
+      "efficiencyPercentage": "Ефективност",
+      "modularity": "Модулност"
+    },
+    "rams": {
+      "memory": "Памет",
+      "timing": "Тайминг"
+    },
+    "ssds": {
+      "capacityInGb": "Капацитет",
+      "operationSpeed": "Скорост на работа",
+      "interface": "Интерфейс"
+    }
+  },
+  "routing": {
+    "monitors": "Монитори",
+    "graphicsCards": "Графични карти",
+    "powerSupplies": "Захранвания",
+    "rams": "RAM Памет",
+    "ssds": "SSD дискове",
+    "motherboards": "Дънни платки",
+    "processors": "Процесори"
+  },
+  "auth": {
+    "signIn": "Вход",
+    "signOut": "Изход",
+    "verify": "Потвърждение"
+  },
+  "keywords": {
+    "productSearch": "Търсене на продукти...",
+    "address": "София, бул. Витоша 76",
+    "mainSpecifications": "Основни характеристики"
+  }
+}
