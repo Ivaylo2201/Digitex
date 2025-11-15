@@ -50,7 +50,7 @@ export default function ProductPage<T extends ProductLong>({
       <section className='flex flex-col gap-4 w-full'>
         <ProductPageBreadcrumb category={category} displayName={displayName} />
         <Button
-          className='w-10 h-10 p-0 rounded-full flex items-center justify-center cursor-pointer'
+          className='w-10 h-10 p-0 bg-theme-gunmetal rounded-full flex items-center justify-center cursor-pointer'
           onClick={() =>
             handleAddToCompare({ ...product, category }, translation)
           }
@@ -72,12 +72,12 @@ export default function ProductPage<T extends ProductLong>({
               {translation.keywords.mainSpecifications}
             </TableCaption>
             <TableBody className='text-theme-gunmetal'>
-              {specs.map((item, index) => (
+              {specs.map((item, idx) => (
                 <TableRow
                   className={`pointer-events-none ${
-                    index % 2 !== 0 ? 'bg-theme-gunmetal text-theme-white' : ''
+                    idx % 2 !== 0 ? 'bg-theme-gunmetal text-theme-white' : ''
                   }`}
-                  key={index}
+                  key={idx}
                 >
                   <TableCell className='w-1/2'>{item.spec}</TableCell>
                   <TableCell className='w-1/2 font-medium'>

@@ -19,6 +19,12 @@
     "w": "W"
   },
   "specs": {
+    "product": {
+      "brand": "Marke",
+      "model": "Modell",
+      "image": "Bild",
+      "price": "Preis"
+    },
     "monitors": {
       "displayDiagonal": "Bildschirmdiagonale",
       "refreshRate": "Bildwiederholfrequenz",
@@ -75,7 +81,8 @@
     "rams": "Arbeitsspeicher",
     "ssds": "SSDs",
     "motherboards": "Mainboards",
-    "processors": "Prozessoren"
+    "processors": "Prozessoren",
+    "home": "Startseite"
   },
   "auth": {
     "signIn": "Anmelden",
@@ -86,6 +93,7 @@
     "productSearch": "Produkte suchen...",
     "address": "Sofia, Vitosha Blvd. 76",
     "mainSpecifications": "Hauptspezifikationen",
-    "compare": "Vergleichen"
+    "compare": "Vergleichen",
+    "comparedProducts": "Zu vergleichende Produkte"
   }
 }

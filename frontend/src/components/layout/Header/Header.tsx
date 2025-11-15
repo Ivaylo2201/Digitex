@@ -1,9 +1,9 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 import AccountLink from '../../../features/account/components/AccountLink';
-import CartLink from './CartLink';
+import CartLink from '../../../features/cart/components/CartLink';
 import LogoLink from './LogoLink';
 import Searchbox from './Searchbox';
-import FavoritesLink from './FavoritesLink';
+import FavoritesLink from '../../../features/favorites/FavoritesLink';
 import CurrencySelect from '../../../features/currencies/components/CurrencySelect';
 import LanguageSelect from './LanguageSelect';
 import SignOutButton from '../../../features/auth/components/SignOutButton';

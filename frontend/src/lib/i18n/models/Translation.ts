@@ -1,5 +1,11 @@
 export type Translation = {
   specs: {
+    product: {
+      brand: string;
+      model: string;
+      image: string;
+      price: string;
+    };
     monitors: {
       displayDiagonal: string;
       refreshRate: string;
@@ -57,6 +63,7 @@ export type Translation = {
     powerSupplies: string;
     rams: string;
     ssds: string;
+    home: string;
   };
   compare: {
     maxCapacityReached: string;
@@ -87,6 +94,7 @@ export type Translation = {
     address: string;
     mainSpecifications: string;
     compare: string;
+    comparedProducts: string
   };
 };
 
@@ -103,9 +111,15 @@ export const translation: Translation = {
     maxCapacityReached: 'Max compare capacity reach.',
     alreadyPresent: 'Product already present.',
     incompatibleCategory: 'Incompatible compare category.',
-    addedSuccessfully: 'Product added for comparison.',
+    addedSuccessfully: 'Product added to comparison.'
   },
   specs: {
+    product: {
+      brand: 'Brand',
+      model: 'Model',
+      image: 'Image',
+      price: 'Price'
+    },
     monitors: {
       displayDiagonal: 'Display diagonal',
       refreshRate: 'Refresh rate',
@@ -162,7 +176,8 @@ export const translation: Translation = {
     rams: 'RAMs',
     ssds: 'SSDs',
     motherboards: 'Motherboards',
-    processors: 'Processors'
+    processors: 'Processors',
+    home: 'Home'
   },
   auth: {
     signIn: 'Sign in',
@@ -178,6 +193,7 @@ export const translation: Translation = {
     productSearch: 'Search for products...',
     address: 'Sofia, Vitosha Blvd. 76',
     mainSpecifications: 'Main specifications',
-    compare: 'Compare'
+    compare: 'Compare',
+    comparedProducts: 'Compared products'
   }
 };

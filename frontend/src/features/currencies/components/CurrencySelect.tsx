@@ -5,8 +5,8 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { getCurrencySymbol } from '@/features/currencies/utils/getCurrencySymbol';
 import { useCurrency } from '@/features/currencies/stores/useCurrency';
+import CurrencyOption from './CurrencyOption';
 
 export default function LanguageSelect() {
   const { currency, currencies, changeCurrency } = useCurrency();
@@ -26,16 +26,5 @@ export default function LanguageSelect() {
         ))}
       </SelectContent>
     </Select>
-  );
-}
-
-function CurrencyOption({ code }: { code: string }) {
-  return (
-    <div className='flex items-center gap-2 font-montserrat text-xs'>
-      <span className='text-theme-crimson font-semibold'>
-        {getCurrencySymbol(code)}
-      </span>
-      <span>{code.toUpperCase()}</span>
-    </div>
   );
 }

@@ -19,6 +19,12 @@
     "w": "W"
   },
   "specs": {
+    "product": {
+      "brand": "Марка",
+      "model": "Модел",
+      "image": "Изображение",
+      "price": "Цена"
+    },
     "monitors": {
       "displayDiagonal": "Диагонал на екрана",
       "refreshRate": "Честота на опресняване",
@@ -75,7 +81,8 @@
     "rams": "RAM Памет",
     "ssds": "SSD дискове",
     "motherboards": "Дънни платки",
-    "processors": "Процесори"
+    "processors": "Процесори",
+    "home": "Начало"
   },
   "auth": {
     "signIn": "Вход",
@@ -86,6 +93,7 @@
     "productSearch": "Търсене на продукти...",
     "address": "София, бул. Витоша 76",
     "mainSpecifications": "Основни характеристики",
-    "compare": "Сравни"
+    "compare": "Сравни",
+    "comparedProducts": "Продукти за сравнение"
   }
 }

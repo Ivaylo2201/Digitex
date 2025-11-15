@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/select';
 
 import { useLanguage } from '@/lib/i18n/hooks/useLanguage';
+import LanguageOption from './LanguageOption';
 
 export default function LanguageSelect() {
   const { language, languages, changeLanguage } = useLanguage();
@@ -26,18 +27,5 @@ export default function LanguageSelect() {
         ))}
       </SelectContent>
     </Select>
-  );
-}
-
-function LanguageOption({ code }: { code: string }) {
-  return (
-    <div className='flex items-center gap-2 font-montserrat text-xs'>
-      <img
-        src={new URL(`/src/assets/flags/${code}.png`, import.meta.url).href}
-        alt={`${code}-flag`}
-        className='size-4.5 rounded-full object-cover'
-      />
-      <span>{code.toUpperCase()}</span>
-    </div>
   );
 }

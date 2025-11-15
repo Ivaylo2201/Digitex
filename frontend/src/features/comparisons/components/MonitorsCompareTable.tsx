@@ -4,42 +4,38 @@ import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import type { Monitor } from '@/features/products/models/Monitor';
 import ProductCompareTable from './ProductCompareTable';
 import React from 'react';
+import { formatMonitor } from '@/lib/utils/productFormatters';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 type MonitorsCompareTableProps = { products: ProductLong[] };
 
 export default function MonitorsCompareTable({
   products
 }: MonitorsCompareTableProps) {
+  const translation = useTranslation();
+
   return (
     <ProductCompareTable
       products={products}
       childTableHeads={
-        <>
-          <TableHead>Diagonal</TableHead>
-          <TableHead>Refresh Rate</TableHead>
-          <TableHead>Latency</TableHead>
-          <TableHead>Matrix</TableHead>
-          <TableHead>Resolution</TableHead>
-          <TableHead>Pixel Size</TableHead>
-          <TableHead>Brightness</TableHead>
-          <TableHead>Color Spectrum</TableHead>
-        </>
+        <React.Fragment>
+          <TableHead>{translation.specs.monitors.displayDiagonal}</TableHead>
+          <TableHead>{translation.specs.monitors.refreshRate}</TableHead>
+          <TableHead>{translation.specs.monitors.latency}</TableHead>
+          <TableHead>{translation.specs.monitors.matrix}</TableHead>
+          <TableHead>{translation.specs.monitors.resolution}</TableHead>
+          <TableHead>{translation.specs.monitors.pixelSize}</TableHead>
+          <TableHead>{translation.specs.monitors.brightness}</TableHead>
+          <TableHead>{translation.specs.monitors.colorSpectre}</TableHead>
+        </React.Fragment>
       }
       childTableCells={(product) => {
-        const monitor = product as Monitor;
+        const monitor = formatMonitor(product as Monitor, translation);
         return (
           <React.Fragment>
-            <TableCell>{monitor.displayDiagonal}"</TableCell>
-            <TableCell>{monitor.refreshRate} Hz</TableCell>
-            <TableCell>{monitor.latency} ms</TableCell>
-            <TableCell>{monitor.matrix}</TableCell>
-            <TableCell>
-              {monitor.resolution.width} x {monitor.resolution.height}{' '}
-              {monitor.resolution.type}
-            </TableCell>
-            <TableCell>{monitor.pixelSize} µm</TableCell>
-            <TableCell>{monitor.brightness} cd/m²</TableCell>
-            <TableCell>{monitor.colorSpectre}%</TableCell>
+            {monitor.map((m) => (
+              <TableCell>{m.value}</TableCell>
+            ))}
           </React.Fragment>
         );
       }}
