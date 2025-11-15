@@ -58,6 +58,12 @@ export type Translation = {
     rams: string;
     ssds: string;
   };
+  compare: {
+    maxCapacityReached: string;
+    alreadyPresent: string;
+    incompatibleCategory: string;
+    addedSuccessfully: string;
+  };
   units: {
     hz: string;
     ms: string;
@@ -80,6 +86,7 @@ export type Translation = {
     productSearch: string;
     address: string;
     mainSpecifications: string;
+    compare: string;
   };
 };
 
@@ -91,6 +98,12 @@ export const translation: Translation = {
     mm: 'mm',
     nits: 'nits',
     w: 'W'
+  },
+  compare: {
+    maxCapacityReached: 'Max compare capacity reach.',
+    alreadyPresent: 'Product already present.',
+    incompatibleCategory: 'Incompatible compare category.',
+    addedSuccessfully: 'Product added for comparison.',
   },
   specs: {
     monitors: {
@@ -164,6 +177,7 @@ export const translation: Translation = {
   keywords: {
     productSearch: 'Search for products...',
     address: 'Sofia, Vitosha Blvd. 76',
-    mainSpecifications: 'Main specifications'
+    mainSpecifications: 'Main specifications',
+    compare: 'Compare'
   }
 };

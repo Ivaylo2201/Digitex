@@ -9,6 +9,7 @@ import ProductsPage from '@/features/products/pages/ProductsPage';
 import ProductPageRouter from './features/products/ProductPageRouter';
 import AccountVerifiedPage from './features/account/pages/AccountVerifiedPage';
 import CartPage from './features/cart/pages/CartPage';
+import ComparePage from './features/comparisons/pages/ComparePage';
 
 export default function Router() {
   return (
@@ -36,6 +37,7 @@ export default function Router() {
           <Route path='sign-up' element={<SignUpPage />} />
           <Route path='verify' element={<AccountVerifiedPage />} />
         </Route>
+        <Route path='/compare' element={<ComparePage />} />
         <Route
           path='/cart'
           element={

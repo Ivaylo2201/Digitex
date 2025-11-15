@@ -4,6 +4,12 @@
     "account": "Профил",
     "favorites": "Любими"
   },
+  "compare": {
+    "maxCapacityReached": "Достигнат максимален капацитет на сравнение.",
+    "alreadyPresent": "Продуктът вече е добавен за сравнение.",
+    "incompatibleCategory": "Не можете да сравнявате продукти от различни категории.",
+    "addedSuccessfully": "Продуктът е добавен успешно за сравнение."
+  },
   "units": {
     "gb": "Гигабайта",
     "hz": "Hz",
@@ -79,6 +85,7 @@
   "keywords": {
     "productSearch": "Търсене на продукти...",
     "address": "София, бул. Витоша 76",
-    "mainSpecifications": "Основни характеристики"
+    "mainSpecifications": "Основни характеристики",
+    "compare": "Сравни"
   }
 }

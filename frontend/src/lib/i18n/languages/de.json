@@ -4,6 +4,12 @@
     "account": "Profil",
     "favorites": "Favoriten"
   },
+  "compare": {
+    "maxCapacityReached": "Die maximale Anzahl zum Vergleichen wurde erreicht.",
+    "alreadyPresent": "Das Produkt wurde bereits zum Vergleich hinzugefügt.",
+    "incompatibleCategory": "Produkte aus unterschiedlichen Kategorien können nicht verglichen werden.",
+    "addedSuccessfully": "Das Produkt wurde erfolgreich zum Vergleich hinzugefügt."
+  },
   "units": {
     "gb": "Gigabyte",
     "hz": "Hz",
@@ -79,6 +85,7 @@
   "keywords": {
     "productSearch": "Produkte suchen...",
     "address": "Sofia, Vitosha Blvd. 76",
-    "mainSpecifications": "Hauptspezifikationen"
+    "mainSpecifications": "Hauptspezifikationen",
+    "compare": "Vergleichen"
   }
 }

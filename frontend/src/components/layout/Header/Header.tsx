@@ -1,15 +1,16 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
-import AccountLink from './AccountLink';
+import AccountLink from '../../../features/account/components/AccountLink';
 import CartLink from './CartLink';
 import LogoLink from './LogoLink';
 import Searchbox from './Searchbox';
 import FavoritesLink from './FavoritesLink';
-import CurrencySelect from './CurrencySelect';
+import CurrencySelect from '../../../features/currencies/components/CurrencySelect';
 import LanguageSelect from './LanguageSelect';
-import SignOutButton from './SignOutButton';
-import SignInLink from './SignInLink';
+import SignOutButton from '../../../features/auth/components/SignOutButton';
+import SignInLink from '../../../features/auth/components/SignInLink';
 import { useAuth } from '@/features/auth/stores/useAuth';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import CompareLink from '../../../features/comparisons/components/CompareLink';
 
 export default function Header() {
   const { isAuthenticated } = useAuth();
@@ -50,6 +51,7 @@ export default function Header() {
           <AccountLink />
           <CartLink />
           <FavoritesLink />
+          <CompareLink />
         </div>
       </section>
     </header>

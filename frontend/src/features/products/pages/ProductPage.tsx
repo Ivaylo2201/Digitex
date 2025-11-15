@@ -10,6 +10,12 @@ import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import ProductPageBreadcrumb from '../components/ProductCard/ProductPageBreadcrumb';
 import Page from '@/components/layout/Page';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import type { Translation } from '@/lib/i18n/models/Translation';
+import { getStaticFile } from '@/lib/utils/getStaticFile';
+import { toast } from 'sonner';
+import { useCompare } from '@/features/comparisons/stores/useCompare';
+import { Button } from '@/components/ui/button';
+import { ArrowLeftRight } from 'lucide-react';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
@@ -23,20 +29,44 @@ export default function ProductPage<T extends ProductLong>({
   specs
 }: ProductPageProps<T>) {
   const translation = useTranslation();
+  const { addToCompare } = useCompare();
   const displayName = `${product.brandName} ${product.modelName}`;
-  const imageSrc = `${import.meta.env.VITE_STATIC_FILES_URL}/${
-    product.imagePath
-  }`;
+
+  const handleAddToCompare = (
+    product: ProductLong & { category: string },
+    translation: Translation
+  ) => {
+    const addToCompareResult = addToCompare(product, translation);
+
+    if (addToCompareResult.isSuccess) {
+      toast.success(addToCompareResult.message);
+    } else {
+      toast.error(addToCompareResult.message);
+    }
+  };
 
   return (
     <Page>
-      <section className='flex flex-col gap-4'>
+      <section className='flex flex-col gap-4 w-full'>
         <ProductPageBreadcrumb category={category} displayName={displayName} />
+        <Button
+          className='w-10 h-10 p-0 rounded-full flex items-center justify-center cursor-pointer'
+          onClick={() =>
+            handleAddToCompare({ ...product, category }, translation)
+          }
+        >
+          <ArrowLeftRight />
+        </Button>
+
         <div className='flex flex-col gap-14'>
           <p className='text-5xl text-theme-gunmetal font-bold'>
             {displayName}
           </p>
-          <img src={imageSrc} alt={displayName} className='object-contain' />
+          <img
+            src={getStaticFile(product.imagePath)}
+            alt={displayName}
+            className='object-contain max-w-140'
+          />
           <Table className='font-montserrat border border-gray-200'>
             <TableCaption>
               {translation.keywords.mainSpecifications}

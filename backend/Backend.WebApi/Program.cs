@@ -57,12 +57,6 @@ app.UseMiddleware<RequestPipelineMiddleware>();
 app.UseGlobalExceptionHandler();
 app.MapControllers();
 
-app.UseSpa(spa =>
-{
-    spa.Options.SourcePath = "../frontend";
-    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
-});
-
 Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment} at version {ServiceVersion}...", serviceName, app.Environment.EnvironmentName, serviceVersion);
 Log.Information("[{ServiceName}]: Web host listening on: {ApiUrl}.", serviceName, $"{serviceUrl}/api");
 Log.Information("[{ServiceName}]: Swagger available on {SwaggerUrl}.", serviceName, swaggerUrl);
