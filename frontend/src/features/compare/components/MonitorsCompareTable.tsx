@@ -17,6 +17,7 @@ export default function MonitorsCompareTable({
   return (
     <ProductCompareTable
       products={products}
+      category='monitors'
       childTableHeads={
         <React.Fragment>
           <TableHead>{translation.specs.monitors.displayDiagonal}</TableHead>
@@ -30,11 +31,10 @@ export default function MonitorsCompareTable({
         </React.Fragment>
       }
       childTableCells={(product) => {
-        const monitor = formatMonitor(product as Monitor, translation);
         return (
           <React.Fragment>
-            {monitor.map((m) => (
-              <TableCell>{m.value}</TableCell>
+            {formatMonitor(product as Monitor, translation).map((monitor) => (
+              <TableCell>{monitor.value}</TableCell>
             ))}
           </React.Fragment>
         );

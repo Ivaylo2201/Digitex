@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
     <Router />
     <Toaster
       position='top-right'
-      duration={3000}
+      duration={1500}
       toastOptions={{
         style: {
           fontFamily: "'Montserrat', sans-serif"

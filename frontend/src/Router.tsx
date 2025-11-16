@@ -9,7 +9,7 @@ import ProductsPage from '@/features/products/pages/ProductsPage';
 import ProductPageRouter from './features/products/ProductPageRouter';
 import AccountVerifiedPage from './features/account/pages/AccountVerifiedPage';
 import CartPage from './features/cart/pages/CartPage';
-import ComparePage from './features/comparisons/pages/ComparePage';
+import ComparePage from './features/compare/pages/ComparePage';
 
 export default function Router() {
   return (

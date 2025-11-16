@@ -13,7 +13,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import type { Translation } from '@/lib/i18n/models/Translation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { toast } from 'sonner';
-import { useCompare } from '@/features/comparisons/stores/useCompare';
+import { useCompare } from '@/features/compare/stores/useCompare';
 import { Button } from '@/components/ui/button';
 import { ArrowLeftRight } from 'lucide-react';
 

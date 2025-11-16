@@ -5,8 +5,9 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { useCurrency } from '@/features/currencies/stores/useCurrency';
+
 import CurrencyOption from './CurrencyOption';
+import { useCurrency } from '../stores/useCurrency';
 
 export default function LanguageSelect() {
   const { currency, currencies, changeCurrency } = useCurrency();

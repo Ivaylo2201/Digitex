@@ -45,7 +45,8 @@
     },
     "graphicsCards": {
       "memory": "Speicher",
-      "clockSpeed": "Taktfrequenz",
+      "baseClockSpeed": "Basistaktfrequenz",
+      "boostClockSpeed": "Maximale Taktfrequenz",
       "busWidth": "Busbreite",
       "cudaCores": "CUDA-Kerne",
       "directXSupport": "DirectX-Unterstützung",
@@ -76,8 +77,8 @@
   },
   "routing": {
     "monitors": "Monitore",
-    "graphicsCards": "Grafikkarten",
-    "powerSupplies": "Netzteile",
+    "graphics-cards": "Grafikkarten",
+    "power-supplies": "Netzteile",
     "rams": "Arbeitsspeicher",
     "ssds": "SSDs",
     "motherboards": "Mainboards",
@@ -94,6 +95,7 @@
     "address": "Sofia, Vitosha Blvd. 76",
     "mainSpecifications": "Hauptspezifikationen",
     "compare": "Vergleichen",
-    "comparedProducts": "Zu vergleichende Produkte"
+    "comparedProducts": "Zu vergleichende Produkte",
+    "clear": "Löschen"
   }
 }

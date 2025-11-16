@@ -4,13 +4,13 @@ import CartLink from '../../../features/cart/components/CartLink';
 import LogoLink from './LogoLink';
 import Searchbox from './Searchbox';
 import FavoritesLink from '../../../features/favorites/FavoritesLink';
-import CurrencySelect from '../../../features/currencies/components/CurrencySelect';
 import LanguageSelect from './LanguageSelect';
 import SignOutButton from '../../../features/auth/components/SignOutButton';
 import SignInLink from '../../../features/auth/components/SignInLink';
 import { useAuth } from '@/features/auth/stores/useAuth';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import CompareLink from '../../../features/comparisons/components/CompareLink';
+import CompareLink from '../../../features/compare/components/CompareLink';
+import CurrencySelect from '@/features/currency/components/CurrencySelect';
 
 export default function Header() {
   const { isAuthenticated } = useAuth();

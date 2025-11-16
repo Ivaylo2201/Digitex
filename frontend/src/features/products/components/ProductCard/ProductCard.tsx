@@ -1,7 +1,7 @@
 import Rating from '@/features/products/components/Rating';
 import { Link } from 'react-router';
 import type { ProductShort } from '@/features/products/models/base/ProductShort';
-import useCurrencyExchange from '@/features/currencies/hooks/useCurrencyExchange';
+import useCurrencyExchange from '@/features/currency/hooks/useCurrencyExchange';
 
 type ProductCardProps = ProductShort & { category: string };
 

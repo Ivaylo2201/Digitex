@@ -12,6 +12,7 @@ type CompareStore = {
     translation: Translation
   ) => CompareActionResult;
   removeFromCompare: (id: string) => void;
+  clearCompare: () => void;
 };
 
 export const useCompare = create<CompareStore>((set, get) => ({
@@ -21,7 +22,7 @@ export const useCompare = create<CompareStore>((set, get) => ({
     const category = get().category;
     const products = get().products;
 
-    if (products.length >= 4)
+    if (products.length >= 10)
       return {
         isSuccess: false,
         message: translation.compare.maxCapacityReached

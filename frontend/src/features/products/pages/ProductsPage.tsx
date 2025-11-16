@@ -5,10 +5,10 @@ import useProducts from '../hooks/useProducts';
 
 export default function ProductsPage() {
   const { category } = useParams<{ category: string }>();
-
-  if (category === undefined) return;
-
   const { data: products } = useProducts(category);
+
+  if (category === undefined)
+    return;
 
   return (
     <Page>

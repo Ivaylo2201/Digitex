@@ -26,7 +26,8 @@ export type Translation = {
     };
     graphicsCards: {
       memory: string;
-      clockSpeed: string;
+      baseClockSpeed: string;
+      boostClockSpeed: string;
       busWidth: string;
       cudaCores: string;
       directXSupport: string;
@@ -58,9 +59,9 @@ export type Translation = {
   routing: {
     monitors: string;
     processors: string;
-    graphicsCards: string;
+    "graphics-cards": string;
     motherboards: string;
-    powerSupplies: string;
+    "power-supplies": string;
     rams: string;
     ssds: string;
     home: string;
@@ -94,7 +95,8 @@ export type Translation = {
     address: string;
     mainSpecifications: string;
     compare: string;
-    comparedProducts: string
+    comparedProducts: string;
+    clear: string;
   };
 };
 
@@ -140,7 +142,8 @@ export const translation: Translation = {
     },
     graphicsCards: {
       memory: 'Memory',
-      clockSpeed: 'Clock speed',
+      baseClockSpeed: 'Base clock speed',
+      boostClockSpeed: 'Boost clock speed',
       busWidth: 'Bus width',
       cudaCores: 'CUDA cores',
       directXSupport: 'DirectX support',
@@ -171,8 +174,8 @@ export const translation: Translation = {
   },
   routing: {
     monitors: 'Monitors',
-    graphicsCards: 'Graphics cards',
-    powerSupplies: 'Power supplies',
+    "graphics-cards": 'Graphics cards',
+    "power-supplies": 'Power supplies',
     rams: 'RAMs',
     ssds: 'SSDs',
     motherboards: 'Motherboards',
@@ -194,6 +197,7 @@ export const translation: Translation = {
     address: 'Sofia, Vitosha Blvd. 76',
     mainSpecifications: 'Main specifications',
     compare: 'Compare',
-    comparedProducts: 'Compared products'
+    comparedProducts: 'Compared products',
+    clear: "Clear"
   }
 };

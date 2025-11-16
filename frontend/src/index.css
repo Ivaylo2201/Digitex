@@ -11,8 +11,9 @@ body {
 
 p,
 input,
-textarea {
-  user-select: text;
+textarea,
+button {
+  user-select: none;
 }
 
 @custom-variant dark (&:is(.dark *));

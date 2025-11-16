@@ -2,10 +2,12 @@ import { useProductParams } from '@/features/products/hooks/useProductParams';
 import { Navigate } from 'react-router';
 import ProcessorProductPage from './pages/ProcessorProductPage';
 import MonitorProductPage from './pages/MonitorProductPage';
+import GraphicsCardsProductPage from './pages/GraphicsCardsProductPage';
 
 const productPages: Record<string, React.ComponentType> = {
   processors: ProcessorProductPage,
-  monitors: MonitorProductPage
+  monitors: MonitorProductPage,
+  "graphics-cards": GraphicsCardsProductPage
 };
 
 export default function ProductPageRouter() {
