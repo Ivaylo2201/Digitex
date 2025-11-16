@@ -8,7 +8,11 @@
     "maxCapacityReached": "Достигнат максимален капацитет на сравнение.",
     "alreadyPresent": "Продуктът вече е добавен за сравнение.",
     "incompatibleCategory": "Не можете да сравнявате продукти от различни категории.",
-    "addedSuccessfully": "Продуктът е добавен успешно за сравнение."
+    "addedSuccessfully": "Продуктът е добавен успешно за сравнение.",
+    "compare": "Сравни",
+    "comparedProducts": "Продукти за сравнение",
+    "clear": "Изчисти",
+    "removeFromCompare": "Продуктът е премахнат от сравняването."
   },
   "units": {
     "gb": "Гигабайта",
@@ -50,7 +54,7 @@
       "busWidth": "Шина",
       "cudaCores": "CUDA ядра",
       "directXSupport": "DirectX поддръжка",
-      "tdp": "TDP"
+      "tdp": "Мощност"
     },
     "motherboards": {
       "socket": "Сокет",
@@ -93,9 +97,6 @@
   "keywords": {
     "productSearch": "Търсене на продукти...",
     "address": "София, бул. Витоша 76",
-    "mainSpecifications": "Основни характеристики",
-    "compare": "Сравни",
-    "comparedProducts": "Продукти за сравнение",
-    "clear": "Изчисти"
+    "mainSpecifications": "Основни характеристики"
   }
 }

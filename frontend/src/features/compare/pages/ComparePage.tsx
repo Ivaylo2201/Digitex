@@ -5,7 +5,7 @@ import MonitorsCompareTable from '../components/MonitorsCompareTable';
 import Page from '@/components/layout/Page';
 import GraphicsCardCompareTable from '../components/GraphicsCardCompareTable';
 import { Button } from '@/components/ui/button';
-import { Recycle, Trash } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 const compareTables: Record<
@@ -35,7 +35,7 @@ export default function ComparePage() {
           onClick={clearCompare}
         >
           <Trash />
-          <p>{translation.keywords.clear}</p>
+          <p>{translation.compare.clear}</p>
         </Button>
         <CompareTable products={products} />
       </section>

@@ -15,6 +15,7 @@ import { useCompare } from '../stores/useCompare';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import useCurrencyExchange from '@/features/currency/hooks/useCurrencyExchange';
+import { toast } from 'sonner';
 
 type ProductCompareTableProps = {
   products: ProductLong[];
@@ -40,11 +41,12 @@ export default function ProductCompareTable({
   ) => {
     e.stopPropagation();
     removeFromCompare(id);
+    toast.success(translation.compare.removeFromCompare);
   };
 
   return (
     <Table className='font-montserrat border'>
-      <TableCaption>{translation.keywords.comparedProducts}</TableCaption>
+      <TableCaption>{translation.compare.comparedProducts}</TableCaption>
       <TableHeader>
         <TableRow className='bg-theme-gunmetal [&>th]:text-white pointer-events-none'>
           <TableHead>{translation.specs.product.brand}</TableHead>
@@ -60,14 +62,14 @@ export default function ProductCompareTable({
           <TableRow
             key={idx}
             onClick={() => navigate(`/products/${category}/${product.id}`)}
-            className='cursor-pointer hover:bg-gray-100 [&>td]:border [&>td]:min-w-30'
+            className='cursor-pointer hover:bg-gray-100 [&>td]:border [&>td]:text-center'
           >
             <TableCell>{product.brandName}</TableCell>
             <TableCell>{product.modelName}</TableCell>
             <TableCell>
               <img
                 src={getStaticFile(product.imagePath)}
-                className='h-11 w-full object-contain'
+                className='h-10 w-full object-contain'
               />
             </TableCell>
             <TableCell>{exchangeCurrency(product.price.discounted)}</TableCell>

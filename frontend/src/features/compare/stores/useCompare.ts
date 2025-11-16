@@ -18,7 +18,7 @@ type CompareStore = {
 export const useCompare = create<CompareStore>((set, get) => ({
   category: null,
   products: [],
-  addToCompare: (product, translation) => {
+  addToCompare: (comparedProduct, translation) => {
     const category = get().category;
     const products = get().products;
 
@@ -28,28 +28,29 @@ export const useCompare = create<CompareStore>((set, get) => ({
         message: translation.compare.maxCapacityReached
       };
 
-    if (category && product.category !== category)
+    if (category && comparedProduct.category !== category)
       return {
         isSuccess: false,
         message: translation.compare.incompatibleCategory
       };
 
-    if (products.some((p) => p.id === product.id))
+    if (products.some((product) => product.id === comparedProduct.id))
       return {
         isSuccess: false,
         message: translation.compare.alreadyPresent
       };
 
-    const { category: _, ...rest } = product;
-    set({ products: [...products, rest], category: product.category });
+    const { category: _, ...rest } = comparedProduct;
+    set({ products: [...products, rest], category: comparedProduct.category });
 
     return { isSuccess: true, message: translation.compare.addedSuccessfully };
   },
   removeFromCompare: (id) => {
-    const products = get().products;
-    set({ products: products.filter((p) => p.id !== id) });
+    const filteredProducts = get().products.filter((product) => product.id !== id);
 
-    if (products.length <= 0) {
+    set({ products: filteredProducts });
+
+    if (filteredProducts.length === 0) {
       set({ category: null });
     }
   },

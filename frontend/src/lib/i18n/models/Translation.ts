@@ -59,9 +59,9 @@ export type Translation = {
   routing: {
     monitors: string;
     processors: string;
-    "graphics-cards": string;
+    'graphics-cards': string;
     motherboards: string;
-    "power-supplies": string;
+    'power-supplies': string;
     rams: string;
     ssds: string;
     home: string;
@@ -71,6 +71,10 @@ export type Translation = {
     alreadyPresent: string;
     incompatibleCategory: string;
     addedSuccessfully: string;
+    compare: string;
+    comparedProducts: string;
+    clear: string;
+    removeFromCompare: string;
   };
   units: {
     hz: string;
@@ -94,9 +98,6 @@ export type Translation = {
     productSearch: string;
     address: string;
     mainSpecifications: string;
-    compare: string;
-    comparedProducts: string;
-    clear: string;
   };
 };
 
@@ -111,9 +112,13 @@ export const translation: Translation = {
   },
   compare: {
     maxCapacityReached: 'Max compare capacity reach.',
-    alreadyPresent: 'Product already present.',
-    incompatibleCategory: 'Incompatible compare category.',
-    addedSuccessfully: 'Product added to comparison.'
+    alreadyPresent: 'Product already present in comparison.',
+    incompatibleCategory: 'Incompatible comparison category.',
+    addedSuccessfully: 'Product added to comparison.',
+    compare: 'Compare',
+    comparedProducts: 'Compared products',
+    clear: 'Clear',
+    removeFromCompare: 'Product removed from comparison.'
   },
   specs: {
     product: {
@@ -174,8 +179,8 @@ export const translation: Translation = {
   },
   routing: {
     monitors: 'Monitors',
-    "graphics-cards": 'Graphics cards',
-    "power-supplies": 'Power supplies',
+    'graphics-cards': 'Graphics cards',
+    'power-supplies': 'Power supplies',
     rams: 'RAMs',
     ssds: 'SSDs',
     motherboards: 'Motherboards',
@@ -195,9 +200,6 @@ export const translation: Translation = {
   keywords: {
     productSearch: 'Search for products...',
     address: 'Sofia, Vitosha Blvd. 76',
-    mainSpecifications: 'Main specifications',
-    compare: 'Compare',
-    comparedProducts: 'Compared products',
-    clear: "Clear"
+    mainSpecifications: 'Main specifications'
   }
 };

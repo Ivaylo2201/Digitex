@@ -9,12 +9,12 @@ const ratings: Record<Currency, number> = {
 };
 
 export default function useCurrencyExchange() {
+  const { currency } = useCurrency();
+  const currencySymbol = getCurrencySymbol(currency);
+
   return {
     exchangeCurrency: (amount: number) => {
-      const { currency } = useCurrency();
-      const currencySymbol = getCurrencySymbol(currency);
       const exchangedAmount = amount * ratings[currency];
-
       return `${currencySymbol}${exchangedAmount.toFixed(2)}`;
     }
   };

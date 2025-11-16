@@ -15,13 +15,13 @@ export default function CompareLink() {
       <div className='relative'>
         <ArrowRightLeft size={19} />
         {comparedProducts.length > 0 && (
-          <span className='size-4 flex justify-center items-center absolute -top-2 -right-4 rounded-full bg-theme-crimson text-[11px] text-theme-white font-Montserrat'>
+          <span className='size-4.5 flex justify-center items-center absolute -top-3 -right-4 rounded-full bg-theme-crimson text-[11px] text-theme-white font-Montserrat'>
             {comparedProducts.length}
           </span>
         )}
       </div>
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.keywords.compare}
+        {translation.compare.compare}
       </span>
     </Link>
   );

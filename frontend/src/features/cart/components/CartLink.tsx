@@ -14,7 +14,7 @@ export default function CartLink() {
       <div className='relative'>
         <ShoppingCart size={19} />
         {cart.items.length > 0 && (
-          <span className='size-4 flex justify-center items-center absolute -top-2 -right-4 rounded-full bg-theme-crimson text-[11px] text-theme-white font-Montserrat'>
+          <span className='size-4.5 flex justify-center items-center absolute -top-3 -right-4 rounded-full bg-theme-crimson text-[11px] text-theme-white font-Montserrat'>
             {cart.items.length}
           </span>
         )}
