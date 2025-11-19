@@ -73,7 +73,12 @@
       "wattage": "Мощност",
       "formFactor": "Форм фактор",
       "efficiencyPercentage": "Ефективност",
-      "modularity": "Модулност"
+      "modularity": {
+        "spec": "Модулност",
+        "none": "Няма",
+        "semi": "Половин",
+        "full": "Пълна"
+      }
     },
     "rams": {
       "memory": "Памет",

@@ -6,6 +6,7 @@ import type { Processor } from '../models/Processor';
 import type { Motherboard } from '../models/Motherboard';
 import type { Ram } from '../models/Ram';
 import type { Ssd } from '../models/Ssd';
+import type { PowerSupply } from '../models/PowerSupply';
 
 export function useFormatProduct(translation: Translation) {
   const toMonitor = (product: ProductLong) => {
@@ -182,12 +183,39 @@ export function useFormatProduct(translation: Translation) {
     ];
   };
 
+  const toPowerSupply = (product: ProductLong) => {
+    const powerSupply = product as PowerSupply;
+
+    return [
+      {
+        spec: translation.specs.powerSupplies.formFactor,
+        value: powerSupply.formFactor.toUpperCase()
+      },
+      {
+        spec: translation.specs.powerSupplies.efficiencyPercentage,
+        value: `${powerSupply.efficiencyPercentage}%`
+      },
+      {
+        spec: translation.specs.powerSupplies.modularity['spec'],
+        value:
+          translation.specs.powerSupplies.modularity[
+            powerSupply.modularity.toLowerCase()
+          ]
+      },
+      {
+        spec: translation.specs.powerSupplies.wattage,
+        value: `${powerSupply.wattage} W`
+      }
+    ];
+  };
+
   return {
     toMonitor,
     toGraphicsCard,
     toProcessor,
     toMotherboard,
     toRam,
-    toSsd
+    toSsd,
+    toPowerSupply
   };
 }

@@ -73,7 +73,12 @@
       "wattage": "Leistung",
       "formFactor": "Formfaktor",
       "efficiencyPercentage": "Effizienz",
-      "modularity": "Modularität"
+      "modularity": {
+        "spec": "Modularität",
+        "none": "Keine",
+        "semi": "Teilweise",
+        "full": "Voll"
+      }
     },
     "rams": {
       "memory": "Speicher",

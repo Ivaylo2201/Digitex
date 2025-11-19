@@ -8,6 +8,7 @@ import { NoProductsForComparison } from '../components/NoProductsForComparison';
 import MotherboardsCompareTable from '../components/tables/MotherboardsCompareTable';
 import { RamsCompareTable } from '../components/tables/RamsCompareTable';
 import { SsdsCompareTable } from '../components/tables/SsdsCompareTable';
+import PowerSuppliesCompareTable from '../components/tables/PowerSuppliesCompareTable';
 
 const compareTables: Record<
   string,
@@ -18,7 +19,8 @@ const compareTables: Record<
   'graphics-cards': GraphicsCardsCompareTable,
   motherboards: MotherboardsCompareTable,
   rams: RamsCompareTable,
-  ssds: SsdsCompareTable
+  ssds: SsdsCompareTable,
+  'power-supplies': PowerSuppliesCompareTable
 };
 
 export function ComparePage() {

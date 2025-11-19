@@ -6,6 +6,7 @@ import { GraphicsCardsProductPage } from './pages/GraphicsCardsProductPage';
 import { MotherboardProductPage } from './pages/MotherboardProductPage';
 import { RamProductPage } from './pages/RamProductPage';
 import { SsdProductPage } from './pages/SsdProductPage';
+import { PowerSupplyProductPage } from './pages/PowerSupplyProductPage';
 
 const productPages: Record<string, React.ComponentType> = {
   processors: ProcessorProductPage,
@@ -13,7 +14,8 @@ const productPages: Record<string, React.ComponentType> = {
   'graphics-cards': GraphicsCardsProductPage,
   motherboards: MotherboardProductPage,
   rams: RamProductPage,
-  ssds: SsdProductPage
+  ssds: SsdProductPage,
+  'power-supplies': PowerSupplyProductPage
 };
 
 export function ProductPageRouter() {

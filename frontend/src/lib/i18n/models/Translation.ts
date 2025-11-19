@@ -44,7 +44,7 @@ export type Translation = {
       wattage: string;
       formFactor: string;
       efficiencyPercentage: string;
-      modularity: string;
+      modularity: Record<string, string>;
     };
     rams: {
       memory: string;
@@ -178,7 +178,12 @@ export const translation: Translation = {
       wattage: 'Wattage',
       formFactor: 'Form factor',
       efficiencyPercentage: 'Efficiency percentage',
-      modularity: 'Modularity'
+      modularity: {
+        spec: 'Modularity',
+        none: 'None',
+        semi: 'Semi',
+        full: 'Full'
+      }
     },
     rams: {
       memory: 'Memory',
