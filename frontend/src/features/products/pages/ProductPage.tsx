@@ -3,12 +3,12 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableRow
+  TableRow,
 } from '@/components/ui/table';
 
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import ProductPageBreadcrumb from '../components/ProductCard/ProductPageBreadcrumb';
-import Page from '@/components/layout/Page';
+import { ProductPageBreadcrumb } from '../components/ProductCard/ProductPageBreadcrumb';
+import { Page } from '@/components/layout/Page';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import type { Translation } from '@/lib/i18n/models/Translation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
@@ -23,10 +23,10 @@ type ProductPageProps<T extends ProductLong> = {
   specs: { spec: string; value: string | number }[];
 };
 
-export default function ProductPage<T extends ProductLong>({
+export function ProductPage<T extends ProductLong>({
   category,
   product,
-  specs
+  specs,
 }: ProductPageProps<T>) {
   const translation = useTranslation();
   const { addToCompare } = useCompare();

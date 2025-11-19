@@ -2,7 +2,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function FavoritesLink() {
+export function FavoritesLink() {
   const { items } = { items: [{}] };
   const translation = useTranslation();
 

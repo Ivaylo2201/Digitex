@@ -1,5 +1,5 @@
-import Page from '@/components/layout/Page';
+import { Page } from '@/components/layout/Page';
 
-export default function FavoritesPage() {
+export function FavoritesPage() {
   return <Page></Page>;
 }

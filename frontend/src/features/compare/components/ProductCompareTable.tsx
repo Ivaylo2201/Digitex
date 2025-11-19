@@ -6,20 +6,20 @@ import {
   TableCell,
   Table,
   TableCaption,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 
-import type { ProductLong } from "@/features/products/models/base/ProductLong";
-import { useTranslation } from "@/lib/i18n/hooks/useTranslation";
-import { getStaticFile } from "@/lib/utils/getStaticFile";
-import { useNavigate } from "react-router";
-import { useCompare } from "../stores/useCompare";
-import useCurrencyExchange from "@/features/currency/hooks/useCurrencyExchange";
-import { toast } from "sonner";
+import type { ProductLong } from '@/features/products/models/base/ProductLong';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { getStaticFile } from '@/lib/utils/getStaticFile';
+import { useNavigate } from 'react-router';
+import { useCompare } from '../stores/useCompare';
+import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
+import { toast } from 'sonner';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from '@/components/ui/hover-card';
 
 type ProductCompareTableProps = {
   products: ProductLong[];
@@ -28,7 +28,7 @@ type ProductCompareTableProps = {
   childTableCells: (product: ProductLong) => React.ReactNode;
 };
 
-export default function ProductCompareTable({
+export function ProductCompareTable({
   products,
   category,
   childTableHeads,
@@ -67,7 +67,7 @@ export default function ProductCompareTable({
                 key={idx}
                 onClick={() => navigate(`/products/${category}/${product.id}`)}
                 className={`cursor-pointer hover:bg-theme-crimson hover:text-theme-white duration-300 transform-color ${
-                  idx % 2 === 0 ? "bg-gray-100" : ""
+                  idx % 2 === 0 ? 'bg-gray-100' : ''
                 }`}
               >
                 <TableCell>{product.brandName}</TableCell>

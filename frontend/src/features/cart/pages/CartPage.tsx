@@ -1,5 +1,5 @@
-import Page from '@/components/layout/Page';
+import { Page } from '@/components/layout/Page';
 
-export default function CartPage() {
+export function CartPage() {
   return <Page></Page>;
 }

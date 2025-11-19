@@ -1,14 +1,13 @@
 import { useParams } from 'react-router';
-import Page from '@/components/layout/Page';
-import ProductCard from '@/features/products/components/ProductCard/ProductCard';
-import useProducts from '../hooks/useProducts';
+import { Page } from '@/components/layout/Page';
+import { ProductCard } from '@/features/products/components/ProductCard/ProductCard';
+import { useProducts } from '../hooks/useProducts';
 
-export default function ProductsPage() {
+export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
   const { data: products } = useProducts(category);
 
-  if (category === undefined)
-    return;
+  if (category === undefined) return;
 
   return (
     <Page>

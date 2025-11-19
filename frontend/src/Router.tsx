@@ -1,17 +1,17 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
-import AuthenticationRequired from '@/features/auth/components/AuthenticationRequired';
-import AccountPage from '@/features/account/pages/AccountPage';
-import FavoritesPage from '@/features/account/pages/FavoritesPage';
-import SignInPage from '@/features/account/pages/SignInPage';
-import SignUpPage from '@/features/account/pages/SignUpPage';
-import Page from '@/components/layout/Page';
-import ProductsPage from '@/features/products/pages/ProductsPage';
-import ProductPageRouter from './features/products/ProductPageRouter';
-import AccountVerifiedPage from './features/account/pages/AccountVerifiedPage';
-import CartPage from './features/cart/pages/CartPage';
-import ComparePage from './features/compare/pages/ComparePage';
+import { AuthenticationRequired } from '@/features/auth/components/AuthenticationRequired';
+import { AccountPage } from '@/features/account/pages/AccountPage';
+import { FavoritesPage } from '@/features/account/pages/FavoritesPage';
+import { SignInPage } from '@/features/account/pages/SignInPage';
+import { SignUpPage } from '@/features/account/pages/SignUpPage';
+import { Page } from '@/components/layout/Page';
+import { ProductsPage } from '@/features/products/pages/ProductsPage';
+import { ProductPageRouter } from './features/products/ProductPageRouter';
+import { AccountVerifiedPage } from './features/account/pages/AccountVerifiedPage';
+import { CartPage } from './features/cart/pages/CartPage';
+import { ComparePage } from './features/compare/pages/ComparePage';
 
-export default function Router() {
+export function Router() {
   return (
     <BrowserRouter>
       <Routes>

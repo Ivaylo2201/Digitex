@@ -1,5 +1,5 @@
-import Page from '@/components/layout/Page';
+import { Page } from '@/components/layout/Page';
 
-export default function AccountPage() {
+export function AccountPage() {
   return <Page></Page>;
 }

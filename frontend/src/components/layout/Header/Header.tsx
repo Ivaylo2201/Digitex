@@ -1,18 +1,18 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
-import AccountLink from '../../../features/account/components/AccountLink';
-import CartLink from '../../../features/cart/components/CartLink';
-import LogoLink from './LogoLink';
-import Searchbox from './Searchbox';
-import FavoritesLink from '../../../features/favorites/FavoritesLink';
-import LanguageSelect from './LanguageSelect';
-import SignOutButton from '../../../features/auth/components/SignOutButton';
-import SignInLink from '../../../features/auth/components/SignInLink';
+import { AccountLink } from '../../../features/account/components/AccountLink';
+import { CartLink } from '../../../features/cart/components/CartLink';
+import { LogoLink } from './LogoLink';
+import { Searchbox } from './Searchbox';
+import { FavoritesLink } from '../../../features/favorites/FavoritesLink';
+import { LanguageSelect } from './LanguageSelect';
+import { SignOutButton } from '../../../features/auth/components/SignOutButton';
+import { SignInLink } from '../../../features/auth/components/SignInLink';
 import { useAuth } from '@/features/auth/stores/useAuth';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import CompareLink from '../../../features/compare/components/CompareLink';
-import CurrencySelect from '@/features/currency/components/CurrencySelect';
+import { CompareLink } from '../../../features/compare/components/CompareLink';
+import { CurrencySelect } from '@/features/currency/components/CurrencySelect';
 
-export default function Header() {
+export function Header() {
   const { isAuthenticated } = useAuth();
   const translation = useTranslation();
 

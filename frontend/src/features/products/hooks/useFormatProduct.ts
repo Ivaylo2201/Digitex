@@ -1,8 +1,8 @@
-import type { Translation } from "@/lib/i18n/models/Translation";
-import type { ProductLong } from "../models/base/ProductLong";
-import type { Monitor } from "../models/Monitor";
-import type { GraphicsCard } from "../models/GraphicsCard";
-import type { Processor } from "../models/Processor";
+import type { Translation } from '@/lib/i18n/models/Translation';
+import type { ProductLong } from '../models/base/ProductLong';
+import type { Monitor } from '../models/Monitor';
+import type { GraphicsCard } from '../models/GraphicsCard';
+import type { Processor } from '../models/Processor';
 
 export function useFormatProduct(translation: Translation) {
   const toMonitor = (product: ProductLong) => {

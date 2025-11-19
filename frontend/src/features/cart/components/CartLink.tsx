@@ -2,7 +2,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function CartLink() {
+export function CartLink() {
   const { cart } = { cart: { items: [{}] } }; //useCart();
   const translation = useTranslation();
 

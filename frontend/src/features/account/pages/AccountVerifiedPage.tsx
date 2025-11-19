@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { Check } from 'lucide-react';
-import Page from '@/components/layout/Page';
+import { Page } from '@/components/layout/Page';
 import { httpClient } from '@/lib/api/httpClient';
 
-export default function AccountVerifiedPage() {
+export function AccountVerifiedPage() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {

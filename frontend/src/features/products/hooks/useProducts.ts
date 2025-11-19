@@ -8,11 +8,11 @@ async function fetchProducts(category: string) {
   return res.data;
 }
 
-export default function useProducts(category: string | undefined) {
+export function useProducts(category: string | undefined) {
   return useSuspenseQuery({
     queryKey: ['products', category],
     queryFn: () => fetchProducts(category ?? ''),
     staleTime: staleTime,
-    retry: false
+    retry: false,
   });
 }

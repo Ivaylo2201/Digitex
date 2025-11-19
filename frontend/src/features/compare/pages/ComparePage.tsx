@@ -1,10 +1,10 @@
-import type { ProductLong } from "@/features/products/models/base/ProductLong";
-import { useCompare } from "../stores/useCompare";
-import ProcessorCompareTable from "../components/ProcessorsCompareTable";
-import MonitorsCompareTable from "../components/MonitorsCompareTable";
-import Page from "@/components/layout/Page";
-import GraphicsCardCompareTable from "../components/GraphicsCardCompareTable";
-import { useTranslation } from "@/lib/i18n/hooks/useTranslation";
+import type { ProductLong } from '@/features/products/models/base/ProductLong';
+import { useCompare } from '../stores/useCompare';
+import { ProcessorCompareTable } from '../components/ProcessorsCompareTable';
+import { MonitorsCompareTable } from '../components/MonitorsCompareTable';
+import { Page } from '@/components/layout/Page';
+import { GraphicsCardCompareTable } from '../components/GraphicsCardCompareTable';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 const compareTables: Record<
   string,
@@ -12,10 +12,10 @@ const compareTables: Record<
 > = {
   processors: ProcessorCompareTable,
   monitors: MonitorsCompareTable,
-  "graphics-cards": GraphicsCardCompareTable,
+  'graphics-cards': GraphicsCardCompareTable,
 };
 
-export default function ComparePage() {
+export function ComparePage() {
   const { category, products, clearCompare } = useCompare();
   const translation = useTranslation();
 

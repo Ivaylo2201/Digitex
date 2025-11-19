@@ -3,7 +3,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { Link } from 'react-router';
 import { useCompare } from '../stores/useCompare';
 
-export default function CompareLink() {
+export function CompareLink() {
   const translation = useTranslation();
   const { products: comparedProducts } = useCompare();
 

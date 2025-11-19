@@ -3,8 +3,8 @@ import { Navigate } from 'react-router';
 
 type AuthenticationRequiredProps = React.PropsWithChildren;
 
-export default function AuthenticationRequired({
-  children
+export function AuthenticationRequired({
+  children,
 }: AuthenticationRequiredProps) {
   const { isAuthenticated } = useAuth();
 

@@ -1,13 +1,13 @@
-import { TableHead, TableCell } from "@/components/ui/table";
-import type { ProductLong } from "@/features/products/models/base/ProductLong";
-import { useTranslation } from "@/lib/i18n/hooks/useTranslation";
-import ProductCompareTable from "./ProductCompareTable";
-import React from "react";
-import { useFormatProduct } from "@/features/products/hooks/useFormatProduct";
+import { TableHead, TableCell } from '@/components/ui/table';
+import type { ProductLong } from '@/features/products/models/base/ProductLong';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { ProductCompareTable } from './ProductCompareTable';
+import React from 'react';
+import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
 
 type ProcessorCompareTableProps = { products: ProductLong[] };
 
-export default function ProcessorCompareTable({
+export function ProcessorCompareTable({
   products,
 }: ProcessorCompareTableProps) {
   const translation = useTranslation();

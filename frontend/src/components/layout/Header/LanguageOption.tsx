@@ -1,4 +1,4 @@
-export default function LanguageOption({ code }: { code: string }) {
+export function LanguageOption({ code }: { code: string }) {
   return (
     <div className='flex items-center gap-2 font-montserrat text-xs'>
       <img

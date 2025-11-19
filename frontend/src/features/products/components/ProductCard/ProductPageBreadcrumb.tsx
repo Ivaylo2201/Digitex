@@ -3,7 +3,7 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator
+  BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { capitalize } from '@/lib/utils/capitalize';
@@ -14,9 +14,9 @@ type ProductPageBreadcrumb = {
   displayName: string;
 };
 
-export default function ProductPageBreadcrumb({
+export function ProductPageBreadcrumb({
   category,
-  displayName
+  displayName,
 }: ProductPageBreadcrumb) {
   const translation = useTranslation();
 

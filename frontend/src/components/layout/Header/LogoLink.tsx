@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-export default function LogoLink() {
+export function LogoLink() {
   return (
     <Link to='/' className='font-bold text-3xl text-theme-white'>
       digite

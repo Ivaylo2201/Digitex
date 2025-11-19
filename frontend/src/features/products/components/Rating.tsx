@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star } from 'lucide-react';
 
 type RatingProps = {
   stars: number;
@@ -6,7 +6,7 @@ type RatingProps = {
   className?: string;
 };
 
-export default function Rating({ stars, starSize = 18, className = '' }: RatingProps) {
+export function Rating({ stars, starSize = 18, className = '' }: RatingProps) {
   const minStars = 0;
   const maxStars = 5;
 
@@ -16,10 +16,15 @@ export default function Rating({ stars, starSize = 18, className = '' }: RatingP
   return (
     <div className={`flex ${className}`}>
       {Array.from({ length: rating }).map((_, idx) => (
-        <Star key={idx} size={starSize} fill="var(--color-theme-crimson)" strokeWidth={0} />
+        <Star
+          key={idx}
+          size={starSize}
+          fill='var(--color-theme-crimson)'
+          strokeWidth={0}
+        />
       ))}
       {Array.from({ length: emptyStars }).map((_, idx) => (
-        <Star key={idx} size={starSize} fill="#9CA3AF" strokeWidth={0} />
+        <Star key={idx} size={starSize} fill='#9CA3AF' strokeWidth={0} />
       ))}
     </div>
   );

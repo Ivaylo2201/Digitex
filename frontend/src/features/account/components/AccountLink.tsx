@@ -2,7 +2,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function AccountLink() {
+export function AccountLink() {
   const translation = useTranslation();
 
   return (

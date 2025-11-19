@@ -8,13 +8,12 @@ type CurrencyStore = {
 };
 
 export const useCurrency = create<CurrencyStore>((set) => {
-  const currencies = (import.meta.env.VITE_APP_CURRENCIES as string).split(
-    ','
-  ) as Currency[];
+  const envCurrencies = import.meta.env.VITE_APP_CURRENCIES as string;
+  const currencies = envCurrencies.split(',') as Currency[];
 
   return {
     currency: currencies[0],
     currencies: currencies,
-    changeCurrency: (currency) => set(() => ({ currency }))
+    changeCurrency: (currency) => set(() => ({ currency })),
   };
 });

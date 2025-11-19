@@ -23,5 +23,5 @@ export const useAuth = create<AuthStore>((set) => ({
     set({ isAuthenticated: false });
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
-  }
+  },
 }));

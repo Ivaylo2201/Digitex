@@ -1,10 +1,10 @@
-import type { Currency } from '@/features/currencies/models/Currency';
+import type { Currency } from '../models/Currency';
 
 export const getCurrencySymbol = (currencyCode: Currency | string): string => {
   const symbols: Record<string, string> = {
     usd: '$',
     gbp: '£',
-    eur: '€'
+    eur: '€',
   };
 
   return symbols[currencyCode.toLowerCase()] || currencyCode;

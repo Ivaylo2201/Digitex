@@ -25,19 +25,19 @@ export const useCompare = create<CompareStore>((set, get) => ({
     if (products.length >= 10)
       return {
         isSuccess: false,
-        message: translation.compare.maxCapacityReached
+        message: translation.compare.maxCapacityReached,
       };
 
     if (category && comparedProduct.category !== category)
       return {
         isSuccess: false,
-        message: translation.compare.incompatibleCategory
+        message: translation.compare.incompatibleCategory,
       };
 
     if (products.some((product) => product.id === comparedProduct.id))
       return {
         isSuccess: false,
-        message: translation.compare.alreadyPresent
+        message: translation.compare.alreadyPresent,
       };
 
     const { category: _, ...rest } = comparedProduct;
@@ -46,7 +46,9 @@ export const useCompare = create<CompareStore>((set, get) => ({
     return { isSuccess: true, message: translation.compare.addedSuccessfully };
   },
   removeFromCompare: (id) => {
-    const filteredProducts = get().products.filter((product) => product.id !== id);
+    const filteredProducts = get().products.filter(
+      (product) => product.id !== id
+    );
 
     set({ products: filteredProducts });
 
@@ -56,5 +58,5 @@ export const useCompare = create<CompareStore>((set, get) => ({
   },
   clearCompare: () => {
     set({ products: [], category: null });
-  }
+  },
 }));

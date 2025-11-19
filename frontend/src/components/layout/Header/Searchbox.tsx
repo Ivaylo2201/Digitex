@@ -5,7 +5,7 @@ import { Search } from 'lucide-react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-export default function Searchbox() {
+export function Searchbox() {
   const [search, setSearch] = useState<string>('');
   const translation = useTranslation();
   const navigate = useNavigate();

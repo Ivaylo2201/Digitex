@@ -1,16 +1,16 @@
 import { useProductParams } from '@/features/products/hooks/useProductParams';
 import { Navigate } from 'react-router';
-import ProcessorProductPage from './pages/ProcessorProductPage';
-import MonitorProductPage from './pages/MonitorProductPage';
-import GraphicsCardsProductPage from './pages/GraphicsCardsProductPage';
+import { ProcessorProductPage } from './pages/ProcessorProductPage';
+import { MonitorProductPage } from './pages/MonitorProductPage';
+import { GraphicsCardsProductPage } from './pages/GraphicsCardsProductPage';
 
 const productPages: Record<string, React.ComponentType> = {
-  processors: ProcessorProductPage,
-  monitors: MonitorProductPage,
-  "graphics-cards": GraphicsCardsProductPage
+  'processors': ProcessorProductPage,
+  'monitors': MonitorProductPage,
+  'graphics-cards': GraphicsCardsProductPage,
 };
 
-export default function ProductPageRouter() {
+export function ProductPageRouter() {
   const { category } = useProductParams();
 
   if (!(category in productPages)) {

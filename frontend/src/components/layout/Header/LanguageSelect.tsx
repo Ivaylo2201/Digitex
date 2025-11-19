@@ -3,13 +3,13 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
 import { useLanguage } from '@/lib/i18n/hooks/useLanguage';
-import LanguageOption from './LanguageOption';
+import { LanguageOption } from './LanguageOption';
 
-export default function LanguageSelect() {
+export function LanguageSelect() {
   const { language, languages, changeLanguage } = useLanguage();
 
   return (

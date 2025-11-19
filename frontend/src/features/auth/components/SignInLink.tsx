@@ -2,7 +2,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { LogIn } from 'lucide-react';
 import { Link } from 'react-router';
 
-export default function SignInLink() {
+export function SignInLink() {
   const translation = useTranslation();
 
   return (

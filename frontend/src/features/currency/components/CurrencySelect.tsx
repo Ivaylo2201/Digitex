@@ -3,13 +3,13 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 } from '@/components/ui/select';
 
-import CurrencyOption from './CurrencyOption';
+import { CurrencyOption } from './CurrencyOption';
 import { useCurrency } from '../stores/useCurrency';
 
-export default function LanguageSelect() {
+export function CurrencySelect() {
   const { currency, currencies, changeCurrency } = useCurrency();
 
   return (

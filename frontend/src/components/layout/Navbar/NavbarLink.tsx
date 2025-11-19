@@ -5,7 +5,7 @@ type NavbarLinkProps = {
   content: string;
 };
 
-export default function NavbarLink({ to, content }: NavbarLinkProps) {
+export function NavbarLink({ to, content }: NavbarLinkProps) {
   return (
     <NavLink
       to={`/products/categories${to}`}
