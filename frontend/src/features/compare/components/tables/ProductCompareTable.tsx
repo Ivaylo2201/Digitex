@@ -5,20 +5,20 @@ import {
   TableBody,
   TableCell,
   Table,
-  TableCaption,
+  TableCaption
 } from '@/components/ui/table';
 
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { useNavigate } from 'react-router';
-import { useCompare } from '../stores/useCompare';
+import { useCompare } from '../../stores/useCompare';
 import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
 import { toast } from 'sonner';
 import {
   HoverCard,
   HoverCardContent,
-  HoverCardTrigger,
+  HoverCardTrigger
 } from '@/components/ui/hover-card';
 
 type ProductCompareTableProps = {
@@ -32,7 +32,7 @@ export function ProductCompareTable({
   products,
   category,
   childTableHeads,
-  childTableCells,
+  childTableCells
 }: ProductCompareTableProps) {
   const translation = useTranslation();
   const navigate = useNavigate();
@@ -60,14 +60,14 @@ export function ProductCompareTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {products.map((product, idx) => (
+        {products.map((product, index) => (
           <HoverCard>
             <HoverCardTrigger asChild>
               <TableRow
-                key={idx}
+                key={index}
                 onClick={() => navigate(`/products/${category}/${product.id}`)}
                 className={`cursor-pointer hover:bg-theme-crimson hover:text-theme-white duration-300 transform-color ${
-                  idx % 2 === 0 ? 'bg-gray-100' : ''
+                  index % 2 === 0 ? 'bg-gray-100' : ''
                 }`}
               >
                 <TableCell>{product.brandName}</TableCell>

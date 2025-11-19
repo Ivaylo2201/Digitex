@@ -12,7 +12,13 @@
     "compare": "Vergleichen",
     "comparedProducts": "Zu vergleichende Produkte",
     "clear": "Löschen",
-    "removeFromCompare": "Produkt aus dem Vergleich entfernt."
+    "removeFromCompare": "Produkt aus dem Vergleich entfernt.",
+    "noProductsForComparison": {
+      "title": "Keine Produkte zum Vergleichen hinzugefügt",
+      "main": "Sie haben noch keine Produkte zum Vergleichen hinzugefügt.",
+      "getStarted": "Fügen Sie ein Produkt hinzu, um zu beginnen.",
+      "addProducts": "Produkte hinzufügen"
+    }
   },
   "units": {
     "gb": "Gigabyte",
@@ -75,7 +81,8 @@
     },
     "ssds": {
       "capacityInGb": "Kapazität",
-      "operationSpeed": "Geschwindigkeit",
+      "operationSpeedRead": "Lesegeschwindigkeit",
+      "operationSpeedWrite": "Schreibgeschwindigkeit",
       "interface": "Schnittstelle"
     }
   },

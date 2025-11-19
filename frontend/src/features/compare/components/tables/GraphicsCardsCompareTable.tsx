@@ -5,11 +5,11 @@ import React from 'react';
 import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
 import { ProductCompareTable } from './ProductCompareTable';
 
-type GraphicsCardCompareTableProps = { products: ProductLong[] };
+type GraphicsCardsCompareTableProps = { products: ProductLong[] };
 
-export function GraphicsCardCompareTable({
-  products,
-}: GraphicsCardCompareTableProps) {
+export function GraphicsCardsCompareTable({
+  products
+}: GraphicsCardsCompareTableProps) {
   const translation = useTranslation();
   const formatProduct = useFormatProduct(translation);
 

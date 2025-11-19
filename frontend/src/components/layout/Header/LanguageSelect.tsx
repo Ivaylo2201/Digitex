@@ -20,8 +20,8 @@ export function LanguageSelect() {
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
-        {languages.map((language, idx) => (
-          <SelectItem className='cursor-pointer' key={idx} value={language}>
+        {languages.map((language, index) => (
+          <SelectItem className='cursor-pointer' key={index} value={language}>
             <LanguageOption code={language} />
           </SelectItem>
         ))}

@@ -15,16 +15,16 @@ export function Rating({ stars, starSize = 18, className = '' }: RatingProps) {
 
   return (
     <div className={`flex ${className}`}>
-      {Array.from({ length: rating }).map((_, idx) => (
+      {Array.from({ length: rating }).map((_, index) => (
         <Star
-          key={idx}
+          key={index}
           size={starSize}
           fill='var(--color-theme-crimson)'
           strokeWidth={0}
         />
       ))}
-      {Array.from({ length: emptyStars }).map((_, idx) => (
-        <Star key={idx} size={starSize} fill='#9CA3AF' strokeWidth={0} />
+      {Array.from({ length: emptyStars }).map((_, index) => (
+        <Star key={index} size={starSize} fill='#9CA3AF' strokeWidth={0} />
       ))}
     </div>
   );

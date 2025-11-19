@@ -12,8 +12,8 @@ export function ProductsPage() {
   return (
     <Page>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-x-6 gap-y-12'>
-        {products.map((product, idx) => (
-          <ProductCard key={idx} {...product} category={category} />
+        {products.map((product, index) => (
+          <ProductCard key={index} {...product} category={category} />
         ))}
       </div>
     </Page>

@@ -3,6 +3,9 @@ import type { ProductLong } from '../models/base/ProductLong';
 import type { Monitor } from '../models/Monitor';
 import type { GraphicsCard } from '../models/GraphicsCard';
 import type { Processor } from '../models/Processor';
+import type { Motherboard } from '../models/Motherboard';
+import type { Ram } from '../models/Ram';
+import type { Ssd } from '../models/Ssd';
 
 export function useFormatProduct(translation: Translation) {
   const toMonitor = (product: ProductLong) => {
@@ -11,38 +14,38 @@ export function useFormatProduct(translation: Translation) {
     return [
       {
         spec: translation.specs.monitors.displayDiagonal,
-        value: `${monitor.displayDiagonal}"`,
+        value: `${monitor.displayDiagonal}"`
       },
       {
         spec: translation.specs.monitors.refreshRate,
-        value: `${monitor.refreshRate} Hz`,
+        value: `${monitor.refreshRate} Hz`
       },
       {
         spec: translation.specs.monitors.latency,
-        value: `${monitor.latency} ms`,
+        value: `${monitor.latency} ms`
       },
       {
         spec: translation.specs.monitors.matrix,
-        value: monitor.matrix.toUpperCase(),
+        value: monitor.matrix.toUpperCase()
       },
       {
         spec: translation.specs.monitors.resolution,
         value: `${monitor.resolution.width}x${
           monitor.resolution.height
-        } ${monitor.resolution.type.toUpperCase()}`,
+        } ${monitor.resolution.type.toUpperCase()}`
       },
       {
         spec: translation.specs.monitors.pixelSize,
-        value: `${monitor.pixelSize} mm`,
+        value: `${monitor.pixelSize} mm`
       },
       {
         spec: translation.specs.monitors.brightness,
-        value: `${monitor.brightness} nits`,
+        value: `${monitor.brightness} nits`
       },
       {
         spec: translation.specs.monitors.colorSpectre,
-        value: `${monitor.colorSpectre}%`,
-      },
+        value: `${monitor.colorSpectre}%`
+      }
     ];
   };
 
@@ -54,32 +57,32 @@ export function useFormatProduct(translation: Translation) {
         spec: translation.specs.graphicsCards.memory,
         value: `${
           graphicsCard.memory.capacityInGb
-        }GB ${graphicsCard.memory.type.toUpperCase()}`,
+        }GB ${graphicsCard.memory.type.toUpperCase()}`
       },
       {
         spec: translation.specs.processors.baseClockSpeed,
-        value: `${graphicsCard.clockSpeed.base.toFixed(2)} MHz`,
+        value: `${graphicsCard.clockSpeed.base.toFixed(2)} MHz`
       },
       {
         spec: translation.specs.processors.boostClockSpeed,
-        value: `${graphicsCard.clockSpeed.boost.toFixed(2)} MHz`,
+        value: `${graphicsCard.clockSpeed.boost.toFixed(2)} MHz`
       },
       {
         spec: translation.specs.graphicsCards.busWidth,
-        value: `${graphicsCard.busWidth}-bit`,
+        value: `${graphicsCard.busWidth}-bit`
       },
       {
         spec: translation.specs.graphicsCards.cudaCores,
-        value: graphicsCard.cudaCores,
+        value: graphicsCard.cudaCores
       },
       {
         spec: translation.specs.graphicsCards.directXSupport,
-        value: graphicsCard.directXSupport,
+        value: graphicsCard.directXSupport
       },
       {
         spec: translation.specs.graphicsCards.tdp,
-        value: `${graphicsCard.tdp} W`,
-      },
+        value: `${graphicsCard.tdp} W`
+      }
     ];
   };
 
@@ -89,30 +92,102 @@ export function useFormatProduct(translation: Translation) {
     return [
       {
         spec: translation.specs.processors.cores,
-        value: processor.cores,
+        value: processor.cores
       },
       {
         spec: translation.specs.processors.threads,
-        value: processor.threads,
+        value: processor.threads
       },
       {
         spec: translation.specs.processors.baseClockSpeed,
-        value: `${processor.clockSpeed.base.toFixed(2)} MHz`,
+        value: `${processor.clockSpeed.base.toFixed(2)} MHz`
       },
       {
         spec: translation.specs.processors.boostClockSpeed,
-        value: `${processor.clockSpeed.boost.toFixed(2)} MHz`,
+        value: `${processor.clockSpeed.boost.toFixed(2)} MHz`
       },
       {
         spec: translation.specs.processors.socket,
-        value: processor.socket.toUpperCase(),
+        value: processor.socket.toUpperCase()
       },
       {
         spec: translation.specs.processors.tdp,
-        value: `${processor.tdp} W`,
-      },
+        value: `${processor.tdp} W`
+      }
     ];
   };
 
-  return { toMonitor, toGraphicsCard, toProcessor };
+  const toMotherboard = (product: ProductLong) => {
+    const motherboard = product as Motherboard;
+
+    return [
+      {
+        spec: translation.specs.motherboards.socket,
+        value: motherboard.socket.toUpperCase()
+      },
+      {
+        spec: translation.specs.motherboards.formFactor,
+        value: motherboard.formFactor
+      },
+      {
+        spec: translation.specs.motherboards.chipset,
+        value: motherboard.chipset
+      },
+      {
+        spec: translation.specs.motherboards.ramSlots,
+        value: motherboard.ramSlots
+      },
+      {
+        spec: translation.specs.motherboards.pcieSlots,
+        value: motherboard.pcieSlots
+      }
+    ];
+  };
+
+  const toRam = (product: ProductLong) => {
+    const ram = product as Ram;
+
+    return [
+      {
+        spec: translation.specs.rams.memory,
+        value: `${ram.memory.capacityInGb}GB ${ram.memory.type.toUpperCase()}`
+      },
+      {
+        spec: translation.specs.rams.timing,
+        value: ram.timing
+      }
+    ];
+  };
+
+  const toSsd = (product: ProductLong) => {
+    const ssd = product as Ssd;
+
+    return [
+      {
+        spec: translation.specs.ssds.capacityInGb,
+        value: `${ssd.capacityInGb}GB`
+      },
+      {
+        spec: translation.specs.ssds.interface,
+        value: ssd.interface.toUpperCase()
+      },
+      {
+        spec: translation.specs.ssds.operationSpeedRead,
+        value: `${ssd.operationSpeed.read} MB/s`
+      },
+      {
+        spec: translation.specs.ssds.operationSpeedWrite,
+        value: `${ssd.operationSpeed.write} MB/s`
+      }
+    ];
+  };
+
+  return {
+    toMonitor,
+    toGraphicsCard,
+    toProcessor,
+    toMotherboard,
+    toRam,
+    toSsd
+  };
 }

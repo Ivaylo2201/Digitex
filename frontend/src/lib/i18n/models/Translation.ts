@@ -52,7 +52,8 @@ export type Translation = {
     };
     ssds: {
       capacityInGb: string;
-      operationSpeed: string;
+      operationSpeedRead: string;
+      operationSpeedWrite: string;
       interface: string;
     };
   };
@@ -75,6 +76,12 @@ export type Translation = {
     comparedProducts: string;
     clear: string;
     removeFromCompare: string;
+    noProductsForComparison: {
+      title: string;
+      main: string;
+      getStarted: string;
+      addProducts: string;
+    };
   };
   units: {
     hz: string;
@@ -108,7 +115,7 @@ export const translation: Translation = {
     ms: 'ms',
     mm: 'mm',
     nits: 'nits',
-    w: 'W',
+    w: 'W'
   },
   compare: {
     maxCapacityReached: 'Max compare capacity reach.',
@@ -119,13 +126,19 @@ export const translation: Translation = {
     comparedProducts: 'Compared products',
     clear: 'Clear',
     removeFromCompare: 'Product removed from comparison.',
+    noProductsForComparison: {
+      title: 'No products added for comparison',
+      main: "You haven't added any products for comparison yet.",
+      getStarted: 'Get started by adding a product.',
+      addProducts: 'Add products'
+    }
   },
   specs: {
     product: {
       brand: 'Brand',
       model: 'Model',
       image: 'Image',
-      price: 'Price',
+      price: 'Price'
     },
     monitors: {
       displayDiagonal: 'Display diagonal',
@@ -135,7 +148,7 @@ export const translation: Translation = {
       resolution: 'Resolution',
       pixelSize: 'Pixel size',
       brightness: 'Brightness',
-      colorSpectre: 'Color spectre',
+      colorSpectre: 'Color spectre'
     },
     processors: {
       cores: 'Cores',
@@ -143,7 +156,7 @@ export const translation: Translation = {
       baseClockSpeed: 'Base clock speed',
       boostClockSpeed: 'Boost clock speed',
       socket: 'Socket',
-      tdp: 'TDP',
+      tdp: 'TDP'
     },
     graphicsCards: {
       memory: 'Memory',
@@ -152,30 +165,31 @@ export const translation: Translation = {
       busWidth: 'Bus width',
       cudaCores: 'CUDA cores',
       directXSupport: 'DirectX support',
-      tdp: 'TDP',
+      tdp: 'TDP'
     },
     motherboards: {
       socket: 'Socket',
       formFactor: 'Form factor',
       chipset: 'Chipset',
       ramSlots: 'RAM slots',
-      pcieSlots: 'PCIe slots',
+      pcieSlots: 'PCIe slots'
     },
     powerSupplies: {
       wattage: 'Wattage',
       formFactor: 'Form factor',
       efficiencyPercentage: 'Efficiency percentage',
-      modularity: 'Modularity',
+      modularity: 'Modularity'
     },
     rams: {
       memory: 'Memory',
-      timing: 'Timing',
+      timing: 'Timing'
     },
     ssds: {
-      capacityInGb: 'Capacity (GB)',
-      operationSpeed: 'Operation speed',
-      interface: 'Interface',
-    },
+      capacityInGb: 'Capacity',
+      operationSpeedRead: "Read speed",
+      operationSpeedWrite: "Write speed",
+      interface: 'Interface'
+    }
   },
   routing: {
     monitors: 'Monitors',
@@ -185,21 +199,21 @@ export const translation: Translation = {
     ssds: 'SSDs',
     motherboards: 'Motherboards',
     processors: 'Processors',
-    home: 'Home',
+    home: 'Home'
   },
   auth: {
     signIn: 'Sign in',
     signOut: 'Sign out',
-    verify: 'Verify',
+    verify: 'Verify'
   },
   user: {
     cart: 'Cart',
     account: 'Account',
-    favorites: 'Favorites',
+    favorites: 'Favorites'
   },
   keywords: {
     productSearch: 'Search for products...',
     address: 'Sofia, Vitosha Blvd. 76',
-    mainSpecifications: 'Main specifications',
-  },
+    mainSpecifications: 'Main specifications'
+  }
 };

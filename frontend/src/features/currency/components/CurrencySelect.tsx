@@ -20,8 +20,8 @@ export function CurrencySelect() {
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
-        {currencies.map((currency, idx) => (
-          <SelectItem className='cursor-pointer' key={idx} value={currency}>
+        {currencies.map((currency, index) => (
+          <SelectItem className='cursor-pointer' key={index} value={currency}>
             <CurrencyOption code={currency} />
           </SelectItem>
         ))}

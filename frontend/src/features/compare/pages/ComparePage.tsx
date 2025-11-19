@@ -1,10 +1,13 @@
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useCompare } from '../stores/useCompare';
-import { ProcessorCompareTable } from '../components/ProcessorsCompareTable';
-import { MonitorsCompareTable } from '../components/MonitorsCompareTable';
+import { ProcessorCompareTable } from '../components/tables/ProcessorsCompareTable';
+import { MonitorsCompareTable } from '../components/tables/MonitorsCompareTable';
 import { Page } from '@/components/layout/Page';
-import { GraphicsCardCompareTable } from '../components/GraphicsCardCompareTable';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { GraphicsCardsCompareTable } from '../components/tables/GraphicsCardsCompareTable';
+import { NoProductsForComparison } from '../components/NoProductsForComparison';
+import MotherboardsCompareTable from '../components/tables/MotherboardsCompareTable';
+import { RamsCompareTable } from '../components/tables/RamsCompareTable';
+import { SsdsCompareTable } from '../components/tables/SsdsCompareTable';
 
 const compareTables: Record<
   string,
@@ -12,22 +15,28 @@ const compareTables: Record<
 > = {
   processors: ProcessorCompareTable,
   monitors: MonitorsCompareTable,
-  'graphics-cards': GraphicsCardCompareTable,
+  'graphics-cards': GraphicsCardsCompareTable,
+  motherboards: MotherboardsCompareTable,
+  rams: RamsCompareTable,
+  ssds: SsdsCompareTable
 };
 
 export function ComparePage() {
   const { category, products, clearCompare } = useCompare();
-  const translation = useTranslation();
 
   if (!category || !(category in compareTables)) {
-    return <Page>Nothing to compare</Page>;
+    return (
+      <Page>
+        <NoProductsForComparison />
+      </Page>
+    );
   }
 
   const CompareTable = compareTables[category];
 
   return (
     <Page>
-      <section className='overflow-x-auto w-3/4'>
+      <section className='overflow-x-auto min-w-1/2'>
         <CompareTable products={products} />
       </section>
     </Page>

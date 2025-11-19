@@ -12,7 +12,13 @@
     "compare": "Сравни",
     "comparedProducts": "Продукти за сравнение",
     "clear": "Изчисти",
-    "removeFromCompare": "Продуктът е премахнат от сравняването."
+    "removeFromCompare": "Продуктът е премахнат от сравняването.",
+    "noProductsForComparison": {
+      "title": "Няма добавени продукти за сравнение",
+      "main": "Все още не сте добавили продукти за сравнение.",
+      "getStarted": "Започнете като добавите продукт.",
+      "addProducts": "Добавяне на продукти"
+    }
   },
   "units": {
     "gb": "Гигабайта",
@@ -75,7 +81,8 @@
     },
     "ssds": {
       "capacityInGb": "Капацитет",
-      "operationSpeed": "Скорост на работа",
+      "operationSpeedRead": "Скорост на четене",
+      "operationSpeedWrite": "Скорост на запис",
       "interface": "Интерфейс"
     }
   },

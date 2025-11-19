@@ -16,8 +16,8 @@ export function Navbar() {
 
   return (
     <nav className='border-b font-montserrat bg-theme-white text-sm flex flex-col md:flex-row gap-6 justify-center items-center border-gray-300 text-black'>
-      {links.map((link, idx) => (
-        <NavbarLink key={idx} {...link} />
+      {links.map((link, index) => (
+        <NavbarLink key={index} {...link} />
       ))}
     </nav>
   );

@@ -6,5 +6,5 @@ export type Ssd = ProductLong & {
     read: number;
     write: number;
   };
-  interface: any;
+  interface: string;
 };

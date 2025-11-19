@@ -8,7 +8,7 @@ import deTranslatation from '../languages/de.json';
 const translations: Record<Language, Translation> = {
   en: translation,
   de: deTranslatation as Translation,
-  bg: bgTranslation as Translation,
+  bg: bgTranslation as Translation
 };
 
 export function useTranslation(): Translation {

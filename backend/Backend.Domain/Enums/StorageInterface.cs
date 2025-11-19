@@ -1,5 +1,8 @@
-﻿namespace Backend.Domain.Enums;
+﻿﻿using System.Text.Json.Serialization;
 
+namespace Backend.Domain.Enums;
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum StorageInterface
 {
     Sas,

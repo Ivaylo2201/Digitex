@@ -72,12 +72,12 @@ export function ProductPage<T extends ProductLong>({
               {translation.keywords.mainSpecifications}
             </TableCaption>
             <TableBody className='text-theme-gunmetal'>
-              {specs.map((item, idx) => (
+              {specs.map((item, index) => (
                 <TableRow
                   className={`pointer-events-none ${
-                    idx % 2 !== 0 ? 'bg-theme-gunmetal text-theme-white' : ''
+                    index % 2 !== 0 ? 'bg-theme-gunmetal text-theme-white' : ''
                   }`}
-                  key={idx}
+                  key={index}
                 >
                   <TableCell className='w-1/2'>{item.spec}</TableCell>
                   <TableCell className='w-1/2 font-medium'>
