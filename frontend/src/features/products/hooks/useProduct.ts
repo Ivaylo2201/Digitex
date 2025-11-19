@@ -1,3 +1,4 @@
+import { staleTime } from '@/lib/api/constants';
 import { httpClient } from '@/lib/api/httpClient';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
@@ -10,7 +11,7 @@ export function useProduct<T>(category: string, id: string) {
   return useSuspenseQuery({
     queryKey: [category, id],
     queryFn: () => fetchProduct<T>(category, id),
-    staleTime: 60 * 60 * 1000,
+    staleTime: staleTime,
     retry: false,
   });
 }

@@ -2,6 +2,8 @@ import { Rating } from '@/features/products/components/Rating';
 import { Link } from 'react-router';
 import type { ProductShort } from '@/features/products/models/base/ProductShort';
 import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
+import { DiscountLabel } from './DiscountLabel';
+import { getStaticFile } from '@/lib/utils/getStaticFile';
 
 type ProductCardProps = ProductShort & { category: string };
 
@@ -17,7 +19,6 @@ export function ProductCard({
 }: ProductCardProps) {
   const { exchangeCurrency } = useCurrencyExchange();
 
-  const imageSrc = `${import.meta.env.VITE_STATIC_FILES_URL}/${imagePath}`;
   const exchangedDiscountedPrice = exchangeCurrency(price.discounted);
   const exchangedInitialPrice = exchangeCurrency(price.initial);
 
@@ -26,16 +27,10 @@ export function ProductCard({
       to={`/products/${category}/${id}`}
       className='w-[345px] h-[375px] flex flex-col font-montserrat px-6 py-3 gap-5 relative group'
     >
-      <span
-        className={`${
-          discountPercentage > 0 ? 'block' : 'hidden'
-        } rounded-sm z-20 absolute right-12 -top-0.5 bg-theme-crimson px-3 py-1 text-sm text-theme-white font-medium`}
-      >
-        -{discountPercentage}%
-      </span>
+      <DiscountLabel discountPercentage={discountPercentage} />
 
       <img
-        src={imageSrc}
+        src={getStaticFile(imagePath)}
         className='object-contain group-hover:scale-105 transition-transform duration-200'
       />
       <div className='flex flex-col items-center gap-1'>
