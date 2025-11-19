@@ -5,17 +5,21 @@ import {
   TableBody,
   TableCell,
   Table,
-  TableCaption
-} from '@/components/ui/table';
-import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import { getStaticFile } from '@/lib/utils/getStaticFile';
-import { useNavigate } from 'react-router';
-import { useCompare } from '../stores/useCompare';
-import { Button } from '@/components/ui/button';
-import { X } from 'lucide-react';
-import useCurrencyExchange from '@/features/currency/hooks/useCurrencyExchange';
-import { toast } from 'sonner';
+  TableCaption,
+} from "@/components/ui/table";
+
+import type { ProductLong } from "@/features/products/models/base/ProductLong";
+import { useTranslation } from "@/lib/i18n/hooks/useTranslation";
+import { getStaticFile } from "@/lib/utils/getStaticFile";
+import { useNavigate } from "react-router";
+import { useCompare } from "../stores/useCompare";
+import useCurrencyExchange from "@/features/currency/hooks/useCurrencyExchange";
+import { toast } from "sonner";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 type ProductCompareTableProps = {
   products: ProductLong[];
@@ -28,7 +32,7 @@ export default function ProductCompareTable({
   products,
   category,
   childTableHeads,
-  childTableCells
+  childTableCells,
 }: ProductCompareTableProps) {
   const translation = useTranslation();
   const navigate = useNavigate();
@@ -48,41 +52,44 @@ export default function ProductCompareTable({
     <Table className='font-montserrat border'>
       <TableCaption>{translation.compare.comparedProducts}</TableCaption>
       <TableHeader>
-        <TableRow className='bg-theme-gunmetal [&>th]:text-white pointer-events-none'>
+        <TableRow className='[&>th]:text-white bg-theme-gunmetal pointer-events-none'>
           <TableHead>{translation.specs.product.brand}</TableHead>
           <TableHead>{translation.specs.product.model}</TableHead>
-          <TableHead>{translation.specs.product.image}</TableHead>
           <TableHead>{translation.specs.product.price}</TableHead>
           {childTableHeads}
-          <TableHead></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {products.map((product, idx) => (
-          <TableRow
-            key={idx}
-            onClick={() => navigate(`/products/${category}/${product.id}`)}
-            className='cursor-pointer hover:bg-gray-100 [&>td]:border [&>td]:text-center'
-          >
-            <TableCell>{product.brandName}</TableCell>
-            <TableCell>{product.modelName}</TableCell>
-            <TableCell>
-              <img
-                src={getStaticFile(product.imagePath)}
-                className='h-10 w-full object-contain'
-              />
-            </TableCell>
-            <TableCell>{exchangeCurrency(product.price.discounted)}</TableCell>
-            {childTableCells(product)}
-            <TableCell className='px-5'>
-              <Button
-                className='w-5 h-6 p-0 bg-theme-gunmetal hover:bg-gray-400 rounded-full flex items-center justify-center cursor-pointer'
-                onClick={(e) => handleRemoveFromCompare(e, product.id)}
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <TableRow
+                key={idx}
+                onClick={() => navigate(`/products/${category}/${product.id}`)}
+                className={`cursor-pointer hover:bg-theme-crimson hover:text-theme-white duration-300 transform-color ${
+                  idx % 2 === 0 ? "bg-gray-100" : ""
+                }`}
               >
-                <X />
-              </Button>
-            </TableCell>
-          </TableRow>
+                <TableCell>{product.brandName}</TableCell>
+                <TableCell>{product.modelName}</TableCell>
+                <TableCell>
+                  {exchangeCurrency(product.price.discounted)}
+                </TableCell>
+                {childTableCells(product)}
+                {/* <TableCell>
+                  <Button
+                    className='w-5 h-6 p-0 bg-theme-gunmetal hover:bg-gray-400 rounded-full flex items-center justify-center cursor-pointer'
+                    onClick={(e) => handleRemoveFromCompare(e, product.id)}
+                  >
+                    <X />
+                  </Button>
+                </TableCell> */}
+              </TableRow>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <img src={getStaticFile(product.imagePath)} />
+            </HoverCardContent>
+          </HoverCard>
         ))}
       </TableBody>
     </Table>

@@ -1,17 +1,17 @@
-import { TableCell, TableHead } from '@/components/ui/table';
-import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import React from 'react';
-import ProductCompareTable from './ProductCompareTable';
-import type { GraphicsCard } from '@/features/products/models/GraphicsCard';
-import { formatGraphicsCard } from '@/lib/utils/productFormatters';
+import { TableCell, TableHead } from "@/components/ui/table";
+import type { ProductLong } from "@/features/products/models/base/ProductLong";
+import { useTranslation } from "@/lib/i18n/hooks/useTranslation";
+import React from "react";
+import ProductCompareTable from "./ProductCompareTable";
+import { useFormatProduct } from "@/features/products/hooks/useFormatProduct";
 
 type GraphicsCardCompareTableProps = { products: ProductLong[] };
 
 export default function GraphicsCardCompareTable({
-  products
+  products,
 }: GraphicsCardCompareTableProps) {
   const translation = useTranslation();
+  const formatProduct = useFormatProduct(translation);
 
   return (
     <ProductCompareTable
@@ -20,8 +20,12 @@ export default function GraphicsCardCompareTable({
       childTableHeads={
         <React.Fragment>
           <TableHead>{translation.specs.graphicsCards.memory}</TableHead>
-          <TableHead>{translation.specs.graphicsCards.baseClockSpeed}</TableHead>
-          <TableHead>{translation.specs.graphicsCards.boostClockSpeed}</TableHead>
+          <TableHead>
+            {translation.specs.graphicsCards.baseClockSpeed}
+          </TableHead>
+          <TableHead>
+            {translation.specs.graphicsCards.boostClockSpeed}
+          </TableHead>
           <TableHead>{translation.specs.graphicsCards.busWidth}</TableHead>
           <TableHead>{translation.specs.graphicsCards.cudaCores}</TableHead>
           <TableHead>
@@ -30,17 +34,13 @@ export default function GraphicsCardCompareTable({
           <TableHead>{translation.specs.graphicsCards.tdp}</TableHead>
         </React.Fragment>
       }
-      childTableCells={(product) => {
-        return (
-          <React.Fragment>
-            {formatGraphicsCard(product as GraphicsCard, translation).map(
-              (graphicsCard) => (
-                <TableCell>{graphicsCard.value}</TableCell>
-              )
-            )}
-          </React.Fragment>
-        );
-      }}
+      childTableCells={(product) => (
+        <React.Fragment>
+          {formatProduct.toGraphicsCard(product).map(({ value }) => (
+            <TableCell>{value}</TableCell>
+          ))}
+        </React.Fragment>
+      )}
     />
   );
 }

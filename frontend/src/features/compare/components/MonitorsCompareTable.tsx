@@ -1,18 +1,18 @@
-import { TableHead, TableCell } from '@/components/ui/table';
+import { TableHead, TableCell } from "@/components/ui/table";
 
-import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import type { Monitor } from '@/features/products/models/Monitor';
-import ProductCompareTable from './ProductCompareTable';
-import React from 'react';
-import { formatMonitor } from '@/lib/utils/productFormatters';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import type { ProductLong } from "@/features/products/models/base/ProductLong";
+import ProductCompareTable from "./ProductCompareTable";
+import React from "react";
+import { useTranslation } from "@/lib/i18n/hooks/useTranslation";
+import { useFormatProduct } from "@/features/products/hooks/useFormatProduct";
 
 type MonitorsCompareTableProps = { products: ProductLong[] };
 
 export default function MonitorsCompareTable({
-  products
+  products,
 }: MonitorsCompareTableProps) {
   const translation = useTranslation();
+  const formatProduct = useFormatProduct(translation);
 
   return (
     <ProductCompareTable
@@ -30,15 +30,13 @@ export default function MonitorsCompareTable({
           <TableHead>{translation.specs.monitors.colorSpectre}</TableHead>
         </React.Fragment>
       }
-      childTableCells={(product) => {
-        return (
-          <React.Fragment>
-            {formatMonitor(product as Monitor, translation).map((monitor) => (
-              <TableCell>{monitor.value}</TableCell>
-            ))}
-          </React.Fragment>
-        );
-      }}
+      childTableCells={(product) => (
+        <React.Fragment>
+          {formatProduct.toMonitor(product).map(({ value }) => (
+            <TableCell>{value}</TableCell>
+          ))}
+        </React.Fragment>
+      )}
     />
   );
 }
