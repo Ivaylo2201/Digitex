@@ -59,7 +59,7 @@ export function ProductPage<T extends ProductLong>({
         </Button>
 
         <div className='flex flex-col gap-14'>
-          <p className='text-5xl text-theme-gunmetal font-bold'>
+          <p className='text-2xl md:text-4xl text-theme-gunmetal font-bold'>
             {displayName}
           </p>
           <img
@@ -75,12 +75,12 @@ export function ProductPage<T extends ProductLong>({
               {specs.map((item, index) => (
                 <TableRow
                   className={`pointer-events-none ${
-                    index % 2 !== 0 ? 'bg-theme-gunmetal text-theme-white' : ''
+                    index % 2 !== 0 ? 'bg-gray-100' : ''
                   }`}
                   key={index}
                 >
                   <TableCell className='w-1/2'>{item.spec}</TableCell>
-                  <TableCell className='w-1/2 font-medium'>
+                  <TableCell className='w-1/2'>
                     {item.value}
                   </TableCell>
                 </TableRow>

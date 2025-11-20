@@ -11,7 +11,7 @@ export function Navbar() {
     { content: translation.routing['rams'], to: '/rams' },
     { content: translation.routing['ssds'], to: '/ssds' },
     { content: translation.routing['power-supplies'], to: '/power-supplies' },
-    { content: translation.routing['monitors'], to: '/monitors' },
+    { content: translation.routing['monitors'], to: '/monitors' }
   ];
 
   return (

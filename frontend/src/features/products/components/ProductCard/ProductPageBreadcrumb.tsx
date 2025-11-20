@@ -3,7 +3,7 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-  BreadcrumbSeparator,
+  BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { capitalize } from '@/lib/utils/capitalize';
@@ -16,7 +16,7 @@ type ProductPageBreadcrumb = {
 
 export function ProductPageBreadcrumb({
   category,
-  displayName,
+  displayName
 }: ProductPageBreadcrumb) {
   const translation = useTranslation();
 
@@ -24,11 +24,13 @@ export function ProductPageBreadcrumb({
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <Link to='/'>{translation.routing.home}</Link>
+          <Link className='text-md' to='/'>
+            {translation.routing.home}
+          </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <Link to={`/products/categories/${category}`}>
+          <Link className='text-md' to={`/products/categories/${category}`}>
             {capitalize(
               (translation.routing as Record<string, string>)[category]
             )}
@@ -36,7 +38,9 @@ export function ProductPageBreadcrumb({
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>{displayName}</BreadcrumbPage>
+          <BreadcrumbPage>
+            <p className='text-md'>{displayName}</p>
+          </BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

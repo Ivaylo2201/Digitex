@@ -1835,7 +1835,7 @@ internal static class Data
         new()
         {
             Brand = Brands["corsair"],
-            ModelName = "MP600 Core XT",
+            ModelName = "MP600 Core XT 1TB",
             ImagePath = "ssds/1tb_ssd_corsair_mp600_core_xt.jpg",
             InitialPrice = 83.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1847,7 +1847,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "P310",
+            ModelName = "P310 1TB",
             ImagePath = "ssds/1tb_crucial_p310.jpg",
             InitialPrice = 87.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1859,7 +1859,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "T500",
+            ModelName = "T500 1TB",
             ImagePath = "ssds/1tb_crucial_t500.jpg",
             InitialPrice = 101.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1871,7 +1871,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "P510",
+            ModelName = "P510 1TB",
             ImagePath = "ssds/1tb_crucial_p510.png",
             InitialPrice = 111.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1883,7 +1883,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "T700 SSD Gen5 NVMe M.2",
+            ModelName = "T700 SSD Gen5 NVMe M.2 1TB",
             ImagePath = "ssds/1tb_crucial_t700_gen5_nvme_m2_ssd.png",
             InitialPrice = 127.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1895,7 +1895,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "P310",
+            ModelName = "P310 2TB",
             ImagePath = "ssds/2tb_crucial_p310.jpg",
             InitialPrice = 133.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1907,7 +1907,7 @@ internal static class Data
         new()
         {
             Brand = Brands["corsair"],
-            ModelName = "MP700 PRO",
+            ModelName = "MP700 PRO 1TB",
             ImagePath = "ssds/1tb_corsair_mp700_pro.png",
             InitialPrice = 147.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1919,7 +1919,7 @@ internal static class Data
         new()
         {
             Brand = Brands["corsair"],
-            ModelName = "MP700 PRO",
+            ModelName = "MP700 PRO 2TB",
             ImagePath = "ssds/2tb_corsair_mp700_pro.png",
             InitialPrice = 244.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1931,7 +1931,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "P310",
+            ModelName = "P310 500GB",
             ImagePath = "ssds/500gb_crucial_p310.png",
             InitialPrice = 60.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1943,7 +1943,7 @@ internal static class Data
         new()
         {
             Brand = Brands["corsair"],
-            ModelName = "MP700 ELITE",
+            ModelName = "MP700 ELITE 1TB",
             ImagePath = "ssds/1tb_corsair_mp700_elite.png",
             InitialPrice = 141.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1955,7 +1955,7 @@ internal static class Data
         new()
         {
             Brand = Brands["corsair"],
-            ModelName = "MP600 CORE XT rev 2.0",
+            ModelName = "MP600 CORE XT rev 2.0 2TB",
             ImagePath = "ssds/2tb_corsair_mp600_core_xt_rev_20.jpg",
             InitialPrice = 157.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1967,7 +1967,7 @@ internal static class Data
         new()
         {
             Brand = Brands["corsair"],
-            ModelName = "MP600 PRO LPX",
+            ModelName = "MP600 PRO LPX 2TB",
             ImagePath = "ssds/2tb_ssd_corsair_mp600_pro_lpx.png",
             InitialPrice = 184.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1979,7 +1979,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "P510",
+            ModelName = "P510 2TB",
             ImagePath = "ssds/2tb_crucial_p510.png",
             InitialPrice = 198.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -1991,7 +1991,7 @@ internal static class Data
         new()
         {
             Brand = Brands["crucial"],
-            ModelName = "T710",
+            ModelName = "T710 1TB",
             ImagePath = "ssds/1tb_crucial_t710.png",
             InitialPrice = 218.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
@@ -2003,7 +2003,7 @@ internal static class Data
         new()
         {
             Brand = Brands["corsair"],
-            ModelName = "MP600 CORE XT",
+            ModelName = "MP600 CORE XT 4TB",
             ImagePath = "ssds/4tb_corsair_mp600_core_xt.png",
             InitialPrice = 331.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
