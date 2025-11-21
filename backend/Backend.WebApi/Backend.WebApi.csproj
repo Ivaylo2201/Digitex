@@ -20,7 +20,7 @@
 
     <ItemGroup>
       <Folder Include="wwwroot\processors\" />
-      <Folder Include="wwwroot\graphic-cards\" />
+      <Folder Include="wwwroot\graphics-cards\" />
       <Folder Include="wwwroot\monitors\" />
       <Folder Include="wwwroot\motherboards\" />
       <Folder Include="wwwroot\power-supplies\" />

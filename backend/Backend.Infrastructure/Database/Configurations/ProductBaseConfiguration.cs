@@ -54,7 +54,7 @@ public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
         
         builder
             .HasMany(product => product.Suggestions)
-            .WithMany(product => product.Suggestions)
+            .WithMany(product => product.SuggestedBy)
             .UsingEntity(
                 SuggestionsTableName,
                 product => product

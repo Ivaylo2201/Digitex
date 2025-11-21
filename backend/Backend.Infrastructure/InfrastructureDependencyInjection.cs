@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics;
+using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
@@ -12,6 +13,7 @@ using Backend.Application.Dtos.Product;
 using Backend.Application.Dtos.Ram;
 using Backend.Application.Dtos.Review;
 using Backend.Application.Dtos.Ssd;
+using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
@@ -177,7 +179,7 @@ public static class InfrastructureDependencyInjection
             .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
             .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
             .AddSingleton<ITokenService>(_ => new TokenService(
-                Convert.FromBase64String(GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY")),
+                Encoding.UTF8.GetBytes(GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY")),
                 GetRequiredEnvironmentVariable<string>("JWT_ISSUER"),
                 GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE")
             ))
@@ -214,8 +216,10 @@ public static class InfrastructureDependencyInjection
             .Map(dest => dest.Reviews, src => src.Reviews
                 .OrderByDescending(r => r.CreatedAt)
                 .Take(10)
-                .Adapt<List<ReviewDto>>());
-
+                .Adapt<List<ReviewDto>>())
+            .Map(dest => dest.Suggestions,
+                src => src.Suggestions.Select(suggestion => suggestion.ToSuggestionDto()));
+        
         TypeAdapterConfig<Processor, ProcessorDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<GraphicsCard, GraphicsCardDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
         TypeAdapterConfig<Monitor, MonitorDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();

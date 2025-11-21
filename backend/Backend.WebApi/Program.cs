@@ -5,6 +5,7 @@ using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
 using Backend.WebApi.Extensions;
 using Backend.WebApi.Middlewares;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,33 @@ builder.Services
     .AddOpenApi()
     .AddInfrastructure(builder.Configuration)
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen()
+    .AddSwaggerGen(c =>
+    {
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            Scheme = "Bearer",
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header,
+            Description = "Enter 'Bearer' [space] and your token."
+        });
+
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference 
+                    { 
+                        Type = ReferenceType.SecurityScheme, 
+                        Id = "Bearer" 
+                    }
+                },
+                Array.Empty<string>()
+            }
+        });
+    })
     .AddRouting(options => options.LowercaseUrls = true)
     .AddControllers();
 

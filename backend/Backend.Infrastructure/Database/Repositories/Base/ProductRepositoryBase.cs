@@ -23,6 +23,8 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
             .Set<TEntity>()
             .AsNoTracking()
             .Include(entity => entity.Brand)
+            .Include(entity => entity.Suggestions)
+            .ThenInclude(suggestion => suggestion.Brand)
             .Include(entity => entity.Reviews)
             .ThenInclude(review => review.User)
             .FirstOrDefaultAsync(entity => entity.Id == id, stoppingToken);

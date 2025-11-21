@@ -17,6 +17,7 @@ public abstract class ProductBase
     public ICollection<Review> Reviews { get; init; } = [];
     public ICollection<User> LikedBy { get; init; } = [];
     public ICollection<ProductBase> Suggestions { get; init; } = [];
+    public ICollection<ProductBase> SuggestedBy { get; init; } = [];
     public ICollection<Sale> Sales { get; init; } = [];  
 
     public double Price => InitialPrice * (1 - DiscountPercentage / 100.0);
