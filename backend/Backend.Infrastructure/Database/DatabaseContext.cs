@@ -25,6 +25,8 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<Address> Addresses => Set<Address>();
     public DbSet<City> Cities => Set<City>();
     public DbSet<Country> Countries => Set<Country>();
+    public DbSet<Payment> Payments => Set<Payment>();
+    public DbSet<Sale> Sales => Set<Sale>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

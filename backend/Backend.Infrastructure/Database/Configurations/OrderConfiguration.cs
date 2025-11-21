@@ -13,10 +13,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder
             .ToTable(TableName)
             .HasKey(order => order.Id);
-
-        builder
-            .Property(order => order.Instructions)
-            .HasColumnType("TEXT");
         
         builder
             .HasOne(order => order.User)
@@ -34,6 +30,12 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .HasMany(order => order.Items)
             .WithOne(item => item.Order)
             .HasForeignKey(item => item.OrderId)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder
+            .HasOne(order => order.Payment)
+            .WithOne(payment => payment.Order)
+            .HasForeignKey<Payment>(payment => payment.OrderId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }

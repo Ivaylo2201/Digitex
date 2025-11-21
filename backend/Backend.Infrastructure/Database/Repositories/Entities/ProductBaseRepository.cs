@@ -39,4 +39,27 @@ public class ProductBaseRepository(ILogger<ProductBaseRepository> logger, Databa
 
         return product?.IsInStock ?? false;
     }
+
+    public async Task<bool> AddSuggestionAsync(Guid productId, Guid suggestedProductId, CancellationToken stoppingToken = default)
+    {
+        var currentProduct = await context.Products
+            .Include(product => product.Suggestions)
+            .FirstOrDefaultAsync(product => product.Id == productId, stoppingToken);
+        
+        var suggestedProduct = await context.Products
+            .Include(product => product.Suggestions)
+            .FirstOrDefaultAsync(product => product.Id == suggestedProductId, stoppingToken);
+        
+        if (currentProduct is null || suggestedProduct is null)
+            return false;
+        
+        if (!currentProduct.Suggestions.Contains(suggestedProduct))
+            currentProduct.Suggestions.Add(suggestedProduct);
+
+        if (!suggestedProduct.Suggestions.Contains(currentProduct))
+            suggestedProduct.Suggestions.Add(currentProduct);
+
+        await context.SaveChangesAsync(stoppingToken);
+        return true;
+    }
 }

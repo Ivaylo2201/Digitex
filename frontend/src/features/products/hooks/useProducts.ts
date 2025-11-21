@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import type { ProductShort } from '../models/base/ProductShort';
 import { staleTime } from '@/lib/api/constants';
 import { httpClient } from '@/lib/api/httpClient';
@@ -9,10 +9,10 @@ async function fetchProducts(category: string) {
 }
 
 export function useProducts(category: string | undefined) {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: ['products', category],
     queryFn: () => fetchProducts(category ?? ''),
     staleTime: staleTime,
-    retry: false,
+    retry: false
   });
 }

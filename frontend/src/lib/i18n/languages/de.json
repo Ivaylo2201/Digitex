@@ -9,6 +9,7 @@
     "alreadyPresent": "Das Produkt wurde bereits zum Vergleich hinzugefügt.",
     "incompatibleCategory": "Produkte aus unterschiedlichen Kategorien können nicht verglichen werden.",
     "addedSuccessfully": "Das Produkt wurde erfolgreich zum Vergleich hinzugefügt.",
+    "removedSuccessfully": "Produkt aus dem Vergleich entfernt.",
     "compare": "Vergleichen",
     "comparedProducts": "Zu vergleichende Produkte",
     "clear": "Löschen",
@@ -19,14 +20,6 @@
       "getStarted": "Fügen Sie ein Produkt hinzu, um zu beginnen.",
       "addProducts": "Produkte hinzufügen"
     }
-  },
-  "units": {
-    "gb": "Gigabyte",
-    "hz": "Hz",
-    "ms": "ms",
-    "mm": "mm",
-    "nits": "nits",
-    "w": "W"
   },
   "specs": {
     "product": {
@@ -109,6 +102,7 @@
   "keywords": {
     "productSearch": "Produkte suchen...",
     "address": "Sofia, Vitosha Blvd. 76",
-    "mainSpecifications": "Hauptspezifikationen"
+    "mainSpecifications": "Hauptspezifikationen",
+    "loading": "Lädt"
   }
 }

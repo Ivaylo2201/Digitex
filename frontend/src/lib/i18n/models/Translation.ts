@@ -70,26 +70,20 @@ export type Translation = {
   compare: {
     maxCapacityReached: string;
     alreadyPresent: string;
+    addToCompare: string;
+    removeFromCompare: string;
     incompatibleCategory: string;
     addedSuccessfully: string;
+    removedSuccessfully: string;
     compare: string;
     comparedProducts: string;
     clear: string;
-    removeFromCompare: string;
     noProductsForComparison: {
       title: string;
       main: string;
       getStarted: string;
       addProducts: string;
     };
-  };
-  units: {
-    hz: string;
-    ms: string;
-    mm: string;
-    nits: string;
-    gb: string;
-    w: string;
   };
   auth: {
     signIn: string;
@@ -105,27 +99,22 @@ export type Translation = {
     productSearch: string;
     address: string;
     mainSpecifications: string;
+    loading: string;
   };
 };
 
 export const translation: Translation = {
-  units: {
-    gb: 'Gigabytes',
-    hz: 'Hz',
-    ms: 'ms',
-    mm: 'mm',
-    nits: 'nits',
-    w: 'W'
-  },
   compare: {
     maxCapacityReached: 'Max compare capacity reach.',
     alreadyPresent: 'Product already present in comparison.',
     incompatibleCategory: 'Incompatible comparison category.',
+    removedSuccessfully: 'Product removed from comparison.',
+    addToCompare: 'Add to compare',
+    removeFromCompare: 'Remove from compare',
     addedSuccessfully: 'Product added to comparison.',
     compare: 'Compare',
     comparedProducts: 'Compared products',
     clear: 'Clear',
-    removeFromCompare: 'Product removed from comparison.',
     noProductsForComparison: {
       title: 'No products added for comparison',
       main: "You haven't added any products for comparison yet.",
@@ -191,8 +180,8 @@ export const translation: Translation = {
     },
     ssds: {
       capacityInGb: 'Capacity',
-      operationSpeedRead: "Read speed",
-      operationSpeedWrite: "Write speed",
+      operationSpeedRead: 'Read speed',
+      operationSpeedWrite: 'Write speed',
       interface: 'Interface'
     }
   },
@@ -219,6 +208,7 @@ export const translation: Translation = {
   keywords: {
     productSearch: 'Search for products...',
     address: 'Sofia, Vitosha Blvd. 76',
-    mainSpecifications: 'Main specifications'
+    mainSpecifications: 'Main specifications',
+    loading: 'Loading'
   }
 };

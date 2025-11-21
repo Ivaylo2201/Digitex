@@ -2,12 +2,24 @@ import { useParams } from 'react-router';
 import { Page } from '@/components/layout/Page';
 import { ProductCard } from '@/features/products/components/ProductCard/ProductCard';
 import { useProducts } from '../hooks/useProducts';
+import { Spinner } from '@/components/ui/spinner';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
   const { data: products } = useProducts(category);
+  const translation = useTranslation();
 
-  if (category === undefined) return;
+  if (products === undefined || category === undefined) {
+    return (
+      <Page>
+        <div className='flex justify-center items-center gap-2'>
+          <Spinner className='size-8 text-theme-crimson' />
+          <span className='font-medium text-theme-gunmetal'>{translation.keywords.loading}...</span>
+        </div>
+      </Page>
+    );
+  }
 
   return (
     <Page>

@@ -7,6 +7,7 @@ public class Order
     public User User { get; init; } = null!;
     public int ShippingId { get; init; }
     public Shipping Shipping { get; init; } = null!;
-    public string? Instructions { get; init; }
+    public int? PaymentId { get; init; }
+    public Payment? Payment { get; init; }
     public ICollection<Item> Items { get; init; } = [];
 }

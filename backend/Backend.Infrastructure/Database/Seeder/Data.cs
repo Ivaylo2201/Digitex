@@ -5,11 +5,11 @@ using Monitor = Backend.Domain.Entities.Monitor;
 
 namespace Backend.Infrastructure.Database.Seeder;
 
-internal static class Data
+public static class Data
 {
     private static readonly Random Random = new();
-    
-    internal static readonly Dictionary<string, Brand> Brands = new()
+
+    public static readonly Dictionary<string, Brand> Brands = new()
     {
         ["intel"] = new Brand { BrandName = "Intel" },
         ["amd"] = new Brand { BrandName = "AMD" },
@@ -35,7 +35,7 @@ internal static class Data
         ["seasonic"] = new Brand { BrandName = "Seasonic" }
     };
 
-    internal static readonly List<GraphicsCard> GraphicsCards =
+    public static readonly List<GraphicsCard> GraphicsCards =
     [
         new()
         {
@@ -414,7 +414,7 @@ internal static class Data
         }
     ];
 
-    internal static readonly List<Processor> Processors =
+    public static readonly List<Processor> Processors =
     [
         new()
         {
@@ -768,7 +768,7 @@ internal static class Data
         }
     ];
 
-    internal static readonly List<Monitor> Monitors =
+    public static readonly List<Monitor> Monitors =
     [
         new()
         {
@@ -1197,7 +1197,7 @@ internal static class Data
         }
     ];
 
-    internal static readonly List<Ram> Rams =
+    public static readonly List<Ram> Rams =
     [
         new()
         {
@@ -1476,7 +1476,7 @@ internal static class Data
         }
     ];
 
-    internal static readonly List<Motherboard> Motherboards =
+    public static readonly List<Motherboard> Motherboards =
     [
         new()
         {
@@ -1830,7 +1830,7 @@ internal static class Data
         }
     ];
 
-    internal static readonly List<Ssd> Ssds =
+    public static readonly List<Ssd> Ssds =
     [
         new()
         {
@@ -2014,7 +2014,7 @@ internal static class Data
         }
     ];
 
-    internal static readonly List<PowerSupply> PowerSupplies =
+    public static readonly List<PowerSupply> PowerSupplies =
     [
         new()
         {
@@ -2147,8 +2147,8 @@ internal static class Data
             Modularity = Modularity.Full
         }
     ];
-    
-    internal static readonly List<Shipping> Shippings =
+
+    public static readonly List<Shipping> Shippings =
     [
         new()
         {
@@ -2175,8 +2175,8 @@ internal static class Data
             Days = 0
         }
     ];
-    
-    internal static readonly Dictionary<string, Country> Countries = new()
+
+    public static readonly Dictionary<string, Country> Countries = new()
     {
         ["bulgaria"] = new Country { CountryName = "Bulgaria" },
         ["austria"] = new Country { CountryName = "Austria" },
@@ -2201,8 +2201,8 @@ internal static class Data
         ["uk"] = new Country { CountryName = "United Kingdom" },
         ["us"] = new Country { CountryName = "United States" }
     };
-    
-    internal static readonly List<City> Cities =
+
+    public static readonly List<City> Cities =
     [
         new() { Country = Countries["bulgaria"], CityName = "Sofia" },
         new() { Country = Countries["bulgaria"], CityName = "Plovdiv" },
@@ -2280,7 +2280,7 @@ internal static class Data
 
         if (!isDiscounted)
             return 0;
-        
+
         var discounts = new[] { 10, 20, 30, 40, 50 };
         return discounts[Random.Next(discounts.Length)];
     }

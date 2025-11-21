@@ -37,16 +37,7 @@ export function ProductCompareTable({
   const translation = useTranslation();
   const navigate = useNavigate();
   const { exchangeCurrency } = useCurrencyExchange();
-  const { removeFromCompare } = useCompare();
-
-  const handleRemoveFromCompare = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: string
-  ) => {
-    e.stopPropagation();
-    removeFromCompare(id);
-    toast.success(translation.compare.removeFromCompare);
-  };
+  //const { clearCompare } = useCompare();
 
   return (
     <Table className='font-montserrat border'>
@@ -76,14 +67,6 @@ export function ProductCompareTable({
                   {exchangeCurrency(product.price.discounted)}
                 </TableCell>
                 {childTableCells(product)}
-                {/* <TableCell>
-                  <Button
-                    className='w-5 h-6 p-0 bg-theme-gunmetal hover:bg-gray-400 rounded-full flex items-center justify-center cursor-pointer'
-                    onClick={(e) => handleRemoveFromCompare(e, product.id)}
-                  >
-                    <X />
-                  </Button>
-                </TableCell> */}
               </TableRow>
             </HoverCardTrigger>
             <HoverCardContent>

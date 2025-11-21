@@ -187,8 +187,8 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Instructions")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ShippingId")
                         .HasColumnType("int");
@@ -203,6 +203,28 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.ProductBase", b =>
@@ -285,6 +307,30 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.ToTable("Reviews", (string)null);
                 });
 
+            modelBuilder.Entity("Backend.Domain.Entities.Sale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("QuantitySold")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SaleDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Sales", (string)null);
+                });
+
             modelBuilder.Entity("Backend.Domain.Entities.Shipping", b =>
                 {
                     b.Property<int>("Id")
@@ -329,6 +375,9 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -340,6 +389,21 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsUnique();
 
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("Suggestions", b =>
+                {
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SuggestedProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ProductId", "SuggestedProductId");
+
+                    b.HasIndex("SuggestedProductId");
+
+                    b.ToTable("Suggestions");
                 });
 
             modelBuilder.Entity("Wishlist", b =>
@@ -664,6 +728,17 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Backend.Domain.Entities.Payment", b =>
+                {
+                    b.HasOne("Backend.Domain.Entities.Order", "Order")
+                        .WithOne("Payment")
+                        .HasForeignKey("Backend.Domain.Entities.Payment", "OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Backend.Domain.Entities.ProductBase", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.Brand", "Brand")
@@ -692,6 +767,32 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Sale", b =>
+                {
+                    b.HasOne("Backend.Domain.Entities.ProductBase", "Product")
+                        .WithMany("Sales")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Suggestions", b =>
+                {
+                    b.HasOne("Backend.Domain.Entities.ProductBase", null)
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Domain.Entities.ProductBase", null)
+                        .WithMany()
+                        .HasForeignKey("SuggestedProductId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Wishlist", b =>
@@ -795,6 +896,8 @@ namespace Backend.Infrastructure.Database.Migrations
             modelBuilder.Entity("Backend.Domain.Entities.Order", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.ProductBase", b =>
@@ -802,6 +905,8 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("Items");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Shipping", b =>

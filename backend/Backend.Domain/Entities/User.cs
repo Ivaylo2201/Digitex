@@ -1,8 +1,11 @@
-﻿namespace Backend.Domain.Entities;
+﻿using Backend.Domain.Enums;
+
+namespace Backend.Domain.Entities;
 
 public class User
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
+    public Role Role { get; init; } = Role.Client;
     public required string Username { get; init; }
     public required string Password { get; set; }
     public required string Email { get; init; }

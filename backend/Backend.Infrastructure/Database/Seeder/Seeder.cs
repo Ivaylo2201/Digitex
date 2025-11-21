@@ -19,6 +19,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         }
         catch (Exception ex)
         {
+            throw ex;
             var exceptionMessage = ex.InnerException?.Message ?? ex.Message;
             var exceptionType = ex.InnerException?.GetType().Name ?? ex.GetType().Name;
             

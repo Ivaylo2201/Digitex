@@ -7,11 +7,9 @@ type CompareActionResult = { isSuccess: boolean; message: string };
 type CompareStore = {
   category: string | null;
   products: ProductLong[];
-  addToCompare: (
-    product: ProductLong & { category: string },
-    translation: Translation
-  ) => CompareActionResult;
-  removeFromCompare: (id: string) => void;
+  addToCompare: (product: ProductLong & { category: string }, translation: Translation) => CompareActionResult;
+  removeFromCompare: (id: string, translation: Translation) => CompareActionResult;
+  isAddedToCompare: (id: string) => boolean;
   clearCompare: () => void;
 };
 
@@ -25,19 +23,13 @@ export const useCompare = create<CompareStore>((set, get) => ({
     if (products.length >= 10)
       return {
         isSuccess: false,
-        message: translation.compare.maxCapacityReached,
+        message: translation.compare.maxCapacityReached
       };
 
     if (category && comparedProduct.category !== category)
       return {
         isSuccess: false,
-        message: translation.compare.incompatibleCategory,
-      };
-
-    if (products.some((product) => product.id === comparedProduct.id))
-      return {
-        isSuccess: false,
-        message: translation.compare.alreadyPresent,
+        message: translation.compare.incompatibleCategory
       };
 
     const { category: _, ...rest } = comparedProduct;
@@ -45,7 +37,7 @@ export const useCompare = create<CompareStore>((set, get) => ({
 
     return { isSuccess: true, message: translation.compare.addedSuccessfully };
   },
-  removeFromCompare: (id) => {
+  removeFromCompare: (id, translation) => {
     const filteredProducts = get().products.filter(
       (product) => product.id !== id
     );
@@ -55,8 +47,16 @@ export const useCompare = create<CompareStore>((set, get) => ({
     if (filteredProducts.length === 0) {
       set({ category: null });
     }
+
+    return {
+      isSuccess: true,
+      message: translation.compare.removedSuccessfully
+    };
+  },
+  isAddedToCompare: (id) => {
+    return get().products.some((product) => product.id === id);
   },
   clearCompare: () => {
     set({ products: [], category: null });
-  },
+  }
 }));
