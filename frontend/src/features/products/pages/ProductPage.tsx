@@ -11,20 +11,19 @@ import { ProductPageBreadcrumb } from '../components/ProductCard/ProductPageBrea
 import { Page } from '@/components/layout/Page';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
-import { toast } from 'sonner';
-import { useCompare } from '@/features/compare/stores/useCompare';
 import { Button } from '@/components/ui/button';
-import { ArrowLeftRight, Minus, Plus, ShoppingCart } from 'lucide-react';
+import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
 import { Separator } from '@/components/ui/separator';
-import { Slider } from '@/components/ui/slider';
 import { useState } from 'react';
 import CompareToggleCheckbox from '../components/CompareToggleCheckbox';
+import { Link } from 'react-router';
+import type { Spec } from '../models/shared/Spec';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
   product: T;
-  specs: { spec: string; value: string | number }[];
+  specs: Spec[];
 };
 
 export function ProductPage<T extends ProductLong>({
@@ -39,9 +38,7 @@ export function ProductPage<T extends ProductLong>({
   const displayName = `${product.brandName} ${product.modelName}`;
   const exchangedDiscountedPrice = exchangeCurrency(product.price.discounted);
   const exchangedInitialPrice = exchangeCurrency(product.price.initial);
-  const exchangedPriceDifference = exchangeCurrency(
-    product.price.initial - product.price.discounted
-  );
+  const exchangedPriceDifference = exchangeCurrency(product.price.initial - product.price.discounted);
 
   return (
     <Page>
@@ -130,6 +127,23 @@ export function ProductPage<T extends ProductLong>({
             </Table>
           </section>
         </div>
+
+        <section className='bg-theme-gunmetal flex'>
+          {product.suggestedProducts.map((suggestedProduct) => (
+            <Link
+              to={`/products/${suggestedProduct.category}/${suggestedProduct.id}`}
+              className='bg-white rounded-xl'
+            >
+              <p>
+                {suggestedProduct.brandName} {suggestedProduct.modelName}
+              </p>
+              <img
+                className='size-10'
+                src={getStaticFile(suggestedProduct.imagePath)}
+              />
+            </Link>
+          ))}
+        </section>
       </section>
     </Page>
   );

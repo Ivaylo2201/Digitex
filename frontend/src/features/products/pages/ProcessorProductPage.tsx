@@ -2,8 +2,8 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { useProduct } from '../hooks/useProduct';
 import { useProductParams } from '../hooks/useProductParams';
 import type { Processor } from '../models/Processor';
-import { ProductPage } from './ProductPage';
 import { useFormatProduct } from '../hooks/useFormatProduct';
+import { ProductPage } from './ProductPage';
 
 export function ProcessorProductPage() {
   const { category, id } = useProductParams();

@@ -5,6 +5,7 @@
     "favorites": "Favoriten"
   },
   "compare": {
+    "addToCompare": "Zum Vergleich hinzufügen",
     "maxCapacityReached": "Die maximale Anzahl zum Vergleichen wurde erreicht.",
     "alreadyPresent": "Das Produkt wurde bereits zum Vergleich hinzugefügt.",
     "incompatibleCategory": "Produkte aus unterschiedlichen Kategorien können nicht verglichen werden.",

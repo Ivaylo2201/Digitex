@@ -217,7 +217,7 @@ public static class InfrastructureDependencyInjection
                 .OrderByDescending(r => r.CreatedAt)
                 .Take(10)
                 .Adapt<List<ReviewDto>>())
-            .Map(dest => dest.Suggestions,
+            .Map(dest => dest.SuggestedProducts,
                 src => src.Suggestions.Select(suggestion => suggestion.ToSuggestionDto()));
         
         TypeAdapterConfig<Processor, ProcessorDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();

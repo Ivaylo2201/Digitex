@@ -6,5 +6,5 @@ public record ProductLongDto : ProductShortDto
 {
     public required string Sku { get; init; }
     public ICollection<ReviewDto> Reviews { get; init; } = [];
-    public ICollection<SuggestionDto> Suggestions { get; init; } = [];
+    public ICollection<SuggestionDto> SuggestedProducts { get; init; } = [];
 }
