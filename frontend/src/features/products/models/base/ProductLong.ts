@@ -11,6 +11,7 @@ type SuggestedProduct = {
 
 export type ProductLong = ProductShort & {
   sku: string;
-  reviews: Review[];
+  totalReviews: number;
+  recentReviews: Review[];
   suggestedProducts: SuggestedProduct[];
 };

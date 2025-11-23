@@ -2,14 +2,14 @@ import { create } from 'zustand';
 import type { Translation } from '@/lib/i18n/models/Translation';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 
-type CompareActionResult = { isSuccess: boolean; message: string };
-
 type CompareStore = {
   category: string | null;
   products: ProductLong[];
-  addToCompare: (product: ProductLong & { category: string }, translation: Translation) => CompareActionResult;
-  removeFromCompare: (id: string, translation: Translation) => CompareActionResult;
-  isAddedToCompare: (id: string) => boolean;
+  addToCompare: (
+    product: ProductLong & { category: string },
+    translation: Translation
+  ) => { isSuccess: boolean; message: string };
+  removeFromCompare: (id: string) => void;
   clearCompare: () => void;
 };
 
@@ -32,12 +32,18 @@ export const useCompare = create<CompareStore>((set, get) => ({
         message: translation.compare.incompatibleCategory
       };
 
+    if (products.some((product) => product.id === comparedProduct.id))
+      return {
+        isSuccess: false,
+        message: translation.compare.alreadyPresent
+      };
+
     const { category: _, ...rest } = comparedProduct;
     set({ products: [...products, rest], category: comparedProduct.category });
 
     return { isSuccess: true, message: translation.compare.addedSuccessfully };
   },
-  removeFromCompare: (id, translation) => {
+  removeFromCompare: (id) => {
     const filteredProducts = get().products.filter(
       (product) => product.id !== id
     );
@@ -47,14 +53,6 @@ export const useCompare = create<CompareStore>((set, get) => ({
     if (filteredProducts.length === 0) {
       set({ category: null });
     }
-
-    return {
-      isSuccess: true,
-      message: translation.compare.removedSuccessfully
-    };
-  },
-  isAddedToCompare: (id) => {
-    return get().products.some((product) => product.id === id);
   },
   clearCompare: () => {
     set({ products: [], category: null });

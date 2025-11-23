@@ -100,6 +100,9 @@ export type Translation = {
     address: string;
     mainSpecifications: string;
     loading: string;
+    suggestedProducts: string;
+    reviews: string;
+    addToCart: string;
   };
 };
 
@@ -209,6 +212,9 @@ export const translation: Translation = {
     productSearch: 'Search for products...',
     address: 'Sofia, Vitosha Blvd. 76',
     mainSpecifications: 'Main specifications',
-    loading: 'Loading'
+    loading: 'Loading',
+    suggestedProducts: 'Suggested products',
+    reviews: 'Reviews',
+    addToCart: 'Add to cart'
   }
 };

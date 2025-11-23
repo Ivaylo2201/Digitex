@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
@@ -213,9 +212,10 @@ public static class InfrastructureDependencyInjection
 
         TypeAdapterConfig<ProductBase, ProductLongDto>.NewConfig().Inherits<ProductBase, ProductShortDto>()
             .Map(dest => dest.Sku, src => src.Sku.ToUpper())
-            .Map(dest => dest.Reviews, src => src.Reviews
+            .Map(dest => dest.TotalReviews, src => src.Reviews.Count)   
+            .Map(dest => dest.RecentReviews, src => src.Reviews
                 .OrderByDescending(r => r.CreatedAt)
-                .Take(10)
+                .Take(50)
                 .Adapt<List<ReviewDto>>())
             .Map(dest => dest.SuggestedProducts,
                 src => src.Suggestions.Select(suggestion => suggestion.ToSuggestionDto()));

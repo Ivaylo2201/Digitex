@@ -104,6 +104,9 @@
     "productSearch": "Produkte suchen...",
     "address": "Sofia, Vitosha Blvd. 76",
     "mainSpecifications": "Hauptspezifikationen",
-    "loading": "Lädt"
+    "loading": "Lädt",
+    "suggestedProducts": "Empfohlene Produkte",
+    "reviews": "Bewertungen",
+    "addToCart": "In den Warenkorb"
   }
 }

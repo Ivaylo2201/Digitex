@@ -5,6 +5,7 @@ namespace Backend.Application.Dtos.Product;
 public record ProductLongDto : ProductShortDto
 {
     public required string Sku { get; init; }
-    public ICollection<ReviewDto> Reviews { get; init; } = [];
+    public required int TotalReviews { get; init; } 
+    public ICollection<ReviewDto> RecentReviews { get; init; } = [];
     public ICollection<SuggestionDto> SuggestedProducts { get; init; } = [];
 }
