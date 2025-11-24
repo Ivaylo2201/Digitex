@@ -6,20 +6,21 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import type { Translation } from '@/lib/i18n/models/Translation';
 import { capitalize } from '@/lib/utils/capitalize';
 import { Link } from 'react-router';
 
 type ProductPageBreadcrumb = {
   category: string;
   displayName: string;
+  translation: Translation;
 };
 
 export function ProductPageBreadcrumb({
   category,
-  displayName
+  displayName,
+  translation
 }: ProductPageBreadcrumb) {
-  const translation = useTranslation();
-
   return (
     <Breadcrumb>
       <BreadcrumbList>

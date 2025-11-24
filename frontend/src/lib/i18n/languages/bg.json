@@ -104,6 +104,9 @@
     "productSearch": "Търсене на продукти...",
     "address": "София, бул. Витоша 76",
     "mainSpecifications": "Основни характеристики",
-    "loading": "Зареждане"
+    "loading": "Зареждане",
+    "suggestedProducts": "Препоръчани продукти",
+    "reviews": "Отзиви",
+    "addToCart": "Добави в количката"
   }
 }

@@ -1,9 +1,9 @@
+import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
+import { useProduct } from '@/features/products/hooks/useProduct';
+import { useProductParams } from '@/features/products/hooks/useProductParams';
+import type { Ram } from '@/features/products/models/Ram';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import { useFormatProduct } from '../hooks/useFormatProduct';
-import { useProduct } from '../hooks/useProduct';
-import { useProductParams } from '../hooks/useProductParams';
-import type { Ram } from '../models/Ram';
-import { ProductPage } from './ProductPage';
+import { ProductPage } from '../ProductPage';
 
 export function RamProductPage() {
   const { category, id } = useProductParams();

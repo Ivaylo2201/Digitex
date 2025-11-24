@@ -1,9 +1,9 @@
+import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
+import { useProduct } from '@/features/products/hooks/useProduct';
+import { useProductParams } from '@/features/products/hooks/useProductParams';
+import type { GraphicsCard } from '@/features/products/models/GraphicsCard';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import { useProduct } from '../hooks/useProduct';
-import { useProductParams } from '../hooks/useProductParams';
-import { ProductPage } from './ProductPage';
-import type { GraphicsCard } from '../models/GraphicsCard';
-import { useFormatProduct } from '../hooks/useFormatProduct';
+import { ProductPage } from '../ProductPage';
 
 export function GraphicsCardsProductPage() {
   const { category, id } = useProductParams();

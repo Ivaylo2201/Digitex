@@ -1,12 +1,12 @@
 import { useProductParams } from '@/features/products/hooks/useProductParams';
 import { Navigate } from 'react-router';
-import { ProcessorProductPage } from './pages/ProcessorProductPage';
-import { MonitorProductPage } from './pages/MonitorProductPage';
-import { GraphicsCardsProductPage } from './pages/GraphicsCardsProductPage';
-import { MotherboardProductPage } from './pages/MotherboardProductPage';
-import { RamProductPage } from './pages/RamProductPage';
-import { SsdProductPage } from './pages/SsdProductPage';
-import { PowerSupplyProductPage } from './pages/PowerSupplyProductPage';
+import { GraphicsCardsProductPage } from './variants/GraphicsCardsProductPage';
+import { MonitorProductPage } from './variants/MonitorProductPage';
+import { MotherboardProductPage } from './variants/MotherboardProductPage';
+import { PowerSupplyProductPage } from './variants/PowerSupplyProductPage';
+import { ProcessorProductPage } from './variants/ProcessorProductPage';
+import { RamProductPage } from './variants/RamProductPage';
+import { SsdProductPage } from './variants/SsdProductPage';
 
 const productPages: Record<string, React.ComponentType> = {
   processors: ProcessorProductPage,
@@ -18,7 +18,7 @@ const productPages: Record<string, React.ComponentType> = {
   'power-supplies': PowerSupplyProductPage
 };
 
-export function ProductPageRouter() {
+export function ProductPageResolver() {
   const { category } = useProductParams();
 
   if (!(category in productPages)) {

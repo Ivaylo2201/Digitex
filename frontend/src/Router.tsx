@@ -5,11 +5,11 @@ import { FavoritesPage } from '@/features/favorites/FavoritesPage';
 import { SignInPage } from '@/features/auth/pages/SignInPage';
 import { SignUpPage } from '@/features/auth/pages/SignUpPage';
 import { Page } from '@/components/layout/Page';
-import { ProductsPage } from '@/features/products/pages/ProductsPage';
-import { ProductPageRouter } from './features/products/ProductPageRouter';
+import { ProductsPage } from '@/features/products/pages/ProductsPage/ProductsPage';
 import { AccountVerifiedPage } from './features/account/pages/AccountVerifiedPage';
 import { CartPage } from './features/cart/pages/CartPage';
 import { ComparePage } from './features/compare/pages/ComparePage';
+import { ProductPageResolver } from './features/products/pages/ProductPage/ProductPageResolver';
 
 export function Router() {
   return (
@@ -22,7 +22,10 @@ export function Router() {
           element={<ProductsPage />}
         />
 
-        <Route path='/products/:category/:id' element={<ProductPageRouter />} />
+        <Route
+          path='/products/:category/:id'
+          element={<ProductPageResolver />}
+        />
 
         <Route path='/auth'>
           <Route
