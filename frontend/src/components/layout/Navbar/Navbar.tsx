@@ -2,16 +2,16 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { NavbarLink } from './NavbarLink';
 
 export function Navbar() {
-  const translation = useTranslation();
+  const { routeNames } = useTranslation();
 
   const links = [
-    { content: translation.routing['processors'], to: '/processors' },
-    { content: translation.routing['graphics-cards'], to: '/graphics-cards' },
-    { content: translation.routing['motherboards'], to: '/motherboards' },
-    { content: translation.routing['rams'], to: '/rams' },
-    { content: translation.routing['ssds'], to: '/ssds' },
-    { content: translation.routing['power-supplies'], to: '/power-supplies' },
-    { content: translation.routing['monitors'], to: '/monitors' }
+    { content: routeNames['processors'], to: '/processors' },
+    { content: routeNames['graphics-cards'], to: '/graphics-cards' },
+    { content: routeNames['motherboards'], to: '/motherboards' },
+    { content: routeNames['rams'], to: '/rams' },
+    { content: routeNames['ssds'], to: '/ssds' },
+    { content: routeNames['power-supplies'], to: '/power-supplies' },
+    { content: routeNames['monitors'], to: '/monitors' }
   ];
 
   return (

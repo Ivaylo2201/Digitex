@@ -5,36 +5,37 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
+
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import type { Translation } from '@/lib/i18n/models/Translation';
 import { capitalize } from '@/lib/utils/capitalize';
 import { Link } from 'react-router';
 
 type ProductPageBreadcrumb = {
   category: string;
   displayName: string;
-  translation: Translation;
 };
 
 export function ProductPageBreadcrumb({
   category,
-  displayName,
-  translation
+  displayName
 }: ProductPageBreadcrumb) {
+  const {
+    components: { productPageBreadcrumb },
+    routeNames
+  } = useTranslation();
+
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <Link className='text-md' to='/'>
-            {translation.routing.home}
+            {productPageBreadcrumb.home}
           </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <Link className='text-md' to={`/products/categories/${category}`}>
-            {capitalize(
-              (translation.routing as Record<string, string>)[category]
-            )}
+            {capitalize((routeNames as Record<string, string>)[category])}
           </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

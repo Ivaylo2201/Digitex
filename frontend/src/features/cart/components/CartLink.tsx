@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 export function CartLink() {
   const { cart } = { cart: { items: [{}] } }; //useCart();
-  const translation = useTranslation();
+  const {
+    components: { cartLink }
+  } = useTranslation();
 
   return (
     <Link
@@ -20,7 +22,7 @@ export function CartLink() {
         )}
       </div>
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.user.cart}
+        {cartLink.cart}
       </span>
     </Link>
   );

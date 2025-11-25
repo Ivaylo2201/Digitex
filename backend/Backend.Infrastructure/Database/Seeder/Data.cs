@@ -41,7 +41,7 @@ public static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 4060 VENTUS 2X BLACK 8G OC",
-            ImagePath = "graphic-cards/msi_geforce_rtx_4060_ventus_2x_black_8g_oc.png",
+            ImagePath = "graphics-cards/msi_geforce_rtx_4060_ventus_2x_black_8g_oc.png",
             InitialPrice = 328.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -56,7 +56,7 @@ public static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 4060 VENTUS 2X White 8G OC",
-            ImagePath = "graphic-cards/msi_geforce_rtx_4060_ventus_2x_white_8g_oc.png",
+            ImagePath = "graphics-cards/msi_geforce_rtx_4060_ventus_2x_white_8g_oc.png",
             InitialPrice = 328.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -71,7 +71,7 @@ public static class Data
         {
             Brand = Brands["asus"],
             ModelName = "Dual GeForce RTX 4060 EVO OC Edition 8GB",
-            ImagePath = "graphic-cards/asus_dual_geforce_rtx_4060_evo_oc_edition_8gb.png",
+            ImagePath = "graphics-cards/asus_dual_geforce_rtx_4060_evo_oc_edition_8gb.png",
             InitialPrice = 337.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -86,7 +86,7 @@ public static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G SHADOW 2X OC",
-            ImagePath = "graphic-cards/msi_geforce_rtx_5060_8g_shadow_2x_oc.png",
+            ImagePath = "graphics-cards/msi_geforce_rtx_5060_8g_shadow_2x_oc.png",
             InitialPrice = 345.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -101,7 +101,7 @@ public static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G VENTUS 2X OC",
-            ImagePath = "graphic-cards/msi_geforce_rtx_5060_8g_ventus_2x_oc.jpg",
+            ImagePath = "graphics-cards/msi_geforce_rtx_5060_8g_ventus_2x_oc.jpg",
             InitialPrice = 345.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -116,7 +116,7 @@ public static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G VENTUS 2X OC WHITE",
-            ImagePath = "graphic-cards/msi_geforce_rtx_5060_8g_ventus_2x_oc_white.jpg",
+            ImagePath = "graphics-cards/msi_geforce_rtx_5060_8g_ventus_2x_oc_white.jpg",
             InitialPrice = 346.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -131,7 +131,7 @@ public static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 8G GAMING OC",
-            ImagePath = "graphic-cards/msi_geforce_rtx_5060_8g_gaming_oc.png",
+            ImagePath = "graphics-cards/msi_geforce_rtx_5060_8g_gaming_oc.png",
             InitialPrice = 367.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -146,7 +146,7 @@ public static class Data
         {
             Brand = Brands["palit"],
             ModelName = "GeForce RTX 4060 TI Dual 8GB",
-            ImagePath = "graphic-cards/palit_geforce_rtx_4060_ti_dual_8gb.png",
+            ImagePath = "graphics-cards/palit_geforce_rtx_4060_ti_dual_8gb.png",
             InitialPrice = 386.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -161,7 +161,7 @@ public static class Data
         {
             Brand = Brands["inno3d"],
             ModelName = "GeForce RTX 4060 Ti 8GB Twin X2 OC White",
-            ImagePath = "graphic-cards/inno3d_geforce_rtx_4060_ti_8gb_twin_x2_oc_white.jpg",
+            ImagePath = "graphics-cards/inno3d_geforce_rtx_4060_ti_8gb_twin_x2_oc_white.jpg",
             InitialPrice = 456.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -176,7 +176,7 @@ public static class Data
         {
             Brand = Brands["msi"],
             ModelName = "GeForce RTX 5060 Ti 16G SHADOW 2X OC PLUS",
-            ImagePath = "graphic-cards/msi_geforce_rtx_5060_ti_16g_shadow_2x_oc_plus.png",
+            ImagePath = "graphics-cards/msi_geforce_rtx_5060_ti_16g_shadow_2x_oc_plus.png",
             InitialPrice = 484.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -191,7 +191,7 @@ public static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD Radeon RX 6600 Challenger White 8GB",
-            ImagePath = "graphic-cards/asrock_amd_radeon_rx_6600_challenger_white_8gb.png",
+            ImagePath = "graphics-cards/asrock_amd_radeon_rx_6600_challenger_white_8gb.png",
             InitialPrice = 233.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -206,7 +206,7 @@ public static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD RADEON RX 7600 Challenger OC",
-            ImagePath = "graphic-cards/asrock_amd_radeon_rx_7600_challenger_oc.png",
+            ImagePath = "graphics-cards/asrock_amd_radeon_rx_7600_challenger_oc.png",
             InitialPrice = 298.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -221,7 +221,7 @@ public static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD RADEON RX 7600 Steel Legend OC",
-            ImagePath = "graphic-cards/asrock_amd_radeon_rx_7600_steel_legend_oc.png",
+            ImagePath = "graphics-cards/asrock_amd_radeon_rx_7600_steel_legend_oc.png",
             InitialPrice = 327.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -236,7 +236,7 @@ public static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD Radeon RX 9060 XT Challenger 8GB OC",
-            ImagePath = "graphic-cards/asrock_amd_radeon_rx_9060_xt_challenger_8gb_oc.png",
+            ImagePath = "graphics-cards/asrock_amd_radeon_rx_9060_xt_challenger_8gb_oc.png",
             InitialPrice = 353.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -251,7 +251,7 @@ public static class Data
         {
             Brand = Brands["xfx"],
             ModelName = "Swift AMD Radeon RX 9060 XT OC Triple Fan Gaming Edition 16GB",
-            ImagePath = "graphic-cards/xfx_swift_amd_radeon_rx_9060_xt_oc_triple_fan_gaming_edition_16gb.jpg",
+            ImagePath = "graphics-cards/xfx_swift_amd_radeon_rx_9060_xt_oc_triple_fan_gaming_edition_16gb.jpg",
             InitialPrice = 443.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -266,7 +266,7 @@ public static class Data
         {
             Brand = Brands["xfx"],
             ModelName = "Mercury AMD Radeon RX 9060 XT OC Gaming Edition 16GB",
-            ImagePath = "graphic-cards/xfx_mercury_amd_radeon_rx_9060_xt_oc_gaming_edition_16gb.jpg",
+            ImagePath = "graphics-cards/xfx_mercury_amd_radeon_rx_9060_xt_oc_gaming_edition_16gb.jpg",
             InitialPrice = 443.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -281,7 +281,7 @@ public static class Data
         {
             Brand = Brands["asus"],
             ModelName = "TUF Gaming Radeon RX 9070 OC Edition 16GB",
-            ImagePath = "graphic-cards/asus_tuf_gaming_radeon_rx_9070_oc_edition_16gb.png",
+            ImagePath = "graphics-cards/asus_tuf_gaming_radeon_rx_9070_oc_edition_16gb.png",
             InitialPrice = 746.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -296,7 +296,7 @@ public static class Data
         {
             Brand = Brands["asrock"],
             ModelName = "AMD Radeon RX 9070 XT Steel Legend 16GB",
-            ImagePath = "graphic-cards/asrock_amd_radeon_rx_9070_xt_steel_legend_16gb.png",
+            ImagePath = "graphics-cards/asrock_amd_radeon_rx_9070_xt_steel_legend_16gb.png",
             InitialPrice = 746.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -311,7 +311,7 @@ public static class Data
         {
             Brand = Brands["asus"],
             ModelName = "Prime Radeon RX 9070 OC Edition 16GB",
-            ImagePath = "graphic-cards/asus_prime_radeon_rx_9070_oc_edition_16gb.png",
+            ImagePath = "graphics-cards/asus_prime_radeon_rx_9070_oc_edition_16gb.png",
             InitialPrice = 754.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -326,7 +326,7 @@ public static class Data
         {
             Brand = Brands["powercolor"],
             ModelName = "Hellhound Spectral White AMD Radeon RX 9070 XT 16GB",
-            ImagePath = "graphic-cards/powercolor_hellhound_spectral_white_amd_radeon_rx_9070_xt_16gb.png",
+            ImagePath = "graphics-cards/powercolor_hellhound_spectral_white_amd_radeon_rx_9070_xt_16gb.png",
             InitialPrice = 824.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -341,7 +341,7 @@ public static class Data
         {
             Brand = Brands["powercolor"],
             ModelName = "AMD Radeon R7 240 4GB 128BIT GDDR5",
-            ImagePath = "graphic-cards/amd_radeon_r7_240_4gb_128bit_gddr5.png",
+            ImagePath = "graphics-cards/amd_radeon_r7_240_4gb_128bit_gddr5.png",
             InitialPrice = 111.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -356,7 +356,7 @@ public static class Data
         {
             Brand = Brands["xfx"],
             ModelName = "SPEEDSTER SWFT 210 AMD Radeon RX 7600 Core Edition 8GB",
-            ImagePath = "graphic-cards/xfx_speedster_swft_210_amd_radeon_rx_7600_core_edition_8gb.png",
+            ImagePath = "graphics-cards/xfx_speedster_swft_210_amd_radeon_rx_7600_core_edition_8gb.png",
             InitialPrice = 305.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -371,7 +371,7 @@ public static class Data
         {
             Brand = Brands["sapphire"],
             ModelName = "PULSE AMD Radeon RX 9060 XT 8GB",
-            ImagePath = "graphic-cards/sapphire_pulse_amd_radeon_rx_9060_xt_8gb.png",
+            ImagePath = "graphics-cards/sapphire_pulse_amd_radeon_rx_9060_xt_8gb.png",
             InitialPrice = 369.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -386,7 +386,7 @@ public static class Data
         {
             Brand = Brands["powercolor"],
             ModelName = "Reaper AMD Radeon RX 9060 XT 8GB",
-            ImagePath = "graphic-cards/powercolor_reaper_amd_radeon_rx_9060_xt_8gb.png",
+            ImagePath = "graphics-cards/powercolor_reaper_amd_radeon_rx_9060_xt_8gb.png",
             InitialPrice = 384.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
@@ -401,7 +401,7 @@ public static class Data
         {
             Brand = Brands["gigabyte"],
             ModelName = "Radeon RX 9060 XT GAMING OC 8G",
-            ImagePath = "graphic-cards/gigabyte_radeon_rx_9060_xt_gaming_oc_8g.png",
+            ImagePath = "graphics-cards/gigabyte_radeon_rx_9060_xt_gaming_oc_8g.png",
             InitialPrice = 410.00,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),

@@ -1,6 +1,80 @@
 export type Translation = {
-  specs: {
-    product: {
+  components: {
+    header: {
+      merchantAddress: string;
+    };
+    searchBox: {
+      searchForProducts: string;
+    };
+    accountLink: {
+      account: string;
+    };
+    signInLink: {
+      signIn: string;
+    };
+    signOutButton: {
+      signOut: string;
+    };
+    cartLink: {
+      cart: string;
+    };
+    compareLink: {
+      compare: string;
+    };
+    emptyComparePage: {
+      noProductsAddedForComparison: string;
+      youHaveNotAddedAnyProductsForComparisonYet: string;
+      getStartedByAddingAProduct: string;
+      addProducts: string;
+    };
+    emptySuggestedProductsSection: {
+      noSuggestedProductsAvailable: string;
+      thisProductHasNoSuggestionsYet: string;
+    };
+    emptyReviewsSection: {
+      noReviewsForThisProduct: string;
+      noReviewsHaveBeenLeftForThisProductYet: string;
+      writeTheFirstReviewViaTheFormBelow: string;
+    };
+    favoritesLink: {
+      favorites: string;
+    };
+    productPageBreadcrumb: {
+      home: string;
+    };
+    addToCompareButton: {
+      maxComparisonCapacityReached: string;
+      incompatibleComparisonCategory: string;
+      productAlreadyAddedToComparison: string;
+      productSuccessfullyAddedToComparison: string;
+    };
+    //addToFavoritesButton: {};
+    productCompareTable: {
+      comparedProducts: string;
+    };
+    specificationsTable: {
+      mainSpecifications: string;
+    };
+    addToCartButton: {
+      addToCart: string;
+    };
+    suggestedProductsSection: {
+      suggestedProducts: string;
+      noSuggestedProductsAvailable: string;
+      thisProductHasNoSuggestionsYet: string;
+    };
+    reviewsSections: {
+      reviews: string;
+      noReviewsForThisProduct: string;
+      noReviewsHaveBeenLeftForThisProductYet: string;
+      writeTheFirstReviewViaTheFormBelow: string;
+    };
+    loader: {
+      loading: string;
+    };
+  };
+  specifications: {
+    base: {
       brand: string;
       model: string;
       image: string;
@@ -57,76 +131,100 @@ export type Translation = {
       interface: string;
     };
   };
-  routing: {
-    monitors: string;
-    processors: string;
-    'graphics-cards': string;
-    motherboards: string;
-    'power-supplies': string;
-    rams: string;
-    ssds: string;
-    home: string;
-  };
-  compare: {
-    maxCapacityReached: string;
-    alreadyPresent: string;
-    addToCompare: string;
-    removeFromCompare: string;
-    incompatibleCategory: string;
-    addedSuccessfully: string;
-    removedSuccessfully: string;
-    compare: string;
-    comparedProducts: string;
-    clear: string;
-    noProductsForComparison: {
-      title: string;
-      main: string;
-      getStarted: string;
-      addProducts: string;
-    };
-  };
-  auth: {
-    signIn: string;
-    signOut: string;
-    verify: string;
-  };
-  user: {
-    cart: string;
-    account: string;
-    favorites: string;
-  };
-  keywords: {
-    productSearch: string;
-    address: string;
-    mainSpecifications: string;
-    loading: string;
-    suggestedProducts: string;
-    reviews: string;
-    addToCart: string;
+  routeNames: {
+    monitors: 'Monitors';
+    'graphics-cards': 'Graphics cards';
+    'power-supplies': 'Power supplies';
+    rams: 'RAMs';
+    ssds: 'SSDs';
+    motherboards: 'Motherboards';
+    processors: 'Processors';
+    home: 'Home';
   };
 };
 
 export const translation: Translation = {
-  compare: {
-    maxCapacityReached: 'Max compare capacity reach.',
-    alreadyPresent: 'Product already present in comparison.',
-    incompatibleCategory: 'Incompatible comparison category.',
-    removedSuccessfully: 'Product removed from comparison.',
-    addToCompare: 'Add to compare',
-    removeFromCompare: 'Remove from compare',
-    addedSuccessfully: 'Product added to comparison.',
-    compare: 'Compare',
-    comparedProducts: 'Compared products',
-    clear: 'Clear',
-    noProductsForComparison: {
-      title: 'No products added for comparison',
-      main: "You haven't added any products for comparison yet.",
-      getStarted: 'Get started by adding a product.',
+  components: {
+    header: {
+      merchantAddress: 'Sofia, Vitosha Blvd. 76'
+    },
+    searchBox: {
+      searchForProducts: 'Search for products...'
+    },
+    accountLink: {
+      account: 'Account'
+    },
+    signInLink: {
+      signIn: 'Sign in'
+    },
+    signOutButton: {
+      signOut: 'Sign out'
+    },
+    cartLink: {
+      cart: 'Cart'
+    },
+    compareLink: {
+      compare: 'Compare'
+    },
+    productCompareTable: {
+      comparedProducts: 'Compared Products'
+    },
+    emptyComparePage: {
+      noProductsAddedForComparison: 'No products added for comparison',
+      youHaveNotAddedAnyProductsForComparisonYet:
+        "You haven't added any products for comparison yet.",
+      getStartedByAddingAProduct: 'Get started by adding a product.',
       addProducts: 'Add products'
+    },
+    emptySuggestedProductsSection: {
+      noSuggestedProductsAvailable: 'No suggested products available',
+      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet'
+    },
+    emptyReviewsSection: {
+      noReviewsForThisProduct: 'No reviews for this product',
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below'
+    },
+    favoritesLink: {
+      favorites: 'Favorites'
+    },
+    productPageBreadcrumb: {
+      home: 'Home'
+    },
+    addToCompareButton: {
+      maxComparisonCapacityReached: 'Max compare capacity reached.',
+      incompatibleComparisonCategory: 'Incompatible comparison category.',
+      productAlreadyAddedToComparison: 'Product already present in comparison.',
+      productSuccessfullyAddedToComparison: 'Product added to comparison.'
+    },
+    //addToFavoritesButton: {},
+    specificationsTable: {
+      mainSpecifications: 'Main specifications'
+    },
+    addToCartButton: {
+      addToCart: 'Add to cart'
+    },
+    suggestedProductsSection: {
+      suggestedProducts: 'Suggested products',
+      noSuggestedProductsAvailable: 'No suggested products available',
+      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet'
+    },
+    reviewsSections: {
+      reviews: 'Reviews',
+      noReviewsForThisProduct: 'No reviews for this product',
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below'
+    },
+    loader: {
+      loading: 'Loading'
     }
   },
-  specs: {
-    product: {
+  specifications: {
+    base: {
       brand: 'Brand',
       model: 'Model',
       image: 'Image',
@@ -171,7 +269,7 @@ export const translation: Translation = {
       formFactor: 'Form factor',
       efficiencyPercentage: 'Efficiency percentage',
       modularity: {
-        spec: 'Modularity',
+        label: 'Modularity',
         none: 'None',
         semi: 'Semi',
         full: 'Full'
@@ -188,33 +286,14 @@ export const translation: Translation = {
       interface: 'Interface'
     }
   },
-  routing: {
+  routeNames: {
     monitors: 'Monitors',
+    processors: 'Processors',
     'graphics-cards': 'Graphics cards',
+    motherboards: 'Motherboards',
     'power-supplies': 'Power supplies',
     rams: 'RAMs',
     ssds: 'SSDs',
-    motherboards: 'Motherboards',
-    processors: 'Processors',
     home: 'Home'
-  },
-  auth: {
-    signIn: 'Sign in',
-    signOut: 'Sign out',
-    verify: 'Verify'
-  },
-  user: {
-    cart: 'Cart',
-    account: 'Account',
-    favorites: 'Favorites'
-  },
-  keywords: {
-    productSearch: 'Search for products...',
-    address: 'Sofia, Vitosha Blvd. 76',
-    mainSpecifications: 'Main specifications',
-    loading: 'Loading',
-    suggestedProducts: 'Suggested products',
-    reviews: 'Reviews',
-    addToCart: 'Add to cart'
   }
 };

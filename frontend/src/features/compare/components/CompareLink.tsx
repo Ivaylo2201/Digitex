@@ -4,7 +4,9 @@ import { Link } from 'react-router';
 import { useCompare } from '../stores/useCompare';
 
 export function CompareLink() {
-  const translation = useTranslation();
+  const {
+    components: { compareLink }
+  } = useTranslation();
   const { products: comparedProducts } = useCompare();
 
   return (
@@ -21,7 +23,7 @@ export function CompareLink() {
         )}
       </div>
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.compare.compare}
+        {compareLink.compare}
       </span>
     </Link>
   );

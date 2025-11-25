@@ -1,29 +1,80 @@
 {
-  "user": {
-    "cart": "Количка",
-    "account": "Профил",
-    "favorites": "Любими"
-  },
-  "compare": {
-    "maxCapacityReached": "Достигнат максимален капацитет на сравнение.",
-    "alreadyPresent": "Продуктът вече е добавен за сравнение.",
-    "incompatibleCategory": "Не можете да сравнявате продукти от различни категории.",
-    "addedSuccessfully": "Продуктът е добавен успешно за сравнение.",
-    "removedSuccessfully": "Продуктът е премахнат успешно от сравнение.",
-    "compare": "Сравни",
-    "comparedProducts": "Продукти за сравнение",
-    "clear": "Изчисти",
-    "addToCompare": "Добави за сравнение",
-    "removeFromCompare": "Премахни от сравнение",
-    "noProductsForComparison": {
-      "title": "Няма добавени продукти за сравнение",
-      "main": "Все още не сте добавили продукти за сравнение.",
-      "getStarted": "Започнете като добавите продукт.",
+  "components": {
+    "header": {
+      "merchantAddress": "София, бул. Витоша 76"
+    },
+    "searchBox": {
+      "searchForProducts": "Търсене на продукти..."
+    },
+    "accountLink": {
+      "account": "Профил"
+    },
+    "signInLink": {
+      "signIn": "Вход"
+    },
+    "signOutButton": {
+      "signOut": "Изход"
+    },
+    "cartLink": {
+      "cart": "Количка"
+    },
+    "compareLink": {
+      "compare": "Сравни"
+    },
+    "emptyComparePage": {
+      "noProductsAddedForComparison": "Няма добавени продукти за сравнение",
+      "youHaveNotAddedAnyProductsForComparisonYet": "Все още не сте добавили продукти за сравнение.",
+      "getStartedByAddingAProduct": "Започнете като добавите продукт.",
       "addProducts": "Добавяне на продукти"
+    },
+    "emptySuggestedProductsSection": {
+      "noSuggestedProductsAvailable": "Няма налични препоръчани продукти",
+      "thisProductHasNoSuggestionsYet": "Този продукт все още няма предложения"
+    },
+    "emptyReviewsSection": {
+      "noReviewsForThisProduct": "Няма отзиви за този продукт",
+      "noReviewsHaveBeenLeftForThisProductYet": "Все още няма оставени отзиви за този продукт",
+      "writeTheFirstReviewViaTheFormBelow": "Напишете първия отзив чрез формата по-долу"
+    },
+    "favoritesLink": {
+      "favorites": "Любими"
+    },
+    "productPageBreadcrumb": {
+      "home": "Начало"
+    },
+    "addToCompareButton": {
+      "maxComparisonCapacityReached": "Достигнат е максималният капацитет за сравнение.",
+      "incompatibleComparisonCategory": "Не можете да сравнявате продукти от различни категории.",
+      "productAlreadyAddedToComparison": "Продуктът вече е добавен за сравнение.",
+      "productSuccessfullyAddedToComparison": "Продуктът е успешно добавен за сравнение."
+    },
+    "addToFavoritesButton": {},
+    "productCompareTable": {
+      "comparedProducts": "Продукти за сравнение"
+    },
+    "specificationsTable": {
+      "mainSpecifications": "Основни характеристики"
+    },
+    "addToCartButton": {
+      "addToCart": "Добави в количката"
+    },
+    "suggestedProductsSection": {
+      "suggestedProducts": "Препоръчани продукти",
+      "noSuggestedProductsAvailable": "Няма налични препоръчани продукти",
+      "thisProductHasNoSuggestionsYet": "Този продукт все още няма предложения"
+    },
+    "reviewsSections": {
+      "reviews": "Отзиви",
+      "noReviewsForThisProduct": "Няма отзиви за този продукт",
+      "noReviewsHaveBeenLeftForThisProductYet": "Все още няма оставени отзиви за този продукт",
+      "writeTheFirstReviewViaTheFormBelow": "Напишете първия отзив чрез формата по-долу"
+    },
+    "loader": {
+      "loading": "Зареждане"
     }
   },
-  "specs": {
-    "product": {
+  "specifications": {
+    "base": {
       "brand": "Марка",
       "model": "Модел",
       "image": "Изображение",
@@ -68,7 +119,7 @@
       "formFactor": "Форм фактор",
       "efficiencyPercentage": "Ефективност",
       "modularity": {
-        "spec": "Модулност",
+        "label": "Модулност",
         "none": "Няма",
         "semi": "Половин",
         "full": "Пълна"
@@ -85,28 +136,14 @@
       "interface": "Интерфейс"
     }
   },
-  "routing": {
+  "routeNames": {
     "monitors": "Монитори",
     "graphics-cards": "Графични карти",
     "power-supplies": "Захранвания",
-    "rams": "RAM Памет",
+    "rams": "RAM памет",
     "ssds": "SSD дискове",
     "motherboards": "Дънни платки",
     "processors": "Процесори",
     "home": "Начало"
-  },
-  "auth": {
-    "signIn": "Вход",
-    "signOut": "Изход",
-    "verify": "Потвърждение"
-  },
-  "keywords": {
-    "productSearch": "Търсене на продукти...",
-    "address": "София, бул. Витоша 76",
-    "mainSpecifications": "Основни характеристики",
-    "loading": "Зареждане",
-    "suggestedProducts": "Препоръчани продукти",
-    "reviews": "Отзиви",
-    "addToCart": "Добави в количката"
   }
 }

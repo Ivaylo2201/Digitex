@@ -2,12 +2,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { Search } from 'lucide-react';
-import React, { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 export function Searchbox() {
   const [search, setSearch] = useState<string>('');
-  const translation = useTranslation();
+  const {
+    components: { searchBox }
+  } = useTranslation();
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -17,10 +19,11 @@ export function Searchbox() {
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Input
         type='text'
-        placeholder={translation.keywords.productSearch}
+        value={search}
+        placeholder={searchBox.searchForProducts}
         onChange={(e) => setSearch(e.target.value)}
         className='w-2/3 text-sm font-medium italic text-theme-gunmetal placeholder-theme-gunmetal! selection:bg-theme-crimson bg-theme-white ring-0 outline-none border-0 focus-visible:ring-0 data-[state=open]:ring-0 data-[state=open]:border-0'
       />
@@ -33,6 +36,6 @@ export function Searchbox() {
       >
         <Search />
       </Button>
-    </React.Fragment>
+    </Fragment>
   );
 }

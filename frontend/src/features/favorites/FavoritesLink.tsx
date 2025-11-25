@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 export function FavoritesLink() {
   const { items } = { items: [{}] };
-  const translation = useTranslation();
+  const {
+    components: { favoritesLink }
+  } = useTranslation();
 
   return (
     <Link
@@ -20,7 +22,7 @@ export function FavoritesLink() {
         )}
       </div>
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.user.favorites}
+        {favoritesLink.favorites}
       </span>
     </Link>
   );

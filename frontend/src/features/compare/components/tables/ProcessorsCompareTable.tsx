@@ -2,37 +2,39 @@ import { TableHead, TableCell } from '@/components/ui/table';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { ProductCompareTable } from './ProductCompareTable';
-import React from 'react';
+import { Fragment } from 'react';
 import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
 
 type ProcessorCompareTableProps = { products: ProductLong[] };
 
 export function ProcessorCompareTable({
-  products,
+  products
 }: ProcessorCompareTableProps) {
-  const translation = useTranslation();
-  const formatProduct = useFormatProduct(translation);
+  const {
+    specifications: { processors }
+  } = useTranslation();
+  const formatProduct = useFormatProduct();
 
   return (
     <ProductCompareTable
       products={products}
       category='processors'
       childTableHeads={
-        <React.Fragment>
-          <TableHead>{translation.specs.processors.cores}</TableHead>
-          <TableHead>{translation.specs.processors.threads}</TableHead>
-          <TableHead>{translation.specs.processors.baseClockSpeed}</TableHead>
-          <TableHead>{translation.specs.processors.boostClockSpeed}</TableHead>
-          <TableHead>{translation.specs.processors.socket}</TableHead>
-          <TableHead>{translation.specs.processors.tdp}</TableHead>
-        </React.Fragment>
+        <Fragment>
+          <TableHead>{processors.cores}</TableHead>
+          <TableHead>{processors.threads}</TableHead>
+          <TableHead>{processors.baseClockSpeed}</TableHead>
+          <TableHead>{processors.boostClockSpeed}</TableHead>
+          <TableHead>{processors.socket}</TableHead>
+          <TableHead>{processors.tdp}</TableHead>
+        </Fragment>
       }
       childTableCells={(product) => (
-        <React.Fragment>
+        <Fragment>
           {formatProduct.toProcessor(product).map(({ value }) => (
             <TableCell>{value}</TableCell>
           ))}
-        </React.Fragment>
+        </Fragment>
       )}
     />
   );

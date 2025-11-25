@@ -1,29 +1,80 @@
 {
-  "user": {
-    "cart": "Warenkorb",
-    "account": "Profil",
-    "favorites": "Favoriten"
-  },
-  "compare": {
-    "addToCompare": "Zum Vergleich hinzufügen",
-    "maxCapacityReached": "Die maximale Anzahl zum Vergleichen wurde erreicht.",
-    "alreadyPresent": "Das Produkt wurde bereits zum Vergleich hinzugefügt.",
-    "incompatibleCategory": "Produkte aus unterschiedlichen Kategorien können nicht verglichen werden.",
-    "addedSuccessfully": "Das Produkt wurde erfolgreich zum Vergleich hinzugefügt.",
-    "removedSuccessfully": "Produkt aus dem Vergleich entfernt.",
-    "compare": "Vergleichen",
-    "comparedProducts": "Zu vergleichende Produkte",
-    "clear": "Löschen",
-    "removeFromCompare": "Produkt aus dem Vergleich entfernt.",
-    "noProductsForComparison": {
-      "title": "Keine Produkte zum Vergleichen hinzugefügt",
-      "main": "Sie haben noch keine Produkte zum Vergleichen hinzugefügt.",
-      "getStarted": "Fügen Sie ein Produkt hinzu, um zu beginnen.",
+  "components": {
+    "header": {
+      "merchantAddress": "Sofia, Vitosha Blvd. 76"
+    },
+    "searchBox": {
+      "searchForProducts": "Produkte suchen..."
+    },
+    "accountLink": {
+      "account": "Profil"
+    },
+    "signInLink": {
+      "signIn": "Anmelden"
+    },
+    "signOutButton": {
+      "signOut": "Abmelden"
+    },
+    "cartLink": {
+      "cart": "Warenkorb"
+    },
+    "compareLink": {
+      "compare": "Vergleichen"
+    },
+    "emptyComparePage": {
+      "noProductsAddedForComparison": "Keine Produkte zum Vergleichen hinzugefügt",
+      "youHaveNotAddedAnyProductsForComparisonYet": "Sie haben noch keine Produkte zum Vergleichen hinzugefügt.",
+      "getStartedByAddingAProduct": "Fügen Sie ein Produkt hinzu, um zu beginnen.",
       "addProducts": "Produkte hinzufügen"
+    },
+    "emptySuggestedProductsSection": {
+      "noSuggestedProductsAvailable": "Keine empfohlenen Produkte verfügbar",
+      "thisProductHasNoSuggestionsYet": "Dieses Produkt hat noch keine Vorschläge"
+    },
+    "emptyReviewsSection": {
+      "noReviewsForThisProduct": "Keine Bewertungen für dieses Produkt",
+      "noReviewsHaveBeenLeftForThisProductYet": "Es wurden noch keine Bewertungen für dieses Produkt abgegeben",
+      "writeTheFirstReviewViaTheFormBelow": "Schreiben Sie die erste Bewertung über das Formular unten"
+    },
+    "favoritesLink": {
+      "favorites": "Favoriten"
+    },
+    "productPageBreadcrumb": {
+      "home": "Startseite"
+    },
+    "addToCompareButton": {
+      "maxComparisonCapacityReached": "Die maximale Vergleichskapazität wurde erreicht.",
+      "incompatibleComparisonCategory": "Produkte aus verschiedenen Kategorien können nicht verglichen werden.",
+      "productAlreadyAddedToComparison": "Dieses Produkt wurde bereits zum Vergleich hinzugefügt.",
+      "productSuccessfullyAddedToComparison": "Produkt erfolgreich zum Vergleich hinzugefügt."
+    },
+    "addToFavoritesButton": {},
+    "productCompareTable": {
+      "comparedProducts": "Zu vergleichende Produkte"
+    },
+    "specificationsTable": {
+      "mainSpecifications": "Hauptspezifikationen"
+    },
+    "addToCartButton": {
+      "addToCart": "In den Warenkorb"
+    },
+    "suggestedProductsSection": {
+      "suggestedProducts": "Empfohlene Produkte",
+      "noSuggestedProductsAvailable": "Keine empfohlenen Produkte verfügbar",
+      "thisProductHasNoSuggestionsYet": "Dieses Produkt hat noch keine Vorschläge"
+    },
+    "reviewsSections": {
+      "reviews": "Bewertungen",
+      "noReviewsForThisProduct": "Keine Bewertungen für dieses Produkt",
+      "noReviewsHaveBeenLeftForThisProductYet": "Es wurden noch keine Bewertungen abgegeben",
+      "writeTheFirstReviewViaTheFormBelow": "Schreiben Sie die erste Bewertung über das Formular unten"
+    },
+    "loader": {
+      "loading": "Lädt"
     }
   },
-  "specs": {
-    "product": {
+  "specifications": {
+    "base": {
       "brand": "Marke",
       "model": "Modell",
       "image": "Bild",
@@ -60,15 +111,15 @@
       "socket": "Sockel",
       "formFactor": "Formfaktor",
       "chipset": "Chipsatz",
-      "ramSlots": "RAM-Slots",
-      "pcieSlots": "PCIe-Slots"
+      "ramSlots": "RAM-Steckplätze",
+      "pcieSlots": "PCIe-Steckplätze"
     },
     "powerSupplies": {
       "wattage": "Leistung",
       "formFactor": "Formfaktor",
       "efficiencyPercentage": "Effizienz",
       "modularity": {
-        "spec": "Modularität",
+        "label": "Modularität",
         "none": "Keine",
         "semi": "Teilweise",
         "full": "Voll"
@@ -85,7 +136,7 @@
       "interface": "Schnittstelle"
     }
   },
-  "routing": {
+  "routeNames": {
     "monitors": "Monitore",
     "graphics-cards": "Grafikkarten",
     "power-supplies": "Netzteile",
@@ -94,19 +145,5 @@
     "motherboards": "Mainboards",
     "processors": "Prozessoren",
     "home": "Startseite"
-  },
-  "auth": {
-    "signIn": "Anmelden",
-    "signOut": "Abmelden",
-    "verify": "Bestätigung"
-  },
-  "keywords": {
-    "productSearch": "Produkte suchen...",
-    "address": "Sofia, Vitosha Blvd. 76",
-    "mainSpecifications": "Hauptspezifikationen",
-    "loading": "Lädt",
-    "suggestedProducts": "Empfohlene Produkte",
-    "reviews": "Bewertungen",
-    "addToCart": "In den Warenkorb"
   }
 }

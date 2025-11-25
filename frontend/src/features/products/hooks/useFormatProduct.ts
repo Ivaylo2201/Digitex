@@ -7,44 +7,47 @@ import type { Motherboard } from '../models/Motherboard';
 import type { Ram } from '../models/Ram';
 import type { Ssd } from '../models/Ssd';
 import type { PowerSupply } from '../models/PowerSupply';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
-export function useFormatProduct(translation: Translation) {
+export function useFormatProduct() {
+  const translation = useTranslation();
+
   const toMonitor = (product: ProductLong) => {
     const monitor = product as Monitor;
 
     return [
       {
-        spec: translation.specs.monitors.displayDiagonal,
+        specificationName: translation.specifications.monitors.displayDiagonal,
         value: `${monitor.displayDiagonal}"`
       },
       {
-        spec: translation.specs.monitors.refreshRate,
+        specificationName: translation.specifications.monitors.refreshRate,
         value: `${monitor.refreshRate} Hz`
       },
       {
-        spec: translation.specs.monitors.latency,
+        specificationName: translation.specifications.monitors.latency,
         value: `${monitor.latency} ms`
       },
       {
-        spec: translation.specs.monitors.matrix,
+        specificationName: translation.specifications.monitors.matrix,
         value: monitor.matrix.toUpperCase()
       },
       {
-        spec: translation.specs.monitors.resolution,
+        specificationName: translation.specifications.monitors.resolution,
         value: `${monitor.resolution.width}x${
           monitor.resolution.height
         } ${monitor.resolution.type.toUpperCase()}`
       },
       {
-        spec: translation.specs.monitors.pixelSize,
+        specificationName: translation.specifications.monitors.pixelSize,
         value: `${monitor.pixelSize} mm`
       },
       {
-        spec: translation.specs.monitors.brightness,
+        specificationName: translation.specifications.monitors.brightness,
         value: `${monitor.brightness} nits`
       },
       {
-        spec: translation.specs.monitors.colorSpectre,
+        specificationName: translation.specifications.monitors.colorSpectre,
         value: `${monitor.colorSpectre}%`
       }
     ];
@@ -55,33 +58,35 @@ export function useFormatProduct(translation: Translation) {
 
     return [
       {
-        spec: translation.specs.graphicsCards.memory,
+        specificationName: translation.specifications.graphicsCards.memory,
         value: `${
           graphicsCard.memory.capacityInGb
         }GB ${graphicsCard.memory.type.toUpperCase()}`
       },
       {
-        spec: translation.specs.processors.baseClockSpeed,
+        specificationName: translation.specifications.processors.baseClockSpeed,
         value: `${graphicsCard.clockSpeed.base.toFixed(2)} MHz`
       },
       {
-        spec: translation.specs.processors.boostClockSpeed,
+        specificationName:
+          translation.specifications.processors.boostClockSpeed,
         value: `${graphicsCard.clockSpeed.boost.toFixed(2)} MHz`
       },
       {
-        spec: translation.specs.graphicsCards.busWidth,
+        specificationName: translation.specifications.graphicsCards.busWidth,
         value: `${graphicsCard.busWidth}-bit`
       },
       {
-        spec: translation.specs.graphicsCards.cudaCores,
+        specificationName: translation.specifications.graphicsCards.cudaCores,
         value: graphicsCard.cudaCores
       },
       {
-        spec: translation.specs.graphicsCards.directXSupport,
+        specificationName:
+          translation.specifications.graphicsCards.directXSupport,
         value: graphicsCard.directXSupport
       },
       {
-        spec: translation.specs.graphicsCards.tdp,
+        specificationName: translation.specifications.graphicsCards.tdp,
         value: `${graphicsCard.tdp} W`
       }
     ];
@@ -92,27 +97,28 @@ export function useFormatProduct(translation: Translation) {
 
     return [
       {
-        spec: translation.specs.processors.cores,
+        specificationName: translation.specifications.processors.cores,
         value: processor.cores
       },
       {
-        spec: translation.specs.processors.threads,
+        specificationName: translation.specifications.processors.threads,
         value: processor.threads
       },
       {
-        spec: translation.specs.processors.baseClockSpeed,
+        specificationName: translation.specifications.processors.baseClockSpeed,
         value: `${processor.clockSpeed.base.toFixed(2)} MHz`
       },
       {
-        spec: translation.specs.processors.boostClockSpeed,
+        specificationName:
+          translation.specifications.processors.boostClockSpeed,
         value: `${processor.clockSpeed.boost.toFixed(2)} MHz`
       },
       {
-        spec: translation.specs.processors.socket,
+        specificationName: translation.specifications.processors.socket,
         value: processor.socket.toUpperCase()
       },
       {
-        spec: translation.specs.processors.tdp,
+        specificationName: translation.specifications.processors.tdp,
         value: `${processor.tdp} W`
       }
     ];
@@ -123,23 +129,23 @@ export function useFormatProduct(translation: Translation) {
 
     return [
       {
-        spec: translation.specs.motherboards.socket,
+        specificationName: translation.specifications.motherboards.socket,
         value: motherboard.socket.toUpperCase()
       },
       {
-        spec: translation.specs.motherboards.formFactor,
+        specificationName: translation.specifications.motherboards.formFactor,
         value: motherboard.formFactor
       },
       {
-        spec: translation.specs.motherboards.chipset,
+        specificationName: translation.specifications.motherboards.chipset,
         value: motherboard.chipset
       },
       {
-        spec: translation.specs.motherboards.ramSlots,
+        specificationName: translation.specifications.motherboards.ramSlots,
         value: motherboard.ramSlots
       },
       {
-        spec: translation.specs.motherboards.pcieSlots,
+        specificationName: translation.specifications.motherboards.pcieSlots,
         value: motherboard.pcieSlots
       }
     ];
@@ -150,11 +156,11 @@ export function useFormatProduct(translation: Translation) {
 
     return [
       {
-        spec: translation.specs.rams.memory,
+        specificationName: translation.specifications.rams.memory,
         value: `${ram.memory.capacityInGb}GB ${ram.memory.type.toUpperCase()}`
       },
       {
-        spec: translation.specs.rams.timing,
+        specificationName: translation.specifications.rams.timing,
         value: ram.timing
       }
     ];
@@ -165,19 +171,19 @@ export function useFormatProduct(translation: Translation) {
 
     return [
       {
-        spec: translation.specs.ssds.capacityInGb,
+        specificationName: translation.specifications.ssds.capacityInGb,
         value: `${ssd.capacityInGb}GB`
       },
       {
-        spec: translation.specs.ssds.interface,
+        specificationName: translation.specifications.ssds.interface,
         value: ssd.interface.toUpperCase()
       },
       {
-        spec: translation.specs.ssds.operationSpeedRead,
+        specificationName: translation.specifications.ssds.operationSpeedRead,
         value: `${ssd.operationSpeed.read} MB/s`
       },
       {
-        spec: translation.specs.ssds.operationSpeedWrite,
+        specificationName: translation.specifications.ssds.operationSpeedWrite,
         value: `${ssd.operationSpeed.write} MB/s`
       }
     ];
@@ -188,22 +194,24 @@ export function useFormatProduct(translation: Translation) {
 
     return [
       {
-        spec: translation.specs.powerSupplies.formFactor,
+        specificationName: translation.specifications.powerSupplies.formFactor,
         value: powerSupply.formFactor.toUpperCase()
       },
       {
-        spec: translation.specs.powerSupplies.efficiencyPercentage,
+        specificationName:
+          translation.specifications.powerSupplies.efficiencyPercentage,
         value: `${powerSupply.efficiencyPercentage}%`
       },
       {
-        spec: translation.specs.powerSupplies.modularity['spec'],
+        specificationName:
+          translation.specifications.powerSupplies.modularity.label,
         value:
-          translation.specs.powerSupplies.modularity[
+          translation.specifications.powerSupplies.modularity[
             powerSupply.modularity.toLowerCase()
           ]
       },
       {
-        spec: translation.specs.powerSupplies.wattage,
+        specificationName: translation.specifications.powerSupplies.wattage,
         value: `${powerSupply.wattage} W`
       }
     ];

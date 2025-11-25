@@ -1,31 +1,28 @@
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { ProductPageBreadcrumb } from '../../components/ProductCard/ProductPageBreadcrumb';
 import { Page } from '@/components/layout/Page';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
-import { Button } from '@/components/ui/button';
-import { ShoppingCart } from 'lucide-react';
-import type { Spec } from '../../models/shared/Spec';
+import type { Specification } from '../../models/shared/Specification';
 import { Rating } from '../../components/Rating';
 import { SuggestedProducts } from './components/SuggestedProducts';
 import { Reviews } from './components/Reviews';
 import { AddToCompareButton } from './components/AddToCompareButton';
-import { SpecsTable } from './components/SpecsTable';
+import { SpecificationsTable } from './components/SpecificationsTable';
 import { ProductPrice } from './components/ProductPrice';
 import { AddToFavoritesButton } from './components/AddToFavoritesButton';
+import { AddToCartButton } from './components/AddToCartButton';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
   product: T;
-  specs: Spec[];
+  specifications: Specification[];
 };
 
 export function ProductPage<T extends ProductLong>({
   category,
   product,
-  specs
+  specifications
 }: ProductPageProps<T>) {
-  const translation = useTranslation();
   const displayName = `${product.brandName} ${product.modelName}`;
 
   return (
@@ -36,7 +33,6 @@ export function ProductPage<T extends ProductLong>({
             <ProductPageBreadcrumb
               category={category}
               displayName={displayName}
-              translation={translation}
             />
 
             <div className='flex justify-between'>
@@ -47,11 +43,7 @@ export function ProductPage<T extends ProductLong>({
               />
 
               <div className='flex flex-col gap-4'>
-                <AddToCompareButton
-                  product={product}
-                  category={category}
-                  translation={translation}
-                />
+                <AddToCompareButton product={product} category={category} />
                 <AddToFavoritesButton />
               </div>
             </div>
@@ -74,20 +66,14 @@ export function ProductPage<T extends ProductLong>({
             </div>
 
             <div className='flex flex-col gap-6'>
-              <SpecsTable specs={specs} translation={translation} />
-              <Button className='bg-theme-crimson hover:bg-theme-gunmetal transition-colors duration-300 cursor-pointer'>
-                <ShoppingCart />
-                {translation.keywords.addToCart}
-              </Button>
+              <SpecificationsTable specifications={specifications} />
+              <AddToCartButton />
             </div>
           </div>
         </div>
 
-        <SuggestedProducts
-          suggestedProducts={product.suggestedProducts}
-          translation={translation}
-        />
-        <Reviews reviews={product.recentReviews} translation={translation} />
+        <SuggestedProducts suggestedProducts={product.suggestedProducts} />
+        <Reviews reviews={product.recentReviews} />
       </section>
     </Page>
   );

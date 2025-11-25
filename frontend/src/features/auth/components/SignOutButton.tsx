@@ -4,7 +4,9 @@ import { LogOut } from 'lucide-react';
 
 export function SignOutButton() {
   const { signOut } = useAuth();
-  const translation = useTranslation();
+  const {
+    components: { signOutButton }
+  } = useTranslation();
 
   return (
     <button
@@ -12,7 +14,7 @@ export function SignOutButton() {
       className='flex justify-center items-center gap-1.5 cursor-pointer'
     >
       <LogOut className='text-theme-crimson' size={15} />
-      <span>{translation.auth.signOut}</span>
+      <span>{signOutButton.signOut}</span>
     </button>
   );
 }

@@ -1,7 +1,7 @@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import type { Review } from '@/features/reviews/models/Review';
-import { type Translation } from '@/lib/i18n/models/Translation';
+
 import {
   Empty,
   EmptyHeader,
@@ -9,21 +9,25 @@ import {
   EmptyTitle,
   EmptyDescription
 } from '@/components/ui/empty';
+
 import { MessageSquareX } from 'lucide-react';
 import { Rating } from '@/features/products/components/Rating';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 type ReviewsProps = {
   reviews: Review[];
-  translation: Translation;
 };
 
-export function Reviews({ reviews, translation }: ReviewsProps) {
-  const hasReviews = reviews.length > -1;
+export function Reviews({ reviews }: ReviewsProps) {
+  const {
+    components: { reviewsSections }
+  } = useTranslation();
+  const hasReviews = reviews.length > 0;
 
   return (
     <section className='flex flex-col'>
       <p className='text-xl font-semibold text-theme-gunmetal'>
-        {translation.keywords.reviews}
+        {reviewsSections.reviews}
       </p>
       <Separator
         orientation='horizontal'
@@ -47,24 +51,28 @@ export function Reviews({ reviews, translation }: ReviewsProps) {
           </div>
         </ScrollArea>
       ) : (
-        <EmptyReviews />
+        <EmptyReviewsSection />
       )}
     </section>
   );
 }
 
-function EmptyReviews() {
+function EmptyReviewsSection() {
+  const {
+    components: { emptyReviewsSection }
+  } = useTranslation();
+
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
           <MessageSquareX />
         </EmptyMedia>
-        <EmptyTitle>No reviews for this product</EmptyTitle>
+        <EmptyTitle>{emptyReviewsSection.noReviewsForThisProduct}</EmptyTitle>
         <EmptyDescription>
-          <p>No reviews have been left for this product yet.</p>
+          <p>{emptyReviewsSection.noReviewsHaveBeenLeftForThisProductYet}</p>
           <p className='flex justify-center items-center gap-1.5'>
-            Write the first review via the form below.
+            {emptyReviewsSection.writeTheFirstReviewViaTheFormBelow}
           </p>
         </EmptyDescription>
       </EmptyHeader>

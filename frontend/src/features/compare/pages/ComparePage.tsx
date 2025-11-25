@@ -4,11 +4,22 @@ import { ProcessorCompareTable } from '../components/tables/ProcessorsCompareTab
 import { MonitorsCompareTable } from '../components/tables/MonitorsCompareTable';
 import { Page } from '@/components/layout/Page';
 import { GraphicsCardsCompareTable } from '../components/tables/GraphicsCardsCompareTable';
-import { NoProductsForComparison } from '../components/NoProductsForComparison';
 import MotherboardsCompareTable from '../components/tables/MotherboardsCompareTable';
 import { RamsCompareTable } from '../components/tables/RamsCompareTable';
 import { SsdsCompareTable } from '../components/tables/SsdsCompareTable';
 import PowerSuppliesCompareTable from '../components/tables/PowerSuppliesCompareTable';
+import { Button } from '@/components/ui/button';
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent
+} from '@/components/ui/empty';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { MonitorX, ArrowUpRightIcon } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 const compareTables: Record<
   string,
@@ -29,7 +40,7 @@ export function ComparePage() {
   if (!category || !(category in compareTables)) {
     return (
       <Page>
-        <NoProductsForComparison />
+        <EmptyComparePage />
       </Page>
     );
   }
@@ -42,5 +53,38 @@ export function ComparePage() {
         <CompareTable products={products} />
       </section>
     </Page>
+  );
+}
+
+function EmptyComparePage() {
+  const {
+    components: { emptyComparePage }
+  } = useTranslation();
+  const navigate = useNavigate();
+
+  return (
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant='icon'>
+          <MonitorX />
+        </EmptyMedia>
+        <EmptyTitle>{emptyComparePage.noProductsAddedForComparison}</EmptyTitle>
+        <EmptyDescription>
+          <p>{emptyComparePage.youHaveNotAddedAnyProductsForComparisonYet}</p>
+          <p className='flex justify-center items-center gap-1.5'>
+            {emptyComparePage.getStartedByAddingAProduct}
+          </p>
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button
+          onClick={() => navigate('/products/categories/graphics-cards')}
+          className='bg-theme-gunmetal cursor-pointer'
+        >
+          {emptyComparePage.addProducts}
+          <ArrowUpRightIcon />
+        </Button>
+      </EmptyContent>
+    </Empty>
   );
 }

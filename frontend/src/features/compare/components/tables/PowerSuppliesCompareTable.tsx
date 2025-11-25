@@ -3,7 +3,7 @@ import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { ProductCompareTable } from './ProductCompareTable';
 import { TableHead, TableCell } from '@/components/ui/table';
-import React from 'react';
+import { Fragment } from 'react';
 
 type PowerSuppliesCompareTableProps = {
   products: ProductLong[];
@@ -12,31 +12,29 @@ type PowerSuppliesCompareTableProps = {
 export default function PowerSuppliesCompareTable({
   products
 }: PowerSuppliesCompareTableProps) {
-  const translation = useTranslation();
-  const formatProduct = useFormatProduct(translation);
+  const {
+    specifications: { powerSupplies }
+  } = useTranslation();
+  const formatProduct = useFormatProduct();
 
   return (
     <ProductCompareTable
       products={products}
       category='power-supplies'
       childTableHeads={
-        <React.Fragment>
-          <TableHead>{translation.specs.powerSupplies.formFactor}</TableHead>
-          <TableHead>
-            {translation.specs.powerSupplies.efficiencyPercentage}
-          </TableHead>
-          <TableHead>
-            {translation.specs.powerSupplies.modularity['spec']}
-          </TableHead>
-          <TableHead>{translation.specs.powerSupplies.wattage}</TableHead>
-        </React.Fragment>
+        <Fragment>
+          <TableHead>{powerSupplies.formFactor}</TableHead>
+          <TableHead>{powerSupplies.efficiencyPercentage}</TableHead>
+          <TableHead>{powerSupplies.modularity.label}</TableHead>
+          <TableHead>{powerSupplies.wattage}</TableHead>
+        </Fragment>
       }
       childTableCells={(product) => (
-        <React.Fragment>
+        <Fragment>
           {formatProduct.toPowerSupply(product).map(({ value }) => (
             <TableCell>{value}</TableCell>
           ))}
-        </React.Fragment>
+        </Fragment>
       )}
     />
   );

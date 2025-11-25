@@ -1,4 +1,3 @@
-import { type Translation } from '@/lib/i18n/models/Translation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { Link } from 'react-router';
 import { Separator } from '@/components/ui/separator';
@@ -11,23 +10,24 @@ import {
 } from '@/components/ui/empty';
 import { MonitorX } from 'lucide-react';
 import type { SuggestedProduct } from '@/features/products/models/shared/SuggestedProduct';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 type SuggestedProductsProps = {
   suggestedProducts: SuggestedProduct[];
-  translation: Translation;
 };
 
 export function SuggestedProducts({
-  suggestedProducts,
-  translation
+  suggestedProducts
 }: SuggestedProductsProps) {
-  console.log(suggestedProducts);
+  const {
+    components: { suggestedProductsSection }
+  } = useTranslation();
   const hasProducts = suggestedProducts.length > 0;
 
   return (
     <section className='flex flex-col'>
       <p className='text-xl font-semibold text-theme-gunmetal'>
-        {translation.keywords.suggestedProducts}
+        {suggestedProductsSection.suggestedProducts}
       </p>
 
       <Separator
@@ -56,23 +56,29 @@ export function SuggestedProducts({
             </Link>
           ))
         ) : (
-          <EmptySuggestedProducts />
+          <EmptySuggestedProductsSection />
         )}
       </div>
     </section>
   );
 }
 
-function EmptySuggestedProducts() {
+function EmptySuggestedProductsSection() {
+  const {
+    components: { emptySuggestedProductsSection }
+  } = useTranslation();
+
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant='icon'>
           <MonitorX />
         </EmptyMedia>
-        <EmptyTitle>No suggested products available</EmptyTitle>
+        <EmptyTitle>
+          {emptySuggestedProductsSection.noSuggestedProductsAvailable}
+        </EmptyTitle>
         <EmptyDescription>
-          <p>This product has no suggestions yet.</p>
+          <p>{emptySuggestedProductsSection.thisProductHasNoSuggestionsYet}</p>
         </EmptyDescription>
       </EmptyHeader>
     </Empty>

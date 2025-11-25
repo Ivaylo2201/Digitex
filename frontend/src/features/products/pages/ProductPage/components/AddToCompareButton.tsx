@@ -1,27 +1,28 @@
 import { Button } from '@/components/ui/button';
 import { useCompare } from '@/features/compare/stores/useCompare';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import type { Translation } from '@/lib/i18n/models/Translation';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { ArrowLeftRight } from 'lucide-react';
 import { toast } from 'sonner';
 
 type AddToCompareButtonProps = {
   product: ProductLong;
   category: string;
-  translation: Translation;
 };
 
 export function AddToCompareButton({
   product,
-  category,
-  translation
+  category
 }: AddToCompareButtonProps) {
   const { addToCompare } = useCompare();
+  const {
+    components: { addToCompareButton }
+  } = useTranslation();
 
   const handleAddToCompare = () => {
     const addToCompareResult = addToCompare(
       { ...product, category },
-      translation
+      addToCompareButton
     );
 
     if (addToCompareResult.isSuccess) {

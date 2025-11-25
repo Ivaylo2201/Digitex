@@ -10,7 +10,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
     {
         try
         {
-            TruncateTables();
+            await TruncateTables();
             await ResetIndicesAsync();
             Seed();
             await context.SaveChangesAsync();
@@ -19,7 +19,6 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         }
         catch (Exception ex)
         {
-            throw ex;
             var exceptionMessage = ex.InnerException?.Message ?? ex.Message;
             var exceptionType = ex.InnerException?.GetType().Name ?? ex.GetType().Name;
             
@@ -51,9 +50,12 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Cities.AddRange(Data.Cities);
     }
 
-    private void TruncateTables()
+    private async Task TruncateTables()
     {
         logger.LogInformation("Truncating tables...");
+        
+        await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Suggestions;");
+        await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Wishlist;");
         
         context.Addresses.RemoveRange(context.Addresses);
         context.Items.RemoveRange(context.Items);
@@ -76,6 +78,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Brands.RemoveRange(context.Brands);
         context.Cities.RemoveRange(context.Cities);
         context.Countries.RemoveRange(context.Countries);
+        context.Payments.RemoveRange(context.Payments);
+        context.Sales.RemoveRange(context.Sales);
     }
 
     private async Task ResetIndicesAsync()

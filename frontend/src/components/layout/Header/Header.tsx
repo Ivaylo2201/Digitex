@@ -14,7 +14,9 @@ import { CurrencySelect } from '@/features/currency/components/CurrencySelect';
 
 export function Header() {
   const { isAuthenticated } = useAuth();
-  const translation = useTranslation();
+  const {
+    components: { header }
+  } = useTranslation();
 
   return (
     <header className='text-white font-montserrat'>
@@ -30,7 +32,7 @@ export function Header() {
           </li>
           <li className='flex justify-center md:justify-start items-center gap-1.5'>
             <MapPin size={16} className='text-theme-crimson' />
-            {translation.keywords.address}
+            {header.merchantAddress}
           </li>
         </ul>
         <ul className='flex'>

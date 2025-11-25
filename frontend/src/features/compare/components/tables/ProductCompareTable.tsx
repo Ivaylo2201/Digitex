@@ -8,18 +8,17 @@ import {
   TableCaption
 } from '@/components/ui/table';
 
-import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import { getStaticFile } from '@/lib/utils/getStaticFile';
-import { useNavigate } from 'react-router';
-import { useCompare } from '../../stores/useCompare';
-import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
-import { toast } from 'sonner';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger
 } from '@/components/ui/hover-card';
+
+import type { ProductLong } from '@/features/products/models/base/ProductLong';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { getStaticFile } from '@/lib/utils/getStaticFile';
+import { useNavigate } from 'react-router';
+import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
 
 type ProductCompareTableProps = {
   products: ProductLong[];
@@ -34,19 +33,22 @@ export function ProductCompareTable({
   childTableHeads,
   childTableCells
 }: ProductCompareTableProps) {
-  const translation = useTranslation();
+  const {
+    specifications: { base },
+    components: { productCompareTable }
+  } = useTranslation();
   const navigate = useNavigate();
   const { exchangeCurrency } = useCurrencyExchange();
   //const { clearCompare } = useCompare();
 
   return (
     <Table className='font-montserrat border'>
-      <TableCaption>{translation.compare.comparedProducts}</TableCaption>
+      <TableCaption>{productCompareTable.comparedProducts}</TableCaption>
       <TableHeader>
         <TableRow className='[&>th]:text-white bg-theme-gunmetal pointer-events-none'>
-          <TableHead>{translation.specs.product.brand}</TableHead>
-          <TableHead>{translation.specs.product.model}</TableHead>
-          <TableHead>{translation.specs.product.price}</TableHead>
+          <TableHead>{base.brand}</TableHead>
+          <TableHead>{base.model}</TableHead>
+          <TableHead>{base.price}</TableHead>
           {childTableHeads}
         </TableRow>
       </TableHeader>

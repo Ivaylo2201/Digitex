@@ -3,7 +3,9 @@ import { User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function AccountLink() {
-  const translation = useTranslation();
+  const {
+    components: { accountLink }
+  } = useTranslation();
 
   return (
     <Link
@@ -12,7 +14,7 @@ export function AccountLink() {
     >
       <User size={19} />
       <span className='text-theme-white text-xs font-Montserrat'>
-        {translation.user.account}
+        {accountLink.account}
       </span>
     </Link>
   );

@@ -3,7 +3,9 @@ import { LogIn } from 'lucide-react';
 import { Link } from 'react-router';
 
 export function SignInLink() {
-  const translation = useTranslation();
+  const {
+    components: { signInLink }
+  } = useTranslation();
 
   return (
     <Link
@@ -11,7 +13,7 @@ export function SignInLink() {
       className='flex justify-center items-center gap-1.5 cursor-pointer'
     >
       <LogIn className='text-theme-crimson' size={15} />
-      <span>{translation.auth.signIn}</span>
+      <span>{signInLink.signIn}</span>
     </Link>
   );
 }

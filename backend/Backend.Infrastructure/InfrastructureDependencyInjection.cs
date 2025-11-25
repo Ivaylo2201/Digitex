@@ -215,7 +215,7 @@ public static class InfrastructureDependencyInjection
             .Map(dest => dest.TotalReviews, src => src.Reviews.Count)   
             .Map(dest => dest.RecentReviews, src => src.Reviews
                 .OrderByDescending(r => r.CreatedAt)
-                .Take(50)
+                .Take(25)
                 .Adapt<List<ReviewDto>>())
             .Map(dest => dest.SuggestedProducts,
                 src => src.Suggestions.Select(suggestion => suggestion.ToSuggestionDto()));

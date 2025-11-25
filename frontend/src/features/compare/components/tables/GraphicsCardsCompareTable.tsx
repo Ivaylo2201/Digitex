@@ -1,7 +1,7 @@
 import { TableCell, TableHead } from '@/components/ui/table';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import React from 'react';
+import { Fragment } from 'react';
 import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
 import { ProductCompareTable } from './ProductCompareTable';
 
@@ -10,36 +10,32 @@ type GraphicsCardsCompareTableProps = { products: ProductLong[] };
 export function GraphicsCardsCompareTable({
   products
 }: GraphicsCardsCompareTableProps) {
-  const translation = useTranslation();
-  const formatProduct = useFormatProduct(translation);
+  const {
+    specifications: { graphicsCards }
+  } = useTranslation();
+  const formatProduct = useFormatProduct();
 
   return (
     <ProductCompareTable
       products={products}
       category='graphics-cards'
       childTableHeads={
-        <React.Fragment>
-          <TableHead>{translation.specs.graphicsCards.memory}</TableHead>
-          <TableHead>
-            {translation.specs.graphicsCards.baseClockSpeed}
-          </TableHead>
-          <TableHead>
-            {translation.specs.graphicsCards.boostClockSpeed}
-          </TableHead>
-          <TableHead>{translation.specs.graphicsCards.busWidth}</TableHead>
-          <TableHead>{translation.specs.graphicsCards.cudaCores}</TableHead>
-          <TableHead>
-            {translation.specs.graphicsCards.directXSupport}
-          </TableHead>
-          <TableHead>{translation.specs.graphicsCards.tdp}</TableHead>
-        </React.Fragment>
+        <Fragment>
+          <TableHead>{graphicsCards.memory}</TableHead>
+          <TableHead>{graphicsCards.baseClockSpeed}</TableHead>
+          <TableHead>{graphicsCards.boostClockSpeed}</TableHead>
+          <TableHead>{graphicsCards.busWidth}</TableHead>
+          <TableHead>{graphicsCards.cudaCores}</TableHead>
+          <TableHead>{graphicsCards.directXSupport}</TableHead>
+          <TableHead>{graphicsCards.tdp}</TableHead>
+        </Fragment>
       }
       childTableCells={(product) => (
-        <React.Fragment>
+        <Fragment>
           {formatProduct.toGraphicsCard(product).map(({ value }) => (
             <TableCell>{value}</TableCell>
           ))}
-        </React.Fragment>
+        </Fragment>
       )}
     />
   );

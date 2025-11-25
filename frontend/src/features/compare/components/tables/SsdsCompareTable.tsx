@@ -2,33 +2,35 @@ import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { ProductCompareTable } from './ProductCompareTable';
-import React from 'react';
+import { Fragment } from 'react';
 import { TableCell, TableHead } from '@/components/ui/table';
 
 type SsdsCompareTableProps = { products: ProductLong[] };
 
 export function SsdsCompareTable({ products }: SsdsCompareTableProps) {
-  const translation = useTranslation();
-  const formatProduct = useFormatProduct(translation);
+  const {
+    specifications: { ssds }
+  } = useTranslation();
+  const formatProduct = useFormatProduct();
 
   return (
     <ProductCompareTable
       products={products}
       category='ssds'
       childTableHeads={
-        <React.Fragment>
-          <TableHead>{translation.specs.ssds.capacityInGb}</TableHead>
-          <TableHead>{translation.specs.ssds.interface}</TableHead>
-          <TableHead>{translation.specs.ssds.operationSpeedRead}</TableHead>
-          <TableHead>{translation.specs.ssds.operationSpeedWrite}</TableHead>
-        </React.Fragment>
+        <Fragment>
+          <TableHead>{ssds.capacityInGb}</TableHead>
+          <TableHead>{ssds.interface}</TableHead>
+          <TableHead>{ssds.operationSpeedRead}</TableHead>
+          <TableHead>{ssds.operationSpeedWrite}</TableHead>
+        </Fragment>
       }
       childTableCells={(product) => (
-        <React.Fragment>
+        <Fragment>
           {formatProduct.toSsd(product).map(({ value }) => (
             <TableCell>{value}</TableCell>
           ))}
-        </React.Fragment>
+        </Fragment>
       )}
     />
   );

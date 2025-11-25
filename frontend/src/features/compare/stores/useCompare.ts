@@ -7,7 +7,7 @@ type CompareStore = {
   products: ProductLong[];
   addToCompare: (
     product: ProductLong & { category: string },
-    translation: Translation
+    addToCompareTranslation: Translation['components']['addToCompareButton']
   ) => { isSuccess: boolean; message: string };
   removeFromCompare: (id: string) => void;
   clearCompare: () => void;
@@ -16,32 +16,35 @@ type CompareStore = {
 export const useCompare = create<CompareStore>((set, get) => ({
   category: null,
   products: [],
-  addToCompare: (comparedProduct, translation) => {
+  addToCompare: (comparedProduct, addToCompareTranslation) => {
     const category = get().category;
     const products = get().products;
 
     if (products.length >= 10)
       return {
         isSuccess: false,
-        message: translation.compare.maxCapacityReached
+        message: addToCompareTranslation.maxComparisonCapacityReached
       };
 
     if (category && comparedProduct.category !== category)
       return {
         isSuccess: false,
-        message: translation.compare.incompatibleCategory
+        message: addToCompareTranslation.incompatibleComparisonCategory
       };
 
     if (products.some((product) => product.id === comparedProduct.id))
       return {
         isSuccess: false,
-        message: translation.compare.alreadyPresent
+        message: addToCompareTranslation.productAlreadyAddedToComparison
       };
 
     const { category: _, ...rest } = comparedProduct;
     set({ products: [...products, rest], category: comparedProduct.category });
 
-    return { isSuccess: true, message: translation.compare.addedSuccessfully };
+    return {
+      isSuccess: true,
+      message: addToCompareTranslation.productSuccessfullyAddedToComparison
+    };
   },
   removeFromCompare: (id) => {
     const filteredProducts = get().products.filter(
