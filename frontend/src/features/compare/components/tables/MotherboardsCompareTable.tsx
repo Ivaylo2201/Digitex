@@ -30,7 +30,7 @@ export default function MotherboardsCompareTable({
           <TableHead>{motherboards.pcieSlots}</TableHead>
         </Fragment>
       }
-      childTableCells={(product) => (
+      renderChildTableCells={(product) => (
         <Fragment>
           {formatProduct.toMotherboard(product).map(({ value }) => (
             <TableCell>{value}</TableCell>

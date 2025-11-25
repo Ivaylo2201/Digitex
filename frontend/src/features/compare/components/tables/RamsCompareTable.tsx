@@ -23,7 +23,7 @@ export function RamsCompareTable({ products }: RamsCompareTableProps) {
           <TableHead>{rams.timing}</TableHead>
         </Fragment>
       }
-      childTableCells={(product) => (
+      renderChildTableCells={(product) => (
         <Fragment>
           {formatProduct.toRam(product).map(({ value }) => (
             <TableCell>{value}</TableCell>

@@ -24,14 +24,14 @@ type ProductCompareTableProps = {
   products: ProductLong[];
   category: string;
   childTableHeads: React.ReactNode;
-  childTableCells: (product: ProductLong) => React.ReactNode;
+  renderChildTableCells: (product: ProductLong) => React.ReactNode;
 };
 
 export function ProductCompareTable({
   products,
   category,
   childTableHeads,
-  childTableCells
+  renderChildTableCells
 }: ProductCompareTableProps) {
   const {
     specifications: { base },
@@ -57,7 +57,7 @@ export function ProductCompareTable({
           <HoverCard>
             <HoverCardTrigger asChild>
               <TableRow
-                key={index}
+                key={product.id}
                 onClick={() => navigate(`/products/${category}/${product.id}`)}
                 className={`cursor-pointer hover:bg-theme-crimson hover:text-theme-white duration-300 transform-color ${
                   index % 2 === 0 ? 'bg-gray-100' : ''
@@ -68,7 +68,7 @@ export function ProductCompareTable({
                 <TableCell>
                   {exchangeCurrency(product.price.discounted)}
                 </TableCell>
-                {childTableCells(product)}
+                {renderChildTableCells(product)}
               </TableRow>
             </HoverCardTrigger>
             <HoverCardContent>

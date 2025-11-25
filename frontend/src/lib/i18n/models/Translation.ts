@@ -63,7 +63,7 @@ export type Translation = {
       noSuggestedProductsAvailable: string;
       thisProductHasNoSuggestionsYet: string;
     };
-    reviewsSections: {
+    reviewsSection: {
       reviews: string;
       noReviewsForThisProduct: string;
       noReviewsHaveBeenLeftForThisProductYet: string;
@@ -211,7 +211,7 @@ export const translation: Translation = {
       noSuggestedProductsAvailable: 'No suggested products available',
       thisProductHasNoSuggestionsYet: 'This product has no suggestions yet'
     },
-    reviewsSections: {
+    reviewsSection: {
       reviews: 'Reviews',
       noReviewsForThisProduct: 'No reviews for this product',
       noReviewsHaveBeenLeftForThisProductYet:

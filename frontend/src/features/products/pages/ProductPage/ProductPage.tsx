@@ -4,8 +4,8 @@ import { Page } from '@/components/layout/Page';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import type { Specification } from '../../models/shared/Specification';
 import { Rating } from '../../components/Rating';
-import { SuggestedProducts } from './components/SuggestedProducts';
-import { Reviews } from './components/Reviews';
+import { SuggestedProductsSection } from './components/SuggestedProductsSection';
+import { ReviewsSection } from './components/ReviewsSection';
 import { AddToCompareButton } from './components/AddToCompareButton';
 import { SpecificationsTable } from './components/SpecificationsTable';
 import { ProductPrice } from './components/ProductPrice';
@@ -72,8 +72,10 @@ export function ProductPage<T extends ProductLong>({
           </div>
         </div>
 
-        <SuggestedProducts suggestedProducts={product.suggestedProducts} />
-        <Reviews reviews={product.recentReviews} />
+        <SuggestedProductsSection
+          suggestedProducts={product.suggestedProducts}
+        />
+        <ReviewsSection reviews={product.recentReviews} />
       </section>
     </Page>
   );

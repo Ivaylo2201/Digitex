@@ -30,7 +30,7 @@ export function GraphicsCardsCompareTable({
           <TableHead>{graphicsCards.tdp}</TableHead>
         </Fragment>
       }
-      childTableCells={(product) => (
+      renderChildTableCells={(product) => (
         <Fragment>
           {formatProduct.toGraphicsCard(product).map(({ value }) => (
             <TableCell>{value}</TableCell>

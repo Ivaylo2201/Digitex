@@ -1,4 +1,3 @@
-import type { Translation } from '@/lib/i18n/models/Translation';
 import type { ProductLong } from '../models/base/ProductLong';
 import type { Monitor } from '../models/Monitor';
 import type { GraphicsCard } from '../models/GraphicsCard';

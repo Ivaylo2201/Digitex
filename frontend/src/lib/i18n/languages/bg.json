@@ -63,7 +63,7 @@
       "noSuggestedProductsAvailable": "Няма налични препоръчани продукти",
       "thisProductHasNoSuggestionsYet": "Този продукт все още няма предложения"
     },
-    "reviewsSections": {
+    "reviewsSection": {
       "reviews": "Отзиви",
       "noReviewsForThisProduct": "Няма отзиви за този продукт",
       "noReviewsHaveBeenLeftForThisProductYet": "Все още няма оставени отзиви за този продукт",

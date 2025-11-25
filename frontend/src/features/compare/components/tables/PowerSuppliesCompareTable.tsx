@@ -29,7 +29,7 @@ export default function PowerSuppliesCompareTable({
           <TableHead>{powerSupplies.wattage}</TableHead>
         </Fragment>
       }
-      childTableCells={(product) => (
+      renderChildTableCells={(product) => (
         <Fragment>
           {formatProduct.toPowerSupply(product).map(({ value }) => (
             <TableCell>{value}</TableCell>

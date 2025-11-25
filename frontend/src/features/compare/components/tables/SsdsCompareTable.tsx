@@ -25,7 +25,7 @@ export function SsdsCompareTable({ products }: SsdsCompareTableProps) {
           <TableHead>{ssds.operationSpeedWrite}</TableHead>
         </Fragment>
       }
-      childTableCells={(product) => (
+      renderChildTableCells={(product) => (
         <Fragment>
           {formatProduct.toSsd(product).map(({ value }) => (
             <TableCell>{value}</TableCell>

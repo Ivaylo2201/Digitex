@@ -63,7 +63,7 @@
       "noSuggestedProductsAvailable": "Keine empfohlenen Produkte verfügbar",
       "thisProductHasNoSuggestionsYet": "Dieses Produkt hat noch keine Vorschläge"
     },
-    "reviewsSections": {
+    "reviewsSection": {
       "reviews": "Bewertungen",
       "noReviewsForThisProduct": "Keine Bewertungen für dieses Produkt",
       "noReviewsHaveBeenLeftForThisProductYet": "Es wurden noch keine Bewertungen abgegeben",

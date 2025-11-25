@@ -29,7 +29,7 @@ export function ProcessorCompareTable({
           <TableHead>{processors.tdp}</TableHead>
         </Fragment>
       }
-      childTableCells={(product) => (
+      renderChildTableCells={(product) => (
         <Fragment>
           {formatProduct.toProcessor(product).map(({ value }) => (
             <TableCell>{value}</TableCell>

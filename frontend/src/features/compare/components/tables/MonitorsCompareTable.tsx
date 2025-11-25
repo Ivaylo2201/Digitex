@@ -30,7 +30,7 @@ export function MonitorsCompareTable({ products }: MonitorsCompareTableProps) {
           <TableHead>{monitors.colorSpectre}</TableHead>
         </Fragment>
       }
-      childTableCells={(product) => (
+      renderChildTableCells={(product) => (
         <Fragment>
           {formatProduct.toMonitor(product).map(({ value }) => (
             <TableCell>{value}</TableCell>

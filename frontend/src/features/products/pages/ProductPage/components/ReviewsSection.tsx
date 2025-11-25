@@ -14,20 +14,20 @@ import { MessageSquareX } from 'lucide-react';
 import { Rating } from '@/features/products/components/Rating';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
-type ReviewsProps = {
+type ReviewsSectionProps = {
   reviews: Review[];
 };
 
-export function Reviews({ reviews }: ReviewsProps) {
+export function ReviewsSection({ reviews }: ReviewsSectionProps) {
   const {
-    components: { reviewsSections }
+    components: { reviewsSection }
   } = useTranslation();
   const hasReviews = reviews.length > 0;
 
   return (
     <section className='flex flex-col'>
       <p className='text-xl font-semibold text-theme-gunmetal'>
-        {reviewsSections.reviews}
+        {reviewsSection.reviews}
       </p>
       <Separator
         orientation='horizontal'
@@ -36,15 +36,14 @@ export function Reviews({ reviews }: ReviewsProps) {
       {hasReviews ? (
         <ScrollArea className='h-72'>
           <div className='flex md:grid md:grid-cols-2 md:items-center flex-col gap-4'>
-            {Array.from({ length: 100 }).map((_, index) => (
-              <article key={index} className='p-1 flex flex-col gap-2'>
+            {reviews.map((review) => (
+              <article key={review.id} className='p-1 flex flex-col gap-2'>
                 <div className='flex flex-col'>
-                  <p className='font-medium'>John doe {index}</p>
+                  <p className='font-medium'>{review.username}</p>
                   <Rating stars={4} starSize={13} />
                 </div>
                 <p className='max-w-110 text-gray-500 text-sm'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Officiis libero.
+                  {review.comment ?? 'No comment provided.'}
                 </p>
               </article>
             ))}
