@@ -15,6 +15,8 @@ public class ReviewsController(IReviewService reviewService, IProductBaseService
     [Authorize]
     [ProducesResponseType(typeof(ReviewDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     public async Task<IActionResult> AddReviewAsync(Guid productId, [FromBody] AddReviewDto body, CancellationToken stoppingToken = default)
     {
         body.UserId = User.GetId();

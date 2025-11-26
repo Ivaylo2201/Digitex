@@ -15,6 +15,8 @@ public class CartController(ICartService cartService, IItemService itemService) 
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     public async Task<IActionResult> AddToCartAsync([FromBody] AddToCartDto cartDto, CancellationToken stoppingToken = default)
     {
         cartDto.UserId = User.GetId();
@@ -26,6 +28,8 @@ public class CartController(ICartService cartService, IItemService itemService) 
     [Authorize]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RemoveFromCartAsync([FromBody] RemoveFromCartDto cartDto, CancellationToken stoppingToken = default)
     {
@@ -44,6 +48,8 @@ public class CartController(ICartService cartService, IItemService itemService) 
     [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     public async Task<IActionResult> ListItemsInCartAsync([FromBody] ListItemsInCartDto cartDto, CancellationToken stoppingToken = default)
     {
         cartDto.UserId = User.GetId();

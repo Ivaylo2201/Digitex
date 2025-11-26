@@ -1842,7 +1842,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 4950, Write: 4250),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1854,7 +1854,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1866,7 +1866,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 5500, Write: 5000),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1878,7 +1878,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 5600, Write: 5100),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1890,7 +1890,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie5
+            StorageInterface = StorageInterface.Pcie5
         },
         new()
         {
@@ -1902,7 +1902,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1914,7 +1914,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie4
+            StorageInterface = StorageInterface.Pcie4
         },
         new()
         {
@@ -1926,7 +1926,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie4
+            StorageInterface = StorageInterface.Pcie4
         },
         new()
         {
@@ -1938,7 +1938,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 500,
             OperationSpeed = new OperationSpeed(Read: 3500, Write: 3000),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1950,7 +1950,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie4
+            StorageInterface = StorageInterface.Pcie4
         },
         new()
         {
@@ -1962,7 +1962,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 4950, Write: 4250),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1974,7 +1974,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 5000, Write: 4500),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1986,7 +1986,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 2000,
             OperationSpeed = new OperationSpeed(Read: 5600, Write: 5100),
-            Interface = StorageInterface.Nvme
+            StorageInterface = StorageInterface.Nvme
         },
         new()
         {
@@ -1998,7 +1998,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 1000,
             OperationSpeed = new OperationSpeed(Read: 7000, Write: 6500),
-            Interface = StorageInterface.Pcie5
+            StorageInterface = StorageInterface.Pcie5
         },
         new()
         {
@@ -2010,7 +2010,7 @@ public static class Data
             Quantity = GetRandomQuantity(),
             CapacityInGb = 4000,
             OperationSpeed = new OperationSpeed(Read: 5500, Write: 4400),
-            Interface = StorageInterface.Pcie4
+            StorageInterface = StorageInterface.Pcie4
         }
     ];
 

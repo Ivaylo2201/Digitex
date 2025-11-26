@@ -1,13 +1,19 @@
-﻿﻿using System.Text.Json.Serialization;
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(StringEnumConverter))]
 public enum StorageInterface
 {
-    Sas,
+    
+    [EnumMember(Value = "SATA")]
     Sata,
-    Nvme,   
+    [EnumMember(Value = "NVMe")]
+    Nvme,
+    [EnumMember(Value = "PCIe 4.0")]
     Pcie4,
+    [EnumMember(Value = "PCIe 5.0")]
     Pcie5
 }

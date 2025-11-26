@@ -12,11 +12,11 @@ namespace Backend.WebApi.Controllers;
 public class AdminController(IProductBaseService productService) : ControllerBase
 {
     [HttpPost("add-suggestion")]
-    [Consumes("application/json")]
-    [Produces("application/json")]  
     [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     [Authorize(Roles = nameof(Role.Admin))]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     public async Task<IActionResult> AddSuggestionAsync([FromBody] AddSuggestionDto body, CancellationToken stoppingToken = default)
     {
         var result = await productService.AddSuggestionAsync(body, stoppingToken);
