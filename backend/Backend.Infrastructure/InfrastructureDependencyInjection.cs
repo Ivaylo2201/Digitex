@@ -232,7 +232,7 @@ public static class InfrastructureDependencyInjection
     private static IServiceCollection AddEmail(this IServiceCollection services)
     {
         var email = GetRequiredEnvironmentVariable<string>("MERCHANT_EMAIL");
-        var appPassword = GetRequiredEnvironmentVariable<string>("MERCHANT_APP_PASSWORD");
+        var gmailAppPassword = GetRequiredEnvironmentVariable<string>("GMAIL_APP_PASSWORD");
         var username = GetRequiredEnvironmentVariable<string>("MERCHANT_USERNAME");
         var smtpProvider = GetRequiredEnvironmentVariable<string>("SMTP_PROVIDER");
         var smtpPort = GetRequiredEnvironmentVariable<int>("SMTP_PORT");
@@ -242,7 +242,7 @@ public static class InfrastructureDependencyInjection
             .AddSmtpSender(() => new SmtpClient(smtpProvider)
             {
                 Port = smtpPort,
-                Credentials = new NetworkCredential(email, appPassword),
+                Credentials = new NetworkCredential(email, gmailAppPassword),
                 EnableSsl = true
             });
 
