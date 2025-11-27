@@ -14,6 +14,8 @@ public static class ErrorTypeExtensions
         ErrorType.ValidationFailed => "Validation failed.",
         ErrorType.CryptographyError => "Cryptography operation failed.",
         ErrorType.OutOfStock => "Product is out of stock.",
+        ErrorType.InvalidWebhookSecret => "Improperly configured webhook secret.",
+        ErrorType.PaymentFailed => "Payment failed.",
         _ => "An unknown error occurred."
     };
 }

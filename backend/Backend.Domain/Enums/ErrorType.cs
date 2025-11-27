@@ -9,5 +9,8 @@ public enum ErrorType
     InvalidCredentials,
     ValidationFailed,
     CryptographyError,
-    OutOfStock
+    OutOfStock,
+    InvalidWebhookSecret,
+    PaymentFailed,
+    General
 }

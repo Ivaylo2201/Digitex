@@ -159,14 +159,13 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductBaseService, ProductBaseService>()
             .AddScoped<IUserService, UserService>()
             .AddScoped<IBrandProviderService, BrandProviderService>()
-
+            .AddScoped<IPaymentService, PaymentService>()
             .AddScoped<IEmailSendingService>(sp => new EmailSendingService(
                 sp.GetRequiredService<ILogger<EmailSendingService>>(),
                 sp.GetRequiredService<IFluentEmail>(),
                 sp.GetRequiredService<IEmailCryptoService>(),
                 sp.GetRequiredService<IWebHostEnvironment>(),
                 frontendUrl))
-
             .AddScoped<ICartService, CartService>()
             .AddScoped<IItemService, ItemService>()
             .AddScoped<IShippingService, ShippingService>()

@@ -3,7 +3,6 @@ using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
 
 namespace Backend.WebApi.Controllers;
 
@@ -26,39 +25,27 @@ public class PaymentController(IPaymentService paymentService) : ControllerBase
     [HttpPost("webhook")]
     [Consumes("application/json")]
     [Produces("application/json")]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status402PaymentRequired)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> WebhookAsync()
     {
-        var webhookSecret = Environment.GetEnvironmentVariable("WebhookSecret");
-        
-        if (webhookSecret is null)
-            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorObject { Message = "Improperly configured webhook secret." });
-        
         using var reader = new StreamReader(Request.Body);
         var json = await reader.ReadToEndAsync();
+        
+        var result = await paymentService.ProcessWebhookAsync(json, Request.Headers);
 
-        try
+        if (!result.IsSuccess)
         {
-            var stripeEvent = EventUtility.ConstructEvent(
-                json,
-                Request.Headers["Stripe-Signature"],
-                webhookSecret
-            );
-
-            if (stripeEvent?.Type is "payment_intent.succeeded")
+            return result.StatusCode switch
             {
-                var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
-                return Ok();
-            }
-            
-            return StatusCode(StatusCodes.Status402PaymentRequired, new ErrorObject { Message = "Payment failed." });
+                StatusCodes.Status500InternalServerError => StatusCode(StatusCodes.Status500InternalServerError, result.ErrorObject),
+                StatusCodes.Status402PaymentRequired => StatusCode(StatusCodes.Status402PaymentRequired, result.ErrorObject),
+                _ => BadRequest(result.ErrorObject),
+            };
         }
-        catch (StripeException ex)
-        {
-            return BadRequest(new ErrorObject { Message = ex.Message });
-        }
+
+        return Ok();
     }
 }

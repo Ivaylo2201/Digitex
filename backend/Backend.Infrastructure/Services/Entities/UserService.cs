@@ -32,7 +32,7 @@ public class UserService(
             var errors = string.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage));
             
             logger.LogError("[{Source}]: Sign in validation failed for {SerializedDto}. Errors: {Errors}", Source, serializedDto, errors);
-            return Result<string>.Failure(ErrorType.ValidationFailed, validationResult.Errors.ToObject());
+            return Result<string>.Failure(ErrorType.ValidationFailed, details: validationResult.Errors.ToObject());
         }
 
         var user = await userRepository.GetOneByCredentialsAsync(signInDto.Email, signInDto.Password, stoppingToken);
@@ -54,7 +54,7 @@ public class UserService(
             var errors = string.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage));
             
             logger.LogError("[{Source}]: Sign up validation failed for {SerializedDto}. Errors: {Errors}", Source, serializedDto, errors);
-            return Result<string>.Failure(ErrorType.ValidationFailed, validationResult.Errors.ToObject());
+            return Result<string>.Failure(ErrorType.ValidationFailed, details: validationResult.Errors.ToObject());
         }
 
         try

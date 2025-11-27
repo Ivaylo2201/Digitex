@@ -45,6 +45,4 @@ public class CartService(ICartRepository cartRepository, IItemRepository itemRep
         await itemRepository.DeleteAsync(cartDto.ItemId, stoppingToken);
         return Result.Success();       
     }
-
-    
 }

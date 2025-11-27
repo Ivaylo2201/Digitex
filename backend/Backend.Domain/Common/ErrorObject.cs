@@ -3,5 +3,6 @@
 public record ErrorObject
 {
     public required string Message { get; init; }
+    public int? StatusCode { get; init; }
     public object? Details { get; init; }   
 }

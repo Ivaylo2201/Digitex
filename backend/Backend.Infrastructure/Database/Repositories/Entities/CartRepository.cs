@@ -23,4 +23,14 @@ public class CartRepository(ILogger<CartRepository> logger, DatabaseContext cont
         
         return user.Cart;
     }
+
+    public async Task<double> GetCartTotalAsync(int userId, CancellationToken stoppingToken = default)
+    {
+        return await context.Users
+            .Where(user => user.Id == userId)
+            .Include(user => user.Cart)
+            .ThenInclude(cart => cart.Items)
+            .SelectMany(user => user.Cart.Items)
+            .SumAsync(item => item.Price, stoppingToken);
+    }
 }
