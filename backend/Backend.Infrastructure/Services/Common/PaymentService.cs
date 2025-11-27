@@ -49,7 +49,11 @@ public class PaymentService(ILogger<PaymentService> logger, IUserRepository user
                     return Result.Failure(ErrorType.General, StatusCodes.Status500InternalServerError);
                 }
 
-                var user = await userRepository.GetOneAsync(userId, stoppingToken);
+                var user = await userRepository.GetOneWithItemsAndProductsAsync(userId, stoppingToken);
+                
+                // For each item in user.Cart.Items, reduce the stock of the product by the quantity of the item and create a sale object
+                // Clear the cart
+                // Send a thank you email
                 
                 return Result.Success();
             }
@@ -66,14 +70,14 @@ public class PaymentService(ILogger<PaymentService> logger, IUserRepository user
 
     public async Task<Result<string>> CreatePaymentIntentAsync(int userId, CancellationToken stoppingToken = default)
     {
-        var cartTotal = (long)await cartRepository.GetCartTotalAsync(userId, stoppingToken);
+        var cartTotal = await cartRepository.GetCartTotalAsync(userId, stoppingToken);
         var paymentIntentService = new PaymentIntentService();
 
         try
         {
             var paymentIntentOptions = new PaymentIntentCreateOptions
             {
-                Amount = cartTotal * 100,
+                Amount = (long)cartTotal * 100,
                 Currency = EuroCurrencyCode,
                 PaymentMethodTypes = _paymentMethodTypes,
                 Metadata = new Dictionary<string, string>

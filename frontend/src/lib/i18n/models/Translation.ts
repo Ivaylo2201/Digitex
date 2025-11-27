@@ -57,6 +57,7 @@ export type Translation = {
     };
     addToCartButton: {
       addToCart: string;
+      outOfStock: string;
     };
     suggestedProductsSection: {
       suggestedProducts: string;
@@ -215,7 +216,8 @@ export const translation: Translation = {
       mainSpecifications: 'Main specifications'
     },
     addToCartButton: {
-      addToCart: 'Add to cart'
+      addToCart: 'Add to cart',
+      outOfStock: 'Out of stock'
     },
     suggestedProductsSection: {
       suggestedProducts: 'Suggested products',

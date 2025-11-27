@@ -196,7 +196,8 @@ public static class InfrastructureDependencyInjection
             {
                 Initial = src.InitialPrice,
                 Discounted = src.Price
-            });
+            })
+            .Map(dest => dest.Quantity, src => src.Quantity);
 
         TypeAdapterConfig<Item, ItemDto>.NewConfig()
             .Map(dest => dest.Product, src => new ProductItemDto
@@ -211,7 +212,7 @@ public static class InfrastructureDependencyInjection
 
         TypeAdapterConfig<ProductBase, ProductLongDto>.NewConfig().Inherits<ProductBase, ProductShortDto>()
             .Map(dest => dest.Sku, src => src.Sku.ToUpper())
-            .Map(dest => dest.TotalReviews, src => src.Reviews.Count)   
+            .Map(dest => dest.TotalReviews, src => src.Reviews.Count)
             .Map(dest => dest.RecentReviews, src => src.Reviews
                 .OrderByDescending(r => r.CreatedAt)
                 .Take(25)

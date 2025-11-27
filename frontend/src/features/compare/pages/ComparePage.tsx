@@ -17,6 +17,7 @@ import {
   EmptyDescription,
   EmptyContent
 } from '@/components/ui/empty';
+
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { MonitorX, ArrowUpRightIcon } from 'lucide-react';
 import { useNavigate } from 'react-router';

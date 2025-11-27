@@ -56,7 +56,8 @@
       "mainSpecifications": "Основни характеристики"
     },
     "addToCartButton": {
-      "addToCart": "Добави в количката"
+      "addToCart": "Добави в количката",
+      "outOfStock": "Изчерпано"
     },
     "suggestedProductsSection": {
       "suggestedProducts": "Препоръчани продукти",

@@ -50,10 +50,11 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
         
         logger.LogInformation("[{Source}]: Listing {Entity} entities...", source, _entity);
 
-        IQueryable<TEntity> queryable = context
+        var queryable = context
             .Set<TEntity>()
             .AsNoTracking()
-            .Include(entity => entity.Brand);
+            .Include(entity => entity.Brand)
+            .Where(entity => entity.Quantity > 0);
 
         if (filter is not null)
             queryable = filter(queryable);

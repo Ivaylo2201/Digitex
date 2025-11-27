@@ -23,6 +23,7 @@ export function ProductPage<T extends ProductLong>({
   product,
   specifications
 }: ProductPageProps<T>) {
+  const isInStock = product.quantity > 0;
   const displayName = `${product.brandName} ${product.modelName}`;
 
   return (
@@ -54,6 +55,12 @@ export function ProductPage<T extends ProductLong>({
               <p className='w-100 text-2xl md:text-3xl text-theme-gunmetal font-bold'>
                 {displayName}
               </p>
+              <p className='text-theme-gunmetal text-sm font-semibold'>
+                SKU:&nbsp;
+                <span className='text-gray-500 font-medium italic'>
+                  {product.sku}
+                </span>
+              </p>
               <div className='flex justify-between items-center'>
                 <ProductPrice product={product} />
                 <div className='flex items-center gap-2'>
@@ -67,7 +74,7 @@ export function ProductPage<T extends ProductLong>({
 
             <div className='flex flex-col gap-6'>
               <SpecificationsTable specifications={specifications} />
-              <AddToCartButton />
+              <AddToCartButton isInStock={isInStock} />
             </div>
           </div>
         </div>

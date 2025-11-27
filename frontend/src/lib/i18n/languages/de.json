@@ -56,7 +56,8 @@
       "mainSpecifications": "Hauptspezifikationen"
     },
     "addToCartButton": {
-      "addToCart": "In den Warenkorb"
+      "addToCart": "In den Warenkorb",
+      "outOfStock": "Ausverkauft"
     },
     "suggestedProductsSection": {
       "suggestedProducts": "Empfohlene Produkte",

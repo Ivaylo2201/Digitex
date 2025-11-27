@@ -1,16 +1,33 @@
 import { Button } from '@/components/ui/button';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, X } from 'lucide-react';
+import { Fragment } from 'react';
 
-export function AddToCartButton() {
+type AddToCartButtonProps = {
+  isInStock: boolean;
+};
+
+export function AddToCartButton({ isInStock }: AddToCartButtonProps) {
   const {
     components: { addToCartButton }
   } = useTranslation();
 
   return (
-    <Button className='bg-theme-crimson hover:bg-theme-gunmetal transition-colors duration-300 cursor-pointer'>
-      <ShoppingCart />
-      {addToCartButton.addToCart}
+    <Button
+      disabled={!isInStock}
+      className='bg-theme-crimson hover:bg-theme-gunmetal transition-colors duration-300 cursor-pointer'
+    >
+      {isInStock ? (
+        <Fragment>
+          <ShoppingCart />
+          {addToCartButton.addToCart}
+        </Fragment>
+      ) : (
+        <Fragment>
+          <X />
+          {addToCartButton.outOfStock}
+        </Fragment>
+      )}
     </Button>
   );
 }

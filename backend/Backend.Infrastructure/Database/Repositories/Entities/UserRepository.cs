@@ -52,6 +52,29 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         return user;
     }
 
+    public async Task<User?> GetOneWithItemsAndProductsAsync(int userId, CancellationToken stoppingToken = default)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        logger.LogInformation("[{Source}]: Getting User entity with Id={Id}.", Source, userId);
+
+        var user = await context.Users
+            .AsNoTracking()
+            .Include(user => user.Cart)
+            .ThenInclude(cart => cart.Items)
+            .ThenInclude(item => item.Product)
+            .FirstOrDefaultAsync(user => user.IsVerified && user.Id == userId, stoppingToken);
+        
+        if (user is null)
+        {
+            logger.LogError("[{Source}]: User entity with with Id={Id} not found.", Source, userId);
+            return null;
+        }
+        
+        stopwatch.Stop();
+        logger.LogInformation("[{Source}]: User entity with Id={Id} retrieved in {Duration}ms.", Source, userId, stopwatch.ElapsedMilliseconds);
+        return user;
+    }
+
     public async Task<bool> VerifyUserAsync(string email, CancellationToken stoppingToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
