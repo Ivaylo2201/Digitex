@@ -10,7 +10,7 @@ public class ProductBaseRepository(ILogger<ProductBaseRepository> logger, Databa
     
     public async Task UpdateRatingAsync(Guid id, int newRating, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Updating rating of product with Id of {ProductId}...", Source, id);
+        logger.LogInformation("[{Source}]: Updating rating of product with Id={Id}...", Source, id);
         var product = await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
 
         if (product is null)
@@ -22,7 +22,7 @@ public class ProductBaseRepository(ILogger<ProductBaseRepository> logger, Databa
 
     public async Task DecreaseQuantityAsync(Guid id, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Decreasing quantity of product with Id of {ProductId}...", Source, id);
+        logger.LogInformation("[{Source}]: Decreasing quantity of product with Id={Id}...", Source, id);
         var product = await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
 
         if (product is null)
@@ -34,7 +34,7 @@ public class ProductBaseRepository(ILogger<ProductBaseRepository> logger, Databa
 
     public async Task<bool> IsInStockAsync(Guid id, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Checking if product with Id of {ProductId} is in stock", Source, id);
+        logger.LogInformation("[{Source}]: Checking if product with Id={Id} is in stock", Source, id);
         var product = await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
 
         return product?.IsInStock ?? false;

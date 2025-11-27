@@ -6,6 +6,7 @@ using Backend.Infrastructure.Database.Seeder;
 using Backend.WebApi.Extensions;
 using Backend.WebApi.Middlewares;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,35 +24,29 @@ builder.Services
     .AddOpenApi()
     .AddInfrastructure(builder.Configuration)
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen(c =>
+    .AddSwaggerGen(options =>
     {
-        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             Name = "Authorization",
             Type = SecuritySchemeType.Http,
             Scheme = "Bearer",
             BearerFormat = "JWT",
-            In = ParameterLocation.Header,
-            Description = "Enter 'Bearer' [space] and your token."
+            In = ParameterLocation.Header
         });
 
-        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        options.AddSecurityRequirement(new OpenApiSecurityRequirement
         {
             {
                 new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference 
-                    { 
-                        Type = ReferenceType.SecurityScheme, 
-                        Id = "Bearer" 
-                    }
-                },
-                Array.Empty<string>()
+                    { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } },
+                []
             }
         });
     })
     .AddRouting(options => options.LowercaseUrls = true)
-    .AddControllers();
+    .AddControllers()
+    .AddNewtonsoftJson();
 
 builder.WebHost.UseUrls(serviceUrl);
 

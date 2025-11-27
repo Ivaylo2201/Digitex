@@ -28,7 +28,7 @@ public class ReviewRepository(ILogger<ReviewRepository> logger, DatabaseContext 
     {
         var stopwatch = Stopwatch.StartNew();
         
-        logger.LogInformation("[{Source}]: Calculating the average reviews' rating for product with ProductId of {ProductId}...", Source, productId);
+        logger.LogInformation("[{Source}]: Calculating the average reviews' rating for product with ProductId={ProductId}...", Source, productId);
 
         try
         {
@@ -37,13 +37,13 @@ public class ReviewRepository(ILogger<ReviewRepository> logger, DatabaseContext 
                 .AverageAsync(review => review.Rating);
             
             stopwatch.Stop();
-            logger.LogInformation("[{Source}]: Average rating for product with ProductId of {ProductId} is {AverageRating} Calculation done in {Duration}ms", Source, productId, average, stopwatch.ElapsedMilliseconds);
+            logger.LogInformation("[{Source}]: Average rating for product with ProductId={ProductId} is {AverageRating} Calculation done in {Duration}ms", Source, productId, average, stopwatch.ElapsedMilliseconds);
 
             return average;
         }
         catch (InvalidOperationException)
         {
-            logger.LogInformation("[{Source}]: Product with ProductId of {ProductId} has no reviews. Defaulting back to 0", Source, productId);
+            logger.LogInformation("[{Source}]: Product with ProductId={ProductId} has no reviews. Defaulting back to 0", Source, productId);
             return 0;
         }
     }

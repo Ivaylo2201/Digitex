@@ -624,7 +624,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int>("CapacityInGb")
                         .HasColumnType("int");
 
-                    b.Property<int>("Interface")
+                    b.Property<int>("StorageInterface")
                         .HasColumnType("int");
 
                     b.ComplexProperty<Dictionary<string, object>>("OperationSpeed", "Backend.Domain.Entities.Ssd.OperationSpeed#OperationSpeed", b1 =>

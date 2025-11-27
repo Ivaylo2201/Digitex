@@ -145,5 +145,16 @@
     "motherboards": "Mainboards",
     "processors": "Prozessoren",
     "home": "Startseite"
+  },
+  "units": {
+    "gigabytes": "GB",
+    "hertz": "Hz",
+    "megahertz": "MHz",
+    "watts": "W",
+    "bits": "bits",
+    "mbPerSecond": "MB/s",
+    "milliseconds": "ms",
+    "millimeters": "mm",
+    "nits": "nits"
   }
 }

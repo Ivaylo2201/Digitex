@@ -141,6 +141,17 @@ export type Translation = {
     processors: 'Processors';
     home: 'Home';
   };
+  units: {
+    gigabytes: string;
+    hertz: string;
+    megahertz: string;
+    watts: string;
+    bits: string;
+    mbPerSecond: string;
+    milliseconds: string;
+    millimeters: string;
+    nits: string;
+  };
 };
 
 export const translation: Translation = {
@@ -295,5 +306,16 @@ export const translation: Translation = {
     rams: 'RAMs',
     ssds: 'SSDs',
     home: 'Home'
+  },
+  units: {
+    gigabytes: 'GB',
+    hertz: 'Hz',
+    megahertz: 'MHz',
+    watts: 'W',
+    bits: 'bits',
+    mbPerSecond: 'MB/s',
+    milliseconds: 'ms',
+    millimeters: 'mm',
+    nits: 'nits'
   }
 };

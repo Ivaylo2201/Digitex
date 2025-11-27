@@ -21,29 +21,27 @@ export function useFormatProduct() {
       },
       {
         specificationName: translation.specifications.monitors.refreshRate,
-        value: `${monitor.refreshRate} Hz`
+        value: `${monitor.refreshRate} ${translation.units.hertz}`
       },
       {
         specificationName: translation.specifications.monitors.latency,
-        value: `${monitor.latency} ms`
+        value: `${monitor.latency} ${translation.units.milliseconds}`
       },
       {
         specificationName: translation.specifications.monitors.matrix,
-        value: monitor.matrix.toUpperCase()
+        value: monitor.matrix
       },
       {
         specificationName: translation.specifications.monitors.resolution,
-        value: `${monitor.resolution.width}x${
-          monitor.resolution.height
-        } ${monitor.resolution.type.toUpperCase()}`
+        value: `${monitor.resolution.width}x${monitor.resolution.height} ${monitor.resolution.type}`
       },
       {
         specificationName: translation.specifications.monitors.pixelSize,
-        value: `${monitor.pixelSize} mm`
+        value: `${monitor.pixelSize} ${translation.units.millimeters}`
       },
       {
         specificationName: translation.specifications.monitors.brightness,
-        value: `${monitor.brightness} nits`
+        value: `${monitor.brightness} ${translation.units.nits}`
       },
       {
         specificationName: translation.specifications.monitors.colorSpectre,
@@ -58,22 +56,24 @@ export function useFormatProduct() {
     return [
       {
         specificationName: translation.specifications.graphicsCards.memory,
-        value: `${
-          graphicsCard.memory.capacityInGb
-        }GB ${graphicsCard.memory.type.toUpperCase()}`
+        value: `${graphicsCard.memory.capacityInGb}${translation.units.gigabytes} ${graphicsCard.memory.type}`
       },
       {
         specificationName: translation.specifications.processors.baseClockSpeed,
-        value: `${graphicsCard.clockSpeed.base.toFixed(2)} MHz`
+        value: `${graphicsCard.clockSpeed.base.toFixed(2)} ${
+          translation.units.megahertz
+        }`
       },
       {
         specificationName:
           translation.specifications.processors.boostClockSpeed,
-        value: `${graphicsCard.clockSpeed.boost.toFixed(2)} MHz`
+        value: `${graphicsCard.clockSpeed.boost.toFixed(2)} ${
+          translation.units.megahertz
+        }`
       },
       {
         specificationName: translation.specifications.graphicsCards.busWidth,
-        value: `${graphicsCard.busWidth}-bit`
+        value: `${graphicsCard.busWidth} ${translation.units.bits}`
       },
       {
         specificationName: translation.specifications.graphicsCards.cudaCores,
@@ -86,7 +86,7 @@ export function useFormatProduct() {
       },
       {
         specificationName: translation.specifications.graphicsCards.tdp,
-        value: `${graphicsCard.tdp} W`
+        value: `${graphicsCard.tdp} ${translation.units.watts}`
       }
     ];
   };
@@ -105,20 +105,24 @@ export function useFormatProduct() {
       },
       {
         specificationName: translation.specifications.processors.baseClockSpeed,
-        value: `${processor.clockSpeed.base.toFixed(2)} MHz`
+        value: `${processor.clockSpeed.base.toFixed(2)} ${
+          translation.units.megahertz
+        }`
       },
       {
         specificationName:
           translation.specifications.processors.boostClockSpeed,
-        value: `${processor.clockSpeed.boost.toFixed(2)} MHz`
+        value: `${processor.clockSpeed.boost.toFixed(2)} ${
+          translation.units.megahertz
+        }`
       },
       {
         specificationName: translation.specifications.processors.socket,
-        value: processor.socket.toUpperCase()
+        value: processor.socket
       },
       {
         specificationName: translation.specifications.processors.tdp,
-        value: `${processor.tdp} W`
+        value: `${processor.tdp} ${translation.units.watts}`
       }
     ];
   };
@@ -129,7 +133,7 @@ export function useFormatProduct() {
     return [
       {
         specificationName: translation.specifications.motherboards.socket,
-        value: motherboard.socket.toUpperCase()
+        value: motherboard.socket
       },
       {
         specificationName: translation.specifications.motherboards.formFactor,
@@ -156,7 +160,9 @@ export function useFormatProduct() {
     return [
       {
         specificationName: translation.specifications.rams.memory,
-        value: `${ram.memory.capacityInGb}GB ${ram.memory.type.toUpperCase()}`
+        value: `${ram.memory.capacityInGb}${
+          translation.units.gigabytes
+        } ${ram.memory.type.toUpperCase()}`
       },
       {
         specificationName: translation.specifications.rams.timing,
@@ -171,19 +177,19 @@ export function useFormatProduct() {
     return [
       {
         specificationName: translation.specifications.ssds.capacityInGb,
-        value: `${ssd.capacityInGb}GB`
+        value: `${ssd.capacityInGb}${translation.units.gigabytes}`
       },
       {
         specificationName: translation.specifications.ssds.interface,
-        value: ssd.interface.toUpperCase()
+        value: ssd.interface
       },
       {
         specificationName: translation.specifications.ssds.operationSpeedRead,
-        value: `${ssd.operationSpeed.read} MB/s`
+        value: `${ssd.operationSpeed.read} ${translation.units.mbPerSecond}`
       },
       {
         specificationName: translation.specifications.ssds.operationSpeedWrite,
-        value: `${ssd.operationSpeed.write} MB/s`
+        value: `${ssd.operationSpeed.write} ${translation.units.mbPerSecond}`
       }
     ];
   };
@@ -194,7 +200,7 @@ export function useFormatProduct() {
     return [
       {
         specificationName: translation.specifications.powerSupplies.formFactor,
-        value: powerSupply.formFactor.toUpperCase()
+        value: powerSupply.formFactor
       },
       {
         specificationName:
@@ -211,7 +217,7 @@ export function useFormatProduct() {
       },
       {
         specificationName: translation.specifications.powerSupplies.wattage,
-        value: `${powerSupply.wattage} W`
+        value: `${powerSupply.wattage} ${translation.units.watts}`
       }
     ];
   };

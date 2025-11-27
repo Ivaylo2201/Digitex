@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(StringEnumConverter))]
 public enum ShippingType
 {
     Express,

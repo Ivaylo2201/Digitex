@@ -17,7 +17,7 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
-        logger.LogInformation("[{Source}]: Getting {Entity} entity with Id of {EntityId}...", source, _entity, id);
+        logger.LogInformation("[{Source}]: Getting {Entity} entity with Id={EntityId}...", source, _entity, id);
 
         var entity = await context
             .Set<TEntity>()
@@ -33,11 +33,11 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
 
         if (entity is null)
         {
-            logger.LogWarning("[{Source}]: {Entity} with Id of {EntityId} entity not found in {Duration}ms", source, _entity, id, stopwatch.ElapsedMilliseconds);
+            logger.LogWarning("[{Source}]: {Entity} with Id={EntityId} entity not found in {Duration}ms", source, _entity, id, stopwatch.ElapsedMilliseconds);
         }
         else
         {
-            logger.LogInformation("[{Source}]: {Entity} entity with Id of {EntityId} found in {Duration}ms", source, _entity, id, stopwatch.ElapsedMilliseconds);
+            logger.LogInformation("[{Source}]: {Entity} entity with Id={EntityId} found in {Duration}ms", source, _entity, id, stopwatch.ElapsedMilliseconds);
         }
         
         return entity;
@@ -79,7 +79,7 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
         await context.SaveChangesAsync(stoppingToken);
         
         stopwatch.Stop();
-        logger.LogInformation("[{Source}]: The rating of {Entity} entity with Id of {Id} has been updated to {NewRating}", source, _entity, id, newRating);
+        logger.LogInformation("[{Source}]: The rating of {Entity} entity with Id={Id} has been updated to {NewRating}", source, _entity, id, newRating);
         return Result.Success();
     }
 }

@@ -145,5 +145,16 @@
     "motherboards": "Дънни платки",
     "processors": "Процесори",
     "home": "Начало"
+  },
+  "units": {
+    "gigabytes": "GB",
+    "hertz": "Hz",
+    "megahertz": "MHz",
+    "watts": "W",
+    "bits": "бита",
+    "mbPerSecond": "MB/с",
+    "milliseconds": "мс",
+    "millimeters": "мм",
+    "nits": "нита"
   }
 }
