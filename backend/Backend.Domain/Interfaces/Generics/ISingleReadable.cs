@@ -2,5 +2,5 @@
 
 public interface ISingleReadable<TEntity, in TKey>
 {
-    Task<TEntity?> GetOneAsync(TKey id, CancellationToken ct = default);
+    Task<TEntity?> GetOneAsync(TKey id, CancellationToken stoppingToken = default);
 }

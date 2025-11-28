@@ -15,6 +15,6 @@ public class ShippingController(IShippingService shippingService) : ControllerBa
     public async Task<IActionResult> ListAllAsync(CancellationToken stoppingToken = default)
     {
         var result = await shippingService.ListAllAsync(stoppingToken);
-        return Ok(result.Value);
+        return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
 }

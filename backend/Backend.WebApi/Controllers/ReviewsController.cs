@@ -22,9 +22,9 @@ public class ReviewsController(IReviewService reviewService, IProductBaseService
         body.UserId = User.GetId();
         body.ProductId = productId;
         
-        var review = await reviewService.AddReviewAsync(body, stoppingToken);
+        var result = await reviewService.AddReviewAsync(body, stoppingToken);
         await productBaseService.UpdateRatingAsync(productId, stoppingToken);
         
-        return review.IsSuccess ? Ok(review.Value) : BadRequest(review.ErrorObject);
+        return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
 }

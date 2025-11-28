@@ -20,6 +20,6 @@ public class AdminController(IProductBaseService productService) : ControllerBas
     public async Task<IActionResult> AddSuggestionAsync([FromBody] AddSuggestionDto body, CancellationToken stoppingToken = default)
     {
         var result = await productService.AddSuggestionAsync(body, stoppingToken);
-        return result.IsSuccess ? Ok() : NotFound(result.ErrorObject);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
     }
 }

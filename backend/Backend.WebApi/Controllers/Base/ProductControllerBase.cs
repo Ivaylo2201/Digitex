@@ -18,8 +18,8 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     [Produces("application/json")]
     public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
     {
-        var product = await productService.GetOneAsync(id, project, stoppingToken);
-        return product.IsSuccess ? Ok(product.Value) : NotFound(product.ErrorObject);
+        var result = await productService.GetOneAsync(id, project, stoppingToken);
+        return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
     
     [HttpGet]
@@ -28,8 +28,8 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     [Produces("application/json")]
     public async Task<IActionResult> GetAllAsync([FromQuery] IDictionary<string, string> criteria, CancellationToken stoppingToken = default)
     {
-        var products = await productService.ListAllAsync(filterService.BuildFilter(criteria), stoppingToken);
-        return Ok(products.Value);   
+        var result = await productService.ListAllAsync(filterService.BuildFilter(criteria), stoppingToken);
+        return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
     
     [HttpGet("filters")]

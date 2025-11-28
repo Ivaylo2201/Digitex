@@ -6,6 +6,7 @@ using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 
 namespace Backend.Infrastructure.Services.Entities;
 
@@ -16,10 +17,15 @@ public class CartService(ICartRepository cartRepository, IItemRepository itemRep
         var cart = await cartRepository.GetCartForUserAsync(cartDto.UserId, stoppingToken);
 
         if (cart is null)
-            return Result.Failure(ErrorType.NotFound);
+            return Result.Failure(StatusCodes.Status404NotFound);
         
-        if (!await productBaseRepository.IsInStockAsync(cartDto.ProductId, stoppingToken))
-            return Result.Failure(ErrorType.OutOfStock);
+        var product = await productBaseRepository.GetOneAsync(cartDto.ProductId, stoppingToken);
+        
+        if (product is null)
+            return Result.Failure(StatusCodes.Status404NotFound);
+        
+        if (cartDto.Quantity > product.Quantity)
+            return Result.Failure(StatusCodes.Status400BadRequest, ErrorType.OutOfStock);
         
         var item = new Item
         {
@@ -30,19 +36,19 @@ public class CartService(ICartRepository cartRepository, IItemRepository itemRep
 
         await productBaseRepository.DecreaseQuantityAsync(cartDto.ProductId, stoppingToken);
         await itemRepository.CreateAsync(item, stoppingToken);
-        return Result.Success();
+        return Result.Success(StatusCodes.Status201Created);
     }
 
     public async Task<Result<List<ItemDto>>> ListItemsInCartAsync(ListItemsInCartDto cartDto, CancellationToken stoppingToken = default)
     {
         var items = await itemRepository.GetItemsInUserCartAsync(cartDto.UserId, stoppingToken);
         var projections = items.Select(item => item.Adapt<ItemDto>()).ToList();
-        return Result<List<ItemDto>>.Success(projections);       
+        return Result<List<ItemDto>>.Success(StatusCodes.Status200OK, projections);       
     }
 
     public async Task<Result> RemoveFromCartAsync(RemoveFromCartDto cartDto, CancellationToken stoppingToken = default)
     {
         await itemRepository.DeleteAsync(cartDto.ItemId, stoppingToken);
-        return Result.Success();       
+        return Result.Success(StatusCodes.Status204NoContent);       
     }
 }

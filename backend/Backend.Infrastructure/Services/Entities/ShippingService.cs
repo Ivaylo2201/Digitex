@@ -3,6 +3,7 @@ using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Entities;
@@ -17,6 +18,6 @@ public class ShippingService(ILogger<ShippingService> logger, IShippingRepositor
         logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into ShippingDto...", source, shippings.Count, "Shipping");
         var projections = shippings.Adapt<List<ShippingDto>>();
         
-        return Result<List<ShippingDto>>.Success(projections);   
+        return Result<List<ShippingDto>>.Success(StatusCodes.Status200OK, projections);   
     }
 }

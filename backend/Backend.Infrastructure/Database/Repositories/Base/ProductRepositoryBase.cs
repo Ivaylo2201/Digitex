@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
-using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -66,21 +65,20 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
         return entities;
     }
 
-    public async Task<Result> UpdateRatingAsync(Guid id, int newRating, CancellationToken stoppingToken = default)
+    public async Task UpdateRatingAsync(Guid id, int newRating, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var stopwatch = Stopwatch.StartNew();
         
         var entity = await context.Set<TEntity>().FirstOrDefaultAsync(entity => entity.Id == id, stoppingToken);
-        
+
         if (entity is null)
-            return Result.Failure(ErrorType.NotFound);
+            return;
         
         entity.Rating = newRating;
         await context.SaveChangesAsync(stoppingToken);
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: The rating of {Entity} entity with Id={Id} has been updated to {NewRating}", source, _entity, id, newRating);
-        return Result.Success();
     }
 }

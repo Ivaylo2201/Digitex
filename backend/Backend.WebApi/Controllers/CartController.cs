@@ -21,7 +21,7 @@ public class CartController(ICartService cartService, IItemService itemService) 
     {
         cartDto.UserId = User.GetId();
         var result = await cartService.AddToCartAsync(cartDto, stoppingToken);
-        return result.IsSuccess ? Ok() : BadRequest(result.ErrorObject);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
     }
     
     [HttpDelete("remove")]
@@ -41,7 +41,7 @@ public class CartController(ICartService cartService, IItemService itemService) 
             return Forbid();
         
         var result = await cartService.RemoveFromCartAsync(cartDto, stoppingToken);
-        return result.IsSuccess ? NoContent() : BadRequest(result.ErrorObject);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
     }
     
     [HttpGet]
@@ -53,7 +53,7 @@ public class CartController(ICartService cartService, IItemService itemService) 
     public async Task<IActionResult> ListItemsInCartAsync([FromBody] ListItemsInCartDto cartDto, CancellationToken stoppingToken = default)
     {
         cartDto.UserId = User.GetId();
-        var items = await cartService.ListItemsInCartAsync(cartDto, stoppingToken);
-        return items.IsSuccess ? Ok(items.Value) : BadRequest(items.ErrorObject);
+        var result = await cartService.ListItemsInCartAsync(cartDto, stoppingToken);
+        return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
 }

@@ -2,9 +2,6 @@
 
 public enum ErrorType
 {
-    NotFound,
-    Unauthorized,
-    Forbidden,
     EmailTaken,
     InvalidCredentials,
     ValidationFailed,

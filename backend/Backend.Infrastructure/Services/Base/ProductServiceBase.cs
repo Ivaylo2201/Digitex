@@ -2,9 +2,9 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
-using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Base;
@@ -23,11 +23,10 @@ public class ProductServiceBase<TEntity, TProjection>(
         var entity = await productRepository.GetOneAsync(id, stoppingToken);
 
         if (entity is null)
-            return Result<TProjection?>.Failure(ErrorType.NotFound);
+            return Result<TProjection?>.Failure(StatusCodes.Status404NotFound);
 
-        logger.LogInformation("[{Source}]: Projecting {Entity} entity into {Projection}...", source, _entityName,
-            _projectionName);
-        return Result<TProjection?>.Success(project(entity));
+        logger.LogInformation("[{Source}]: Projecting {Entity} entity into {Projection}...", source, _entityName, _projectionName);
+        return Result<TProjection?>.Success(StatusCodes.Status200OK, project(entity));
     }
 
     public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter,
@@ -36,10 +35,9 @@ public class ProductServiceBase<TEntity, TProjection>(
         var source = GetType().Name;
         var entities = await productRepository.ListAllAsync(filter, stoppingToken);
 
-        logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source,
-            entities.Count, _entityName, _projectionName);
+        logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
         var projections = entities.Select(entity => entity.Adapt<ProductShortDto>()).ToList();
 
-        return Result<List<ProductShortDto>>.Success(projections);
+        return Result<List<ProductShortDto>>.Success(StatusCodes.Status200OK, projections);
     }
 }

@@ -6,6 +6,7 @@ using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -32,15 +33,15 @@ public class UserService(
             var errors = string.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage));
             
             logger.LogError("[{Source}]: Sign in validation failed for {SerializedDto}. Errors: {Errors}", Source, serializedDto, errors);
-            return Result<string>.Failure(ErrorType.ValidationFailed, details: validationResult.Errors.ToObject());
+            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.ValidationFailed, validationResult.Errors.ToObject());
         }
 
         var user = await userRepository.GetOneByCredentialsAsync(signInDto.Email, signInDto.Password, stoppingToken);
 
         if (user is null)
-            return Result<string>.Failure(ErrorType.InvalidCredentials);
+            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);
         
-        return Result<string>.Success(tokenService.GenerateToken(user));
+        return Result<string>.Success(StatusCodes.Status200OK, tokenService.GenerateToken(user));
     }
 
     public async Task<Result> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
@@ -54,7 +55,7 @@ public class UserService(
             var errors = string.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage));
             
             logger.LogError("[{Source}]: Sign up validation failed for {SerializedDto}. Errors: {Errors}", Source, serializedDto, errors);
-            return Result<string>.Failure(ErrorType.ValidationFailed, details: validationResult.Errors.ToObject());
+            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.ValidationFailed, details: validationResult.Errors.ToObject());
         }
 
         try
@@ -68,12 +69,12 @@ public class UserService(
             }, stoppingToken);
             
             await emailSendingService.SendVerificationMailAsync(user, stoppingToken);
-            return Result.Success();
+            return Result.Success(StatusCodes.Status201Created);
         }
         catch (DbUpdateException)
         {
             logger.LogError("[{Source}]: Email={Email} is already taken.", Source, signUpDto.Email);
-            return Result.Failure(ErrorType.EmailTaken);       
+            return Result.Failure(StatusCodes.Status400BadRequest, ErrorType.EmailTaken);       
         }
     }
 
@@ -85,12 +86,12 @@ public class UserService(
         {
             var email = emailCryptoService.Decrypt(token);
             var isVerificationSuccessful = await userRepository.VerifyUserAsync(email, stoppingToken);
-            return isVerificationSuccessful ? Result.Success() : Result.Failure(ErrorType.InvalidCredentials);    
+            return isVerificationSuccessful ? Result.Success(StatusCodes.Status200OK) : Result.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);    
         }
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: {ExceptionName} occurred while decrypting email. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
-            return Result.Failure(ErrorType.CryptographyError);
+            return Result.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);
         }
     }
 }

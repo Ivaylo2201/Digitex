@@ -25,7 +25,7 @@ public class PaymentService(ILogger<PaymentService> logger, IUserRepository user
         if (webhookSecret is null)
         {
             logger.LogError("[{Source}]: Improperly configured webhook secret in env.", Source);
-            return Result.Failure(ErrorType.InvalidWebhookSecret, StatusCodes.Status500InternalServerError);
+            return Result.Failure(StatusCodes.Status500InternalServerError, ErrorType.InvalidWebhookSecret);
         }
 
         try
@@ -40,13 +40,13 @@ public class PaymentService(ILogger<PaymentService> logger, IUserRepository user
                 if (stripeEvent.Data.Object is not PaymentIntent paymentIntent)
                 {
                     logger.LogError("[{Source}]: Could not cast Stripe event into a PaymentIntent.", Source);
-                    return Result.Failure(ErrorType.General, StatusCodes.Status500InternalServerError);
+                    return Result.Failure(StatusCodes.Status500InternalServerError);
                 }
                 
                 if (!paymentIntent.Metadata.TryGetValue("userId", out var userIdValue) || !int.TryParse(userIdValue, out var userId))
                 {
                     logger.LogError("[{Source}]: Missing userId in Metadata.", Source);
-                    return Result.Failure(ErrorType.General, StatusCodes.Status500InternalServerError);
+                    return Result.Failure(StatusCodes.Status500InternalServerError);
                 }
 
                 var user = await userRepository.GetOneWithItemsAndProductsAsync(userId, stoppingToken);
@@ -55,16 +55,16 @@ public class PaymentService(ILogger<PaymentService> logger, IUserRepository user
                 // Clear the cart
                 // Send a thank you email
                 
-                return Result.Success();
+                return Result.Success(StatusCodes.Status200OK);
             }
             
             logger.LogError("[{Source}]: Event type was not {SuccessEventType}.", Source, SuccessEventType);
-            return Result.Failure(ErrorType.PaymentFailed, StatusCodes.Status402PaymentRequired);
+            return Result.Failure(StatusCodes.Status402PaymentRequired, ErrorType.PaymentFailed);
         }
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: Failed to process webhook call from Stripe. Exception message - {Exception}", Source, ex.Message);
-            return Result.Failure(ErrorType.General, StatusCodes.Status400BadRequest);
+            return Result.Failure(StatusCodes.Status400BadRequest);
         }
     }
 
@@ -92,12 +92,12 @@ public class PaymentService(ILogger<PaymentService> logger, IUserRepository user
                 paymentIntentOptions,
                 cancellationToken: stoppingToken);
             
-            return Result<string>.Success(paymentIntent.ClientSecret);
+            return Result<string>.Success(StatusCodes.Status200OK, paymentIntent.ClientSecret);
         }
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: Failed to create payment intent. Exception message - {Exception}", Source, ex.Message);
-            return Result<string>.Failure(ErrorType.General);
+            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.General);
         }
     }
 }

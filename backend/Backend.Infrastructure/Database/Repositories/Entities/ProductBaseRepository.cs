@@ -1,4 +1,5 @@
-﻿using Backend.Domain.Interfaces;
+﻿using Backend.Domain.Entities;
+using Backend.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -31,15 +32,7 @@ public class ProductBaseRepository(ILogger<ProductBaseRepository> logger, Databa
         product.Quantity -= 1;
         await context.SaveChangesAsync(stoppingToken);
     }
-
-    public async Task<bool> IsInStockAsync(Guid id, CancellationToken stoppingToken = default)
-    {
-        logger.LogInformation("[{Source}]: Checking if product with Id={Id} is in stock", Source, id);
-        var product = await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
-
-        return product?.IsInStock ?? false;
-    }
-
+    
     public async Task<bool> AddSuggestionAsync(Guid productId, Guid suggestedProductId, CancellationToken stoppingToken = default)
     {
         var currentProduct = await context.Products
@@ -62,4 +55,7 @@ public class ProductBaseRepository(ILogger<ProductBaseRepository> logger, Databa
         await context.SaveChangesAsync(stoppingToken);
         return true;
     }
+
+    public async Task<ProductBase?> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
+         => await context.Products.FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
 }

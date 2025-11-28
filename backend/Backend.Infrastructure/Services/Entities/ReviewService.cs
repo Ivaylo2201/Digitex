@@ -4,6 +4,7 @@ using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Entities;
@@ -23,6 +24,6 @@ public class ReviewService(ILogger<ReviewService> logger, IReviewRepository revi
         }, stoppingToken);
         
         logger.LogInformation("[{Source}]: Projecting review into a ReviewDto...", Source);
-        return Result<ReviewDto>.Success(review.Adapt<ReviewDto>());
+        return Result<ReviewDto>.Success(StatusCodes.Status200OK, review.Adapt<ReviewDto>());
     }
 }
