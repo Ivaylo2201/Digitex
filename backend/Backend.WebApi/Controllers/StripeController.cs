@@ -1,5 +1,6 @@
 ﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
+using Backend.Domain.Exceptions;
 using Backend.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +12,17 @@ namespace Backend.WebApi.Controllers;
 [Route("api/stripe")]
 public class StripeController : ControllerBase
 {
-    private readonly IPaymentService _paymentService;
+    private readonly IStripeService _stripeService;
     
-    public StripeController(IPaymentService paymentService)
+    public StripeController(IStripeService stripeService)
     {
         var secretKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY") ;
                         
         if (secretKey is null)                
-            throw new InvalidOperationException("Stripe secret key is not configured.");
+            throw new ImproperlyConfiguredException("Stripe secret key is not configured.");
         
         StripeConfiguration.ApiKey = secretKey;
-        _paymentService = paymentService;
+        _stripeService = stripeService;
     }
     
     [HttpPost("create-payment-intent")]
@@ -32,7 +33,7 @@ public class StripeController : ControllerBase
     [Produces("application/json")]
     public async Task<IActionResult> CreatePaymentIntentAsync()
     {
-        var result = await _paymentService.CreatePaymentIntentAsync(User.GetId());
+        var result = await _stripeService.CreatePaymentIntentAsync(User.GetId());
         return StatusCode(result.StatusCode, result.IsSuccess ? new { ClientSecret = result.Value } : result.ErrorObject);
     }
 
@@ -48,7 +49,7 @@ public class StripeController : ControllerBase
         using var reader = new StreamReader(Request.Body);
         var json = await reader.ReadToEndAsync();
         
-        var result = await _paymentService.ProcessWebhookAsync(json, Request.Headers);
+        var result = await _stripeService.ProcessWebhookAsync(json, Request.Headers);
         return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
     }
     
@@ -60,7 +61,7 @@ public class StripeController : ControllerBase
         var publicKey = Environment.GetEnvironmentVariable("STRIPE_PUBLIC_KEY");
         
         if (publicKey is null)
-            throw new InvalidOperationException("Stripe public key is not configured.");
+            throw new ImproperlyConfiguredException("Stripe public key is not configured.");
         
         return Ok(new { PublicKey = publicKey });
     }

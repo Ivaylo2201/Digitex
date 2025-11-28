@@ -15,6 +15,7 @@ using Backend.Application.Dtos.Ssd;
 using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
+using Backend.Domain.Exceptions;
 using Backend.Domain.Interfaces;
 using Backend.Domain.ValueObjects;
 using Backend.Infrastructure.Common;
@@ -53,7 +54,7 @@ public static class InfrastructureDependencyInjection
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             
             if (frontendUrl is null)
-                throw new InvalidOperationException("Missing frontend url.");
+                throw new ImproperlyConfiguredException("Missing frontend url.");
 
             services
                 .AddDbContext(connectionString)
@@ -78,7 +79,7 @@ public static class InfrastructureDependencyInjection
     private static IServiceCollection AddDbContext(this IServiceCollection services, string? connectionString)
     {
         if (string.IsNullOrEmpty(connectionString))
-            throw new InvalidOperationException("Connection string is null or empty.");
+            throw new ImproperlyConfiguredException("Connection string is null or empty.");
 
         return services
             .AddDbContext<DatabaseContext>(optionsBuilder
@@ -159,7 +160,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IProductBaseService, ProductBaseService>()
             .AddScoped<IUserService, UserService>()
             .AddScoped<IBrandProviderService, BrandProviderService>()
-            .AddScoped<IPaymentService, PaymentService>()
+            .AddScoped<IStripeService, StripeService>()
             .AddScoped<IEmailSendingService>(sp => new EmailSendingService(
                 sp.GetRequiredService<ILogger<EmailSendingService>>(),
                 sp.GetRequiredService<IFluentEmail>(),
@@ -254,7 +255,7 @@ public static class InfrastructureDependencyInjection
         var variable = Environment.GetEnvironmentVariable(variableName);
 
         if (string.IsNullOrEmpty(variable))
-            throw new InvalidOperationException($"Missing {variableName}.");
+            throw new ImproperlyConfiguredException($"Missing {variableName}.");
 
         return (T)Convert.ChangeType(variable, typeof(T));
     }

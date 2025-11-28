@@ -68,7 +68,7 @@ public class UserService(
                 Cart = new Cart()
             }, stoppingToken);
             
-            await emailSendingService.SendVerificationMailAsync(user, stoppingToken);
+            await emailSendingService.SendVerificationEmailAsync(user, stoppingToken);
             return Result.Success(StatusCodes.Status201Created);
         }
         catch (DbUpdateException)

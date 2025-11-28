@@ -1,6 +1,7 @@
 ﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
+using Backend.Domain.Exceptions;
 using Backend.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -9,9 +10,13 @@ using Stripe;
 
 namespace Backend.Infrastructure.Services.Common;
 
-public class PaymentService(ILogger<PaymentService> logger, IUserRepository userRepository, ICartRepository cartRepository) : IPaymentService
+public class StripeService(
+    ILogger<StripeService> logger,
+    IEmailSendingService emailSendingService,
+    IUserRepository userRepository,
+    ICartRepository cartRepository) : IStripeService
 {
-    private const string Source = nameof(PaymentService);
+    private const string Source = nameof(StripeService);
     private const string WebhookSecretEnv = "WebhookSecret";
     private const string SuccessEventType = "payment_intent.succeeded";
     private const string StripeSignatureKey = "Stripe-Signature";
@@ -23,43 +28,41 @@ public class PaymentService(ILogger<PaymentService> logger, IUserRepository user
         var webhookSecret = Environment.GetEnvironmentVariable(WebhookSecretEnv);
 
         if (webhookSecret is null)
-        {
-            logger.LogError("[{Source}]: Improperly configured webhook secret in env.", Source);
-            return Result.Failure(StatusCodes.Status500InternalServerError, ErrorType.InvalidWebhookSecret);
-        }
+            throw new ImproperlyConfiguredException("Webhook secret is not configured.");
 
         try
         {
             var stripeSignature = headers[StripeSignatureKey];
             
-            logger.LogInformation("[{Source}]: Constructing Stripe event using JSON={Json} and stripeSignature={StripeSignature}...", Source, json, stripeSignature);
+            logger.LogInformation("[{Source}]: Constructing Stripe event using Json={Json} and StripeSignature={StripeSignature}...", Source, json, stripeSignature);
             var stripeEvent = EventUtility.ConstructEvent(json, stripeSignature, webhookSecret);
 
-            if (stripeEvent?.Type is SuccessEventType)
+            if (stripeEvent?.Type is not SuccessEventType)
             {
-                if (stripeEvent.Data.Object is not PaymentIntent paymentIntent)
-                {
-                    logger.LogError("[{Source}]: Could not cast Stripe event into a PaymentIntent.", Source);
-                    return Result.Failure(StatusCodes.Status500InternalServerError);
-                }
-                
-                if (!paymentIntent.Metadata.TryGetValue("userId", out var userIdValue) || !int.TryParse(userIdValue, out var userId))
-                {
-                    logger.LogError("[{Source}]: Missing userId in Metadata.", Source);
-                    return Result.Failure(StatusCodes.Status500InternalServerError);
-                }
-
-                var user = await userRepository.GetOneWithItemsAndProductsAsync(userId, stoppingToken);
-                
-                // For each item in user.Cart.Items, reduce the stock of the product by the quantity of the item and create a sale object
-                // Clear the cart
-                // Send a thank you email
-                
-                return Result.Success(StatusCodes.Status200OK);
+                logger.LogError("[{Source}]: Event type was not {SuccessEventType}.", Source, SuccessEventType);
+                return Result.Failure(StatusCodes.Status402PaymentRequired, ErrorType.PaymentFailed);
             }
-            
-            logger.LogError("[{Source}]: Event type was not {SuccessEventType}.", Source, SuccessEventType);
-            return Result.Failure(StatusCodes.Status402PaymentRequired, ErrorType.PaymentFailed);
+
+            if (stripeEvent.Data.Object is not PaymentIntent paymentIntent)
+            {
+                logger.LogError("[{Source}]: Could not cast Stripe event into a PaymentIntent.", Source);
+                return Result.Failure(StatusCodes.Status500InternalServerError);
+            }
+                
+            if (!paymentIntent.Metadata.TryGetValue("userId", out var userIdValue) || !int.TryParse(userIdValue, out var userId))
+            {
+                logger.LogError("[{Source}]: Missing userId in Metadata.", Source);
+                return Result.Failure(StatusCodes.Status400BadRequest);
+            }
+
+            var user = await userRepository.GetOneWithItemsAndProductsAsync(userId, stoppingToken);
+                
+            // For each item in user.Cart.Items, reduce the stock of the product by the quantity of the item and create a sale object
+            // Clear the cart
+
+            await emailSendingService.SendOrderConfirmationEmailAsync(user, stoppingToken);
+                
+            return Result.Success(StatusCodes.Status200OK);
         }
         catch (Exception ex)
         {

@@ -1,5 +1,4 @@
-﻿using System.Web;
-using Backend.Application.Interfaces.Services;
+﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using FluentEmail.Core;
 using Microsoft.AspNetCore.Hosting;
@@ -17,7 +16,7 @@ public class EmailSendingService(
 {
     private const string Source = nameof(EmailSendingService);
 
-    public async Task SendVerificationMailAsync(User user, CancellationToken stoppingToken = default)
+    public async Task SendVerificationEmailAsync(User user, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Sending verification email to {Email}...", Source, user.Email);
         const string subject = "Welcome to Digitex!";
@@ -27,7 +26,7 @@ public class EmailSendingService(
             await fluentEmail
                 .To(user.Email, user.Username)
                 .Subject(subject)
-                .Body(GetEmailBody(user), isHtml: true)
+                .Body(GetVerificationEmailBody(user), isHtml: true)
                 .SendAsync(stoppingToken);
 
             logger.LogInformation("[{Source}]: Verification email sent successfully to {Email}.", Source, user.Email);
@@ -39,7 +38,29 @@ public class EmailSendingService(
         }
     }
 
-    private string GetEmailBody(User user)
+    public async Task SendOrderConfirmationEmailAsync(User user, CancellationToken stoppingToken = default)
+    {
+        logger.LogInformation("[{Source}]: Sending order confirmation email to {Email}...", Source, user.Email);
+        const string subject = "Confirmation of your Order";
+        
+        try
+        {
+            await fluentEmail
+                .To(user.Email, user.Username)
+                .Subject(subject)
+                .Body(GetOrderConfirmationEmailBody(user), isHtml: true)
+                .SendAsync(stoppingToken);
+
+            logger.LogInformation("[{Source}]: Order confirmation email sent successfully to {Email}.", Source, user.Email);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError("[{Source}]: Failed to send order confirmation email to {Email}. Exception message - {Exception}",
+                Source, user.Email, ex.Message);
+        }
+    }
+
+    private string GetVerificationEmailBody(User user)
     {
         logger.LogInformation("[{Source}]: Building verification email body...", Source);
 
@@ -95,6 +116,46 @@ public class EmailSendingService(
                     <p style="font-size: 14px; font-weight: 600; color: #1e1f29">
                       This email was sent by DIGITE<span style="color: #e02b4a">X</span>. If you
                       did not sign up, please ignore this message.
+                    </p>
+                  </body>
+                </html>
+
+                """;
+    }
+    
+    private string GetOrderConfirmationEmailBody(User user)
+    {
+        logger.LogInformation("[{Source}]: Building order confirmation email body...", Source);
+
+        return $"""
+
+                <html lang="en">
+                  <body style="font-family: 'Montserrat', Arial, sans-serif">
+                    <p
+                      style="
+                        font-weight: bold;
+                        font-size: 30px;
+                        color: #1e1f29;
+                        text-transform: uppercase;
+                      "
+                    >
+                      digite<span style="color: crimson">x</span>
+                    </p>
+
+                    <p style="font-weight: bold; font-size: 20px; color: #15161d">
+                      Order Confirmation
+                    </p>
+
+                    <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0" />
+
+                    <p style="color: #15161d; font-size: 16px; margin: 20px 0">
+                      Hello, {user.Username}!<br />Thank you for your order. We are processing it and will notify you once it's shipped.
+                    </p>
+
+                    <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0" />
+
+                    <p style="font-size: 14px; font-weight: 600; color: #1e1f29">
+                      This email was sent by DIGITE<span style="color: #e02b4a">X</span>. If you have any questions, please contact our support team.
                     </p>
                   </body>
                 </html>
