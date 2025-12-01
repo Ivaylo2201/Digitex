@@ -73,6 +73,16 @@ export type Translation = {
     loader: {
       loading: string;
     };
+    signInForm: {
+      signInToYourAccount: string;
+      enterYourCredentialsToSignInToYourAccount: string;
+      email: string;
+      password: string;
+      signIn: string;
+      dontHaveAnAccount: string;
+      signUp: string;
+      rememberMe: string;
+    };
   };
   specifications: {
     base: {
@@ -183,8 +193,7 @@ export const translation: Translation = {
     },
     emptyComparePage: {
       noProductsAddedForComparison: 'No products added for comparison',
-      youHaveNotAddedAnyProductsForComparisonYet:
-        "You haven't added any products for comparison yet.",
+      youHaveNotAddedAnyProductsForComparisonYet: "You haven't added any products for comparison yet.",
       getStartedByAddingAProduct: 'Get started by adding a product.',
       addProducts: 'Add products'
     },
@@ -194,10 +203,8 @@ export const translation: Translation = {
     },
     emptyReviewsSection: {
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet:
-        'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow:
-        'Write the first review via the form below'
+      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below'
     },
     favoritesLink: {
       favorites: 'Favorites'
@@ -227,13 +234,21 @@ export const translation: Translation = {
     reviewsSection: {
       reviews: 'Reviews',
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet:
-        'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow:
-        'Write the first review via the form below'
+      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below'
     },
     loader: {
       loading: 'Loading'
+    },
+    signInForm: {
+      signInToYourAccount: "Sign in to your account",
+      enterYourCredentialsToSignInToYourAccount: "Enter your credentials to sign in to your account.",
+      email: "Email",
+      password: "Password",
+      signIn: "Sign in",
+      dontHaveAnAccount: "Don't have an account?",
+      signUp: "Sign up",
+      rememberMe: "Remember me"
     }
   },
   specifications: {

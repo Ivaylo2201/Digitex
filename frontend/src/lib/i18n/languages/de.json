@@ -1,5 +1,15 @@
 {
   "components": {
+    "signInForm": {
+      "signInToYourAccount": "Melden Sie sich bei Ihrem Konto an",
+      "enterYourCredentialsToSignInToYourAccount": "Geben Sie Ihre Daten ein, um sich bei Ihrem Konto anzumelden.",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "signIn": "Anmelden",
+      "dontHaveAnAccount": "Noch kein Konto?",
+      "signUp": "Registrieren",
+      "rememberMe": "Angemeldet bleiben"
+    },
     "header": {
       "merchantAddress": "Sofia, Vitosha Blvd. 76"
     },

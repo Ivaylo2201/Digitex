@@ -1,5 +1,15 @@
 {
   "components": {
+    "signInForm": {
+      "signInToYourAccount": "Влезте в своя акаунт",
+      "enterYourCredentialsToSignInToYourAccount": "Въведете своите данни, за да влезете в акаунта си.",
+      "email": "Имейл",
+      "password": "Парола",
+      "signIn": "Вход",
+      "dontHaveAnAccount": "Нямате акаунт?",
+      "signUp": "Регистрация",
+      "rememberMe": "Запомни ме"
+    },
     "header": {
       "merchantAddress": "София, бул. Витоша 76"
     },

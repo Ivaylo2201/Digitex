@@ -58,7 +58,7 @@ public class StripeController : ControllerBase
     [Produces("application/json")]
     public IActionResult GetPublicKey()
     {
-        var publicKey = Environment.GetEnvironmentVariable("STRIPE_PUBLIC_KEY");
+        var publicKey = Environment.GetEnvironmentVariable("STRIPE_PUBLISHABLE_KEY");
         
         if (publicKey is null)
             throw new ImproperlyConfiguredException("Stripe public key is not configured.");

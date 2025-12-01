@@ -1,15 +1,17 @@
 import { create } from 'zustand';
 
 type AuthStore = {
+  role: string | null;
   isAuthenticated: boolean;
-  signIn: (token: string, rememberMe: boolean) => void;
+  signIn: (token: string, role: string, rememberMe: boolean) => void;
   signOut: () => void;
 };
 
 export const useAuth = create<AuthStore>((set) => ({
+  role: null,
   isAuthenticated: !!localStorage.getItem('token'),
-  signIn: (token: string, rememberMe: boolean) => {
-    set({ isAuthenticated: true });
+  signIn: (token: string, role: string, rememberMe: boolean) => {
+    set({ isAuthenticated: true, role });
 
     if (rememberMe) {
       localStorage.setItem('token', token);
@@ -20,7 +22,7 @@ export const useAuth = create<AuthStore>((set) => ({
     }
   },
   signOut: () => {
-    set({ isAuthenticated: false });
+    set({ isAuthenticated: false, role: null });
     localStorage.removeItem('token');
     sessionStorage.removeItem('token');
   },

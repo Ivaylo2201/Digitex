@@ -22,7 +22,7 @@ public class UserService(
 {
     private const string Source = nameof(UserService);
     
-    public async Task<Result<string>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default)
+    public async Task<Result<(string, Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Validating SignIn request body...", Source);
         var validationResult = await new SignInValidator().ValidateAsync(signInDto, stoppingToken);
@@ -33,15 +33,15 @@ public class UserService(
             var errors = string.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage));
             
             logger.LogError("[{Source}]: Sign in validation failed for {SerializedDto}. Errors: {Errors}", Source, serializedDto, errors);
-            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.ValidationFailed, validationResult.Errors.ToObject());
+            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.ValidationFailed, validationResult.Errors.ToObject());
         }
 
         var user = await userRepository.GetOneByCredentialsAsync(signInDto.Email, signInDto.Password, stoppingToken);
 
         if (user is null)
-            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);
+            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);
         
-        return Result<string>.Success(StatusCodes.Status200OK, tokenService.GenerateToken(user));
+        return Result<(string, Role)>.Success(StatusCodes.Status200OK, (tokenService.GenerateToken(user), user.Role));
     }
 
     public async Task<Result> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
