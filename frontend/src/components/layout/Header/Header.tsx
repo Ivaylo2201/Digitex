@@ -3,7 +3,7 @@ import { AccountLink } from '../../../features/account/components/AccountLink';
 import { CartLink } from '../../../features/cart/components/CartLink';
 import { LogoLink } from './LogoLink';
 import { Searchbox } from './Searchbox';
-import { FavoritesLink } from '../../../features/favorites/FavoritesLink';
+import { FavoritesLink } from '../../../features/favorites/components/FavoritesLink';
 import { LanguageSelect } from './LanguageSelect';
 import { SignOutButton } from '../../../features/auth/components/SignOutButton';
 import { SignInLink } from '../../../features/auth/components/SignInLink';

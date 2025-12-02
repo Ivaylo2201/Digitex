@@ -1,18 +1,9 @@
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
-import type { Review } from '@/features/reviews/models/Review';
-
-import {
-  Empty,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  EmptyDescription
-} from '@/components/ui/empty';
-
-import { MessageSquareX } from 'lucide-react';
-import { Rating } from '@/features/products/components/Rating';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import type { Review } from '../models/Review';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Rating } from '@/features/products/components/Rating';
+import { EmptyReviewsSection } from './EmptyReviewsSection';
 
 type ReviewsSectionProps = {
   reviews: Review[];
@@ -20,7 +11,7 @@ type ReviewsSectionProps = {
 
 export function ReviewsSection({ reviews }: ReviewsSectionProps) {
   const {
-    components: { reviewsSection }
+    components: { reviewsSection },
   } = useTranslation();
   const hasReviews = reviews.length > 0;
 
@@ -53,28 +44,5 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
         <EmptyReviewsSection />
       )}
     </section>
-  );
-}
-
-function EmptyReviewsSection() {
-  const {
-    components: { emptyReviewsSection }
-  } = useTranslation();
-
-  return (
-    <Empty>
-      <EmptyHeader>
-        <EmptyMedia variant='icon'>
-          <MessageSquareX />
-        </EmptyMedia>
-        <EmptyTitle>{emptyReviewsSection.noReviewsForThisProduct}</EmptyTitle>
-        <EmptyDescription>
-          <p>{emptyReviewsSection.noReviewsHaveBeenLeftForThisProductYet}</p>
-          <p className='flex justify-center items-center gap-1.5'>
-            {emptyReviewsSection.writeTheFirstReviewViaTheFormBelow}
-          </p>
-        </EmptyDescription>
-      </EmptyHeader>
-    </Empty>
   );
 }

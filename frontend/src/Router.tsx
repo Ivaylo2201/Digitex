@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { AuthenticationRequired } from '@/features/auth/components/AuthenticationRequired';
 import { AccountPage } from '@/features/account/pages/AccountPage';
-import { FavoritesPage } from '@/features/favorites/FavoritesPage';
+import { FavoritesPage } from '@/features/favorites/pages/FavoritesPage';
 import { SignInPage } from '@/features/auth/pages/SignInPage';
 import { SignUpPage } from '@/features/auth/pages/SignUpPage';
 import { Page } from '@/components/layout/Page';

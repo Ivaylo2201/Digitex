@@ -15,7 +15,7 @@ const productPages: Record<string, React.ComponentType> = {
   motherboards: MotherboardProductPage,
   rams: RamProductPage,
   ssds: SsdProductPage,
-  'power-supplies': PowerSupplyProductPage
+  'power-supplies': PowerSupplyProductPage,
 };
 
 export function ProductPageResolver() {

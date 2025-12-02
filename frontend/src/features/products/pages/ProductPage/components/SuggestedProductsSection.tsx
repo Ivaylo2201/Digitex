@@ -1,27 +1,19 @@
-import {
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle
-} from '@/components/ui/empty';
-
+import type { SuggestedProduct } from '@/features/products/models/shared/SuggestedProduct';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { Link } from 'react-router';
 import { Separator } from '@/components/ui/separator';
-import { MonitorX } from 'lucide-react';
-import type { SuggestedProduct } from '@/features/products/models/shared/SuggestedProduct';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { EmptySuggestedProductsSection } from './EmptySuggestedProductsSection';
 
 type SuggestedProductsSectionProps = {
   suggestedProducts: SuggestedProduct[];
 };
 
 export function SuggestedProductsSection({
-  suggestedProducts
+  suggestedProducts,
 }: SuggestedProductsSectionProps) {
   const {
-    components: { suggestedProductsSection }
+    components: { suggestedProductsSection },
   } = useTranslation();
   const hasProducts = suggestedProducts.length > 0;
 
@@ -61,27 +53,5 @@ export function SuggestedProductsSection({
         )}
       </div>
     </section>
-  );
-}
-
-function EmptySuggestedProductsSection() {
-  const {
-    components: { emptySuggestedProductsSection }
-  } = useTranslation();
-
-  return (
-    <Empty>
-      <EmptyHeader>
-        <EmptyMedia variant='icon'>
-          <MonitorX />
-        </EmptyMedia>
-        <EmptyTitle>
-          {emptySuggestedProductsSection.noSuggestedProductsAvailable}
-        </EmptyTitle>
-        <EmptyDescription>
-          <p>{emptySuggestedProductsSection.thisProductHasNoSuggestionsYet}</p>
-        </EmptyDescription>
-      </EmptyHeader>
-    </Empty>
   );
 }

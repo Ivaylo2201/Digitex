@@ -3,7 +3,7 @@ import {
   TableCaption,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
 } from '@/components/ui/table';
 import type { Specification } from '@/features/products/models/shared/Specification';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
@@ -11,10 +11,10 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 type SpecificationsTableTableProps = { specifications: Specification[] };
 
 export function SpecificationsTable({
-  specifications
+  specifications,
 }: SpecificationsTableTableProps) {
   const {
-    components: { specificationsTable }
+    components: { specificationsTable },
   } = useTranslation();
 
   return (

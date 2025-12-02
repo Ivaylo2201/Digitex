@@ -5,12 +5,12 @@ import { getStaticFile } from '@/lib/utils/getStaticFile';
 import type { Specification } from '../../models/shared/Specification';
 import { Rating } from '../../components/Rating';
 import { SuggestedProductsSection } from './components/SuggestedProductsSection';
-import { ReviewsSection } from './components/ReviewsSection';
-import { AddToCompareButton } from './components/AddToCompareButton';
+import { AddToCompareButton } from '../../../compare/components/AddToCompareButton';
 import { SpecificationsTable } from './components/SpecificationsTable';
 import { ProductPrice } from './components/ProductPrice';
-import { AddToFavoritesButton } from './components/AddToFavoritesButton';
-import { AddToCartButton } from './components/AddToCartButton';
+import { AddToFavoritesButton } from '../../../favorites/components/AddToFavoritesButton';
+import { ReviewsSection } from '@/features/reviews/components/ReviewsSection';
+import { AddToCartButton } from '@/features/cart/components/AddToCartButton';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
@@ -21,7 +21,7 @@ type ProductPageProps<T extends ProductLong> = {
 export function ProductPage<T extends ProductLong>({
   category,
   product,
-  specifications
+  specifications,
 }: ProductPageProps<T>) {
   const isInStock = product.quantity > 0;
   const displayName = `${product.brandName} ${product.modelName}`;

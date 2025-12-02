@@ -9,7 +9,7 @@ type AddToCartButtonProps = {
 
 export function AddToCartButton({ isInStock }: AddToCartButtonProps) {
   const {
-    components: { addToCartButton }
+    components: { addToCartButton },
   } = useTranslation();
 
   return (
