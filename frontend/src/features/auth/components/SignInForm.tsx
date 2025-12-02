@@ -13,13 +13,17 @@ import { Link } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import { signInSchema, type SignInSchema } from '../schemas/signInSchema';
-import { useSignIn } from '../hooks/useSignIn';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Spinner } from '@/components/ui/spinner';
+import { useSignIn } from '../hooks/sign-in/useSignIn';
+import {
+  useSignInSchema,
+  type SignInSchema,
+} from '../hooks/sign-in/useSignInSchema';
 
 export function SignInForm() {
   const { handleSubmit, register, setValue } = useForm<SignInSchema>();
+  const signInSchema = useSignInSchema();
   const { mutate, isPending } = useSignIn();
   const {
     components: { signInForm },
@@ -70,12 +74,15 @@ export function SignInForm() {
 
           <div className='flex gap-2 items-center'>
             <Checkbox
-              id='terms'
+              id='rememberMe'
               onCheckedChange={(state) =>
                 setValue('rememberMe', state === true)
               }
+              className='cursor-pointer'
             />
-            <Label htmlFor='terms'>{signInForm.rememberMe}</Label>
+            <Label htmlFor='rememberMe' className='cursor-pointer'>
+              {signInForm.rememberMe}
+            </Label>
           </div>
 
           <Button

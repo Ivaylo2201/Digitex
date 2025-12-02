@@ -1,5 +1,17 @@
 {
   "components": {
+    "signUpForm": {
+      "createdAnAccount": "Konto erstellen",
+      "enterYourCredentialsToSignUpForAnAccount": "Geben Sie Ihre Anmeldedaten ein, um sich für ein Konto zu registrieren",
+      "email": "E-Mail",
+      "username": "Benutzername",
+      "password": "Passwort",
+      "passwordConfirmation": "Passwort bestätigen",
+      "signUp": "Registrieren",
+      "alreadyHaveAnAccount": "Sie haben bereits ein Konto?",
+      "signIn": "Anmelden",
+      "acceptTermsAndConditions": "Geschäftsbedingungen akzeptieren"
+    },
     "signInForm": {
       "signInToYourAccount": "Melden Sie sich bei Ihrem Konto an",
       "enterYourCredentialsToSignInToYourAccount": "Geben Sie Ihre Daten ein, um sich bei Ihrem Konto anzumelden.",
@@ -82,6 +94,10 @@
     },
     "loader": {
       "loading": "Lädt"
+    },
+    "accountVerifiedPage": {
+      "accountVerifiedSuccessfully": "Konto wurde erfolgreich bestätigt.",
+      "accountVerificationFailed": "Konto-Bestätigung ist fehlgeschlagen."
     }
   },
   "specifications": {
@@ -167,5 +183,8 @@
     "milliseconds": "ms",
     "millimeters": "mm",
     "nits": "nits"
+  },
+  "generic": {
+    "somethingWentWrong": "Etwas ist gelaufen."
   }
 }

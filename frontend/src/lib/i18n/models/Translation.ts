@@ -27,6 +27,10 @@ export type Translation = {
       getStartedByAddingAProduct: string;
       addProducts: string;
     };
+    accountVerifiedPage: {
+      accountVerifiedSuccessfully: string;
+      accountVerificationFailed: string;
+    };
     emptySuggestedProductsSection: {
       noSuggestedProductsAvailable: string;
       thisProductHasNoSuggestionsYet: string;
@@ -83,7 +87,18 @@ export type Translation = {
       signUp: string;
       rememberMe: string;
     };
-    signUpForm: {};
+    signUpForm: {
+      createdAnAccount: string;
+      enterYourCredentialsToSignUpForAnAccount: string;
+      email: string;
+      username: string;
+      password: string;
+      passwordConfirmation: string;
+      signUp: string;
+      alreadyHaveAnAccount: string;
+      signIn: string;
+      acceptTermsAndConditions: string;
+    };
   };
   specifications: {
     base: {
@@ -163,6 +178,9 @@ export type Translation = {
     milliseconds: string;
     millimeters: string;
     nits: string;
+  };
+  generic: {
+    somethingWentWrong: string;
   };
 };
 
@@ -257,7 +275,23 @@ export const translation: Translation = {
       signUp: 'Sign up',
       rememberMe: 'Remember me',
     },
-    signUpForm: {},
+    signUpForm: {
+      createdAnAccount: 'Create an account',
+      enterYourCredentialsToSignUpForAnAccount:
+        'Enter your credentials to sign up for an account.',
+      email: 'Email',
+      username: 'Username',
+      password: 'Password',
+      passwordConfirmation: 'Password confirmation',
+      signUp: 'Sign up',
+      alreadyHaveAnAccount: 'Already have an account?',
+      signIn: 'Sign in',
+      acceptTermsAndConditions: 'I accept the Terms and Conditions',
+    },
+    accountVerifiedPage: {
+      accountVerifiedSuccessfully: 'Account verified successfully.',
+      accountVerificationFailed: 'Account verification failed.',
+    },
   },
   specifications: {
     base: {
@@ -342,5 +376,8 @@ export const translation: Translation = {
     milliseconds: 'ms',
     millimeters: 'mm',
     nits: 'nits',
+  },
+  generic: {
+    somethingWentWrong: 'Something went wrong.',
   },
 };

@@ -1,29 +1,33 @@
 import { useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router';
-import { Check } from 'lucide-react';
-import { Page } from '@/components/layout/Page';
+import { Navigate, useSearchParams } from 'react-router';
 import { httpClient } from '@/lib/api/httpClient';
+import { toast } from 'sonner';
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+
+function getVerifyUrl(token: string) {
+  return `/auth/verify?token=${encodeURIComponent(token)}`;
+}
 
 export function AccountVerifiedPage() {
+  const {
+    components: { accountVerifiedPage },
+  } = useTranslation();
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const token = searchParams.get('token');
+    const verifyAccount = async (token: string | null) => {
+      if (token) {
+        try {
+          await httpClient.get(getVerifyUrl(token));
+          toast.success(accountVerifiedPage.accountVerifiedSuccessfully);
+        } catch {
+          toast.error(accountVerifiedPage.accountVerificationFailed);
+        }
+      }
+    };
 
-    if (token) {
-      httpClient.get(`/auth/verify?token=${encodeURIComponent(token)}`);
-    }
+    verifyAccount(searchParams.get('token'));
   }, []);
 
-  return (
-    <Page>
-      <div className='flex flex-col justify-center items-center bg-[#a7eb96] rounded-xl border-4 border-green-600 font-montserrat'>
-        <Check size={120} className='text-green-600' />
-        <p className='text-theme-gunmetal font-bold'>
-          Account verification complete!
-        </p>
-        <Link to='/auth/sign-in'>Sign in</Link>
-      </div>
-    </Page>
-  );
+  return <Navigate to='/' replace={true} />;
 }

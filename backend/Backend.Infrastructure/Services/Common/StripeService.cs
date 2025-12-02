@@ -55,12 +55,12 @@ public class StripeService(
                 return Result.Failure(StatusCodes.Status400BadRequest);
             }
 
-            var user = await userRepository.GetOneWithItemsAndProductsAsync(userId, stoppingToken);
+            //var user = await userRepository.GetOneWithItemsAndProductsAsync(userId, stoppingToken);
                 
             // For each item in user.Cart.Items, reduce the stock of the product by the quantity of the item and create a sale object
             // Clear the cart
 
-            await emailSendingService.SendOrderConfirmationEmailAsync(user, stoppingToken);
+            //await emailSendingService.SendOrderConfirmationEmailAsync(user, stoppingToken);
                 
             return Result.Success(StatusCodes.Status200OK);
         }

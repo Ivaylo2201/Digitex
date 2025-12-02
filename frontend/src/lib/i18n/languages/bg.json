@@ -1,5 +1,17 @@
 {
   "components": {
+    "signUpForm": {
+      "createdAnAccount": "Създайте акаунт",
+      "enterYourCredentialsToSignUpForAnAccount": "Въведете вашите данни, за да си създадете акаунт.",
+      "email": "Имейл",
+      "username": "Потребителско име",
+      "password": "Парола",
+      "passwordConfirmation": "Потвърждение на паролата",
+      "signUp": "Регистрация",
+      "alreadyHaveAnAccount": "Вече имате профил?",
+      "signIn": "Вход",
+      "acceptTermsAndConditions": "Приемам общите условия"
+    },
     "signInForm": {
       "signInToYourAccount": "Влезте в своя акаунт",
       "enterYourCredentialsToSignInToYourAccount": "Въведете своите данни, за да влезете в акаунта си.",
@@ -82,6 +94,10 @@
     },
     "loader": {
       "loading": "Зареждане"
+    },
+    "accountVerifiedPage": {
+      "accountVerifiedSuccessfully": "Акаунтът е потвърден успешно.",
+      "accountVerificationFailed": "Потвърждаването на акаунта не беше успешно."
     }
   },
   "specifications": {
@@ -167,5 +183,8 @@
     "milliseconds": "мс",
     "millimeters": "мм",
     "nits": "нита"
+  },
+  "generic": {
+    "somethingWentWrong": "Нещо се обърка."
   }
 }
