@@ -83,6 +83,7 @@ export type Translation = {
       signUp: string;
       rememberMe: string;
     };
+    signUpForm: {};
   };
   specifications: {
     base: {
@@ -168,95 +169,102 @@ export type Translation = {
 export const translation: Translation = {
   components: {
     header: {
-      merchantAddress: 'Sofia, Vitosha Blvd. 76'
+      merchantAddress: 'Sofia, Vitosha Blvd. 76',
     },
     searchBox: {
-      searchForProducts: 'Search for products...'
+      searchForProducts: 'Search for products...',
     },
     accountLink: {
-      account: 'Account'
+      account: 'Account',
     },
     signInLink: {
-      signIn: 'Sign in'
+      signIn: 'Sign in',
     },
     signOutButton: {
-      signOut: 'Sign out'
+      signOut: 'Sign out',
     },
     cartLink: {
-      cart: 'Cart'
+      cart: 'Cart',
     },
     compareLink: {
-      compare: 'Compare'
+      compare: 'Compare',
     },
     productCompareTable: {
-      comparedProducts: 'Compared Products'
+      comparedProducts: 'Compared Products',
     },
     emptyComparePage: {
       noProductsAddedForComparison: 'No products added for comparison',
-      youHaveNotAddedAnyProductsForComparisonYet: "You haven't added any products for comparison yet.",
+      youHaveNotAddedAnyProductsForComparisonYet:
+        "You haven't added any products for comparison yet.",
       getStartedByAddingAProduct: 'Get started by adding a product.',
-      addProducts: 'Add products'
+      addProducts: 'Add products',
     },
     emptySuggestedProductsSection: {
       noSuggestedProductsAvailable: 'No suggested products available',
-      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet'
+      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet',
     },
     emptyReviewsSection: {
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below'
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below',
     },
     favoritesLink: {
-      favorites: 'Favorites'
+      favorites: 'Favorites',
     },
     productPageBreadcrumb: {
-      home: 'Home'
+      home: 'Home',
     },
     addToCompareButton: {
       maxComparisonCapacityReached: 'Max compare capacity reached.',
       incompatibleComparisonCategory: 'Incompatible comparison category.',
       productAlreadyAddedToComparison: 'Product already present in comparison.',
-      productSuccessfullyAddedToComparison: 'Product added to comparison.'
+      productSuccessfullyAddedToComparison: 'Product added to comparison.',
     },
     //addToFavoritesButton: {},
     specificationsTable: {
-      mainSpecifications: 'Main specifications'
+      mainSpecifications: 'Main specifications',
     },
     addToCartButton: {
       addToCart: 'Add to cart',
-      outOfStock: 'Out of stock'
+      outOfStock: 'Out of stock',
     },
     suggestedProductsSection: {
       suggestedProducts: 'Suggested products',
       noSuggestedProductsAvailable: 'No suggested products available',
-      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet'
+      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet',
     },
     reviewsSection: {
       reviews: 'Reviews',
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below'
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below',
     },
     loader: {
-      loading: 'Loading'
+      loading: 'Loading',
     },
     signInForm: {
-      signInToYourAccount: "Sign in to your account",
-      enterYourCredentialsToSignInToYourAccount: "Enter your credentials to sign in to your account.",
-      email: "Email",
-      password: "Password",
-      signIn: "Sign in",
+      signInToYourAccount: 'Sign in to your account',
+      enterYourCredentialsToSignInToYourAccount:
+        'Enter your credentials to sign in to your account.',
+      email: 'Email',
+      password: 'Password',
+      signIn: 'Sign in',
       dontHaveAnAccount: "Don't have an account?",
-      signUp: "Sign up",
-      rememberMe: "Remember me"
-    }
+      signUp: 'Sign up',
+      rememberMe: 'Remember me',
+    },
+    signUpForm: {},
   },
   specifications: {
     base: {
       brand: 'Brand',
       model: 'Model',
       image: 'Image',
-      price: 'Price'
+      price: 'Price',
     },
     monitors: {
       displayDiagonal: 'Display diagonal',
@@ -266,7 +274,7 @@ export const translation: Translation = {
       resolution: 'Resolution',
       pixelSize: 'Pixel size',
       brightness: 'Brightness',
-      colorSpectre: 'Color spectre'
+      colorSpectre: 'Color spectre',
     },
     processors: {
       cores: 'Cores',
@@ -274,7 +282,7 @@ export const translation: Translation = {
       baseClockSpeed: 'Base clock speed',
       boostClockSpeed: 'Boost clock speed',
       socket: 'Socket',
-      tdp: 'TDP'
+      tdp: 'TDP',
     },
     graphicsCards: {
       memory: 'Memory',
@@ -283,14 +291,14 @@ export const translation: Translation = {
       busWidth: 'Bus width',
       cudaCores: 'CUDA cores',
       directXSupport: 'DirectX support',
-      tdp: 'TDP'
+      tdp: 'TDP',
     },
     motherboards: {
       socket: 'Socket',
       formFactor: 'Form factor',
       chipset: 'Chipset',
       ramSlots: 'RAM slots',
-      pcieSlots: 'PCIe slots'
+      pcieSlots: 'PCIe slots',
     },
     powerSupplies: {
       wattage: 'Wattage',
@@ -300,19 +308,19 @@ export const translation: Translation = {
         label: 'Modularity',
         none: 'None',
         semi: 'Semi',
-        full: 'Full'
-      }
+        full: 'Full',
+      },
     },
     rams: {
       memory: 'Memory',
-      timing: 'Timing'
+      timing: 'Timing',
     },
     ssds: {
       capacityInGb: 'Capacity',
       operationSpeedRead: 'Read speed',
       operationSpeedWrite: 'Write speed',
-      interface: 'Interface'
-    }
+      interface: 'Interface',
+    },
   },
   routeNames: {
     monitors: 'Monitors',
@@ -322,7 +330,7 @@ export const translation: Translation = {
     'power-supplies': 'Power supplies',
     rams: 'RAMs',
     ssds: 'SSDs',
-    home: 'Home'
+    home: 'Home',
   },
   units: {
     gigabytes: 'GB',
@@ -333,6 +341,6 @@ export const translation: Translation = {
     mbPerSecond: 'MB/s',
     milliseconds: 'ms',
     millimeters: 'mm',
-    nits: 'nits'
-  }
+    nits: 'nits',
+  },
 };

@@ -26,7 +26,6 @@ export function SignInForm() {
   } = useTranslation();
 
   const onSubmit = (data: SignInSchema) => {
-    console.log(data);
     const result = signInSchema.safeParse(data);
 
     if (!result.success) {
