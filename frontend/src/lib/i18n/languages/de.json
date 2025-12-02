@@ -1,4 +1,23 @@
 {
+  "validationSchemas": {
+    "auth": {
+      "email": {
+        "requiredError": "E-Mail ist erforderlich.",
+        "invalidEmailError": "Ungültige E-Mail-Adresse."
+      },
+      "password": {
+        "requiredError": "Passwort ist erforderlich.",
+        "minLengthError": "Das Passwort ist zu kurz.",
+        "regexError": "Das Passwort erfüllt die Komplexitätsanforderungen nicht.",
+        "passwordMismatchError": "Passwörter stimmen nicht überein."
+      },
+      "username": {
+        "requiredError": "Benutzername ist erforderlich.",
+        "minLengthError": "Der Benutzername ist zu kurz.",
+        "maxLengthError": "Der Benutzername ist zu lang."
+      }
+    }
+  },
   "components": {
     "signUpForm": {
       "createdAnAccount": "Konto erstellen",

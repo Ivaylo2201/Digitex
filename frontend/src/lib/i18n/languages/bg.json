@@ -1,4 +1,23 @@
 {
+  "validationSchemas": {
+    "auth": {
+      "email": {
+        "requiredError": "Имейлът е задължителен.",
+        "invalidEmailError": "Невалиден имейл адрес."
+      },
+      "password": {
+        "requiredError": "Паролата е задължителна.",
+        "minLengthError": "Паролата е твърде кратка.",
+        "regexError": "Паролата не отговаря на изискванията за сложност.",
+        "passwordMismatchError": "Паролите не съвпадат."
+      },
+      "username": {
+        "requiredError": "Потребителското име е задължително.",
+        "minLengthError": "Потребителското име е твърде кратко.",
+        "maxLengthError": "Потребителското име е твърде дълго."
+      }
+    }
+  },
   "components": {
     "signUpForm": {
       "createdAnAccount": "Създайте акаунт",

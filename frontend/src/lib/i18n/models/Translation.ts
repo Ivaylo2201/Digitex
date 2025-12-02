@@ -1,4 +1,23 @@
 export type Translation = {
+  validationSchemas: {
+    auth: {
+      email: {
+        requiredError: string;
+        invalidEmailError: string;
+      };
+      password: {
+        requiredError: string;
+        minLengthError: string;
+        regexError: string;
+        passwordMismatchError: string;
+      };
+      username: {
+        requiredError: string;
+        minLengthError: string;
+        maxLengthError: string;
+      };
+    };
+  };
   components: {
     header: {
       merchantAddress: string;
@@ -185,6 +204,25 @@ export type Translation = {
 };
 
 export const translation: Translation = {
+  validationSchemas: {
+    auth: {
+      email: {
+        requiredError: 'Email is required.',
+        invalidEmailError: 'Invalid email address.',
+      },
+      password: {
+        requiredError: 'Password is required.',
+        minLengthError: 'Password is too short.',
+        regexError: 'Password does not meet complexity requirements.',
+        passwordMismatchError: 'Passwords do not match.',
+      },
+      username: {
+        requiredError: 'Username is required.',
+        minLengthError: 'Username is too short.',
+        maxLengthError: 'Username is too long.',
+      },
+    },
+  },
   components: {
     header: {
       merchantAddress: 'Sofia, Vitosha Blvd. 76',

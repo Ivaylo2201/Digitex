@@ -1,24 +1,42 @@
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import z from 'zod';
+import {
+  FIELD_MIN_LENGTH,
+  PASSWORD_MIN_LENGTH,
+  PASSWORD_REGEX,
+  USERNAME_MAX_LENGTH,
+  USERNAME_MIN_LENGTH,
+} from '../../constants';
 
 export function useSignUpSchema() {
-  const {} = useTranslation();
+  const {
+    validationSchemas: { auth },
+  } = useTranslation();
 
   return z
     .object({
-      email: z.string({ required_error: '' }).email(''),
-      username: z.string().min(3).max(20),
+      email: z
+        .string()
+        .min(FIELD_MIN_LENGTH, auth.email.requiredError)
+        .email(auth.email.invalidEmailError),
+      username: z
+        .string()
+        .min(FIELD_MIN_LENGTH, auth.username.requiredError)
+        .min(USERNAME_MIN_LENGTH, auth.username.minLengthError)
+        .max(USERNAME_MAX_LENGTH, auth.username.maxLengthError),
       password: z
         .string()
-        .min(8)
-        .regex(/^(?=.*[A-Za-z])(?=.*\d).+$/),
+        .min(FIELD_MIN_LENGTH, auth.password.requiredError)
+        .min(PASSWORD_MIN_LENGTH, auth.password.minLengthError)
+        .regex(PASSWORD_REGEX, auth.password.regexError),
       passwordConfirmation: z
         .string()
-        .min(8)
-        .regex(/^(?=.*[A-Za-z])(?=.*\d).+$/),
+        .min(FIELD_MIN_LENGTH, auth.password.requiredError)
+        .min(PASSWORD_MIN_LENGTH, auth.password.minLengthError)
+        .regex(PASSWORD_REGEX, auth.password.regexError),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
-      message: 'Passwords do not match',
+      message: auth.password.passwordMismatchError,
       path: ['passwordConfirmation'],
     });
 }

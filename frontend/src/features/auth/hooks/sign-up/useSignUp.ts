@@ -6,7 +6,7 @@ import type { SignUpSchema } from './useSignUpSchema';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 type UseSignUpResponse = { token: string; role: string };
-type UseSignUpAxiosError = AxiosError<{ message: string }>;
+type UseSignUpAxiosError = AxiosError<{ message: string }>; // refactor
 type UseSignUpRequest = SignUpSchema;
 
 async function signUp(data: UseSignUpRequest) {
@@ -20,7 +20,7 @@ export function useSignUp() {
   return useMutation<UseSignUpResponse, UseSignUpAxiosError, UseSignUpRequest>({
     mutationFn: signUp,
     onError: (e) => {
-      toast.error(e.response?.data.message || generic.somethingWentWrong);
+      toast.error(e.response?.data.message || generic.somethingWentWrong); // TODO: remove e.response thing with translation
     },
   });
 }

@@ -8,7 +8,7 @@ import { useAuth } from '../../stores/useAuth';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 
 type UseSignInResponse = { token: string; role: string };
-type UseSignInAxiosError = AxiosError<{ message: string }>;
+type UseSignInAxiosError = AxiosError<{ message: string }>; // refactor
 type UseSignInRequest = SignInSchema;
 
 async function signIn(data: UseSignInRequest) {
@@ -28,7 +28,7 @@ export function useSignIn() {
       navigate('/');
     },
     onError: (e) => {
-      toast.error(e.response?.data.message || generic.somethingWentWrong);
+      toast.error(e.response?.data.message || generic.somethingWentWrong); // TODO: remove e.response thing with translation
     },
   });
 }

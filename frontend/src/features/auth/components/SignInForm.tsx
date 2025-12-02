@@ -55,7 +55,7 @@ export function SignInForm() {
             <Label htmlFor='email'>{signInForm.email}</Label>
             <Input
               id='email'
-              type='email'
+              type='text'
               placeholder='email@example.com'
               className='bg-theme-white text-theme-gunmetal placeholder:text-theme-gunmetal'
               {...register('email')}
