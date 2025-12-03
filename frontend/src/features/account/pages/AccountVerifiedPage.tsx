@@ -23,7 +23,6 @@ export function AccountVerifiedPage() {
       if (token) {
         try {
           const { data: res } = await httpClient.get<AccountVerifiedResponse>(getVerifyUrl(token));
-          console.log(res.token, res.role);
           signIn(res.token, res.role);
           toast.success(accountVerifiedPage.accountVerifiedSuccessfully);
         } catch {
