@@ -1,5 +1,6 @@
 ﻿using Backend.Application.Dtos.Shipping;
 using Backend.Application.Interfaces.Services;
+using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers;
@@ -10,8 +11,8 @@ public class ShippingController(IShippingService shippingService) : ControllerBa
 {
     [HttpGet]
     [ProducesResponseType(typeof(List<ShippingDto>), StatusCodes.Status200OK)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync(CancellationToken stoppingToken = default)
     {
         var result = await shippingService.ListAllAsync(stoppingToken);

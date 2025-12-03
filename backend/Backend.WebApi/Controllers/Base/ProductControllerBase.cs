@@ -2,6 +2,7 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
+using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers.Base;
@@ -14,8 +15,8 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
     {
         var result = await productService.GetOneAsync(id, project, stoppingToken);
@@ -24,8 +25,8 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     
     [HttpGet]
     [ProducesResponseType(typeof(List<ProductShortDto>), StatusCodes.Status200OK)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> GetAllAsync([FromQuery] IDictionary<string, string> criteria, CancellationToken stoppingToken = default)
     {
         var result = await productService.ListAllAsync(filterService.BuildFilter(criteria), stoppingToken);
@@ -33,8 +34,8 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     }
     
     [HttpGet("filters")]
-    [Consumes("application/json")]
-    [Produces("application/json")]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public IActionResult GetFilters() => Ok(filterService.GetFilters());
 }

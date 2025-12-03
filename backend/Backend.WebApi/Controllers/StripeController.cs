@@ -2,6 +2,7 @@
 using Backend.Domain.Common;
 using Backend.Domain.Exceptions;
 using Backend.Infrastructure.Extensions;
+using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
@@ -29,8 +30,8 @@ public class StripeController : ControllerBase
     [Authorize]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> CreatePaymentIntentAsync()
     {
         var result = await _stripeService.CreatePaymentIntentAsync(User.GetId());
@@ -38,12 +39,12 @@ public class StripeController : ControllerBase
     }
 
     [HttpPost("webhook")]
-    [Consumes("application/json")]
-    [Produces("application/json")]
     [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status402PaymentRequired)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> WebhookAsync()
     {
         using var reader = new StreamReader(Request.Body);
@@ -55,7 +56,8 @@ public class StripeController : ControllerBase
     
     [HttpGet("public-key")]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public IActionResult GetPublicKey()
     {
         var publicKey = Environment.GetEnvironmentVariable("STRIPE_PUBLISHABLE_KEY");

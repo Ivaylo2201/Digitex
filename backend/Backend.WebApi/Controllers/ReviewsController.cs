@@ -2,6 +2,7 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;
+using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,12 +12,12 @@ namespace Backend.WebApi.Controllers;
 [Route("api/products/{productId:guid}/reviews")]
 public class ReviewsController(IReviewService reviewService, IProductBaseService productBaseService) : ControllerBase
 {
-    [HttpPost]
     [Authorize]
+    [HttpPost]
     [ProducesResponseType(typeof(ReviewDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> AddReviewAsync(Guid productId, [FromBody] AddReviewDto body, CancellationToken stoppingToken = default)
     {
         body.UserId = User.GetId();

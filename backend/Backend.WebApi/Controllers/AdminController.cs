@@ -2,6 +2,7 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
+using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,12 +12,12 @@ namespace Backend.WebApi.Controllers;
 [Route("api/admin")]
 public class AdminController(IProductBaseService productService) : ControllerBase
 {
+    [Authorize(Roles = nameof(Role.Admin))]
     [HttpPost("add-suggestion")]
     [ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
-    [Authorize(Roles = nameof(Role.Admin))]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> AddSuggestionAsync([FromBody] AddSuggestionDto body, CancellationToken stoppingToken = default)
     {
         var result = await productService.AddSuggestionAsync(body, stoppingToken);

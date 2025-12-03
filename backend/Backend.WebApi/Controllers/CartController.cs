@@ -2,6 +2,7 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;
+using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,12 +12,12 @@ namespace Backend.WebApi.Controllers;
 [Route("api/carts")]
 public class CartController(ICartService cartService, IItemService itemService) : ControllerBase
 {
-    [HttpPost("add")]
     [Authorize]
+    [HttpPost("add")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> AddToCartAsync([FromBody] AddToCartDto cartDto, CancellationToken stoppingToken = default)
     {
         cartDto.UserId = User.GetId();
@@ -24,13 +25,13 @@ public class CartController(ICartService cartService, IItemService itemService) 
         return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
     }
     
-    [HttpDelete("remove")]
     [Authorize]
+    [HttpDelete("remove")]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> RemoveFromCartAsync([FromBody] RemoveFromCartDto cartDto, CancellationToken stoppingToken = default)
     {
         cartDto.UserId = User.GetId();
@@ -44,12 +45,12 @@ public class CartController(ICartService cartService, IItemService itemService) 
         return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
     }
     
-    [HttpGet]
     [Authorize]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
-    [Consumes("application/json")]
-    [Produces("application/json")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListItemsInCartAsync([FromBody] ListItemsInCartDto cartDto, CancellationToken stoppingToken = default)
     {
         cartDto.UserId = User.GetId();
