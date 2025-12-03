@@ -22,7 +22,7 @@ public class UserService(
 {
     private const string Source = nameof(UserService);
     
-    public async Task<Result<(string, Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default)
+    public async Task<Result<(string Token, Role Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Validating SignIn request body...", Source);
         var validationResult = await new SignInValidator().ValidateAsync(signInDto, stoppingToken);
@@ -78,20 +78,24 @@ public class UserService(
         }
     }
 
-    public async Task<Result> VerifyUserAsync(string token, CancellationToken stoppingToken = default)
+    public async Task<Result<(string Token, Role Role)>> VerifyUserAsync(string token, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Starting verification process...", Source);
         
         try
         {
             var email = emailCryptoService.Decrypt(token);
-            var isVerificationSuccessful = await userRepository.VerifyUserAsync(email, stoppingToken);
-            return isVerificationSuccessful ? Result.Success(StatusCodes.Status200OK) : Result.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);    
+            var (isVerificationSuccessful, user) = await userRepository.VerifyUserAsync(email, stoppingToken);
+
+            if (isVerificationSuccessful && user is not null)
+                return Result<(string, Role)>.Success(StatusCodes.Status200OK, (tokenService.GenerateToken(user), user.Role));
+            
+            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);    
         }
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: {ExceptionName} occurred while decrypting email. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
-            return Result.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);
+            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);   
         }
     }
 }

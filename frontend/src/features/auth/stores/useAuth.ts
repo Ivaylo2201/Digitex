@@ -3,14 +3,14 @@ import { create } from 'zustand';
 type AuthStore = {
   role: string | null;
   isAuthenticated: boolean;
-  signIn: (token: string, role: string, rememberMe: boolean) => void;
+  signIn: (token: string, role: string, rememberMe?: boolean) => void;
   signOut: () => void;
 };
 
 export const useAuth = create<AuthStore>((set) => ({
   role: null,
   isAuthenticated: !!localStorage.getItem('token'),
-  signIn: (token: string, role: string, rememberMe: boolean) => {
+  signIn: (token: string, role: string, rememberMe: boolean = false) => {
     set({ isAuthenticated: true, role });
 
     if (rememberMe) {

@@ -6,7 +6,7 @@ namespace Backend.Application.Interfaces.Services;
 
 public interface IUserService
 {
-    Task<Result<(string, Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default);
+    Task<Result<(string Token, Role Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default);
     Task<Result> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default);
-    Task<Result> VerifyUserAsync(string token, CancellationToken stoppingToken = default);
+    Task<Result<(string Token, Role Role)>> VerifyUserAsync(string token, CancellationToken stoppingToken = default);
 }

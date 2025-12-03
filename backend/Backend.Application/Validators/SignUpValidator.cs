@@ -5,26 +5,34 @@ namespace Backend.Application.Validators;
 
 public class SignUpValidator : AbstractValidator<SignUpDto>
 {
-    private const int UsernameMinLength = 5;
-    private const int UsernameMaxLength = 25;
-    private const int PasswordMinLength = 5;
-    private const string PasswordRegex = @"^(?=.*[A-Za-z])(?=.*\d).+$";
-
     public SignUpValidator()
     {
+        RuleFor(x => x.Email)
+            .NotEmpty().WithMessage(Constants.EmailRequired)
+            .EmailAddress().WithMessage(Constants.EmailInvalid);
+
         RuleFor(x => x.Username)
-            .NotEmpty().WithMessage("Username must be provided.")
-            .Length(UsernameMinLength, UsernameMaxLength).WithMessage($"Username must be between {UsernameMinLength} and {UsernameMaxLength} characters.");
+            .NotEmpty().WithMessage(Constants.UsernameRequired)
+            .MinimumLength(Constants.UsernameMinLength).WithMessage(Constants.UsernameTooShort)
+            .MaximumLength(Constants.UsernameMaxLength).WithMessage(Constants.UsernameTooLong);
 
         RuleFor(x => x.Password)
-            .NotEmpty().WithMessage("Password must be provided.")
-            .MinimumLength(PasswordMinLength).WithMessage($"Password must be at least {PasswordMinLength} characters long.")
-            .Matches(PasswordRegex).WithMessage("Password must contain both letters and numbers.")
-            .Must((c, password) => !password.Contains(c.Username)).WithMessage("Password must not contain username.");
+            .NotEmpty().WithMessage(Constants.PasswordRequired)
+            .MinimumLength(Constants.PasswordMinLength).WithMessage(Constants.PasswordTooShort)
+            .Matches(Constants.PasswordRegex).WithMessage(Constants.PasswordRegexError);
 
         RuleFor(x => x.PasswordConfirmation)
-            .NotEmpty().WithMessage("PasswordConfirmation must be provided.")
-            .Equal(x => x.Password)
-            .WithMessage("Passwords do not match.");
+            .NotEmpty().WithMessage(Constants.PasswordRequired)
+            .MinimumLength(Constants.PasswordMinLength).WithMessage(Constants.PasswordTooShort)
+            .Matches(Constants.PasswordRegex).WithMessage(Constants.PasswordRegexError);
+
+        RuleFor(x => x)
+            .Must(x => x.Password == x.PasswordConfirmation)
+            .WithMessage(Constants.PasswordMismatch)
+            .WithName("passwordConfirmation");
+
+        RuleFor(x => x)
+            .Must(x => !x.Password.Contains(x.Username.ToLower(), StringComparison.OrdinalIgnoreCase))
+            .WithMessage(Constants.PasswordContainsUsername);
     }
 }

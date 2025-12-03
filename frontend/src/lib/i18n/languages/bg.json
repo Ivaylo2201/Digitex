@@ -9,7 +9,8 @@
         "requiredError": "Паролата е задължителна.",
         "minLengthError": "Паролата е твърде кратка.",
         "regexError": "Паролата не отговаря на изискванията за сложност.",
-        "passwordMismatchError": "Паролите не съвпадат."
+        "passwordMismatchError": "Паролите не съвпадат.",
+        "passwordContainsUsername": "Паролата не може да съдържа потребителското име."
       },
       "username": {
         "requiredError": "Потребителското име е задължително.",
@@ -203,7 +204,12 @@
     "millimeters": "мм",
     "nits": "нита"
   },
-  "generic": {
-    "somethingWentWrong": "Нещо се обърка."
+  "hooks": {
+    "useSignUp": {
+      "visitYourEmailToVerifyYourAccount": "Посетете имейла си, за да потвърдите акаунта си."
+    },
+    "generic": {
+      "somethingWentWrong": "Нещо се обърка."
+    }
   }
 }

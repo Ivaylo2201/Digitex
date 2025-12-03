@@ -1,5 +1,3 @@
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import z from 'zod';
 import {
   FIELD_MIN_LENGTH,
   PASSWORD_MIN_LENGTH,
@@ -7,6 +5,9 @@ import {
   USERNAME_MAX_LENGTH,
   USERNAME_MIN_LENGTH,
 } from '../../constants';
+
+import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import z from 'zod';
 
 export function useSignUpSchema() {
   const {
@@ -34,6 +35,10 @@ export function useSignUpSchema() {
         .min(FIELD_MIN_LENGTH, auth.password.requiredError)
         .min(PASSWORD_MIN_LENGTH, auth.password.minLengthError)
         .regex(PASSWORD_REGEX, auth.password.regexError),
+    })
+    .refine((data) => !data.password.toLowerCase().includes(data.username.toLowerCase()), {
+      message: auth.password.passwordContainsUsername,
+      path: ['password'],
     })
     .refine((data) => data.password === data.passwordConfirmation, {
       message: auth.password.passwordMismatchError,

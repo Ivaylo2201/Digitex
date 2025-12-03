@@ -10,6 +10,7 @@ export type Translation = {
         minLengthError: string;
         regexError: string;
         passwordMismatchError: string;
+        passwordContainsUsername: string;
       };
       username: {
         requiredError: string;
@@ -198,8 +199,13 @@ export type Translation = {
     millimeters: string;
     nits: string;
   };
-  generic: {
-    somethingWentWrong: string;
+  hooks: {
+    useSignUp: {
+      visitYourEmailToVerifyYourAccount: string;
+    };
+    generic: {
+      somethingWentWrong: string;
+    };
   };
 };
 
@@ -215,6 +221,7 @@ export const translation: Translation = {
         minLengthError: 'Password is too short.',
         regexError: 'Password does not meet complexity requirements.',
         passwordMismatchError: 'Passwords do not match.',
+        passwordContainsUsername: 'Password cannot contain the username.',
       },
       username: {
         requiredError: 'Username is required.',
@@ -415,7 +422,10 @@ export const translation: Translation = {
     millimeters: 'mm',
     nits: 'nits',
   },
-  generic: {
-    somethingWentWrong: 'Something went wrong.',
+  hooks: {
+    useSignUp: {
+      visitYourEmailToVerifyYourAccount: 'Visit your email to verify your account.',
+    },
+    generic: { somethingWentWrong: 'Something went wrong.' },
   },
 };

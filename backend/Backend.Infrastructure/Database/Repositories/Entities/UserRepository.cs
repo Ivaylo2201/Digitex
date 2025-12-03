@@ -75,7 +75,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         return user;
     }
 
-    public async Task<bool> VerifyUserAsync(string email, CancellationToken stoppingToken = default)
+    public async Task<(bool, User?)> VerifyUserAsync(string email, CancellationToken stoppingToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
@@ -84,13 +84,13 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         if (user is null)
         {
             logger.LogError("[{Source}]: User entity with Email={Email} not found.", Source, email);
-            return false;
+            return (false, user);
         }
 
         if (user.IsVerified)
         {
             logger.LogError("[{Source}]: User entity with Email={Email} already verified.", Source, email);
-            return false;       
+            return (false, user);    
         }
         
         user.IsVerified = true;
@@ -98,7 +98,7 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: User entity with Email={Email} verified in {Duration}ms.", Source, email, stopwatch.ElapsedMilliseconds);
-        return true;
+        return (true, user);
     }
 
     public async Task<User?> GetOneAsync(int id, CancellationToken stoppingToken = default)

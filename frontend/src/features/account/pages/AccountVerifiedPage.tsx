@@ -3,6 +3,9 @@ import { Navigate, useSearchParams } from 'react-router';
 import { httpClient } from '@/lib/api/httpClient';
 import { toast } from 'sonner';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useAuth } from '@/features/auth/stores/useAuth';
+
+type AccountVerifiedResponse = { token: string; role: string };
 
 function getVerifyUrl(token: string) {
   return `/auth/verify?token=${encodeURIComponent(token)}`;
@@ -13,12 +16,15 @@ export function AccountVerifiedPage() {
     components: { accountVerifiedPage },
   } = useTranslation();
   const [searchParams] = useSearchParams();
+  const { signIn } = useAuth();
 
   useEffect(() => {
     const verifyAccount = async (token: string | null) => {
       if (token) {
         try {
-          await httpClient.get(getVerifyUrl(token));
+          const { data: res } = await httpClient.get<AccountVerifiedResponse>(getVerifyUrl(token));
+          console.log(res.token, res.role);
+          signIn(res.token, res.role);
           toast.success(accountVerifiedPage.accountVerifiedSuccessfully);
         } catch {
           toast.error(accountVerifiedPage.accountVerificationFailed);

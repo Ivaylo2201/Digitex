@@ -9,7 +9,8 @@
         "requiredError": "Passwort ist erforderlich.",
         "minLengthError": "Das Passwort ist zu kurz.",
         "regexError": "Das Passwort erfüllt die Komplexitätsanforderungen nicht.",
-        "passwordMismatchError": "Passwörter stimmen nicht überein."
+        "passwordMismatchError": "Passwörter stimmen nicht überein.",
+        "passwordContainsUsername": "Das Passwort darf den Benutzernamen nicht enthalten."
       },
       "username": {
         "requiredError": "Benutzername ist erforderlich.",
@@ -203,7 +204,12 @@
     "millimeters": "mm",
     "nits": "nits"
   },
-  "generic": {
-    "somethingWentWrong": "Etwas ist gelaufen."
+  "hooks": {
+    "useSignUp": {
+      "visitYourEmailToVerifyYourAccount": "Besuchen Sie Ihre E-Mails, um Ihr Konto zu bestätigen."
+    },
+    "generic": {
+      "somethingWentWrong": "Etwas ist schiefgelaufen."
+    }
   }
 }

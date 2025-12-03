@@ -28,7 +28,7 @@ public class AuthenticationController(IUserService userService) : ControllerBase
     public async Task<IActionResult> SignInAsync([FromBody] SignInDto body, CancellationToken stoppingToken = default)
     {
         var result = await userService.SignInAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new { Token = result.Value } : result.ErrorObject);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { result.Value.Token, result.Value.Role } : result.ErrorObject);
     }
 
     [HttpGet("verify")]
@@ -39,6 +39,6 @@ public class AuthenticationController(IUserService userService) : ControllerBase
     public async Task<IActionResult> VerifyUserAsync([FromQuery] string token, CancellationToken stoppingToken = default)
     {
         var result = await userService.VerifyUserAsync(token, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { result.Value.Token, result.Value.Role } : result.ErrorObject);
     }
 }
