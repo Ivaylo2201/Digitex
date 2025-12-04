@@ -28,7 +28,6 @@ using DotNetEnv;
 using FluentEmail.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -168,11 +167,12 @@ public static class InfrastructureDependencyInjection
                 .AddScoped<IEmailSendingService>(serviceProvider => new EmailSendingService(
                     serviceProvider.GetRequiredService<ILogger<EmailSendingService>>(),
                     serviceProvider.GetRequiredService<IFluentEmail>(),
-                    serviceProvider.GetRequiredService<IWebHostEnvironment>(),
+                    serviceProvider.GetRequiredService<IEmailBuilderService>(),
                     frontendUrl))
                 .AddScoped<ICartService, CartService>()
                 .AddScoped<IItemService, ItemService>()
                 .AddScoped<IShippingService, ShippingService>()
+                .AddTransient<IEmailBuilderService, EmailBuilderService>()
                 .AddTransient<ITokenService, TokenService>()
                 .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
                 .AddTransient<IFilterService<Ram>, RamFilterService>()

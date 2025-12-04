@@ -44,7 +44,7 @@ public class UserService(
             Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateJwt(user), user.Role));
     }
 
-    public async Task<Result> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
+    public async Task<Result<string>> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Validating SignUp request body...", Source);
         var validationResult = await new SignUpValidator().ValidateAsync(signUpDto, stoppingToken);
@@ -68,23 +68,17 @@ public class UserService(
                 Cart = new Cart()
             }, stoppingToken);
             
-            var rawVerificationToken = tokenService.GenerateToken();
+            var token = tokenService.GenerateToken();
 
-            var userToken = new UserToken(UserTokenType.AccountVerification)
-            {
-                User = user,
-                Hash = tokenService.HashToken(rawVerificationToken)
-            };
-
-            await userTokenRepository.CreateAsync(userToken, stoppingToken);
-            await emailSendingService.SendVerificationEmailAsync(user, rawVerificationToken, stoppingToken);
+            await userTokenRepository.CreateAsync(CreateUserToken(user, token), stoppingToken);
+            await emailSendingService.SendVerificationEmailAsync(user, token, stoppingToken);
             
-            return Result.Success(StatusCodes.Status201Created);
+            return Result<string>.Success(StatusCodes.Status201Created, user.Email);
         }
         catch (DbUpdateException ex)
         {
-            logger.LogError("[{Source}]: {ExceptionName} occurred creating user or account verification token. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
-            return Result.Failure(StatusCodes.Status400BadRequest, ErrorType.EmailTaken);       
+            logger.LogError("[{Source}]: {ExceptionName} occurred creating user or account verification token. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.InnerException?.Message ?? ex.Message);
+            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.DatabaseError);       
         }
     }
 
@@ -116,5 +110,20 @@ public class UserService(
     {
         logger.LogInformation("[{Source}]: Starting password reset process...", Source);
         return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);  // dummy
+    }
+
+    private UserToken CreateUserToken(User user, string token)
+    {
+        const int accountVerificationTokenExpirationInMinutes = 1440;
+        var createdAt = DateTime.UtcNow;
+        
+        return new UserToken
+        {
+            User = user,
+            Hash = tokenService.HashToken(token),
+            UserTokenType = UserTokenType.AccountVerification,
+            CreatedAt = createdAt,
+            ExpiresAt = createdAt.AddMinutes(accountVerificationTokenExpirationInMinutes)
+        };
     }
 }

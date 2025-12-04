@@ -2,7 +2,7 @@
 
 public enum ErrorType
 {
-    EmailTaken,
+    DatabaseError,
     InvalidCredentials,
     ValidationFailed,
     CryptographyError,

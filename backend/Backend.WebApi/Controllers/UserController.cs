@@ -15,7 +15,7 @@ public class UserController(IUserService userService) : ControllerBase
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> VerifyUserAsync([FromQuery] VerifyUserDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> VerifyUserAsync([FromBody] VerifyUserDto body, CancellationToken stoppingToken = default)
     {
         var result = await userService.VerifyUserAsync(body, stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? new { result.Value.Token, result.Value.Role } : result.ErrorObject);

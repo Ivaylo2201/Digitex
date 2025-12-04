@@ -22,7 +22,7 @@ public class ErrorObject
             (int)HttpStatusCode.Forbidden => "Access forbidden.",
             _ => errorType switch
             {
-                ErrorType.EmailTaken => "Email already taken.",
+                ErrorType.DatabaseError => "Database operation failed.",
                 ErrorType.InvalidCredentials => "Invalid credentials.",
                 ErrorType.ValidationFailed => "Validation failed.",
                 ErrorType.CryptographyError => "Cryptography operation failed.",

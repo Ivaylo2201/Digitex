@@ -20,14 +20,14 @@ public class UserTokenRepository(ILogger<UserTokenRepository> logger, DatabaseCo
         stopwatch.Stop();
             
         var tokenType = userToken.UserTokenType.ToString();
-        var remaingingTimeInMinutes = (userToken.ExpiresAt - userToken.CreatedAt).Minutes;
+        var remainingTimeInMinutes = (userToken.ExpiresAt - userToken.CreatedAt).Minutes;
 
         logger.LogInformation(
             "[{Source}]: {TokenType} UserToken entity with UserId={UserId} created in {Duration}ms.", Source,
             tokenType, userToken.UserId, stopwatch.ElapsedMilliseconds);
         logger.LogInformation(
             "[{Source}]: Token will be active for {RemainingTimeInMinutes} minutes until {Timestamp}.", Source,
-            remaingingTimeInMinutes, userToken.ExpiresAt);
+            remainingTimeInMinutes, userToken.ExpiresAt);
 
         return userToken;
     }
@@ -41,18 +41,23 @@ public class UserTokenRepository(ILogger<UserTokenRepository> logger, DatabaseCo
         var userToken = await context.UserTokens
             .AsNoTracking()
             .Include(userToken => userToken.User)
-            .FirstOrDefaultAsync(userToken => userToken.IsActive && userToken.Hash == hashedToken, stoppingToken);
+            .FirstOrDefaultAsync(userToken => userToken.Hash == hashedToken, stoppingToken);
+        
+        stopwatch.Stop();
         
         if (userToken is null)
         {
             logger.LogWarning("[{Source}]: UserToken with with Hash={hashedToken} not found in {Duration}ms", Source, hashedToken, stopwatch.ElapsedMilliseconds);
+            return null;
         }
-        else
+
+        if (DateTime.UtcNow > userToken.ExpiresAt)
         {
-            logger.LogInformation("[{Source}]: UserToken entity with with Hash={hashedToken} found in {Duration}ms", Source, hashedToken, stopwatch.ElapsedMilliseconds);
+            logger.LogWarning("[{Source}]: UserToken with with Hash={hashedToken} found in {Duration}ms, but it is expired.", Source, hashedToken, stopwatch.ElapsedMilliseconds);
+            return null;
         }
         
-        stopwatch.Stop();
+        logger.LogInformation("[{Source}]: UserToken entity with with Hash={hashedToken} found in {Duration}ms", Source, hashedToken, stopwatch.ElapsedMilliseconds);
         return userToken;
     }
 }
