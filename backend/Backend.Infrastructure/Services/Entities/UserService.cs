@@ -16,8 +16,9 @@ namespace Backend.Infrastructure.Services.Entities;
 public class UserService(
     ILogger<UserService> logger,
     IUserRepository userRepository,
+    IUserTokenRepository userTokenRepository,
+    IJwtService jwtService,
     ITokenService tokenService,
-    IEmailCryptoService emailCryptoService,
     IEmailSendingService emailSendingService) : IUserService
 {
     private const string Source = nameof(UserService);
@@ -38,10 +39,9 @@ public class UserService(
 
         var user = await userRepository.GetOneByCredentialsAsync(signInDto.Email, signInDto.Password, stoppingToken);
 
-        if (user is null)
-            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);
-        
-        return Result<(string, Role)>.Success(StatusCodes.Status200OK, (tokenService.GenerateToken(user), user.Role));
+        return user is null ?
+            Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials) :
+            Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateJwt(user), user.Role));
     }
 
     public async Task<Result> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
@@ -68,34 +68,53 @@ public class UserService(
                 Cart = new Cart()
             }, stoppingToken);
             
-            await emailSendingService.SendVerificationEmailAsync(user, stoppingToken);
+            var rawVerificationToken = tokenService.GenerateToken();
+
+            var userToken = new UserToken(UserTokenType.AccountVerification)
+            {
+                User = user,
+                Hash = tokenService.HashToken(rawVerificationToken)
+            };
+
+            await userTokenRepository.CreateAsync(userToken, stoppingToken);
+            await emailSendingService.SendVerificationEmailAsync(user, rawVerificationToken, stoppingToken);
+            
             return Result.Success(StatusCodes.Status201Created);
         }
-        catch (DbUpdateException)
+        catch (DbUpdateException ex)
         {
-            logger.LogError("[{Source}]: Email={Email} is already taken.", Source, signUpDto.Email);
+            logger.LogError("[{Source}]: {ExceptionName} occurred creating user or account verification token. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
             return Result.Failure(StatusCodes.Status400BadRequest, ErrorType.EmailTaken);       
         }
     }
 
-    public async Task<Result<(string Token, Role Role)>> VerifyUserAsync(string token, CancellationToken stoppingToken = default)
+    public async Task<Result<(string Token, Role Role)>> VerifyUserAsync(VerifyUserDto verifyUserDto, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Starting verification process...", Source);
-        
+
         try
         {
-            var email = emailCryptoService.Decrypt(token);
-            var (isVerificationSuccessful, user) = await userRepository.VerifyUserAsync(email, stoppingToken);
+            var userToken = await userTokenRepository.GetByHashedTokenWithUserAsync(tokenService.HashToken(verifyUserDto.Token), stoppingToken);
 
-            if (isVerificationSuccessful && user is not null)
-                return Result<(string, Role)>.Success(StatusCodes.Status200OK, (tokenService.GenerateToken(user), user.Role));
+            if (userToken?.UserTokenType is not UserTokenType.AccountVerification)
+                return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);
             
-            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);    
+            var user = await userRepository.VerifyUserAsync(userToken.User.Id, stoppingToken);
+            
+            return user is null ? 
+                Result<(string, Role)>.Failure(StatusCodes.Status404NotFound) : 
+                Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateJwt(user), user.Role));
         }
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: {ExceptionName} occurred while decrypting email. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
-            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);   
+            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);  
         }
+    }
+
+    public async Task<Result> ResetPasswordAsync(ResetPasswordDto resetPasswordDto, CancellationToken stoppingToken = default)
+    {
+        logger.LogInformation("[{Source}]: Starting password reset process...", Source);
+        return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);  // dummy
     }
 }

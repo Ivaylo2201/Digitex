@@ -391,6 +391,40 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("Backend.Domain.Entities.UserToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Hash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserTokenType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Hash")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTokens", (string)null);
+                });
+
             modelBuilder.Entity("Suggestions", b =>
                 {
                     b.Property<Guid>("ProductId")
@@ -780,6 +814,17 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Backend.Domain.Entities.UserToken", b =>
+                {
+                    b.HasOne("Backend.Domain.Entities.User", "User")
+                        .WithMany("Tokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Suggestions", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.ProductBase", null)
@@ -924,6 +969,8 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Reviews");
+
+                    b.Navigation("Tokens");
                 });
 #pragma warning restore 612, 618
         }

@@ -75,30 +75,30 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         return user;
     }
 
-    public async Task<(bool, User?)> VerifyUserAsync(string email, CancellationToken stoppingToken = default)
+    public async Task<User?> VerifyUserAsync(int id, CancellationToken stoppingToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
-        var user = await context.Users.FirstOrDefaultAsync(user => user.Email == email, stoppingToken);
+        var user = await context.Users.FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
         
         if (user is null)
         {
-            logger.LogError("[{Source}]: User entity with Email={Email} not found.", Source, email);
-            return (false, user);
+            logger.LogError("[{Source}]: User entity with Id={Id} not found.", Source, id);
+            return null;
         }
 
         if (user.IsVerified)
         {
-            logger.LogError("[{Source}]: User entity with Email={Email} already verified.", Source, email);
-            return (false, user);    
+            logger.LogError("[{Source}]: User entity with Id={Id} already verified.", Source, id);
+            return null;
         }
         
         user.IsVerified = true;
         await context.SaveChangesAsync(stoppingToken);
         
         stopwatch.Stop();
-        logger.LogInformation("[{Source}]: User entity with Email={Email} verified in {Duration}ms.", Source, email, stopwatch.ElapsedMilliseconds);
-        return (true, user);
+        logger.LogInformation("[{Source}]: User entity with Id={Id} verified in {Duration}ms.", Source, id, stopwatch.ElapsedMilliseconds);
+        return user;
     }
 
     public async Task<User?> GetOneAsync(int id, CancellationToken stoppingToken = default)

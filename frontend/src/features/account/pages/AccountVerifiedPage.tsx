@@ -7,10 +7,6 @@ import { useAuth } from '@/features/auth/stores/useAuth';
 
 type AccountVerifiedResponse = { token: string; role: string };
 
-function getVerifyUrl(token: string) {
-  return `/auth/verify?token=${encodeURIComponent(token)}`;
-}
-
 export function AccountVerifiedPage() {
   const {
     components: { accountVerifiedPage },
@@ -22,7 +18,10 @@ export function AccountVerifiedPage() {
     const verifyAccount = async (token: string | null) => {
       if (token) {
         try {
-          const { data: res } = await httpClient.get<AccountVerifiedResponse>(getVerifyUrl(token));
+          const { data: res } = await httpClient.patch<AccountVerifiedResponse>(
+            '/users/verify',
+            { token: encodeURIComponent(token) }
+          );
           signIn(res.token, res.role);
           toast.success(accountVerifiedPage.accountVerifiedSuccessfully);
         } catch {

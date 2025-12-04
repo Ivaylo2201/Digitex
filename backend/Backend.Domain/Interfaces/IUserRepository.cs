@@ -6,6 +6,5 @@ namespace Backend.Domain.Interfaces;
 public interface IUserRepository : ICreatable<User>, ISingleReadable<User, int>
 {
     Task<User?> GetOneByCredentialsAsync(string email, string password, CancellationToken stoppingToken = default);
-    Task<User?> GetOneWithItemsAndProductsAsync(int userId, CancellationToken stoppingToken = default);
-    Task<(bool, User?)> VerifyUserAsync(string email, CancellationToken stoppingToken = default);
+    Task<User?> VerifyUserAsync(int id, CancellationToken stoppingToken = default);
 }

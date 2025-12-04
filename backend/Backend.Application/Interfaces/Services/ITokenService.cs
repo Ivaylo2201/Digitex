@@ -1,8 +1,7 @@
-﻿using Backend.Domain.Entities;
-
-namespace Backend.Application.Interfaces.Services;
+﻿namespace Backend.Application.Interfaces.Services;
 
 public interface ITokenService
 {
-    string GenerateToken(User user);
+    string GenerateToken(int size = 32);
+    string HashToken(string token);
 }

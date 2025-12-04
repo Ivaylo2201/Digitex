@@ -10,13 +10,12 @@ namespace Backend.Infrastructure.Services.Common;
 public class EmailSendingService(
     ILogger<EmailSendingService> logger,
     IFluentEmail fluentEmail,
-    IEmailCryptoService emailCryptoService,
     IWebHostEnvironment environment,
     string frontendUrl) : IEmailSendingService
 {
     private const string Source = nameof(EmailSendingService);
 
-    public async Task SendVerificationEmailAsync(User user, CancellationToken stoppingToken = default)
+    public async Task SendVerificationEmailAsync(User user, string token, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Sending verification email to {Email}...", Source, user.Email);
         const string subject = "Welcome to Digitex!";
@@ -26,7 +25,7 @@ public class EmailSendingService(
             await fluentEmail
                 .To(user.Email, user.Username)
                 .Subject(subject)
-                .Body(GetVerificationEmailBody(user), isHtml: true)
+                .Body(GetVerificationEmailBody(user.Username, token), isHtml: true)
                 .SendAsync(stoppingToken);
 
             logger.LogInformation("[{Source}]: Verification email sent successfully to {Email}.", Source, user.Email);
@@ -60,15 +59,13 @@ public class EmailSendingService(
         }
     }
 
-    private string GetVerificationEmailBody(User user)
+    private string GetVerificationEmailBody(string username, string token)
     {
         logger.LogInformation("[{Source}]: Building verification email body...", Source);
-
-        var encryptedEmail = emailCryptoService.Encrypt(user.Email);
-        var verificationUrl = $"{frontendUrl}/auth/verify?token={encryptedEmail}";
+        var verificationUrl = $"{frontendUrl}/auth/verify?token={token}";
         
         if (environment.IsDevelopment())
-            logger.LogInformation("[{Source}]: {Username} must visit {VerificationUrl} to confirm their account.", Source, user.Username, verificationUrl);
+            logger.LogInformation("[{Source}]: {Username} must visit {VerificationUrl} to confirm their account.", Source, username, verificationUrl);
 
         return $"""
 
@@ -92,7 +89,7 @@ public class EmailSendingService(
                     <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0" />
 
                     <p style="color: #15161d; font-size: 16px; margin: 20px 0">
-                      Hello, {user.Username}!<br />Thank you for signing up. Please verify your
+                      Hello, {username}!<br />Thank you for signing up. Please verify your
                       account by clicking the button below:
                     </p>
 

@@ -57,6 +57,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Suggestions;");
         await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Wishlist;");
         
+        context.UserTokens.RemoveRange(context.UserTokens);
         context.Addresses.RemoveRange(context.Addresses);
         context.Items.RemoveRange(context.Items);
         context.Reviews.RemoveRange(context.Reviews);
