@@ -1,23 +1,23 @@
-import type { SignUpSchema } from './useSignUpSchema';
 import type { ApiError } from '@/lib/api/ApiError';
-import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/lib/api/httpClient';
-import { toast } from 'sonner';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
-export function useSignUp() {
+type UseResetPasswordRequest = { newPassword: string; token: string };
+
+async function resetPassword(data: UseResetPasswordRequest) {
+  await httpClient.post('/users/reset-password', data);
+}
+
+export function useResetPassword() {
   const { hooks } = useTranslation();
   const navigate = useNavigate();
 
-  return useMutation<void, ApiError, SignUpSchema>({
-    mutationFn: async (data) => {
-      await httpClient.post('/auth/sign-up', data);
-    },
+  return useMutation<void, ApiError, UseResetPasswordRequest>({
+    mutationFn: resetPassword,
     onSuccess: () => {
-      toast.success(hooks.useSignUp.visitYourEmailToVerifyYourAccount, {
-        duration: 10000,
-      });
       navigate('/auth/sign-in');
     },
     onError: (e) => {

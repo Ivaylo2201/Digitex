@@ -40,7 +40,21 @@
       "signIn": "Anmelden",
       "dontHaveAnAccount": "Noch kein Konto?",
       "signUp": "Registrieren",
-      "rememberMe": "Angemeldet bleiben"
+      "rememberMe": "Angemeldet bleiben",
+      "forgotPassword": "Passwort vergessen?"
+    },
+    "resetPasswordForm": {
+      "resetYourPassword": "Passwort zurücksetzen",
+      "enterYourNewPasswordBelow": "Geben Sie unten Ihr neues Passwort ein",
+      "newPassword": "Neues Passwort",
+      "newPasswordConfirmation": "Neues Passwort bestätigen",
+      "resetPassword": "Passwort zurücksetzen"
+    },
+    "forgotPasswordForm": {
+      "resetPassword": "Passwort zurücksetzen",
+      "enterYourEmailToReceiveAPasswordResetEmail": "Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten",
+      "email": "E-Mail",
+      "sendResetEmail": "Link zum Zurücksetzen senden"
     },
     "header": {
       "merchantAddress": "Sofia, Vitosha Blvd. 76"
@@ -207,6 +221,9 @@
   "hooks": {
     "useSignUp": {
       "visitYourEmailToVerifyYourAccount": "Besuchen Sie Ihre E-Mails, um Ihr Konto zu bestätigen."
+    },
+    "useForgotPassword": {
+      "visitYourEmailToResetYourPassword": "Besuchen Sie Ihre E-Mail, um Ihr Passwort zurückzusetzen."
     },
     "generic": {
       "somethingWentWrong": "Etwas ist schiefgelaufen."

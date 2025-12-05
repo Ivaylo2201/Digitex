@@ -63,7 +63,15 @@ export function SignInForm() {
           </div>
 
           <div className='grid gap-2'>
-            <Label htmlFor='password'>{signInForm.password}</Label>
+            <div className='flex justify-between items-center'>
+              <Label htmlFor='password'>{signInForm.password}</Label>
+              <Link
+                to='/account/forgot-password'
+                className='text-gray-400 text-sm hover:text-theme-crimson duration-200 transition-colors'
+              >
+                {signInForm.forgotPassword}
+              </Link>
+            </div>
             <Input
               id='password'
               type='password'
@@ -78,7 +86,7 @@ export function SignInForm() {
               onCheckedChange={(state) =>
                 setValue('rememberMe', state === true)
               }
-              className='cursor-pointer'
+              className='cursor-pointer data-[state=checked]:bg-theme-crimson'
             />
             <Label htmlFor='rememberMe' className='cursor-pointer'>
               {signInForm.rememberMe}

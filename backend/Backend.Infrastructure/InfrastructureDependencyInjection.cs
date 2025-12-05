@@ -182,6 +182,7 @@ public static class InfrastructureDependencyInjection
                 .AddTransient<IFilterService<Ssd>, SsdFilterService>()
                 .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
                 .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
+                .AddSingleton<IUrlService, UrlService>()
                 .AddSingleton<IJwtService>(_ => new JwtService(
                     Encoding.UTF8.GetBytes(GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY")),
                     GetRequiredEnvironmentVariable<string>("JWT_ISSUER"),

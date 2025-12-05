@@ -6,10 +6,12 @@ import { SignInPage } from '@/features/auth/pages/SignInPage';
 import { SignUpPage } from '@/features/auth/pages/SignUpPage';
 import { Page } from '@/components/layout/Page';
 import { ProductsPage } from '@/features/products/pages/ProductsPage/ProductsPage';
-import { AccountVerifiedPage } from './features/account/pages/AccountVerifiedPage';
+import { VerifyAccountPage } from './features/account/pages/VerifyAccountPage';
 import { CartPage } from './features/cart/pages/CartPage';
 import { ComparePage } from './features/compare/pages/ComparePage';
 import { ProductPageResolver } from './features/products/pages/ProductPage/ProductPageResolver';
+import { ResetPasswordPage } from './features/account/pages/ResetPasswordPage';
+import { ForgotPasswordPage } from './features/account/pages/ForgotPasswordPage';
 
 export function Router() {
   return (
@@ -17,29 +19,30 @@ export function Router() {
       <Routes>
         <Route path='/' element={<Page></Page>} />
 
-        <Route
-          path='/products/categories/:category'
-          element={<ProductsPage />}
-        />
+        <Route path='/products'>
+          <Route path='categories/:category' element={<ProductsPage />} />
+          <Route path=':category/:id' element={<ProductPageResolver />} />
+        </Route>
 
-        <Route
-          path='/products/:category/:id'
-          element={<ProductPageResolver />}
-        />
-
-        <Route path='/auth'>
+        <Route path='/account'>
           <Route
-            path='account'
+            index
             element={
               <AuthenticationRequired>
                 <AccountPage />
               </AuthenticationRequired>
             }
           />
+          <Route path='verify' element={<VerifyAccountPage />} />
+          <Route path='forgot-password' element={<ForgotPasswordPage />} />
+          <Route path='reset-password' element={<ResetPasswordPage />} />
+        </Route>
+
+        <Route path='/auth'>
           <Route path='sign-in' element={<SignInPage />} />
           <Route path='sign-up' element={<SignUpPage />} />
-          <Route path='verify' element={<AccountVerifiedPage />} />
         </Route>
+
         <Route path='/compare' element={<ComparePage />} />
         <Route
           path='/cart'

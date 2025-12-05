@@ -98,5 +98,6 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Reviews', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Cities', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Countries', RESEED, 0);");
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('UserTokens', RESEED, 0);");
     }
 } 

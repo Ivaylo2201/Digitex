@@ -4,7 +4,7 @@ import {
   FIELD_MIN_LENGTH,
   PASSWORD_MIN_LENGTH,
   PASSWORD_REGEX,
-} from '../../constants';
+} from '../../../../lib/validation/constants';
 
 export function useSignInSchema() {
   const {

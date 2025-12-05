@@ -1,5 +1,6 @@
 ﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
+using Backend.Infrastructure.Extensions;
 using FluentEmail.Core;
 using Microsoft.Extensions.Logging;
 
@@ -13,7 +14,7 @@ public class EmailSendingService(
 {
     private const string Source = nameof(EmailSendingService);
 
-    public async Task SendVerificationEmailAsync(User user, string token, CancellationToken stoppingToken = default)
+    public async Task SendVerificationEmailAsync(User user, string verificationUrl, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Sending verification email to {Email}...", Source, user.Email);
         const string subject = "Welcome to Digitex!";
@@ -23,17 +24,33 @@ public class EmailSendingService(
             await fluentEmail
                 .To(user.Email, user.Username)
                 .Subject(subject)
-                .Body(GetAccountVerificationEmailBody(user, token), isHtml: true)
+                .Body(emailBuilderService.BuildAccountVerificationEmail(user.Username, verificationUrl), isHtml: true)
                 .SendAsync(stoppingToken);
 
             logger.LogInformation("[{Source}]: Verification email sent successfully to {Email}.", Source, user.Email);
         }
         catch (Exception ex)
         {
-            logger.LogError("[{Source}]: Failed to send verification email to {Email}. Exception message - {Exception}", Source, user.Email, ex.Message);
+            logger.LogException(Source, ex, $"sending verification email to {user.Email}");
         }
     }
 
-    private string GetAccountVerificationEmailBody(User user, string token)
-        => emailBuilderService.BuildAccountVerificationEmail(user.Username, $"{frontendUrl}/auth/verify?token={token}");
+    public async Task SendPasswordResetEmailAsync(User user, string passwordResetUrl, CancellationToken stoppingToken = default)
+    {
+        logger.LogInformation("[{Source}]: Sending password reset email to {Email}...", Source, user.Email);
+        const string subject = "Reset password for you Digitex account.";
+
+        try
+        {
+            await fluentEmail
+                .To(user.Email, user.Username)
+                .Subject(subject)
+                .Body(emailBuilderService.BuildPasswordResetEmail(user.Username, passwordResetUrl), isHtml: true)
+                .SendAsync(stoppingToken);
+        }
+        catch (Exception ex)
+        {
+            logger.LogException(Source, ex, $"sending password reset email to {user.Email}");
+        }
+    }
 }

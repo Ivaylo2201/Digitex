@@ -106,6 +106,7 @@ export type Translation = {
       dontHaveAnAccount: string;
       signUp: string;
       rememberMe: string;
+      forgotPassword: string;
     };
     signUpForm: {
       createdAnAccount: string;
@@ -118,6 +119,19 @@ export type Translation = {
       alreadyHaveAnAccount: string;
       signIn: string;
       acceptTermsAndConditions: string;
+    };
+    resetPasswordForm: {
+      resetYourPassword: string;
+      enterYourNewPasswordBelow: string;
+      newPassword: string;
+      newPasswordConfirmation: string;
+      resetPassword: string;
+    };
+    forgotPasswordForm: {
+      resetPassword: string;
+      enterYourEmailToReceiveAPasswordResetEmail: string;
+      email: string;
+      sendResetEmail: string;
     };
   };
   specifications: {
@@ -202,6 +216,9 @@ export type Translation = {
   hooks: {
     useSignUp: {
       visitYourEmailToVerifyYourAccount: string;
+    };
+    useForgotPassword: {
+      visitYourEmailToResetYourPassword: string;
     };
     generic: {
       somethingWentWrong: string;
@@ -319,6 +336,7 @@ export const translation: Translation = {
       dontHaveAnAccount: "Don't have an account?",
       signUp: 'Sign up',
       rememberMe: 'Remember me',
+      forgotPassword: 'Forgot password?',
     },
     signUpForm: {
       createdAnAccount: 'Create an account',
@@ -336,6 +354,20 @@ export const translation: Translation = {
     accountVerifiedPage: {
       accountVerifiedSuccessfully: 'Account verified successfully.',
       accountVerificationFailed: 'Account verification failed.',
+    },
+    resetPasswordForm: {
+      resetYourPassword: 'Reset your password',
+      enterYourNewPasswordBelow: 'Enter your new password below.',
+      newPassword: 'New password',
+      newPasswordConfirmation: 'New password confirmation',
+      resetPassword: 'Reset password',
+    },
+    forgotPasswordForm: {
+      resetPassword: 'Reset password',
+      enterYourEmailToReceiveAPasswordResetEmail:
+        'Enter your email to receive a password reset email.',
+      email: 'Email',
+      sendResetEmail: 'Send reset email',
     },
   },
   specifications: {
@@ -424,7 +456,12 @@ export const translation: Translation = {
   },
   hooks: {
     useSignUp: {
-      visitYourEmailToVerifyYourAccount: 'Visit your email to verify your account.',
+      visitYourEmailToVerifyYourAccount:
+        'Visit your email to verify your account.',
+    },
+    useForgotPassword: {
+      visitYourEmailToResetYourPassword:
+        'Visit your email to reset your password.',
     },
     generic: { somethingWentWrong: 'Something went wrong.' },
   },

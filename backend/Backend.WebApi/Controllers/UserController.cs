@@ -20,6 +20,17 @@ public class UserController(IUserService userService) : ControllerBase
         var result = await userService.VerifyUserAsync(body, stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? new { result.Value.Token, result.Value.Role } : result.ErrorObject);
     }
+
+    [HttpPost("forgot-password")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
+    [Consumes(Constants.ApplicationJson)]
+    [Produces(Constants.ApplicationJson)]
+    public async Task<IActionResult> ProcessForgottenPasswordAsync([FromBody] ForgotPasswordDto body, CancellationToken stoppingToken = default)
+    {
+        var result = await userService.ProcessForgottenPasswordAsync(body, stoppingToken);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
+    } 
     
     [HttpPatch("reset-password")]
     [Consumes(Constants.ApplicationJson)]

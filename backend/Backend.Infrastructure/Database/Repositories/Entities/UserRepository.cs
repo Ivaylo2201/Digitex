@@ -25,6 +25,27 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         return user;
     }
 
+    public async Task<User?> GetOneByEmailAsync(string email, CancellationToken stoppingToken = default)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        logger.LogInformation("[{Source}]: Getting User entity with Email={Email}", Source, email);
+        
+        var user = await context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(user => user.Email == email, stoppingToken);
+        
+        if (user is null)
+        {
+            logger.LogError("[{Source}]: User entity with Email={Email} not found.", Source, email);
+            return null;
+        }
+        
+        stopwatch.Stop();
+        logger.LogInformation("[{Source}]: User entity with Email={Email} retrieved in {Duration}ms.", Source, email, stopwatch.ElapsedMilliseconds);
+        return user;
+    }
+
     public async Task<User?> GetOneByCredentialsAsync(string email, string password, CancellationToken stoppingToken = default)
     {
         var stopwatch = Stopwatch.StartNew();

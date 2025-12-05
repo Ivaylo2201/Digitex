@@ -5,9 +5,9 @@ import { toast } from 'sonner';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { useAuth } from '@/features/auth/stores/useAuth';
 
-type AccountVerifiedResponse = { token: string; role: string };
+type VerifyAccountResponse = { token: string; role: string };
 
-export function AccountVerifiedPage() {
+export function VerifyAccountPage() {
   const {
     components: { accountVerifiedPage },
   } = useTranslation();
@@ -18,9 +18,9 @@ export function AccountVerifiedPage() {
     const verifyAccount = async (token: string | null) => {
       if (token) {
         try {
-          const { data: res } = await httpClient.patch<AccountVerifiedResponse>(
+          const { data: res } = await httpClient.patch<VerifyAccountResponse>(
             '/users/verify',
-            { token: encodeURIComponent(token) }
+            { token }
           );
           signIn(res.token, res.role);
           toast.success(accountVerifiedPage.accountVerifiedSuccessfully);

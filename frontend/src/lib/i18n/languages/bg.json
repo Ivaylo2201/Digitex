@@ -40,7 +40,21 @@
       "signIn": "Вход",
       "dontHaveAnAccount": "Нямате акаунт?",
       "signUp": "Регистрация",
-      "rememberMe": "Запомни ме"
+      "rememberMe": "Запомни ме",
+      "forgotPassword": "Забравена парола?"
+    },
+    "resetPasswordForm": {
+      "resetYourPassword": "Промяна на паролата",
+      "enterYourNewPasswordBelow": "Въведете новата си парола по-долу",
+      "newPassword": "Нова парола",
+      "newPasswordConfirmation": "Потвърждение на новата парола",
+      "resetPassword": "Промяна на паролата"
+    },
+    "forgotPasswordForm": {
+      "resetPassword": "Нулиране на паролата",
+      "enterYourEmailToReceiveAPasswordResetEmail": "Въведете вашия имейл, за да получите линк за нулиране на паролата",
+      "email": "Имейл",
+      "sendResetEmail": "Изпрати линк за нулиране"
     },
     "header": {
       "merchantAddress": "София, бул. Витоша 76"
@@ -207,6 +221,9 @@
   "hooks": {
     "useSignUp": {
       "visitYourEmailToVerifyYourAccount": "Посетете имейла си, за да потвърдите акаунта си."
+    },
+    "useForgotPassword": {
+      "visitYourEmailToResetYourPassword": "Посетете имейла си, за да нулирате паролата."
     },
     "generic": {
       "somethingWentWrong": "Нещо се обърка."

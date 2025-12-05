@@ -108,7 +108,7 @@ export function SignUpForm() {
             <Checkbox
               id='terms'
               onCheckedChange={handleAcceptTermsAndConditionsToggle}
-              className='cursor-pointer'
+              className='cursor-pointer data-[state=checked]:bg-theme-crimson'
             />
             <Label htmlFor='terms' className='cursor-pointer'>
               {signUpForm.acceptTermsAndConditions}

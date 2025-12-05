@@ -19,7 +19,8 @@ public class UserService(
     IUserTokenRepository userTokenRepository,
     IJwtService jwtService,
     ITokenService tokenService,
-    IEmailSendingService emailSendingService) : IUserService
+    IEmailSendingService emailSendingService,
+    IUrlService urlService) : IUserService
 {
     private const string Source = nameof(UserService);
     
@@ -69,12 +70,10 @@ public class UserService(
             }, stoppingToken);
             
             var rawToken = tokenService.GenerateToken();
-
-            if (rawToken is null || !tokenService.TryHashToken(rawToken, out var hashedToken))
-                return Result<string>.Failure(StatusCodes.Status500InternalServerError);
+            var hashedToken = tokenService.HashToken(rawToken);
             
-            await userTokenRepository.CreateAsync(CreateUserToken(user, hashedToken, UserTokenType.AccountVerification), stoppingToken);
-            await emailSendingService.SendVerificationEmailAsync(user, rawToken, stoppingToken);
+            await userTokenRepository.CreateAsync(UserToken.Create(user, hashedToken, UserTokenType.AccountVerification), stoppingToken);
+            await emailSendingService.SendVerificationEmailAsync(user, urlService.AccountVerificationUrl(rawToken), stoppingToken);
             
             return Result<string>.Success(StatusCodes.Status201Created, $"Visit {user.Email} to verify your account.");
         }
@@ -89,9 +88,7 @@ public class UserService(
     {
         logger.LogInformation("[{Source}]: Starting verification process...", Source);
         
-        if (!tokenService.TryHashToken(verifyUserDto.Token, out var hashedToken))
-            return Result<(string, Role)>.Failure(StatusCodes.Status500InternalServerError);
-        
+        var hashedToken = tokenService.HashToken(verifyUserDto.Token);
         var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, stoppingToken);
 
         if (userToken is null)
@@ -110,31 +107,24 @@ public class UserService(
 
     public async Task<Result> ResetPasswordAsync(ResetPasswordDto resetPasswordDto, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Starting password reset process...", Source);
-        return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);  // dummy
+        throw new NotImplementedException();
     }
 
-    private static UserToken CreateUserToken(User user, string hash, UserTokenType userTokenType)
+    public async Task<Result> ProcessForgottenPasswordAsync(ForgotPasswordDto forgotPasswordDto, CancellationToken stoppingToken = default)
     {
-        const int accountVerificationTokenExpirationInMinutes = 1440;
-        const int passwordResetTokenExpirationInMinutes = 30;
-        const int defaultTokenExpirationInMinutes = 0;
+        logger.LogInformation("[{Source}]: Starting forgotten password process...", Source);
         
-        var createdAt = DateTime.UtcNow;
-        var expiresAt = createdAt.AddMinutes(userTokenType switch
-        {
-            UserTokenType.AccountVerification => accountVerificationTokenExpirationInMinutes,
-            UserTokenType.PasswordReset => passwordResetTokenExpirationInMinutes,
-            _ => defaultTokenExpirationInMinutes
-        });
+        var user = await userRepository.GetOneByEmailAsync(forgotPasswordDto.Email, stoppingToken);
+
+        if (user is null)
+            return Result.Failure(StatusCodes.Status404NotFound);
         
-        return new UserToken
-        {
-            User = user,
-            Hash = hash,
-            UserTokenType = userTokenType,
-            CreatedAt = createdAt,
-            ExpiresAt = expiresAt
-        };
+        var rawToken = tokenService.GenerateToken();
+        var hashedToken = tokenService.HashToken(rawToken);
+            
+        await userTokenRepository.CreateAsync(UserToken.Create(user, hashedToken, UserTokenType.PasswordReset), stoppingToken);
+        await emailSendingService.SendPasswordResetEmailAsync(user, urlService.ResetPasswordUrl(rawToken) ,stoppingToken);
+        
+        return Result.Success(StatusCodes.Status200OK);
     }
 }
