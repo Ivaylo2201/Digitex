@@ -14,25 +14,22 @@ public class UserTokenRepository(ILogger<UserTokenRepository> logger, DatabaseCo
     {
         var stopwatch = Stopwatch.StartNew();
 
-        await context.UserTokens.AddAsync(userToken, stoppingToken);
+        var token = (await context.UserTokens.AddAsync(userToken, stoppingToken)).Entity;
         await context.SaveChangesAsync(stoppingToken);
 
         stopwatch.Stop();
-            
-        var tokenType = userToken.UserTokenType.ToString();
-        var remainingTimeInMinutes = (userToken.ExpiresAt - userToken.CreatedAt).Minutes;
 
         logger.LogInformation(
-            "[{Source}]: {TokenType} UserToken entity with UserId={UserId} created in {Duration}ms.", Source,
-            tokenType, userToken.UserId, stopwatch.ElapsedMilliseconds);
+            "[{Source}]: UserToken entity with UserId={UserId} and type={TokenType} created in {Duration}ms.", Source,
+            userToken.UserId,  userToken.UserTokenType.ToString(), stopwatch.ElapsedMilliseconds);
         logger.LogInformation(
-            "[{Source}]: Token will be active for {RemainingTimeInMinutes} minutes until {Timestamp}.", Source,
-            remainingTimeInMinutes, userToken.ExpiresAt);
+            "[{Source}]: Token with Id={TokenId} will be active for {RemainingTimeInMinutes} minutes until {Timestamp}.", Source, token.Id,
+            token.RemainingTimeOfActivityInMinutes, userToken.ExpiresAt);
 
         return userToken;
     }
 
-    public async Task<UserToken?> GetByHashedTokenWithUserAsync(string hashedToken, CancellationToken stoppingToken = default)
+    public async Task<UserToken?> GetActiveTokenByHashWithUserAsync(string hashedToken, CancellationToken stoppingToken = default)
     {
         var stopwatch = Stopwatch.StartNew();
         
@@ -51,7 +48,7 @@ public class UserTokenRepository(ILogger<UserTokenRepository> logger, DatabaseCo
             return null;
         }
 
-        if (DateTime.UtcNow > userToken.ExpiresAt)
+        if (userToken.IsExpired)
         {
             logger.LogWarning("[{Source}]: UserToken with with Hash={hashedToken} found in {Duration}ms, but it is expired.", Source, hashedToken, stopwatch.ElapsedMilliseconds);
             return null;

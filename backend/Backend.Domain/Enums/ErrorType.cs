@@ -3,6 +3,7 @@
 public enum ErrorType
 {
     DatabaseError,
+    InvalidTokenType,
     InvalidCredentials,
     ValidationFailed,
     CryptographyError,

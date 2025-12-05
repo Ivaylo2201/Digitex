@@ -68,10 +68,10 @@ public class UserService(
                 Cart = new Cart()
             }, stoppingToken);
             
-            var token = tokenService.GenerateToken();
+            var rawToken = tokenService.GenerateToken();
 
-            await userTokenRepository.CreateAsync(CreateUserToken(user, token), stoppingToken);
-            await emailSendingService.SendVerificationEmailAsync(user, token, stoppingToken);
+            await userTokenRepository.CreateAsync(CreateUserToken(user, rawToken, UserTokenType.AccountVerification), stoppingToken);
+            await emailSendingService.SendVerificationEmailAsync(user, rawToken, stoppingToken);
             
             return Result<string>.Success(StatusCodes.Status201Created, user.Email);
         }
@@ -88,10 +88,13 @@ public class UserService(
 
         try
         {
-            var userToken = await userTokenRepository.GetByHashedTokenWithUserAsync(tokenService.HashToken(verifyUserDto.Token), stoppingToken);
+            var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(tokenService.HashToken(verifyUserDto.Token), stoppingToken);
 
-            if (userToken?.UserTokenType is not UserTokenType.AccountVerification)
-                return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials);
+            if (userToken is null)
+                return Result<(string, Role)>.Failure(StatusCodes.Status404NotFound);
+
+            if (userToken.UserTokenType is not UserTokenType.AccountVerification)
+                return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidTokenType);
             
             var user = await userRepository.VerifyUserAsync(userToken.User.Id, stoppingToken);
             
@@ -112,18 +115,27 @@ public class UserService(
         return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);  // dummy
     }
 
-    private UserToken CreateUserToken(User user, string token)
+    private UserToken CreateUserToken(User user, string rawToken, UserTokenType userTokenType)
     {
         const int accountVerificationTokenExpirationInMinutes = 1440;
+        const int passwordResetTokenExpirationInMinutes = 30;
+        const int defaultTokenExpirationInMinutes = 0;
+        
         var createdAt = DateTime.UtcNow;
+        var expiresAt = createdAt.AddMinutes(userTokenType switch
+        {
+            UserTokenType.AccountVerification => accountVerificationTokenExpirationInMinutes,
+            UserTokenType.PasswordReset => passwordResetTokenExpirationInMinutes,
+            _ => defaultTokenExpirationInMinutes
+        });
         
         return new UserToken
         {
             User = user,
-            Hash = tokenService.HashToken(token),
-            UserTokenType = UserTokenType.AccountVerification,
+            Hash = tokenService.HashToken(rawToken),
+            UserTokenType = userTokenType,
             CreatedAt = createdAt,
-            ExpiresAt = createdAt.AddMinutes(accountVerificationTokenExpirationInMinutes)
+            ExpiresAt = expiresAt
         };
     }
 }

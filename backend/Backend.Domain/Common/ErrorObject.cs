@@ -23,6 +23,7 @@ public class ErrorObject
             _ => errorType switch
             {
                 ErrorType.DatabaseError => "Database operation failed.",
+                ErrorType.InvalidTokenType => "Invalid token type.",
                 ErrorType.InvalidCredentials => "Invalid credentials.",
                 ErrorType.ValidationFailed => "Validation failed.",
                 ErrorType.CryptographyError => "Cryptography operation failed.",
