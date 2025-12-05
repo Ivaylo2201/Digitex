@@ -3,7 +3,7 @@ using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Interfaces;
 
-public interface IUserTokenRepository : ICreatable<UserToken>
+public interface IUserTokenRepository : ICreatable<UserToken>, IDeletable<int>
 {
     Task<UserToken?> GetActiveTokenByHashWithUserAsync(string hashedToken, CancellationToken stoppingToken = default);
 }

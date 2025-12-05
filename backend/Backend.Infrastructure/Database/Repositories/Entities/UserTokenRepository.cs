@@ -57,4 +57,18 @@ public class UserTokenRepository(ILogger<UserTokenRepository> logger, DatabaseCo
         logger.LogInformation("[{Source}]: UserToken entity with with Hash={hashedToken} found in {Duration}ms", Source, hashedToken, stopwatch.ElapsedMilliseconds);
         return userToken;
     }
+
+    public async Task DeleteAsync(int id, CancellationToken stoppingToken = default)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        var affected = await context.UserTokens
+            .Where(x => x.Id == id)
+            .ExecuteDeleteAsync(stoppingToken);
+        
+        stopwatch.Stop();
+
+        if (affected is 0)
+            logger.LogWarning("[{Source}]: UserToken with with Id={Id} not found in {Duration}ms", Source, id, stopwatch.ElapsedMilliseconds);
+    }
 }

@@ -76,7 +76,7 @@ public class UserService(
             await userTokenRepository.CreateAsync(CreateUserToken(user, hashedToken, UserTokenType.AccountVerification), stoppingToken);
             await emailSendingService.SendVerificationEmailAsync(user, rawToken, stoppingToken);
             
-            return Result<string>.Success(StatusCodes.Status201Created, user.Email);
+            return Result<string>.Success(StatusCodes.Status201Created, $"Visit {user.Email} to verify your account.");
         }
         catch (DbUpdateException ex)
         {
@@ -101,6 +101,7 @@ public class UserService(
             return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidTokenType);
         
         var user = await userRepository.VerifyUserAsync(userToken.User.Id, stoppingToken);
+        await userTokenRepository.DeleteAsync(userToken.Id, stoppingToken);
         
         return user is null ? 
             Result<(string, Role)>.Failure(StatusCodes.Status404NotFound) : 

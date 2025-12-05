@@ -1,6 +1,8 @@
 import { getCurrencySymbol } from '../utils/getCurrencySymbol';
 
-export function CurrencyOption({ code }: { code: string }) {
+type CurrencyOptionProps = { code: string };
+
+export function CurrencyOption({ code }: CurrencyOptionProps) {
   return (
     <div className='flex items-center gap-2 font-montserrat text-xs'>
       <span className='text-theme-crimson font-semibold'>
