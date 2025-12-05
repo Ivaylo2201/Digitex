@@ -25,7 +25,7 @@ export function useCompletePasswordResetSchema() {
         .regex(PASSWORD_REGEX, auth.password.regexError),
     })
     .refine((data) => data.newPassword === data.newPasswordConfirmation, {
-      message: 'Passwords do not match',
+      message: auth.password.passwordMismatchError,
       path: ['passwordConfirmation'],
     });
 }
