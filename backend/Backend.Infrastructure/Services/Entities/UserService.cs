@@ -70,14 +70,17 @@ public class UserService(
             
             var rawToken = tokenService.GenerateToken();
 
-            await userTokenRepository.CreateAsync(CreateUserToken(user, rawToken, UserTokenType.AccountVerification), stoppingToken);
+            if (rawToken is null || !tokenService.TryHashToken(rawToken, out var hashedToken))
+                return Result<string>.Failure(StatusCodes.Status500InternalServerError);
+            
+            await userTokenRepository.CreateAsync(CreateUserToken(user, hashedToken, UserTokenType.AccountVerification), stoppingToken);
             await emailSendingService.SendVerificationEmailAsync(user, rawToken, stoppingToken);
             
             return Result<string>.Success(StatusCodes.Status201Created, user.Email);
         }
         catch (DbUpdateException ex)
         {
-            logger.LogError("[{Source}]: {ExceptionName} occurred creating user or account verification token. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.InnerException?.Message ?? ex.Message);
+            logger.LogException(Source, ex, "creating user or account verification token");
             return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.DatabaseError);       
         }
     }
@@ -85,28 +88,23 @@ public class UserService(
     public async Task<Result<(string Token, Role Role)>> VerifyUserAsync(VerifyUserDto verifyUserDto, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Starting verification process...", Source);
+        
+        if (!tokenService.TryHashToken(verifyUserDto.Token, out var hashedToken))
+            return Result<(string, Role)>.Failure(StatusCodes.Status500InternalServerError);
+        
+        var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, stoppingToken);
 
-        try
-        {
-            var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(tokenService.HashToken(verifyUserDto.Token), stoppingToken);
+        if (userToken is null)
+            return Result<(string, Role)>.Failure(StatusCodes.Status404NotFound);
 
-            if (userToken is null)
-                return Result<(string, Role)>.Failure(StatusCodes.Status404NotFound);
-
-            if (userToken.UserTokenType is not UserTokenType.AccountVerification)
-                return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidTokenType);
-            
-            var user = await userRepository.VerifyUserAsync(userToken.User.Id, stoppingToken);
-            
-            return user is null ? 
-                Result<(string, Role)>.Failure(StatusCodes.Status404NotFound) : 
-                Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateJwt(user), user.Role));
-        }
-        catch (Exception ex)
-        {
-            logger.LogError("[{Source}]: {ExceptionName} occurred while decrypting email. Exception message: {ExceptionMessage}", Source, ex.GetType().Name, ex.Message);
-            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);  
-        }
+        if (userToken.UserTokenType is not UserTokenType.AccountVerification)
+            return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidTokenType);
+        
+        var user = await userRepository.VerifyUserAsync(userToken.User.Id, stoppingToken);
+        
+        return user is null ? 
+            Result<(string, Role)>.Failure(StatusCodes.Status404NotFound) : 
+            Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateJwt(user), user.Role));
     }
 
     public async Task<Result> ResetPasswordAsync(ResetPasswordDto resetPasswordDto, CancellationToken stoppingToken = default)
@@ -115,7 +113,7 @@ public class UserService(
         return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.CryptographyError);  // dummy
     }
 
-    private UserToken CreateUserToken(User user, string rawToken, UserTokenType userTokenType)
+    private static UserToken CreateUserToken(User user, string hash, UserTokenType userTokenType)
     {
         const int accountVerificationTokenExpirationInMinutes = 1440;
         const int passwordResetTokenExpirationInMinutes = 30;
@@ -132,7 +130,7 @@ public class UserService(
         return new UserToken
         {
             User = user,
-            Hash = tokenService.HashToken(rawToken),
+            Hash = hash,
             UserTokenType = userTokenType,
             CreatedAt = createdAt,
             ExpiresAt = expiresAt

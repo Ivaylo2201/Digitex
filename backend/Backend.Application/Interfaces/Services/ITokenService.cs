@@ -2,6 +2,6 @@
 
 public interface ITokenService
 {
-    string GenerateToken(int size = 32);
-    string HashToken(string token);
+    string? GenerateToken(int size = 32);
+    bool TryHashToken(string raw, out string hashed);
 }

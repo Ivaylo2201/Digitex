@@ -1,22 +1,44 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Backend.Application.Interfaces.Services;
+using Backend.Infrastructure.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Common;
 
-public class TokenService : ITokenService
+public class TokenService(ILogger<TokenService> logger) : ITokenService
 {
-    public string GenerateToken(int size = 32)
+    private const string Source = nameof(TokenService);
+    
+    public string? GenerateToken(int size = 32)
     {
-        var bytes = new byte[size];
-        RandomNumberGenerator.Fill(bytes);
-        return Convert.ToBase64String(bytes);
+        try
+        {
+            var bytes = new byte[size];
+            RandomNumberGenerator.Fill(bytes);
+            return Convert.ToBase64String(bytes);
+        }
+        catch (Exception ex)
+        {
+            logger.LogException(Source, ex, "generating a token");
+            return null;
+        }
     }
 
-    public string HashToken(string token)
+    public bool TryHashToken(string raw, out string hashed)
     {
-        var bytes = Encoding.UTF8.GetBytes(token);
-        var hash = SHA256.HashData(bytes);
-        return Convert.ToBase64String(hash);
+        try
+        {
+            var bytes = Encoding.UTF8.GetBytes(raw);
+            var hash = SHA256.HashData(bytes);
+            hashed = Convert.ToBase64String(hash);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.LogException(Source, ex, "hashing a token");
+            hashed = string.Empty;
+            return false;
+        }
     }
 }

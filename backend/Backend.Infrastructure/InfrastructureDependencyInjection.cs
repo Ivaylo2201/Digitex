@@ -71,9 +71,10 @@ public static class InfrastructureDependencyInjection
             }
             catch (Exception ex)
             {
-                Log.Error(
-                    "[{Source}]: {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}",
-                    Source, ex.GetType().Name, ex.Message);
+                var exceptionMessage = ex.InnerException?.Message ?? ex.Message;
+                var exceptionType = ex.InnerException?.GetType().Name ?? ex.GetType().Name;
+                
+                Log.Error("[{Source}]: An {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}", Source, exceptionType, exceptionMessage);
                 return services;
             }
         }

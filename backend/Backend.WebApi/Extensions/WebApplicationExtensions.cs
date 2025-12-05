@@ -1,12 +1,12 @@
-﻿using FluentValidation;
+﻿using Backend.WebApi.Utilities;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 
 namespace Backend.WebApi.Extensions;
 
 public static class WebApplicationExtensions
 {
-    private const string ContentType = "application/json";
-    private const string ErrorMessageFallback = "An error occurred.";
+    private const string ErrorMessageFallback = "An unknown error has occurred.";
     
     public static void UseGlobalExceptionHandler(this WebApplication app)
     {
@@ -14,7 +14,7 @@ public static class WebApplicationExtensions
         {
             builder.Run(async context =>
             {
-                context.Response.ContentType = ContentType;
+                context.Response.ContentType = Constants.ApplicationJson;
 
                 var error = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
 

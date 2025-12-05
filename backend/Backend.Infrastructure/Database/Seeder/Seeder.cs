@@ -1,4 +1,5 @@
 ﻿using Backend.Domain.Entities;
+using Backend.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -6,6 +7,8 @@ namespace Backend.Infrastructure.Database.Seeder;
 
 public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
 {
+    private const string Source = nameof(Seeder);
+    
     public async Task RunAsync()
     {
         try
@@ -19,10 +22,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         }
         catch (Exception ex)
         {
-            var exceptionMessage = ex.InnerException?.Message ?? ex.Message;
-            var exceptionType = ex.InnerException?.GetType().Name ?? ex.GetType().Name;
-            
-            logger.LogError("{ExceptionName} occurred while seeding the database. Exception message: {ExceptionMessage}", exceptionType, exceptionMessage);
+            logger.LogException(Source, ex, "seeding the database");
         }
     }
     
