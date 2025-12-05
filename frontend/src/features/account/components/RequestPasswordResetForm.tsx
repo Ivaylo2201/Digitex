@@ -14,21 +14,21 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { toast } from 'sonner';
 import { Spinner } from '@/components/ui/spinner';
 import {
-  useForgotPasswordSchema,
-  type ForgotPasswordSchema,
-} from '../hooks/forgot-password/useForgotPasswordSchema';
-import { useForgotPassword } from '../hooks/forgot-password/useForgotPassword';
+  useRequestPasswordResetSchema,
+  type RequestPasswordResetSchema,
+} from '../hooks/request-password-reset/useRequestPasswordResetSchema';
+import { useRequestPasswordReset } from '../hooks/request-password-reset/useRequestPasswordReset';
 
-export function ForgotPasswordForm() {
-  const { handleSubmit, register } = useForm<ForgotPasswordSchema>();
-  const forgotPasswordSchema = useForgotPasswordSchema();
-  const { mutate, isPending } = useForgotPassword();
+export function RequestPasswordResetForm() {
+  const { handleSubmit, register } = useForm<RequestPasswordResetSchema>();
+  const requestPasswordResetSchema = useRequestPasswordResetSchema();
+  const { mutate, isPending } = useRequestPasswordReset();
   const {
     components: { forgotPasswordForm },
   } = useTranslation();
 
-  const onSubmit = (data: ForgotPasswordSchema) => {
-    const result = forgotPasswordSchema.safeParse(data);
+  const onSubmit = (data: RequestPasswordResetSchema) => {
+    const result = requestPasswordResetSchema.safeParse(data);
 
     if (!result.success) {
       toast.error(result.error?.errors[0].message);

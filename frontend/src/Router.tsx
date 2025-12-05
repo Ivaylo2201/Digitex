@@ -6,12 +6,12 @@ import { SignInPage } from '@/features/auth/pages/SignInPage';
 import { SignUpPage } from '@/features/auth/pages/SignUpPage';
 import { Page } from '@/components/layout/Page';
 import { ProductsPage } from '@/features/products/pages/ProductsPage/ProductsPage';
-import { VerifyAccountPage } from './features/account/pages/VerifyAccountPage';
 import { CartPage } from './features/cart/pages/CartPage';
 import { ComparePage } from './features/compare/pages/ComparePage';
 import { ProductPageResolver } from './features/products/pages/ProductPage/ProductPageResolver';
-import { ResetPasswordPage } from './features/account/pages/ResetPasswordPage';
-import { ForgotPasswordPage } from './features/account/pages/ForgotPasswordPage';
+import { AccountVerificationPage } from './features/account/pages/AccountVerificationPage';
+import { RequestPasswordResetPage } from './features/account/pages/RequestPasswordResetPage';
+import { CompletePasswordResetPage } from './features/account/pages/CompletePasswordResetPage';
 
 export function Router() {
   return (
@@ -33,9 +33,17 @@ export function Router() {
               </AuthenticationRequired>
             }
           />
-          <Route path='verify' element={<VerifyAccountPage />} />
-          <Route path='forgot-password' element={<ForgotPasswordPage />} />
-          <Route path='reset-password' element={<ResetPasswordPage />} />
+          <Route
+            path='verify'
+            element={<AccountVerificationPage />} />
+          <Route
+            path='request-password-reset'
+            element={<RequestPasswordResetPage />}
+          />
+          <Route
+            path='complete-password-reset'
+            element={<CompletePasswordResetPage />}
+          />
         </Route>
 
         <Route path='/auth'>

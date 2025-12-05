@@ -6,7 +6,7 @@ import {
 } from '@/lib/validation/constants';
 import z from 'zod';
 
-export function useResetPasswordSchema() {
+export function useCompletePasswordResetSchema() {
   const {
     validationSchemas: { auth },
   } = useTranslation();
@@ -30,6 +30,6 @@ export function useResetPasswordSchema() {
     });
 }
 
-export type ResetPasswordSchema = z.infer<
-  ReturnType<typeof useResetPasswordSchema>
+export type CompletePasswordResetSchema = z.infer<
+  ReturnType<typeof useCompletePasswordResetSchema>
 >;

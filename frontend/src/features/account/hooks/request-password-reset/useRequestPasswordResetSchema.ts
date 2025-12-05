@@ -2,7 +2,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { FIELD_MIN_LENGTH } from '@/lib/validation/constants';
 import z from 'zod';
 
-export function useForgotPasswordSchema() {
+export function useRequestPasswordResetSchema() {
   const {
     validationSchemas: { auth },
   } = useTranslation();
@@ -15,6 +15,6 @@ export function useForgotPasswordSchema() {
   });
 }
 
-export type ForgotPasswordSchema = z.infer<
-  ReturnType<typeof useForgotPasswordSchema>
+export type RequestPasswordResetSchema = z.infer<
+  ReturnType<typeof useRequestPasswordResetSchema>
 >;

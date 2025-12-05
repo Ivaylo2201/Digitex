@@ -21,7 +21,7 @@ public class UserController(IUserService userService) : ControllerBase
         return StatusCode(result.StatusCode, result.IsSuccess ? new { result.Value.Token, result.Value.Role } : result.ErrorObject);
     }
 
-    [HttpPost("forgot-password")]
+    [HttpPost("request-password-reset")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
@@ -32,7 +32,10 @@ public class UserController(IUserService userService) : ControllerBase
         return StatusCode(result.StatusCode, result.IsSuccess ? new { Message = result.Value } : result.ErrorObject);
     } 
     
-    [HttpPatch("reset-password")]
+    [HttpPatch("complete-password-reset")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> CompletePasswordResetAsync([FromBody] CompletePasswordResetDto body, CancellationToken stoppingToken = default)

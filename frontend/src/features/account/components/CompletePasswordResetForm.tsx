@@ -15,22 +15,22 @@ import { Spinner } from '@/components/ui/spinner';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { toast } from 'sonner';
 import {
-  useResetPasswordSchema,
-  type ResetPasswordSchema,
-} from '../hooks/reset-password/useResetPasswordSchema';
-import { useResetPassword } from '../hooks/reset-password/useResetPassword';
+  useCompletePasswordResetSchema,
+  type CompletePasswordResetSchema,
+} from '../hooks/complete-password-reset/useCompletePasswordResetSchema';
+import { useCompletePasswordReset } from '../hooks/complete-password-reset/useCompletePasswordReset';
 
-export function ResetPasswordForm() {
-  const { handleSubmit, register } = useForm<ResetPasswordSchema>();
+export function CompletePasswordResetForm() {
+  const { handleSubmit, register } = useForm<CompletePasswordResetSchema>();
   const [searchParams] = useSearchParams();
-  const resetPasswordSchema = useResetPasswordSchema();
-  const { mutate, isPending } = useResetPassword();
+  const completePasswordResetSchema = useCompletePasswordResetSchema();
+  const { mutate, isPending } = useCompletePasswordReset();
   const {
     components: { resetPasswordForm },
   } = useTranslation();
 
-  const onSubmit = (data: ResetPasswordSchema) => {
-    const result = resetPasswordSchema.safeParse(data);
+  const onSubmit = (data: CompletePasswordResetSchema) => {
+    const result = completePasswordResetSchema.safeParse(data);
 
     if (!result.success) {
       toast.error(result.error?.errors[0].message);

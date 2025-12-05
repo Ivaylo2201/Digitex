@@ -66,7 +66,7 @@ export function SignInForm() {
             <div className='flex justify-between items-center'>
               <Label htmlFor='password'>{signInForm.password}</Label>
               <Link
-                to='/account/forgot-password'
+                to='/account/request-password-reset'
                 className='text-gray-400 text-sm hover:text-theme-crimson duration-200 transition-colors'
               >
                 {signInForm.forgotPassword}
