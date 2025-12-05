@@ -1,6 +1,6 @@
 ﻿namespace Backend.Application.Dtos.User;
 
-public class ForgotPasswordDto
+public class RequestPasswordResetDto
 {
     public required string Email { get; init; }
 }

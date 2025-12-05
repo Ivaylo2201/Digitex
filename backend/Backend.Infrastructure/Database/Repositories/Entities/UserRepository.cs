@@ -122,6 +122,25 @@ public class UserRepository(ILogger<UserRepository> logger, DatabaseContext cont
         return user;
     }
 
+    public async Task ResetPasswordAsync(int id, string newPassword, CancellationToken stoppingToken = default)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        
+        var user = await context.Users.FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
+        
+        if (user is null)
+        {
+            logger.LogError("[{Source}]: User entity with Id={Id} not found.", Source, id);
+            return;
+        }
+        
+        user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+        await context.SaveChangesAsync(stoppingToken);
+        
+        stopwatch.Stop();
+        logger.LogInformation("[{Source}]: User entity with Id={Id} password reset in {Duration}ms.", Source, id, stopwatch.ElapsedMilliseconds);
+    }
+
     public async Task<User?> GetOneAsync(int id, CancellationToken stoppingToken = default)
         => await context.Users.FirstOrDefaultAsync(user => user.IsVerified && user.Id == id, stoppingToken);
 }

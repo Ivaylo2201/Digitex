@@ -25,8 +25,8 @@ export function useSignIn() {
       storeSignIn(res.token, res.role, rememberMe);
       navigate('/');
     },
-    onError: (e) => {
-      toast.error(e.response?.data.message || hooks.generic.somethingWentWrong); // TODO: remove e.response thing with translation
+    onError: () => {
+      toast.error(hooks.generic.somethingWentWrong);
     },
   });
 }

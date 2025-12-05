@@ -6,9 +6,9 @@ namespace Backend.Application.Interfaces.Services;
 
 public interface IUserService
 {
-    Task<Result<(string Token, Role Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default);
     Task<Result<string>> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default);
-    Task<Result<(string Token, Role Role)>> VerifyUserAsync(VerifyUserDto verifyUserDto, CancellationToken stoppingToken = default);
-    Task<Result> ResetPasswordAsync(ResetPasswordDto resetPasswordDto, CancellationToken stoppingToken = default);
-    Task<Result> ProcessForgottenPasswordAsync(ForgotPasswordDto forgotPasswordDto, CancellationToken stoppingToken = default);
+    Task<Result<(string Token, Role Role)>> CompleteAccountVerificationAsync(AccountVerificationDto accountVerificationDto, CancellationToken stoppingToken = default);
+    Task<Result<(string Token, Role Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default);
+    Task<Result<string>> RequestPasswordResetAsync(RequestPasswordResetDto requestPasswordResetDto, CancellationToken stoppingToken = default);
+    Task<Result<string>> CompletePasswordResetAsync(CompletePasswordResetDto completePasswordResetDto, CancellationToken stoppingToken = default);
 }

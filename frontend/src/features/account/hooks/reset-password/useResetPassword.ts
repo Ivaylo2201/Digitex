@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 type UseResetPasswordRequest = { newPassword: string; token: string };
 
 async function resetPassword(data: UseResetPasswordRequest) {
-  await httpClient.post('/users/reset-password', data);
+  await httpClient.patch('/users/reset-password', data);
 }
 
 export function useResetPassword() {
@@ -20,8 +20,8 @@ export function useResetPassword() {
     onSuccess: () => {
       navigate('/auth/sign-in');
     },
-    onError: (e) => {
-      toast.error(e.response?.data.message || hooks.generic.somethingWentWrong); // TODO: remove e.response thing with translation
+    onError: () => {
+      toast.error(hooks.generic.somethingWentWrong);
     },
   });
 }

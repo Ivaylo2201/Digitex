@@ -66,6 +66,8 @@ public class UserTokenRepository(ILogger<UserTokenRepository> logger, DatabaseCo
             .Where(x => x.Id == id)
             .ExecuteDeleteAsync(stoppingToken);
         
+        logger.LogInformation("[{Source}]: UserToken entity with Id={Id} was consumed and deleted.", Source, id);
+        
         stopwatch.Stop();
 
         if (affected is 0)

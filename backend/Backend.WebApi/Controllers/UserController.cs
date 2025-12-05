@@ -15,9 +15,9 @@ public class UserController(IUserService userService) : ControllerBase
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> VerifyUserAsync([FromBody] VerifyUserDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> CompleteAccountVerificationAsync([FromBody] AccountVerificationDto body, CancellationToken stoppingToken = default)
     {
-        var result = await userService.VerifyUserAsync(body, stoppingToken);
+        var result = await userService.CompleteAccountVerificationAsync(body, stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? new { result.Value.Token, result.Value.Role } : result.ErrorObject);
     }
 
@@ -26,18 +26,18 @@ public class UserController(IUserService userService) : ControllerBase
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> ProcessForgottenPasswordAsync([FromBody] ForgotPasswordDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> RequestPasswordResetAsync([FromBody] RequestPasswordResetDto body, CancellationToken stoppingToken = default)
     {
-        var result = await userService.ProcessForgottenPasswordAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
+        var result = await userService.RequestPasswordResetAsync(body, stoppingToken);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { Message = result.Value } : result.ErrorObject);
     } 
     
     [HttpPatch("reset-password")]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> CompletePasswordResetAsync([FromBody] CompletePasswordResetDto body, CancellationToken stoppingToken = default)
     {
-        var result = await userService.ResetPasswordAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
+        var result = await userService.CompletePasswordResetAsync(body, stoppingToken);
+        return StatusCode(result.StatusCode, result.IsSuccess ? new { Message = result.Value } : result.ErrorObject);
     }
 }
