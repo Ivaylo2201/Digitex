@@ -5,8 +5,8 @@ public class Order
     public int Id { get; init; }
     public int UserId { get; init; }
     public User User { get; init; } = null!;
-    public int ShippingId { get; init; }
-    public Shipping Shipping { get; init; } = null!;
+    public int ShipmentId { get; init; }
+    public Shipment Shipment { get; init; } = null!;
     public int? PaymentId { get; init; }
     public Payment? Payment { get; init; }
     public ICollection<Item> Items { get; init; } = [];

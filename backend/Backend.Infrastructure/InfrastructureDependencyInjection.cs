@@ -2,16 +2,10 @@
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
-using Backend.Application.Dtos.GraphicsCards;
 using Backend.Application.Dtos.Item;
-using Backend.Application.Dtos.Monitor;
-using Backend.Application.Dtos.Motherboard;
-using Backend.Application.Dtos.PowerSupply;
-using Backend.Application.Dtos.Processor;
 using Backend.Application.Dtos.Product;
-using Backend.Application.Dtos.Ram;
+using Backend.Application.Dtos.Products;
 using Backend.Application.Dtos.Review;
-using Backend.Application.Dtos.Ssd;
 using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
@@ -20,7 +14,9 @@ using Backend.Domain.Interfaces;
 using Backend.Domain.ValueObjects;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
+using Backend.Infrastructure.Database.Repositories;
 using Backend.Infrastructure.Database.Repositories.Entities;
+using Backend.Infrastructure.Database.Repositories.Products;
 using Backend.Infrastructure.Services.Common;
 using Backend.Infrastructure.Services.Common.Filters;
 using Backend.Infrastructure.Services.Entities;
@@ -145,7 +141,7 @@ public static class InfrastructureDependencyInjection
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<ICartRepository, CartRepository>()
                 .AddScoped<IItemRepository, ItemRepository>()
-                .AddScoped<IShippingRepository, ShippingRepository>()
+                .AddScoped<IShipmentRepository, ShipmentRepository>()
                 .AddScoped<IUserTokenRepository, UserTokenRepository>();
         }
 
@@ -172,7 +168,7 @@ public static class InfrastructureDependencyInjection
                     frontendUrl))
                 .AddScoped<ICartService, CartService>()
                 .AddScoped<IItemService, ItemService>()
-                .AddScoped<IShippingService, ShippingService>()
+                .AddScoped<IShipmentService, ShipmentService>()
                 .AddTransient<IEmailBuilderService, EmailBuilderService>()
                 .AddTransient<ITokenService, TokenService>()
                 .AddTransient<IFilterService<Monitor>, MonitorFilterService>()

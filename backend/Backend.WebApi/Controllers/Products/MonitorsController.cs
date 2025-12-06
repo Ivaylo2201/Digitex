@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Monitor;
+﻿using Backend.Application.Dtos.Products;
 using Backend.Application.Interfaces.Services;
 using Backend.WebApi.Controllers.Base;
 using Mapster;

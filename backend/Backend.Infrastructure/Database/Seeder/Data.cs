@@ -2148,29 +2148,29 @@ public static class Data
         }
     ];
 
-    public static readonly List<Shipping> Shippings =
+    public static readonly List<Shipment> Shipments =
     [
         new()
         {
-            ShippingType = ShippingType.Express,
+            ShipmentType = ShipmentType.Express,
             Cost = 25,
             Days = 2
         },
         new()
         {
-            ShippingType = ShippingType.Standard,
+            ShipmentType = ShipmentType.Standard,
             Cost = 10,
             Days = 5
         },
         new()
         {
-            ShippingType = ShippingType.NextDay,
+            ShipmentType = ShipmentType.NextDay,
             Cost = 35,
             Days = 1
         },
         new()
         {
-            ShippingType = ShippingType.SameDay,
+            ShipmentType = ShipmentType.SameDay,
             Cost = 50,
             Days = 0
         }

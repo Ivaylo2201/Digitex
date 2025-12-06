@@ -45,7 +45,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         products.ForEach(context.AddRange);
         
         context.Brands.AddRange(Data.Brands.Values);
-        context.Shippings.AddRange(Data.Shippings);
+        context.Shipments.AddRange(Data.Shipments);
         context.Countries.AddRange(Data.Countries.Values);
         context.Cities.AddRange(Data.Cities);
     }
@@ -74,7 +74,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Products.RemoveRange(context.Products);
         context.Addresses.RemoveRange(context.Addresses);
         context.Cities.RemoveRange(context.Cities);
-        context.Shippings.RemoveRange(context.Shippings);
+        context.Shipments.RemoveRange(context.Shipments);
         context.Users.RemoveRange(context.Users);
         context.Brands.RemoveRange(context.Brands);
         context.Cities.RemoveRange(context.Cities);
@@ -89,7 +89,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Addresses', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Cities', RESEED, 0);");
-        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Shippings', RESEED, 0);");
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Shipments', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Users', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Brands', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Carts', RESEED, 0);");

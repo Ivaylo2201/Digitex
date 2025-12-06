@@ -16,21 +16,22 @@ public class ProductServiceBase<TEntity, TProjection>(
     private readonly string _entityName = typeof(TEntity).Name;
     private readonly string _projectionName = typeof(TProjection).Name;
 
-    public async Task<Result<TProjection?>> GetOneAsync(Guid id, Func<TEntity, TProjection> project,
-        CancellationToken stoppingToken = default)
+    public async Task<Result<TProjection?>> GetOneAsync(Guid id, Func<TEntity, TProjection> project, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var entity = await productRepository.GetOneAsync(id, stoppingToken);
 
         if (entity is null)
+        {
+            logger.LogWarning("[{Source}]: {Entity} with Id={Id} was not found.", source, _entityName, id);
             return Result<TProjection?>.Failure(StatusCodes.Status404NotFound);
+        }
 
-        logger.LogInformation("[{Source}]: Projecting {Entity} entity into {Projection}...", source, _entityName, _projectionName);
+        logger.LogInformation("[{Source}]: Projecting {Entity} into a {Projection}...", source, _entityName, _projectionName);
         return Result<TProjection?>.Success(StatusCodes.Status200OK, project(entity));
     }
 
-    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter,
-        CancellationToken stoppingToken = default)
+    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var entities = await productRepository.ListAllAsync(filter, stoppingToken);
