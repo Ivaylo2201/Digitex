@@ -15,13 +15,9 @@ export function useSignUp() {
       await httpClient.post('/auth/sign-up', data);
     },
     onSuccess: () => {
-      toast.success(hooks.useSignUp.visitYourEmailToVerifyYourAccount, {
-        duration: 10000,
-      });
+      toast.success(hooks.useSignUp.visitYourEmailToVerifyYourAccount);
       navigate('/auth/sign-in');
     },
-    onError: () => {
-      toast.error(hooks.generic.somethingWentWrong);
-    },
+    onError: () => toast.error(hooks.generic.somethingWentWrong)
   });
 }

@@ -36,8 +36,6 @@ public class UserRepository(DatabaseContext context) : IUserRepository
     public async Task ResetPasswordAsync(int id, string newPassword, CancellationToken stoppingToken = default)
     {
         var user = await VerifiedUsers.FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
-        Console.WriteLine("Resetting password for user ID: " + id);
-        
         user?.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
         await context.SaveChangesAsync(stoppingToken);
     }

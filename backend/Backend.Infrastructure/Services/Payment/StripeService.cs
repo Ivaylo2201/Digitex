@@ -12,7 +12,7 @@ namespace Backend.Infrastructure.Services.Payment;
 
 public class StripeService(
     ILogger<StripeService> logger,
-    IEmailSendingService emailSendingService,
+    IEmailSenderService emailSenderService,
     IUserRepository userRepository,
     ICartRepository cartRepository) : IStripeService
 {
@@ -50,7 +50,7 @@ public class StripeService(
             // For each item in user.Cart.Items, reduce the stock of the product by the quantity of the item and create a sale object
             // Clear the cart
 
-            //await emailSendingService.SendOrderConfirmationEmailAsync(user, stoppingToken);
+            //await emailSenderService.SendOrderConfirmationEmailAsync(user, stoppingToken);
                 
             return Result.Success(StatusCodes.Status200OK);
         }

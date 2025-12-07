@@ -8,7 +8,7 @@ public class EmailBuilderService : IEmailBuilderService
     { 
         const string title = """
                              <p style="font-weight: bold; font-size: 20px; color: #15161d">
-                               Confirm your account
+                               Verify your account
                              </p>
                              """;
         

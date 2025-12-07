@@ -15,7 +15,7 @@ public class AccountService(
     IUserTokenRepository userTokenRepository,
     IJwtService jwtService,
     ITokenService tokenService,
-    IEmailSendingService emailSendingService,
+    IEmailSenderService emailSenderService,
     IUrlService urlService) : IAccountService
 {
     private const string Source = nameof(AccountService);
@@ -65,7 +65,7 @@ public class AccountService(
         var hashedToken = tokenService.HashToken(rawToken);
         await userTokenRepository.CreateAsync(UserToken.Create(user, hashedToken, UserTokenType.PasswordReset), stoppingToken);
         
-        await emailSendingService.SendPasswordResetEmailAsync(user, urlService.GetPasswordResetUrl(rawToken), stoppingToken);
+        await emailSenderService.SendPasswordResetEmailAsync(user, urlService.GetPasswordResetUrl(rawToken), stoppingToken);
         return Result<string>.Success(StatusCodes.Status200OK, $"Visit {user.Email} to reset your password.");
     }
     

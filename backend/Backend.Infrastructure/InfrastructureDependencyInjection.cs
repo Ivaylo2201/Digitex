@@ -157,7 +157,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped(typeof(IBrandProviderService<>), typeof(BrandProviderService<>))
             .AddScoped<IStripeService, StripeService>()
             .AddScoped<IShipmentService, ShipmentService>()
-            .AddScoped<IEmailSendingService, EmailSendingService>()
+            .AddScoped<IEmailSenderService, EmailSenderService>()
             .AddTransient<IEmailBuilderService, EmailBuilderService>()
             .AddTransient<ITokenService, TokenService>()
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()

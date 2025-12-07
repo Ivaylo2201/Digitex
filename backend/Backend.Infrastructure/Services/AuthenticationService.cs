@@ -19,7 +19,7 @@ public class AuthenticationService(
     IUserTokenRepository userTokenRepository,
     IJwtService jwtService,
     ITokenService tokenService,
-    IEmailSendingService emailSendingService,
+    IEmailSenderService emailSenderService,
     IUrlService urlService) : IAuthenticationService
 {
     private const string Source = nameof(AuthenticationService);
@@ -86,6 +86,6 @@ public class AuthenticationService(
         var hashedToken = tokenService.HashToken(rawToken);
             
         await userTokenRepository.CreateAsync(UserToken.Create(user, hashedToken, UserTokenType.AccountVerification), stoppingToken);
-        await emailSendingService.SendAccountVerificationEmailAsync(user, urlService.GetAccountVerificationUrl(rawToken), stoppingToken);
+        await emailSenderService.SendAccountVerificationEmailAsync(user, urlService.GetAccountVerificationUrl(rawToken), stoppingToken);
     }
 }

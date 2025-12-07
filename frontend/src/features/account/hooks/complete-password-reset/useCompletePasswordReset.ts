@@ -20,8 +20,6 @@ export function useCompletePasswordReset() {
   return useMutation<AxiosResponse, ApiError, UseCompletePasswordResetRequest>({
     mutationFn: completePasswordReset,
     onSuccess: () => navigate('/auth/sign-in'),
-    onError: () => {
-      toast.error(hooks.generic.somethingWentWrong);
-    },
+    onError: () => toast.error(hooks.generic.somethingWentWrong)
   });
 }

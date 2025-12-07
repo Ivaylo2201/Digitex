@@ -16,12 +16,7 @@ export function useRequestPasswordReset() {
 
   return useMutation<AxiosResponse, ApiError, RequestPasswordResetSchema>({
     mutationFn: requestPasswordReset,
-    onSuccess: () => {
-      const message = hooks.useForgotPassword.visitYourEmailToResetYourPassword;
-      toast.success(message, { duration: 10000 });
-    },
-    onError: () => {
-      toast.error(hooks.generic.somethingWentWrong);
-    },
+    onSuccess: () => toast.success(hooks.useForgotPassword.visitYourEmailToResetYourPassword),
+    onError: () => toast.error(hooks.generic.somethingWentWrong),
   });
 }
