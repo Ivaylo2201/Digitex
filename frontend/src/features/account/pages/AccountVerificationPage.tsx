@@ -18,7 +18,7 @@ export function AccountVerificationPage() {
     const verifyAccount = async (token: string | null) => {
       if (token) {
         try {
-          const { data: res } = await httpClient.patch<AccountVerificationResponse>('/users/verify', { token });
+          const { data: res } = await httpClient.patch<AccountVerificationResponse>('/accounts/verify', { token });
           signIn(res.token, res.role);
           toast.success(accountVerifiedPage.accountVerifiedSuccessfully);
         } catch {

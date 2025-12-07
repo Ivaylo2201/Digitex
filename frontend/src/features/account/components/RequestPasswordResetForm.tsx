@@ -24,7 +24,7 @@ export function RequestPasswordResetForm() {
   const requestPasswordResetSchema = useRequestPasswordResetSchema();
   const { mutate, isPending } = useRequestPasswordReset();
   const {
-    components: { forgotPasswordForm },
+    components: { requestPasswordResetForm },
   } = useTranslation();
 
   const onSubmit = (data: RequestPasswordResetSchema) => {
@@ -41,16 +41,16 @@ export function RequestPasswordResetForm() {
   return (
     <Card className='w-full max-w-sm bg-theme-gunmetal text-theme-white'>
       <CardHeader>
-        <CardTitle>{forgotPasswordForm.resetPassword}</CardTitle>
+        <CardTitle>{requestPasswordResetForm.requestAPasswordReset}</CardTitle>
         <CardDescription className='text-gray-400'>
-          {forgotPasswordForm.enterYourEmailToReceiveAPasswordResetEmail}
+          {requestPasswordResetForm.enterYourEmailToRequestAPasswordResetForYourAccount}
         </CardDescription>
       </CardHeader>
 
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
           <div className='grid gap-2'>
-            <Label htmlFor='email'>{forgotPasswordForm.email}</Label>
+            <Label htmlFor='email'>{requestPasswordResetForm.email}</Label>
             <Input
               id='email'
               type='text'
@@ -63,10 +63,10 @@ export function RequestPasswordResetForm() {
           <Button
             type='submit'
             disabled={isPending}
-            className='w-full bg-theme-crimson cursor-pointer'
+            className='w-full bg-theme-crimson hover:bg-theme-lightcrimson cursor-pointer duration-200 transition-colors'
           >
             {isPending && <Spinner />}
-            {forgotPasswordForm.sendResetEmail}
+            {requestPasswordResetForm.requestAPasswordReset}
           </Button>
         </form>
       </CardContent>

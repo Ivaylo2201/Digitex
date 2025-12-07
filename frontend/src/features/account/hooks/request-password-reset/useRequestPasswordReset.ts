@@ -7,7 +7,7 @@ import type { RequestPasswordResetSchema } from './useRequestPasswordResetSchema
 import type { AxiosResponse } from 'axios';
 
 async function requestPasswordReset(data: RequestPasswordResetSchema) {
-  const res = await httpClient.post('/users/request-password-reset', data);
+  const res = await httpClient.post('/accounts/request-password-reset', data);
   return res.data;
 }
 

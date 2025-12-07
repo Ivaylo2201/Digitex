@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Dtos.User;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ namespace Backend.WebApi.Controllers;
 
 [ApiController]
 [Route("api/auth")]
-public class AuthenticationController(IUserService userService) : ControllerBase
+public class AuthenticationController(IAuthenticationService authenticationService) : ControllerBase
 {
     [HttpPost("sign-up")]
     [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
@@ -17,7 +17,7 @@ public class AuthenticationController(IUserService userService) : ControllerBase
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> SignUpAsync([FromBody] SignUpDto body, CancellationToken stoppingToken = default)
     {
-        var result = await userService.SignUpAsync(body, stoppingToken);
+        var result = await authenticationService.SignUpAsync(body, stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? new { Message = result.Value } : result.ErrorObject);
     }
 
@@ -28,7 +28,7 @@ public class AuthenticationController(IUserService userService) : ControllerBase
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> SignInAsync([FromBody] SignInDto body, CancellationToken stoppingToken = default)
     {
-        var result = await userService.SignInAsync(body, stoppingToken);
+        var result = await authenticationService.SignInAsync(body, stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? new { result.Value.Token, result.Value.Role } : result.ErrorObject);
     }
 }

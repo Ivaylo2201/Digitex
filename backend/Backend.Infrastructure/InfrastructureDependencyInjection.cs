@@ -7,6 +7,7 @@ using Backend.Application.Dtos.Product;
 using Backend.Application.Dtos.Products;
 using Backend.Application.Dtos.Review;
 using Backend.Application.Extensions;
+using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Exceptions;
@@ -15,23 +16,24 @@ using Backend.Domain.ValueObjects;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Repositories;
-using Backend.Infrastructure.Database.Repositories.Entities;
 using Backend.Infrastructure.Database.Repositories.Products;
-using Backend.Infrastructure.Services.Common;
-using Backend.Infrastructure.Services.Common.Filters;
-using Backend.Infrastructure.Services.Entities;
+using Backend.Infrastructure.Extensions;
+using Backend.Infrastructure.Services;
+using Backend.Infrastructure.Services.Email;
+using Backend.Infrastructure.Services.Filters;
+using Backend.Infrastructure.Services.Payment;
+using Backend.Infrastructure.Services.Products;
+using Backend.Infrastructure.Services.Tokens;
 using DotNetEnv;
-using FluentEmail.Core;
 using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Monitor = Backend.Domain.Entities.Monitor;
-using MonitorService = Backend.Infrastructure.Services.Entities.MonitorService;
+using MonitorService = Backend.Infrastructure.Services.Products.MonitorService;
 
 namespace Backend.Infrastructure;
 
@@ -46,23 +48,17 @@ public static class InfrastructureDependencyInjection
             try
             {
                 Env.Load();
-            
-                var frontendUrl = configuration["Urls:Frontend"];
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
-            
-                if (frontendUrl is null)
-                    throw new ImproperlyConfiguredException("Missing frontend url.");
                 
                 InfrastructureDependencyInjection.AddMapsterConfigurations();
 
                 services
-                    .AddDbContext(connectionString)
-                    .AddServices(frontendUrl)
+                    .AddDbContext(configuration)
                     .AddRepositories()
-                    .AddCors(frontendUrl)
+                    .AddServices()
+                    .AddCors(configuration)
                     .AddAuthentication();
 
-                Log.Information("[{Source}]: Infrastructure services successfully initialized.", Source);
+                Log.Information("[{Source}]: Infrastructure layer successfully initialized.", Source);
                 return services;
             }
             catch (Exception ex)
@@ -70,13 +66,15 @@ public static class InfrastructureDependencyInjection
                 var exceptionMessage = ex.InnerException?.Message ?? ex.Message;
                 var exceptionType = ex.InnerException?.GetType().Name ?? ex.GetType().Name;
                 
-                Log.Error("[{Source}]: An {ExceptionType} occurred while configuring DI for Infrastructure. Exception message: {ExceptionMessage}", Source, exceptionType, exceptionMessage);
+                Log.Error("[{Source}]: An {ExceptionType} occurred while configuring the Infrastructure layer. Exception message: {ExceptionMessage}", Source, exceptionType, exceptionMessage);
                 return services;
             }
         }
 
-        private IServiceCollection AddDbContext(string? connectionString)
+        private IServiceCollection AddDbContext(IConfiguration configuration)
         {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            
             if (string.IsNullOrEmpty(connectionString))
                 throw new ImproperlyConfiguredException("Connection string is null or empty.");
 
@@ -88,9 +86,9 @@ public static class InfrastructureDependencyInjection
 
         private IServiceCollection AddAuthentication()
         {
-            var jwtSecretKey = GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY");
-            var jwtIssuer = GetRequiredEnvironmentVariable<string>("JWT_ISSUER");
-            var jwtAudience = GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE");
+            var jwtSecretKey = "JWT_SECRET_KEY".GetFromEnvironmentVariables();
+            var jwtIssuer = "JWT_ISSUER".GetFromEnvironmentVariables();
+            var jwtAudience = "JWT_AUDIENCE".GetFromEnvironmentVariables();
 
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -112,10 +110,14 @@ public static class InfrastructureDependencyInjection
             return services.AddAuthorization();
         }
 
-        private IServiceCollection AddCors(string frontendUrl)
-        {
-            return services.AddCors(corsOptions =>
+        private IServiceCollection AddCors(IConfiguration configuration) => services
+            .AddCors(corsOptions =>
             {
+                var frontendUrl = configuration["Urls:Frontend"];
+                
+                if (string.IsNullOrEmpty(frontendUrl))
+                    throw new ImproperlyConfiguredException("Frontend url is null or empty.");
+                
                 corsOptions.AddPolicy(
                     nameof(Policy.AllowFrontend),
                     policyBuilder => policyBuilder.WithOrigins(frontendUrl).AllowAnyHeader().AllowAnyMethod());
@@ -124,67 +126,49 @@ public static class InfrastructureDependencyInjection
                     nameof(Policy.AllowAny),
                     policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
-        }
+        
+        private IServiceCollection AddRepositories() => services
+            .AddScoped<IProductRepository<Monitor>, MonitorRepository>()
+            .AddScoped<IProductRepository<Ram>, RamRepository>()
+            .AddScoped<IProductRepository<Processor>, ProcessorRepository>()
+            .AddScoped<IProductRepository<GraphicsCard>, GraphicsCardRepository>()
+            .AddScoped<IProductRepository<Ssd>, SsdRepository>()
+            .AddScoped<IProductRepository<Motherboard>, MotherboardRepository>()
+            .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>()
+            .AddScoped<IReviewRepository, ReviewRepository>()
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<ICartRepository, CartRepository>()
+            .AddScoped<IItemRepository, ItemRepository>()
+            .AddScoped<IShipmentRepository, ShipmentRepository>()
+            .AddScoped<IUserTokenRepository, UserTokenRepository>();
 
-        private IServiceCollection AddRepositories()
-        {
-            return services
-                .AddScoped<IProductRepository<Monitor>, MonitorRepository>()
-                .AddScoped<IProductRepository<Ram>, RamRepository>()
-                .AddScoped<IProductRepository<Processor>, ProcessorRepository>()
-                .AddScoped<IProductRepository<GraphicsCard>, GraphicsCardRepository>()
-                .AddScoped<IProductRepository<Ssd>, SsdRepository>()
-                .AddScoped<IProductRepository<Motherboard>, MotherboardRepository>()
-                .AddScoped<IProductRepository<PowerSupply>, PowerSupplyRepository>()
-                .AddScoped<IReviewRepository, ReviewRepository>()
-                .AddScoped<IProductBaseRepository, ProductBaseRepository>()
-                .AddScoped<IUserRepository, UserRepository>()
-                .AddScoped<ICartRepository, CartRepository>()
-                .AddScoped<IItemRepository, ItemRepository>()
-                .AddScoped<IShipmentRepository, ShipmentRepository>()
-                .AddScoped<IUserTokenRepository, UserTokenRepository>();
-        }
-
-        private IServiceCollection AddServices(string frontendUrl)
-        {
-            return services
-                .AddEmail()
-                .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
-                .AddScoped<IProductService<Ram, RamDto>, RamService>()
-                .AddScoped<IProductService<Processor, ProcessorDto>, ProcessorService>()
-                .AddScoped<IProductService<GraphicsCard, GraphicsCardDto>, GraphicsCardService>()
-                .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
-                .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
-                .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
-                .AddScoped<IReviewService, ReviewService>()
-                .AddScoped<IProductBaseService, ProductBaseService>()
-                .AddScoped<IUserService, UserService>()
-                .AddScoped<IBrandProviderService, BrandProviderService>()
-                .AddScoped<IStripeService, StripeService>()
-                .AddScoped<IEmailSendingService>(serviceProvider => new EmailSendingService(
-                    serviceProvider.GetRequiredService<ILogger<EmailSendingService>>(),
-                    serviceProvider.GetRequiredService<IFluentEmail>(),
-                    serviceProvider.GetRequiredService<IEmailBuilderService>(),
-                    frontendUrl))
-                .AddScoped<ICartService, CartService>()
-                .AddScoped<IItemService, ItemService>()
-                .AddScoped<IShipmentService, ShipmentService>()
-                .AddTransient<IEmailBuilderService, EmailBuilderService>()
-                .AddTransient<ITokenService, TokenService>()
-                .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
-                .AddTransient<IFilterService<Ram>, RamFilterService>()
-                .AddTransient<IFilterService<Processor>, ProcessorFilterService>()
-                .AddTransient<IFilterService<GraphicsCard>, GraphicsCardFilterService>()
-                .AddTransient<IFilterService<Ssd>, SsdFilterService>()
-                .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
-                .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
-                .AddSingleton<IUrlService, UrlService>()
-                .AddSingleton<IJwtService>(_ => new JwtService(
-                    Encoding.UTF8.GetBytes(GetRequiredEnvironmentVariable<string>("JWT_SECRET_KEY")),
-                    GetRequiredEnvironmentVariable<string>("JWT_ISSUER"),
-                    GetRequiredEnvironmentVariable<string>("JWT_AUDIENCE")
-                ));
-        }
+        private IServiceCollection AddServices() => services
+            .AddEmail()
+            .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
+            .AddScoped<IProductService<Ram, RamDto>, RamService>()
+            .AddScoped<IProductService<Processor, ProcessorDto>, ProcessorService>()
+            .AddScoped<IProductService<GraphicsCard, GraphicsCardDto>, GraphicsCardService>()
+            .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
+            .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
+            .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
+            .AddScoped<IReviewService, ReviewService>()
+            .AddScoped<IAuthenticationService, AuthenticationService>()
+            .AddScoped<IAccountService, AccountService>()
+            .AddScoped<IBrandProviderService, BrandProviderService>()
+            .AddScoped<IStripeService, StripeService>()
+            .AddScoped<IShipmentService, ShipmentService>()
+            .AddScoped<IEmailSendingService, EmailSendingService>()
+            .AddTransient<IEmailBuilderService, EmailBuilderService>()
+            .AddTransient<ITokenService, TokenService>()
+            .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
+            .AddTransient<IFilterService<Ram>, RamFilterService>()
+            .AddTransient<IFilterService<Processor>, ProcessorFilterService>()
+            .AddTransient<IFilterService<GraphicsCard>, GraphicsCardFilterService>()
+            .AddTransient<IFilterService<Ssd>, SsdFilterService>()
+            .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
+            .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
+            .AddSingleton<IUrlService, UrlService>()
+            .AddSingleton<IJwtService, JwtService>();
 
         private static void AddMapsterConfigurations()
         {
@@ -229,11 +213,11 @@ public static class InfrastructureDependencyInjection
 
         private IServiceCollection AddEmail()
         {
-            var email = GetRequiredEnvironmentVariable<string>("MERCHANT_EMAIL");
-            var gmailAppPassword = GetRequiredEnvironmentVariable<string>("GMAIL_APP_PASSWORD");
-            var username = GetRequiredEnvironmentVariable<string>("MERCHANT_USERNAME");
-            var smtpProvider = GetRequiredEnvironmentVariable<string>("SMTP_PROVIDER");
-            var smtpPort = GetRequiredEnvironmentVariable<int>("SMTP_PORT");
+            var email = "MERCHANT_EMAIL".GetFromEnvironmentVariables();
+            var gmailAppPassword = "GMAIL_APP_PASSWORD".GetFromEnvironmentVariables();
+            var username = "MERCHANT_USERNAME".GetFromEnvironmentVariables();
+            var smtpProvider = "SMTP_PROVIDER".GetFromEnvironmentVariables();
+            var smtpPort = int.Parse("SMTP_PORT".GetFromEnvironmentVariables());
 
             services
                 .AddFluentEmail(email, username)
@@ -246,15 +230,5 @@ public static class InfrastructureDependencyInjection
 
             return services;
         }
-    }
-
-    private static T GetRequiredEnvironmentVariable<T>(string variableName)
-    {
-        var variable = Environment.GetEnvironmentVariable(variableName);
-
-        if (string.IsNullOrEmpty(variable))
-            throw new ImproperlyConfiguredException($"Missing {variableName}.");
-
-        return (T)Convert.ChangeType(variable, typeof(T));
     }
 }

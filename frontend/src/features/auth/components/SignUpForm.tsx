@@ -118,7 +118,7 @@ export function SignUpForm() {
           <Button
             type='submit'
             disabled={isPending || !areTermsAndConditionsAccepted}
-            className='w-full bg-theme-crimson cursor-pointer'
+            className='w-full bg-theme-crimson hover:bg-theme-lightcrimson cursor-pointer duration-200 transition-colors'
           >
             {isPending && <Spinner />}
             {signUpForm.signUp}

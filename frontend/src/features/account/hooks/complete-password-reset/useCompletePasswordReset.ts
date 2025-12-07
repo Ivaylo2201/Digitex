@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 type UseCompletePasswordResetRequest = { newPassword: string; token: string };
 
 async function completePasswordReset(data: UseCompletePasswordResetRequest) {
-  const res = await httpClient.patch('/users/complete-password-reset', data);
+  const res = await httpClient.patch('/accounts/complete-password-reset', data);
   return res.data;
 }
 

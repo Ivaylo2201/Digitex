@@ -120,18 +120,16 @@ export type Translation = {
       signIn: string;
       acceptTermsAndConditions: string;
     };
-    resetPasswordForm: {
-      resetYourPassword: string;
+    completePasswordResetForm: {
+      completePasswordReset: string;
       enterYourNewPasswordBelow: string;
       newPassword: string;
       newPasswordConfirmation: string;
-      resetPassword: string;
     };
-    forgotPasswordForm: {
-      resetPassword: string;
-      enterYourEmailToReceiveAPasswordResetEmail: string;
+    requestPasswordResetForm: {
+      enterYourEmailToRequestAPasswordResetForYourAccount: string;
       email: string;
-      sendResetEmail: string;
+      requestAPasswordReset: string;
     };
   };
   specifications: {
@@ -355,19 +353,17 @@ export const translation: Translation = {
       accountVerifiedSuccessfully: 'Account verified successfully.',
       accountVerificationFailed: 'Account verification failed.',
     },
-    resetPasswordForm: {
-      resetYourPassword: 'Reset your password',
+    completePasswordResetForm: {
+      completePasswordReset: 'Complete password reset',
       enterYourNewPasswordBelow: 'Enter your new password below.',
       newPassword: 'New password',
       newPasswordConfirmation: 'New password confirmation',
-      resetPassword: 'Reset password',
     },
-    forgotPasswordForm: {
-      resetPassword: 'Reset password',
-      enterYourEmailToReceiveAPasswordResetEmail:
-        'Enter your email to receive a password reset email.',
+    requestPasswordResetForm: {
+      enterYourEmailToRequestAPasswordResetForYourAccount:
+        'Enter your email to request a password reset for your account.',
       email: 'Email',
-      sendResetEmail: 'Send reset email',
+      requestAPasswordReset: 'Request a password reset',
     },
   },
   specifications: {

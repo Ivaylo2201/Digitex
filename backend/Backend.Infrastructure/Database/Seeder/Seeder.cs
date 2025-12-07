@@ -18,7 +18,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
             Seed();
             await context.SaveChangesAsync();
             
-            logger.LogInformation("Seeding complete.");
+            logger.LogInformation("Database seeding complete.");
         }
         catch (Exception ex)
         {
@@ -28,7 +28,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
     
     private void Seed()
     {
-        logger.LogInformation("Seeding...");
+        logger.LogInformation("Seeding the database...");
 
         
         List<IEnumerable<ProductBase>> products =

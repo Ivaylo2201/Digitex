@@ -6,13 +6,11 @@ using Backend.Infrastructure.Database.Seeder;
 using Backend.WebApi.Extensions;
 using Backend.WebApi.Middlewares;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Converters;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var serviceName = Assembly.GetEntryAssembly()?.GetName().Name ?? "Backend.WebApi";
-var serviceVersion = Assembly.GetEntryAssembly()?.GetName().Version ?? Version.Parse("1.0.0.0");
 var serviceUrl = builder.Configuration["Urls:Backend"]!;
 var swaggerUrl = $"{serviceUrl}/swagger/index.html";
 
@@ -79,8 +77,8 @@ app.UseMiddleware<RequestPipelineMiddleware>();
 app.UseGlobalExceptionHandler();
 app.MapControllers();
 
-Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment} at version {ServiceVersion}...", serviceName, app.Environment.EnvironmentName, serviceVersion);
-Log.Information("[{ServiceName}]: Web host listening on: {ApiUrl}.", serviceName, $"{serviceUrl}/api");
+Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment}...", serviceName, app.Environment.EnvironmentName);
+Log.Information("[{ServiceName}]: Web host configured to listen on: {ApiUrl}.", serviceName, $"{serviceUrl}/api");
 Log.Information("[{ServiceName}]: Swagger available on {SwaggerUrl}.", serviceName, swaggerUrl);
 
 app.Run();

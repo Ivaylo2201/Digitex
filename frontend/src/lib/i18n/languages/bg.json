@@ -43,18 +43,16 @@
       "rememberMe": "Запомни ме",
       "forgotPassword": "Забравена парола?"
     },
-    "resetPasswordForm": {
-      "resetYourPassword": "Промяна на паролата",
-      "enterYourNewPasswordBelow": "Въведете новата си парола по-долу",
+    "completePasswordResetForm": {
+      "completePasswordReset": "Завърши промяната на паролата",
+      "enterYourNewPasswordBelow": "Въведете новата си парола по-долу.",
       "newPassword": "Нова парола",
-      "newPasswordConfirmation": "Потвърждение на новата парола",
-      "resetPassword": "Промяна на паролата"
+      "newPasswordConfirmation": "Потвърждение на новата парола"
     },
-    "forgotPasswordForm": {
-      "resetPassword": "Нулиране на паролата",
-      "enterYourEmailToReceiveAPasswordResetEmail": "Въведете вашия имейл, за да получите линк за нулиране на паролата",
+    "requestPasswordResetForm": {
+      "enterYourEmailToRequestAPasswordResetForYourAccount": "Въведете вашия имейл, за да заявите нулиране на паролата за вашия акаунт.",
       "email": "Имейл",
-      "sendResetEmail": "Изпрати линк за нулиране"
+      "requestAPasswordReset": "Заяви нулиране на паролата"
     },
     "header": {
       "merchantAddress": "София, бул. Витоша 76"

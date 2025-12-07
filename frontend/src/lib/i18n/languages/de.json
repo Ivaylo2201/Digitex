@@ -43,18 +43,16 @@
       "rememberMe": "Angemeldet bleiben",
       "forgotPassword": "Passwort vergessen?"
     },
-    "resetPasswordForm": {
-      "resetYourPassword": "Passwort zurücksetzen",
+    "completePasswordResetForm": {
+      "completePasswordReset": "Passwortänderung abschließen",
       "enterYourNewPasswordBelow": "Geben Sie unten Ihr neues Passwort ein",
       "newPassword": "Neues Passwort",
-      "newPasswordConfirmation": "Neues Passwort bestätigen",
-      "resetPassword": "Passwort zurücksetzen"
+      "newPasswordConfirmation": "Neues Passwort bestätigen"
     },
-    "forgotPasswordForm": {
-      "resetPassword": "Passwort zurücksetzen",
-      "enterYourEmailToReceiveAPasswordResetEmail": "Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten",
+    "requestPasswordResetForm": {
+      "enterYourEmailToRequestAPasswordResetForYourAccount": "Geben Sie Ihre E-Mail-Adresse ein, um eine Passwortzurücksetzung für Ihr Konto anzufordern",
       "email": "E-Mail",
-      "sendResetEmail": "Link zum Zurücksetzen senden"
+      "requestAPasswordReset": "Passwortzurücksetzung anfordern"
     },
     "header": {
       "merchantAddress": "Sofia, Vitosha Blvd. 76"

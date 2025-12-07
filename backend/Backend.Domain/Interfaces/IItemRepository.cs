@@ -5,6 +5,5 @@ namespace Backend.Domain.Interfaces;
 
 public interface IItemRepository : ICreatable<Item>, IDeletable<int>
 {
-    Task<List<Item>> GetItemsInUserCartAsync(int userId, CancellationToken stoppingToken = default);
-    Task<bool> IsItemOwnedByUserAsync(int itemId, int userId, CancellationToken stoppingToken = default);
+    Task<bool> UserOwnsItemAsync(int userId, int itemId, CancellationToken stoppingToken = default);
 }

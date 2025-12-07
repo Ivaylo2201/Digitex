@@ -1,16 +1,13 @@
-﻿using System.Diagnostics;
-using Backend.Domain.Common;
+﻿using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Database.Repositories.Products;
 
-public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext context) : IProductRepository<TEntity> where TEntity : ProductBase
+public class ProductRepositoryBase<TEntity>(DatabaseContext context)
+    : IProductRepository<TEntity> where TEntity : ProductBase
 {
-    private readonly string _entity = typeof(TEntity).Name;
-    
     public async Task<TEntity?> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
         => await context
             .Set<TEntity>()
@@ -35,22 +32,5 @@ public class ProductRepositoryBase<TEntity>(ILogger logger, DatabaseContext cont
             queryable = filter(queryable);
         
         return await queryable.ToListAsync(stoppingToken);
-    }
-
-    public async Task UpdateRatingAsync(Guid id, int newRating, CancellationToken stoppingToken = default)
-    {
-        var source = GetType().Name;
-        var stopwatch = Stopwatch.StartNew();
-        
-        var entity = await context.Set<TEntity>().FirstOrDefaultAsync(entity => entity.Id == id, stoppingToken);
-
-        if (entity is null)
-            return;
-        
-        entity.Rating = newRating;
-        await context.SaveChangesAsync(stoppingToken);
-        
-        stopwatch.Stop();
-        logger.LogInformation("[{Source}]: The rating of {Entity} entity with Id={Id} has been updated to {NewRating}", source, _entity, id, newRating);
     }
 }

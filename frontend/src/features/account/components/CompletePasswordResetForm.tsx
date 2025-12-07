@@ -26,7 +26,7 @@ export function CompletePasswordResetForm() {
   const completePasswordResetSchema = useCompletePasswordResetSchema();
   const { mutate, isPending } = useCompletePasswordReset();
   const {
-    components: { resetPasswordForm },
+    components: { completePasswordResetForm },
   } = useTranslation();
 
   const onSubmit = (data: CompletePasswordResetSchema) => {
@@ -47,16 +47,16 @@ export function CompletePasswordResetForm() {
   return (
     <Card className='w-full max-w-sm bg-theme-gunmetal text-theme-white'>
       <CardHeader>
-        <CardTitle>{resetPasswordForm.resetYourPassword}</CardTitle>
+        <CardTitle>{completePasswordResetForm.completePasswordReset}</CardTitle>
         <CardDescription className='text-gray-400'>
-          {resetPasswordForm.enterYourNewPasswordBelow}
+          {completePasswordResetForm.enterYourNewPasswordBelow}
         </CardDescription>
       </CardHeader>
 
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
           <div className='grid gap-2'>
-            <Label htmlFor='newPassword'>{resetPasswordForm.newPassword}</Label>
+            <Label htmlFor='newPassword'>{completePasswordResetForm.newPassword}</Label>
             <Input
               id='newPassword'
               type='password'
@@ -67,7 +67,7 @@ export function CompletePasswordResetForm() {
 
           <div className='grid gap-2'>
             <Label htmlFor='confirm'>
-              {resetPasswordForm.newPasswordConfirmation}
+              {completePasswordResetForm.newPasswordConfirmation}
             </Label>
             <Input
               id='newPasswordConfirmation'
@@ -80,10 +80,10 @@ export function CompletePasswordResetForm() {
           <Button
             type='submit'
             disabled={isPending}
-            className='w-full bg-theme-crimson cursor-pointer'
+            className='w-full bg-theme-crimson hover:bg-theme-lightcrimson cursor-pointer duration-200 transition-colors'
           >
             {isPending && <Spinner />}
-            {resetPasswordForm.resetPassword}
+            {completePasswordResetForm.completePasswordReset}
           </Button>
         </form>
       </CardContent>

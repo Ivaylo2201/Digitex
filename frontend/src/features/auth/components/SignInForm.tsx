@@ -96,7 +96,7 @@ export function SignInForm() {
           <Button
             type='submit'
             disabled={isPending}
-            className='w-full bg-theme-crimson cursor-pointer'
+            className='w-full bg-theme-crimson hover:bg-theme-lightcrimson cursor-pointer duration-200 transition-colors'
           >
             {isPending && <Spinner />}
             {signInForm.signIn}
