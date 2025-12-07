@@ -4,22 +4,18 @@ using System.Text;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Backend.Infrastructure.Services.Tokens;
 
-public class JwtService(ILogger<JwtService> logger) : IJwtService
+public class JwtService : IJwtService
 {
-    private const string Source = nameof(JwtService);
     private readonly byte[] _secretKey = Encoding.UTF8.GetBytes("JWT_SECRET_KEY".GetFromEnvironmentVariables());
     private readonly string _issuer = "JWT_ISSUER".GetFromEnvironmentVariables();
     private readonly string _audience = "JWT_AUDIENCE".GetFromEnvironmentVariables();
     
-    public string GenerateJwt(User user)
+    public string GenerateToken(User user)
     {
-        logger.LogInformation("[{Source}]: Generating JWT...", Source);
-        
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),

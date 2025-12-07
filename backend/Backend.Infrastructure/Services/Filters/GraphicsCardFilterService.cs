@@ -4,7 +4,7 @@ using Backend.Domain.Entities;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public class GraphicsCardFilterService(IBrandProviderService brandProviderService) 
+public class GraphicsCardFilterService(IBrandProviderService<GraphicsCard> brandProviderService) 
     : FilterServiceBase<GraphicsCard>(brandProviderService)
 {
     public override Filter<GraphicsCard> BuildFilter(IDictionary<string, string> criteria) => filter => filter;

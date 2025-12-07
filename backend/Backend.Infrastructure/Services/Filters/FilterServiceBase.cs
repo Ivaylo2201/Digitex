@@ -4,11 +4,11 @@ using Backend.Domain.Entities;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public abstract class FilterServiceBase<TEntity>(IBrandProviderService brandProviderService)
+public abstract class FilterServiceBase<TEntity>(IBrandProviderService<TEntity> brandProviderService)
     : IFilterService<TEntity> where TEntity : ProductBase
 {
     public abstract Filter<TEntity> BuildFilter(IDictionary<string, string> criteria);
     public abstract object GetFilters();
 
-    protected FilterBase BaseFilters => new(brandProviderService.GetBrands<TEntity>(), new Range<double>(1, 5000));
+    protected FilterBase BaseFilters => new(brandProviderService.Brands, new Range<double>(1, 5000));
 }

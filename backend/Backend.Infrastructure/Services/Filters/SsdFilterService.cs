@@ -5,7 +5,8 @@ using Backend.Domain.Enums;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public class SsdFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<Ssd>(brandProviderService)
+public class SsdFilterService(IBrandProviderService<Ssd> brandProviderService)
+    : FilterServiceBase<Ssd>(brandProviderService)
 {
     public override Filter<Ssd> BuildFilter(IDictionary<string, string> criteria) => ssd => ssd;
 

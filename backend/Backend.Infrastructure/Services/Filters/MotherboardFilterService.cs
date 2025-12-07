@@ -4,7 +4,8 @@ using Backend.Domain.Entities;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public class MotherboardFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<Motherboard>(brandProviderService)
+public class MotherboardFilterService(IBrandProviderService<Motherboard> brandProviderService)
+    : FilterServiceBase<Motherboard>(brandProviderService)
 {
     public override Filter<Motherboard> BuildFilter(IDictionary<string, string> criteria) => filter => filter;
 

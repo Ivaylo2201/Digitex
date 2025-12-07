@@ -33,4 +33,6 @@ public class ProductRepositoryBase<TEntity>(DatabaseContext context)
         
         return await queryable.ToListAsync(stoppingToken);
     }
+
+    public IQueryable<TEntity> GetContextSet() => context.Set<TEntity>();
 }

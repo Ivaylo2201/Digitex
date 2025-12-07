@@ -5,7 +5,8 @@ namespace Backend.Infrastructure.Services.Filters;
 
 using Monitor = Domain.Entities.Monitor;
 
-public class MonitorFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<Monitor>(brandProviderService)
+public class MonitorFilterService(IBrandProviderService<Monitor> brandProviderService)
+    : FilterServiceBase<Monitor>(brandProviderService)
 {
     public override Filter<Monitor> BuildFilter(IDictionary<string, string> criteria) => filter => filter;
 

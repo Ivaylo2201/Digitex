@@ -15,35 +15,31 @@ public class EmailSendingService(
 
     public async Task SendAccountVerificationEmailAsync(User user, string accountVerificationUrl, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Sending verification email to {Email}...", Source, user.Email);
-        const string subject = "Welcome to Digitex!";
-
         try
         {
+            logger.LogInformation("[{Source}]: Sending account verification email to {Email}...", Source, user.Email);
+            
             await fluentEmail
                 .To(user.Email, user.Username)
-                .Subject(subject)
+                .Subject("Welcome to DIGITEX!")
                 .Body(emailBuilderService.BuildAccountVerificationEmail(user.Username, accountVerificationUrl), isHtml: true)
                 .SendAsync(stoppingToken);
-
-            logger.LogInformation("[{Source}]: Verification email sent successfully to {Email}.", Source, user.Email);
         }
         catch (Exception ex)
         {
-            logger.LogException(Source, ex, $"sending verification email to {user.Email}");
+            logger.LogException(Source, ex, $"sending account verification email to {user.Email}");
         }
     }
 
     public async Task SendPasswordResetEmailAsync(User user, string passwordResetUrl, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Sending password reset email to {Email}...", Source, user.Email);
-        const string subject = "Reset password for you Digitex account.";
-
         try
         {
+            logger.LogInformation("[{Source}]: Sending password reset email to {Email}...", Source, user.Email);
+            
             await fluentEmail
                 .To(user.Email, user.Username)
-                .Subject(subject)
+                .Subject("Reset password for you DIGITEX account.")
                 .Body(emailBuilderService.BuildPasswordResetEmail(user.Username, passwordResetUrl), isHtml: true)
                 .SendAsync(stoppingToken);
         }

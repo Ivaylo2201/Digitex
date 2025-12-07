@@ -8,7 +8,6 @@ using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Backend.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -53,7 +52,7 @@ public class AuthenticationService(
             
             return Result<string>.Success(StatusCodes.Status201Created, $"Visit {user.Email} to verify your account.");
         }
-        catch (DbUpdateException ex)
+        catch (Exception ex)
         {
             logger.LogException(Source, ex, "creating user or account verification token");
             return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.DatabaseError);       
@@ -78,17 +77,15 @@ public class AuthenticationService(
 
         return user is null ?
             Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials) :
-            Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateJwt(user), user.Role));
+            Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateToken(user), user.Role));
     }
     
     private async Task RequestAccountVerificationAsync(User user, CancellationToken stoppingToken)
     {
-        logger.LogInformation("[{Source}]: Requesting account verification for User with Username={Username}...", Source, user.Username);
-        
         var rawToken = tokenService.GenerateToken();
         var hashedToken = tokenService.HashToken(rawToken);
             
         await userTokenRepository.CreateAsync(UserToken.Create(user, hashedToken, UserTokenType.AccountVerification), stoppingToken);
-        await emailSendingService.SendAccountVerificationEmailAsync(user, urlService.AccountVerificationUrl(rawToken), stoppingToken);
+        await emailSendingService.SendAccountVerificationEmailAsync(user, urlService.GetAccountVerificationUrl(rawToken), stoppingToken);
     }
 }

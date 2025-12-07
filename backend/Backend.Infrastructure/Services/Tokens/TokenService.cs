@@ -10,9 +10,15 @@ public class TokenService : ITokenService
     {
         var bytes = new byte[size];
         RandomNumberGenerator.Fill(bytes);
-        return Convert.ToBase64String(bytes);
+        var token = Convert.ToBase64String(bytes);
+        Console.WriteLine($"Generated: {token}");
+        return token;
     }
 
     public string HashToken(string rawToken)
-        => Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(rawToken)));
+    {
+        var hashed = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(rawToken)));
+        Console.WriteLine($"Hashed: {hashed}");
+        return hashed;
+    }
 }

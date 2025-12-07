@@ -2,7 +2,7 @@
 
 namespace Backend.Application.Interfaces.Services;
 
-public interface IBrandProviderService
+public interface IBrandProviderService<TEntity> where TEntity : ProductBase
 {
-    List<string> GetBrands<TEntity>() where TEntity : ProductBase;
+    List<string> Brands { get; }
 }

@@ -6,7 +6,8 @@ using Backend.Domain.Extensions;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public class ProcessorFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<Processor>(brandProviderService)
+public class ProcessorFilterService(IBrandProviderService<Processor> brandProviderService)
+    : FilterServiceBase<Processor>(brandProviderService)
 {
     public override Filter<Processor> BuildFilter(IDictionary<string, string> criteria) => processor => processor;
 

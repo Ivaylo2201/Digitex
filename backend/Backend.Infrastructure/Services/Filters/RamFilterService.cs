@@ -4,7 +4,8 @@ using Backend.Domain.Entities;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public class RamFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<Ram>(brandProviderService)
+public class RamFilterService(IBrandProviderService<Ram> brandProviderService) :
+    FilterServiceBase<Ram>(brandProviderService)
 {
     public override Filter<Ram> BuildFilter(IDictionary<string, string> criteria) => processor => processor;
 

@@ -18,7 +18,7 @@ public class AccountService(
     IEmailSendingService emailSendingService,
     IUrlService urlService) : IAccountService
 {
-    private const string Source = nameof(IAccountService);
+    private const string Source = nameof(AccountService);
     
     public async Task<Result<(string Token, Role Role)>> CompleteAccountVerificationAsync(AccountVerificationDto accountVerificationDto, CancellationToken stoppingToken = default)
     {
@@ -28,17 +28,25 @@ public class AccountService(
         var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, stoppingToken);
 
         if (userToken is null)
+        {
+            logger.LogWarning("[{Source}]: No active UserToken was found by hash.", Source);
             return Result<(string, Role)>.Failure(StatusCodes.Status404NotFound);
+        }
 
         if (userToken.UserTokenType is not UserTokenType.AccountVerification)
+        {
+            logger.LogWarning("[{Source}]: UserToken type is invalid for account verification.", Source);
             return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidTokenType);
+        }
         
+        logger.LogInformation("[{Source}]: Verifying User with Username={Username}...", Source, userToken.User.Username);
         var user = await userRepository.VerifyUserAsync(userToken.User.Id, stoppingToken);
+        
         await userTokenRepository.DeleteAsync(userToken.Id, stoppingToken);
         
         return user is null ? 
             Result<(string, Role)>.Failure(StatusCodes.Status404NotFound) : 
-            Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateJwt(user), user.Role));
+            Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateToken(user), user.Role));
     }
     
     public async Task<Result<string>> RequestPasswordResetAsync(RequestPasswordResetDto requestPasswordResetDto, CancellationToken stoppingToken = default)
@@ -48,17 +56,16 @@ public class AccountService(
         var user = await userRepository.GetOneByEmailAsync(requestPasswordResetDto.Email, stoppingToken);
 
         if (user is null)
+        {
+            logger.LogWarning("[{Source}]: User with Email={Email} was not found.", Source, requestPasswordResetDto.Email);
             return Result<string>.Failure(StatusCodes.Status404NotFound);
+        }
         
         var rawToken = tokenService.GenerateToken();
         var hashedToken = tokenService.HashToken(rawToken);
-
-        await userTokenRepository.CreateAsync(
-            UserToken.Create(user, hashedToken, UserTokenType.PasswordReset),
-            stoppingToken
-        );
+        await userTokenRepository.CreateAsync(UserToken.Create(user, hashedToken, UserTokenType.PasswordReset), stoppingToken);
         
-        await emailSendingService.SendPasswordResetEmailAsync(user, urlService.PasswordResetUrl(rawToken), stoppingToken);
+        await emailSendingService.SendPasswordResetEmailAsync(user, urlService.GetPasswordResetUrl(rawToken), stoppingToken);
         return Result<string>.Success(StatusCodes.Status200OK, $"Visit {user.Email} to reset your password.");
     }
     
@@ -66,10 +73,7 @@ public class AccountService(
     {
         logger.LogInformation("[{Source}]: Completing password reset...", Source);
         
-        logger.LogWarning("[{Source}]: Hashing the provided raw token...", Source);
         var hashedToken = tokenService.HashToken(completePasswordResetDto.Token);
-        
-        logger.LogWarning("[{Source}]: Getting active UserToken by hash.", Source);
         var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, stoppingToken);
 
         if (userToken is null)
@@ -86,21 +90,8 @@ public class AccountService(
         
         logger.LogInformation("[{Source}]: Resetting password for User with Username={Username}...", Source, userToken.User.Username);
         await userRepository.ResetPasswordAsync(userToken.User.Id, completePasswordResetDto.NewPassword, stoppingToken);
-        
-        logger.LogInformation("[{Source}]: Deleting consumed UserToken with Id={Id}...", Source, userToken.Id);
         await userTokenRepository.DeleteAsync(userToken.Id, stoppingToken);
 
         return Result<string>.Success(StatusCodes.Status200OK, "Password has been successfully reset.");
-    }
-    
-    private async Task RequestAccountVerificationAsync(User user, CancellationToken stoppingToken)
-    {
-        logger.LogInformation("[{Source}]: Requesting account verification for User with Username={Username}...", Source, user.Username);
-        
-        var rawToken = tokenService.GenerateToken();
-        var hashedToken = tokenService.HashToken(rawToken);
-            
-        await userTokenRepository.CreateAsync(UserToken.Create(user, hashedToken, UserTokenType.AccountVerification), stoppingToken);
-        await emailSendingService.SendAccountVerificationEmailAsync(user, urlService.AccountVerificationUrl(rawToken), stoppingToken);
     }
 }

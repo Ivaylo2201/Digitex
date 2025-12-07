@@ -1,8 +1,8 @@
 ﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
-using Backend.Domain.Exceptions;
 using Backend.Domain.Interfaces;
+using Backend.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
@@ -17,29 +17,19 @@ public class StripeService(
     ICartRepository cartRepository) : IStripeService
 {
     private const string Source = nameof(StripeService);
-    private const string WebhookSecretEnv = "WebhookSecret";
-    private const string SuccessEventType = "payment_intent.succeeded";
-    private const string StripeSignatureKey = "Stripe-Signature";
-    private const string EuroCurrencyCode = "eur";
-    private readonly List<string> _paymentMethodTypes = ["card"];
+    private const string PaymentIntentSucceeded = "payment_intent.succeeded";
     
     public async Task<Result> ProcessWebhookAsync(string json, IDictionary<string, StringValues> headers, CancellationToken stoppingToken = default)
     {
-        var webhookSecret = Environment.GetEnvironmentVariable(WebhookSecretEnv);
-
-        if (webhookSecret is null)
-            throw new ImproperlyConfiguredException("Webhook secret is not configured.");
+        var webhookSecret = "WebhookSecret".GetFromEnvironmentVariables();
 
         try
         {
-            var stripeSignature = headers[StripeSignatureKey];
-            
-            logger.LogInformation("[{Source}]: Constructing Stripe event using Json={Json} and StripeSignature={StripeSignature}...", Source, json, stripeSignature);
-            var stripeEvent = EventUtility.ConstructEvent(json, stripeSignature, webhookSecret);
+            var stripeEvent = EventUtility.ConstructEvent(json, headers["Stripe-Signature"], webhookSecret);
 
-            if (stripeEvent?.Type is not SuccessEventType)
+            if (stripeEvent?.Type is not PaymentIntentSucceeded)
             {
-                logger.LogError("[{Source}]: Event type was not {SuccessEventType}.", Source, SuccessEventType);
+                logger.LogError("[{Source}]: Event type was not {PaymentIntentSucceeded}.", Source, PaymentIntentSucceeded);
                 return Result.Failure(StatusCodes.Status402PaymentRequired, ErrorType.PaymentFailed);
             }
 
@@ -81,8 +71,8 @@ public class StripeService(
             var paymentIntentOptions = new PaymentIntentCreateOptions
             {
                 Amount = (long)cartTotal * 100,
-                Currency = EuroCurrencyCode,
-                PaymentMethodTypes = _paymentMethodTypes,
+                Currency = "eur",
+                PaymentMethodTypes = ["card"],
                 Metadata = new Dictionary<string, string>
                 {
                     { "userId", userId.ToString() }

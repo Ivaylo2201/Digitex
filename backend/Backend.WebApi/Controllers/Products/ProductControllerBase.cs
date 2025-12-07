@@ -5,7 +5,7 @@ using Backend.Domain.Entities;
 using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Backend.WebApi.Controllers.Base;
+namespace Backend.WebApi.Controllers.Products;
 
 public abstract class ProductControllerBase<TEntity, TProjection>(
     IProductService<TEntity, TProjection> productService,

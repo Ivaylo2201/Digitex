@@ -2,6 +2,6 @@
 
 public interface IUrlService
 {
-    public string PasswordResetUrl(string rawToken);
-    public string AccountVerificationUrl(string rawToken);
+    public string GetPasswordResetUrl(string rawToken);
+    public string GetAccountVerificationUrl(string rawToken);
 }

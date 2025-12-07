@@ -1,16 +1,11 @@
 ﻿using Backend.Application.Interfaces.Services;
-using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Email;
 
-public class EmailBuilderService(ILogger<EmailBuilderService> logger) : IEmailBuilderService
+public class EmailBuilderService : IEmailBuilderService
 {
-    private const string Source = nameof(EmailBuilderService);
-  
     public string BuildAccountVerificationEmail(string username, string verificationUrl)
     { 
-        logger.LogInformation("[{Source}]: Building verification email body...", Source);
-        
         const string title = """
                              <p style="font-weight: bold; font-size: 20px; color: #15161d">
                                Confirm your account
@@ -55,76 +50,74 @@ public class EmailBuilderService(ILogger<EmailBuilderService> logger) : IEmailBu
 
     public string BuildPasswordResetEmail(string username, string passwordResetUrl)
     {
-      logger.LogInformation("[{Source}]: Building password reset email body...", Source);
-
-      const string title = """
+        const string title = """
                            <p style="font-weight: bold; font-size: 20px; color: #15161d">
                              Reset Your Password
                            </p>
                            """;
 
-      var body = $"""
-                  <p style="color: #15161d; font-size: 16px; margin: 20px 0">
-                    Hello, {username}!<br />
-                    We received a request to reset your password. Click the button below to set a new password:
-                  </p>
+        var body = $"""
+                    <p style="color: #15161d; font-size: 16px; margin: 20px 0">
+                      Hello, {username}!<br />
+                      We received a request to reset your password. Click the button below to set a new password:
+                    </p>
 
-                  <a
-                    href="{passwordResetUrl}"
-                    style="
-                      display: inline-block;
-                      padding: 12px 24px;
-                      background-color: #e02b4a;
-                      color: #fff;
-                      text-decoration: none;
-                      border-radius: 5px;
-                      font-family: 'Montserrat', Arial, sans-serif;
-                    "
-                  >
-                    Reset Password
-                  </a>
-                  """;
+                    <a
+                      href="{passwordResetUrl}"
+                      style="
+                        display: inline-block;
+                        padding: 12px 24px;
+                        background-color: #e02b4a;
+                        color: #fff;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        font-family: 'Montserrat', Arial, sans-serif;
+                      "
+                    >
+                      Reset Password
+                    </a>
+                    """;
 
-      const string footer = """
-                            <p style="font-size: 14px; font-weight: 600; color: #1e1f29; margin-top: 20px;">
-                              This email was sent by DIGITE<span style="color: #e02b4a">X</span>. If you did not request a password reset, please ignore this message.
-                            </p>
-                            """;
+        const string footer = """
+                              <p style="font-size: 14px; font-weight: 600; color: #1e1f29; margin-top: 20px;">
+                                This email was sent by DIGITE<span style="color: #e02b4a">X</span>. If you did not request a password reset, please ignore this message.
+                              </p>
+                              """;
 
-      return BuildEmail(title, body, footer);
+        return BuildEmail(title, body, footer);
     }
     
     private static string BuildEmail(string title, string body, string footer)
     {
-      return $"""
+        return $"""
 
-              <html lang="en">
-                <body style="font-family: 'Montserrat', Arial, sans-serif">
-                  <p
-                    style="
-                      font-weight: bold;
-                      font-size: 30px;
-                      color: #1e1f29;
-                      text-transform: uppercase;
-                    "
-                  >
-                    digite<span style="color: crimson">x</span>
-                  </p>
+                <html lang="en">
+                  <body style="font-family: 'Montserrat', Arial, sans-serif">
+                    <p
+                      style="
+                        font-weight: bold;
+                        font-size: 30px;
+                        color: #1e1f29;
+                        text-transform: uppercase;
+                      "
+                    >
+                      digite<span style="color: crimson">x</span>
+                    </p>
 
-                  <p style="font-weight: bold; font-size: 20px; color: #15161d">
-                    {title}
-                  </p>
+                    <p style="font-weight: bold; font-size: 20px; color: #15161d">
+                      {title}
+                    </p>
 
-                  <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0" />
+                    <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0" />
 
-                  {body}
+                    {body}
 
-                  <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0" />
+                    <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0" />
 
-                  {footer}
-                </body>
-              </html>
+                    {footer}
+                  </body>
+                </html>
 
-              """;
+                """;
     }
 }

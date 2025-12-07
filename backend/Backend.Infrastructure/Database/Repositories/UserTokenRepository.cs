@@ -13,17 +13,14 @@ public class UserTokenRepository(DatabaseContext context) : IUserTokenRepository
         return token;
     }
 
-    public async Task<UserToken?> GetActiveTokenByHashWithUserAsync(string hashedToken, CancellationToken stoppingToken = default)
+    public async Task<UserToken?> GetActiveTokenByHashWithUserAsync(string hash, CancellationToken stoppingToken = default)
     {
         var userToken = await context.UserTokens
             .AsNoTracking()
             .Include(userToken => userToken.User)
-            .FirstOrDefaultAsync(userToken => userToken.Hash == hashedToken, stoppingToken);
-
-        if (userToken is not null && userToken.IsExpired)
-            return null;
+            .FirstOrDefaultAsync(userToken => userToken.Hash == hash, stoppingToken);
         
-        return userToken;
+        return userToken is not null && userToken.IsExpired ? null : userToken;
     }
 
     public async Task DeleteAsync(int id, CancellationToken stoppingToken = default)

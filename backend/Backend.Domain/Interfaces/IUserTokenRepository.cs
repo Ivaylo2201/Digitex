@@ -5,5 +5,5 @@ namespace Backend.Domain.Interfaces;
 
 public interface IUserTokenRepository : ICreatable<UserToken>, IDeletable<int>
 {
-    Task<UserToken?> GetActiveTokenByHashWithUserAsync(string hashedToken, CancellationToken stoppingToken = default);
+    Task<UserToken?> GetActiveTokenByHashWithUserAsync(string hash, CancellationToken stoppingToken = default);
 }

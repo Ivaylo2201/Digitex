@@ -4,7 +4,8 @@ using Backend.Domain.Entities;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public class PowerSupplyFilterService(IBrandProviderService brandProviderService) : FilterServiceBase<PowerSupply>(brandProviderService)
+public class PowerSupplyFilterService(IBrandProviderService<PowerSupply> brandProviderService) 
+    : FilterServiceBase<PowerSupply>(brandProviderService)
 {
     public override Filter<PowerSupply> BuildFilter(IDictionary<string, string> criteria) => filter => filter;
 

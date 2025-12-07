@@ -1,7 +1,6 @@
 ﻿using Backend.Application.Dtos.Products;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
-using Backend.WebApi.Controllers.Base;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
