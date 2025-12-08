@@ -20,6 +20,11 @@
     }
   },
   "components": {
+    "filterForm": {
+      "brands": "Марки",
+      "price": "Цена",
+      "apply": "Приложи"
+    },
     "signUpForm": {
       "createdAnAccount": "Създайте акаунт",
       "enterYourCredentialsToSignUpForAnAccount": "Въведете вашите данни, за да си създадете акаунт.",

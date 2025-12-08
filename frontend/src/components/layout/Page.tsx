@@ -9,7 +9,7 @@ export function Page({ children, className = '' }: PageProps) {
       <Header />
       <Navbar />
       <main
-        className={`flex justify-center items-center grow p-10 ${className}`}
+        className={`flex justify-center items-center grow px-10 py-16 ${className}`}
       >
         {children}
       </main>

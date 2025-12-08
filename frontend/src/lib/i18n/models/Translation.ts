@@ -20,6 +20,11 @@ export type Translation = {
     };
   };
   components: {
+    filterForm: {
+      brands: string;
+      price: string;
+      apply: string;
+    };
     header: {
       merchantAddress: string;
     };
@@ -246,6 +251,11 @@ export const translation: Translation = {
     },
   },
   components: {
+    filterForm: {
+      brands: 'Brands',
+      price: 'Price',
+      apply: 'Apply',
+    },
     header: {
       merchantAddress: 'Sofia, Vitosha Blvd. 76',
     },

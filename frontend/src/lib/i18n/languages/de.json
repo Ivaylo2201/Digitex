@@ -20,6 +20,11 @@
     }
   },
   "components": {
+    "filterForm": {
+      "brands": "Marken",
+      "price": "Preis",
+      "apply": "Anwenden"
+    },
     "signUpForm": {
       "createdAnAccount": "Konto erstellen",
       "enterYourCredentialsToSignUpForAnAccount": "Geben Sie Ihre Anmeldedaten ein, um sich für ein Konto zu registrieren",
