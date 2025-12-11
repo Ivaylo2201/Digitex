@@ -1,23 +1,24 @@
-export function toQueryParams(obj: Record<string, any>, prefix = ''): string {
+function buildQueryParameter(key: string, value: string) {
+  return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+}
+
+export function toQueryParams(obj: Record<string, any>): string {
   const params: string[] = [];
 
   for (const key in obj) {
-    if (!obj.hasOwnProperty(key)) continue;
+    if (!obj.hasOwnProperty(key))
+       continue;
 
     const value = obj[key];
-    const paramKey = prefix
-      ? `${prefix}[${encodeURIComponent(key)}]`
-      : encodeURIComponent(key);
+    if (!value)
+       continue;
 
-    if (value === null || value === undefined) continue;
-    if (typeof value === 'object' && !Array.isArray(value)) {
-      params.push(toQueryParams(value, paramKey));
-    } else if (Array.isArray(value)) {
-      value.forEach((v) => {
-        params.push(`${paramKey}[]=${encodeURIComponent(v)}`);
-      });
+    if (Array.isArray(value)) {
+      value.forEach((v) =>
+        params.push(buildQueryParameter(key, v.toString()))
+      );
     } else {
-      params.push(`${paramKey}=${encodeURIComponent(value)}`);
+      params.push(buildQueryParameter(key, value.toString()));
     }
   }
 
