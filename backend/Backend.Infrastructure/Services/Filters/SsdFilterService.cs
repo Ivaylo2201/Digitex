@@ -13,7 +13,6 @@ public class SsdFilterService(IBrandProviderService<Ssd> brandProviderService)
     public override object GetFilters() => new
     {
         BaseFilters.Brands,
-        BaseFilters.Price,
         CapacityInGb = new Range<int>(1000, 5000),
         StorageInterfaces = Enum.GetNames<StorageInterface>().ToList(),
         ReadSpeed = new Range<int>(1000, 10000),

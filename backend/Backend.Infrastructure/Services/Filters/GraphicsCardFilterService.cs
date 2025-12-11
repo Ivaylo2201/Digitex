@@ -14,7 +14,6 @@ public class GraphicsCardFilterService(IBrandProviderService<GraphicsCard> brand
     public override object GetFilters() => new
     {
         BaseFilters.Brands,
-        BaseFilters.Price,
         BusWidth = Enum.GetValues<BusWidth>().Cast<int>().ToList(),
         MemoryCapacity = new List<int> { 2, 4, 6, 8, 10, 12, 16, 24 },
         BaseClockSpeed = new Range<double>(1.0, 5.0),

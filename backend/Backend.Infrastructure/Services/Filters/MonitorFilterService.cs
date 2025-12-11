@@ -12,7 +12,6 @@ public class MonitorFilterService(IBrandProviderService<Monitor> brandProviderSe
 
     public override object GetFilters() => new
     {
-        BaseFilters.Brands,
-        BaseFilters.Price
+        BaseFilters.Brands
     };
 }

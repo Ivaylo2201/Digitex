@@ -11,7 +11,6 @@ public class MotherboardFilterService(IBrandProviderService<Motherboard> brandPr
 
     public override object GetFilters() => new
     {
-        BaseFilters.Brands,
-        BaseFilters.Price
+        BaseFilters.Brands
     };
 }

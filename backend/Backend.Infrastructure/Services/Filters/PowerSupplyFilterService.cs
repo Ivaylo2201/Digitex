@@ -11,7 +11,6 @@ public class PowerSupplyFilterService(IBrandProviderService<PowerSupply> brandPr
 
     public override object GetFilters() => new
     {
-        BaseFilters.Brands,
-        BaseFilters.Price
+        BaseFilters.Brands
     };
 }

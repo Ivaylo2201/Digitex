@@ -14,7 +14,6 @@ public class ProcessorFilterService(IBrandProviderService<Processor> brandProvid
     public override object GetFilters() => new
     {
         BaseFilters.Brands,
-        BaseFilters.Price,
         Cores = new List<int> { 4, 6, 8, 10, 12, 14, 16, 20, 24 },
         Threads = new List<int> { 8, 12, 16, 20, 24, 28, 32 },
         Socket = Enum.GetValues<Socket>().Select(socket => socket.GetEnumMemberValue()),

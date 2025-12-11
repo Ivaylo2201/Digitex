@@ -11,7 +11,6 @@ public class RamFilterService(IBrandProviderService<Ram> brandProviderService) :
 
     public override object GetFilters() => new
     {
-        BaseFilters.Brands,
-        BaseFilters.Price
+        BaseFilters.Brands
     };
 }
