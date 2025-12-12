@@ -6,6 +6,7 @@ import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { OptionsList } from '../OptionsList';
 import { RangeSlider } from '../RangeSlider';
 import { useApplyFilter } from '../../hooks/useApplyFilter';
+import { useEffect } from 'react';
 
 export type GraphicsCardsFilters = BaseFilters & {
   busWidth: number[];
@@ -23,6 +24,13 @@ export function GraphicsCardsFilterForm() {
     components: { graphicsCardsFilterForm },
     units,
   } = useTranslation();
+
+  useEffect(() => {
+    const subscription = form.watch((values) => {
+      form.handleSubmit(() => applyFilter(values))();
+    });
+    return () => subscription.unsubscribe();
+  }, [form.watch, form.handleSubmit, applyFilter]);
 
   const setClockSpeedRange = (range: [number, number]) => {
     form.setValue('minClockSpeed', range[0]);
