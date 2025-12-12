@@ -1,4 +1,4 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { Button } from '@/components/ui/button';
 import { RangeSlider } from '../RangeSlider';
@@ -6,7 +6,7 @@ import type React from 'react';
 import { OptionsList } from '../OptionsList';
 
 type FilterFormProps = React.PropsWithChildren<{
-  brands: string[];
+  brands?: string[];
 }>;
 
 export function FilterForm({ brands, children }: FilterFormProps) {
@@ -22,7 +22,7 @@ export function FilterForm({ brands, children }: FilterFormProps) {
         options={brands}
         control={control}
         name='brands'
-        title={filterForm.brands}
+        title={filterForm.brand}
       />
 
       <RangeSlider

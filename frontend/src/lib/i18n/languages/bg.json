@@ -21,9 +21,20 @@
   },
   "components": {
     "filterForm": {
-      "brands": "Марки",
+      "brand": "Маркa",
       "price": "Цена",
       "apply": "Приложи"
+    },
+    "graphicsCardsFilterForm": {
+      "busWidth": "Шина",
+      "memoryCapacity": "Капацитет на паметта",
+      "clockSpeed": "Тактова честота",
+      "cudaCores": "CUDA ядра"
+    },
+    "motherboardsFilterForm": {
+      "socket": "Сокет",
+      "formFactor": "Форм фактор",
+      "chipset": "Чипсет"
     },
     "signUpForm": {
       "createdAnAccount": "Създайте акаунт",

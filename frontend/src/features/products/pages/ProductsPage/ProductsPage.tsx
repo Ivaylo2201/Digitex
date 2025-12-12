@@ -4,9 +4,11 @@ import { useProducts } from '../../hooks/useProducts';
 import { Loader } from './components/Loader';
 import { ProductsList } from './components/ProductsList';
 import { GraphicsCardsFilterForm } from '@/features/filters/components/forms/GraphicsCardsFilterForm';
+import { MotherboardsFilterForm } from '@/features/filters/components/forms/MotherboardsFilterForm';
 
 const filterForms: Record<string, React.ComponentType> = {
   'graphics-cards': GraphicsCardsFilterForm,
+  motherboards: MotherboardsFilterForm,
 };
 
 export function ProductsPage() {

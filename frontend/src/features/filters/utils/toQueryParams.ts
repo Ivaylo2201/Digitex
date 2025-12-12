@@ -1,21 +1,27 @@
 function buildQueryParameter(key: string, value: string) {
-  return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+  const encodedKey = encodeURIComponent(key);
+  const encodedValue = value
+    .split(',')
+    .map((v) => encodeURIComponent(v.trim().replace(/\s+/g, '')))
+    .join(',');
+
+  return `${encodedKey}=${encodedValue}`;
 }
 
 export function toQueryParams(obj: Record<string, any>): string {
   const params: string[] = [];
 
   for (const key in obj) {
-    if (!obj.hasOwnProperty(key))
-       continue;
+    if (!obj.hasOwnProperty(key)) continue;
 
     const value = obj[key];
-    if (!value)
-       continue;
+    if (!value) continue;
 
     if (Array.isArray(value)) {
-      value.forEach((v) =>
-        params.push(buildQueryParameter(key, v.toString()))
+      if (value.length === 0) continue;
+
+      params.push(
+        buildQueryParameter(key, value.map((v) => v.toString()).join(','))
       );
     } else {
       params.push(buildQueryParameter(key, value.toString()));

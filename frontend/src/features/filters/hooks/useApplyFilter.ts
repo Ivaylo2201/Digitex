@@ -9,7 +9,9 @@ export function useApplyFilter(category: string) {
 
   const applyFilter = (data: object) => {
     queryClient.invalidateQueries({ queryKey: ['products', category] });
-    navigate(`${location.pathname}?${toQueryParams(data)}`, { replace: true });
+    const qParams = toQueryParams(data);
+    console.log(qParams);
+    navigate(`${location.pathname}?${qParams}`, { replace: true });
   };
 
   return { applyFilter };

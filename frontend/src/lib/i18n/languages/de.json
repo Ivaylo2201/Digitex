@@ -21,9 +21,20 @@
   },
   "components": {
     "filterForm": {
-      "brands": "Marken",
+      "brand": "Marke",
       "price": "Preis",
       "apply": "Anwenden"
+    },
+    "graphicsCardsFilterForm": {
+      "busWidth": "Busbreite",
+      "memoryCapacity": "Speicherkapazität",
+      "clockSpeed": "Taktfrequenz",
+      "cudaCores": "CUDA-Kerne"
+    },
+    "motherboardsFilterForm": {
+      "socket": "Sockel",
+      "formFactor": "Formfaktor",
+      "chipset": "Chipsatz"
     },
     "signUpForm": {
       "createdAnAccount": "Konto erstellen",

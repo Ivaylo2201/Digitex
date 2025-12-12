@@ -1,4 +1,4 @@
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import type { BaseFilters } from '../../types/BaseFilters';
 import { useFilters } from '../../hooks/useFilters';
 import { FilterForm } from './FilterForm';
@@ -19,45 +19,48 @@ export function GraphicsCardsFilterForm() {
   const form = useForm<GraphicsCardsFilters>();
   const { data } = useFilters<GraphicsCardsFilters>('graphics-cards');
   const { applyFilter } = useApplyFilter('graphics-cards');
-  const { units } = useTranslation();
+  const {
+    components: { graphicsCardsFilterForm },
+    units,
+  } = useTranslation();
 
-  if (!data) return;
+  const setClockSpeedRange = (range: [number, number]) => {
+    form.setValue('minClockSpeed', range[0]);
+    form.setValue('maxClockSpeed', range[1]);
+  };
 
   return (
     <form onSubmit={form.handleSubmit(applyFilter)}>
       <FormProvider {...form}>
-        <FilterForm brands={data.brands}>
+        <FilterForm brands={data?.brands}>
           <OptionsList
-            options={data.busWidth}
+            options={data?.busWidth}
             control={form.control}
             onDisplay={(busWidth) => `${busWidth} ${units.bits}`}
             name='busWidth'
-            title='Bus widths'
+            title={graphicsCardsFilterForm.busWidth}
           />
           <OptionsList
-            options={data.memoryCapacity}
+            options={data?.memoryCapacity}
             control={form.control}
             onDisplay={(memoryCapacity) =>
               `${memoryCapacity} ${units.gigabytes}`
             }
             name='memoryCapacity'
-            title='Memory capacity'
+            title={graphicsCardsFilterForm.memoryCapacity}
           />
           <RangeSlider
-            title={'Clock speed'}
-            onChange={(range) => {
-              form.setValue('minClockSpeed', range[0]);
-              form.setValue('maxClockSpeed', range[1]);
-            }}
+            title={graphicsCardsFilterForm.clockSpeed}
+            onChange={setClockSpeedRange}
             min={0}
-            max={5000}
-            step={100}
+            max={5}
+            step={0.1}
           />
           <OptionsList
-            options={data.cudaCores}
+            options={data?.cudaCores}
             control={form.control}
             name='cudaCores'
-            title='Cuda cores'
+            title={graphicsCardsFilterForm.cudaCores}
           />
         </FilterForm>
       </FormProvider>
