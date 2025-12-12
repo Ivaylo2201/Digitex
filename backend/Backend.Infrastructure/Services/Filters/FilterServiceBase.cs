@@ -8,7 +8,7 @@ public abstract class FilterServiceBase<TEntity>(IBrandProviderService<TEntity> 
     : IFilterService<TEntity> where TEntity : ProductBase
 {
     public abstract Filter<TEntity> BuildFilter(IDictionary<string, string> criteria);
-    public abstract object GetFilters();
+    public abstract object Filters { get; }
 
-    protected FilterBase BaseFilters => new(brandProviderService.Brands);
+    protected List<string> Brands => brandProviderService.Brands;
 }

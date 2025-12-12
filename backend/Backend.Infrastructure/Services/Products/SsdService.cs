@@ -5,5 +5,5 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public class SsdService(ILogger<SsdService> logger, IProductRepository<Ssd> ssdRepository) 
-    : ProductServiceBase<Ssd, SsdDto>(logger, ssdRepository);
+public class SsdService(ILogger<SsdService> logger, IProductRepository<Ssd> ssdRepository, IExchangeRateRepository exchangeRateRepository) 
+    : ProductServiceBase<Ssd, SsdDto>(logger, ssdRepository, exchangeRateRepository);

@@ -9,8 +9,8 @@ public class RamFilterService(IBrandProviderService<Ram> brandProviderService) :
 {
     public override Filter<Ram> BuildFilter(IDictionary<string, string> criteria) => processor => processor;
 
-    public override object GetFilters() => new
+    public override object Filters => new
     {
-        BaseFilters.Brands
+        Brands
     };
 }

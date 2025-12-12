@@ -61,14 +61,14 @@ export function useFormatProduct() {
       {
         specificationName: translation.specifications.processors.baseClockSpeed,
         value: `${graphicsCard.clockSpeed.base.toFixed(2)} ${
-          translation.units.megahertz
+          translation.units.gigahertz
         }`
       },
       {
         specificationName:
           translation.specifications.processors.boostClockSpeed,
         value: `${graphicsCard.clockSpeed.boost.toFixed(2)} ${
-          translation.units.megahertz
+          translation.units.gigahertz
         }`
       },
       {
@@ -106,14 +106,14 @@ export function useFormatProduct() {
       {
         specificationName: translation.specifications.processors.baseClockSpeed,
         value: `${processor.clockSpeed.base.toFixed(2)} ${
-          translation.units.megahertz
+          translation.units.gigahertz
         }`
       },
       {
         specificationName:
           translation.specifications.processors.boostClockSpeed,
         value: `${processor.clockSpeed.boost.toFixed(2)} ${
-          translation.units.megahertz
+          translation.units.gigahertz
         }`
       },
       {

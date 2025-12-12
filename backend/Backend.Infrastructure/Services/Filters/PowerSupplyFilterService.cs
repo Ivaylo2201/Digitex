@@ -9,8 +9,8 @@ public class PowerSupplyFilterService(IBrandProviderService<PowerSupply> brandPr
 {
     public override Filter<PowerSupply> BuildFilter(IDictionary<string, string> criteria) => filter => filter;
 
-    public override object GetFilters() => new
+    public override object Filters => new
     {
-        BaseFilters.Brands
+        Brands
     };
 }

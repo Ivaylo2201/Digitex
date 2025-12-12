@@ -4,20 +4,32 @@ import { Button } from '@/components/ui/button';
 import { RangeSlider } from '../RangeSlider';
 import type React from 'react';
 import { OptionsList } from '../OptionsList';
+import { useEffect } from 'react';
+import { useCurrency } from '@/features/currency/stores/useCurrency';
+import { getCurrencySymbol } from '@/features/currency/utils/getCurrencySymbol';
 
 type FilterFormProps = React.PropsWithChildren<{
-  brands?: string[];
+  brands: string[];
+  applyFilter: (data: object) => void;
 }>;
 
-export function FilterForm({ brands, children }: FilterFormProps) {
+export function FilterForm({ brands, applyFilter, children }: FilterFormProps) {
   const {
     components: { filterForm },
   } = useTranslation();
 
-  const { control, setValue } = useFormContext();
+  const { watch, control, setValue, handleSubmit } = useFormContext();
+  const { currency } = useCurrency();
+
+  useEffect(() => {
+    const subscription = watch((values) => {
+      handleSubmit(() => applyFilter(values))();
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, handleSubmit, applyFilter]);
 
   return (
-    <div className='flex flex-col gap-4 w-56'>
+    <div className='flex flex-col gap-8 w-56'>
       <OptionsList
         options={brands}
         control={control}
@@ -34,6 +46,7 @@ export function FilterForm({ brands, children }: FilterFormProps) {
         min={0}
         max={5000}
         step={100}
+        onFormat={(value) => `${getCurrencySymbol(currency)}${value.toFixed(2)}`}
       />
 
       {children}

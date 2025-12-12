@@ -25,7 +25,7 @@ export function MotherboardsFilterForm() {
   return (
     <form onSubmit={form.handleSubmit(applyFilter)}>
       <FormProvider {...form}>
-        <FilterForm brands={data.brands}>
+        <FilterForm brands={data.brands} applyFilter={applyFilter}>
           <OptionsList
             options={data.sockets}
             control={form.control}

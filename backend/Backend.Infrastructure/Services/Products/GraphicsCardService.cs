@@ -5,5 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public class GraphicsCardService(ILogger<GraphicsCardService> logger, IProductRepository<GraphicsCard> graphicCardRepository)
-    : ProductServiceBase<GraphicsCard, GraphicsCardDto>(logger, graphicCardRepository);
+public class GraphicsCardService(
+    ILogger<GraphicsCardService> logger,
+    IProductRepository<GraphicsCard> graphicCardRepository,
+    IExchangeRateRepository exchangeRateRepository) : ProductServiceBase<GraphicsCard, GraphicsCardDto>(logger, graphicCardRepository, exchangeRateRepository);

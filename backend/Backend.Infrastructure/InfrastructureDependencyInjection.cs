@@ -126,7 +126,7 @@ public static class InfrastructureDependencyInjection
                     nameof(Policy.AllowAny),
                     policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
-        
+
         private IServiceCollection AddRepositories() => services
             .AddScoped<IProductRepository<Monitor>, MonitorRepository>()
             .AddScoped<IProductRepository<Ram>, RamRepository>()
@@ -140,7 +140,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<ICartRepository, CartRepository>()
             .AddScoped<IItemRepository, ItemRepository>()
             .AddScoped<IShipmentRepository, ShipmentRepository>()
-            .AddScoped<IUserTokenRepository, UserTokenRepository>();
+            .AddScoped<IUserTokenRepository, UserTokenRepository>()
+            .AddScoped<IExchangeRateRepository, ExchangeRateRepository>();
 
         private IServiceCollection AddServices() => services
             .AddEmail()

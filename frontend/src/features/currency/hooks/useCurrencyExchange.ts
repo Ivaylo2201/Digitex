@@ -16,6 +16,6 @@ export function useCurrencyExchange() {
     exchangeCurrency: (amount: number) => {
       const exchangedAmount = amount * ratings[currency];
       return `${currencySymbol}${exchangedAmount.toFixed(2)}`;
-    },
+    }
   };
 }

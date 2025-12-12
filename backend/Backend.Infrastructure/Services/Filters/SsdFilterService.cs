@@ -2,6 +2,7 @@
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
+using Backend.Domain.Extensions;
 
 namespace Backend.Infrastructure.Services.Filters;
 
@@ -10,11 +11,11 @@ public class SsdFilterService(IBrandProviderService<Ssd> brandProviderService)
 {
     public override Filter<Ssd> BuildFilter(IDictionary<string, string> criteria) => ssd => ssd;
 
-    public override object GetFilters() => new
+    public override object Filters => new
     {
-        BaseFilters.Brands,
-        CapacityInGb = new Range<int>(1000, 5000),
-        StorageInterfaces = Enum.GetNames<StorageInterface>().ToList(),
+        Brands,
+        MemoryCapacities = new List<int> { 1000, 2000, 3000, 4000, 5000 },
+        StorageInterfaces = Enum.GetValues<StorageInterface>().Select(storageInterface => storageInterface.GetEnumMemberValue()),
         ReadSpeed = new Range<int>(1000, 10000),
         WriteSpeed = new Range<int>(1000, 10000)
     };

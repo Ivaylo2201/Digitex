@@ -48,6 +48,8 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Shipments.AddRange(Data.Shipments);
         context.Countries.AddRange(Data.Countries.Values);
         context.Cities.AddRange(Data.Cities);
+        context.Currencies.AddRange(Data.Currencies.Values);
+        context.ExchangeRates.AddRange(Data.ExchangeRates);
     }
 
     private async Task TruncateTables()
@@ -56,6 +58,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         
         await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Suggestions;");
         await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE Wishlist;");
+        await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE ExchangeRates;");
         
         context.UserTokens.RemoveRange(context.UserTokens);
         context.Addresses.RemoveRange(context.Addresses);
@@ -81,12 +84,14 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Countries.RemoveRange(context.Countries);
         context.Payments.RemoveRange(context.Payments);
         context.Sales.RemoveRange(context.Sales);
+        context.Currencies.RemoveRange(context.Currencies);
     }
 
     private async Task ResetIndicesAsync()
     {
         logger.LogInformation("Resetting indices...");
         
+        await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Currencies', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Addresses', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Cities', RESEED, 0);");
         await context.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('Shipments', RESEED, 0);");

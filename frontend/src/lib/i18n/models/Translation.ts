@@ -220,6 +220,7 @@ export type Translation = {
     gigabytes: string;
     hertz: string;
     megahertz: string;
+    gigahertz: string;
     watts: string;
     bits: string;
     mbPerSecond: string;
@@ -467,6 +468,7 @@ export const translation: Translation = {
     gigabytes: 'GB',
     hertz: 'Hz',
     megahertz: 'MHz',
+    gigahertz: 'GHz',
     watts: 'W',
     bits: 'bits',
     mbPerSecond: 'MB/s',

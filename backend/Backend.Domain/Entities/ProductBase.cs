@@ -8,7 +8,7 @@ public abstract class ProductBase
     public Brand Brand { get; init; } = null!;
     public required string ModelName { get; init; }
     public required string ImagePath { get; init; }
-    public required double InitialPrice { get; init; }
+    public required double InitialPrice { get; set; }
     public int DiscountPercentage { get; init; }
     public required int Quantity { get; set; }
     public int Rating { get; set; }

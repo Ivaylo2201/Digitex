@@ -28,6 +28,8 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<Sale> Sales => Set<Sale>();
     public DbSet<UserToken> UserTokens => Set<UserToken>();
+    public DbSet<Currency> Currencies => Set<Currency>();
+    public DbSet<ExchangeRate> ExchangeRates => Set<ExchangeRate>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

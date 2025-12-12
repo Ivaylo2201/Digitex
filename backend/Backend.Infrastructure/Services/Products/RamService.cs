@@ -5,5 +5,5 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public class RamService(ILogger<RamService> logger, IProductRepository<Ram> ramRepository) 
-    : ProductServiceBase<Ram, RamDto>(logger, ramRepository);
+public class RamService(ILogger<RamService> logger, IProductRepository<Ram> ramRepository, IExchangeRateRepository exchangeRateRepository) 
+    : ProductServiceBase<Ram, RamDto>(logger, ramRepository, exchangeRateRepository);

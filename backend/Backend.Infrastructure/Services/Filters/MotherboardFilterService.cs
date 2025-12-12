@@ -19,9 +19,9 @@ public class MotherboardFilterService(IBrandProviderService<Motherboard> brandPr
         return query => query;
     }
 
-    public override object GetFilters() => new
+    public override object Filters => new
     {
-        BaseFilters.Brands,
+        Brands,
         Sockets = Enum.GetValues<Socket>().Select(socket => socket.GetEnumMemberValue()),
         FormFactors = Enum.GetValues<FormFactor>().Select(formFactor => formFactor.GetEnumMemberValue()),
         Chipsets = Enum.GetValues<Chipset>().Select(chipset => chipset.GetEnumMemberValue())

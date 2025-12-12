@@ -5,5 +5,5 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public class ProcessorService(ILogger<ProcessorService> logger, IProductRepository<Processor> processorRepository) 
-    : ProductServiceBase<Processor, ProcessorDto>(logger, processorRepository);
+public class ProcessorService(ILogger<ProcessorService> logger, IProductRepository<Processor> processorRepository, IExchangeRateRepository exchangeRateRepository) 
+    : ProductServiceBase<Processor, ProcessorDto>(logger, processorRepository, exchangeRateRepository);

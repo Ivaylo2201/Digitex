@@ -2,7 +2,6 @@
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
-using Backend.Domain.Extensions;
 
 namespace Backend.Infrastructure.Services.Filters;
 
@@ -11,12 +10,13 @@ public class GraphicsCardFilterService(IBrandProviderService<GraphicsCard> brand
 {
     public override Filter<GraphicsCard> BuildFilter(IDictionary<string, string> criteria) => filter => filter;
 
-    public override object GetFilters() => new
+    public override object Filters => new
     {
-        BaseFilters.Brands,
-        BusWidth = Enum.GetValues<BusWidth>().Cast<int>().ToList(),
-        MemoryCapacity = new List<int> { 2, 4, 6, 8, 10, 12, 16, 24 },
-        BaseClockSpeed = new Range<double>(1.0, 5.0),
+        Brands,
+        BusWidths = Enum.GetValues<BusWidth>().Cast<int>().ToList(),
+        MemoryCapacities = new List<int> { 2, 4, 6, 8, 10, 12, 16, 24 },
+        MinClockSpeed = 1,
+        MaxClockSpeed = 5,
         CudaCores = new List<int> { 2048, 3072, 3584, 4352, 5888, 8704, 10496 }
     };
 }

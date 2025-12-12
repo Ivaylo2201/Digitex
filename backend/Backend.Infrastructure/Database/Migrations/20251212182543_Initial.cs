@@ -38,6 +38,20 @@ namespace Backend.Infrastructure.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Currencies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsoCode = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    Sign = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Currencies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shipments",
                 columns: table => new
                 {
@@ -112,6 +126,31 @@ namespace Backend.Infrastructure.Database.Migrations
                         principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExchangeRates",
+                columns: table => new
+                {
+                    FromCurrencyId = table.Column<int>(type: "int", nullable: false),
+                    ToCurrencyId = table.Column<int>(type: "int", nullable: false),
+                    Rate = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExchangeRates", x => new { x.FromCurrencyId, x.ToCurrencyId });
+                    table.ForeignKey(
+                        name: "FK_ExchangeRates_Currencies_FromCurrencyId",
+                        column: x => x.FromCurrencyId,
+                        principalTable: "Currencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ExchangeRates_Currencies_ToCurrencyId",
+                        column: x => x.ToCurrencyId,
+                        principalTable: "Currencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -548,6 +587,17 @@ namespace Backend.Infrastructure.Database.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Currencies_IsoCode",
+                table: "Currencies",
+                column: "IsoCode",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExchangeRates_ToCurrencyId",
+                table: "ExchangeRates",
+                column: "ToCurrencyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Items_CartId",
                 table: "Items",
                 column: "CartId");
@@ -639,6 +689,9 @@ namespace Backend.Infrastructure.Database.Migrations
                 name: "Addresses");
 
             migrationBuilder.DropTable(
+                name: "ExchangeRates");
+
+            migrationBuilder.DropTable(
                 name: "GraphicsCards");
 
             migrationBuilder.DropTable(
@@ -682,6 +735,9 @@ namespace Backend.Infrastructure.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cities");
+
+            migrationBuilder.DropTable(
+                name: "Currencies");
 
             migrationBuilder.DropTable(
                 name: "Carts");

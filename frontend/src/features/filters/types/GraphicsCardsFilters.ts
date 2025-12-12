@@ -1,8 +1,9 @@
 import type { BaseFilters } from './BaseFilters';
 
 export type GraphicsCardsFilters = BaseFilters & {
-  busWidth: number[];
-  memoryCapacity: number[];
-  baseClockSpeed: number[];
+  busWidths: number[];
+  memoryCapacities: number[];
+  minClockSpeed: number;
+  maxClockSpeed: number;
   cudaCores: number[];
 };

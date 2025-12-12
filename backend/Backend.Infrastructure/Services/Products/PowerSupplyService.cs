@@ -5,5 +5,5 @@ using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public class PowerSupplyService(ILogger<PowerSupplyService> logger, IProductRepository<PowerSupply> powerSupplyRepository) 
-    : ProductServiceBase<PowerSupply, PowerSupplyDto>(logger, powerSupplyRepository);
+public class PowerSupplyService(ILogger<PowerSupplyService> logger, IProductRepository<PowerSupply> powerSupplyRepository, IExchangeRateRepository exchangeRateRepository) 
+    : ProductServiceBase<PowerSupply, PowerSupplyDto>(logger, powerSupplyRepository, exchangeRateRepository);

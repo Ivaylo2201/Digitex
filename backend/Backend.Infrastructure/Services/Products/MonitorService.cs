@@ -6,5 +6,5 @@ namespace Backend.Infrastructure.Services.Products;
 
 using Monitor = Domain.Entities.Monitor;
 
-public class MonitorService(ILogger<MonitorService> logger, IProductRepository<Monitor> monitorRepository)
-    : ProductServiceBase<Monitor, MonitorDto>(logger, monitorRepository);
+public class MonitorService(ILogger<MonitorService> logger, IProductRepository<Monitor> monitorRepository, IExchangeRateRepository exchangeRateRepository)
+    : ProductServiceBase<Monitor, MonitorDto>(logger, monitorRepository, exchangeRateRepository);

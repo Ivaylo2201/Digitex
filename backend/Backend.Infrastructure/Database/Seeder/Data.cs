@@ -7,7 +7,7 @@ namespace Backend.Infrastructure.Database.Seeder;
 
 public static class Data
 {
-    private static readonly Random Random = new();
+    private static readonly Random Random = new();  
 
     public static readonly Dictionary<string, Brand> Brands = new()
     {
@@ -2270,6 +2270,26 @@ public static class Data
         new() { Country = Countries["us"], CityName = "New York" },
         new() { Country = Countries["us"], CityName = "Los Angeles" },
         new() { Country = Countries["us"], CityName = "Chicago" }
+    ];
+    
+    public static readonly Dictionary<string, Currency> Currencies = new()
+    {
+        ["usd"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Usd, Sign = "$", },
+        ["eur"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Eur, Sign = "€" },
+        ["gbp"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Gbp, Sign = "£" },
+    };
+
+    public static readonly List<ExchangeRate> ExchangeRates =
+    [
+        new() { FromCurrency = Currencies["usd"], ToCurrency = Currencies["usd"], Rate = 1 },
+        new() { FromCurrency = Currencies["eur"], ToCurrency = Currencies["eur"], Rate = 1 },
+        new() { FromCurrency = Currencies["gbp"], ToCurrency = Currencies["gbp"], Rate = 1 },
+        new() { FromCurrency = Currencies["usd"], ToCurrency = Currencies["eur"], Rate = 0.85 }, 
+        new() { FromCurrency = Currencies["usd"], ToCurrency = Currencies["gbp"], Rate = 0.75 }, 
+        new() { FromCurrency = Currencies["eur"], ToCurrency = Currencies["usd"], Rate = 1.20 }, 
+        new() { FromCurrency = Currencies["eur"], ToCurrency = Currencies["gbp"], Rate = 0.90 }, 
+        new() { FromCurrency = Currencies["gbp"], ToCurrency = Currencies["usd"], Rate = 1.35 }, 
+        new() { FromCurrency = Currencies["gbp"], ToCurrency = Currencies["eur"], Rate = 1.15 }
     ];
 
     private static int GetRandomQuantity() => Random.Next(10, 51);

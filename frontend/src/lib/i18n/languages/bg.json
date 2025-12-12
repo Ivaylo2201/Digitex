@@ -225,6 +225,7 @@
     "gigabytes": "GB",
     "hertz": "Hz",
     "megahertz": "MHz",
+    "gigahertz": "GHz",
     "watts": "W",
     "bits": "бита",
     "mbPerSecond": "MB/с",
