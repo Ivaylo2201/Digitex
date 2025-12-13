@@ -23,7 +23,7 @@ export function MotherboardsFilterForm() {
   return (
     <form>
       <FormProvider {...form}>
-        <FilterForm brands={data.brands} category='motherboards'>
+        <FilterForm brands={data.brands}>
           <OptionsList
             options={data.sockets}
             control={form.control}

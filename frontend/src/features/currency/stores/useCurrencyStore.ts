@@ -9,7 +9,7 @@ type CurrencyStore = {
 };
 
 export const useCurrencyStore = create<CurrencyStore>((set) => ({
-  currency: { currencyIsoCode: 'Eur', sign: '€' },
+  currency: { currencyIsoCode: 'EUR', sign: '€' },
   currencies: [],
   setCurrencies: (currencies) =>
     set({

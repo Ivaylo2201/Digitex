@@ -9,6 +9,7 @@ async function fetchProducts(
   category: string,
   queryParams: string | undefined
 ) {
+  console.log('fetching');
   const res = await httpClient.get<ProductShort[]>(
     `/products/${category}${queryParams}`
   );
@@ -20,12 +21,14 @@ export function useProducts(category: string) {
   const { currency } = useCurrencyStore();
 
   return useQuery({
-    queryKey: ['products', category, currency.currencyIsoCode],
-    queryFn: () =>
-      fetchProducts(
-        category,
-        `${location.search}&currencyIsoCode=${currency.currencyIsoCode}`
-      ),
+    queryKey: ['products', category, currency, location.search],
+    queryFn: () => {
+      const searchParams = location.search.split('?')[1];
+      const queryParams = `?currency=${currency.currencyIsoCode}${
+        searchParams ? `&${searchParams}` : ''
+      }`;
+      return fetchProducts(category, queryParams);
+    },
     staleTime: staleTime,
     retry: false,
   });

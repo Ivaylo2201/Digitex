@@ -32,15 +32,15 @@ export function OptionsList({
   const values = Array.isArray(field.value) ? field.value : [];
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-2.5'>
       <p className='font-semibold text-theme-gunmetal'>{title}</p>
 
-      <ul className='flex flex-col gap-3'>
+      <ul className='flex flex-col gap-3.5'>
         {(options ?? []).map((option) => {
           const optionString = option.toString();
 
           return (
-            <li key={optionString} className='flex gap-3'>
+            <li key={optionString} className='flex gap-2.5'>
               <Checkbox
                 id={optionString}
                 checked={values.includes(optionString)}
