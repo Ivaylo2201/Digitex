@@ -1,1 +1,4 @@
-export type Currency = 'eur' | 'usd' | 'gbp';
+export type Currency = {
+  currencyIsoCode: string;
+  sign: string;
+};

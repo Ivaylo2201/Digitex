@@ -13,7 +13,7 @@ const filterForms: Record<string, React.ComponentType> = {
 
 export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
-  const { data: products } = useProducts(category);
+  const { data: products } = useProducts(category ?? '');
   const isLoading = products === undefined || category === undefined;
 
   if (isLoading) {

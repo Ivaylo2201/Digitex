@@ -1,7 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import type { BaseFilters } from '../../types/BaseFilters';
 import { useFilters } from '../../hooks/useFilters';
-import { useApplyFilter } from '../../hooks/useApplyFilter';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { FilterForm } from './FilterForm';
 import { OptionsList } from '../OptionsList';
@@ -15,7 +14,6 @@ export type MotherboardsFilters = BaseFilters & {
 export function MotherboardsFilterForm() {
   const form = useForm<MotherboardsFilters>();
   const { data } = useFilters<MotherboardsFilters>('motherboards');
-  const { applyFilter } = useApplyFilter('motherboards');
   const {
     components: { motherboardsFilterForm },
   } = useTranslation();
@@ -23,9 +21,9 @@ export function MotherboardsFilterForm() {
   if (!data) return;
 
   return (
-    <form onSubmit={form.handleSubmit(applyFilter)}>
+    <form>
       <FormProvider {...form}>
-        <FilterForm brands={data.brands} applyFilter={applyFilter}>
+        <FilterForm brands={data.brands} category='motherboards'>
           <OptionsList
             options={data.sockets}
             control={form.control}

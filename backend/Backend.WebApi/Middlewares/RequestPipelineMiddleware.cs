@@ -11,9 +11,10 @@ public class RequestPipelineMiddleware(ILogger<RequestPipelineMiddleware> logger
     {
         var method = context.Request.Method;
         var path = context.Request.Path;
+        var query = context.Request.QueryString.Value;
         var stopwatch = Stopwatch.StartNew();
         
-        logger.LogInformation("[{Source}]: Executing {Method} {Endpoint}...", _source, method, path);
+        logger.LogInformation("[{Source}]: Executing {Method} {Endpoint}{Query}...", _source, method, path, query);
         await next(context);
         stopwatch.Stop();
         logger.LogInformation("[{Source}]: {Method} {Endpoint} executed in {Duration}ms.", _source, method, path, stopwatch.ElapsedMilliseconds);

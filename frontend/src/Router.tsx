@@ -33,9 +33,7 @@ export function Router() {
               </AuthenticationRequired>
             }
           />
-          <Route
-            path='verify'
-            element={<AccountVerificationPage />} />
+          <Route path='verify' element={<AccountVerificationPage />} />
           <Route
             path='request-password-reset'
             element={<RequestPasswordResetPage />}

@@ -4,13 +4,12 @@ import { FilterForm } from './FilterForm';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { OptionsList } from '../OptionsList';
 import { RangeSlider } from '../RangeSlider';
-import { useApplyFilter } from '../../hooks/useApplyFilter';
 import type { GraphicsCardsFilters } from '../../types/GraphicsCardsFilters';
 
 export function GraphicsCardsFilterForm() {
   const form = useForm<GraphicsCardsFilters>();
   const { data } = useFilters<GraphicsCardsFilters>('graphics-cards');
-  const { applyFilter } = useApplyFilter('graphics-cards');
+
   const {
     components: { graphicsCardsFilterForm },
     units,
@@ -22,9 +21,9 @@ export function GraphicsCardsFilterForm() {
   };
 
   return (
-    <form onSubmit={form.handleSubmit(applyFilter)}>
+    <form>
       <FormProvider {...form}>
-        <FilterForm brands={data?.brands ?? []} applyFilter={applyFilter}>
+        <FilterForm brands={data?.brands ?? []} category='graphics-cards'>
           <OptionsList
             options={data?.busWidths}
             control={form.control}

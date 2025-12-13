@@ -18,7 +18,7 @@ public class ProductServiceBase<TEntity, TProjection>(
     private readonly string _entityName = typeof(TEntity).Name;
     private readonly string _projectionName = typeof(TProjection).Name;
 
-    public async Task<Result<TProjection?>> GetOneAsync(Guid id, Func<TEntity, TProjection> project, CurrencyIsoCode currencyIsoCode = CurrencyIsoCode.Eur, CancellationToken stoppingToken = default)
+    public async Task<Result<TProjection?>> GetOneAsync(Guid id, Func<TEntity, TProjection> project, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var entity = await productRepository.GetOneAsync(id, stoppingToken);
@@ -39,7 +39,7 @@ public class ProductServiceBase<TEntity, TProjection>(
         return Result<TProjection?>.Success(StatusCodes.Status200OK, project(entity));
     }
 
-    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter, CurrencyIsoCode currencyIsoCode = CurrencyIsoCode.Eur, CancellationToken stoppingToken = default)
+    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var entities = await productRepository.ListAllAsync(filter, stoppingToken);

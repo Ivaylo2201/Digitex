@@ -1,35 +1,42 @@
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
-import { Button } from '@/components/ui/button';
 import { RangeSlider } from '../RangeSlider';
 import type React from 'react';
 import { OptionsList } from '../OptionsList';
+import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { useCurrency } from '@/features/currency/stores/useCurrency';
-import { getCurrencySymbol } from '@/features/currency/utils/getCurrencySymbol';
+import { useLocation, useNavigate } from 'react-router';
+import { toQueryParams } from '../../utils/toQueryParams';
 
 type FilterFormProps = React.PropsWithChildren<{
   brands: string[];
-  applyFilter: (data: object) => void;
+  category: string;
 }>;
 
-export function FilterForm({ brands, applyFilter, children }: FilterFormProps) {
+export function FilterForm({ brands, category, children }: FilterFormProps) {
   const {
     components: { filterForm },
   } = useTranslation();
 
-  const { watch, control, setValue, handleSubmit } = useFormContext();
-  const { currency } = useCurrency();
+  const { control, setValue, handleSubmit, watch } = useFormContext();
+  const { currency } = useCurrencyStore();
+  const queryClient = useQueryClient();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const onSubmit = (data: object) => {
+    navigate(`${location.pathname}?${toQueryParams(data)}`, { replace: true });
+    queryClient.invalidateQueries({ queryKey: ['products', category] });
+  };
 
   useEffect(() => {
-    const subscription = watch((values) => {
-      handleSubmit(() => applyFilter(values))();
-    });
+    const subscription = watch(() => handleSubmit(onSubmit)());
     return () => subscription.unsubscribe();
-  }, [watch, handleSubmit, applyFilter]);
+  }, [watch, handleSubmit]);
 
   return (
-    <div className='flex flex-col gap-8 w-56'>
+    <div className='flex flex-col gap-8 w-56' onSubmit={handleSubmit(onSubmit)}>
       <OptionsList
         options={brands}
         control={control}
@@ -43,20 +50,13 @@ export function FilterForm({ brands, applyFilter, children }: FilterFormProps) {
           setValue('minPrice', range[0]);
           setValue('maxPrice', range[1]);
         }}
+        onFormat={(value) => `${currency.sign}${value.toFixed(2)}`}
         min={0}
         max={5000}
         step={100}
-        onFormat={(value) => `${getCurrencySymbol(currency)}${value.toFixed(2)}`}
       />
 
       {children}
-
-      <Button
-        type='submit'
-        className='w-full bg-theme-crimson hover:bg-theme-lightcrimson cursor-pointer duration-200 transition-colors mt-5'
-      >
-        {filterForm.apply}
-      </Button>
     </div>
   );
 }

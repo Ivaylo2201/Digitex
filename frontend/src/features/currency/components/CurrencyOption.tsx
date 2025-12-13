@@ -1,14 +1,10 @@
-import { getCurrencySymbol } from '../utils/getCurrencySymbol';
+import type { Currency } from '../models/Currency';
 
-type CurrencyOptionProps = { code: string };
-
-export function CurrencyOption({ code }: CurrencyOptionProps) {
+export function CurrencyOption({ currencyIsoCode, sign }: Currency) {
   return (
     <div className='flex items-center gap-2 font-montserrat text-xs'>
-      <span className='text-theme-crimson font-semibold'>
-        {getCurrencySymbol(code)}
-      </span>
-      <span>{code.toUpperCase()}</span>
+      <span className='text-theme-crimson font-semibold'>{sign}</span>
+      <span>{currencyIsoCode.toUpperCase()}</span>
     </div>
   );
 }

@@ -18,7 +18,6 @@ import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { useNavigate } from 'react-router';
-import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
 
 type ProductCompareTableProps = {
   products: ProductLong[];
@@ -38,7 +37,6 @@ export function ProductCompareTable({
     components: { productCompareTable }
   } = useTranslation();
   const navigate = useNavigate();
-  const { exchangeCurrency } = useCurrencyExchange();
   //const { clearCompare } = useCompare();
 
   return (
@@ -66,7 +64,7 @@ export function ProductCompareTable({
                 <TableCell>{product.brandName}</TableCell>
                 <TableCell>{product.modelName}</TableCell>
                 <TableCell>
-                  {exchangeCurrency(product.price.discounted)}
+                  {product.price.discounted}
                 </TableCell>
                 {renderChildTableCells(product)}
               </TableRow>

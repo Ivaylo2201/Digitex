@@ -1,9 +1,9 @@
 import { Rating } from '@/features/products/components/Rating';
 import { Link } from 'react-router';
 import type { ProductShort } from '@/features/products/models/base/ProductShort';
-import { useCurrencyExchange } from '@/features/currency/hooks/useCurrencyExchange';
 import { DiscountLabel } from './DiscountLabel';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
+import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 
 type ProductCardProps = ProductShort & { category: string };
 
@@ -17,10 +17,7 @@ export function ProductCard({
   rating,
   category,
 }: ProductCardProps) {
-  const { exchangeCurrency } = useCurrencyExchange();
-
-  const exchangedDiscountedPrice = exchangeCurrency(price.discounted);
-  const exchangedInitialPrice = exchangeCurrency(price.initial);
+  const { currency } = useCurrencyStore();
 
   return (
     <Link
@@ -42,14 +39,14 @@ export function ProductCard({
 
         <div className='flex items-center gap-2'>
           <p className='font-bold text-theme-crimson'>
-            {exchangedDiscountedPrice}
+            {currency.sign}{price.discounted.toFixed(2)}
           </p>
           <p
             className={`text-sm line-through text-gray-500 ${
               discountPercentage > 0 ? 'block' : 'hidden'
             }`}
           >
-            {exchangedInitialPrice}
+            {currency.sign}{price.initial.toFixed(2)}
           </p>
         </div>
 
