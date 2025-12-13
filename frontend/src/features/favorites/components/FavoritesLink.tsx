@@ -1,4 +1,4 @@
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 

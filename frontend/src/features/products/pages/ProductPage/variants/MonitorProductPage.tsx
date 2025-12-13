@@ -13,7 +13,7 @@ export function MonitorProductPage() {
     <ProductPage
       product={product}
       category={category}
-      specifications={formatProduct.toMonitor(product)}
+      onFormatSpecifications={formatProduct.toMonitor}
     />
   );
 }

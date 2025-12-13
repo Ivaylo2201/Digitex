@@ -9,7 +9,7 @@ import {
 
 import { Page } from '@/components/layout/Page';
 import { Button } from '@/components/ui/button';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { ArrowUpRightIcon, MonitorX } from 'lucide-react';
 import { useNavigate } from 'react-router';
 

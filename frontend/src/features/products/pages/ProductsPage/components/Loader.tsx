@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/ui/spinner';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 export function Loader() {
   const {

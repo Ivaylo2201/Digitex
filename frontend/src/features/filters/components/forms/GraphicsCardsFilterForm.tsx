@@ -1,7 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useFilters } from '../../hooks/useFilters';
 import { FilterForm } from './FilterForm';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { OptionsList } from '../OptionsList';
 import { RangeSlider } from '../RangeSlider';
 import type { GraphicsCardsFilters } from '../../types/GraphicsCardsFilters';

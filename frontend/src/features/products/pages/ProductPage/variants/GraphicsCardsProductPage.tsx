@@ -13,7 +13,7 @@ export function GraphicsCardsProductPage() {
     <ProductPage
       product={product}
       category={category}
-      specifications={formatProduct.toGraphicsCard(product)}
+      onFormatSpecifications={formatProduct.toGraphicsCard}
     />
   );
 }

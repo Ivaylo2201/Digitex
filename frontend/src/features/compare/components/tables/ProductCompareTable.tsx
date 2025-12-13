@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/hover-card';
 
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { useNavigate } from 'react-router';
 
@@ -37,7 +37,7 @@ export function ProductCompareTable({
     components: { productCompareTable }
   } = useTranslation();
   const navigate = useNavigate();
-  //const { clearCompare } = useCompare();
+  //const { clearCompare } = useCompare(); // TODO: implement
 
   return (
     <Table className='font-montserrat border'>

@@ -1,5 +1,5 @@
-import { Header } from '@/components/layout/Header/Header';
 import { Navbar } from '@/components/layout/Navbar/Navbar';
+import { Header } from './Header/Header';
 
 type PageProps = React.PropsWithChildren & { className?: string };
 

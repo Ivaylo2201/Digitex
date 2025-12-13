@@ -6,7 +6,7 @@ import {
   USERNAME_MIN_LENGTH,
 } from '../../../../lib/validation/constants';
 
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import z from 'zod';
 
 export function useSignUpSchema() {

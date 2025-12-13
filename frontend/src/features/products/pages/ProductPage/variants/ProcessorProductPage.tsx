@@ -13,7 +13,7 @@ export function ProcessorProductPage() {
     <ProductPage
       product={product}
       category={category}
-      specifications={formatProduct.toProcessor(product)}
+      onFormatSpecifications={formatProduct.toProcessor}
     />
   );
 }

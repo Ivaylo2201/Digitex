@@ -1,7 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import type { BaseFilters } from '../../types/BaseFilters';
 import { useFilters } from '../../hooks/useFilters';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { FilterForm } from './FilterForm';
 import { OptionsList } from '../OptionsList';
 

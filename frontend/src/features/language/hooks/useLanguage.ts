@@ -8,8 +8,11 @@ type LanguageStore = {
 };
 
 export const useLanguage = create<LanguageStore>((set) => {
-  const envLanguages = import.meta.env.VITE_APP_LANGUAGES as string;
-  const languages = envLanguages.split(',') as Language[];
+  const languages: Language[] = [
+    { languageIsoCode: 'EN' },
+    { languageIsoCode: 'BG' },
+    { languageIsoCode: 'DE' },
+  ];
 
   return {
     language: languages[0],

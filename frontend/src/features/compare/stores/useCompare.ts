@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { Translation } from '@/lib/i18n/models/Translation';
+import type { Translation } from '@/features/language/models/Translation';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 
 type CompareStore = {

@@ -1,5 +1,5 @@
 import { useAuth } from '@/features/auth/stores/useAuth';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { LogOut } from 'lucide-react';
 
 export function SignOutButton() {

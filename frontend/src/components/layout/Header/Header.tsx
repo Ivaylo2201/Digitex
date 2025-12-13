@@ -4,18 +4,18 @@ import { CartLink } from '../../../features/cart/components/CartLink';
 import { LogoLink } from './LogoLink';
 import { Searchbox } from './Searchbox';
 import { FavoritesLink } from '../../../features/favorites/components/FavoritesLink';
-import { LanguageSelect } from './LanguageSelect';
+import { LanguageSelect } from '../../../features/language/components/Header/LanguageSelect';
 import { SignOutButton } from '../../../features/auth/components/SignOutButton';
 import { SignInLink } from '../../../features/auth/components/SignInLink';
 import { useAuth } from '@/features/auth/stores/useAuth';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
 import { CompareLink } from '../../../features/compare/components/CompareLink';
 import { CurrencySelect } from '@/features/currency/components/CurrencySelect';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 export function Header() {
   const { isAuthenticated } = useAuth();
   const {
-    components: { header }
+    components: { header },
   } = useTranslation();
 
   return (

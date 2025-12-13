@@ -1,4 +1,4 @@
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { NavbarLink } from './NavbarLink';
 
 export function Navbar() {
@@ -11,7 +11,7 @@ export function Navbar() {
     { content: routeNames['rams'], to: '/rams' },
     { content: routeNames['ssds'], to: '/ssds' },
     { content: routeNames['power-supplies'], to: '/power-supplies' },
-    { content: routeNames['monitors'], to: '/monitors' }
+    { content: routeNames['monitors'], to: '/monitors' },
   ];
 
   return (

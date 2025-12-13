@@ -1,6 +1,6 @@
 import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { ProductCompareTable } from './ProductCompareTable';
 import { TableHead, TableCell } from '@/components/ui/table';
 import { Fragment } from 'react';
@@ -10,10 +10,10 @@ type PowerSuppliesCompareTableProps = {
 };
 
 export default function PowerSuppliesCompareTable({
-  products
+  products,
 }: PowerSuppliesCompareTableProps) {
   const {
-    specifications: { powerSupplies }
+    specifications: { powerSupplies },
   } = useTranslation();
   const formatProduct = useFormatProduct();
 

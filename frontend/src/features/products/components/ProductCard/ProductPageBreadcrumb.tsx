@@ -6,7 +6,7 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { capitalize } from '@/lib/utils/capitalize';
 import { Link } from 'react-router';
 

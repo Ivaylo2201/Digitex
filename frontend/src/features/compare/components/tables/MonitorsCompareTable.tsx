@@ -2,15 +2,15 @@ import { TableHead, TableCell } from '@/components/ui/table';
 
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { ProductCompareTable } from './ProductCompareTable';
-import { Fragment } from 'react';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';
+import { Fragment } from 'react';
 
 type MonitorsCompareTableProps = { products: ProductLong[] };
 
 export function MonitorsCompareTable({ products }: MonitorsCompareTableProps) {
   const {
-    specifications: { monitors }
+    specifications: { monitors },
   } = useTranslation();
   const formatProduct = useFormatProduct();
 

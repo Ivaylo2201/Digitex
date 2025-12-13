@@ -1,5 +1,5 @@
 import { ArrowRightLeft } from 'lucide-react';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Link } from 'react-router';
 import { useCompare } from '../stores/useCompare';
 

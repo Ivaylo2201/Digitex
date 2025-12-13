@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { useCompare } from '@/features/compare/stores/useCompare';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { ArrowLeftRight } from 'lucide-react';
 import { toast } from 'sonner';
 

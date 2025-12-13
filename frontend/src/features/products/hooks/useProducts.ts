@@ -9,7 +9,6 @@ async function fetchProducts(
   category: string,
   queryParams: string | undefined
 ) {
-  console.log('fetching');
   const res = await httpClient.get<ProductShort[]>(
     `/products/${category}${queryParams}`
   );

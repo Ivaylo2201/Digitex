@@ -2,7 +2,7 @@ import type { SuggestedProduct } from '@/features/products/models/shared/Suggest
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { Link } from 'react-router';
 import { Separator } from '@/components/ui/separator';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { EmptySuggestedProductsSection } from './EmptySuggestedProductsSection';
 
 type SuggestedProductsSectionProps = {

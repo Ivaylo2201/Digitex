@@ -11,20 +11,30 @@ import { ProductPrice } from './components/ProductPrice';
 import { AddToFavoritesButton } from '../../../favorites/components/AddToFavoritesButton';
 import { ReviewsSection } from '@/features/reviews/components/ReviewsSection';
 import { AddToCartButton } from '@/features/cart/components/AddToCartButton';
+import { Loader } from 'lucide-react';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
-  product: T;
-  specifications: Specification[];
+  product: T | undefined;
+  onFormatSpecifications: (product: T) => Specification[];
 };
 
 export function ProductPage<T extends ProductLong>({
   category,
   product,
-  specifications,
+  onFormatSpecifications,
 }: ProductPageProps<T>) {
+  if (!product) {
+    return (
+      <Page>
+        <Loader />
+      </Page>
+    );
+  }
+
   const isInStock = product.quantity > 0;
   const displayName = `${product.brandName} ${product.modelName}`;
+  const specifications = onFormatSpecifications(product);
 
   return (
     <Page>

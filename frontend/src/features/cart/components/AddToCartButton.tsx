@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { ShoppingCart, X } from 'lucide-react';
 import { Fragment } from 'react';
 

@@ -1,16 +1,21 @@
+import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 import { staleTime } from '@/lib/api/constants';
 import { httpClient } from '@/lib/api/httpClient';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-async function fetchProduct<T>(category: string, id: string) {
-  const res = await httpClient.get<T>(`/products/${category}/${id}`);
+async function fetchProduct<T>(category: string, id: string, currency: string) {
+  const res = await httpClient.get<T>(
+    `/products/${category}/${id}?currency=${currency}`
+  );
   return res.data;
 }
 
 export function useProduct<T>(category: string, id: string) {
-  return useSuspenseQuery({
-    queryKey: [category, id],
-    queryFn: () => fetchProduct<T>(category, id),
+  const { currency } = useCurrencyStore();
+
+  return useQuery({
+    queryKey: [category, id, currency],
+    queryFn: () => fetchProduct<T>(category, id, currency.currencyIsoCode),
     staleTime: staleTime,
     retry: false,
   });

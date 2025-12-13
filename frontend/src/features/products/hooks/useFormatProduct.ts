@@ -6,7 +6,7 @@ import type { Motherboard } from '../models/Motherboard';
 import type { Ram } from '../models/Ram';
 import type { Ssd } from '../models/Ssd';
 import type { PowerSupply } from '../models/PowerSupply';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 export function useFormatProduct() {
   const translation = useTranslation();

@@ -1,6 +1,6 @@
 import type { ApiError } from '@/lib/api/ApiError';
 import { httpClient } from '@/lib/api/httpClient';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import type { RequestPasswordResetSchema } from './useRequestPasswordResetSchema';

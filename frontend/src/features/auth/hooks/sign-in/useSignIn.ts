@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import type { SignInSchema } from './useSignInSchema';
 import { useAuth } from '../../stores/useAuth';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import type { ApiError } from '@/lib/api/ApiError';
 
 type UseSignInResponse = { token: string; role: string };

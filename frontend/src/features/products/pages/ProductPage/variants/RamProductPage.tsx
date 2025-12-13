@@ -13,7 +13,7 @@ export function RamProductPage() {
     <ProductPage
       product={product}
       category={category}
-      specifications={formatProduct.toRam(product)}
+      onFormatSpecifications={formatProduct.toRam}
     />
   );
 }

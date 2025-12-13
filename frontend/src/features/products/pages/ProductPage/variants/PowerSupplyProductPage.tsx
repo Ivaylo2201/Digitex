@@ -13,7 +13,7 @@ export function PowerSupplyProductPage() {
     <ProductPage
       product={product}
       category={category}
-      specifications={formatProduct.toPowerSupply(product)}
+      onFormatSpecifications={formatProduct.toPowerSupply}
     />
   );
 }

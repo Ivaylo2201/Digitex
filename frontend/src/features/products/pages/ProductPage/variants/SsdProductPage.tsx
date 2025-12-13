@@ -13,7 +13,7 @@ export function SsdProductPage() {
     <ProductPage
       product={product}
       category={category}
-      specifications={formatProduct.toSsd(product)}
+      onFormatSpecifications={formatProduct.toSsd}
     />
   );
 }

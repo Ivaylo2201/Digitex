@@ -1,6 +1,6 @@
 import { TableHead, TableCell } from '@/components/ui/table';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { ProductCompareTable } from './ProductCompareTable';
 import { Fragment } from 'react';
 import { useFormatProduct } from '@/features/products/hooks/useFormatProduct';

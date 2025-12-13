@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, useSearchParams } from 'react-router';
 import { httpClient } from '@/lib/api/httpClient';
 import { toast } from 'sonner';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { useAuth } from '@/features/auth/stores/useAuth';
 
 type AccountVerificationResponse = { token: string; role: string };
@@ -18,7 +18,11 @@ export function AccountVerificationPage() {
     const verifyAccount = async (token: string | null) => {
       if (token) {
         try {
-          const { data: res } = await httpClient.patch<AccountVerificationResponse>('/accounts/verify', { token });
+          const { data: res } =
+            await httpClient.patch<AccountVerificationResponse>(
+              '/accounts/verify',
+              { token }
+            );
           signIn(res.token, res.role);
           toast.success(accountVerifiedPage.accountVerifiedSuccessfully);
         } catch {

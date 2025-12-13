@@ -24,7 +24,7 @@ export function ProductsPage() {
     );
   }
 
-  const FilterForm = filterForms[category];
+  const FilterForm = filterForms[category] ?? GraphicsCardsFilterForm; // TODO: implement other
 
   return (
     <Page>

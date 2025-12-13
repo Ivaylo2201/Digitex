@@ -3,7 +3,7 @@ import type { ApiError } from '@/lib/api/ApiError';
 import { useMutation } from '@tanstack/react-query';
 import { httpClient } from '@/lib/api/httpClient';
 import { toast } from 'sonner';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { useNavigate } from 'react-router';
 
 export function useSignUp() {

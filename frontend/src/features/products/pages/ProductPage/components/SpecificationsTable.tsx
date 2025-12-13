@@ -6,7 +6,7 @@ import {
   TableCell,
 } from '@/components/ui/table';
 import type { Specification } from '@/features/products/models/shared/Specification';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 type SpecificationsTableTableProps = { specifications: Specification[] };
 

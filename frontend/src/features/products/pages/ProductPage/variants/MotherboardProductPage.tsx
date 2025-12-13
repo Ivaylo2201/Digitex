@@ -13,7 +13,7 @@ export function MotherboardProductPage() {
     <ProductPage
       product={product}
       category={category}
-      specifications={formatProduct.toMotherboard(product)}
+      onFormatSpecifications={formatProduct.toMotherboard}
     />
   );
 }

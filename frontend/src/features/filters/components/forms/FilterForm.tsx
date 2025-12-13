@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { RangeSlider } from '../RangeSlider';
 import type React from 'react';
 import { OptionsList } from '../OptionsList';

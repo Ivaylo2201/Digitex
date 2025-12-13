@@ -6,7 +6,7 @@ import {
   EmptyDescription,
 } from '@/components/ui/empty';
 
-import { useTranslation } from '@/lib/i18n/hooks/useTranslation';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { MessageSquareX } from 'lucide-react';
 
 export function EmptyReviewsSection() {
