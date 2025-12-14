@@ -4,7 +4,15 @@ import { FilterForm } from './FilterForm';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { OptionsList } from '../OptionsList';
 import { RangeSlider } from '../RangeSlider';
-import type { GraphicsCardsFilters } from '../../types/GraphicsCardsFilters';
+import type { BaseFilters } from '../../types/BaseFilters';
+
+type GraphicsCardsFilters = BaseFilters & {
+  busWidths: number[];
+  memoryCapacities: number[];
+  minClockSpeed: number;
+  maxClockSpeed: number;
+  cudaCores: number[];
+};
 
 export function GraphicsCardsFilterForm() {
   const form = useForm<GraphicsCardsFilters>();
@@ -27,14 +35,14 @@ export function GraphicsCardsFilterForm() {
           options={data?.busWidths}
           control={form.control}
           onDisplay={(busWidth) => `${busWidth} ${units.bits}`}
-          name='busWidth'
+          name='busWidths'
           title={graphicsCardsFilterForm.busWidth}
         />
         <OptionsList
           options={data?.memoryCapacities}
           control={form.control}
           onDisplay={(memoryCapacity) => `${memoryCapacity} ${units.gigabytes}`}
-          name='memoryCapacity'
+          name='memoryCapacities'
           title={graphicsCardsFilterForm.memoryCapacity}
         />
         <RangeSlider
@@ -43,6 +51,7 @@ export function GraphicsCardsFilterForm() {
           min={0}
           max={5}
           step={0.1}
+          urlValues={['minClockSpeed', 'maxClockSpeed']}
           onFormat={(value) => `${value.toFixed(1)} ${units.gigahertz}`}
         />
         <OptionsList

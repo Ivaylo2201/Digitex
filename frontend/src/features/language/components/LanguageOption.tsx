@@ -1,7 +1,7 @@
 type LanguageOptionProps = { code: string };
 
 export function LanguageOption({ code }: LanguageOptionProps) {
-  const flagSrc = new URL(`/src/assets/flags/${code.toLowerCase()}.png`, import.meta.url).href;
+  const flagSrc = new URL(`/src/assets/flags/${code}.png`, import.meta.url).href;
 
   return (
     <div className='flex items-center gap-2 font-montserrat text-xs'>
@@ -10,7 +10,7 @@ export function LanguageOption({ code }: LanguageOptionProps) {
         alt={`${code}-flag`}
         className='size-4.5 rounded-full object-cover'
       />
-      <span>{code.toUpperCase()}</span>
+      <span className='uppercase'>{code}</span>
     </div>
   );
 }

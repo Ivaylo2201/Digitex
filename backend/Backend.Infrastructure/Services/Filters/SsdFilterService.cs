@@ -16,7 +16,9 @@ public class SsdFilterService(IBrandProviderService<Ssd> brandProviderService)
         Brands,
         MemoryCapacities = new List<int> { 1000, 2000, 3000, 4000, 5000 },
         StorageInterfaces = Enum.GetValues<StorageInterface>().Select(storageInterface => storageInterface.GetEnumMemberValue()),
-        ReadSpeed = new Range<int>(1000, 10000),
-        WriteSpeed = new Range<int>(1000, 10000)
+        MinReadSpeed = 1000,
+        MaxReadSpeed = 10000,
+        MinWriteSpeed = 1000,
+        MaxWriteSpeed = 10000
     };
 }

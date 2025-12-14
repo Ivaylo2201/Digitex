@@ -36,6 +36,12 @@
       "formFactor": "Formfaktor",
       "chipset": "Chipsatz"
     },
+    "processorsFilterForm": {
+      "cores": "Kerne",
+      "threads": "Threads",
+      "socket": "Sockel",
+      "tdp": "Leistungsaufnahme"
+    },
     "signUpForm": {
       "createdAnAccount": "Konto erstellen",
       "enterYourCredentialsToSignUpForAnAccount": "Geben Sie Ihre Anmeldedaten ein, um sich für ein Konto zu registrieren",

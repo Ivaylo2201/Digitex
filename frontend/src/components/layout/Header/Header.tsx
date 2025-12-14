@@ -4,13 +4,13 @@ import { CartLink } from '../../../features/cart/components/CartLink';
 import { LogoLink } from './LogoLink';
 import { Searchbox } from './Searchbox';
 import { FavoritesLink } from '../../../features/favorites/components/FavoritesLink';
-import { LanguageSelect } from '../../../features/language/components/Header/LanguageSelect';
 import { SignOutButton } from '../../../features/auth/components/SignOutButton';
 import { SignInLink } from '../../../features/auth/components/SignInLink';
 import { useAuth } from '@/features/auth/stores/useAuth';
 import { CompareLink } from '../../../features/compare/components/CompareLink';
 import { CurrencySelect } from '@/features/currency/components/CurrencySelect';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
+import { LanguageSelect } from '@/features/language/components/LanguageSelect';
 
 export function Header() {
   const { isAuthenticated } = useAuth();

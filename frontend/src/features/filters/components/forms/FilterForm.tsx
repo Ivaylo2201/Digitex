@@ -22,13 +22,20 @@ export function FilterForm({ brands, children }: FilterFormProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const onSubmit = (data: object) =>
-    navigate(`${location.pathname}?${toQueryParams(data)}`, { replace: true });
+  const onSubmit = (data: object) => {
+    const queryParams = Object.fromEntries(
+      new URLSearchParams(location.search)
+    );
+    navigate(
+      `${location.pathname}?${toQueryParams({ ...queryParams, ...data })}`,
+      { replace: true }
+    );
+  };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='flex flex-col gap-5 w-56'
+      className='flex flex-col gap-6 w-56'
     >
       <OptionsList
         options={brands}
@@ -43,13 +50,14 @@ export function FilterForm({ brands, children }: FilterFormProps) {
           setValue('minPrice', range[0]);
           setValue('maxPrice', range[1]);
         }}
+        urlValues={['minPrice', 'maxPrice']}
         onFormat={(value) => `${currency.sign}${value.toFixed(2)}`}
         min={0}
         max={5000}
         step={100}
       />
 
-      {children}
+      <div className='flex flex-col gap-6'>{children}</div>
 
       <Button
         type='submit'

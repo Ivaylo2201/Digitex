@@ -1,6 +1,6 @@
 import { RangeSlider as Slider } from '@/components/ui/range-slider';
 import { parseNumber } from '@/lib/utils/parseNumber';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
 type RangeSliderProps = {
@@ -8,6 +8,7 @@ type RangeSliderProps = {
   max: number;
   step: number;
   title: string;
+  urlValues?: [string, string]
   onChange?: (value: [number, number]) => void;
   onFormat?: (value: number) => string;
 };
@@ -17,20 +18,21 @@ export function RangeSlider({
   max,
   step,
   title,
+  urlValues,
   onChange,
   onFormat,
 }: RangeSliderProps) {
   const location = useLocation();
+  const [range, setRange] = useState<[number, number]>([min, max]);
 
-  const [range, setRange] = useState(() => {
-    const queryParams = Object.fromEntries(
-      new URLSearchParams(location.search)
-    );
-    return [
-      parseNumber(queryParams.minPrice) ?? 0,
-      parseNumber(queryParams.maxPrice) ?? 5000,
-    ];
-  });
+  useEffect(() => {
+    const params = Object.fromEntries(new URLSearchParams(location.search));
+
+    setRange([
+      parseNumber(params[urlValues?.[0] ?? '']) ?? min,
+      parseNumber(params[urlValues?.[1] ?? '']) ?? max,
+    ]);
+  }, [location.search, min, max]);
 
   const handleChange = (value: [number, number]) => {
     setRange(value);

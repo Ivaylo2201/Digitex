@@ -36,6 +36,12 @@
       "formFactor": "Форм фактор",
       "chipset": "Чипсет"
     },
+    "processorsFilterForm": {
+      "cores": "Ядра",
+      "threads": "Нишки",
+      "socket": "Сокет",
+      "tdp": "Мощност"
+    },
     "signUpForm": {
       "createdAnAccount": "Създайте акаунт",
       "enterYourCredentialsToSignUpForAnAccount": "Въведете вашите данни, за да си създадете акаунт.",

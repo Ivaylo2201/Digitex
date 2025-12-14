@@ -17,7 +17,7 @@ public class ProcessorFilterService(IBrandProviderService<Processor> brandProvid
         Cores = new List<int> { 4, 6, 8, 10, 12, 14, 16, 20, 24 },
         Threads = new List<int> { 8, 12, 16, 20, 24, 28, 32 },
         Sockets = Enum.GetValues<Socket>().Select(socket => socket.GetEnumMemberValue()),
-        Tdp = new Range<int>(50, 250),
-        ClockSpeed = new Range<double>(1.0, 10.0),
+        MinTdp = 50,
+        MaxTdp = 250
     };
 }

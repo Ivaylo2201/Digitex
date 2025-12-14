@@ -73,7 +73,7 @@ export function ProductPage<T extends ProductLong>({
               </p>
               <div className='flex justify-between items-center'>
                 <ProductPrice product={product} />
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-1'>
                   <Rating stars={product.rating} starSize={20} />
                   <span className='font-medium text-theme-gunmetal'>
                     ({product.totalReviews})
@@ -82,8 +82,10 @@ export function ProductPage<T extends ProductLong>({
               </div>
             </div>
 
-            <div className='flex flex-col gap-6'>
-              <SpecificationsTable specifications={specifications} />
+            <SpecificationsTable specifications={specifications} />
+
+            <div className='flex'>
+              {/* TODO: ADD QUANTITY COUNTER */}
               <AddToCartButton isInStock={isInStock} />
             </div>
           </div>

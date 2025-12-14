@@ -1,23 +1,28 @@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { useEffect } from 'react';
-import { useController, type Control } from 'react-hook-form';
+import {
+  useController,
+  type Control,
+  type FieldValues,
+  type Path,
+} from 'react-hook-form';
 
-type OptionsListProps = {
+type OptionsListProps<T extends FieldValues> = {
   options?: (string | number)[];
-  control: Control<any>;
-  name: string;
+  control: Control<T>;
+  name: Path<T>;
   title: string;
   onDisplay?: (value: string) => string;
 };
 
-export function OptionsList({
+export function OptionsList<T extends FieldValues>({
   options,
   control,
   name,
   title,
   onDisplay,
-}: OptionsListProps) {
+}: OptionsListProps<T>) {
   const { field } = useController({ name, control });
 
   useEffect(() => {
@@ -29,7 +34,7 @@ export function OptionsList({
     }
   }, []);
 
-  const values = Array.isArray(field.value) ? field.value : [];
+  const values: string[] = Array.isArray(field.value) ? field.value : [];
 
   return (
     <div className='flex flex-col gap-2.5'>

@@ -9,9 +9,9 @@ type LanguageStore = {
 
 export const useLanguage = create<LanguageStore>((set) => {
   const languages: Language[] = [
-    { languageIsoCode: 'EN' },
-    { languageIsoCode: 'BG' },
-    { languageIsoCode: 'DE' },
+    { languageIsoCode: 'en' },
+    { languageIsoCode: 'bg' },
+    { languageIsoCode: 'de' },
   ];
 
   return {
