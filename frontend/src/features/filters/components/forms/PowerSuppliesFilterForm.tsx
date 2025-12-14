@@ -18,8 +18,7 @@ export function PowerSuppliesFilterForm() {
   const { data } = useFilters<PowerSuppliesFilters>('power-supplies');
 
   const {
-    components: { graphicsCardsFilterForm },
-    units,
+    components: { powerSuppliesFilterForm },
   } = useTranslation();
 
   const setEfficiencyPercentageRange = (range: [number, number]) => {
@@ -34,16 +33,16 @@ export function PowerSuppliesFilterForm() {
           options={data?.formFactors}
           control={form.control}
           name='formFactors'
-          title={'form factor'}
+          title={powerSuppliesFilterForm.formFactor}
         />
         <OptionsList
           options={data?.modularities}
           control={form.control}
           name='modularities'
-          title={'modularities'}
+          title={powerSuppliesFilterForm.modularity}
         />
         <RangeSlider
-          title={'Efficiency Percentage'}
+          title={powerSuppliesFilterForm.efficiencyPercentage}
           onChange={setEfficiencyPercentageRange}
           min={data?.minEfficiencyPercentage ?? 0}
           max={data?.maxEfficiencyPercentage ?? 100}

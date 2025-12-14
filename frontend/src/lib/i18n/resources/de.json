@@ -20,6 +20,9 @@
     }
   },
   "components": {
+    "footer": {
+      "allRightsReserved": "Alle Rechte vorbehalten."
+    },
     "filterForm": {
       "brand": "Marke",
       "price": "Preis",
@@ -41,6 +44,27 @@
       "threads": "Threads",
       "socket": "Sockel",
       "tdp": "Leistungsaufnahme"
+    },
+    "powerSuppliesFilterForm": {
+      "formFactor": "Formfaktor",
+      "efficiencyPercentage": "Effizienz (%)",
+      "modularity": "Modularität"
+    },
+    "ramsFilterForm": {
+      "memoryCapacity": "Speicherkapazität",
+      "memoryType": "Speichertyp",
+      "frequency": "Frequenz"
+    },
+    "ssdsFilterForm": {
+      "memoryCapacity": "Speicherkapazität",
+      "storageInterface": "Speicherschnittstelle",
+      "readSpeed": "Lesegeschwindigkeit",
+      "writeSpeed": "Schreibgeschwindigkeit"
+    },
+    "monitorsFilterForm": {
+      "refreshRates": "Bildwiederholfrequenzen",
+      "matrices": "Matrixtypen",
+      "resolutionTypes": "Auflösungstypen"
     },
     "signUpForm": {
       "createdAnAccount": "Konto erstellen",

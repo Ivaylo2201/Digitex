@@ -20,6 +20,9 @@ export type Translation = {
     };
   };
   components: {
+    footer: {
+      allRightsReserved: string;
+    },
     filterForm: {
       brand: string;
       price: string;
@@ -41,6 +44,27 @@ export type Translation = {
       threads: string;
       socket: string;
       tdp: string;
+    };
+    powerSuppliesFilterForm: {
+      formFactor: string;
+      efficiencyPercentage: string;
+      modularity: string;
+    };
+    ramsFilterForm: {
+      memoryCapacity: string;
+      memoryType: string;
+      frequency: string;
+    };
+    ssdsFilterForm: {
+      memoryCapacity: string;
+      storageInterface: string;
+      readSpeed: string;
+      writeSpeed: string;
+    };
+    monitorsFilterForm: {
+      refreshRates: string;
+      matrices: string;
+      resolutionTypes: string;
     };
     header: {
       merchantAddress: string;
@@ -269,6 +293,9 @@ export const translation: Translation = {
     },
   },
   components: {
+    footer: {
+      allRightsReserved: 'All rights reserved.',
+    },
     filterForm: {
       brand: 'Brand',
       price: 'Price',
@@ -306,8 +333,7 @@ export const translation: Translation = {
     },
     emptyComparePage: {
       noProductsAddedForComparison: 'No products added for comparison',
-      youHaveNotAddedAnyProductsForComparisonYet:
-        "You haven't added any products for comparison yet.",
+      youHaveNotAddedAnyProductsForComparisonYet: "You haven't added any products for comparison yet.",
       getStartedByAddingAProduct: 'Get started by adding a product.',
       addProducts: 'Add products',
     },
@@ -317,10 +343,8 @@ export const translation: Translation = {
     },
     emptyReviewsSection: {
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet:
-        'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow:
-        'Write the first review via the form below',
+      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below',
     },
     favoritesLink: {
       favorites: 'Favorites',
@@ -350,18 +374,15 @@ export const translation: Translation = {
     reviewsSection: {
       reviews: 'Reviews',
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet:
-        'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow:
-        'Write the first review via the form below',
+      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below',
     },
     loader: {
       loading: 'Loading',
     },
     signInForm: {
       signInToYourAccount: 'Sign in to your account',
-      enterYourCredentialsToSignInToYourAccount:
-        'Enter your credentials to sign in to your account.',
+      enterYourCredentialsToSignInToYourAccount: 'Enter your credentials to sign in to your account.',
       email: 'Email',
       password: 'Password',
       signIn: 'Sign in',
@@ -372,8 +393,7 @@ export const translation: Translation = {
     },
     signUpForm: {
       createdAnAccount: 'Create an account',
-      enterYourCredentialsToSignUpForAnAccount:
-        'Enter your credentials to sign up for an account.',
+      enterYourCredentialsToSignUpForAnAccount: 'Enter your credentials to sign up for an account.',
       email: 'Email',
       username: 'Username',
       password: 'Password',
@@ -394,8 +414,7 @@ export const translation: Translation = {
       newPasswordConfirmation: 'New password confirmation',
     },
     requestPasswordResetForm: {
-      enterYourEmailToRequestAPasswordResetForYourAccount:
-        'Enter your email to request a password reset for your account.',
+      enterYourEmailToRequestAPasswordResetForYourAccount: 'Enter your email to request a password reset for your account.',
       email: 'Email',
       requestAPasswordReset: 'Request a password reset',
     },
@@ -410,6 +429,27 @@ export const translation: Translation = {
       formFactor: 'Form factor',
       chipset: 'Chipset',
     },
+    powerSuppliesFilterForm: {
+      formFactor: "Form factor",
+      efficiencyPercentage: "Efficiency percentage",
+      modularity: "Modularity"
+    },
+    ramsFilterForm: {
+      memoryCapacity: "Memory capacity",
+      memoryType: "Memory type",
+      frequency: "Frequency"
+    },
+    ssdsFilterForm: {
+      memoryCapacity: "Memory capacity",
+      storageInterface: "Storage interface",
+      readSpeed: "Read speed",
+      writeSpeed: "Write speed"
+    },
+    monitorsFilterForm: {
+      refreshRates: "Refresh rates",
+      matrices: "Matrices",
+      resolutionTypes: "Resolution types"
+    }
   },
   specifications: {
     base: {

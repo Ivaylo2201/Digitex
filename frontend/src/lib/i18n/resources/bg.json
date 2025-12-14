@@ -20,6 +20,9 @@
     }
   },
   "components": {
+    "footer": {
+      "allRightsReserved": "Всички права запазени."
+    },
     "filterForm": {
       "brand": "Маркa",
       "price": "Цена",
@@ -41,6 +44,27 @@
       "threads": "Нишки",
       "socket": "Сокет",
       "tdp": "Мощност"
+    },
+    "powerSuppliesFilterForm": {
+      "formFactor": "Форм фактор",
+      "efficiencyPercentage": "Ефективност (%)",
+      "modularity": "Модуларност"
+    },
+    "ramsFilterForm": {
+      "memoryCapacity": "Капацитет на паметта",
+      "memoryType": "Тип памет",
+      "frequency": "Честота"
+    },
+    "ssdsFilterForm": {
+      "memoryCapacity": "Капацитет на паметта",
+      "storageInterface": "Интерфейс за съхранение",
+      "readSpeed": "Скорост на четене",
+      "writeSpeed": "Скорост на запис"
+    },
+    "monitorsFilterForm": {
+      "refreshRates": "Честота на опресняване",
+      "matrices": "Матрици",
+      "resolutionTypes": "Типове резолюция"
     },
     "signUpForm": {
       "createdAnAccount": "Създайте акаунт",

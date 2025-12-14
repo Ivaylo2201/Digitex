@@ -16,7 +16,7 @@ export function RamsFilterForm() {
   const { data } = useFilters<RamsFilters>('rams');
 
   const {
-    components: { graphicsCardsFilterForm },
+    components: { ramsFilterForm },
     units,
   } = useTranslation();
 
@@ -28,19 +28,19 @@ export function RamsFilterForm() {
           control={form.control}
           onDisplay={(memoryCapacity) => `${memoryCapacity} ${units.gigabytes}`}
           name='memoryCapacities'
-          title={graphicsCardsFilterForm.memoryCapacity}
+          title={ramsFilterForm.memoryCapacity}
         />
         <OptionsList
           options={data?.memoryTypes}
           control={form.control}
           name='memoryTypes'
-          title={'memoryTypes'}
+          title={ramsFilterForm.memoryType}
         />
         <OptionsList
           options={data?.frequencies}
           control={form.control}
           name='frequencies'
-          title={'frequency'}
+          title={ramsFilterForm.frequency}
           onDisplay={(frequency) => `${frequency} ${units.megahertz}`}
         />
       </FilterForm>

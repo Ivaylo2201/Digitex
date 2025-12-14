@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/layout/Navbar/Navbar';
 import { Header } from './Header/Header';
+import { Footer } from './Footer/Footer';
 
 type PageProps = React.PropsWithChildren & { className?: string };
 
@@ -13,6 +14,7 @@ export function Page({ children, className = '' }: PageProps) {
       >
         {children}
       </main>
+      <Footer />
     </div>
   );
 }

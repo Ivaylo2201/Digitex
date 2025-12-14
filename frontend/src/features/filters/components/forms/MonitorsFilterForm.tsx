@@ -15,8 +15,8 @@ export function MonitorsFilterForm() {
   const form = useForm<MonitorsFilters>();
   const { data } = useFilters<MonitorsFilters>('monitors');
   const {
-    components: { motherboardsFilterForm },
-    units
+    components: { monitorsFilterForm },
+    units,
   } = useTranslation();
 
   return (
@@ -26,20 +26,20 @@ export function MonitorsFilterForm() {
           options={data?.refreshRates}
           control={form.control}
           name='refreshRates'
-          title={'refreshRates'}
+          title={monitorsFilterForm.refreshRates}
           onDisplay={(refreshRate) => `${refreshRate} ${units.hertz}`}
         />
         <OptionsList
           options={data?.matrices}
           control={form.control}
           name='matrices'
-          title={'matrices'}
+          title={monitorsFilterForm.matrices}
         />
         <OptionsList
           options={data?.resolutionTypes}
           control={form.control}
           name='resolutionTypes'
-          title={'resolutionTypes'}
+          title={monitorsFilterForm.resolutionTypes}
         />
       </FilterForm>
     </FormProvider>

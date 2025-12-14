@@ -8,7 +8,7 @@ import { MotherboardsFilterForm } from '@/features/filters/components/forms/Moth
 import { ProcessorsFilterForm } from '@/features/filters/components/forms/ProcessorsFilterForm';
 import { RamsFilterForm } from '@/features/filters/components/forms/RamFilterForm';
 import { MonitorsFilterForm } from '@/features/filters/components/forms/MonitorsFilterForm';
-import { SsdFilterForm } from '@/features/filters/components/forms/SsdsFilterForm';
+import { SsdsFilterForm } from '@/features/filters/components/forms/SsdsFilterForm';
 import { PowerSuppliesFilterForm } from '@/features/filters/components/forms/PowerSuppliesFilterForm';
 
 const filterForms: Record<string, React.ComponentType> = {
@@ -17,7 +17,7 @@ const filterForms: Record<string, React.ComponentType> = {
   processors: ProcessorsFilterForm,
   rams: RamsFilterForm,
   monitors: MonitorsFilterForm,
-  ssds: SsdFilterForm,
+  ssds: SsdsFilterForm,
   'power-supplies': PowerSuppliesFilterForm,
 };
 

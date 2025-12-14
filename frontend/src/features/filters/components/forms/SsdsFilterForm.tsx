@@ -15,12 +15,12 @@ type SsdsFilters = BaseFilters & {
   maxWriteSpeed: number;
 };
 
-export function SsdFilterForm() {
+export function SsdsFilterForm() {
   const form = useForm<SsdsFilters>();
   const { data } = useFilters<SsdsFilters>('ssds');
 
   const {
-    components: { graphicsCardsFilterForm },
+    components: { ssdsFilterForm },
     units,
   } = useTranslation();
 
@@ -42,16 +42,16 @@ export function SsdFilterForm() {
           control={form.control}
           onDisplay={(memoryCapacity) => `${memoryCapacity} ${units.gigabytes}`}
           name='memoryCapacities'
-          title={graphicsCardsFilterForm.memoryCapacity}
+          title={ssdsFilterForm.memoryCapacity}
         />
         <OptionsList
           options={data?.storageInterfaces}
           control={form.control}
           name='storageInterfaces'
-          title={'storageInterfaces'}
+          title={ssdsFilterForm.storageInterface}
         />
         <RangeSlider
-          title={'read speed'}
+          title={ssdsFilterForm.readSpeed}
           onChange={setReadSpeedRange}
           min={data?.minReadSpeed ?? 1000}
           max={data?.maxReadSpeed ?? 10000}
@@ -60,7 +60,7 @@ export function SsdFilterForm() {
           onFormat={(value) => `${value} ${units.mbPerSecond}`}
         />
         <RangeSlider
-          title={'write speed'}
+          title={ssdsFilterForm.writeSpeed}
           onChange={setWriteSpeedRange}
           min={data?.minWriteSpeed ?? 1000}
           max={data?.maxWriteSpeed ?? 10000}
