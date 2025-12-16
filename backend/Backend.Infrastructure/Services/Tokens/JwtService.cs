@@ -10,9 +10,9 @@ namespace Backend.Infrastructure.Services.Tokens;
 
 public class JwtService : IJwtService
 {
-    private readonly byte[] _secretKey = Encoding.UTF8.GetBytes("JWT_SECRET_KEY".GetFromEnvironmentVariables());
-    private readonly string _issuer = "JWT_ISSUER".GetFromEnvironmentVariables();
-    private readonly string _audience = "JWT_AUDIENCE".GetFromEnvironmentVariables();
+    private readonly byte[] _secretKey = Encoding.UTF8.GetBytes("JWT_SECRET_KEY".GetRequiredEnvironmentalVariable());
+    private readonly string _issuer = "JWT_ISSUER".GetRequiredEnvironmentalVariable();
+    private readonly string _audience = "JWT_AUDIENCE".GetRequiredEnvironmentalVariable();
     
     public string GenerateToken(User user)
     {

@@ -21,7 +21,7 @@ public class StripeService(
     
     public async Task<Result> ProcessWebhookAsync(string json, IDictionary<string, StringValues> headers, CancellationToken stoppingToken = default)
     {
-        var webhookSecret = "WebhookSecret".GetFromEnvironmentVariables();
+        var webhookSecret = "WebhookSecret".GetRequiredEnvironmentalVariable();
 
         try
         {

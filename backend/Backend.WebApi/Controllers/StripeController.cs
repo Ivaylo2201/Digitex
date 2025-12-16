@@ -1,6 +1,5 @@
 ﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
-using Backend.Domain.Exceptions;
 using Backend.Infrastructure.Extensions;
 using Backend.WebApi.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -17,12 +16,7 @@ public class StripeController : ControllerBase
     
     public StripeController(IStripeService stripeService)
     {
-        var secretKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY") ;
-                        
-        if (secretKey is null)                
-            throw new ImproperlyConfiguredException("Stripe secret key is not configured.");
-        
-        StripeConfiguration.ApiKey = secretKey;
+        StripeConfiguration.ApiKey = "STRIPE_SECRET_KEY".GetRequiredEnvironmentalVariable();
         _stripeService = stripeService;
     }
     
@@ -54,17 +48,10 @@ public class StripeController : ControllerBase
         return StatusCode(result.StatusCode, result.IsSuccess ? new { } : result.ErrorObject);
     }
     
-    [HttpGet("public-key")]
+    [HttpGet("publishable-key")]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public IActionResult GetPublicKey()
-    {
-        var publicKey = Environment.GetEnvironmentVariable("STRIPE_PUBLISHABLE_KEY");
-        
-        if (publicKey is null)
-            throw new ImproperlyConfiguredException("Stripe public key is not configured.");
-        
-        return Ok(new { PublicKey = publicKey });
-    }
+    public IActionResult GetPublishableKey() 
+        => Ok(new { PublishableKey = "STRIPE_PUBLISHABLE_KEY".GetRequiredEnvironmentalVariable() });
 }
