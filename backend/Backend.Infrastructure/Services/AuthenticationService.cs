@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.User;
+﻿using Backend.Application.Dtos.Authentication;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Services;
 using Backend.Application.Validators;

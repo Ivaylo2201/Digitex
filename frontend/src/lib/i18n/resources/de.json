@@ -121,6 +121,9 @@
     "compareLink": {
       "compare": "Vergleichen"
     },
+    "productPage": {
+      "sku": "Artikelnummer"
+    },
     "emptyComparePage": {
       "noProductsAddedForComparison": "Keine Produkte zum Vergleichen hinzugefügt",
       "youHaveNotAddedAnyProductsForComparisonYet": "Sie haben noch keine Produkte zum Vergleichen hinzugefügt.",

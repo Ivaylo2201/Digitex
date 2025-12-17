@@ -1,4 +1,4 @@
-﻿namespace Backend.Application.Dtos.User;
+﻿namespace Backend.Application.Dtos.Accounts;
 
 public record CompletePasswordResetDto
 {

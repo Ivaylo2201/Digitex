@@ -5,9 +5,10 @@ import { Fragment } from 'react';
 
 type AddToCartButtonProps = {
   isInStock: boolean;
+  quantity: number;
 };
 
-export function AddToCartButton({ isInStock }: AddToCartButtonProps) {
+export function AddToCartButton({ isInStock, quantity }: AddToCartButtonProps) {
   const {
     components: { addToCartButton },
   } = useTranslation();
@@ -15,7 +16,7 @@ export function AddToCartButton({ isInStock }: AddToCartButtonProps) {
   return (
     <Button
       disabled={!isInStock}
-      className='bg-theme-crimson hover:bg-theme-gunmetal transition-colors duration-300 cursor-pointer'
+      className='flex-1 bg-theme-crimson hover:bg-theme-gunmetal transition-colors duration-300 cursor-pointer'
     >
       {isInStock ? (
         <Fragment>

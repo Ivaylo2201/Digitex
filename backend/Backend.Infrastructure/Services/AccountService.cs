@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.User;
+﻿using Backend.Application.Dtos.Accounts;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
@@ -20,11 +20,11 @@ public class AccountService(
 {
     private const string Source = nameof(AccountService);
     
-    public async Task<Result<(string Token, Role Role)>> CompleteAccountVerificationAsync(AccountVerificationDto accountVerificationDto, CancellationToken stoppingToken = default)
+    public async Task<Result<(string Token, Role Role)>> CompleteAccountVerificationAsync(CompleteAccountVerificationDto completeAccountVerificationDto, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Completing account verification...", Source);
         
-        var hashedToken = tokenService.HashToken(accountVerificationDto.Token);
+        var hashedToken = tokenService.HashToken(completeAccountVerificationDto.Token);
         var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, stoppingToken);
 
         if (userToken is null)

@@ -12,6 +12,9 @@ import { AddToFavoritesButton } from '../../../favorites/components/AddToFavorit
 import { ReviewsSection } from '@/features/reviews/components/ReviewsSection';
 import { AddToCartButton } from '@/features/cart/components/AddToCartButton';
 import { Loader } from 'lucide-react';
+import { QuantityControlButtons } from './components/QuantityControlButtons';
+import { useQuantityControl } from '../../hooks/useQuantityControl';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
@@ -24,6 +27,11 @@ export function ProductPage<T extends ProductLong>({
   product,
   onFormatSpecifications,
 }: ProductPageProps<T>) {
+  const { quantity, ...rest } = useQuantityControl();
+  const {
+    components: { productPage },
+  } = useTranslation();
+
   if (!product) {
     return (
       <Page>
@@ -38,7 +46,7 @@ export function ProductPage<T extends ProductLong>({
 
   return (
     <Page>
-      <section className='flex flex-col gap-8'>
+      <section className='flex flex-col gap-8 '>
         <div className='flex flex-col gap-8 md:flex-row md:gap-25'>
           <div className='flex flex-col gap-8'>
             <ProductPageBreadcrumb
@@ -66,7 +74,7 @@ export function ProductPage<T extends ProductLong>({
                 {displayName}
               </p>
               <p className='text-theme-gunmetal text-sm font-semibold'>
-                SKU:&nbsp;
+                {productPage.sku}:&nbsp;
                 <span className='text-gray-500 font-medium italic'>
                   {product.sku}
                 </span>
@@ -84,9 +92,9 @@ export function ProductPage<T extends ProductLong>({
 
             <SpecificationsTable specifications={specifications} />
 
-            <div className='flex'>
-              {/* TODO: ADD QUANTITY COUNTER */}
-              <AddToCartButton isInStock={isInStock} />
+            <div className='flex justify-center items-center gap-8'>
+              <QuantityControlButtons quantity={quantity} {...rest} />
+              <AddToCartButton isInStock={isInStock} quantity={quantity} />
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.User;
+﻿using Backend.Application.Dtos.Authentication;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 

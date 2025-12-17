@@ -121,6 +121,9 @@
     "compareLink": {
       "compare": "Сравни"
     },
+    "productPage": {
+      "sku": "Артикулен номер"
+    },
     "emptyComparePage": {
       "noProductsAddedForComparison": "Няма добавени продукти за сравнение",
       "youHaveNotAddedAnyProductsForComparisonYet": "Все още не сте добавили продукти за сравнение.",

@@ -14,11 +14,10 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     Func<TEntity, TProjection> project) : ControllerBase where TEntity : ProductBase
 {
     [HttpGet("{id:guid}")]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public async Task<IActionResult> GetOneAsync([FromRoute] Guid id, [FromQuery] string currency, CancellationToken stoppingToken = default)
+    public virtual async Task<IActionResult> GetOneAsync([FromRoute] Guid id, [FromQuery] string currency, CancellationToken stoppingToken = default)
     {
         var result = await productService.GetOneAsync(id, project, currency.ToCurrencyIsoCode(), stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);

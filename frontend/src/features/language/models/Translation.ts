@@ -87,6 +87,9 @@ export type Translation = {
     compareLink: {
       compare: string;
     };
+    productPage: {
+      sku: string;
+    }
     emptyComparePage: {
       noProductsAddedForComparison: string;
       youHaveNotAddedAnyProductsForComparisonYet: string;
@@ -330,6 +333,9 @@ export const translation: Translation = {
     },
     productCompareTable: {
       comparedProducts: 'Compared Products',
+    },
+    productPage: {
+      sku: 'SKU',
     },
     emptyComparePage: {
       noProductsAddedForComparison: 'No products added for comparison',

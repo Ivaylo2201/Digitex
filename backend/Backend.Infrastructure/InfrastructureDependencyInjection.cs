@@ -86,9 +86,9 @@ public static class InfrastructureDependencyInjection
 
         private IServiceCollection AddAuthentication()
         {
-            var jwtSecretKey = "JWT_SECRET_KEY".GetRequiredEnvironmentalVariable();
-            var jwtIssuer = "JWT_ISSUER".GetRequiredEnvironmentalVariable();
-            var jwtAudience = "JWT_AUDIENCE".GetRequiredEnvironmentalVariable();
+            var jwtSecretKey = "JWT_SECRET_KEY".GetRequiredEnvironmentVariable();
+            var jwtIssuer = "JWT_ISSUER".GetRequiredEnvironmentVariable();
+            var jwtAudience = "JWT_AUDIENCE".GetRequiredEnvironmentVariable();
 
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -216,11 +216,11 @@ public static class InfrastructureDependencyInjection
 
         private IServiceCollection AddEmail()
         {
-            var email = "MERCHANT_EMAIL".GetRequiredEnvironmentalVariable();
-            var gmailAppPassword = "GMAIL_APP_PASSWORD".GetRequiredEnvironmentalVariable();
-            var username = "MERCHANT_USERNAME".GetRequiredEnvironmentalVariable();
-            var smtpProvider = "SMTP_PROVIDER".GetRequiredEnvironmentalVariable();
-            var smtpPort = int.Parse("SMTP_PORT".GetRequiredEnvironmentalVariable());
+            var email = "MERCHANT_EMAIL".GetRequiredEnvironmentVariable();
+            var gmailAppPassword = "GMAIL_APP_PASSWORD".GetRequiredEnvironmentVariable();
+            var username = "MERCHANT_USERNAME".GetRequiredEnvironmentVariable();
+            var smtpProvider = "SMTP_PROVIDER".GetRequiredEnvironmentVariable();
+            var smtpPort = int.Parse("SMTP_PORT".GetRequiredEnvironmentVariable());
 
             services
                 .AddFluentEmail(email, username)
