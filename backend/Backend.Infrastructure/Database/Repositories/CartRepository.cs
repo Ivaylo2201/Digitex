@@ -6,9 +6,6 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class CartRepository(DatabaseContext context) : ICartRepository
 {
-    public async Task<Cart?> GetCartForUserAsync(int? userId, CancellationToken stoppingToken = default)
-        => await context.Carts.Where(cart => cart.UserId == userId).FirstOrDefaultAsync(stoppingToken);
-
     public async Task<double> GetCartTotalAsync(int userId, CancellationToken stoppingToken = default)
     {
         return await context.Users
@@ -17,5 +14,11 @@ public class CartRepository(DatabaseContext context) : ICartRepository
             .ThenInclude(cart => cart.Items)
             .SelectMany(user => user.Cart.Items)
             .SumAsync(item => item.Price, stoppingToken);
+    }
+
+    public async Task AddToCartAsync(Item item, CancellationToken stoppingToken)
+    {
+        await context.Items.AddAsync(item, stoppingToken);
+        await context.SaveChangesAsync(stoppingToken);
     }
 }

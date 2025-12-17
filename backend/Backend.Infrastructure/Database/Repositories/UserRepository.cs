@@ -40,6 +40,9 @@ public class UserRepository(DatabaseContext context) : IUserRepository
         await context.SaveChangesAsync(stoppingToken);
     }
 
+    public async Task<User?> GetOneByIdWithCartAsync(int id, CancellationToken stoppingToken = default)
+        => await VerifiedUsers.Include(user => user.Cart).FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
+
     public async Task<User?> GetOneAsync(int id, CancellationToken stoppingToken = default)
         => await VerifiedUsers.FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
     

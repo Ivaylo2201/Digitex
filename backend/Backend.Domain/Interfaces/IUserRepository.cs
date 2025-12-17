@@ -9,4 +9,5 @@ public interface IUserRepository : ICreatable<User>, ISingleReadable<User, int>
     Task<User?> GetOneByCredentialsAsync(string email, string password, CancellationToken stoppingToken = default);
     Task<User?> VerifyUserAsync(int id, CancellationToken stoppingToken = default);
     Task ResetPasswordAsync(int id, string newPassword, CancellationToken stoppingToken = default);
+    Task<User?> GetOneByIdWithCartAsync(int id, CancellationToken stoppingToken = default);
 }

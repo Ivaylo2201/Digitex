@@ -267,6 +267,9 @@
     "nits": "нита"
   },
   "hooks": {
+    "useAddToCart": {
+      "productSuccessfullyAddedToCart": "Продуктът е успешно добавен в количката."
+    },
     "useSignUp": {
       "visitYourEmailToVerifyYourAccount": "Посетете имейла си, за да потвърдите акаунта си."
     },

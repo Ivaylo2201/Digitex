@@ -267,6 +267,9 @@
     "nits": "nits"
   },
   "hooks": {
+    "useAddToCart": {
+      "productSuccessfullyAddedToCart": "Produkt wurde erfolgreich zum Warenkorb hinzugefügt."
+    },
     "useSignUp": {
       "visitYourEmailToVerifyYourAccount": "Besuchen Sie Ihre E-Mails, um Ihr Konto zu bestätigen."
     },

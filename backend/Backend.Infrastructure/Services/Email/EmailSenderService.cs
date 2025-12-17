@@ -18,12 +18,12 @@ public class EmailSenderService(
         try
         {
             logger.LogInformation("[{Source}]: Sending account verification email to {Email}...", Source, user.Email);
-            
-            await fluentEmail
-                .To(user.Email, user.Username)
-                .Subject("[DIGITEX] Verify Your Account")
-                .Body(emailBuilderService.BuildAccountVerificationEmail(user.Username, accountVerificationUrl), isHtml: true)
-                .SendAsync(stoppingToken);
+
+            await SendEmailAsync(
+                user,
+                "Verify Your Account",
+                emailBuilderService.BuildAccountVerificationEmail(user.Username, accountVerificationUrl),
+                stoppingToken);
         }
         catch (Exception ex)
         {
@@ -37,15 +37,24 @@ public class EmailSenderService(
         {
             logger.LogInformation("[{Source}]: Sending password reset email to {Email}...", Source, user.Email);
             
-            await fluentEmail
-                .To(user.Email, user.Username)
-                .Subject("[DIGITEX] Reset Your Password")
-                .Body(emailBuilderService.BuildPasswordResetEmail(user.Username, passwordResetUrl), isHtml: true)
-                .SendAsync(stoppingToken);
+            await SendEmailAsync(
+                user,
+                "Reset Your Password",
+                emailBuilderService.BuildPasswordResetEmail(user.Username, passwordResetUrl),
+                stoppingToken);
         }
         catch (Exception ex)
         {
             logger.LogException(Source, ex, $"sending password reset email to {user.Email}");
         }
+    }
+
+    private async Task SendEmailAsync(User user, string subject, string body, CancellationToken stoppingToken)
+    {
+        await fluentEmail
+            .To(user.Email, user.Username)
+            .Subject($"[DIGITEX] {subject}")
+            .Body(body, isHtml: true)
+            .SendAsync(stoppingToken);
     }
 }
