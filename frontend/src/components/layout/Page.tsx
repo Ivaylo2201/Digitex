@@ -1,7 +1,6 @@
 import { Navbar } from '@/components/layout/Navbar/Navbar';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import { Digibot } from '@/features/digibot/components/Digibot';
 
 type PageProps = React.PropsWithChildren & { className?: string };
 
@@ -15,7 +14,6 @@ export function Page({ children, className = '' }: PageProps) {
       >
         {children}
       </main>
-      <Digibot />
       <Footer />
     </div>
   );

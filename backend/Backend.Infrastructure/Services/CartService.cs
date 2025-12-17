@@ -32,6 +32,7 @@ public class CartService(ILogger<CartService> logger, ICartRepository cartReposi
 
         try
         {
+            Console.WriteLine(addToCartDto.UserId);
             var user = await userRepository.GetOneByIdWithCartAsync(addToCartDto.UserId, stoppingToken);
 
             if (user is null)

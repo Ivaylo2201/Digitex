@@ -11,10 +11,10 @@ import { ProductPrice } from './components/ProductPrice';
 import { AddToFavoritesButton } from '../../../favorites/components/AddToFavoritesButton';
 import { ReviewsSection } from '@/features/reviews/components/ReviewsSection';
 import { AddToCartButton } from '@/features/cart/components/AddToCartButton';
-import { Loader } from 'lucide-react';
 import { QuantityControlButtons } from './components/QuantityControlButtons';
 import { useQuantityControl } from '../../hooks/useQuantityControl';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
+import { Loader } from '../../components/Loader';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
@@ -27,7 +27,7 @@ export function ProductPage<T extends ProductLong>({
   product,
   onFormatSpecifications,
 }: ProductPageProps<T>) {
-  const { quantity, ...rest } = useQuantityControl();
+  const quantityControl = useQuantityControl();
   const {
     components: { productPage },
   } = useTranslation();
@@ -93,8 +93,12 @@ export function ProductPage<T extends ProductLong>({
             <SpecificationsTable specifications={specifications} />
 
             <div className='flex justify-center items-center gap-8'>
-              <QuantityControlButtons quantity={quantity} {...rest} />
-              <AddToCartButton isInStock={isInStock} quantity={quantity} />
+              <QuantityControlButtons {...quantityControl} />
+              <AddToCartButton
+                isInStock={isInStock}
+                quantity={quantityControl.quantity}
+                productId={product.id}
+              />
             </div>
           </div>
         </div>

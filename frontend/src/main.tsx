@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './index.css';
+import './lib/api/interceptors';
 import { Router } from './Router';
 import { Toaster } from 'sonner';
 

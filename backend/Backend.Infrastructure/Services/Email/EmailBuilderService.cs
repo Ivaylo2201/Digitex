@@ -46,7 +46,7 @@ public class EmailBuilderService : IEmailBuilderService
     {
         var body = $"""
                          <p style="color: #15161d; font-size: 16px; line-height: 1.6">
-                           Hello, <strong>{username}</strong><br /><br />
+                           Hello, <strong>{username}</strong><br />
                            We received a request to reset your password. Click the button below to
                            choose a new one.
                          </p>
@@ -103,7 +103,7 @@ public class EmailBuilderService : IEmailBuilderService
                      >
                        <p
                          style="
-                           font-weight: 700;
+                           font-weight: bold;
                            font-size: 32px;
                            color: #1e1f29;
                            letter-spacing: 1px;

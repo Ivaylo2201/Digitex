@@ -274,6 +274,9 @@ export type Translation = {
     generic: {
       somethingWentWrong: string;
     };
+    useSignIn: {
+      invalidCredentials: string;
+    }
   };
 };
 
@@ -566,5 +569,8 @@ export const translation: Translation = {
     useAddToCart: {
       productSuccessfullyAddedToCart: 'Product successfully added to cart.',
     },
+    useSignIn: {
+      invalidCredentials: 'Invalid credentials.',
+    }
   },
 };

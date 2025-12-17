@@ -25,6 +25,6 @@ export function useSignIn() {
       storeSignIn(res.token, res.role, rememberMe);
       navigate('/');
     },
-    onError: () => toast.error(hooks.generic.somethingWentWrong)
+    onError: () => toast.error(hooks.useSignIn.invalidCredentials)
   });
 }

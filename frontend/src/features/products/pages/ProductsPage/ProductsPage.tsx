@@ -1,7 +1,7 @@
 import { Navigate, useParams } from 'react-router';
 import { Page } from '@/components/layout/Page';
 import { useProducts } from '../../hooks/useProducts';
-import { Loader } from './components/Loader';
+import { Loader } from '../../components/Loader';
 import { ProductsList } from './components/ProductsList';
 import { GraphicsCardsFilterForm } from '@/features/filters/components/forms/GraphicsCardsFilterForm';
 import { MotherboardsFilterForm } from '@/features/filters/components/forms/MotherboardsFilterForm';
@@ -21,6 +21,7 @@ const filterForms: Record<string, React.ComponentType> = {
   'power-supplies': PowerSuppliesFilterForm,
 };
 
+// TODO: Pagination
 export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
   const { data: products } = useProducts(category ?? '');

@@ -69,9 +69,9 @@ if (args.Contains("seed"))
 }
 
 app.UseRouting();
+app.UseCors((app.Environment.IsDevelopment() ? Policy.AllowAny : Policy.AllowFrontend).ToString());
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors((app.Environment.IsDevelopment() ? Policy.AllowAny : Policy.AllowFrontend).ToString());
 app.UseStaticFiles();
 app.UseMiddleware<RequestPipelineMiddleware>();
 app.UseGlobalExceptionHandler();

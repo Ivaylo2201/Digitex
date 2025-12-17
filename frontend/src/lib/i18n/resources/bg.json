@@ -278,6 +278,9 @@
     },
     "generic": {
       "somethingWentWrong": "Нещо се обърка."
+    },
+    "useSignIn": {
+      "invalidCredentials": "Невалидни данни за вход."
     }
   }
 }

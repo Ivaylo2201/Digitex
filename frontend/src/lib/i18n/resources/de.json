@@ -278,6 +278,9 @@
     },
     "generic": {
       "somethingWentWrong": "Etwas ist schiefgelaufen."
+    },
+    "useSignIn": {
+      "invalidCredentials": "Ungültige Anmeldedaten."
     }
   }
 }

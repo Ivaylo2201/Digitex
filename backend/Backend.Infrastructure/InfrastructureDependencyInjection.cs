@@ -161,6 +161,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IShipmentService, ShipmentService>()
             .AddScoped<IEmailSenderService, EmailSenderService>()
             .AddScoped<ICurrencyService, CurrencyService>()
+            .AddScoped<ICartService, CartService>()
             .AddTransient<IEmailBuilderService, EmailBuilderService>()
             .AddTransient<ITokenService, TokenService>()
             .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
