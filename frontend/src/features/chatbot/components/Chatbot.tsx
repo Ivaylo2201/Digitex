@@ -1,19 +1,14 @@
 import { useRef, useState } from 'react';
-import type { ChatMessage } from '../types/ChatMessage';
+import type { Message } from '../types/Message';
+import { useChatbot } from '../hooks/useChatbot';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
-import { useOpenAi } from '../hooks/useOpenAi';
 
-// TODO: Finish using ScrollArea
-
-// in env
-// `You are a helpful chatbot assistant for the online ecommerce store Digitex. The user is about to ask you a question soon, so be ready to answer them shortly and cleanly please match their language - the website supports english bulgarian and german`;
-
-export function Digibot() {
+export function Chatbot() {
   const [prompt, setPrompt] = useState('');
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const initialContextMessageSent = useRef(false);
-  const { callOpenAi } = useOpenAi();
+  const { promptChatbot } = useChatbot();
 
   const onMessageSend = async () => {
     if (!prompt.trim()) {
@@ -29,26 +24,25 @@ export function Digibot() {
       initialContextMessageSent.current = true;
     }
 
-    const userMessage: ChatMessage = { sender: 'user', content: prompt };
+    const userMessage: Message = { sender: 'user', content: prompt };
 
     addMessage(userMessage);
     addMessage({ sender: 'chatbot', content: 'Thinking...', isLoading: true });
 
-    const res = await callOpenAi([userMessage, ...chatMessages]);
-    markMessageAsLoaded(res.choices[0].message.content);
+    const res = await promptChatbot([userMessage, ...messages]);
+    //markMessageAsLoaded(res);
     setPrompt('');
   };
 
-  const addMessage = (chatMessage: ChatMessage) =>
-    setChatMessages((chatMessages) => [...chatMessages, chatMessage]);
+  const addMessage = (chatMessage: Message) =>
+    setMessages((messages) => [...messages, chatMessage]);
 
   const markMessageAsLoaded = (content: string) => {
-    setChatMessages((chatMessages) => {
-      const updated = [...chatMessages];
+    setMessages((messages) => {
+      const updated = [...messages];
       updated[updated.length - 1] = {
         sender: 'chatbot',
         content,
-        isLoading: false,
       };
       return updated;
     });
@@ -57,7 +51,7 @@ export function Digibot() {
   return (
     <div>
       <div className='min-h-[200px] max-w-[500px] border border-gray-300 p-2'>
-        {chatMessages
+        {messages
           .filter((chatMessage) => chatMessage.sender !== 'system')
           .map((chatMessage, i) => (
             <div

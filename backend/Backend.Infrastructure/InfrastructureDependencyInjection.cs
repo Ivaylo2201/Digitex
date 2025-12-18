@@ -146,6 +146,8 @@ public static class InfrastructureDependencyInjection
 
         private IServiceCollection AddServices() => services
             .AddEmail()
+            .AddHttpClient()
+            .AddScoped<IChatbotService, ChatbotService>()
             .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
             .AddScoped<IProductService<Ram, RamDto>, RamService>()
             .AddScoped<IProductService<Processor, ProcessorDto>, ProcessorService>()
