@@ -1,7 +1,7 @@
 ﻿using Backend.Application.Dtos.Cart;
 using Backend.Application.Interfaces.Services;
 using Backend.Infrastructure.Extensions;
-using Backend.WebApi.Utilities;
+using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

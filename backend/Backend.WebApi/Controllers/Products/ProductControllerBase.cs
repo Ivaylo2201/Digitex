@@ -3,7 +3,7 @@ using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;
-using Backend.WebApi.Utilities;
+using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers.Products;

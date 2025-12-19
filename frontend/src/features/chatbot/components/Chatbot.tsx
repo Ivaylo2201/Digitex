@@ -29,6 +29,8 @@ export function Chatbot() {
     addMessage(userMessage);
     addMessage({ sender: 'chatbot', content: 'Thinking...', isLoading: true });
 
+    console.log([userMessage, ...messages]);
+
     const res = await promptChatbot([userMessage, ...messages]);
     //markMessageAsLoaded(res);
     setPrompt('');

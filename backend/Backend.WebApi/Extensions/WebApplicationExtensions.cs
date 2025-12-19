@@ -1,4 +1,4 @@
-﻿using Backend.WebApi.Utilities;
+﻿using Backend.Infrastructure.Http;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 

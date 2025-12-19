@@ -1,6 +1,6 @@
 ﻿using Backend.Application.Dtos;
 using Backend.Application.Interfaces.Services;
-using Backend.WebApi.Utilities;
+using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers;

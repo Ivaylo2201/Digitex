@@ -18,6 +18,8 @@ using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Repositories;
 using Backend.Infrastructure.Database.Repositories.Products;
 using Backend.Infrastructure.Extensions;
+using Backend.Infrastructure.Http;
+using Backend.Infrastructure.Http.Interfaces;
 using Backend.Infrastructure.Services;
 using Backend.Infrastructure.Services.Email;
 using Backend.Infrastructure.Services.Filters;
@@ -55,6 +57,7 @@ public static class InfrastructureDependencyInjection
                     .AddDbContext(configuration)
                     .AddRepositories()
                     .AddServices()
+                    .AddHttp()
                     .AddCors(configuration)
                     .AddAuthentication();
 
@@ -146,7 +149,6 @@ public static class InfrastructureDependencyInjection
 
         private IServiceCollection AddServices() => services
             .AddEmail()
-            .AddHttpClient()
             .AddScoped<IChatbotService, ChatbotService>()
             .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
             .AddScoped<IProductService<Ram, RamDto>, RamService>()
@@ -233,6 +235,16 @@ public static class InfrastructureDependencyInjection
                     Credentials = new NetworkCredential(email, gmailAppPassword),
                     EnableSsl = true
                 });
+
+            return services;
+        }
+
+        private IServiceCollection AddHttp()
+        {
+            services.AddHttpClient<IChatbotClient, ChatbotClient>(httpClient =>
+            {
+                httpClient.BaseAddress = new Uri("https://apifreellm.com/api/chat");
+            });
 
             return services;
         }

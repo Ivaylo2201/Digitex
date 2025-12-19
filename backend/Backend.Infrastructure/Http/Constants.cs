@@ -1,4 +1,4 @@
-﻿namespace Backend.WebApi.Utilities;
+﻿namespace Backend.Infrastructure.Http;
 
 public static class Constants
 {

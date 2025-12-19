@@ -1,7 +1,7 @@
 ﻿using Backend.Application.Dtos.Authentication;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
-using Backend.WebApi.Utilities;
+using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers;
