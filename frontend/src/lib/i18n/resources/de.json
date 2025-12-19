@@ -20,6 +20,9 @@
     }
   },
   "components": {
+    "chatbot": {
+      "typeYourMessage": "Gib deine Nachricht ein..."
+    },
     "footer": {
       "allRightsReserved": "Alle Rechte vorbehalten."
     },
@@ -179,6 +182,10 @@
     "accountVerifiedPage": {
       "accountVerifiedSuccessfully": "Konto wurde erfolgreich bestätigt.",
       "accountVerificationFailed": "Konto-Bestätigung ist fehlgeschlagen."
+    },
+    "emptyMessagesSection": {
+      "hiThereImYourDigitexAssistant": "Hallo! Ich bin dein Digitex-Assistent",
+      "imHereToHelpAskMeAnything": "Ich bin hier, um zu helfen – frag mich einfach!"
     }
   },
   "specifications": {

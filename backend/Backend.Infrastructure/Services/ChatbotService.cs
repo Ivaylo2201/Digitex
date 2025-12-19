@@ -29,7 +29,7 @@ public class ChatbotService(ILogger<ChatbotService> logger, IChatbotClient chatb
         catch (Exception ex)
         {
             logger.LogException(Source, ex, "processing chatbot request");
-            return Result<string>.Success(StatusCodes.Status400BadRequest, "Something went wrong.");
+            return Result<string>.Success(StatusCodes.Status500InternalServerError, "Something went wrong.");
         }
     }
 }

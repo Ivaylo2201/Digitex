@@ -1,6 +1,5 @@
 ﻿using Backend.Application.Dtos.Chatbot;
 using Backend.Application.Interfaces;
-using Backend.Domain.Common;
 using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,12 +11,12 @@ public class ChatbotController(IChatbotService chatbotService) : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType<PromptChatbotResponse>(StatusCodes.Status200OK)]
-    [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<PromptChatbotResponse>(StatusCodes.Status500InternalServerError)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> PromptChatbotAsync([FromBody] PromptChatbotRequest promptChatbotRequest, CancellationToken stoppingToken = default)
     {
         var result = await chatbotService.PromptChatbotAsync(promptChatbotRequest, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new PromptChatbotResponse(result.Value) : result.ErrorObject);
+        return StatusCode(result.StatusCode, new PromptChatbotResponse(result.Value));
     }
 }

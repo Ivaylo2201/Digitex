@@ -241,9 +241,13 @@ public static class InfrastructureDependencyInjection
 
         private IServiceCollection AddHttp()
         {
+            const string chatbotClientBaseAddress = "https://apifreellm.com/api/chat";
+            const int chatbotClientTimeoutInSeconds = 30;
+            
             services.AddHttpClient<IChatbotClient, ChatbotClient>(httpClient =>
             {
-                httpClient.BaseAddress = new Uri("https://apifreellm.com/api/chat");
+                httpClient.BaseAddress = new Uri(chatbotClientBaseAddress);
+                httpClient.Timeout = TimeSpan.FromSeconds(chatbotClientTimeoutInSeconds);
             });
 
             return services;

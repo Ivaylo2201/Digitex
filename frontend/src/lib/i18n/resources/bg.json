@@ -20,6 +20,9 @@
     }
   },
   "components": {
+    "chatbot": {
+      "typeYourMessage": "Напиши своето съобщение..."
+    },
     "footer": {
       "allRightsReserved": "Всички права запазени."
     },
@@ -179,6 +182,10 @@
     "accountVerifiedPage": {
       "accountVerifiedSuccessfully": "Акаунтът е потвърден успешно.",
       "accountVerificationFailed": "Потвърждаването на акаунта не беше успешно."
+    },
+    "emptyMessagesSection": {
+      "hiThereImYourDigitexAssistant": "Здравей! Аз съм твоят Digitex асистент",
+      "imHereToHelpAskMeAnything": "Тук съм, за да помогна – питай ме каквото пожелаеш!"
     }
   },
   "specifications": {

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using Backend.Application.Dtos.Chatbot;
 using Backend.Infrastructure.Http.Interfaces;
 using Newtonsoft.Json;
@@ -11,9 +12,12 @@ public class ChatbotClient(HttpClient httpClient) : IChatbotClient
     {
         var requestBody = new StringContent(JsonConvert.SerializeObject(chatbotRequest), Encoding.UTF8, Constants.ApplicationJson);
         var response = await httpClient.PostAsync(string.Empty, requestBody, stoppingToken);
-        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync(stoppingToken);
+
+        if (response.StatusCode is not HttpStatusCode.OK)
+            throw new HttpRequestException(content);
         
-        var chatbotResponse = JsonConvert.DeserializeObject<ChatbotResponse>(await response.Content.ReadAsStringAsync(stoppingToken));
+        var chatbotResponse = JsonConvert.DeserializeObject<ChatbotResponse>(content);
         return chatbotResponse ?? throw new JsonException("Could not deserialize response into ChatbotResponse.");
     }
 }

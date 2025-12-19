@@ -3,10 +3,14 @@ import type { Message } from '../types/Message';
 
 export function useChatbot() {
   const promptChatbot = async (messages: Message[]) => {
-    const res = await httpClient.post<{ response: string }>('/chatbot', {
-      messages,
-    });
-    return res.data;
+    try {
+      const { data } = await httpClient.post<{ response: string }>('/chatbot', {
+        messages,
+      });
+      return data;
+    } catch {
+      return { response: 'Something went wrong.' };
+    }
   };
 
   return { promptChatbot };

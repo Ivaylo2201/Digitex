@@ -1,6 +1,8 @@
 import { Navbar } from '@/components/layout/Navbar/Navbar';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
+import { ChatbotButton } from '@/features/chatbot/components/ChatbotButton';
+
 type PageProps = React.PropsWithChildren & { className?: string };
 
 export function Page({ children, className = '' }: PageProps) {
@@ -13,6 +15,7 @@ export function Page({ children, className = '' }: PageProps) {
       >
         {children}
       </main>
+      <ChatbotButton />
       <Footer />
     </div>
   );

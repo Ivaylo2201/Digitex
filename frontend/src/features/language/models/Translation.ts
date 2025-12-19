@@ -20,6 +20,9 @@ export type Translation = {
     };
   };
   components: {
+    chatbot: {
+      typeYourMessage: string;
+    }
     footer: {
       allRightsReserved: string;
     };
@@ -108,6 +111,10 @@ export type Translation = {
       noReviewsForThisProduct: string;
       noReviewsHaveBeenLeftForThisProductYet: string;
       writeTheFirstReviewViaTheFormBelow: string;
+    };
+    emptyMessagesSection: {
+      hiThereImYourDigitexAssistant: string;
+      imHereToHelpAskMeAnything: string;
     };
     favoritesLink: {
       favorites: string;
@@ -276,7 +283,7 @@ export type Translation = {
     };
     useSignIn: {
       invalidCredentials: string;
-    }
+    };
   };
 };
 
@@ -302,6 +309,13 @@ export const translation: Translation = {
     },
   },
   components: {
+    chatbot: {
+      typeYourMessage: 'Type your message...',
+    },
+    emptyMessagesSection: {
+      hiThereImYourDigitexAssistant: "Hi there! I'm your Digitex assistant",
+      imHereToHelpAskMeAnything: "I'm here to help - Ask me anything!",
+    },
     footer: {
       allRightsReserved: 'All rights reserved.',
     },
@@ -571,6 +585,6 @@ export const translation: Translation = {
     },
     useSignIn: {
       invalidCredentials: 'Invalid credentials.',
-    }
+    },
   },
 };

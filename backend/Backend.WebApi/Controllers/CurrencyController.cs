@@ -10,7 +10,7 @@ namespace Backend.WebApi.Controllers;
 public class CurrencyController(ICurrencyService currencyService) : ControllerBase
 {
     [HttpGet]
-    [ProducesResponseType(typeof(List<CurrencyDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<CurrencyDto>>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync(CancellationToken stoppingToken = default)

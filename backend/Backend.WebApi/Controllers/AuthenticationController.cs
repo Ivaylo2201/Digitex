@@ -11,8 +11,8 @@ namespace Backend.WebApi.Controllers;
 public class AuthenticationController(IAuthenticationService authenticationService) : ControllerBase
 {
     [HttpPost("sign-up")]
-    [ProducesResponseType(typeof(SignUpResponse), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<SignUpResponse>(StatusCodes.Status201Created)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> SignUpAsync([FromBody] SignUpDto body, CancellationToken stoppingToken = default)
@@ -22,8 +22,8 @@ public class AuthenticationController(IAuthenticationService authenticationServi
     }
 
     [HttpPost("sign-in")]
-    [ProducesResponseType(typeof(SignInResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<SignInResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> SignInAsync([FromBody] SignInDto body, CancellationToken stoppingToken = default)

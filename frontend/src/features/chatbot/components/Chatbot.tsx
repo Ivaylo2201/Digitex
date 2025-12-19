@@ -1,43 +1,35 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import type { Message } from '../types/Message';
 import { useChatbot } from '../hooks/useChatbot';
-import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
+import { Send } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { MessagesList } from './MessagesList';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 export function Chatbot() {
   const [prompt, setPrompt] = useState('');
-  const [messages, setMessages] = useState<Message[]>([]);
-  const initialContextMessageSent = useRef(false);
+  const [messages, setMessages] = useState<Message[]>([
+    { sender: 'system', content: import.meta.env.VITE_CHATBOT_CONTEXT },
+  ]);
   const { promptChatbot } = useChatbot();
+  const {
+    components: { chatbot },
+  } = useTranslation();
 
-  const onMessageSend = async () => {
-    if (!prompt.trim()) {
-      toast.error('Please enter a message.');
-      return;
-    }
-
-    if (!initialContextMessageSent.current) {
-      addMessage({
-        sender: 'system',
-        content: import.meta.env.VITE_CHATBOT_CONTEXT,
-      });
-      initialContextMessageSent.current = true;
-    }
-
-    const userMessage: Message = { sender: 'user', content: prompt };
-
-    addMessage(userMessage);
-    addMessage({ sender: 'chatbot', content: 'Thinking...', isLoading: true });
-
-    console.log([userMessage, ...messages]);
-
-    const res = await promptChatbot([userMessage, ...messages]);
-    //markMessageAsLoaded(res);
+  const handleMessageSend = async () => {
+    const message: Message = { sender: 'user', content: prompt };
     setPrompt('');
-  };
 
-  const addMessage = (chatMessage: Message) =>
-    setMessages((messages) => [...messages, chatMessage]);
+    setMessages((messages) => [
+      ...messages,
+      message,
+      { sender: 'chatbot', content: '', isLoading: true },
+    ]);
+
+    const res = await promptChatbot([message, ...messages]);
+    markMessageAsLoaded(res.response);
+  };
 
   const markMessageAsLoaded = (content: string) => {
     setMessages((messages) => {
@@ -51,29 +43,27 @@ export function Chatbot() {
   };
 
   return (
-    <div>
-      <div className='min-h-[200px] max-w-[500px] border border-gray-300 p-2'>
-        {messages
-          .filter((chatMessage) => chatMessage.sender !== 'system')
-          .map((chatMessage, i) => (
-            <div
-              key={i}
-              className={
-                chatMessage.sender === 'user' ? 'text-right' : 'text-left'
-              }
-            >
-              <strong>{chatMessage.sender}:</strong> {chatMessage.content}
-            </div>
-          ))}
-      </div>
+    <div className='flex flex-col gap-4 font-montserrat'>
+      <MessagesList messages={messages} />
 
-      <Input
-        onChange={(e) => setPrompt(e.target.value)}
-        value={prompt}
-        type='text'
-        placeholder='Type your message...'
-      />
-      <button onClick={onMessageSend}>Send</button>
+      <div className='flex gap-2 items-center'>
+        <Input
+          onChange={(e) => setPrompt(e.target.value)}
+          value={prompt}
+          type='text'
+          placeholder={chatbot.typeYourMessage}
+          className='flex-1 h-10 text-sm font-medium italic text-theme-gunmetal placeholder-theme-gunmetal! selection:bg-theme-crimson bg-theme-white ring-0 outline-none focus-visible:ring-0 data-[state=open]:ring-0'
+        />
+        <Button
+          disabled={
+            messages[messages.length - 1]?.isLoading || prompt.trim() === ''
+          }
+          onClick={handleMessageSend}
+          className='w-10 h-10 rounded-full bg-theme-crimson hover:bg-theme-lightcrimson flex items-center justify-center transition-colors duration-200'
+        >
+          <Send size={18} className='text-white' />
+        </Button>
+      </div>
     </div>
   );
 }

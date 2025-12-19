@@ -23,8 +23,8 @@ public class StripeController : ControllerBase
     
     [HttpPost("create-payment-intent")]
     [Authorize]
-    [ProducesResponseType(typeof(CreatePaymentIntentResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<CreatePaymentIntentResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> CreatePaymentIntentAsync()
@@ -34,10 +34,10 @@ public class StripeController : ControllerBase
     }
 
     [HttpPost("webhook")]
-    [ProducesResponseType(typeof(ProcessWebhookResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status402PaymentRequired)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<ProcessWebhookResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status500InternalServerError)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status402PaymentRequired)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ProcessWebhookAsync()
@@ -50,7 +50,7 @@ public class StripeController : ControllerBase
     }
     
     [HttpGet("publishable-key")]
-    [ProducesResponseType(typeof(GetPublishableKeyResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType<GetPublishableKeyResponse>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public IActionResult GetPublishableKey() 

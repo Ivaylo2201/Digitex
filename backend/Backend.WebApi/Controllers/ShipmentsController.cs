@@ -10,7 +10,7 @@ namespace Backend.WebApi.Controllers;
 public class ShipmentsController(IShipmentService shipmentService) : ControllerBase
 {
     [HttpGet]
-    [ProducesResponseType(typeof(List<ShipmentDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<ShipmentDto>>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync(CancellationToken stoppingToken = default)

@@ -11,8 +11,8 @@ namespace Backend.WebApi.Controllers;
 public class AccountController(IAccountService accountService) : ControllerBase
 {
     [HttpPatch("verify")]
-    [ProducesResponseType(typeof(CompleteAccountVerificationResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
+    [ProducesResponseType<CompleteAccountVerificationResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> CompleteAccountVerificationAsync([FromBody] CompleteAccountVerificationDto body, CancellationToken stoppingToken = default)
@@ -22,8 +22,8 @@ public class AccountController(IAccountService accountService) : ControllerBase
     }
 
     [HttpPost("request-password-reset")]
-    [ProducesResponseType(typeof(RequestPasswordResetResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
+    [ProducesResponseType<RequestPasswordResetResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> RequestPasswordResetAsync([FromBody] RequestPasswordResetDto body, CancellationToken stoppingToken = default)
@@ -33,9 +33,9 @@ public class AccountController(IAccountService accountService) : ControllerBase
     } 
     
     [HttpPatch("complete-password-reset")]
-    [ProducesResponseType(typeof(CompletePasswordResetResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<CompletePasswordResetResponse>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
     public async Task<IActionResult> CompletePasswordResetAsync([FromBody] CompletePasswordResetDto body, CancellationToken stoppingToken = default)
