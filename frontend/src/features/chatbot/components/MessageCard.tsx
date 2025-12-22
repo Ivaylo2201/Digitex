@@ -12,7 +12,7 @@ export function MessageCard({ sender, content, isLoading }: MessageCardProps) {
   const isUser = sender === 'user';
 
   return (
-    <article
+    <li
       className={`flex items-center gap-3 font-montserrat ${
         isUser ? 'flex-row-reverse' : 'flex-row'
       }`}
@@ -22,6 +22,6 @@ export function MessageCard({ sender, content, isLoading }: MessageCardProps) {
       <p className='max-w-xs bg-gray-200 p-3 rounded-xl wrap-break-word text-sm'>
         {isLoading ? <Ellipsis size={14} /> : content}
       </p>
-    </article>
+    </li>
   );
 }

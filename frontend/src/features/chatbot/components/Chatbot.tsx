@@ -43,10 +43,10 @@ export function Chatbot() {
   };
 
   return (
-    <div className='flex flex-col gap-4 font-montserrat'>
+    <div className='flex flex-col h-full min-h-0 font-montserrat'>
       <MessagesList messages={messages} />
 
-      <div className='flex gap-2 items-center'>
+      <section className='flex gap-2 items-center shrink-0'>
         <Input
           onChange={(e) => setPrompt(e.target.value)}
           value={prompt}
@@ -63,7 +63,7 @@ export function Chatbot() {
         >
           <Send size={18} className='text-white' />
         </Button>
-      </div>
+      </section>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 ﻿using Backend.Application.Dtos.Product;
+using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
@@ -45,7 +46,7 @@ public class ProductServiceBase<TEntity, TProjection>(
         var entities = await productRepository.ListAllAsync(filter, stoppingToken);
 
         logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
-        var rate = currencyIsoCode == CurrencyIsoCode.Eur ? 1 : (await exchangeRateRepository.GetOneAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken))?.Rate ?? 1;
+        var rate = currencyIsoCode is CurrencyIsoCode.Eur ? 1 : (await exchangeRateRepository.GetOneAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken))?.Rate ?? 1;
 
         var projections = entities.Select(entity =>
         {

@@ -1,4 +1,5 @@
 ﻿using Backend.Application.Dtos.Products;
+using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Mapster;
