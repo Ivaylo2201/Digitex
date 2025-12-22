@@ -1,9 +1,9 @@
 ﻿using Backend.Domain.Common;
 
-namespace Backend.Application.Interfaces.Services;
+namespace Backend.Application.Interfaces;
 
-public interface IFilterService<TEntity>
+public interface IFilterService<TEntity, out TFilters>
 {
     Filter<TEntity> BuildFilter(IDictionary<string, string> criteria);
-    object Filters { get; }
+    TFilters Filters { get; }
 }

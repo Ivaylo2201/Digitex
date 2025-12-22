@@ -2,6 +2,7 @@
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
+using Backend.Application.Dtos.Filters;
 using Backend.Application.Dtos.Item;
 using Backend.Application.Dtos.Product;
 using Backend.Application.Dtos.Products;
@@ -168,13 +169,13 @@ public static class InfrastructureDependencyInjection
             .AddScoped<ICartService, CartService>()
             .AddTransient<IEmailBuilderService, EmailBuilderService>()
             .AddTransient<ITokenService, TokenService>()
-            .AddTransient<IFilterService<Monitor>, MonitorFilterService>()
-            .AddTransient<IFilterService<Ram>, RamFilterService>()
-            .AddTransient<IFilterService<Processor>, ProcessorFilterService>()
-            .AddTransient<IFilterService<GraphicsCard>, GraphicsCardFilterService>()
-            .AddTransient<IFilterService<Ssd>, SsdFilterService>()
-            .AddTransient<IFilterService<Motherboard>, MotherboardFilterService>()
-            .AddTransient<IFilterService<PowerSupply>, PowerSupplyFilterService>()
+            .AddTransient<IFilterService<Monitor, MonitorFilters>, MonitorFilterService>()
+            .AddTransient<IFilterService<Ram, RamFilters>, RamFilterService>()
+            .AddTransient<IFilterService<Processor, ProcessorFilters>, ProcessorFilterService>()
+            .AddTransient<IFilterService<GraphicsCard, GraphicsCardFilters>, GraphicsCardFilterService>()
+            .AddTransient<IFilterService<Ssd, SsdFilters>, SsdFilterService>()
+            .AddTransient<IFilterService<Motherboard, MotherboardFilters>, MotherboardFilterService>()
+            .AddTransient<IFilterService<PowerSupply, PowerSupplyFilters>, PowerSupplyFilterService>()
             .AddSingleton<IUrlService, UrlService>()
             .AddSingleton<IJwtService, JwtService>();
 

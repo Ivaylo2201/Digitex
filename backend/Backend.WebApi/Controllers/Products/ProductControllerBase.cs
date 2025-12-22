@@ -1,6 +1,5 @@
 ﻿using Backend.Application.Dtos.Product;
 using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;
@@ -9,13 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers.Products;
 
-public abstract class ProductControllerBase<TEntity, TProjection>(
+public abstract class ProductControllerBase<TEntity, TProjection, TFilters>(
     IProductService<TEntity, TProjection> productService,
-    IFilterService<TEntity> filterService,
+    IFilterService<TEntity, TFilters> filterService,
     Func<TEntity, TProjection> project) : ControllerBase where TEntity : ProductBase
 {
     [HttpGet("{id:guid}")]
-    [ProducesResponseType(typeof(ErrorObject), StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public virtual async Task<IActionResult> GetOneAsync([FromRoute] Guid id, [FromQuery] string currency, CancellationToken stoppingToken = default)
@@ -25,7 +24,7 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     }
     
     [HttpGet]
-    [ProducesResponseType(typeof(List<ProductShortDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType<List<ProductShortDto>>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync([FromQuery] IDictionary<string, string> criteria, [FromQuery] string currency, CancellationToken stoppingToken = default)
@@ -35,8 +34,7 @@ public abstract class ProductControllerBase<TEntity, TProjection>(
     }
     
     [HttpGet("filters")]
-    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public IActionResult GetFilters() => Ok(filterService.Filters);
+    public virtual IActionResult GetFilters() => Ok(filterService.Filters);
 }
