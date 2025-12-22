@@ -331,7 +331,7 @@ export const translation: Translation = {
       tdp: 'TDP',
     },
     header: {
-      merchantAddress: 'Sofia, Vitosha Blvd. 76',
+      merchantAddress: import.meta.env.VITE_MERCHANT_ADDRESS,
     },
     searchBox: {
       searchForProducts: 'Search for products...',

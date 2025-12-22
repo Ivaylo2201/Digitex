@@ -9,15 +9,7 @@ namespace Backend.Infrastructure.Services.Filters;
 public class MotherboardFilterService(IBrandProviderService<Motherboard> brandProviderService)
     : FilterServiceBase<Motherboard>(brandProviderService)
 {
-    public override Filter<Motherboard> BuildFilter(IDictionary<string, string> criteria)
-    {
-        foreach (var kvp in criteria)
-        {
-            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-        }
-
-        return query => query;
-    }
+    public override Filter<Motherboard> BuildFilter(IDictionary<string, string> criteria) => query => query;
 
     public override object Filters => new
     {
