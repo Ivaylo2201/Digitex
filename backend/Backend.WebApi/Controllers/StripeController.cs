@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Dtos.Stripe;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Http;

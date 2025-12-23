@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Dtos.Cart;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces;
 using Backend.Application.Validators;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;

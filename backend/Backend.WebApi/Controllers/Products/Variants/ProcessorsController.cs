@@ -1,6 +1,7 @@
 ﻿using Backend.Application.Dtos.Filters;
 using Backend.Application.Dtos.Products;
 using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Filters;
 using Backend.Domain.Entities;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;

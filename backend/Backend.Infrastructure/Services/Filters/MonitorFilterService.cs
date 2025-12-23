@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Dtos.Filters;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces.Filters;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;

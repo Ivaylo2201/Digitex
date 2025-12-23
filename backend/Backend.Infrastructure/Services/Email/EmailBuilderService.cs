@@ -1,4 +1,4 @@
-﻿using Backend.Application.Interfaces.Services;
+﻿using Backend.Application.Interfaces.Email;
 
 namespace Backend.Infrastructure.Services.Email;
 

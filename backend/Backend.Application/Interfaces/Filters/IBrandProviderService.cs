@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.Entities;
 
-namespace Backend.Application.Interfaces.Services;
+namespace Backend.Application.Interfaces.Filters;
 
 public interface IBrandProviderService<TEntity> where TEntity : ProductBase
 {

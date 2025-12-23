@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Dtos;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces;
 using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
 

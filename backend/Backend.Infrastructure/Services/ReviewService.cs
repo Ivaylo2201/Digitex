@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Dtos.Review;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;

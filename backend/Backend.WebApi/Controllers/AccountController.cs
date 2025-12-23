@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Dtos.Accounts;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,4 @@
-﻿using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.Services;
+﻿using Backend.Application.Interfaces.Filters;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 

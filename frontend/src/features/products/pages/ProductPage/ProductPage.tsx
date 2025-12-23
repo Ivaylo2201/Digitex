@@ -12,9 +12,9 @@ import { AddToFavoritesButton } from '../../../favorites/components/AddToFavorit
 import { ReviewsSection } from '@/features/reviews/components/ReviewsSection';
 import { AddToCartButton } from '@/features/cart/components/AddToCartButton';
 import { QuantityControlButtons } from './components/QuantityControlButtons';
-import { useQuantityControl } from '../../hooks/useQuantityControl';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Loader } from '../../components/Loader';
+import { useQuantityControl } from '../../hooks/useQuantityControl';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
@@ -27,7 +27,8 @@ export function ProductPage<T extends ProductLong>({
   product,
   onFormatSpecifications,
 }: ProductPageProps<T>) {
-  const quantityControl = useQuantityControl();
+  const quantityControl = useQuantityControl(product?.quantity ?? 0);
+
   const {
     components: { productPage },
   } = useTranslation();
@@ -93,7 +94,10 @@ export function ProductPage<T extends ProductLong>({
             <SpecificationsTable specifications={specifications} />
 
             <div className='flex justify-center items-center gap-8'>
-              <QuantityControlButtons {...quantityControl} />
+              <QuantityControlButtons
+                maxQuantity={product.quantity}
+                {...quantityControl}
+              />
               <AddToCartButton
                 isInStock={isInStock}
                 quantity={quantityControl.quantity}

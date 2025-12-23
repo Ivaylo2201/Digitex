@@ -2,7 +2,7 @@
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 
-namespace Backend.Application.Interfaces.Services;
+namespace Backend.Application.Interfaces;
 
 public interface IAccountService
 {

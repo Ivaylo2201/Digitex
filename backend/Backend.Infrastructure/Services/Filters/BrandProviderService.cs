@@ -1,4 +1,4 @@
-﻿using Backend.Application.Interfaces.Services;
+﻿using Backend.Application.Interfaces.Filters;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;

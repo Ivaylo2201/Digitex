@@ -9,7 +9,9 @@ using Backend.Application.Dtos.Products;
 using Backend.Application.Dtos.Review;
 using Backend.Application.Extensions;
 using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces.Email;
+using Backend.Application.Interfaces.Filters;
+using Backend.Application.Interfaces.Tokens;
 using Backend.Domain.Entities;
 using Backend.Domain.Exceptions;
 using Backend.Domain.Interfaces;
@@ -24,7 +26,6 @@ using Backend.Infrastructure.Http.Interfaces;
 using Backend.Infrastructure.Services;
 using Backend.Infrastructure.Services.Email;
 using Backend.Infrastructure.Services.Filters;
-using Backend.Infrastructure.Services.Payment;
 using Backend.Infrastructure.Services.Products;
 using Backend.Infrastructure.Services.Tokens;
 using DotNetEnv;
@@ -52,7 +53,7 @@ public static class InfrastructureDependencyInjection
             {
                 Env.Load();
                 
-                InfrastructureDependencyInjection.AddMapsterConfigurations();
+                IServiceCollection.AddMapsterConfigurations();
 
                 services
                     .AddDbContext(configuration)

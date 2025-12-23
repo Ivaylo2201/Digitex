@@ -1,5 +1,6 @@
 ﻿using Backend.Application.Dtos.Product;
 using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Filters;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;

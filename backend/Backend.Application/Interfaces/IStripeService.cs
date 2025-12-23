@@ -1,7 +1,7 @@
 ﻿using Backend.Domain.Common;
 using Microsoft.Extensions.Primitives;
 
-namespace Backend.Application.Interfaces.Services;
+namespace Backend.Application.Interfaces;
 
 public interface IStripeService
 {

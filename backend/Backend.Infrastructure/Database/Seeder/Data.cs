@@ -2274,9 +2274,9 @@ public static class Data
     
     public static readonly Dictionary<string, Currency> Currencies = new()
     {
-        ["usd"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Usd, Sign = "$", },
+        ["usd"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Usd, Sign = "$" },
         ["eur"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Eur, Sign = "€" },
-        ["gbp"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Gbp, Sign = "£" },
+        ["gbp"] = new Currency { CurrencyIsoCode = CurrencyIsoCode.Gbp, Sign = "£" }
     };
 
     public static readonly List<ExchangeRate> ExchangeRates =

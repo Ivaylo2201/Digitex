@@ -1,6 +1,7 @@
 ﻿using Backend.Application.Dtos.Authentication;
 using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces.Email;
+using Backend.Application.Interfaces.Tokens;
 using Backend.Application.Validators;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;

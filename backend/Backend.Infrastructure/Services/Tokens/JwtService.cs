@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces.Tokens;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;
 using Microsoft.IdentityModel.Tokens;

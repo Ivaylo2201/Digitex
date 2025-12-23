@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.Common;
 
-namespace Backend.Application.Interfaces;
+namespace Backend.Application.Interfaces.Filters;
 
 public interface IFilterService<TEntity, out TFilters>
 {

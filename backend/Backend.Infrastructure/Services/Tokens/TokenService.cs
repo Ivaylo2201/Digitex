@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces.Tokens;
 
 namespace Backend.Infrastructure.Services.Tokens;
 

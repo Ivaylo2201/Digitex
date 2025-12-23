@@ -1,5 +1,5 @@
 ﻿using System.Web;
-using Backend.Application.Interfaces.Services;
+using Backend.Application.Interfaces.Email;
 using Backend.Domain.Exceptions;
 using Microsoft.Extensions.Configuration;
 

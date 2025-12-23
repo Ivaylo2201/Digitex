@@ -1,4 +1,5 @@
-﻿using Backend.Application.Interfaces.Services;
+﻿using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Email;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Stripe;
 
-namespace Backend.Infrastructure.Services.Payment;
+namespace Backend.Infrastructure.Services;
 
 public class StripeService(
     ILogger<StripeService> logger,

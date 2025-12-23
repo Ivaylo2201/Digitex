@@ -1,7 +1,7 @@
 ﻿using Backend.Application.Dtos.Review;
 using Backend.Domain.Common;
 
-namespace Backend.Application.Interfaces.Services;
+namespace Backend.Application.Interfaces;
 
 public interface IReviewService
 {

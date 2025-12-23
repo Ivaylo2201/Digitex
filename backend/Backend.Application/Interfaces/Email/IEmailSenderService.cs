@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.Entities;
 
-namespace Backend.Application.Interfaces.Services;
+namespace Backend.Application.Interfaces.Email;
 
 public interface IEmailSenderService
 {
