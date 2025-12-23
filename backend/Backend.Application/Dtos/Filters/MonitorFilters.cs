@@ -1,8 +1,9 @@
 ﻿namespace Backend.Application.Dtos.Filters;
 
-public record MonitorFilters(
-    IReadOnlyList<string> Brands,
-    IReadOnlyList<int> RefreshRates,
-    IReadOnlyList<string> Matrices,
-    IReadOnlyList<string> ResolutionTypes
-);
+public record MonitorFilters
+{
+    public required IReadOnlyList<string> Brands { get; init; }
+    public required IReadOnlyList<int> RefreshRates { get; init; }
+    public required IReadOnlyList<string> Matrices { get; init; }
+    public required IReadOnlyList<string> ResolutionTypes { get; init; }
+}

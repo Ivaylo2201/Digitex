@@ -1,11 +1,12 @@
 ﻿namespace Backend.Application.Dtos.Filters;
 
-public record SsdFilters(
-    IReadOnlyList<string> Brands,
-    IReadOnlyList<int> MemoryCapacities,
-    IReadOnlyList<string> StorageInterfaces,
-    int MinReadSpeed,
-    int MaxReadSpeed,
-    int MinWriteSpeed,
-    int MaxWriteSpeed
-);
+public record SsdFilters
+{
+    public required IReadOnlyList<string> Brands { get; init; }
+    public required IReadOnlyList<int> MemoryCapacities { get; init; }
+    public required IReadOnlyList<string> StorageInterfaces { get; init; }
+    public required int MinReadSpeed { get; init; }
+    public required int MaxReadSpeed { get; init; }
+    public required int MinWriteSpeed { get; init; }
+    public required int MaxWriteSpeed { get; init; }
+}

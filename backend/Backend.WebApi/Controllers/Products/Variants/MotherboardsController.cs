@@ -19,5 +19,6 @@ public class MotherboardsController(
         => base.GetOneAsync(id, currency, stoppingToken);
     
     [ProducesResponseType<MotherboardFilters>(StatusCodes.Status200OK)]
-    public override IActionResult GetFilters() => base.GetFilters();
+    public override async Task<IActionResult> GetFiltersAsync(CancellationToken stoppingToken = default) 
+        => await base.GetFiltersAsync(stoppingToken);
 }

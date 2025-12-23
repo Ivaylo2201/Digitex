@@ -55,4 +55,18 @@ public class ProductServiceBase<TEntity, TProjection>(
 
         return Result<List<ProductShortDto>>.Success(StatusCodes.Status200OK, projections);
     }
+
+    public async Task<Result<List<TProjection>>> AdminListAllAsync(CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
+    {
+        var entities = await productRepository.AdminListAllAsync(stoppingToken);
+        var rate = currencyIsoCode is CurrencyIsoCode.Eur ? 1 : (await exchangeRateRepository.GetOneAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken))?.Rate ?? 1;
+        
+        var projections = entities.Select(entity =>
+        {
+            entity.InitialPrice *= rate;
+            return entity.Adapt<TProjection>();
+        }).ToList();
+        
+        return Result<List<TProjection>>.Success(StatusCodes.Status200OK, projections);
+    }
 }

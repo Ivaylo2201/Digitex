@@ -19,5 +19,6 @@ public class PowerSuppliesController(
         => base.GetOneAsync(id, currency, stoppingToken);
     
     [ProducesResponseType<PowerSupplyFilters>(StatusCodes.Status200OK)]
-    public override IActionResult GetFilters() => base.GetFilters();
+    public override async Task<IActionResult> GetFiltersAsync(CancellationToken stoppingToken = default) 
+        => await base.GetFiltersAsync(stoppingToken);
 }

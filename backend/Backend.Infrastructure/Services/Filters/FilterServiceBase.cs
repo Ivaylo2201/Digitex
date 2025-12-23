@@ -1,14 +1,16 @@
 ﻿using Backend.Application.Interfaces.Filters;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
+using Backend.Domain.Interfaces;
 
 namespace Backend.Infrastructure.Services.Filters;
 
-public abstract class FilterServiceBase<TEntity, TFilters>(IBrandProviderService<TEntity> brandProviderService)
+public abstract class FilterServiceBase<TEntity, TFilters>(IProductRepository<TEntity> productRepository)
     : IFilterService<TEntity, TFilters> where TEntity : ProductBase
 {
     public abstract Filter<TEntity> BuildFilter(IDictionary<string, string> criteria);
-    public abstract TFilters Filters { get; }
+    public abstract Task<Result<TFilters>> GetFiltersAsync(CancellationToken stoppingToken = default);
 
-    protected List<string> Brands => brandProviderService.Brands;
+    protected async Task<IReadOnlyList<string>> ListBrandsAsync(CancellationToken stoppingToken) 
+        => await productRepository.ListBrandsAsync(stoppingToken);
 }

@@ -19,7 +19,6 @@ public class ProductRepositoryBase<TEntity>(DatabaseContext context)
             .ThenInclude(review => review.User)
             .FirstOrDefaultAsync(entity => entity.Id == id, stoppingToken);
     
-
     public async Task<List<TEntity>> ListAllAsync(Filter<TEntity>? filter, CancellationToken stoppingToken = default)
     {
         var queryable = context
@@ -33,6 +32,20 @@ public class ProductRepositoryBase<TEntity>(DatabaseContext context)
         
         return await queryable.ToListAsync(stoppingToken);
     }
-
-    public IQueryable<TEntity> GetContextSet() => context.Set<TEntity>();
+    
+    public async Task<List<string>> ListBrandsAsync(CancellationToken stoppingToken = default)
+        => await context
+            .Set<TEntity>()
+            .AsNoTracking()
+            .Include(entity => entity.Brand)
+            .Select(entity => entity.Brand.BrandName)
+            .Distinct()
+            .ToListAsync(stoppingToken);
+    
+    public async Task<List<TEntity>> AdminListAllAsync(CancellationToken stoppingToken = default) 
+        => await context
+            .Set<TEntity>()
+            .AsNoTracking()
+            .Include(entity => entity.Brand)
+            .ToListAsync(stoppingToken);
 }

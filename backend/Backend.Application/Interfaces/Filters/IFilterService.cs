@@ -2,8 +2,8 @@
 
 namespace Backend.Application.Interfaces.Filters;
 
-public interface IFilterService<TEntity, out TFilters>
+public interface IFilterService<TEntity, TFilters>
 {
     Filter<TEntity> BuildFilter(IDictionary<string, string> criteria);
-    TFilters Filters { get; }
+    Task<Result<TFilters>> GetFiltersAsync(CancellationToken stoppingToken = default);
 }

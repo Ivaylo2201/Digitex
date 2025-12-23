@@ -33,9 +33,22 @@ public abstract class ProductControllerBase<TEntity, TProjection, TFilters>(
         var result = await productService.ListAllAsync(filterService.BuildFilter(criteria), currency.ToCurrencyIsoCode(), stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
-    
+
     [HttpGet("filters")]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public virtual IActionResult GetFilters() => Ok(filterService.Filters);
+    public virtual async Task<IActionResult> GetFiltersAsync(CancellationToken stoppingToken = default)
+    {
+        var result = await filterService.GetFiltersAsync(stoppingToken);
+        return StatusCode(result.StatusCode, result.Value);
+    }
+    
+    [HttpGet("admin")]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
+    public virtual async Task<IActionResult> AdminListAllAsync([FromQuery] string currency, CancellationToken stoppingToken = default)
+    {
+        var result = await productService.AdminListAllAsync(currency.ToCurrencyIsoCode(), stoppingToken);
+        return StatusCode(result.StatusCode, result.Value);
+    }
 }

@@ -19,5 +19,10 @@ public class GraphicsCardsController(
         => base.GetOneAsync(id, currency, stoppingToken);
     
     [ProducesResponseType<GraphicsCardFilters>(StatusCodes.Status200OK)]
-    public override IActionResult GetFilters() => base.GetFilters();
+    public override async Task<IActionResult> GetFiltersAsync(CancellationToken stoppingToken = default) 
+        => await base.GetFiltersAsync(stoppingToken);
+
+    [ProducesResponseType<List<GraphicsCard>>(StatusCodes.Status200OK)]
+    public override Task<IActionResult> AdminListAllAsync(string currency, CancellationToken stoppingToken = default)
+        => base.AdminListAllAsync(currency, stoppingToken);
 }
