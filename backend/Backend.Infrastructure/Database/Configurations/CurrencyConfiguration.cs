@@ -17,6 +17,10 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
             .HasKey(currency => currency.Id);
         
         builder
+            .Property(currency => currency.CurrencyIsoCode)
+            .HasMaxLength(IsoCodeMaxLength);
+        
+        builder
             .Property(currency => currency.Sign)
             .HasMaxLength(SignMaxLength);
     }

@@ -1,7 +1,6 @@
-﻿using Backend.Application.Dtos.Filters;
-using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Dtos.Products;
 using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.Filters;
+using Backend.Application.Interfaces.QueryBuilder;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,15 +10,5 @@ using Monitor = Domain.Entities.Monitor;
 
 [ApiController]
 [Route("api/products/[controller]")]
-public class MonitorsController(
-    IProductService<Monitor, MonitorDto> productService,
-    IFilterService<Monitor, MonitorFilters> filterService) : ProductControllerBase<Monitor, MonitorDto, MonitorFilters>(productService, filterService, monitor => monitor.Adapt<MonitorDto>())
-{
-    [ProducesResponseType<MonitorDto>(StatusCodes.Status200OK)]
-    public override Task<IActionResult> GetOneAsync([FromRoute] Guid id, [FromQuery] string currency, CancellationToken stoppingToken = default)
-        => base.GetOneAsync(id, currency, stoppingToken);
-    
-    [ProducesResponseType<MonitorFilters>(StatusCodes.Status200OK)]
-    public override async Task<IActionResult> GetFiltersAsync(CancellationToken stoppingToken = default) 
-        => await base.GetFiltersAsync(stoppingToken);
-}
+public class MonitorsController(IProductService<Monitor, MonitorDto> productService, IQueryBuilderService<Monitor> queryBuilderService) 
+    : ProductControllerBase<Monitor, MonitorDto>(productService, queryBuilderService, monitor => monitor.Adapt<MonitorDto>());

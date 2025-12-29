@@ -5,27 +5,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Database.Repositories.Products;
 
-public class ProductRepositoryBase<TEntity>(DatabaseContext context)
-    : IProductRepository<TEntity> where TEntity : ProductBase
+public class ProductRepositoryBase<TProduct>(DatabaseContext context)
+    : IProductRepository<TProduct> where TProduct : ProductBase
 {
-    public async Task<TEntity?> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
+    public async Task<TProduct?> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
         => await context
-            .Set<TEntity>()
+            .Set<TProduct>()
             .AsNoTracking()
-            .Include(entity => entity.Brand)
-            .Include(entity => entity.Suggestions)
+            .Include(product => product.Brand)
+            .Include(product => product.Suggestions)
             .ThenInclude(suggestion => suggestion.Brand)
-            .Include(entity => entity.Reviews)
+            .Include(product => product.Reviews)
             .ThenInclude(review => review.User)
-            .FirstOrDefaultAsync(entity => entity.Id == id, stoppingToken);
+            .FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
     
-    public async Task<List<TEntity>> ListAllAsync(Filter<TEntity>? filter, CancellationToken stoppingToken = default)
+    public async Task<List<TProduct>> ListAllAsync(Query<TProduct>? filter, CancellationToken stoppingToken = default)
     {
         var queryable = context
-            .Set<TEntity>()
+            .Set<TProduct>()
             .AsNoTracking()
-            .Include(entity => entity.Brand)
-            .Where(entity => entity.Quantity > 0);
+            .Include(product => product.Brand)
+            .Where(product => product.Quantity > 0);
 
         if (filter is not null)
             queryable = filter(queryable);
@@ -33,19 +33,10 @@ public class ProductRepositoryBase<TEntity>(DatabaseContext context)
         return await queryable.ToListAsync(stoppingToken);
     }
     
-    public async Task<List<string>> ListBrandsAsync(CancellationToken stoppingToken = default)
+    public async Task<List<TProduct>> AdminListAllAsync(CancellationToken stoppingToken = default) 
         => await context
-            .Set<TEntity>()
+            .Set<TProduct>()
             .AsNoTracking()
-            .Include(entity => entity.Brand)
-            .Select(entity => entity.Brand.BrandName)
-            .Distinct()
-            .ToListAsync(stoppingToken);
-    
-    public async Task<List<TEntity>> AdminListAllAsync(CancellationToken stoppingToken = default) 
-        => await context
-            .Set<TEntity>()
-            .AsNoTracking()
-            .Include(entity => entity.Brand)
+            .Include(product => product.Brand)
             .ToListAsync(stoppingToken);
 }

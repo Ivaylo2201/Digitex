@@ -10,7 +10,8 @@ using Backend.Application.Dtos.Review;
 using Backend.Application.Extensions;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Email;
-using Backend.Application.Interfaces.Filters;
+using Backend.Application.Interfaces.FiltersProvider;
+using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Application.Interfaces.Tokens;
 using Backend.Domain.Entities;
 using Backend.Domain.Exceptions;
@@ -25,8 +26,9 @@ using Backend.Infrastructure.Http;
 using Backend.Infrastructure.Http.Interfaces;
 using Backend.Infrastructure.Services;
 using Backend.Infrastructure.Services.Email;
-using Backend.Infrastructure.Services.Filters;
+using Backend.Infrastructure.Services.FiltersProvider;
 using Backend.Infrastructure.Services.Products;
+using Backend.Infrastructure.Services.QueryBuilder;
 using Backend.Infrastructure.Services.Tokens;
 using DotNetEnv;
 using Mapster;
@@ -147,7 +149,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IShipmentRepository, ShipmentRepository>()
             .AddScoped<IUserTokenRepository, UserTokenRepository>()
             .AddScoped<IExchangeRateRepository, ExchangeRateRepository>()
-            .AddScoped<ICurrencyRepository, CurrencyRepository>();
+            .AddScoped<ICurrencyRepository, CurrencyRepository>()
+            .AddScoped<IBrandRepository, BrandRepository>();
 
         private IServiceCollection AddServices() => services
             .AddEmail()
@@ -167,15 +170,23 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IEmailSenderService, EmailSenderService>()
             .AddScoped<ICurrencyService, CurrencyService>()
             .AddScoped<ICartService, CartService>()
+            .AddScoped<IFiltersProviderService<GraphicsCardFilters>, GraphicsCardFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<MonitorFilters>, MonitorFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<RamFilters>, RamFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<ProcessorFilters>, ProcessorFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<GraphicsCardFilters>, GraphicsCardFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<SsdFilters>, SsdFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<MotherboardFilters>, MotherboardFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<PowerSupplyFilters>, PowerSupplyFiltersProviderService>()
+            .AddTransient<IQueryBuilderService<Monitor>, MonitorQueryBuilderService>()
+            .AddTransient<IQueryBuilderService<Ram>, RamQueryBuilderService>()
+            .AddTransient<IQueryBuilderService<Processor>, ProcessorQueryBuilderService>()
+            .AddTransient<IQueryBuilderService<GraphicsCard>, GraphicsCardQueryBuilderService>()
+            .AddTransient<IQueryBuilderService<Ssd>, SsdQueryBuilderService>()
+            .AddTransient<IQueryBuilderService<Motherboard>, MotherboardQueryBuilderService>()
+            .AddTransient<IQueryBuilderService<PowerSupply>, PowerSupplyQueryBuilderService>()
             .AddTransient<IEmailBuilderService, EmailBuilderService>()
             .AddTransient<ITokenService, TokenService>()
-            .AddTransient<IFilterService<Monitor, MonitorFilters>, MonitorFilterService>()
-            .AddTransient<IFilterService<Ram, RamFilters>, RamFilterService>()
-            .AddTransient<IFilterService<Processor, ProcessorFilters>, ProcessorFilterService>()
-            .AddTransient<IFilterService<GraphicsCard, GraphicsCardFilters>, GraphicsCardFilterService>()
-            .AddTransient<IFilterService<Ssd, SsdFilters>, SsdFilterService>()
-            .AddTransient<IFilterService<Motherboard, MotherboardFilters>, MotherboardFilterService>()
-            .AddTransient<IFilterService<PowerSupply, PowerSupplyFilters>, PowerSupplyFilterService>()
             .AddSingleton<IUrlService, UrlService>()
             .AddSingleton<IJwtService, JwtService>();
 

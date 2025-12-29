@@ -7,6 +7,6 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class CurrencyRepository(DatabaseContext context) : ICurrencyRepository
 {
-    public async Task<List<Currency>> ListAllAsync(Filter<Currency>? filter = null, CancellationToken stoppingToken = default)
+    public async Task<List<Currency>> ListAllAsync(Query<Currency>? filter = null, CancellationToken stoppingToken = default)
         => await context.Currencies.ToListAsync(stoppingToken);
 }

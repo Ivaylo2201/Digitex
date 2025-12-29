@@ -1,0 +1,10 @@
+﻿using Backend.Application.Dtos.Filters;
+using Backend.Application.Interfaces.FiltersProvider;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Backend.WebApi.Controllers.Filters.Variants;
+
+[ApiController]
+[Route("api/filters/power-supply")]
+public class PowerSupplyFiltersController(IFiltersProviderService<PowerSupplyFilters> filtersProviderService)
+    : FiltersControllerBase<PowerSupplyFilters>(filtersProviderService);

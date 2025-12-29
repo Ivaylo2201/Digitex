@@ -29,22 +29,24 @@ public class ProductServiceBase<TEntity, TProjection>(
             return Result<TProjection?>.Failure(StatusCodes.Status404NotFound);
         }
         
-        if (currencyIsoCode is not CurrencyIsoCode.Eur)
-        {
-            var exchangeRate = await exchangeRateRepository.GetOneAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken);
-            entity.InitialPrice *= exchangeRate?.Rate ?? 1;
-        }
-
         logger.LogInformation("[{Source}]: Projecting {Entity} into a {Projection}...", source, _entityName, _projectionName);
+
+        if (currencyIsoCode is CurrencyIsoCode.Eur)
+            return Result<TProjection?>.Success(StatusCodes.Status200OK, project(entity));
+
+        var exchangeRate = await exchangeRateRepository.GetOneAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken);
+        entity.InitialPrice *= exchangeRate?.Rate ?? 1;
+        
         return Result<TProjection?>.Success(StatusCodes.Status200OK, project(entity));
     }
 
-    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Filter<TEntity> filter, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
+    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Query<TEntity> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
-        var entities = await productRepository.ListAllAsync(filter, stoppingToken);
-
+        var entities = await productRepository.ListAllAsync(query, stoppingToken);
+        
         logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
+        
         var rate = currencyIsoCode is CurrencyIsoCode.Eur ? 1 : (await exchangeRateRepository.GetOneAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken))?.Rate ?? 1;
 
         var projections = entities.Select(entity =>

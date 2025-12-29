@@ -1,6 +1,6 @@
 ﻿using Backend.Application.Dtos.Product;
 using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.Filters;
+using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;
@@ -9,10 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers.Products;
 
-public abstract class ProductControllerBase<TEntity, TProjection, TFilters>(
-    IProductService<TEntity, TProjection> productService,
-    IFilterService<TEntity, TFilters> filterService,
-    Func<TEntity, TProjection> project) : ControllerBase where TEntity : ProductBase
+[ApiController]
+public abstract class ProductControllerBase<TProduct, TProjection>(
+    IProductService<TProduct, TProjection> productService,
+    IQueryBuilderService<TProduct> queryBuilderService,
+    Func<TProduct, TProjection> project) : ControllerBase where TProduct : ProductBase
 {
     [HttpGet("{id:guid}")]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
@@ -30,25 +31,7 @@ public abstract class ProductControllerBase<TEntity, TProjection, TFilters>(
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync([FromQuery] IDictionary<string, string> criteria, [FromQuery] string currency, CancellationToken stoppingToken = default)
     {
-        var result = await productService.ListAllAsync(filterService.BuildFilter(criteria), currency.ToCurrencyIsoCode(), stoppingToken);
+        var result = await productService.ListAllAsync(queryBuilderService.BuildQuery(criteria), currency.ToCurrencyIsoCode(), stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
-    }
-
-    [HttpGet("filters")]
-    [Produces(Constants.ApplicationJson)]
-    [Consumes(Constants.ApplicationJson)]
-    public virtual async Task<IActionResult> GetFiltersAsync(CancellationToken stoppingToken = default)
-    {
-        var result = await filterService.GetFiltersAsync(stoppingToken);
-        return StatusCode(result.StatusCode, result.Value);
-    }
-    
-    [HttpGet("admin")]
-    [Produces(Constants.ApplicationJson)]
-    [Consumes(Constants.ApplicationJson)]
-    public virtual async Task<IActionResult> AdminListAllAsync([FromQuery] string currency, CancellationToken stoppingToken = default)
-    {
-        var result = await productService.AdminListAllAsync(currency.ToCurrencyIsoCode(), stoppingToken);
-        return StatusCode(result.StatusCode, result.Value);
     }
 }
