@@ -40,10 +40,10 @@ public class ProductServiceBase<TEntity, TProjection>(
         return Result<TProjection?>.Success(StatusCodes.Status200OK, project(entity));
     }
 
-    public async Task<Result<List<ProductShortDto>>> ListAllAsync(Query<TEntity> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
+    public async Task<Result<PaginatedResponse<List<ProductShortDto>>>> ListAllAsync(int page, int pageSize, Query<TEntity> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
-        var entities = await productRepository.ListAllAsync(query, stoppingToken);
+        var entities = await productRepository.ListAllAsync(page, pageSize, query, stoppingToken);
         
         logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
         
@@ -54,21 +54,16 @@ public class ProductServiceBase<TEntity, TProjection>(
             entity.InitialPrice *= rate;
             return entity.Adapt<ProductShortDto>();
         }).ToList();
-
-        return Result<List<ProductShortDto>>.Success(StatusCodes.Status200OK, projections);
-    }
-
-    public async Task<Result<List<TProjection>>> AdminListAllAsync(CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
-    {
-        var entities = await productRepository.AdminListAllAsync(stoppingToken);
-        var rate = currencyIsoCode is CurrencyIsoCode.Eur ? 1 : (await exchangeRateRepository.GetOneAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken))?.Rate ?? 1;
         
-        var projections = entities.Select(entity =>
+        var totalItems = await productRepository.CountAsync(query, stoppingToken);
+
+        var response = new PaginatedResponse<List<ProductShortDto>>
         {
-            entity.InitialPrice *= rate;
-            return entity.Adapt<TProjection>();
-        }).ToList();
-        
-        return Result<List<TProjection>>.Success(StatusCodes.Status200OK, projections);
+            Items = projections,
+            TotalItems = totalItems,
+            TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
+        };
+
+        return Result<PaginatedResponse<List<ProductShortDto>>>.Success(StatusCodes.Status200OK, response);
     }
 }

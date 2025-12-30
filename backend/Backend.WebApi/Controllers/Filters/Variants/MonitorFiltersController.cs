@@ -4,6 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers.Filters.Variants;
 
-[Route("api/filters/monitor")]
+[Route("api/filters/monitors")]
 public class MonitorFiltersController(IFiltersProviderService<MonitorFilters> filtersProviderService)
     : FiltersControllerBase<MonitorFilters>(filtersProviderService);

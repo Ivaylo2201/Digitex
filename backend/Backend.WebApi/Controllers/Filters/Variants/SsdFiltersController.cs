@@ -5,6 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.WebApi.Controllers.Filters.Variants;
 
 [ApiController]
-[Route("api/filters/ssd")]
+[Route("api/filters/ssds")]
 public class SsdFiltersController(IFiltersProviderService<SsdFilters> filtersProviderService)
     : FiltersControllerBase<SsdFilters>(filtersProviderService);

@@ -5,6 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.WebApi.Controllers.Filters.Variants;
 
 [ApiController]
-[Route("api/filters/ram")]
+[Route("api/filters/rams")]
 public class RamFiltersController(IFiltersProviderService<RamFilters> filtersProviderService)
     : FiltersControllerBase<RamFilters>(filtersProviderService);

@@ -186,6 +186,13 @@
     "emptyMessagesSection": {
       "hiThereImYourDigitexAssistant": "Здравей! Аз съм твоят Digitex асистент",
       "imHereToHelpAskMeAnything": "Тук съм, за да помогна – питай ме каквото пожелаеш!"
+    },
+    "productsPagination": {
+      "previous": "Предишна",
+      "next": "Следваща",
+      "showing": "Показване на",
+      "outOf": "от",
+      "products": "продукта"
     }
   },
   "specifications": {

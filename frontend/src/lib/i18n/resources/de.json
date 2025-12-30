@@ -186,6 +186,13 @@
     "emptyMessagesSection": {
       "hiThereImYourDigitexAssistant": "Hallo! Ich bin dein Digitex-Assistent",
       "imHereToHelpAskMeAnything": "Ich bin hier, um zu helfen – frag mich einfach!"
+    },
+    "productsPagination": {
+      "previous": "Zurück",
+      "next": "Weiter",
+      "showing": "Anzeigen",
+      "outOf": "von",
+      "products": "Produkte"
     }
   },
   "specifications": {

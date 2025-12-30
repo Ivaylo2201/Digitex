@@ -10,6 +10,8 @@ import { RamsFilterForm } from '@/features/filters/components/forms/RamFilterFor
 import { MonitorsFilterForm } from '@/features/filters/components/forms/MonitorsFilterForm';
 import { SsdsFilterForm } from '@/features/filters/components/forms/SsdsFilterForm';
 import { PowerSuppliesFilterForm } from '@/features/filters/components/forms/PowerSuppliesFilterForm';
+import { useState } from 'react';
+import { ProductsPagination } from './components/ProductsPagination';
 
 const filterForms: Record<string, React.ComponentType> = {
   'graphics-cards': GraphicsCardsFilterForm,
@@ -21,12 +23,13 @@ const filterForms: Record<string, React.ComponentType> = {
   'power-supplies': PowerSuppliesFilterForm,
 };
 
-// TODO: Pagination
 export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
-  const { data: products } = useProducts(category ?? '');
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(9);
+  const { data } = useProducts(category ?? '', page, pageSize);
 
-  if (!products || !category) {
+  if (!data?.items || !category) {
     return (
       <Page>
         <Loader />
@@ -40,9 +43,17 @@ export function ProductsPage() {
 
   return (
     <Page>
-      <div className='flex flex-col lg:flex-row items-center lg:items-start gap-20'>
-        <FilterForm />
-        <ProductsList products={products} category={category} />
+      <div className='flex flex-col gap-10'>
+        <div className='flex flex-col lg:flex-row items-center lg:items-start gap-20'>
+          <FilterForm />
+          <ProductsList products={data.items} category={category} />
+        </div>
+        <ProductsPagination
+          page={page}
+          pageSize={pageSize}
+          setPage={setPage}
+          totalPages={data.totalPages}
+        />
       </div>
     </Page>
   );
