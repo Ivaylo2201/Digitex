@@ -1,6 +1,6 @@
 ﻿namespace Backend.Domain.Entities;
 
-public class ExchangeRate
+public class Exchange
 {
     public int FromCurrencyId { get; init; }
     public Currency FromCurrency { get; init; } = null!;
@@ -8,5 +8,5 @@ public class ExchangeRate
     public int ToCurrencyId { get; init; }
     public Currency ToCurrency { get; init; } = null!;
 
-    public required double Rate { get; init; }
+    public required decimal Rate { get; init; }
 }

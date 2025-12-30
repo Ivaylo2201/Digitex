@@ -64,14 +64,18 @@ public class StripeService(
 
     public async Task<Result<string>> CreatePaymentIntentAsync(int userId, CancellationToken stoppingToken = default)
     {
-        var cartTotal = await cartRepository.GetCartTotalAsync(userId, stoppingToken);
-        var paymentIntentService = new PaymentIntentService();
+        var cart = await cartRepository.GetCartAsync(userId, stoppingToken);
+        
+        if (cart is null || cart.Items.Count is 0)
+            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.General);
 
+        var paymentIntentService = new PaymentIntentService();
+        
         try
         {
             var paymentIntentOptions = new PaymentIntentCreateOptions
             {
-                Amount = (long)cartTotal * 100,
+                Amount = (long)cart.Items.Sum(item => item.Price) * 100,
                 Currency = "eur",
                 PaymentMethodTypes = ["card"],
                 Metadata = new Dictionary<string, string>

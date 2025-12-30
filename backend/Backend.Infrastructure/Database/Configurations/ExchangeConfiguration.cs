@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Backend.Infrastructure.Database.Configurations;
 
-public class ExchangeRateConfiguration : IEntityTypeConfiguration<ExchangeRate>
+public class ExchangeConfiguration : IEntityTypeConfiguration<Exchange>
 {
-    private const string TableName = "ExchangeRates";
+    private const string TableName = "Exchanges";
     
-    public void Configure(EntityTypeBuilder<ExchangeRate> builder)
+    public void Configure(EntityTypeBuilder<Exchange> builder)
     {
         builder
             .ToTable(TableName)

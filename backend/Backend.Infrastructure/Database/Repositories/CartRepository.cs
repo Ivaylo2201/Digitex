@@ -6,19 +6,16 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class CartRepository(DatabaseContext context) : ICartRepository
 {
-    public async Task<double> GetCartTotalAsync(int userId, CancellationToken stoppingToken = default)
-    {
-        return await context.Users
-            .Where(user => user.Id == userId)
-            .Include(user => user.Cart)
-            .ThenInclude(cart => cart.Items)
-            .SelectMany(user => user.Cart.Items)
-            .SumAsync(item => item.Price, stoppingToken);
-    }
-
     public async Task AddToCartAsync(Item item, CancellationToken stoppingToken)
     {
         await context.Items.AddAsync(item, stoppingToken);
         await context.SaveChangesAsync(stoppingToken);
     }
+
+    public async Task<Cart?> GetCartAsync(int userId, CancellationToken stoppingToken)
+        => await context.Carts
+            .Include(cart => cart.Items)
+            .ThenInclude(item => item.Product)
+            .ThenInclude(product => product.Brand)
+            .FirstOrDefaultAsync(cart => cart.UserId == userId, stoppingToken);
 }

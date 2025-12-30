@@ -11,5 +11,5 @@ public class Item
     public int? OrderId { get; set; }
     public Order Order { get; set; } = null!;
 
-    public double Price => Product.Price * Quantity;
+    public decimal Price => Product.Price * Quantity;
 }

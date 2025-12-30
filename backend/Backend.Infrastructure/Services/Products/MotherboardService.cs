@@ -1,9 +1,13 @@
 ﻿using Backend.Application.Dtos.Products;
+using Backend.Application.Interfaces;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public class MotherboardService(ILogger<MotherboardService> logger, IProductRepository<Motherboard> motherboardRepository, IExchangeRateRepository exchangeRateRepository) 
-    : ProductServiceBase<Motherboard, MotherboardDto>(logger, motherboardRepository, exchangeRateRepository);
+public class MotherboardService(
+    ILogger<MotherboardService> logger,
+    IProductRepository<Motherboard> motherboardRepository,
+    IExchangeRepository exchangeRateRepository,
+    ICurrencyService currencyService) : ProductServiceBase<Motherboard, MotherboardDto>(logger, motherboardRepository, exchangeRateRepository, currencyService);

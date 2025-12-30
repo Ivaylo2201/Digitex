@@ -157,6 +157,7 @@ namespace Backend.Infrastructure.Database.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CurrencyIsoCode")
+                        .HasMaxLength(3)
                         .HasColumnType("int");
 
                     b.Property<string>("Sign")
@@ -169,7 +170,34 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.ToTable("Currencies", (string)null);
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.ExchangeRate", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.DiscountCoupon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("DiscountPercentage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("DiscountCoupons", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Exchange", b =>
                 {
                     b.Property<int>("FromCurrencyId")
                         .HasColumnType("int");
@@ -177,14 +205,14 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int>("ToCurrencyId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Rate")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("FromCurrencyId", "ToCurrencyId");
 
                     b.HasIndex("ToCurrencyId");
 
-                    b.ToTable("ExchangeRates", (string)null);
+                    b.ToTable("Exchanges", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.Item", b =>
@@ -225,6 +253,9 @@ namespace Backend.Infrastructure.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DiscountCouponId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PaymentId")
                         .HasColumnType("int");
@@ -282,8 +313,8 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("InitialPrice")
-                        .HasColumnType("float");
+                    b.Property<decimal>("InitialPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ModelName")
                         .IsRequired()
@@ -757,7 +788,18 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("Backend.Domain.Entities.ExchangeRate", b =>
+            modelBuilder.Entity("Backend.Domain.Entities.DiscountCoupon", b =>
+                {
+                    b.HasOne("Backend.Domain.Entities.Order", "Order")
+                        .WithOne("DiscountCoupon")
+                        .HasForeignKey("Backend.Domain.Entities.DiscountCoupon", "OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Backend.Domain.Entities.Exchange", b =>
                 {
                     b.HasOne("Backend.Domain.Entities.Currency", "FromCurrency")
                         .WithMany()
@@ -998,6 +1040,9 @@ namespace Backend.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Backend.Domain.Entities.Order", b =>
                 {
+                    b.Navigation("DiscountCoupon")
+                        .IsRequired();
+
                     b.Navigation("Items");
 
                     b.Navigation("Payment");

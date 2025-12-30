@@ -1,4 +1,5 @@
-﻿using Backend.Application.Dtos.Cart;
+﻿using Backend.Application.Contracts.Cart.AddToCart;
+using Backend.Application.Contracts.Cart.GetCart;
 using Backend.Application.Interfaces;
 using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Http;
@@ -15,10 +16,25 @@ public class CartsController(ICartService cartService) : ControllerBase
     [Authorize]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public async Task<IActionResult> AddToCartAsync([FromBody] AddToCartDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> AddToCartAsync([FromBody] AddToCartRequest request, CancellationToken stoppingToken = default)
     {
-        body.UserId = User.GetId();
-        var result = await cartService.AddToCartAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new {} : result.ErrorObject);
+        request.UserId = User.GetId();
+        var result = await cartService.AddToCartAsync(request, stoppingToken);
+        return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
+    }
+    
+    [HttpGet]
+    [Authorize]
+    [Produces(Constants.ApplicationJson)]
+    [Consumes(Constants.ApplicationJson)]
+    public async Task<IActionResult> GetCartAsync(string currency, CancellationToken stoppingToken = default)
+    {
+        var result = await cartService.GetCartAsync(new GetCartRequest
+        {
+            UserId = User.GetId(),
+            CurrencyIsoCode = currency.ToCurrencyIsoCode()
+        }, stoppingToken);
+        
+        return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
 }

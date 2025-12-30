@@ -2,8 +2,8 @@
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
+using Backend.Application.Contracts.Cart.GetCart;
 using Backend.Application.Dtos.Filters;
-using Backend.Application.Dtos.Item;
 using Backend.Application.Dtos.Product;
 using Backend.Application.Dtos.Products;
 using Backend.Application.Dtos.Review;
@@ -148,7 +148,7 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IItemRepository, ItemRepository>()
             .AddScoped<IShipmentRepository, ShipmentRepository>()
             .AddScoped<IUserTokenRepository, UserTokenRepository>()
-            .AddScoped<IExchangeRateRepository, ExchangeRateRepository>()
+            .AddScoped<IExchangeRepository, ExchangeRepository>()
             .AddScoped<ICurrencyRepository, CurrencyRepository>()
             .AddScoped<IBrandRepository, BrandRepository>();
 
@@ -200,9 +200,10 @@ public static class InfrastructureDependencyInjection
                     Discounted = source.Price
                 })
                 .Map(destination => destination.Quantity, source => source.Quantity);
-
-            TypeAdapterConfig<Item, ItemDto>.NewConfig()
-                .Map(destination => destination.Product, source => new ProductItemDto
+            
+            
+            TypeAdapterConfig<Item, ItemProjection>.NewConfig()
+                .Map(destination => destination.Product, source => new ProductProjection
                 {
                     Sku = source.Product.Sku,
                     BrandName = source.Product.Brand.BrandName,
@@ -210,7 +211,7 @@ public static class InfrastructureDependencyInjection
                     Price = source.Product.Price,
                     ImagePath = source.Product.ImagePath
                 })
-                .Map(destination => destination.Price, source => source.Product.Price * source.Quantity);
+                .Map(destination => destination.LineTotal, source => source.Product.Price * source.Quantity);
 
             TypeAdapterConfig<ProductBase, ProductLongDto>.NewConfig().Inherits<ProductBase, ProductShortDto>()
                 .Map(destination => destination.Sku, source => source.Sku.ToUpper())
