@@ -5,6 +5,6 @@ namespace Backend.Application.Interfaces;
 
 public interface IStripeService
 {
-    Task<Result> ProcessWebhookAsync(string json, IDictionary<string, StringValues> headers, CancellationToken stoppingToken = default);
-    Task<Result<string>> CreatePaymentIntentAsync(int userId, CancellationToken stoppingToken = default);
+    Task<Result> ProcessWebhookAsync(string json, IDictionary<string, StringValues> headers, CancellationToken cancellationToken = default);
+    Task<Result<string>> CreatePaymentIntentAsync(int userId, CancellationToken cancellationToken = default);
 }

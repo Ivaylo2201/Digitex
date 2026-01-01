@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
@@ -10,4 +10,4 @@ public class GraphicsCardService(
     ILogger<GraphicsCardService> logger,
     IProductRepository<GraphicsCard> graphicCardRepository,
     IExchangeRepository exchangeRepository,
-    ICurrencyService currencyService) : ProductServiceBase<GraphicsCard, GraphicsCardDto>(logger, graphicCardRepository, exchangeRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<GraphicsCard, GraphicsCardProjection>(logger, graphicCardRepository, exchangeRepository, currencyService);

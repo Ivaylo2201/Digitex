@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Filters;
+﻿using Backend.Application.Contracts.Filters;
 using Backend.Application.Interfaces.FiltersProvider;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;

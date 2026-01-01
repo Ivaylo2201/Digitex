@@ -1,4 +1,7 @@
-﻿using Backend.Application.Dtos.Accounts;
+﻿using Backend.Application.Contracts.Account;
+using Backend.Application.Contracts.Account.CompleteAccountVerification;
+using Backend.Application.Contracts.Account.CompletePasswordReset;
+using Backend.Application.Contracts.Account.RequestPasswordReset;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Email;
 using Backend.Application.Interfaces.Tokens;
@@ -22,11 +25,11 @@ public class AccountService(
 {
     private const string Source = nameof(AccountService);
     
-    public async Task<Result<(string Token, Role Role)>> CompleteAccountVerificationAsync(CompleteAccountVerificationDto completeAccountVerificationDto, CancellationToken stoppingToken = default)
+    public async Task<Result<(string Token, Role Role)>> CompleteAccountVerificationAsync(CompleteAccountVerificationRequest request, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Completing account verification...", Source);
         
-        var hashedToken = tokenService.HashToken(completeAccountVerificationDto.Token);
+        var hashedToken = tokenService.HashToken(request.Token);
         var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, stoppingToken);
 
         if (userToken is null)
@@ -51,15 +54,15 @@ public class AccountService(
             Result<(string, Role)>.Success(StatusCodes.Status200OK, (jwtService.GenerateToken(user), user.Role));
     }
     
-    public async Task<Result<string>> RequestPasswordResetAsync(RequestPasswordResetDto requestPasswordResetDto, CancellationToken stoppingToken = default)
+    public async Task<Result<string>> RequestPasswordResetAsync(RequestPasswordResetRequest request, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Requesting password reset for User with Email={Email}...", Source, requestPasswordResetDto.Email);
+        logger.LogInformation("[{Source}]: Requesting password reset for User with Email={Email}...", Source, request.Email);
         
-        var user = await userRepository.GetOneByEmailAsync(requestPasswordResetDto.Email, stoppingToken);
+        var user = await userRepository.GetOneByEmailAsync(request.Email, stoppingToken);
 
         if (user is null)
         {
-            logger.LogWarning("[{Source}]: User with Email={Email} was not found.", Source, requestPasswordResetDto.Email);
+            logger.LogWarning("[{Source}]: User with Email={Email} was not found.", Source, request.Email);
             return Result<string>.Failure(StatusCodes.Status404NotFound);
         }
         
@@ -71,11 +74,11 @@ public class AccountService(
         return Result<string>.Success(StatusCodes.Status200OK, $"Visit {user.Email} to reset your password.");
     }
     
-    public async Task<Result<string>> CompletePasswordResetAsync(CompletePasswordResetDto completePasswordResetDto, CancellationToken stoppingToken = default)
+    public async Task<Result<string>> CompletePasswordResetAsync(CompletePasswordResetRequest request, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Completing password reset...", Source);
         
-        var hashedToken = tokenService.HashToken(completePasswordResetDto.Token);
+        var hashedToken = tokenService.HashToken(request.Token);
         var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, stoppingToken);
 
         if (userToken is null)
@@ -91,7 +94,7 @@ public class AccountService(
         }
         
         logger.LogInformation("[{Source}]: Resetting password for User with Username={Username}...", Source, userToken.User.Username);
-        await userRepository.ResetPasswordAsync(userToken.User.Id, completePasswordResetDto.NewPassword, stoppingToken);
+        await userRepository.ResetPasswordAsync(userToken.User.Id, request.NewPassword, stoppingToken);
         await userTokenRepository.DeleteAsync(userToken.Id, stoppingToken);
 
         return Result<string>.Success(StatusCodes.Status200OK, "Password has been successfully reset.");

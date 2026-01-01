@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -11,4 +11,4 @@ public class MonitorService(
     ILogger<MonitorService> logger,
     IProductRepository<Monitor> monitorRepository,
     IExchangeRepository exchangeRepository,
-    ICurrencyService currencyService) : ProductServiceBase<Monitor, MonitorDto>(logger, monitorRepository, exchangeRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<Monitor, MonitorProjection>(logger, monitorRepository, exchangeRepository, currencyService);

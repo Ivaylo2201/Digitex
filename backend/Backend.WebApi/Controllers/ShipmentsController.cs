@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Shipment;
+﻿using Backend.Application.Contracts.Shipment.ListShipments;
 using Backend.Application.Interfaces;
 using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +10,7 @@ namespace Backend.WebApi.Controllers;
 public class ShipmentsController(IShipmentService shipmentService) : ControllerBase
 {
     [HttpGet]
-    [ProducesResponseType<List<ShipmentDto>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<List<ShipmentProjection>>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync(CancellationToken stoppingToken = default)

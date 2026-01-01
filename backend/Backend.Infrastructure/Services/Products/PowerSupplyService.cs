@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
@@ -10,4 +10,4 @@ public class PowerSupplyService(
     ILogger<PowerSupplyService> logger,
     IProductRepository<PowerSupply> powerSupplyRepository,
     IExchangeRepository exchangeRateRepository,
-    ICurrencyService currencyService) : ProductServiceBase<PowerSupply, PowerSupplyDto>(logger, powerSupplyRepository, exchangeRateRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<PowerSupply, PowerSupplyProjection>(logger, powerSupplyRepository, exchangeRateRepository, currencyService);

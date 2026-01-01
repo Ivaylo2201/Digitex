@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Chatbot;
+﻿using Backend.Application.Contracts.Chatbot.PromptChatbot;
 using Backend.Domain.Common;
 
 namespace Backend.Application.Interfaces;

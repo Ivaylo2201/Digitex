@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
@@ -10,4 +10,4 @@ public class SsdService(
     ILogger<SsdService> logger, 
     IProductRepository<Ssd> ssdRepository, 
     IExchangeRepository exchangeRateRepository,
-    ICurrencyService currencyService) : ProductServiceBase<Ssd, SsdDto>(logger, ssdRepository, exchangeRateRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<Ssd, SsdProjection>(logger, ssdRepository, exchangeRateRepository, currencyService);

@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
@@ -10,4 +10,4 @@ public class RamService(
     ILogger<RamService> logger,
     IProductRepository<Ram> ramRepository,
     IExchangeRepository exchangeRateRepository,
-    ICurrencyService currencyService) : ProductServiceBase<Ram, RamDto>(logger, ramRepository, exchangeRateRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<Ram, RamProjection>(logger, ramRepository, exchangeRateRepository, currencyService);

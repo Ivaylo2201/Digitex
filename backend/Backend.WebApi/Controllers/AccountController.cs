@@ -1,4 +1,6 @@
-﻿using Backend.Application.Dtos.Accounts;
+﻿using Backend.Application.Contracts.Account.CompleteAccountVerification;
+using Backend.Application.Contracts.Account.CompletePasswordReset;
+using Backend.Application.Contracts.Account.RequestPasswordReset;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Http;
@@ -15,10 +17,12 @@ public class AccountController(IAccountService accountService) : ControllerBase
     [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> CompleteAccountVerificationAsync([FromBody] CompleteAccountVerificationDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> CompleteAccountVerificationAsync([FromBody] CompleteAccountVerificationRequest completeAccountVerificationRequest, CancellationToken cancellationToken = default)
     {
-        var result = await accountService.CompleteAccountVerificationAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new CompleteAccountVerificationResponse(result.Value.Token, result.Value.Role) : result.ErrorObject);
+        var result = await accountService.CompleteAccountVerificationAsync(completeAccountVerificationRequest, cancellationToken);
+        var response = new CompleteAccountVerificationResponse { Role = result.Value.Role, Token = result.Value.Token };
+        
+        return StatusCode(result.StatusCode, result.IsSuccess ? response : result.ErrorObject);
     }
 
     [HttpPost("request-password-reset")]
@@ -26,10 +30,12 @@ public class AccountController(IAccountService accountService) : ControllerBase
     [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> RequestPasswordResetAsync([FromBody] RequestPasswordResetDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> RequestPasswordResetAsync([FromBody] RequestPasswordResetRequest requestPasswordResetRequest, CancellationToken cancellationToken = default)
     {
-        var result = await accountService.RequestPasswordResetAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new RequestPasswordResetResponse(result.Value) : result.ErrorObject);
+        var result = await accountService.RequestPasswordResetAsync(requestPasswordResetRequest, cancellationToken);
+        var response = new RequestPasswordResetResponse { Message = result.Value };
+        
+        return StatusCode(result.StatusCode, result.IsSuccess ? response : result.ErrorObject);
     } 
     
     [HttpPatch("complete-password-reset")]
@@ -38,9 +44,11 @@ public class AccountController(IAccountService accountService) : ControllerBase
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> CompletePasswordResetAsync([FromBody] CompletePasswordResetDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> CompletePasswordResetAsync([FromBody] CompletePasswordResetRequest completePasswordResetRequest, CancellationToken cancellationToken = default)
     {
-        var result = await accountService.CompletePasswordResetAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new CompletePasswordResetResponse(result.Value) : result.ErrorObject);
+        var result = await accountService.CompletePasswordResetAsync(completePasswordResetRequest, cancellationToken);
+        var response = new CompletePasswordResetResponse { Message = result.Value };
+        
+        return StatusCode(result.StatusCode, result.IsSuccess ? response : result.ErrorObject);
     }
 }

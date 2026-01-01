@@ -1,4 +1,5 @@
-﻿using Backend.Application.Dtos.Chatbot;
+﻿using Backend.Application.Contracts.Chatbot;
+using Backend.Application.Contracts.Chatbot.PromptChatbot;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;

@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Domain.Entities;
@@ -9,5 +9,5 @@ namespace Backend.WebApi.Controllers.Products.Variants;
 
 [ApiController]
 [Route("api/products/[controller]")]
-public class RamsController(IProductService<Ram, RamDto> productService, IQueryBuilderService<Ram> queryBuilderService)
-    : ProductControllerBase<Ram, RamDto>(productService, queryBuilderService, ram => ram.Adapt<RamDto>());
+public class RamsController(IProductService<Ram, RamProjection> productService, IQueryBuilderService<Ram> queryBuilderService)
+    : ProductControllerBase<Ram, RamProjection>(productService, queryBuilderService, ram => ram.Adapt<RamProjection>());

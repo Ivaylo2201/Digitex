@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Domain.Entities;
@@ -9,5 +9,5 @@ namespace Backend.WebApi.Controllers.Products.Variants;
 
 [ApiController]
 [Route("api/products/[controller]")]
-public class MotherboardsController(IProductService<Motherboard, MotherboardDto> productService, IQueryBuilderService<Motherboard> queryBuilderService)
-    : ProductControllerBase<Motherboard, MotherboardDto>(productService, queryBuilderService, motherboard => motherboard.Adapt<MotherboardDto>());
+public class MotherboardsController(IProductService<Motherboard, MotherboardProjection> productService, IQueryBuilderService<Motherboard> queryBuilderService)
+    : ProductControllerBase<Motherboard, MotherboardProjection>(productService, queryBuilderService, motherboard => motherboard.Adapt<MotherboardProjection>());

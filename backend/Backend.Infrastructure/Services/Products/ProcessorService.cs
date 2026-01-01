@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
@@ -10,4 +10,4 @@ public class ProcessorService(
     ILogger<ProcessorService> logger,
     IProductRepository<Processor> processorRepository,
     IExchangeRepository exchangeRateRepository,
-    ICurrencyService currencyService) : ProductServiceBase<Processor, ProcessorDto>(logger, processorRepository, exchangeRateRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<Processor, ProcessorProjection>(logger, processorRepository, exchangeRateRepository, currencyService);

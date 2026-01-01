@@ -1,0 +1,12 @@
+﻿using Backend.Application.Contracts.Product.Base;
+using Backend.Domain.Enums;
+using Backend.Domain.ValueObjects;
+
+namespace Backend.Application.Contracts.Product.Variants;
+
+public record SsdProjection : ProductDetails
+{
+    public required int CapacityInGb { get; init; }
+    public required OperationSpeed OperationSpeed { get; init; }
+    public required StorageInterface Interface { get; init; }
+}

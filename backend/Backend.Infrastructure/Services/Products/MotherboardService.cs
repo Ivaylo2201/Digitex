@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
@@ -10,4 +10,4 @@ public class MotherboardService(
     ILogger<MotherboardService> logger,
     IProductRepository<Motherboard> motherboardRepository,
     IExchangeRepository exchangeRateRepository,
-    ICurrencyService currencyService) : ProductServiceBase<Motherboard, MotherboardDto>(logger, motherboardRepository, exchangeRateRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<Motherboard, MotherboardProjection>(logger, motherboardRepository, exchangeRateRepository, currencyService);

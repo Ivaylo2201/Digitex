@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Domain.Entities;
@@ -9,5 +9,5 @@ namespace Backend.WebApi.Controllers.Products.Variants;
 
 [ApiController]
 [Route("api/products/[controller]")]
-public class ProcessorsController(IProductService<Processor, ProcessorDto> productService, IQueryBuilderService<Processor> queryBuilderService) 
-    : ProductControllerBase<Processor, ProcessorDto>(productService, queryBuilderService, processor => processor.Adapt<ProcessorDto>());
+public class ProcessorsController(IProductService<Processor, ProcessorProjection> productService, IQueryBuilderService<Processor> queryBuilderService) 
+    : ProductControllerBase<Processor, ProcessorProjection>(productService, queryBuilderService, processor => processor.Adapt<ProcessorProjection>());

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Text;
-using Backend.Application.Dtos.Chatbot;
+using Backend.Application.Contracts.Chatbot;
 using Backend.Infrastructure.Http.Interfaces;
 using Newtonsoft.Json;
 

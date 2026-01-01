@@ -1,4 +1,5 @@
-﻿using Backend.Application.Dtos.Authentication;
+﻿using Backend.Application.Contracts.Authentication.SignIn;
+using Backend.Application.Contracts.Authentication.SignUp;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Http;
@@ -15,10 +16,12 @@ public class AuthenticationController(IAuthenticationService authenticationServi
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> SignUpAsync([FromBody] SignUpDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> SignUpAsync([FromBody] SignUpRequest signUpRequest, CancellationToken cancellationToken = default)
     {
-        var result = await authenticationService.SignUpAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new SignUpResponse(result.Value) : result.ErrorObject);
+        var result = await authenticationService.SignUpAsync(signUpRequest, cancellationToken);
+        var response = new SignUpResponse { Message = result.Value };
+        
+        return StatusCode(result.StatusCode, result.IsSuccess ? response : result.ErrorObject);
     }
 
     [HttpPost("sign-in")]
@@ -26,9 +29,11 @@ public class AuthenticationController(IAuthenticationService authenticationServi
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Consumes(Constants.ApplicationJson)]
     [Produces(Constants.ApplicationJson)]
-    public async Task<IActionResult> SignInAsync([FromBody] SignInDto body, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> SignInAsync([FromBody] SignInRequest signInRequest, CancellationToken cancellationToken = default)
     {
-        var result = await authenticationService.SignInAsync(body, stoppingToken);
-        return StatusCode(result.StatusCode, result.IsSuccess ? new SignInResponse(result.Value.Token, result.Value.Role) : result.ErrorObject);
+        var result = await authenticationService.SignInAsync(signInRequest, cancellationToken);
+        var response = new SignInResponse { Token = result.Value.Token, Role = result.Value.Role };
+        
+        return StatusCode(result.StatusCode, result.IsSuccess ? response : result.ErrorObject);
     }
 }

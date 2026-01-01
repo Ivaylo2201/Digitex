@@ -1,4 +1,5 @@
-﻿using Backend.Application.Dtos.Authentication;
+﻿using Backend.Application.Contracts.Authentication.SignIn;
+using Backend.Application.Contracts.Authentication.SignUp;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Email;
 using Backend.Application.Interfaces.Tokens;
@@ -25,14 +26,14 @@ public class AuthenticationService(
 {
     private const string Source = nameof(AuthenticationService);
     
-    public async Task<Result<string>> SignUpAsync(SignUpDto signUpDto, CancellationToken stoppingToken = default)
+    public async Task<Result<string>> SignUpAsync(SignUpRequest signUpRequest, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Validating SignUp request body...", Source);
-        var validationResult = await new SignUpValidator().ValidateAsync(signUpDto, stoppingToken);
+        var validationResult = await new SignUpValidator().ValidateAsync(signUpRequest, stoppingToken);
 
         if (!validationResult.IsValid)
         {
-            var serializedDto = JsonConvert.SerializeObject(signUpDto);
+            var serializedDto = JsonConvert.SerializeObject(signUpRequest);
             var errors = string.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage));
             
             logger.LogError("[{Source}]: Sign up validation failed for {SerializedDto}. Errors: {Errors}", Source, serializedDto, errors);
@@ -43,9 +44,9 @@ public class AuthenticationService(
         {
             var user = await userRepository.CreateAsync(new User
             {
-                Username = signUpDto.Username,
-                Password = signUpDto.Password,
-                Email = signUpDto.Email,
+                Username = signUpRequest.Username,
+                Password = signUpRequest.Password,
+                Email = signUpRequest.Email,
                 Cart = new Cart()
             }, stoppingToken);
             
@@ -60,21 +61,21 @@ public class AuthenticationService(
         }
     }
 
-    public async Task<Result<(string Token, Role Role)>> SignInAsync(SignInDto signInDto, CancellationToken stoppingToken = default)
+    public async Task<Result<(string Token, Role Role)>> SignInAsync(SignInRequest signInRequest, CancellationToken stoppingToken = default)
     {
         logger.LogInformation("[{Source}]: Validating SignIn request body...", Source);
-        var validationResult = await new SignInValidator().ValidateAsync(signInDto, stoppingToken);
+        var validationResult = await new SignInValidator().ValidateAsync(signInRequest, stoppingToken);
 
         if (!validationResult.IsValid)
         {
-            var serializedDto = JsonConvert.SerializeObject(signInDto);
+            var serializedDto = JsonConvert.SerializeObject(signInRequest);
             var errors = string.Join(", ", validationResult.Errors.Select(error => error.ErrorMessage));
             
             logger.LogError("[{Source}]: Sign in validation failed for {SerializedDto}. Errors: {Errors}", Source, serializedDto, errors);
             return Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.ValidationFailed, validationResult.Errors.ToObject());
         }
 
-        var user = await userRepository.GetOneByCredentialsAsync(signInDto.Email, signInDto.Password, stoppingToken);
+        var user = await userRepository.GetOneByCredentialsAsync(signInRequest.Email, signInRequest.Password, stoppingToken);
 
         return user is null ?
             Result<(string, Role)>.Failure(StatusCodes.Status400BadRequest, ErrorType.InvalidCredentials) :

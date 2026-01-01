@@ -1,10 +1,7 @@
-﻿using Backend.Application.Dtos;
+﻿using Backend.Application.Contracts.Currency.ListCurrencies;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
-using Backend.Domain.Entities;
-using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
-using Backend.Infrastructure.Common;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -15,24 +12,14 @@ public class CurrencyService(ILogger<CurrencyService> logger, ICurrencyRepositor
 {
     private const string Source = nameof(CurrencyService);
     
-    public async Task<Result<List<CurrencyDto>>> ListAllAsync(CancellationToken stoppingToken = default)
+    public async Task<Result<List<CurrencyProjection>>> ListAllAsync(CancellationToken stoppingToken = default)
     {
         var currencies = await currencyRepository.ListAllAsync(null, stoppingToken);
         
-        logger.LogInformation("[{Source}]: Projecting {Count} Currency entities into {Projection}...", Source, currencies.Count, nameof(CurrencyDto));
-        var projections = currencies.Select(currency => currency.Adapt<CurrencyDto>()).ToList();
+        logger.LogInformation("[{Source}]: Projecting {Count} Currency entities into {Projection}...", Source, currencies.Count, nameof(CurrencyProjection));
+        var projections = currencies.Adapt<List<CurrencyProjection>>();
 
-        return Result<List<CurrencyDto>>.Success(StatusCodes.Status200OK, projections);
-    }
-
-    public async Task<List<T>> ConvertPrices<T>(IEnumerable<T> entities, CurrencyIsoCode toCurrency, Action<T> mutate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<T> ConvertPrice<T>(T entity, CurrencyIsoCode toCurrency, Action<T> mutate)
-    {
-        throw new NotImplementedException();
+        return Result<List<CurrencyProjection>>.Success(StatusCodes.Status200OK, projections);
     }
 
     public List<T> ConvertPrices<T>(IEnumerable<T> entities, Action<T> mutate)

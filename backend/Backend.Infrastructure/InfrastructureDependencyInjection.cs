@@ -3,11 +3,9 @@ using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using Backend.Application.Contracts.Cart.GetCart;
-using Backend.Application.Dtos.Filters;
-using Backend.Application.Dtos.Product;
-using Backend.Application.Dtos.Products;
-using Backend.Application.Dtos.Review;
-using Backend.Application.Extensions;
+using Backend.Application.Contracts.Filters;
+using Backend.Application.Contracts.Product.Base;
+using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Email;
 using Backend.Application.Interfaces.FiltersProvider;
@@ -155,14 +153,13 @@ public static class InfrastructureDependencyInjection
         private IServiceCollection AddServices() => services
             .AddEmail()
             .AddScoped<IChatbotService, ChatbotService>()
-            .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
-            .AddScoped<IProductService<Ram, RamDto>, RamService>()
-            .AddScoped<IProductService<Processor, ProcessorDto>, ProcessorService>()
-            .AddScoped<IProductService<GraphicsCard, GraphicsCardDto>, GraphicsCardService>()
-            .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
-            .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
-            .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
-            .AddScoped<IReviewService, ReviewService>()
+            .AddScoped<IProductService<Monitor, MonitorProjection>, MonitorService>()
+            .AddScoped<IProductService<Ram, RamProjection>, RamService>()
+            .AddScoped<IProductService<Processor, ProcessorProjection>, ProcessorService>()
+            .AddScoped<IProductService<GraphicsCard, GraphicsCardProjection>, GraphicsCardService>()
+            .AddScoped<IProductService<Ssd, SsdProjection>, SsdService>()
+            .AddScoped<IProductService<Motherboard, MotherboardProjection>, MotherboardService>()
+            .AddScoped<IProductService<PowerSupply, PowerSupplyProjection>, PowerSupplyService>()
             .AddScoped<IAuthenticationService, AuthenticationService>()
             .AddScoped<IAccountService, AccountService>()
             .AddScoped<IStripeService, StripeService>()
@@ -192,7 +189,7 @@ public static class InfrastructureDependencyInjection
 
         private static void AddMapsterConfigurations()
         {
-            TypeAdapterConfig<ProductBase, ProductShortDto>.NewConfig()
+            TypeAdapterConfig<ProductBase, ProductSummary>.NewConfig()
                 .Map(destination => destination.BrandName, source => source.Brand.BrandName)
                 .Map(destination => destination.Price, source => new Price
                 {
@@ -213,23 +210,17 @@ public static class InfrastructureDependencyInjection
                 })
                 .Map(destination => destination.LineTotal, source => source.Product.Price * source.Quantity);
 
-            TypeAdapterConfig<ProductBase, ProductLongDto>.NewConfig().Inherits<ProductBase, ProductShortDto>()
+            TypeAdapterConfig<ProductBase, ProductDetails>.NewConfig().Inherits<ProductBase, ProductSummary>()
                 .Map(destination => destination.Sku, source => source.Sku.ToUpper())
-                .Map(destination => destination.TotalReviews, source => source.Reviews.Count)
-                .Map(destination => destination.RecentReviews, source => source.Reviews
-                    .OrderByDescending(r => r.CreatedAt)
-                    .Take(25)
-                    .Adapt<List<ReviewDto>>())
-                .Map(destination => destination.SuggestedProducts,
-                    source => source.Suggestions.Select(suggestion => suggestion.ToSuggestionDto()));
+                .Map(destination => destination.TotalReviews, source => source.Reviews.Count);
         
-            TypeAdapterConfig<Processor, ProcessorDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-            TypeAdapterConfig<GraphicsCard, GraphicsCardDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-            TypeAdapterConfig<Monitor, MonitorDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-            TypeAdapterConfig<Motherboard, MotherboardDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-            TypeAdapterConfig<PowerSupply, PowerSupplyDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-            TypeAdapterConfig<Ram, RamDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
-            TypeAdapterConfig<Ssd, SsdDto>.NewConfig().Inherits<ProductBase, ProductLongDto>();
+            TypeAdapterConfig<Processor, ProcessorProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<GraphicsCard, GraphicsCardProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Monitor, MonitorProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Motherboard, MotherboardProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<PowerSupply, PowerSupplyProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Ram, RamProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Ssd, SsdProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
         }
 
         private IServiceCollection AddEmail()

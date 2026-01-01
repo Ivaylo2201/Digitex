@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Products;
+﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Domain.Entities;
@@ -9,5 +9,5 @@ namespace Backend.WebApi.Controllers.Products.Variants;
 
 [ApiController]
 [Route("api/products/power-supplies")]
-public class PowerSuppliesController(IProductService<PowerSupply, PowerSupplyDto> productService, IQueryBuilderService<PowerSupply> queryBuilderService) 
-    : ProductControllerBase<PowerSupply, PowerSupplyDto>(productService, queryBuilderService, powerSupply => powerSupply.Adapt<PowerSupplyDto>());
+public class PowerSuppliesController(IProductService<PowerSupply, PowerSupplyProjection> productService, IQueryBuilderService<PowerSupply> queryBuilderService) 
+    : ProductControllerBase<PowerSupply, PowerSupplyProjection>(productService, queryBuilderService, powerSupply => powerSupply.Adapt<PowerSupplyProjection>());

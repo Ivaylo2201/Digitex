@@ -1,4 +1,7 @@
-﻿using Backend.Application.Dtos.Stripe;
+﻿using Backend.Application.Contracts.Stripe;
+using Backend.Application.Contracts.Stripe.CreatePaymentIntent;
+using Backend.Application.Contracts.Stripe.GetPublishableKey;
+using Backend.Application.Contracts.Stripe.ProcessWebhook;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;
@@ -27,10 +30,12 @@ public class StripeController : ControllerBase
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public async Task<IActionResult> CreatePaymentIntentAsync()
+    public async Task<IActionResult> CreatePaymentIntentAsync(CancellationToken cancellationToken)
     {
-        var result = await _stripeService.CreatePaymentIntentAsync(User.GetId());
-        return StatusCode(result.StatusCode, result.IsSuccess ? new CreatePaymentIntentResponse(result.Value) : result.ErrorObject);
+        var result = await _stripeService.CreatePaymentIntentAsync(User.GetId(), cancellationToken);
+        var response = new CreatePaymentIntentResponse { ClientSecret = result.Value };
+        
+        return StatusCode(result.StatusCode, result.IsSuccess ? response : result.ErrorObject);
     }
 
     [HttpPost("webhook")]
@@ -48,11 +53,18 @@ public class StripeController : ControllerBase
         var result = await _stripeService.ProcessWebhookAsync(json, Request.Headers);
         return StatusCode(result.StatusCode, result.IsSuccess ? new ProcessWebhookResponse() : result.ErrorObject);
     }
-    
+
     [HttpGet("publishable-key")]
     [ProducesResponseType<GetPublishableKeyResponse>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public IActionResult GetPublishableKey() 
-        => Ok(new GetPublishableKeyResponse("STRIPE_PUBLISHABLE_KEY".GetRequiredEnvironmentVariable()));
+    public IActionResult GetPublishableKey()
+    {
+        var response = new GetPublishableKeyResponse
+        {
+            PublishableKey = "STRIPE_PUBLISHABLE_KEY".GetRequiredEnvironmentVariable()
+        };
+        
+        return Ok(response);
+    }
 }

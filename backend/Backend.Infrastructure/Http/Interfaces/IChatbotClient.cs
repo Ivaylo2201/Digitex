@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Chatbot;
+﻿using Backend.Application.Contracts.Chatbot;
 
 namespace Backend.Infrastructure.Http.Interfaces;
 

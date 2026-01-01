@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Product;
+﻿using Backend.Application.Contracts.Product.Base;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
@@ -37,7 +37,7 @@ public class ProductServiceBase<TProduct, TProjection>(
         return Result<TProjection?>.Success(StatusCodes.Status200OK, projection);
     }
 
-    public async Task<Result<PaginatedResponse<IReadOnlyList<ProductShortDto>>>> ListAllAsync(int page, int pageSize, Query<TProduct> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
+    public async Task<Result<PaginatedResponse<IReadOnlyList<ProductSummary>>>> ListAllAsync(int page, int pageSize, Query<TProduct> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var entities = await productRepository.ListAllAsync(page, pageSize, query, stoppingToken);
@@ -46,21 +46,19 @@ public class ProductServiceBase<TProduct, TProjection>(
         
         var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken);
 
-        var projections = entities.Select(entity =>
-        {
-            entity.InitialPrice *= rate;
-            return entity.Adapt<ProductShortDto>();
-        }).ToList();
+        var projections = currencyService
+            .ConvertPrices(entities, entity => entity.InitialPrice *= rate)
+            .Adapt<IReadOnlyList<ProductSummary>>();
         
         var totalItems = await productRepository.CountAsync(query, stoppingToken);
 
-        var response = new PaginatedResponse<IReadOnlyList<ProductShortDto>>
+        var response = new PaginatedResponse<IReadOnlyList<ProductSummary>>
         {
             Items = projections,
             TotalItems = totalItems,
             TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
         };
 
-        return Result<PaginatedResponse<IReadOnlyList<ProductShortDto>>>.Success(StatusCodes.Status200OK, response);
+        return Result<PaginatedResponse<IReadOnlyList<ProductSummary>>>.Success(StatusCodes.Status200OK, response);
     }
 }

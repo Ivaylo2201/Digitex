@@ -1,9 +1,9 @@
-﻿using Backend.Application.Dtos.Authentication;
+﻿using Backend.Application.Contracts.Authentication.SignUp;
 using FluentValidation;
 
 namespace Backend.Application.Validators;
 
-public class SignUpValidator : AbstractValidator<SignUpDto>
+public class SignUpValidator : AbstractValidator<SignUpRequest>
 {
     public SignUpValidator()
     {

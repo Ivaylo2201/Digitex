@@ -1,4 +1,4 @@
-﻿using Backend.Application.Dtos.Product;
+﻿using Backend.Application.Contracts.Product.Base;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Domain.Common;
@@ -25,7 +25,7 @@ public abstract class ProductControllerBase<TProduct, TProjection>(
     }
     
     [HttpGet]
-    [ProducesResponseType<List<ProductShortDto>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<List<ProductSummary>>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync(int page, int pageSize, string currency, [FromQuery] IDictionary<string, string> criteria, CancellationToken stoppingToken = default)
