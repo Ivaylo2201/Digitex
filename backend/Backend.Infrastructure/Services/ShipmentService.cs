@@ -1,24 +1,19 @@
-﻿using Backend.Application.Contracts.Shipment.ListShipments;
+﻿using Backend.Application.Contracts.Shipment;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces;
 using Mapster;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services;
 
-public class ShipmentService(ILogger<ShipmentService> logger, IShipmentRepository shipmentRepository) : IShipmentService
+public class ShipmentService(IShipmentRepository shipmentRepository) : IShipmentService
 {
-    private const string Source = nameof(ShipmentService);
-    
-    public async Task<Result<List<ShipmentProjection>>> ListAllAsync(CancellationToken stoppingToken = default)
+    public async Task<Result<IReadOnlyList<ShipmentDto>>> GetShipmentsAsync(CancellationToken cancellationToken = default)
     {
-        var shipments = await shipmentRepository.ListAllAsync(stoppingToken: stoppingToken);
+        var shipments = await shipmentRepository.ListAllAsync(cancellationToken: cancellationToken);
+        var projections = shipments.Adapt<IReadOnlyList<ShipmentDto>>();
         
-        logger.LogInformation("[{Source}]: Projecting {Count} Shipment entities into ShipmentDto...", Source, shipments.Count);
-        var projections = shipments.Adapt<List<ShipmentProjection>>();
-        
-        return Result<List<ShipmentProjection>>.Success(StatusCodes.Status200OK, projections);   
+        return Result<IReadOnlyList<ShipmentDto>>.Success(StatusCodes.Status200OK, projections);   
     }
 }

@@ -17,9 +17,4 @@
       <ProjectReference Include="..\Backend.Domain\Backend.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Contracts\Review\AddReview\" />
-      <Folder Include="Contracts\Review\ListReviews\" />
-    </ItemGroup>
-
 </Project>

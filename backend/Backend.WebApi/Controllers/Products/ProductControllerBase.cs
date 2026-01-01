@@ -1,4 +1,4 @@
-﻿using Backend.Application.Contracts.Product.Base;
+﻿using Backend.Application.Contracts.Product;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.QueryBuilder;
 using Backend.Domain.Common;

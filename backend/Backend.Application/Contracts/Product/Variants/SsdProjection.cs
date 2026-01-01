@@ -1,5 +1,4 @@
-﻿using Backend.Application.Contracts.Product.Base;
-using Backend.Domain.Enums;
+﻿using Backend.Domain.Enums;
 using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.Contracts.Product.Variants;

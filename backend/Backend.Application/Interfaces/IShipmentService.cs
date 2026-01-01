@@ -1,9 +1,9 @@
-﻿using Backend.Application.Contracts.Shipment.ListShipments;
+﻿using Backend.Application.Contracts.Shipment;
 using Backend.Domain.Common;
 
 namespace Backend.Application.Interfaces;
 
 public interface IShipmentService
 {
-    Task<Result<List<ShipmentProjection>>> ListAllAsync(CancellationToken stoppingToken = default);
+    Task<Result<IReadOnlyList<ShipmentDto>>> GetShipmentsAsync(CancellationToken cancellationToken = default);
 }

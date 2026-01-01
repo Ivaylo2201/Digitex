@@ -4,7 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using Backend.Application.Contracts.Cart.GetCart;
 using Backend.Application.Contracts.Filters;
-using Backend.Application.Contracts.Product.Base;
+using Backend.Application.Contracts.Product;
 using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Email;

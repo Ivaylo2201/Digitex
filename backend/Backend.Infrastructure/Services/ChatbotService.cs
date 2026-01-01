@@ -15,7 +15,7 @@ public class ChatbotService(ILogger<ChatbotService> logger, IChatbotClient chatb
     
     public async Task<Result<string>> PromptChatbotAsync(PromptChatbotRequest promptChatbotRequest, CancellationToken stoppingToken = default)
     {
-        logger.LogInformation("[{Source}]: Building context prompt with {MessageCount} messages...", Source, promptChatbotRequest.Messages.Count);
+        logger.LogInformation("[{Source}]: Prompting AI endpoint with {MessageCount} messages...", Source, promptChatbotRequest.Messages.Count);
         var promptWithContext = string.Join("\n", promptChatbotRequest.Messages.Select(message => $"{message.Sender}: {message.Content}"));
         var chatbotRequest = new ChatbotRequest { Message = promptWithContext };
         

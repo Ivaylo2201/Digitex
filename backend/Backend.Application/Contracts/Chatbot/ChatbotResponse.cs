@@ -3,5 +3,4 @@
 public record ChatbotResponse
 {
     public required string Response { get; init; }
-    public string? Status { get; init; }
 }

@@ -1,4 +1,4 @@
-﻿using Backend.Application.Contracts.Product.Base;
+﻿using Backend.Application.Contracts.Product;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;

@@ -1,3 +1,3 @@
 ﻿namespace Backend.Application.Contracts.Cart.AddToCart;
 
-public record AddToCartResponse();
+public record AddToCartResponse;

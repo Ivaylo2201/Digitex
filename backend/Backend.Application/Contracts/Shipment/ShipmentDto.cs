@@ -1,8 +1,8 @@
 ﻿using Backend.Domain.Enums;
 
-namespace Backend.Application.Contracts.Shipment.ListShipments;
+namespace Backend.Application.Contracts.Shipment;
 
-public record ShipmentProjection
+public record ShipmentDto
 {
     public required int Id { get; set; }
     public required ShipmentType ShipmentType { get; init; }

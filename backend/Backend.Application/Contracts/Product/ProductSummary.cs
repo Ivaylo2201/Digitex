@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.ValueObjects;
 
-namespace Backend.Application.Contracts.Product.Base;
+namespace Backend.Application.Contracts.Product;
 
 public record ProductSummary
 {

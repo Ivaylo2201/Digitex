@@ -16,10 +16,10 @@ public class CartsController(ICartService cartService) : ControllerBase
     [Authorize]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public async Task<IActionResult> AddToCartAsync([FromBody] AddToCartRequest request, CancellationToken stoppingToken = default)
+    public async Task<IActionResult> AddToCartAsync([FromBody] AddToCartRequest addToCartRequest, CancellationToken stoppingToken = default)
     {
-        request.UserId = User.GetId();
-        var result = await cartService.AddToCartAsync(request, stoppingToken);
+        addToCartRequest.UserId = User.GetId();
+        var result = await cartService.AddToCartAsync(addToCartRequest, stoppingToken);
         return StatusCode(result.StatusCode, result.IsSuccess ? result.Value : result.ErrorObject);
     }
     

@@ -2,6 +2,6 @@
 
 public record GetCartResponse
 {
-    public required List<ItemProjection> Items { get; init; }
+    public required IReadOnlyList<ItemProjection> Items { get; init; }
     public required decimal TotalPrice { get; init; }
 }

@@ -1,4 +1,4 @@
-﻿namespace Backend.Application.Contracts.Product.Base;
+﻿namespace Backend.Application.Contracts.Product;
 
 public record ProductDetails : ProductSummary
 {

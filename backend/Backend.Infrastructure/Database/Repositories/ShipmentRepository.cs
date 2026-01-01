@@ -7,6 +7,6 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class ShipmentRepository(DatabaseContext context) : IShipmentRepository
 {
-    public async Task<List<Shipment>> ListAllAsync(Query<Shipment>? filter = null, CancellationToken stoppingToken = default)
-        => await context.Shipments.AsNoTracking().ToListAsync(stoppingToken);
+    public async Task<List<Shipment>> ListAllAsync(Query<Shipment>? filter = null, CancellationToken cancellationToken = default)
+        => await context.Shipments.AsNoTracking().ToListAsync(cancellationToken);
 }
