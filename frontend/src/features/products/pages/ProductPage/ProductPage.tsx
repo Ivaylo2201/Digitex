@@ -27,7 +27,7 @@ export function ProductPage<T extends ProductLong>({
   product,
   onFormatSpecifications,
 }: ProductPageProps<T>) {
-  const quantityControl = useQuantityControl(product?.quantity ?? 0);
+  const quantityControl = useQuantityControl(1, product?.quantity ?? 0);
 
   const {
     components: { productPage },

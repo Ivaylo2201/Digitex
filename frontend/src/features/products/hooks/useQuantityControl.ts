@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
-export function useQuantityControl(maxQuantity: number) {
-  const [quantity, setQuantity] = useState(1);
+export function useQuantityControl(
+  initialQuantity: number,
+  maxQuantity: number
+) {
+  const [quantity, setQuantity] = useState(initialQuantity);
 
   const handleQuantityIncrease = () => {
     setQuantity((previousQuantity) =>

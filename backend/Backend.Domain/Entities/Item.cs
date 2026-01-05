@@ -5,7 +5,7 @@ public class Item
     public int Id { get; init; }
     public Guid ProductId { get; init; }
     public ProductBase Product { get; init; } = null!;
-    public required int Quantity { get; init; }
+    public required int Quantity { get; set; }
     public int? CartId { get; set; }
     public Cart Cart { get; set; } = null!;
     public int? OrderId { get; set; }

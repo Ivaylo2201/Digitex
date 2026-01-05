@@ -1,5 +1,7 @@
 ﻿using Backend.Application.Contracts.Cart.AddToCart;
 using Backend.Application.Contracts.Cart.GetCart;
+using Backend.Application.Contracts.Cart.RemoveFromCart;
+using Backend.Application.Contracts.Cart.UpdateItemQuantity;
 using Backend.Application.Extensions;
 using Backend.Application.Interfaces;
 using Backend.Application.Validators;
@@ -19,7 +21,8 @@ public class CartService(
     ICurrencyService currencyService,
     ICartRepository cartRepository,
     IUserRepository userRepository,
-    IExchangeRepository exchangeRepository) : ICartService
+    IExchangeRepository exchangeRepository,
+    IItemRepository itemRepository) : ICartService
 {
     private const string Source = nameof(CartService);
 
@@ -64,5 +67,53 @@ public class CartService(
             Items = converted.Adapt<List<ItemProjection>>(),
             TotalPrice = cart.Items.Sum(item => item.Price)
         });
+    }
+
+    public async Task<Result> RemoveFromCartAsync(RemoveFromCartRequest removeFromCartRequest, CancellationToken cancellationToken)
+    {
+        var hasPermission = await HasItemPermissionAsync(removeFromCartRequest.ItemId, removeFromCartRequest.UserId, cancellationToken);
+        
+        if (!hasPermission.IsSuccess)
+            return hasPermission;
+
+        await itemRepository.DeleteAsync(removeFromCartRequest.ItemId, cancellationToken);
+        return Result.Success(StatusCodes.Status204NoContent);
+    }
+
+    public async Task<Result> UpdateItemQuantityAsync(UpdateItemQuantityRequest updateItemQuantityRequest, CancellationToken cancellationToken)
+    {
+        var hasPermission = await HasItemPermissionAsync(updateItemQuantityRequest.ItemId, updateItemQuantityRequest.UserId, cancellationToken);
+        
+        if (!hasPermission.IsSuccess)
+            return hasPermission;
+        
+        var product = (await itemRepository.GetOneByIdWithProductAsync(updateItemQuantityRequest.ItemId, cancellationToken))?.Product;
+        
+        if (product is null)
+            return Result.Failure(StatusCodes.Status404NotFound);
+        
+        if (product.Quantity < updateItemQuantityRequest.NewQuantity)
+            return Result.Failure(StatusCodes.Status400BadRequest);
+
+        await itemRepository.UpdateQuantityAsync(
+            updateItemQuantityRequest.ItemId,
+            updateItemQuantityRequest.NewQuantity,
+            cancellationToken);
+
+        return Result.Success(StatusCodes.Status200OK);
+    }
+
+    private async Task<Result> HasItemPermissionAsync(int itemId, int userId, CancellationToken cancellationToken)
+    {
+        var user = await userRepository.GetOneAsync(userId, cancellationToken);
+        var item = await itemRepository.GetOneByIdWithCartAsync(itemId, cancellationToken);
+        
+        if (user is null || item is null)
+            return Result.Failure(StatusCodes.Status404NotFound);
+            
+        if (item.Cart.User.Id != userId)
+            return Result.Failure(StatusCodes.Status403Forbidden);
+        
+        return Result.Success(StatusCodes.Status200OK);
     }
 }
