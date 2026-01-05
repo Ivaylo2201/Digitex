@@ -12,6 +12,7 @@ import { ProductPageResolver } from './features/products/pages/ProductPage/Produ
 import { AccountVerificationPage } from './features/account/pages/AccountVerificationPage';
 import { RequestPasswordResetPage } from './features/account/pages/RequestPasswordResetPage';
 import { CompletePasswordResetPage } from './features/account/pages/CompletePasswordResetPage';
+import { CheckoutPage } from './features/checkout/pages/CheckoutPage';
 
 export function Router() {
   return (
@@ -55,6 +56,14 @@ export function Router() {
           element={
             <AuthenticationRequired>
               <CartPage />
+            </AuthenticationRequired>
+          }
+        />
+        <Route
+          path='/checkout'
+          element={
+            <AuthenticationRequired>
+              <CheckoutPage />
             </AuthenticationRequired>
           }
         />

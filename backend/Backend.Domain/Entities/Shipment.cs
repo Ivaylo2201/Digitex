@@ -8,7 +8,7 @@ public class Shipment
 {
     public int Id { get; set; }
     public required ShipmentType ShipmentType { get; init; }
-    public required int Cost { get; init; }
+    public required decimal Cost { get; set; }
     public required int Days { get; init; }
     public ICollection<Order> Orders { get; init; } = [];   
 }

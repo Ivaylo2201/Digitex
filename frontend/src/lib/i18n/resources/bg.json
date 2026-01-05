@@ -20,6 +20,13 @@
     }
   },
   "components": {
+    "cartPage": {
+      "price": "Цена",
+      "quantity": "Количество",
+      "product": "Продукт",
+      "subtotal": "Междинна сума",
+      "proceedToCheckout": "Премини към плащане"
+    },
     "chatbot": {
       "typeYourMessage": "Напиши своето съобщение..."
     },

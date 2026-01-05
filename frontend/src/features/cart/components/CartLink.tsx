@@ -1,12 +1,16 @@
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../hooks/useCart';
 
 export function CartLink() {
-  const { cart } = { cart: { items: [{}] } }; //useCart();
+  const { data: cart } = useCart();
   const {
-    components: { cartLink }
+    components: { cartLink },
   } = useTranslation();
+
+  const itemsCount =
+    cart?.items.map((item) => item.quantity).reduce((a, b) => a + b, 0) ?? 0;
 
   return (
     <Link
@@ -15,11 +19,12 @@ export function CartLink() {
     >
       <div className='relative'>
         <ShoppingCart size={19} />
-        {cart.items.length > 0 && (
-          <span className='size-4.5 flex justify-center items-center absolute -top-3 -right-4 rounded-full bg-theme-crimson text-[11px] text-theme-white font-Montserrat'>
-            {cart.items.length}
-          </span>
-        )}
+        <span
+          className={`size-4.5 flex justify-center items-center absolute -top-3 -right-4 rounded-full bg-theme-crimson text-[11px] text-theme-white font-Montserrat
+    ${itemsCount > 0 ? 'block' : 'hidden'}`}
+        >
+          {itemsCount}
+        </span>
       </div>
       <span className='text-theme-white text-xs font-Montserrat'>
         {cartLink.cart}

@@ -15,7 +15,11 @@ httpClient.interceptors.request.use((config) => {
 httpClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === unauthorized) {
+    if (
+      error.response &&
+      error.response.status === unauthorized &&
+      window.location.pathname !== '/auth/sign-in'
+    ) {
       localStorage.removeItem('token');
       sessionStorage.removeItem('token');
       window.location.href = '/auth/sign-in';

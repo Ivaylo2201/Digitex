@@ -1,7 +1,7 @@
 import { useTranslation } from "@/features/language/hooks/useTranslation";
 import type { ApiError } from "@/lib/api/ApiError";
 import { httpClient } from "@/lib/api/httpClient";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import { toast } from "sonner";
 
@@ -13,11 +13,15 @@ async function addToCart(data: UseAddToCartRequest) {
 }
 
 export function useAddToCart() {
+  const queryClient = useQueryClient();
   const { hooks } = useTranslation();
 
   return useMutation<AxiosResponse, ApiError, UseAddToCartRequest>({
     mutationFn: addToCart,
-    onSuccess: () => toast.success(hooks.useAddToCart.productSuccessfullyAddedToCart),
+    onSuccess: () => {
+      toast.success(hooks.useAddToCart.productSuccessfullyAddedToCart)
+      queryClient.invalidateQueries({ queryKey: ['cart'] });
+    },
     onError: () => toast.error(hooks.generic.somethingWentWrong)
   });
 }

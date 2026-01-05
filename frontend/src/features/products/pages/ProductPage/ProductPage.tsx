@@ -108,9 +108,9 @@ export function ProductPage<T extends ProductLong>({
         </div>
 
         <SuggestedProductsSection
-          suggestedProducts={product.suggestedProducts}
+          suggestedProducts={[]}
         />
-        <ReviewsSection reviews={product.recentReviews} />
+        <ReviewsSection reviews={[]} />
       </section>
     </Page>
   );

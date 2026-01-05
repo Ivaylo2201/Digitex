@@ -203,6 +203,7 @@ public static class InfrastructureDependencyInjection
                 .Map(destination => destination.Product, source => new ProductProjection
                 {
                     Sku = source.Product.Sku,
+                    StockQuantity = source.Product.Quantity,
                     BrandName = source.Product.Brand.BrandName,
                     ModelName = source.Product.ModelName,
                     Price = source.Product.Price,

@@ -14,7 +14,6 @@ type Category =
 
 async function fetchFilters<T>(category: Category) {
   const res = await httpClient.get<T>(`/filters/${category}`);
-  console.log(res.data)
   return res.data;
 }
 

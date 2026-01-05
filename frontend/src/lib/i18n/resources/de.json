@@ -20,6 +20,13 @@
     }
   },
   "components": {
+    "cartPage": {
+      "price": "Preis",
+      "quantity": "Menge",
+      "product": "Produkt",
+      "subtotal": "Zwischensumme",
+      "proceedToCheckout": "Zur Kasse gehen"
+    },
     "chatbot": {
       "typeYourMessage": "Gib deine Nachricht ein..."
     },
