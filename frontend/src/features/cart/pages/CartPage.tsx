@@ -13,6 +13,8 @@ import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router';
 import { ItemRow } from '../components/ItemRow';
+import { EmptyComparePage } from '@/features/compare/pages/EmptyComparePage';
+import { EmptyCartPage } from './EmptyCartPage';
 
 export function CartPage() {
   const { data: cart } = useCart();
@@ -27,6 +29,10 @@ export function CartPage() {
         <Loader />
       </Page>
     );
+  }
+
+  if (cart.items.length === 0) {
+    return <EmptyCartPage />;
   }
 
   return (

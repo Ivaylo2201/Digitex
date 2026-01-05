@@ -20,6 +20,12 @@
     }
   },
   "components": {
+    "emptyCartPage": {
+      "yourCartIsEmpty": "Вашата количка е празна",
+      "youHaveNotAddedAnyItemsInYourCart": "Все още не сте добавили артикули в количката",
+      "GetStartedByAddingAnItem": "Започнете, като добавите артикул",
+      "AddItems": "Добави артикули"
+    },
     "cartPage": {
       "price": "Цена",
       "quantity": "Количество",

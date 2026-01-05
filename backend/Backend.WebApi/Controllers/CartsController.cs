@@ -3,6 +3,7 @@ using Backend.Application.Contracts.Cart.GetCart;
 using Backend.Application.Contracts.Cart.RemoveFromCart;
 using Backend.Application.Contracts.Cart.UpdateItemQuantity;
 using Backend.Application.Interfaces;
+using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Authorization;
@@ -16,6 +17,9 @@ public class CartsController(ICartService cartService) : ControllerBase
 {
     [HttpPost]
     [Authorize]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<AddToCartResponse>(StatusCodes.Status201Created)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> AddToCartAsync([FromBody] AddToCartRequest addToCartRequest, CancellationToken cancellationToken = default)
@@ -27,6 +31,8 @@ public class CartsController(ICartService cartService) : ControllerBase
     
     [HttpGet]
     [Authorize]
+    [ProducesResponseType<ErrorObject>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<GetCartResponse>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> GetCartAsync(string currency, CancellationToken cancellationToken = default)

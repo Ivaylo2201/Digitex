@@ -20,6 +20,12 @@
     }
   },
   "components": {
+    "emptyCartPage": {
+      "yourCartIsEmpty": "Ihr Warenkorb ist leer",
+      "youHaveNotAddedAnyItemsInYourCart": "Sie haben noch keine Artikel in Ihren Warenkorb gelegt",
+      "GetStartedByAddingAnItem": "Beginnen Sie, indem Sie einen Artikel hinzufügen",
+      "AddItems": "Artikel hinzufügen"
+    },
     "cartPage": {
       "price": "Preis",
       "quantity": "Menge",
