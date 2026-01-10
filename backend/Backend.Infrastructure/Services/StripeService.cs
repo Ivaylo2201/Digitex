@@ -64,38 +64,59 @@ public class StripeService(
 
     public async Task<Result<string>> CreatePaymentIntentAsync(int userId, CancellationToken stoppingToken = default)
     {
-        var cart = await cartRepository.GetCartAsync(userId, stoppingToken);
+        // var cart = await cartRepository.GetCartAsync(userId, stoppingToken);
+        //
+        // if (cart is null || cart.Items.Count is 0)
+        //     return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.General);
+        //
+        // var paymentIntentService = new PaymentIntentService();
+        //
+        // try
+        // {
+        //     var paymentIntentOptions = new PaymentIntentCreateOptions
+        //     {
+        //         Amount = (long)cart.Items.Sum(item => item.Price) * 100,
+        //         Currency = "eur",
+        //         PaymentMethodTypes = ["card"],
+        //         Metadata = new Dictionary<string, string>
+        //         {
+        //             { "userId", userId.ToString() }
+        //         }
+        //     };
+        //     
+        //     logger.LogInformation("[{Source}]: Creating payment intent...", Source);
+        //     
+        //     var paymentIntent = await paymentIntentService.CreateAsync(
+        //         paymentIntentOptions,
+        //         cancellationToken: stoppingToken);
+        //     
+        //     return Result<string>.Success(StatusCodes.Status200OK, paymentIntent.ClientSecret);
+        // }
+        // catch (Exception ex)
+        // {
+        //     logger.LogError("[{Source}]: Failed to create payment intent. Exception message - {Exception}", Source, ex.Message);
+        //     return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.General);
+        //
         
-        if (cart is null || cart.Items.Count is 0)
-            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.General);
-
         var paymentIntentService = new PaymentIntentService();
         
-        try
+        var paymentIntentOptions = new PaymentIntentCreateOptions
         {
-            var paymentIntentOptions = new PaymentIntentCreateOptions
+            Amount = 1000,
+            Currency = "eur",
+            PaymentMethodTypes = ["card"],
+            Metadata = new Dictionary<string, string>
             {
-                Amount = (long)cart.Items.Sum(item => item.Price) * 100,
-                Currency = "eur",
-                PaymentMethodTypes = ["card"],
-                Metadata = new Dictionary<string, string>
-                {
-                    { "userId", userId.ToString() }
-                }
-            };
+                { "userId", userId.ToString() }
+            }
+        };
             
-            logger.LogInformation("[{Source}]: Creating payment intent...", Source);
+        logger.LogInformation("[{Source}]: Creating payment intent...", Source);
             
-            var paymentIntent = await paymentIntentService.CreateAsync(
-                paymentIntentOptions,
-                cancellationToken: stoppingToken);
+        var paymentIntent = await paymentIntentService.CreateAsync(
+            paymentIntentOptions,
+            cancellationToken: stoppingToken);
             
-            return Result<string>.Success(StatusCodes.Status200OK, paymentIntent.ClientSecret);
-        }
-        catch (Exception ex)
-        {
-            logger.LogError("[{Source}]: Failed to create payment intent. Exception message - {Exception}", Source, ex.Message);
-            return Result<string>.Failure(StatusCodes.Status400BadRequest, ErrorType.General);
-        }
+        return Result<string>.Success(StatusCodes.Status200OK, paymentIntent.ClientSecret);
     }
 }

@@ -1,12 +1,10 @@
-﻿using Backend.Application.Contracts.Stripe;
-using Backend.Application.Contracts.Stripe.CreatePaymentIntent;
+﻿using Backend.Application.Contracts.Stripe.CreatePaymentIntent;
 using Backend.Application.Contracts.Stripe.GetPublishableKey;
 using Backend.Application.Contracts.Stripe.ProcessWebhook;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Http;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 
@@ -25,14 +23,14 @@ public class StripeController : ControllerBase
     }
     
     [HttpPost("create-payment-intent")]
-    [Authorize]
+    //[Authorize]
     [ProducesResponseType<CreatePaymentIntentResponse>(StatusCodes.Status200OK)]
     [ProducesResponseType<ErrorObject>(StatusCodes.Status400BadRequest)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
     public async Task<IActionResult> CreatePaymentIntentAsync(CancellationToken cancellationToken)
     {
-        var result = await _stripeService.CreatePaymentIntentAsync(User.GetId(), cancellationToken);
+        var result = await _stripeService.CreatePaymentIntentAsync(1, cancellationToken);
         var response = new CreatePaymentIntentResponse { ClientSecret = result.Value };
         
         return StatusCode(result.StatusCode, result.IsSuccess ? response : result.ErrorObject);

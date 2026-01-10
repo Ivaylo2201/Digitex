@@ -148,7 +148,9 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IUserTokenRepository, UserTokenRepository>()
             .AddScoped<IExchangeRepository, ExchangeRepository>()
             .AddScoped<ICurrencyRepository, CurrencyRepository>()
-            .AddScoped<IBrandRepository, BrandRepository>();
+            .AddScoped<IBrandRepository, BrandRepository>()
+            .AddScoped<ICountryRepository, CountryRepository>()
+            .AddScoped<ICityRepository, CityRepository>();
 
         private IServiceCollection AddServices() => services
             .AddEmail()
@@ -167,6 +169,8 @@ public static class InfrastructureDependencyInjection
             .AddScoped<IEmailSenderService, EmailSenderService>()
             .AddScoped<ICurrencyService, CurrencyService>()
             .AddScoped<ICartService, CartService>()
+            .AddScoped<ICountryService, CountryService>()
+            .AddScoped<ICityService, CityService>()
             .AddScoped<IFiltersProviderService<GraphicsCardFilters>, GraphicsCardFiltersProviderService>()
             .AddScoped<IFiltersProviderService<MonitorFilters>, MonitorFiltersProviderService>()
             .AddScoped<IFiltersProviderService<RamFilters>, RamFiltersProviderService>()
