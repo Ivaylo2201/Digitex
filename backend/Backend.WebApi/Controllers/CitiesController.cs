@@ -13,7 +13,7 @@ public class CitiesController(ICityService cityService) : ControllerBase
     [ProducesResponseType<IReadOnlyList<CityDto>>(StatusCodes.Status200OK)]
     [Produces(Constants.ApplicationJson)]
     [Consumes(Constants.ApplicationJson)]
-    public async Task<IActionResult> GetCitiesByCountryIdAsync([FromRoute] int countryId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetCitiesByCountryIdAsync([FromQuery] int countryId, CancellationToken cancellationToken)
     {
         var result = await cityService.GetCitiesByCountryIdAsync(countryId, cancellationToken);
         return StatusCode(result.StatusCode, result.Value);

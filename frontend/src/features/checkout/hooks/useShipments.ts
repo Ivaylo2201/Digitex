@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import type { Shipment } from '../types/Shipment';
 import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 
-async function getShipments(currencyIsoCode: string) {
-  const response = await httpClient.get<Shipment[]>(
-    `/shipments?currency=${currencyIsoCode}`
-  );
-  return response.data;
+async function fetchShipments(currencyIsoCode: string) {
+  const res = await httpClient.get<Shipment[]>('/shipments', {
+    params: { currency: currencyIsoCode },
+  });
+  return res.data;
 }
 
 export function useShipments() {
@@ -16,7 +16,7 @@ export function useShipments() {
   );
 
   return useQuery({
-    queryKey: ['shipments'],
-    queryFn: () => getShipments(currencyIsoCode),
+    queryKey: ['shipments', currencyIsoCode],
+    queryFn: () => fetchShipments(currencyIsoCode),
   });
 }

@@ -20,6 +20,22 @@ export type Translation = {
     };
   };
   components: {
+    contactInformationForm: {
+      country: string;
+      selectCountry: string;
+      city: string;
+      selectCity: string;
+      streetName: string;
+      streetNumber: string;
+      floor: string;
+      apartment: string;
+    };
+    billingForm: {
+      contactInformation: string;
+      shippingMethod: string;
+      returnPolicyLabel: string;
+      returnPolicyText: string;
+    };
     emptyCartPage: {
       yourCartIsEmpty: string;
       youHaveNotAddedAnyItemsInYourCart: string;
@@ -329,6 +345,23 @@ export const translation: Translation = {
     },
   },
   components: {
+    contactInformationForm: {
+      country: 'Country',
+      selectCountry: 'Select country',
+      city: 'City',
+      selectCity: 'Select city',
+      streetName: 'Street name',
+      streetNumber: 'Street number',
+      floor: 'Floor',
+      apartment: 'Apartment',
+    },
+    billingForm: {
+      contactInformation: 'Contact Information',
+      shippingMethod: 'Shipping Method',
+      returnPolicyLabel: 'Return Policy',
+      returnPolicyText:
+        "We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition. Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.",
+    },
     cartPage: {
       price: 'Price',
       quantity: 'Quantity',
@@ -386,7 +419,8 @@ export const translation: Translation = {
     },
     emptyComparePage: {
       noProductsAddedForComparison: 'No products added for comparison',
-      youHaveNotAddedAnyProductsForComparisonYet: "You haven't added any products for comparison yet.",
+      youHaveNotAddedAnyProductsForComparisonYet:
+        "You haven't added any products for comparison yet.",
       getStartedByAddingAProduct: 'Get started by adding a product.',
       addProducts: 'Add products',
     },
@@ -396,8 +430,10 @@ export const translation: Translation = {
     },
     emptyReviewsSection: {
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below',
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below',
     },
     favoritesLink: {
       favorites: 'Favorites',
@@ -427,15 +463,18 @@ export const translation: Translation = {
     reviewsSection: {
       reviews: 'Reviews',
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below',
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below',
     },
     loader: {
       loading: 'Loading',
     },
     signInForm: {
       signInToYourAccount: 'Sign in to your account',
-      enterYourCredentialsToSignInToYourAccount: 'Enter your credentials to sign in to your account.',
+      enterYourCredentialsToSignInToYourAccount:
+        'Enter your credentials to sign in to your account.',
       email: 'Email',
       password: 'Password',
       signIn: 'Sign in',
@@ -446,7 +485,8 @@ export const translation: Translation = {
     },
     signUpForm: {
       createdAnAccount: 'Create an account',
-      enterYourCredentialsToSignUpForAnAccount: 'Enter your credentials to sign up for an account.',
+      enterYourCredentialsToSignUpForAnAccount:
+        'Enter your credentials to sign up for an account.',
       email: 'Email',
       username: 'Username',
       password: 'Password',
@@ -467,7 +507,8 @@ export const translation: Translation = {
       newPasswordConfirmation: 'New password confirmation',
     },
     requestPasswordResetForm: {
-      enterYourEmailToRequestAPasswordResetForYourAccount: 'Enter your email to request a password reset for your account.',
+      enterYourEmailToRequestAPasswordResetForYourAccount:
+        'Enter your email to request a password reset for your account.',
       email: 'Email',
       requestAPasswordReset: 'Request a password reset',
     },
@@ -511,11 +552,12 @@ export const translation: Translation = {
       products: 'products',
     },
     emptyCartPage: {
-      yourCartIsEmpty: "Your cart is empty",
-      youHaveNotAddedAnyItemsInYourCart: "You have not added any items in your cart",
-      GetStartedByAddingAnItem: "Get started by adding an item",
-      AddItems: "Add items"
-    }
+      yourCartIsEmpty: 'Your cart is empty',
+      youHaveNotAddedAnyItemsInYourCart:
+        'You have not added any items in your cart',
+      GetStartedByAddingAnItem: 'Get started by adding an item',
+      AddItems: 'Add items',
+    },
   },
   specifications: {
     base: {

@@ -1,8 +1,14 @@
 import { Page } from '@/components/layout/Page';
+import { BillingForm } from '../components/BillingForm';
 import { Payment } from '../components/Payment';
 
-type CheckoutPageProps = {};
-
-export function CheckoutPage({}: CheckoutPageProps) {
-  return <Page><Payment /></Page>;
+export function CheckoutPage() {
+  return (
+    <Page>
+      <div className='flex flex-col lg:flex-row gap-8 lg:gap-20'>
+        <BillingForm />
+        <Payment />
+      </div>
+    </Page>
+  );
 }

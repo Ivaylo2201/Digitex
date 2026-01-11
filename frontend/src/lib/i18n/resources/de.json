@@ -20,6 +20,22 @@
     }
   },
   "components": {
+    "contactInformationForm": {
+      "country": "Land",
+      "selectCountry": "Land auswählen",
+      "city": "Stadt",
+      "selectCity": "Stadt auswählen",
+      "streetName": "Straßenname",
+      "streetNumber": "Hausnummer",
+      "floor": "Stockwerk",
+      "apartment": "Wohnung"
+    },
+    "billingForm": {
+      "contactInformation": "Kontaktinformationen",
+      "shippingMethod": "Versandart",
+      "returnPolicyLabel": "Rückgaberecht",
+      "returnPolicyText": "Wir stehen hinter unseren Produkten mit einem umfassenden 30-tägigen Rückgaberecht. Wenn Sie nicht vollständig zufrieden sind, senden Sie den Artikel einfach im Originalzustand zurück. Unser unkomplizierter Rückgabeprozess umfasst kostenlosen Rückversand und eine vollständige Rückerstattung innerhalb von 48 Stunden nach Eingang der Rücksendung."
+    },
     "emptyCartPage": {
       "yourCartIsEmpty": "Ihr Warenkorb ist leer",
       "youHaveNotAddedAnyItemsInYourCart": "Sie haben noch keine Artikel in Ihren Warenkorb gelegt",

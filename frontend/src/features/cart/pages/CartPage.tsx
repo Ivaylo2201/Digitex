@@ -13,7 +13,6 @@ import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router';
 import { ItemRow } from '../components/ItemRow';
-import { EmptyComparePage } from '@/features/compare/pages/EmptyComparePage';
 import { EmptyCartPage } from './EmptyCartPage';
 
 export function CartPage() {
