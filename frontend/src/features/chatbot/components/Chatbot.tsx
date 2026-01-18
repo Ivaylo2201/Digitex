@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import type { Message } from '../types/Message';
-import { useChatbot } from '../hooks/useChatbot';
 import { Input } from '@/components/ui/input';
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { MessagesList } from './MessagesList';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
+import { useAssistant } from '../hooks/useAssistant';
 
 export function Chatbot() {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState<Message[]>([
     { sender: 'system', content: import.meta.env.VITE_CHATBOT_CONTEXT },
   ]);
-  const { promptChatbot } = useChatbot();
+  const { askAssistant } = useAssistant();
   const {
     components: { chatbot },
   } = useTranslation();
@@ -27,7 +27,7 @@ export function Chatbot() {
       { sender: 'chatbot', content: '', isLoading: true },
     ]);
 
-    const res = await promptChatbot([message, ...messages]);
+    const res = await askAssistant([message, ...messages]);
     markMessageAsLoaded(res.response);
   };
 

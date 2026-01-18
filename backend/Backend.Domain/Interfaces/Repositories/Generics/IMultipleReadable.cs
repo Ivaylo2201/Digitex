@@ -1,4 +1,4 @@
-﻿namespace Backend.Domain.Interfaces.Generics;
+﻿namespace Backend.Domain.Interfaces.Repositories.Generics;
 
 public interface IMultipleReadable<TEntity>
 {

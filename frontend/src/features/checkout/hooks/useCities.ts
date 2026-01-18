@@ -9,9 +9,10 @@ async function fetchCities(countryId: number) {
   return res.data;
 }
 
-export function useCities(countryId: number) {
+export function useCities(countryId: number | undefined) {
   return useQuery({
     queryKey: ['cities', countryId],
-    queryFn: () => fetchCities(countryId),
+    queryFn: () => fetchCities(countryId!),
+    enabled: !!countryId
   });
 }

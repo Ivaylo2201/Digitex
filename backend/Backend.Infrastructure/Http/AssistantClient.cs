@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Text;
+using System.Text.Json;
 using Backend.Application.DTOs;
 using Backend.Application.Interfaces.Http;
-using Newtonsoft.Json;
 
 namespace Backend.Infrastructure.Http;
 
@@ -11,7 +11,7 @@ public class AssistantClient(HttpClient httpClient) : IAssistantClient
     public async Task<ApiFreeLlmResponse> AskAsync(string message, CancellationToken cancellationToken)
     {
         var requestBody = new StringContent(
-            JsonConvert.SerializeObject(new { message }),
+            JsonSerializer.Serialize(new { message }),
             Encoding.UTF8,
             HttpConstants.ApplicationJson);
         
@@ -21,7 +21,7 @@ public class AssistantClient(HttpClient httpClient) : IAssistantClient
             throw new HttpRequestException("ApiFreeLlmClient received a non-success status code.");
         
         var content = await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken);
-        var apiFreeLlmResponse = JsonConvert.DeserializeObject<ApiFreeLlmResponse>(content);
+        var apiFreeLlmResponse = JsonSerializer.Deserialize<ApiFreeLlmResponse>(content);
         
         return apiFreeLlmResponse ?? throw new JsonException("Could not deserialize response into AskAssistantResponse.");
     }

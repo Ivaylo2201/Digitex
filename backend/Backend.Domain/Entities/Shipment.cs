@@ -1,6 +1,4 @@
 ﻿using Backend.Domain.Enums;
-using Backend.Domain.Interfaces;
-using Backend.Domain.Interfaces.Generics;
 
 namespace Backend.Domain.Entities;
 

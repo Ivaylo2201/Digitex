@@ -6,45 +6,45 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class UserRepository(DatabaseContext context) : IUserRepository
 {
-    public async Task<User> CreateAsync(User user, CancellationToken stoppingToken = default)
+    public async Task<User> CreateAsync(User user, CancellationToken cancellationToken = default)
     {
         user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
         
-        var entity = (await context.Users.AddAsync(user, stoppingToken)).Entity;
-        await context.SaveChangesAsync(stoppingToken);
+        var entity = (await context.Users.AddAsync(user, cancellationToken)).Entity;
+        await context.SaveChangesAsync(cancellationToken);
         return entity;
     }
 
-    public async Task<User?> GetOneByEmailAsync(string email, CancellationToken stoppingToken = default)
-        => await VerifiedUsers.FirstOrDefaultAsync(user => user.Email == email, stoppingToken);
+    public async Task<User?> GetOneByEmailAsync(string email, CancellationToken cancellationToken = default)
+        => await VerifiedUsers.FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
 
-    public async Task<User?> GetOneByCredentialsAsync(string email, string password, CancellationToken stoppingToken = default)
+    public async Task<User?> GetOneByCredentialsAsync(string email, string password, CancellationToken cancellationToken = default)
     {
-        var user = await VerifiedUsers.FirstOrDefaultAsync(user => user.Email == email, stoppingToken);
+        var user = await VerifiedUsers.FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
         return BCrypt.Net.BCrypt.Verify(password, user?.Password) ? user : null;
     }
 
-    public async Task<User?> VerifyUserAsync(int id, CancellationToken stoppingToken = default)
+    public async Task<User?> VerifyUserAsync(int id, CancellationToken cancellationToken = default)
     {
-        var user = await context.Users.FirstOrDefaultAsync(user => user.Id == id && !user.IsVerified, stoppingToken);
+        var user = await context.Users.FirstOrDefaultAsync(user => user.Id == id && !user.IsVerified, cancellationToken);
         
         user?.IsVerified = true;
-        await context.SaveChangesAsync(stoppingToken);
+        await context.SaveChangesAsync(cancellationToken);
         return user;
     }
 
-    public async Task ResetPasswordAsync(int id, string newPassword, CancellationToken stoppingToken = default)
+    public async Task ResetPasswordAsync(int id, string newPassword, CancellationToken cancellationToken = default)
     {
-        var user = await VerifiedUsers.FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
+        var user = await VerifiedUsers.FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
         user?.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
-        await context.SaveChangesAsync(stoppingToken);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<User?> GetOneByIdWithCartAsync(int id, CancellationToken stoppingToken = default)
-        => await VerifiedUsers.Include(user => user.Cart).FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
+    public async Task<User?> GetOneByIdWithCartAsync(int id, CancellationToken cancellationToken = default)
+        => await VerifiedUsers.Include(user => user.Cart).FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
 
-    public async Task<User?> GetOneAsync(int id, CancellationToken stoppingToken = default)
-        => await VerifiedUsers.FirstOrDefaultAsync(user => user.Id == id, stoppingToken);
+    public async Task<User?> GetOneAsync(int id, CancellationToken cancellationToken = default)
+        => await VerifiedUsers.FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
     
     private IQueryable<User> VerifiedUsers 
         => context.Users.Where(user => user.IsVerified);

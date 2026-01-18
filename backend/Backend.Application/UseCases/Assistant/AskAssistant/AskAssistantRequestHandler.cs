@@ -15,7 +15,7 @@ public class AskAssistantRequestHandler(
     public async Task<Result<AskAssistantResponse>> Handle(AskAssistantRequest request, CancellationToken cancellationToken)
     {
         var context = string.Join("\n", request.Messages.Select(message => $"{message.Sender}: {message.Content}"));
-        
+
         try
         {
             var apiFreeLlmResponse = await assistantClient.AskAsync(context, cancellationToken);
@@ -26,7 +26,7 @@ public class AskAssistantRequestHandler(
                 Response = apiFreeLlmResponse.Response
             });
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return Result<AskAssistantResponse>.Success(HttpStatusCode.InternalServerError, new AskAssistantResponse
             {

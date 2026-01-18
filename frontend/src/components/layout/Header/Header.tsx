@@ -6,14 +6,14 @@ import { Searchbox } from './Searchbox';
 import { FavoritesLink } from '../../../features/favorites/components/FavoritesLink';
 import { SignOutButton } from '../../../features/auth/components/SignOutButton';
 import { SignInLink } from '../../../features/auth/components/SignInLink';
-import { useAuth } from '@/features/auth/stores/useAuth';
 import { CompareLink } from '../../../features/compare/components/CompareLink';
 import { CurrencySelect } from '@/features/currency/components/CurrencySelect';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { LanguageSelect } from '@/features/language/components/LanguageSelect';
+import { useAuthStore } from '@/features/auth/stores/useAuth';
 
 export function Header() {
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const {
     components: { header },
   } = useTranslation();

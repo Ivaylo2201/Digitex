@@ -1,11 +1,10 @@
 ﻿using System.Net;
-using AutoMapper;
 using Backend.Application.DTOs;
-using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
+using Mapster;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -15,8 +14,7 @@ public class GetCartRequestHandler(
     ILogger<GetCartRequestHandler> logger,
     ICartRepository cartRepository,
     IExchangeRepository exchangeRepository,
-    ICurrencyService currencyService,
-    IMapper mapper) : IRequestHandler<GetCartRequest, Result<GetCartResponse>>
+    ICurrencyService currencyService) : IRequestHandler<GetCartRequest, Result<GetCartResponse>>
 {
     public async Task<Result<GetCartResponse>> Handle(GetCartRequest request, CancellationToken cancellationToken)
     {
@@ -30,7 +28,7 @@ public class GetCartRequestHandler(
         
         return Result<GetCartResponse>.Success(HttpStatusCode.OK, new GetCartResponse
         {
-            Items = mapper.Map<IEnumerable<ItemDto>>(converted),
+            Items = converted.Adapt<IEnumerable<ItemDto>>(),
             TotalPrice = cart.Items.Sum(item => item.Price)
         });
     }

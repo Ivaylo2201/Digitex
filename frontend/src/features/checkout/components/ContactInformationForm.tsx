@@ -22,13 +22,12 @@ import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 export function ContactInformationForm() {
   const { handleSubmit, control } = useFormContext<Billing>();
-  const selectedCountryId = useWatch({
-    control,
-    name: 'countryId',
-  });
+  const selectedCountryId = useWatch({ control, name: 'countryId'});
   const {
     components: { contactInformationForm },
   } = useTranslation();
+
+  console.log(selectedCountryId)
 
   const { data: countries = [] } = useCountries();
   const { data: cities = [] } = useCities(selectedCountryId);

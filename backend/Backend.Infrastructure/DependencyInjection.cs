@@ -4,7 +4,9 @@ using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using Backend.Application.Contracts.Filters;
+using Backend.Application.Contracts.Product;
 using Backend.Application.Contracts.Product.Variants;
+using Backend.Application.DTOs;
 using Backend.Application.Enums;
 using Backend.Application.Interfaces.Http;
 using Backend.Application.Interfaces.Services;
@@ -21,6 +23,7 @@ using Backend.Infrastructure.Services.FiltersProvider;
 using Backend.Infrastructure.Services.Products;
 using Backend.Infrastructure.Services.QueryBuilder;
 using DotNetEnv;
+using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +32,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Stripe;
 using Monitor = Backend.Domain.Entities.Monitor;
+using Price = Backend.Domain.ValueObjects.Price;
 using TokenService = Backend.Infrastructure.Services.TokenService;
 
 namespace Backend.Infrastructure;
@@ -40,6 +44,8 @@ public static class DependencyInjection
         public IServiceCollection AddInfrastructure(IConfiguration configuration)
         {
             Env.Load();
+            
+            IServiceCollection.AddMaps();
         
             var env = new EnvSettings
             {
@@ -80,15 +86,14 @@ public static class DependencyInjection
         
             services.AddSingleton(Options.Create(env));
             StripeConfiguration.ApiKey = env.Stripe.SecretKey;
-        
+
             return services
                 .AddRepositories()
                 .AddServices()
                 .AddHttpClients(env)
                 .AddEmailServices(env)
                 .AddSecurity(configuration, env)
-                .AddPersistence(configuration)
-                .AddAutoMapper(_ => { }, typeof(DependencyInjection).Assembly);
+                .AddPersistence(configuration);
         }
 
         private IServiceCollection AddRepositories() => services
@@ -219,6 +224,42 @@ public static class DependencyInjection
                         sqlServerOptionsBuilder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                     });
             });
+        }
+        
+        private static void AddMaps()
+        {
+            TypeAdapterConfig<ProductBase, ProductSummary>.NewConfig()
+                .Map(destination => destination.BrandName, source => source.Brand.BrandName)
+                .Map(destination => destination.Price, source => new Price
+                {
+                    Initial = source.InitialPrice,
+                    Discounted = source.Price
+                })
+                .Map(destination => destination.Quantity, source => source.Quantity);
+            
+            TypeAdapterConfig<Item, ItemDto>.NewConfig()
+                .Map(destination => destination.Product, source => new ProductDto
+                {
+                    Sku = source.Product.Sku,
+                    StockQuantity = source.Product.Quantity,
+                    BrandName = source.Product.Brand.BrandName,
+                    ModelName = source.Product.ModelName,
+                    Price = source.Product.Price,
+                    ImagePath = source.Product.ImagePath
+                })
+                .Map(destination => destination.LineTotal, source => source.Product.Price * source.Quantity);
+
+            TypeAdapterConfig<ProductBase, ProductDetails>.NewConfig().Inherits<ProductBase, ProductSummary>()
+                .Map(destination => destination.Sku, source => source.Sku.ToUpper())
+                .Map(destination => destination.TotalReviews, source => source.Reviews.Count);
+        
+            TypeAdapterConfig<Processor, ProcessorProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<GraphicsCard, GraphicsCardProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Monitor, MonitorProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Motherboard, MotherboardProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<PowerSupply, PowerSupplyProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Ram, RamProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Ssd, SsdProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
         }
     }
 }

@@ -1,9 +1,9 @@
-import { useAuth } from '@/features/auth/stores/useAuth';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { LogOut } from 'lucide-react';
+import { useAuthStore } from '../stores/useAuth';
 
 export function SignOutButton() {
-  const { signOut } = useAuth();
+  const signOut = useAuthStore((state) => state.signOut);
   const {
     components: { signOutButton }
   } = useTranslation();

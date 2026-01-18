@@ -3,7 +3,7 @@ import { Navigate, useSearchParams } from 'react-router';
 import { httpClient } from '@/lib/api/httpClient';
 import { toast } from 'sonner';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
-import { useAuth } from '@/features/auth/stores/useAuth';
+import { useAuthStore } from '@/features/auth/stores/useAuth';
 
 type AccountVerificationResponse = { token: string; role: string };
 
@@ -12,7 +12,7 @@ export function AccountVerificationPage() {
     components: { accountVerifiedPage },
   } = useTranslation();
   const [searchParams] = useSearchParams();
-  const { signIn } = useAuth();
+  const signIn = useAuthStore((state) => state.signIn);
 
   useEffect(() => {
     const verifyAccount = async (token: string | null) => {

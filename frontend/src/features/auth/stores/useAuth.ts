@@ -7,7 +7,7 @@ type AuthStore = {
   signOut: () => void;
 };
 
-export const useAuth = create<AuthStore>((set) => ({
+export const useAuthStore = create<AuthStore>((set) => ({
   role: null,
   isAuthenticated: !!localStorage.getItem('token'),
   signIn: (token: string, role: string, rememberMe: boolean = false) => {
