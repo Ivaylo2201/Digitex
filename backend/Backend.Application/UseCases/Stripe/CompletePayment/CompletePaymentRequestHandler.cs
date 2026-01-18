@@ -1,16 +1,18 @@
 ﻿using System.Net;
-using Backend.Application.Extensions;
-using Backend.Application.Interfaces.Email;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Settings;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Stripe;
 
 namespace Backend.Application.UseCases.Stripe.CompletePayment;
 
 public class CompletePaymentRequestHandler(
     ILogger<CompletePaymentRequestHandler> logger,
+    IOptions<EnvSettings> options,
     IUserRepository userRepository,
     IEmailSenderService emailSenderService) : IRequestHandler<CompletePaymentRequest, Result<CompletePaymentResponse>>
 {
@@ -21,14 +23,13 @@ public class CompletePaymentRequestHandler(
     {
         using var reader = new StreamReader(request.Payload);
         var json = await reader.ReadToEndAsync(cancellationToken);
-        var webhookSecret = "WebhookSecret".GetRequiredEnvironmentVariable();
         
         try
         {
             var stripeEvent = EventUtility.ConstructEvent(
                 json,
                 request.Headers["Stripe-Signature"],
-                webhookSecret);
+                options.Value.Stripe.WebhookSecret);
 
             if (stripeEvent?.Type is not PaymentIntentSucceeded)
             {

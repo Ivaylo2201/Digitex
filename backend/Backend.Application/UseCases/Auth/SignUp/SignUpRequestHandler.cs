@@ -1,7 +1,5 @@
 ﻿using System.Net;
-using Backend.Application.Extensions;
-using Backend.Application.Interfaces.Email;
-using Backend.Application.Interfaces.Tokens;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
@@ -42,7 +40,6 @@ public class SignUpRequestHandler(
         }
         catch (Exception ex)
         {
-            logger.LogException(Source, ex, "creating user or account verification token");
             return Result<SignUpResponse>.Failure(HttpStatusCode.InternalServerError);       
         }
     }

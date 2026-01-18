@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Contracts.Filters;
-using Backend.Application.Interfaces.FiltersProvider;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;

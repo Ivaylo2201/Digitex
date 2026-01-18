@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Backend.Application.Contracts.Product;
 using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;

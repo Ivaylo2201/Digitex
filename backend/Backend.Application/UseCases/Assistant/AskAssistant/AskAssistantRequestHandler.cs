@@ -1,6 +1,5 @@
 ﻿using System.Net;
-using Backend.Application.Extensions;
-using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Http;
 using Backend.Domain.Common;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -29,7 +28,6 @@ public class AskAssistantRequestHandler(
         }
         catch (Exception ex)
         {
-            logger.LogException(Source, ex, "processing chatbot request");
             return Result<AskAssistantResponse>.Success(HttpStatusCode.InternalServerError, new AskAssistantResponse
             {
                 Response = "Something went wrong."

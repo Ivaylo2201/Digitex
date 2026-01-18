@@ -1,5 +1,5 @@
 ﻿using Backend.Application.Contracts.Filters;
-using Backend.Application.Interfaces.FiltersProvider;
+using Backend.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers.Filters.Variants;

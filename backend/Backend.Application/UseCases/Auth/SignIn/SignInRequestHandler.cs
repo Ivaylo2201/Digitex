@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Backend.Application.Interfaces.Tokens;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces;
 using MediatR;

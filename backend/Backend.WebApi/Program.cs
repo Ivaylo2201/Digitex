@@ -1,9 +1,10 @@
 using System.Reflection;
 using Backend.Application;
+using Backend.Application.Enums;
 using Backend.Infrastructure;
-using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
+using Backend.Infrastructure.Extensions;
 using Backend.WebApi.Extensions;
 using Backend.WebApi.Middlewares;
 using Microsoft.OpenApi.Models;
@@ -12,7 +13,7 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 var serviceName = Assembly.GetEntryAssembly()?.GetName().Name ?? "Backend.WebApi";
-var serviceUrl = builder.Configuration["Urls:Backend"]!;
+var serviceUrl = builder.Configuration.GetRequiredAppSettingsVariable("Urls:Backend");
 var swaggerUrl = $"{serviceUrl}/swagger/index.html";
 
 Log.Logger = new LoggerConfiguration()

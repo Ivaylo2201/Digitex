@@ -1,4 +1,5 @@
 ﻿using Backend.Application.UseCases.Carts.GetCart;
+using Backend.Domain.Extensions;
 using Backend.Infrastructure.Extensions;
 using Backend.WebApi.Extensions;
 using MediatR;

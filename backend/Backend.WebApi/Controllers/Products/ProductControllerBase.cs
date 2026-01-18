@@ -1,8 +1,9 @@
 ﻿using Backend.Application.Contracts.Product;
 using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.QueryBuilder;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
+using Backend.Domain.Extensions;
 using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,8 @@ public abstract class ProductControllerBase<TProduct, TProjection>(
 {
     [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [Produces(Constants.ApplicationJson)]
-    [Consumes(Constants.ApplicationJson)]
+    [Produces(HttpConstants.ApplicationJson)]
+    [Consumes(HttpConstants.ApplicationJson)]
     public virtual async Task<IActionResult> GetOneAsync(Guid id, string currency, CancellationToken stoppingToken = default)
     {
         var result = await productService.GetOneAsync(id, project, currency.ToCurrencyIsoCode(), stoppingToken);
@@ -26,8 +27,8 @@ public abstract class ProductControllerBase<TProduct, TProjection>(
     
     [HttpGet]
     [ProducesResponseType<List<ProductSummary>>(StatusCodes.Status200OK)]
-    [Produces(Constants.ApplicationJson)]
-    [Consumes(Constants.ApplicationJson)]
+    [Produces(HttpConstants.ApplicationJson)]
+    [Consumes(HttpConstants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync(int page, int pageSize, string currency, [FromQuery] IDictionary<string, string> criteria, CancellationToken stoppingToken = default)
     {
         var result = await productService.ListAllAsync(page, pageSize, queryBuilderService.BuildQuery(criteria), currency.ToCurrencyIsoCode(), stoppingToken);

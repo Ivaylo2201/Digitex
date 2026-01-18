@@ -14,7 +14,7 @@ public static class WebApplicationExtensions
         {
             builder.Run(async context =>
             {
-                context.Response.ContentType = Constants.ApplicationJson;
+                context.Response.ContentType = HttpConstants.ApplicationJson;
 
                 var error = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
 

@@ -1,6 +1,4 @@
-﻿using Backend.Application.Extensions;
-using Backend.Domain.Entities;
-using Backend.Infrastructure.Extensions;
+﻿using Backend.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -23,7 +21,7 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         }
         catch (Exception ex)
         {
-            logger.LogException(Source, ex, "seeding the database");
+            
         }
     }
     

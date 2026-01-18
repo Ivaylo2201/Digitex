@@ -1,4 +1,4 @@
-﻿using Backend.Domain.Exceptions;
+﻿using Backend.Domain.Extensions;
 
 namespace Backend.WebApi.Extensions;
 

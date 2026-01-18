@@ -1,6 +1,6 @@
 ﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
-using Backend.Application.Interfaces.QueryBuilder;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;

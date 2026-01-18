@@ -1,4 +1,4 @@
-﻿using Backend.Application.Interfaces.QueryBuilder;
+﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 
 namespace Backend.Infrastructure.Services.QueryBuilder;

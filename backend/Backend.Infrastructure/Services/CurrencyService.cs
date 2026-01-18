@@ -1,4 +1,5 @@
 ﻿using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Services;
 
 namespace Backend.Infrastructure.Services;
 

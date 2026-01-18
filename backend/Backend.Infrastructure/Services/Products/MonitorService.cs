@@ -1,5 +1,6 @@
 ﻿using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 

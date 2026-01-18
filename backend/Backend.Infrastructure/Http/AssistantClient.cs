@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text;
 using Backend.Application.DTOs;
-using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Http;
 using Newtonsoft.Json;
 
 namespace Backend.Infrastructure.Http;
@@ -13,7 +13,7 @@ public class AssistantClient(HttpClient httpClient) : IAssistantClient
         var requestBody = new StringContent(
             JsonConvert.SerializeObject(new { message }),
             Encoding.UTF8,
-            "application/json");
+            HttpConstants.ApplicationJson);
         
         var httpResponseMessage = await httpClient.PostAsync(string.Empty, requestBody, cancellationToken);
         

@@ -2,6 +2,7 @@
 using AutoMapper;
 using Backend.Application.DTOs;
 using Backend.Application.Interfaces;
+using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;

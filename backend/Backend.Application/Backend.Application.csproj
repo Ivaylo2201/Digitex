@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Contracts\City\" />
+      <Folder Include="Extensions\" />
     </ItemGroup>
 
 </Project>
