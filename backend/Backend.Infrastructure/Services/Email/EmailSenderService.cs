@@ -1,4 +1,5 @@
-﻿using Backend.Application.Interfaces.Email;
+﻿using Backend.Application.Extensions;
+using Backend.Application.Interfaces.Email;
 using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;
 using FluentEmail.Core;

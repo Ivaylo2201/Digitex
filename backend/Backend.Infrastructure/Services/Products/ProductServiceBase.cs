@@ -1,4 +1,5 @@
-﻿using Backend.Application.Contracts.Product;
+﻿using System.Net;
+using Backend.Application.Contracts.Product;
 using Backend.Application.Interfaces;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
@@ -27,14 +28,14 @@ public class ProductServiceBase<TProduct, TProjection>(
         if (product is null)
         {
             logger.LogWarning("[{Source}]: {Entity} with Id={Id} was not found.", source, _entityName, id);
-            return Result<TProjection?>.Failure(StatusCodes.Status404NotFound);
+            return Result<TProjection?>.Failure(HttpStatusCode.NotFound);
         }
         
         logger.LogInformation("[{Source}]: Projecting {Entity} into a {Projection}...", source, _entityName, _projectionName);
         var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken);
         var projection = project(currencyService.ConvertPrice(product, entity => entity.InitialPrice *= rate));
         
-        return Result<TProjection?>.Success(StatusCodes.Status200OK, projection);
+        return Result<TProjection?>.Success(HttpStatusCode.OK, projection);
     }
 
     public async Task<Result<PaginatedResponse<IReadOnlyList<ProductSummary>>>> ListAllAsync(int page, int pageSize, Query<TProduct> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
@@ -59,6 +60,6 @@ public class ProductServiceBase<TProduct, TProjection>(
             TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
         };
 
-        return Result<PaginatedResponse<IReadOnlyList<ProductSummary>>>.Success(StatusCodes.Status200OK, response);
+        return Result<PaginatedResponse<IReadOnlyList<ProductSummary>>>.Success(HttpStatusCode.OK, response);
     }
 }

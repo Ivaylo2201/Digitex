@@ -1,4 +1,5 @@
-﻿using Backend.Domain.Entities;
+﻿using Backend.Application.Extensions;
+using Backend.Domain.Entities;
 using Backend.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

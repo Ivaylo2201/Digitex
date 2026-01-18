@@ -1,39 +1,33 @@
-﻿using Backend.Domain.Enums;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 
 namespace Backend.Domain.Common;
 
-public class Result
+public class Result<TValue>
 {
-    public readonly bool IsSuccess;
-    public readonly ErrorObject? ErrorObject;
     public readonly int StatusCode;
-    
-    protected Result(int statusCode, ErrorObject? errorObject)
+    public readonly TValue? Value;
+    public readonly string? ErrorMessage;
+
+    private Result(int statusCode, TValue? value, string? errorMessage)
     {
-        IsSuccess = statusCode is >= 200 and < 300;  
-        ErrorObject = errorObject;
         StatusCode = statusCode;
-    }
-
-    public static Result Success(int statusCode)
-        => new(statusCode, null);
-    
-    public static Result Failure(int statusCode, ErrorType? errorType = null, object? details = null) 
-        => new(statusCode, ErrorObject.Construct(statusCode, errorType, details));
-}
-
-public class Result<T> : Result
-{
-    public readonly T? Value;
-    
-    private Result(int statusCode, T? value, ErrorObject? errorObject) : base(statusCode, errorObject)
-    {
         Value = value;
+        ErrorMessage = errorMessage;
     }
     
-    public static Result<T> Success(int statusCode, T value)
-        => new(statusCode, value, null);
+    [MemberNotNullWhen(true, nameof(Value))]
+    public bool IsSuccess => StatusCode is >= 200 and < 300 && ErrorMessage is null && Value is not null;
 
-    public new static Result<T> Failure(int statusCode, ErrorType? errorType = null, object? details = null) 
-        => new(statusCode, default, ErrorObject.Construct(statusCode, errorType, details));
+    public static Result<TValue> Success(HttpStatusCode httpStatusCode, TValue value)
+        => new((int)httpStatusCode, value, null);
+
+    public static Result<TValue> Failure(HttpStatusCode httpStatusCode)
+        => new((int)httpStatusCode, default, httpStatusCode switch
+        {
+            HttpStatusCode.NotFound => "Resource not found.",
+            HttpStatusCode.Unauthorized => "Unauthorized access.",
+            HttpStatusCode.Forbidden => "Access forbidden.",
+            _ => "Internal server error."
+        });
 }

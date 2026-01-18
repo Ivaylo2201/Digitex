@@ -30,7 +30,6 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<UserToken> UserTokens => Set<UserToken>();
     public DbSet<Currency> Currencies => Set<Currency>();
     public DbSet<Exchange> ExchangeRates => Set<Exchange>();
-    public DbSet<DiscountCoupon> DiscountCoupons => Set<DiscountCoupon>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

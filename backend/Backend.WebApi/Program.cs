@@ -1,4 +1,5 @@
 using System.Reflection;
+using Backend.Application;
 using Backend.Infrastructure;
 using Backend.Infrastructure.Common;
 using Backend.Infrastructure.Database;
@@ -21,6 +22,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Services
     .AddOpenApi()
     .AddInfrastructure(builder.Configuration)
+    .AddApplication()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen(options =>
     {
@@ -76,6 +78,7 @@ app.UseStaticFiles();
 app.UseMiddleware<RequestPipelineMiddleware>();
 app.UseGlobalExceptionHandler();
 app.MapControllers();
+app.MapEndpoints();
 
 Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment}...", serviceName, app.Environment.EnvironmentName);
 Log.Information("[{ServiceName}]: Web host configured to listen on: {ApiUrl}.", serviceName, $"{serviceUrl}/api");
