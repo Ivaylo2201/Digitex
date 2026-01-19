@@ -1,6 +1,6 @@
 ﻿namespace Backend.Application.DTOs;
 
-public record ApiFreeLlmResponse
+public record ApiFreeLlmResponseDto
 {
     public required string Response { get; init; }
 }

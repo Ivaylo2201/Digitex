@@ -4,5 +4,5 @@ namespace Backend.Application.Interfaces.Http;
 
 public interface IAssistantClient
 {
-    Task<ApiFreeLlmResponse> AskAsync(string message, CancellationToken cancellationToken);
+    Task<ApiFreeLlmResponseDto> AskAsync(string message, CancellationToken cancellationToken);
 }

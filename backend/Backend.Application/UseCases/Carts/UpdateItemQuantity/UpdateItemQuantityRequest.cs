@@ -1,5 +1,5 @@
-﻿using Backend.Domain.Common;
-using Backend.Infrastructure.Common;
+﻿using Backend.Application.Interfaces.Common;
+using Backend.Domain.Common;
 using MediatR;
 
 namespace Backend.Application.UseCases.Carts.UpdateItemQuantity;

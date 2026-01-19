@@ -8,7 +8,7 @@ namespace Backend.Infrastructure.Http;
 
 public class AssistantClient(HttpClient httpClient) : IAssistantClient
 {
-    public async Task<ApiFreeLlmResponse> AskAsync(string message, CancellationToken cancellationToken)
+    public async Task<ApiFreeLlmResponseDto> AskAsync(string message, CancellationToken cancellationToken)
     {
         var requestBody = new StringContent(
             JsonSerializer.Serialize(new { message }),
@@ -21,7 +21,7 @@ public class AssistantClient(HttpClient httpClient) : IAssistantClient
             throw new HttpRequestException("ApiFreeLlmClient received a non-success status code.");
         
         var content = await httpResponseMessage.Content.ReadAsStringAsync(cancellationToken);
-        var apiFreeLlmResponse = JsonSerializer.Deserialize<ApiFreeLlmResponse>(content);
+        var apiFreeLlmResponse = JsonSerializer.Deserialize<ApiFreeLlmResponseDto>(content);
         
         return apiFreeLlmResponse ?? throw new JsonException("Could not deserialize response into AskAssistantResponse.");
     }

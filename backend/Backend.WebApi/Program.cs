@@ -51,7 +51,8 @@ builder.Services
         });
     })
     .AddRouting(options => options.LowercaseUrls = true)
-    .AddControllers();
+    .AddControllers()
+    .AddNewtonsoftJson();
 
 builder.WebHost.UseUrls(serviceUrl);
 
@@ -83,7 +84,6 @@ app.UseStaticFiles();
 app.UseMiddleware<RequestPipelineMiddleware>();
 app.UseGlobalExceptionHandler();
 app.MapControllers();
-app.MapEndpoints();
 
 Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment}...", serviceName, app.Environment.EnvironmentName);
 Log.Information("[{ServiceName}]: Web host configured to listen on: {ApiUrl}.", serviceName, $"{serviceUrl}/api");

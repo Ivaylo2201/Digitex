@@ -1,6 +1,6 @@
-﻿using Backend.Domain.Common;
+﻿using Backend.Application.Interfaces.Common;
+using Backend.Domain.Common;
 using Backend.Domain.Enums;
-using Backend.Infrastructure.Common;
 using MediatR;
 
 namespace Backend.Application.UseCases.Carts.GetCart;

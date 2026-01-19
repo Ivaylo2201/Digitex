@@ -4,17 +4,14 @@ using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Backend.WebApi.Endpoints.Cities;
+namespace Backend.WebApi.Controllers;
 
-public class GetCitiesByCountry : IEndpoint
+[ApiController]
+[Route("api/[controller]")]
+public class CitiesController(IMediator mediator) : ControllerBase
 {
-    public static void Map(IEndpointRouteBuilder app) => app
-        .MapGet("/", HandleAsync);
-
-    private static async Task<Ok<IEnumerable<CityDto>>> HandleAsync(
-        [FromQuery] int countryId,
-        [FromServices] IMediator mediator,
-        CancellationToken cancellationToken)
+    [HttpGet]
+    public async Task<Ok<IEnumerable<CityDto>>> GetAllCitiesByCountryAsync([FromQuery] int countryId, CancellationToken cancellationToken)
     {
         var result = await mediator.Send(new GetAllCitiesByCountryRequest { CountryId = countryId }, cancellationToken);
         return TypedResults.Ok(result.Value);

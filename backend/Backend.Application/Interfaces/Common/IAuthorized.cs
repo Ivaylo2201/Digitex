@@ -1,4 +1,4 @@
-﻿namespace Backend.Infrastructure.Common;
+﻿namespace Backend.Application.Interfaces.Common;
 
 public interface IAuthorized
 {
