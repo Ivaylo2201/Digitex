@@ -1,18 +1,18 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum ShipmentType
 {
-    [EnumMember(Value = "Express")]
+    [JsonStringEnumMemberName("Express")]
     Express,
-    [EnumMember(Value = "Standard")]
+
+    [JsonStringEnumMemberName("Standard")]
     Standard,
-    [EnumMember(Value = "Next Day")]
+
+    [JsonStringEnumMemberName("Next Day")]
     NextDay,
-    [EnumMember(Value = "Same Day")]
+
+    [JsonStringEnumMemberName("Same Day")]
     SameDay
 }

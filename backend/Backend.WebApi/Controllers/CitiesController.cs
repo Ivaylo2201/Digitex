@@ -1,5 +1,5 @@
 ﻿using Backend.Application.DTOs;
-using Backend.Application.UseCases.Cities.GetAllCitiesByCountry;
+using Backend.Application.UseCases.Cities.GetAllCitiesByCountryId;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +11,9 @@ namespace Backend.WebApi.Controllers;
 public class CitiesController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<Ok<IEnumerable<CityDto>>> GetAllCitiesByCountryAsync([FromQuery] int countryId, CancellationToken cancellationToken)
+    public async Task<Ok<IEnumerable<CityDto>>> GetAllCitiesByCountryIdAsync([FromQuery] int countryId, CancellationToken cancellationToken)
     {
-        var result = await mediator.Send(new GetAllCitiesByCountryRequest { CountryId = countryId }, cancellationToken);
+        var result = await mediator.Send(new GetAllCitiesByCountryIdRequest { CountryId = countryId }, cancellationToken);
         return TypedResults.Ok(result.Value);
     }
 }

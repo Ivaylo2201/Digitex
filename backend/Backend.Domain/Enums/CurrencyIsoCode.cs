@@ -1,16 +1,15 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum CurrencyIsoCode
 {
-     [EnumMember(Value = "EUR")]
+     [JsonStringEnumMemberName("EUR")]
      Eur,
-     [EnumMember(Value = "USD")]
+     
+     [JsonStringEnumMemberName("USD")]
      Usd,
-     [EnumMember(Value = "GBP")] 
+     
+     [JsonStringEnumMemberName("GBP")]
      Gbp
 }

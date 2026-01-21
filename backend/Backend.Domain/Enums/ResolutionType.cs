@@ -1,14 +1,12 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum ResolutionType
 {
-    [EnumMember(Value = "Full HD")]
+    [JsonStringEnumMemberName("Full HD")]
     Fhd,
-    [EnumMember(Value = "4K")]
+
+    [JsonStringEnumMemberName("4K")]
     Qhd
 }

@@ -1,16 +1,15 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum Matrix
 {
-    [EnumMember(Value = "IPS")]
+    [JsonStringEnumMemberName("IPS")]
     Ips,
-    [EnumMember(Value = "VA")]
+
+    [JsonStringEnumMemberName("VA")]
     Va,
-    [EnumMember(Value = "TN")]
+
+    [JsonStringEnumMemberName("TN")]
     Tn
 }

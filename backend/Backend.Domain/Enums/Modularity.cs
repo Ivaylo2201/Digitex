@@ -1,16 +1,15 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum Modularity
 {
-    [EnumMember(Value = "Full")]
+    [JsonStringEnumMemberName("Full")]
     Full,
-    [EnumMember(Value = "Semi")]
+
+    [JsonStringEnumMemberName("Semi")]
     Semi,
-    [EnumMember(Value = "None")]
+
+    [JsonStringEnumMemberName("None")]
     None
 }

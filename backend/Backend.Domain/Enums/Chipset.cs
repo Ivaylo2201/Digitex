@@ -1,24 +1,27 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum Chipset
 {
-    [EnumMember(Value = "A620")]
+    [JsonStringEnumMemberName("A620")]
     A620,
-    [EnumMember(Value = "B550")]
+
+    [JsonStringEnumMemberName("B550")]
     B550,
-    [EnumMember(Value = "B650")]
+
+    [JsonStringEnumMemberName("B650")]
     B650,
-    [EnumMember(Value = "B760")]
+
+    [JsonStringEnumMemberName("B760")]
     B760,
-    [EnumMember(Value = "B840")]
+
+    [JsonStringEnumMemberName("B840")]
     B840,
-    [EnumMember(Value = "B850")]
+
+    [JsonStringEnumMemberName("B850")]
     B850,
-    [EnumMember(Value = "B860")]
+
+    [JsonStringEnumMemberName("B860")]
     B860
 }

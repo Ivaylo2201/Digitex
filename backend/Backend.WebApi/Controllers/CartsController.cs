@@ -43,7 +43,7 @@ public class CartsController(IMediator mediator) : ControllerBase
     [HttpDelete("{itemId:int}")]
     [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
     [ProducesResponseType<ProblemDetails>(StatusCodes.Status403Forbidden)]
-    public async Task<Results<NoContent, ProblemHttpResult>> RemoveAsync([FromRoute] int itemId, CancellationToken cancellationToken)
+    public async Task<Results<NoContent, ProblemHttpResult>> RemoveFromCartAsync([FromRoute] int itemId, CancellationToken cancellationToken)
     {
         var request = new RemoveFromCartRequest { ItemId = itemId };
         var result = await mediator.Send(request.Authorize(HttpContext), cancellationToken);

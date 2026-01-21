@@ -1,18 +1,18 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum Socket
 {
-    [EnumMember(Value = "LGA1200")]
+    [JsonStringEnumMemberName("LGA1200")]
     Lga1200,
-    [EnumMember(Value = "LGA1700")]
+
+    [JsonStringEnumMemberName("LGA1700")]
     Lga1700,
-    [EnumMember(Value = "AM4")]
+
+    [JsonStringEnumMemberName("AM4")]
     Am4,
-    [EnumMember(Value = "AM5")]
-    Am5,
+
+    [JsonStringEnumMemberName("AM5")]
+    Am5
 }

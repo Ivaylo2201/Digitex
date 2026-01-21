@@ -1,16 +1,15 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum Role
 {
-    [EnumMember(Value = "client")]
+    [JsonStringEnumMemberName("client")]
     Client,
-    [EnumMember(Value = "admin")]
+
+    [JsonStringEnumMemberName("admin")]
     Admin,
-    [EnumMember(Value = "manager")]
+
+    [JsonStringEnumMemberName("manager")]
     Manager
 }

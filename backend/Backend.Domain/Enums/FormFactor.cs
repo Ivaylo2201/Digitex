@@ -1,16 +1,15 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum FormFactor
-{   
-    [EnumMember(Value = "ATX")]
+{
+    [JsonStringEnumMemberName("ATX")]
     Atx,
-    [EnumMember(Value = "Micro ATX")]   
+
+    [JsonStringEnumMemberName("Micro ATX")]
     MicroAtx,
-    [EnumMember(Value = "Mini ATX")]
+
+    [JsonStringEnumMemberName("Mini ATX")]
     MiniItx
 }

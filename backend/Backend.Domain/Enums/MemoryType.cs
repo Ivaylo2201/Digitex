@@ -1,20 +1,21 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Backend.Domain.Enums;
 
-[JsonConverter(typeof(StringEnumConverter))]
 public enum MemoryType
 {
-    [EnumMember(Value = "DDR4")]
+    [JsonStringEnumMemberName("DDR4")]
     Ddr4,
-    [EnumMember(Value = "DDR5")]
+
+    [JsonStringEnumMemberName("DDR5")]
     Ddr5,
-    [EnumMember(Value = "GDDR5")]
+
+    [JsonStringEnumMemberName("GDDR5")]
     GDdr5,
-    [EnumMember(Value = "GDDR6")]
+
+    [JsonStringEnumMemberName("GDDR6")]
     GDdr6,
-    [EnumMember(Value = "GDDR7")]
+
+    [JsonStringEnumMemberName("GDDR7")]
     GDdr7
 }

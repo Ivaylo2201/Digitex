@@ -1,8 +1,8 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Backend.Application;
 using Backend.Application.Enums;
 using Backend.Infrastructure;
-using Backend.Infrastructure.Convertors;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
 using Backend.Infrastructure.Extensions;
@@ -21,10 +21,9 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 
-builder.Services
-    .ConfigureHttpJsonOptions(options =>
+builder.Services.ConfigureHttpJsonOptions(options =>
     {
-        options.SerializerOptions.Converters.Add(new EnumMemberConverterFactory());
+        options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
     })
     .AddOpenApi()
     .AddInfrastructure(builder.Configuration)
@@ -51,8 +50,7 @@ builder.Services
         });
     })
     .AddRouting(options => options.LowercaseUrls = true)
-    .AddControllers()
-    .AddNewtonsoftJson();
+    .AddControllers();
 
 builder.WebHost.UseUrls(serviceUrl);
 
