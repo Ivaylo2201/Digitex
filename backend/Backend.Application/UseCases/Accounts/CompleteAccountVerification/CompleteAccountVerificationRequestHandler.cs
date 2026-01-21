@@ -1,10 +1,12 @@
 ﻿using System.Net;
+using Backend.Application.Extensions;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Serilog.Context;
 
 namespace Backend.Application.UseCases.Accounts.CompleteAccountVerification;
 
@@ -19,34 +21,38 @@ public class CompleteAccountVerificationRequestHandler(
     
     public async Task<Result<CompleteAccountVerificationResponse>> Handle(CompleteAccountVerificationRequest request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("[{Source}]: Completing account verification...", Source);
-        
-        var hashedToken = tokenService.HashToken(request.Token);
-        var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, cancellationToken);
-        
-        if (userToken is null)
+        using (LogContext.PushProperty("Source", Source))
         {
-            logger.LogWarning("[{Source}]: No active UserToken was found by hash.", Source);
-            return Result<CompleteAccountVerificationResponse>.Failure(HttpStatusCode.NotFound);
-        }
-
-        if (userToken.UserTokenType is not UserTokenType.AccountVerification)
-        {
-            logger.LogWarning("[{Source}]: UserToken type is invalid for account verification.", Source);
-            return Result<CompleteAccountVerificationResponse>.Failure(HttpStatusCode.BadRequest);
-        }
+            logger.LogRequestProcessingStart(nameof(CompleteAccountVerificationRequest));
         
-        logger.LogInformation("[{Source}]: Verifying User with Username={Username}...", Source, userToken.User.Username);
-        var user = await userRepository.VerifyUserAsync(userToken.User.Id, cancellationToken);
+            var hashedToken = tokenService.HashToken(request.Token);
+            var userToken = await userTokenRepository.GetActiveTokenByHashWithUserAsync(hashedToken, cancellationToken);
         
-        await userTokenRepository.DeleteAsync(userToken.Id, cancellationToken);
-        
-        return user is null ? 
-            Result<CompleteAccountVerificationResponse>.Failure(HttpStatusCode.NotFound) : 
-            Result<CompleteAccountVerificationResponse>.Success(HttpStatusCode.OK, new CompleteAccountVerificationResponse
+            if (userToken is null)
             {
-                Token = jwtService.GenerateToken(user),
-                Role = user.Role
-            });
+                logger.LogWarning("[{Source}]: No active UserToken was found by hash.", Source);
+                return Result<CompleteAccountVerificationResponse>.Failure(HttpStatusCode.NotFound);
+            }
+
+            if (userToken.UserTokenType is not UserTokenType.AccountVerification)
+            {
+                logger.LogWarning("UserToken type is invalid for account verification.");
+                return Result<CompleteAccountVerificationResponse>.Failure(HttpStatusCode.BadRequest);
+            }
+        
+            logger.LogDebug("Verifying User with Username={Username}...", userToken.User.Username);
+            var user = await userRepository.VerifyUserAsync(userToken.User.Id, cancellationToken);
+        
+            logger.LogDebug("Deleting UserToken with Id={Id}...", userToken.Id);
+            await userTokenRepository.DeleteAsync(userToken.Id, cancellationToken);
+        
+            return user is null ? 
+                Result<CompleteAccountVerificationResponse>.Failure(HttpStatusCode.NotFound) : 
+                Result<CompleteAccountVerificationResponse>.Success(HttpStatusCode.OK, new CompleteAccountVerificationResponse
+                {
+                    Token = jwtService.GenerateToken(user),
+                    Role = user.Role
+                });
+        }
     }
 }

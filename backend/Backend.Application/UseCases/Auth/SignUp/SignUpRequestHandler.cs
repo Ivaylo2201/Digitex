@@ -38,7 +38,7 @@ public class SignUpRequestHandler(
                 Message = $"Visit {user.Email} to verify your account."
             });
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return Result<SignUpResponse>.Failure(HttpStatusCode.InternalServerError);       
         }
