@@ -3,7 +3,7 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.Contracts.Product.Variants;
 
-public record ProcessorProjection : ProductDetails
+public record ProcessorProjection : ProductDetailsDto
 {
     public required int Cores { get; init; }
     public required int Threads { get; init; }

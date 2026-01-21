@@ -10,8 +10,5 @@ public static class StringExtensions
             => Enum.TryParse<CurrencyIsoCode>(currency, true, out var currencyIsoCode)
                 ? currencyIsoCode
                 : CurrencyIsoCode.Eur;
-
-        public string ToCapitalized()
-            => string.IsNullOrEmpty(currency) ? currency : $"{char.ToUpper(currency[0])}{currency[1..]}";
     }
 }

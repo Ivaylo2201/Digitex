@@ -3,7 +3,7 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.Contracts.Product.Variants;
 
-public record GraphicsCardProjection : ProductDetails
+public record GraphicsCardDto : ProductDetailsDto
 {
     public required Memory Memory { get; init; }
     public required ClockSpeed ClockSpeed { get; init; }

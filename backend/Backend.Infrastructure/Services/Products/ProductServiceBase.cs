@@ -7,7 +7,6 @@ using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
@@ -39,7 +38,7 @@ public class ProductServiceBase<TProduct, TProjection>(
         return Result<TProjection?>.Success(HttpStatusCode.OK, projection);
     }
 
-    public async Task<Result<PaginatedResponse<IReadOnlyList<ProductSummary>>>> ListAllAsync(int page, int pageSize, Query<TProduct> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
+    public async Task<Result<PaginatedResponse<IReadOnlyList<ProductSummaryDto>>>> ListAllAsync(int page, int pageSize, Query<TProduct> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
     {
         var source = GetType().Name;
         var entities = await productRepository.ListAllAsync(page, pageSize, query, stoppingToken);
@@ -50,17 +49,17 @@ public class ProductServiceBase<TProduct, TProjection>(
 
         var projections = currencyService
             .ConvertPrices(entities, entity => entity.InitialPrice *= rate)
-            .Adapt<IReadOnlyList<ProductSummary>>();
+            .Adapt<IReadOnlyList<ProductSummaryDto>>();
         
         var totalItems = await productRepository.CountAsync(query, stoppingToken);
 
-        var response = new PaginatedResponse<IReadOnlyList<ProductSummary>>
+        var response = new PaginatedResponse<IReadOnlyList<ProductSummaryDto>>
         {
             Items = projections,
             TotalItems = totalItems,
             TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
         };
 
-        return Result<PaginatedResponse<IReadOnlyList<ProductSummary>>>.Success(HttpStatusCode.OK, response);
+        return Result<PaginatedResponse<IReadOnlyList<ProductSummaryDto>>>.Success(HttpStatusCode.OK, response);
     }
 }

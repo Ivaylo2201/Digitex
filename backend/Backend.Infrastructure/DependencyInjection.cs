@@ -120,7 +120,7 @@ public static class DependencyInjection
             .AddScoped<IProductService<Monitor, MonitorProjection>, MonitorService>()
             .AddScoped<IProductService<Ram, RamProjection>, RamService>()
             .AddScoped<IProductService<Processor, ProcessorProjection>, ProcessorService>()
-            .AddScoped<IProductService<GraphicsCard, GraphicsCardProjection>, GraphicsCardService>()
+            .AddScoped<IProductService<GraphicsCard, GraphicsCardDto>, GraphicsCardService>()
             .AddScoped<IProductService<Ssd, SsdProjection>, SsdService>()
             .AddScoped<IProductService<Motherboard, MotherboardProjection>, MotherboardService>()
             .AddScoped<IProductService<PowerSupply, PowerSupplyProjection>, PowerSupplyService>()
@@ -228,7 +228,7 @@ public static class DependencyInjection
         
         private static void AddMaps()
         {
-            TypeAdapterConfig<ProductBase, ProductSummary>.NewConfig()
+            TypeAdapterConfig<ProductBase, ProductSummaryDto>.NewConfig()
                 .Map(destination => destination.BrandName, source => source.Brand.BrandName)
                 .Map(destination => destination.Price, source => new Price
                 {
@@ -249,17 +249,17 @@ public static class DependencyInjection
                 })
                 .Map(destination => destination.LineTotal, source => source.Product.Price * source.Quantity);
 
-            TypeAdapterConfig<ProductBase, ProductDetails>.NewConfig().Inherits<ProductBase, ProductSummary>()
+            TypeAdapterConfig<ProductBase, ProductDetailsDto>.NewConfig().Inherits<ProductBase, ProductSummaryDto>()
                 .Map(destination => destination.Sku, source => source.Sku.ToUpper())
                 .Map(destination => destination.TotalReviews, source => source.Reviews.Count);
         
-            TypeAdapterConfig<Processor, ProcessorProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
-            TypeAdapterConfig<GraphicsCard, GraphicsCardProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
-            TypeAdapterConfig<Monitor, MonitorProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
-            TypeAdapterConfig<Motherboard, MotherboardProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
-            TypeAdapterConfig<PowerSupply, PowerSupplyProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
-            TypeAdapterConfig<Ram, RamProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
-            TypeAdapterConfig<Ssd, SsdProjection>.NewConfig().Inherits<ProductBase, ProductDetails>();
+            TypeAdapterConfig<Processor, ProcessorProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<GraphicsCard, GraphicsCardDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Monitor, MonitorProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Motherboard, MotherboardProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<PowerSupply, PowerSupplyProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Ram, RamProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Ssd, SsdProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
         }
     }
 }

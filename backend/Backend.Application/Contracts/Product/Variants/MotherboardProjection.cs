@@ -2,7 +2,7 @@
 
 namespace Backend.Application.Contracts.Product.Variants;
 
-public record MotherboardProjection : ProductDetails
+public record MotherboardProjection : ProductDetailsDto
 {
     public required Socket Socket { get; init; }
     public required FormFactor FormFactor { get; init; }

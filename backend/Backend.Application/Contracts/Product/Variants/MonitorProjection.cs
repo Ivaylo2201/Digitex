@@ -3,7 +3,7 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.Contracts.Product.Variants;
 
-public record MonitorProjection : ProductDetails
+public record MonitorProjection : ProductDetailsDto
 {
     public required double DisplayDiagonal { get; init; }
     public required RefreshRate RefreshRate { get; init; }

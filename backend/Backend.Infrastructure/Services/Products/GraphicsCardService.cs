@@ -11,4 +11,4 @@ public class GraphicsCardService(
     ILogger<GraphicsCardService> logger,
     IProductRepository<GraphicsCard> graphicCardRepository,
     IExchangeRepository exchangeRepository,
-    ICurrencyService currencyService) : ProductServiceBase<GraphicsCard, GraphicsCardProjection>(logger, graphicCardRepository, exchangeRepository, currencyService);
+    ICurrencyService currencyService) : ProductServiceBase<GraphicsCard, GraphicsCardDto>(logger, graphicCardRepository, exchangeRepository, currencyService);

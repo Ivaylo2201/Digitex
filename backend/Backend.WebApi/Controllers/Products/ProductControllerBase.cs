@@ -1,10 +1,7 @@
 ﻿using Backend.Application.Contracts.Product;
-using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Services;
-using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Extensions;
-using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +23,7 @@ public abstract class ProductControllerBase<TProduct, TProjection>(
     }
     
     [HttpGet]
-    [ProducesResponseType<List<ProductSummary>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<List<ProductSummaryDto>>(StatusCodes.Status200OK)]
     [Produces(HttpConstants.ApplicationJson)]
     [Consumes(HttpConstants.ApplicationJson)]
     public async Task<IActionResult> ListAllAsync(int page, int pageSize, string currency, [FromQuery] IDictionary<string, string> criteria, CancellationToken stoppingToken = default)

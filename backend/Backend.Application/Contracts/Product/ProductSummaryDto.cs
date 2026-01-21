@@ -2,7 +2,7 @@
 
 namespace Backend.Application.Contracts.Product;
 
-public record ProductSummary
+public record ProductSummaryDto
 {
     public required Guid Id { get; init; }
     public required string BrandName { get; init; }

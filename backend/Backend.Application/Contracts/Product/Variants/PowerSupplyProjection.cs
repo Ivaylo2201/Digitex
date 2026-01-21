@@ -2,7 +2,7 @@
 
 namespace Backend.Application.Contracts.Product.Variants;
 
-public record PowerSupplyProjection : ProductDetails
+public record PowerSupplyProjection : ProductDetailsDto
 {
     public required int Wattage { get; init; }
     public required FormFactor FormFactor { get; init; }

@@ -1,5 +1,4 @@
 ﻿using Backend.Application.Contracts.Product.Variants;
-using Backend.Application.Interfaces;
 using Backend.Application.Interfaces.Services;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;

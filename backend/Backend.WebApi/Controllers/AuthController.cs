@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Backend.WebApi.Controllers.Products;
+namespace Backend.WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
