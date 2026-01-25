@@ -1,6 +1,7 @@
 ﻿using Backend.Application.DTOs;
 using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products;
+using Backend.Application.DTOs.Products.GraphicsCard;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

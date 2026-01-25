@@ -1,7 +1,7 @@
 ﻿using Backend.Domain.Enums;
 using Backend.Domain.ValueObjects;
 
-namespace Backend.Application.DTOs.Products;
+namespace Backend.Application.DTOs.Products.GraphicsCard;
 
 public record GraphicsCardDto : ProductDetailsDto
 {

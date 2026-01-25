@@ -20,6 +20,9 @@
     }
   },
   "components": {
+    "adminPanelLink": {
+      "adminPanel": "Admin-Bereich"
+    },
     "contactInformationForm": {
       "country": "Land",
       "selectCountry": "Land auswählen",

@@ -1,4 +1,5 @@
 ﻿using Backend.Application.DTOs.Products;
+using Backend.Application.DTOs.Products.GraphicsCard;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
@@ -41,7 +42,7 @@ public abstract class ProductControllerBase<TProduct, TProjection, TFilters>(
 
     [HttpPost]
     [Authorize(Roles = nameof(Role.Admin))]
-    public async Task<Results<Created, BadRequest>> CreateAsync([FromBody] TProduct product, CancellationToken cancellationToken)
+    public async Task<Results<Created, BadRequest>> CreateAsync([FromBody] GraphicsCardCreateDto product, CancellationToken cancellationToken)
     {
         var result = await productService.CreateAsync(product, cancellationToken);
         

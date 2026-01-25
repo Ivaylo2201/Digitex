@@ -20,6 +20,8 @@ export function Router() {
       <Routes>
         <Route path='/' element={<Page></Page>} />
 
+        <Route path='/admin-panel' element={<Page></Page>} />
+
         <Route path='/products'>
           <Route path='categories/:category' element={<ProductsPage />} />
           <Route path=':category/:id' element={<ProductPageResolver />} />

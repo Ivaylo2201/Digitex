@@ -11,12 +11,15 @@ import { CurrencySelect } from '@/features/currency/components/CurrencySelect';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { LanguageSelect } from '@/features/language/components/LanguageSelect';
 import { useAuthStore } from '@/features/auth/stores/useAuth';
+import { AdminPanelLink } from './AdminPanelLink';
 
 export function Header() {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { isAuthenticated, role } = useAuthStore();
   const {
     components: { header },
   } = useTranslation();
+
+  console.log(role)
 
   return (
     <header className='text-white font-montserrat'>
@@ -39,6 +42,7 @@ export function Header() {
           <CurrencySelect />
           <LanguageSelect />
           {isAuthenticated ? <SignOutButton /> : <SignInLink />}
+          {role === 'admin' && <AdminPanelLink />}
         </ul>
       </section>
 

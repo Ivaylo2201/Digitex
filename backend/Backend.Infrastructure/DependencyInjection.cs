@@ -6,6 +6,7 @@ using System.Text;
 using Backend.Application.DTOs;
 using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products;
+using Backend.Application.DTOs.Products.GraphicsCard;
 using Backend.Application.Enums;
 using Backend.Application.Interfaces.Http;
 using Backend.Application.Interfaces.Services;

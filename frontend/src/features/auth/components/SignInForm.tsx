@@ -21,11 +21,7 @@ import {
   type SignInSchema,
 } from '../hooks/sign-in/useSignInSchema';
 
-type SignInFormProps = {
-  isAdmin?: boolean;
-};
-
-export function SignInForm({ isAdmin = false }: SignInFormProps) {
+export function SignInForm() {
   const { handleSubmit, register, setValue } = useForm<SignInSchema>();
   const signInSchema = useSignInSchema();
   const { mutate, isPending } = useSignIn();

@@ -11,7 +11,7 @@ export function SignOutButton() {
   return (
     <button
       onClick={signOut}
-      className='flex justify-center items-center gap-1.5 cursor-pointer'
+      className='flex justify-center items-center gap-1.5 cursor-pointer '
     >
       <LogOut className='text-theme-crimson' size={15} />
       <span>{signOutButton.signOut}</span>

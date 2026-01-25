@@ -20,6 +20,9 @@
     }
   },
   "components": {
+    "adminPanelLink": {
+      "adminPanel": "Административен панел"
+    },
     "contactInformationForm": {
       "country": "Държава",
       "selectCountry": "Изберете държава",

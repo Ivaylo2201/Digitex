@@ -27,8 +27,6 @@ export function ContactInformationForm() {
     components: { contactInformationForm },
   } = useTranslation();
 
-  console.log(selectedCountryId)
-
   const { data: countries = [] } = useCountries();
   const { data: cities = [] } = useCities(selectedCountryId);
 
