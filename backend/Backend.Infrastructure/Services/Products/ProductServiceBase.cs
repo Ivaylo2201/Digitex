@@ -1,65 +1,67 @@
-﻿using System.Net;
-using Backend.Application.Contracts.Product;
-using Backend.Application.Interfaces;
+﻿using System.Linq.Expressions;
+using System.Net;
+using Backend.Application.DTOs.Products;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
-using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Mapster;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public class ProductServiceBase<TProduct, TProjection>(
+public abstract class ProductServiceBase<TProduct, TProjection>(
     ILogger logger,
     IProductRepository<TProduct> productRepository,
     IExchangeRepository exchangeRepository,
     ICurrencyService currencyService) : IProductService<TProduct, TProjection> where TProduct : ProductBase
 {
-    private readonly string _entityName = typeof(TProduct).Name;
-    private readonly string _projectionName = typeof(TProjection).Name;
-
-    public async Task<Result<TProjection?>> GetOneAsync(Guid id, Func<TProduct, TProjection> project, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
+    public async Task<Result<TProjection?>> GetOneAsync(Guid id, CurrencyIsoCode currency, CancellationToken cancellationToken)
     {
-        var source = GetType().Name;
-        var product = await productRepository.GetOneAsync(id, stoppingToken);
+        var product = await productRepository.GetOneAsync(id, cancellationToken);
 
         if (product is null)
-        {
-            logger.LogWarning("[{Source}]: {Entity} with Id={Id} was not found.", source, _entityName, id);
             return Result<TProjection?>.Failure(HttpStatusCode.NotFound);
-        }
         
-        logger.LogInformation("[{Source}]: Projecting {Entity} into a {Projection}...", source, _entityName, _projectionName);
-        var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken);
-        var projection = project(currencyService.ConvertPrice(product, entity => entity.InitialPrice *= rate));
+        var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, currency, cancellationToken);
+        var projection = currencyService.ConvertPrice(product, p => p.InitialPrice *= rate).Adapt<TProjection>();
         
         return Result<TProjection?>.Success(HttpStatusCode.OK, projection);
     }
 
-    public async Task<Result<PaginatedResponse<IReadOnlyList<ProductSummaryDto>>>> ListAllAsync(int page, int pageSize, Query<TProduct> query, CurrencyIsoCode currencyIsoCode, CancellationToken stoppingToken = default)
+    public async Task<Result<Pagination<ProductSummaryDto>>> GetAllAsync(int page, int pageSize, CurrencyIsoCode currency, Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken)
     {
-        var source = GetType().Name;
-        var entities = await productRepository.ListAllAsync(page, pageSize, query, stoppingToken);
+        var products = await productRepository.GetAllAsync(page, pageSize, filter, cancellationToken);
+        var filteredProductsCount = await productRepository.CountAsync(filter, cancellationToken);
         
-        logger.LogInformation("[{Source}]: Projecting {Count} {Entity} entities into {Projection}...", source, entities.Count, _entityName, _projectionName);
-        
-        var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, currencyIsoCode, stoppingToken);
+        var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, currency, cancellationToken);
+        var projections = currencyService.ConvertPrices(products, p => p.InitialPrice *= rate).Adapt<IEnumerable<ProductSummaryDto>>();
 
-        var projections = currencyService
-            .ConvertPrices(entities, entity => entity.InitialPrice *= rate)
-            .Adapt<IReadOnlyList<ProductSummaryDto>>();
-        
-        var totalItems = await productRepository.CountAsync(query, stoppingToken);
-
-        var response = new PaginatedResponse<IReadOnlyList<ProductSummaryDto>>
+        return Result<Pagination<ProductSummaryDto>>.Success(HttpStatusCode.OK, new Pagination<ProductSummaryDto>
         {
             Items = projections,
-            TotalItems = totalItems,
-            TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
-        };
+            TotalItems = filteredProductsCount,
+            TotalPages = (int)Math.Ceiling(filteredProductsCount / (double)pageSize)
+        });
+    }
 
-        return Result<PaginatedResponse<IReadOnlyList<ProductSummaryDto>>>.Success(HttpStatusCode.OK, response);
+    public async Task<Result<TProjection>> CreateAsync(TProduct product, CancellationToken cancellationToken)
+    {
+        var createdProduct = await productRepository.CreateAsync(product, cancellationToken);
+        return Result<TProjection>.Success(HttpStatusCode.Created, createdProduct.Adapt<TProjection>());
+    }
+
+    public async Task<Result<Unit>> UpdateAsync(Guid id, TProduct product, CancellationToken cancellationToken)
+    {
+        await productRepository.UpdateAsync(id, product, cancellationToken);
+        return Result<Unit>.Success(HttpStatusCode.OK, Unit.Value);
+    }
+
+    public async Task<Result<Unit>> DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        await productRepository.DeleteAsync(id, cancellationToken);
+        return Result<Unit>.Success(HttpStatusCode.NoContent, Unit.Value);
     }
 }

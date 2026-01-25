@@ -1,11 +1,15 @@
-﻿using Backend.Domain.Common;
-using Backend.Domain.Interfaces.Generics;
+﻿using System.Linq.Expressions;
+using Backend.Domain.Entities;
+using Backend.Domain.Interfaces.Repositories.Generics;
 
-namespace Backend.Domain.Interfaces;
+namespace Backend.Domain.Interfaces.Repositories;
 
-public interface IProductRepository<TEntity> : ISingleReadable<TEntity, Guid>
-{
-    Task<List<TEntity>> AdminListAllAsync(CancellationToken stoppingToken = default);
-    Task<int> CountAsync(Query<TEntity>? filter = null, CancellationToken stoppingToken = default);
-    Task<List<TEntity>> ListAllAsync(int page, int pageSize, Query<TEntity>? filter = null, CancellationToken stoppingToken = default);
+public interface IProductRepository<TProduct> : 
+    ISingleReadable<TProduct, Guid>,
+    ICreatable<TProduct>,
+    IDeletable<Guid>,
+    IUpdatable<TProduct, Guid> where TProduct : ProductBase
+{ 
+    Task<List<TProduct>> GetAllAsync(int page, int pageSize, Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken);
+    Task<int> CountAsync(Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken);
 }

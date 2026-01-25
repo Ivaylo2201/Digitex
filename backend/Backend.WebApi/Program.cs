@@ -7,7 +7,7 @@ using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
 using Backend.Infrastructure.Extensions;
 using Backend.WebApi.Extensions;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +24,6 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     {
         options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
     })
-    .AddOpenApi()
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
     .AddEndpointsApiExplorer()
@@ -33,18 +32,16 @@ builder.Services.ConfigureHttpJsonOptions(options =>
         options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             Name = "Authorization",
+            In = ParameterLocation.Header,
             Type = SecuritySchemeType.Http,
             Scheme = "Bearer",
             BearerFormat = "JWT",
-            In = ParameterLocation.Header
         });
-
-        options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            
+        options.AddSecurityRequirement(_ => new OpenApiSecurityRequirement
         {
             {
-                new OpenApiSecurityScheme
-                    { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } },
-                []
+                new OpenApiSecuritySchemeReference(referenceId: "Bearer"), []
             }
         });
     })
@@ -59,7 +56,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
 }

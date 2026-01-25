@@ -1,16 +1,17 @@
-﻿using Backend.Application.Contracts.Filters;
+﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class GraphicsCardFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<GraphicsCardFilters>
+public class GraphicsCardFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<GraphicsCardFiltersDto>
 {
-    public async Task<GraphicsCardFilters> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<GraphicsCardFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
     {
-        return new GraphicsCardFilters
+        return new GraphicsCardFiltersDto
         {
             Brands = await brandRepository.ListBrandNamesAsync<GraphicsCard>(stoppingToken),
             BusWidths = Enum.GetValues<BusWidth>().Cast<int>().ToList(),

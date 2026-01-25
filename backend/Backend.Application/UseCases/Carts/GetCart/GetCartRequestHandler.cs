@@ -4,6 +4,7 @@ using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Mapster;
 using MediatR;
 using Microsoft.Extensions.Logging;

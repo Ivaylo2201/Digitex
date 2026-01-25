@@ -2,6 +2,7 @@
 using Backend.Application.DTOs;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Mapster;
 using MediatR;
 using Microsoft.Extensions.Logging;

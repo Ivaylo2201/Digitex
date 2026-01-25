@@ -1,17 +1,18 @@
-﻿using Backend.Application.Contracts.Filters;
+﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class ProcessorFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<ProcessorFilters>
+public class ProcessorFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<ProcessorFiltersDto>
 {
-    public async Task<ProcessorFilters> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<ProcessorFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
     {
-        return new ProcessorFilters
+        return new ProcessorFiltersDto
         {
             Brands = await brandRepository.ListBrandNamesAsync<Processor>(stoppingToken),
             Cores = new List<int> { 4, 6, 8, 10, 12, 14, 16, 20, 24 },

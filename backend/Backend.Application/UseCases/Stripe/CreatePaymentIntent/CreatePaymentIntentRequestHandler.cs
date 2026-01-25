@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Stripe;

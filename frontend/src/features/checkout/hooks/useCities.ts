@@ -13,6 +13,6 @@ export function useCities(countryId: number | undefined) {
   return useQuery({
     queryKey: ['cities', countryId],
     queryFn: () => fetchCities(countryId!),
-    enabled: !!countryId
+    enabled: countryId !== undefined,
   });
 }

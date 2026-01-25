@@ -1,6 +1,6 @@
-﻿namespace Backend.Domain.Interfaces.Generics;
+﻿namespace Backend.Domain.Interfaces.Repositories.Generics;
 
 public interface IDeletable<in TKey>
 {
-    Task DeleteAsync(TKey id, CancellationToken stoppingToken = default);
+    Task DeleteAsync(TKey id, CancellationToken cancellationToken);
 }

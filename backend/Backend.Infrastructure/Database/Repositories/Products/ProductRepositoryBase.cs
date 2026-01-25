@@ -1,14 +1,15 @@
-﻿using Backend.Domain.Common;
+﻿using System.Linq.Expressions;
 using Backend.Domain.Entities;
-using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Database.Repositories.Products;
 
-public class ProductRepositoryBase<TProduct>(DatabaseContext context) : IProductRepository<TProduct> where TProduct : ProductBase
+public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) : IProductRepository<TProduct> where TProduct : ProductBase
 {
-    public async Task<TProduct?> GetOneAsync(Guid id, CancellationToken stoppingToken = default)
-        => await context
+    public async Task<TProduct?> GetOneAsync(Guid id, CancellationToken stoppingToken)
+    {
+        return await context
             .Set<TProduct>()
             .AsNoTracking()
             .Include(product => product.Brand)
@@ -17,38 +18,39 @@ public class ProductRepositoryBase<TProduct>(DatabaseContext context) : IProduct
             .Include(product => product.Reviews)
             .ThenInclude(review => review.User)
             .FirstOrDefaultAsync(product => product.Id == id, stoppingToken);
-
-    public async Task<int> CountAsync(Query<TProduct>? filter = null, CancellationToken stoppingToken = default)
-    {
-        var queryable = context.Set<TProduct>().AsNoTracking();
-
-        if (filter is not null)
-            queryable = filter(queryable);
-
-        return await queryable.CountAsync(stoppingToken);
     }
 
-    public async Task<List<TProduct>> ListAllAsync(int page, int pageSize, Query<TProduct>? filter, CancellationToken stoppingToken = default)
+    public async Task<TProduct> CreateAsync(TProduct product, CancellationToken cancellationToken)
+    {
+        var entity = (await context.Set<TProduct>().AddAsync(product, cancellationToken)).Entity;
+        await context.SaveChangesAsync(cancellationToken);
+        return entity;
+    }
+
+    public async Task<List<TProduct>> GetAllAsync(int page, int pageSize, Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken)
     {
         var queryable = context
             .Set<TProduct>()
             .AsNoTracking()
-            .Include(product => product.Brand)
-            .Where(product => product.Quantity > 0);
+            .Include(p => p.Brand)
+            .Where(p => p.Quantity > 0)
+            .Where(filter);
 
-        if (filter is not null)
-            queryable = filter(queryable);
-        
         return await queryable
             .Skip((Math.Max(page, 1) - 1) * pageSize)
             .Take(pageSize)
-            .ToListAsync(stoppingToken);
+            .ToListAsync(cancellationToken);
     }
-    
-    public async Task<List<TProduct>> AdminListAllAsync(CancellationToken stoppingToken = default) 
-        => await context
-            .Set<TProduct>()
-            .AsNoTracking()
-            .Include(product => product.Brand)
-            .ToListAsync(stoppingToken);
+
+    public async Task<int> CountAsync(Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken)
+        => await context.Set<TProduct>().CountAsync(filter, cancellationToken);
+
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+    {
+        await context.Set<TProduct>()
+            .Where(product => product.Id == id)
+            .ExecuteDeleteAsync(cancellationToken);
+    }
+
+    public abstract Task UpdateAsync(Guid id, TProduct item, CancellationToken cancellationToken);
 }

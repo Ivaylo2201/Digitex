@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.Entities;
 
-namespace Backend.Domain.Interfaces;
+namespace Backend.Domain.Interfaces.Repositories;
 
 public interface ICityRepository
 {

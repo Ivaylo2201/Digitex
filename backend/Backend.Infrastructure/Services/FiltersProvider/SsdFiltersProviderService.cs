@@ -1,17 +1,18 @@
-﻿using Backend.Application.Contracts.Filters;
+﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class SsdFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<SsdFilters>
+public class SsdFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<SsdFiltersDto>
 {
-    public async Task<SsdFilters> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<SsdFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
     {
-        return new SsdFilters
+        return new SsdFiltersDto
         {
             Brands = await brandRepository.ListBrandNamesAsync<Ssd>(stoppingToken),
             MemoryCapacities = new List<int> { 1000, 2000, 3000, 4000, 5000 },

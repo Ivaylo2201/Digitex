@@ -1,8 +1,8 @@
-﻿using Backend.Application.Contracts.Product.Variants;
-using Backend.Application.Interfaces;
+﻿using Backend.Application.DTOs.Products;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;

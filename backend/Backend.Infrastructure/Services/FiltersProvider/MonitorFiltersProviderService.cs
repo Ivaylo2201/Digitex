@@ -1,17 +1,18 @@
-﻿using Backend.Application.Contracts.Filters;
+﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Monitor = Backend.Domain.Entities.Monitor;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class MonitorFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<MonitorFilters>
+public class MonitorFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<MonitorFiltersDto>
 {
-    public async Task<MonitorFilters> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<MonitorFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
     {
-        return new MonitorFilters
+        return new MonitorFiltersDto
         {
             Brands = await brandRepository.ListBrandNamesAsync<Monitor>(stoppingToken),
             RefreshRates = Enum.GetValues<RefreshRate>()

@@ -10,7 +10,7 @@ import { RamsFilterForm } from '@/features/filters/components/forms/RamFilterFor
 import { MonitorsFilterForm } from '@/features/filters/components/forms/MonitorsFilterForm';
 import { SsdsFilterForm } from '@/features/filters/components/forms/SsdsFilterForm';
 import { PowerSuppliesFilterForm } from '@/features/filters/components/forms/PowerSuppliesFilterForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductsPagination } from './components/ProductsPagination';
 
 const filterForms: Record<string, React.ComponentType> = {
@@ -26,8 +26,12 @@ const filterForms: Record<string, React.ComponentType> = {
 export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(9);
+  const [pageSize, setPageSize] = useState(9); //TODO: IMplement page size selector
   const { data } = useProducts(category ?? '', page, pageSize);
+
+  useEffect(() => {
+    setPage(1);
+  }, [category]);
 
   if (!data?.items || !category) {
     return (

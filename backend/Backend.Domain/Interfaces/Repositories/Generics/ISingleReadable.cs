@@ -1,6 +1,6 @@
-﻿namespace Backend.Domain.Interfaces.Generics;
+﻿namespace Backend.Domain.Interfaces.Repositories.Generics;
 
 public interface ISingleReadable<TEntity, in TKey>
 {
-    Task<TEntity?> GetOneAsync(TKey id, CancellationToken stoppingToken = default);
+    Task<TEntity?> GetOneAsync(TKey id, CancellationToken cancellationToken);
 }

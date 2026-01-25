@@ -13,7 +13,7 @@ type Category =
   | 'other';
 
 async function fetchFilters<T>(category: Category) {
-  const res = await httpClient.get<T>(`/filters/${category}`);
+  const res = await httpClient.get<T>(`/products/${category}/filters`);
   return res.data;
 }
 

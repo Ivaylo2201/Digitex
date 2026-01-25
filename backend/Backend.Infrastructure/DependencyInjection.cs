@@ -3,15 +3,15 @@ using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
-using Backend.Application.Contracts.Filters;
-using Backend.Application.Contracts.Product;
-using Backend.Application.Contracts.Product.Variants;
 using Backend.Application.DTOs;
+using Backend.Application.DTOs.Filters;
+using Backend.Application.DTOs.Products;
 using Backend.Application.Enums;
 using Backend.Application.Interfaces.Http;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Backend.Domain.Settings;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Repositories;
@@ -117,29 +117,30 @@ public static class DependencyInjection
             .AddScoped<ICityRepository, CityRepository>();
 
         private IServiceCollection AddServices() => services
-            .AddScoped<IProductService<Monitor, MonitorProjection>, MonitorService>()
-            .AddScoped<IProductService<Ram, RamProjection>, RamService>()
-            .AddScoped<IProductService<Processor, ProcessorProjection>, ProcessorService>()
+            .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
+            .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
+            .AddScoped<IProductService<Ram, RamDto>, RamService>()
+            .AddScoped<IProductService<Processor, ProcessorDto>, ProcessorService>()
             .AddScoped<IProductService<GraphicsCard, GraphicsCardDto>, GraphicsCardService>()
-            .AddScoped<IProductService<Ssd, SsdProjection>, SsdService>()
-            .AddScoped<IProductService<Motherboard, MotherboardProjection>, MotherboardService>()
-            .AddScoped<IProductService<PowerSupply, PowerSupplyProjection>, PowerSupplyService>()
+            .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
+            .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
+            .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
             .AddScoped<ICurrencyService, CurrencyService>()
-            .AddScoped<IFiltersProviderService<GraphicsCardFilters>, GraphicsCardFiltersProviderService>()
-            .AddScoped<IFiltersProviderService<MonitorFilters>, MonitorFiltersProviderService>()
-            .AddScoped<IFiltersProviderService<RamFilters>, RamFiltersProviderService>()
-            .AddScoped<IFiltersProviderService<ProcessorFilters>, ProcessorFiltersProviderService>()
-            .AddScoped<IFiltersProviderService<GraphicsCardFilters>, GraphicsCardFiltersProviderService>()
-            .AddScoped<IFiltersProviderService<SsdFilters>, SsdFiltersProviderService>()
-            .AddScoped<IFiltersProviderService<MotherboardFilters>, MotherboardFiltersProviderService>()
-            .AddScoped<IFiltersProviderService<PowerSupplyFilters>, PowerSupplyFiltersProviderService>()
-            .AddTransient<IQueryBuilderService<Monitor>, MonitorQueryBuilderService>()
-            .AddTransient<IQueryBuilderService<Ram>, RamQueryBuilderService>()
-            .AddTransient<IQueryBuilderService<Processor>, ProcessorQueryBuilderService>()
-            .AddTransient<IQueryBuilderService<GraphicsCard>, GraphicsCardQueryBuilderService>()
-            .AddTransient<IQueryBuilderService<Ssd>, SsdQueryBuilderService>()
-            .AddTransient<IQueryBuilderService<Motherboard>, MotherboardQueryBuilderService>()
-            .AddTransient<IQueryBuilderService<PowerSupply>, PowerSupplyQueryBuilderService>()
+            .AddScoped<IFiltersProviderService<GraphicsCardFiltersDto>, GraphicsCardFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<MonitorFiltersDto>, MonitorFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<RamFiltersDto>, RamFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<ProcessorFiltersDto>, ProcessorFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<GraphicsCardFiltersDto>, GraphicsCardFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<SsdFiltersDto>, SsdFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<MotherboardFiltersDto>, MotherboardFiltersProviderService>()
+            .AddScoped<IFiltersProviderService<PowerSupplyFiltersDto>, PowerSupplyFiltersProviderService>()
+            .AddTransient<IExpressionBuilderService<Monitor>, MonitorExpressionBuilderService>()
+            .AddTransient<IExpressionBuilderService<Ram>, RamExpressionBuilderService>()
+            .AddTransient<IExpressionBuilderService<Processor>, ProcessorExpressionBuilderService>()
+            .AddTransient<IExpressionBuilderService<GraphicsCard>, GraphicsCardExpressionBuilderService>()
+            .AddTransient<IExpressionBuilderService<Ssd>, SsdExpressionBuilderService>()
+            .AddTransient<IExpressionBuilderService<Motherboard>, MotherboardExpressionBuilderService>()
+            .AddTransient<IExpressionBuilderService<PowerSupply>, PowerSupplyExpressionBuilderService>()
             .AddTransient<ITokenService, TokenService>()
             .AddSingleton<IUrlService, UrlService>()
             .AddSingleton<IJwtService, JwtService>();
@@ -253,13 +254,13 @@ public static class DependencyInjection
                 .Map(destination => destination.Sku, source => source.Sku.ToUpper())
                 .Map(destination => destination.TotalReviews, source => source.Reviews.Count);
         
-            TypeAdapterConfig<Processor, ProcessorProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Processor, ProcessorDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
             TypeAdapterConfig<GraphicsCard, GraphicsCardDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
-            TypeAdapterConfig<Monitor, MonitorProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
-            TypeAdapterConfig<Motherboard, MotherboardProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
-            TypeAdapterConfig<PowerSupply, PowerSupplyProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
-            TypeAdapterConfig<Ram, RamProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
-            TypeAdapterConfig<Ssd, SsdProjection>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Monitor, MonitorDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Motherboard, MotherboardDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<PowerSupply, PowerSupplyDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Ram, RamDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
+            TypeAdapterConfig<Ssd, SsdDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
         }
     }
 }
