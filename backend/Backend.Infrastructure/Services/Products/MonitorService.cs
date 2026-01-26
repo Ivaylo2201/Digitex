@@ -1,7 +1,8 @@
 ﻿using Backend.Application.DTOs.Products;
+using Backend.Application.DTOs.Products.Monitor;
 using Backend.Application.Interfaces.Services;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
+using FluentValidation;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
@@ -12,4 +13,5 @@ public class MonitorService(
     ILogger<MonitorService> logger,
     IProductRepository<Monitor> monitorRepository,
     IExchangeRepository exchangeRepository,
-    ICurrencyService currencyService) : ProductServiceBase<Monitor, MonitorDto>(logger, monitorRepository, exchangeRepository, currencyService);
+    ICurrencyService currencyService,
+    IValidator<Monitor> validator) : ProductServiceBase<Monitor, MonitorDto>(logger, monitorRepository, exchangeRepository, currencyService, validator);

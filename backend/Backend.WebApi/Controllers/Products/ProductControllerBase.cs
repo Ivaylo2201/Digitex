@@ -1,11 +1,11 @@
 ﻿using Backend.Application.DTOs.Products;
-using Backend.Application.DTOs.Products.GraphicsCard;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;
 using Backend.WebApi.Extensions;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -42,9 +42,9 @@ public abstract class ProductControllerBase<TProduct, TProjection, TFilters>(
 
     [HttpPost]
     [Authorize(Roles = nameof(Role.Admin))]
-    public async Task<Results<Created, BadRequest>> CreateAsync([FromBody] GraphicsCardCreateDto product, CancellationToken cancellationToken)
+    public async Task<Results<Created, BadRequest>> CreateAsync([FromBody] TProduct product, CancellationToken cancellationToken)
     {
-        var result = await productService.CreateAsync(product, cancellationToken);
+        var result = await productService.CreateAsync(product.Adapt<TProduct>(), cancellationToken);
         
         return result.IsSuccess
             ? TypedResults.Created()
@@ -55,7 +55,7 @@ public abstract class ProductControllerBase<TProduct, TProjection, TFilters>(
     [Authorize(Roles = nameof(Role.Admin))]
     public async Task<Results<Ok, BadRequest>> UpdateAsync([FromRoute] Guid id, [FromBody] TProduct product, CancellationToken cancellationToken)
     {
-        var result = await productService.UpdateAsync(id, product, cancellationToken);
+        var result = await productService.UpdateAsync(id, product.Adapt<TProduct>(), cancellationToken);
         
         return result.IsSuccess
             ? TypedResults.Ok()

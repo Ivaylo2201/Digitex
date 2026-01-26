@@ -1,6 +1,7 @@
 ﻿using Backend.Application.DTOs;
 using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products;
+using Backend.Application.DTOs.Products.Monitor;
 using Backend.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Monitor = Backend.Domain.Entities.Monitor;

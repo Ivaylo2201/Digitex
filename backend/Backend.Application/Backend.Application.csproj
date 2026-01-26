@@ -25,8 +25,4 @@
       <Compile Remove="UseCases\Products\GetAllProductsRequest.cs" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Validators\" />
-    </ItemGroup>
-
 </Project>

@@ -6,17 +6,19 @@ using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Interfaces.Repositories;
+using FluentValidation;
 using Mapster;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Infrastructure.Services.Products;
 
-public abstract class ProductServiceBase<TProduct, TProjection, TCreate, TUpdate>(
+public abstract class ProductServiceBase<TProduct, TProjection>(
     ILogger logger,
     IProductRepository<TProduct> productRepository,
     IExchangeRepository exchangeRepository,
-    ICurrencyService currencyService) : IProductService<TProduct, TProjection, TCreate, TUpdate> where TProduct : ProductBase
+    ICurrencyService currencyService,
+    IValidator<TProduct> validator) : IProductService<TProduct, TProjection> where TProduct : ProductBase
 {
     public async Task<Result<TProjection?>> GetOneAsync(Guid id, CurrencyIsoCode currency, CancellationToken cancellationToken)
     {
@@ -47,23 +49,23 @@ public abstract class ProductServiceBase<TProduct, TProjection, TCreate, TUpdate
         });
     }
 
-    public async Task<Result<TProjection>> CreateAsync(TCreate product, CancellationToken cancellationToken)
+    public async Task<Result<TProjection>> CreateAsync(TProduct product, CancellationToken cancellationToken)
     {
-        // var result = await validator.ValidateAsync(product, cancellationToken);
-        //
-        // if (!result.IsValid)
-        //     return Result<TProjection>.Failure(HttpStatusCode.BadRequest);
+        var result = await validator.ValidateAsync(product, cancellationToken);
+        
+        if (!result.IsValid)
+            return Result<TProjection>.Failure(HttpStatusCode.BadRequest);
 
         var createdProduct = await productRepository.CreateAsync(product, cancellationToken);
         return Result<TProjection>.Success(HttpStatusCode.Created, createdProduct.Adapt<TProjection>());
     }
 
-    public async Task<Result<Unit>> UpdateAsync(Guid id, TUpdate product, CancellationToken cancellationToken)
+    public async Task<Result<Unit>> UpdateAsync(Guid id, TProduct product, CancellationToken cancellationToken)
     {
-        // var result = await validator.ValidateAsync(product, cancellationToken);
-        //
-        // if (!result.IsValid)
-        //     return Result<Unit>.Failure(HttpStatusCode.BadRequest);
+        var result = await validator.ValidateAsync(product, cancellationToken);
+        
+        if (!result.IsValid)
+            return Result<Unit>.Failure(HttpStatusCode.BadRequest);
         
         await productRepository.UpdateAsync(id, product, cancellationToken);
         return Result<Unit>.Success(HttpStatusCode.OK, Unit.Value);

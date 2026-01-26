@@ -1,6 +1,6 @@
 ﻿using Backend.Domain.Enums;
 
-namespace Backend.Application.DTOs.Products;
+namespace Backend.Application.DTOs.Products.PowerSupply;
 
 public record PowerSupplyDto : ProductDetailsDto
 {
