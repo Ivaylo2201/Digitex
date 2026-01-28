@@ -40,6 +40,7 @@ using Microsoft.IdentityModel.Tokens;
 using Stripe;
 using Monitor = Backend.Domain.Entities.Monitor;
 using Price = Backend.Domain.ValueObjects.Price;
+using Review = Backend.Domain.Entities.Review;
 using TokenService = Backend.Infrastructure.Services.TokenService;
 
 namespace Backend.Infrastructure;
@@ -245,6 +246,9 @@ public static class DependencyInjection
                 })
                 .Map(destination => destination.Rating, source => source.AverageRating)
                 .Map(destination => destination.Quantity, source => source.Quantity);
+
+            TypeAdapterConfig<Review, ReviewDto>.NewConfig()
+                .Map(destination => destination.Username, source => source.User.Username);
             
             TypeAdapterConfig<Item, ItemDto>.NewConfig()
                 .Map(destination => destination.Product, source => new ProductDto

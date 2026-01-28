@@ -21,13 +21,14 @@ export function Rating({
       {Array.from({ length: maxStars }).map((_, i) => {
         const starNumber = i + 1;
         const filled = starNumber <= rating;
+        
         return (
           <Star
             key={i}
             size={starSize}
             fill={filled ? 'var(--color-theme-crimson)' : '#9CA3AF'}
             strokeWidth={0}
-            className='cursor-pointer transition-colors'
+            className={`transition-colors ${onStarClick ? 'cursor-pointer' : ''}`}
             onClick={() => onStarClick && onStarClick(starNumber)}
           />
         );

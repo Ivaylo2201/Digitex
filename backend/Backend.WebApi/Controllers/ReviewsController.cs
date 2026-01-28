@@ -14,7 +14,7 @@ namespace Backend.WebApi.Controllers;
 public class ReviewsController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<Ok<IEnumerable<ReviewDto>>> GetAllReviewsByProductIdAsync([FromQuery] Guid productId, [FromQuery] int limit = 9, CancellationToken cancellationToken = default)
+    public async Task<Ok<IEnumerable<ReviewDto>>> GetAllReviewsByProductIdAsync([FromQuery] Guid productId, [FromQuery] int limit = 6, CancellationToken cancellationToken = default)
     {
         var result = await mediator.Send(new GetAllReviewsByProductIdRequest { ProductId = productId, Limit = limit }, cancellationToken);
         return TypedResults.Ok(result.Value);

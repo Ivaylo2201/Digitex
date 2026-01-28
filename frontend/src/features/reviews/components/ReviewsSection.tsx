@@ -1,21 +1,21 @@
 import { useTranslation } from '@/features/language/hooks/useTranslation';
-import type { Review } from '../models/Review';
 import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { Rating } from '@/features/products/components/Rating';
 import { EmptyReviewsSection } from './EmptyReviewsSection';
 import { ReviewForm } from './ReviewForm';
+import { useReviews } from '../hooks/useReviews';
 
 type ReviewsSectionProps = {
   productId: string;
-  reviews: Review[];
 };
 
-export function ReviewsSection({ reviews, productId }: ReviewsSectionProps) {
+export function ReviewsSection({ productId }: ReviewsSectionProps) {
   const {
     components: { reviewsSection },
   } = useTranslation();
-  const hasReviews = reviews.length > 0;
+
+  const { data: reviews } = useReviews(productId);
+  const hasReviews = (reviews?.length ?? 0) > 0;
 
   return (
     <section className='flex flex-col'>
@@ -27,21 +27,35 @@ export function ReviewsSection({ reviews, productId }: ReviewsSectionProps) {
         className='bg-gray-300 h-px mt-2 mb-4'
       />
       {hasReviews ? (
-        <ScrollArea className='h-72'>
-          <div className='flex md:grid md:grid-cols-2 md:items-center flex-col gap-4'>
-            {reviews.map((review) => (
-              <article key={review.id} className='p-1 flex flex-col gap-2'>
-                <div className='flex flex-col'>
-                  <p className='font-medium'>{review.username}</p>
-                  <Rating stars={4} starSize={13} />
+        <div className='grid gap-4 grid-cols-1 lg:grid-cols-2'>
+          {reviews?.map((review) => (
+            <article
+              key={review.id}
+              className='p-4 flex flex-col gap-2 bg-theme-gunmetal rounded-lg shadow-sm'
+            >
+              <div className='flex flex-col gap-1'>
+                <div className='flex justify-between items-center'>
+                  <p className='font-medium text-white'>{review.username}</p>
+                  <span className='text-gray-400 text-xs'>
+                    {new Date(review.createdAt).toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </span>
                 </div>
-                <p className='max-w-110 text-gray-500 text-sm'>
-                  {review.comment ?? 'No comment provided.'}
+                <Rating stars={review.rating} starSize={14} />
+              </div>
+              <div className='text-gray-300 text-sm mt-1'>
+                <p className={review.comment === '' ? 'italic' : ''}>
+                  {review.comment === ''
+                    ? reviewsSection.noCommentProvided
+                    : review.comment}
                 </p>
-              </article>
-            ))}
-          </div>
-        </ScrollArea>
+              </div>
+            </article>
+          ))}
+        </div>
       ) : (
         <EmptyReviewsSection />
       )}

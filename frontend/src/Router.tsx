@@ -13,6 +13,7 @@ import { AccountVerificationPage } from './features/account/pages/AccountVerific
 import { RequestPasswordResetPage } from './features/account/pages/RequestPasswordResetPage';
 import { CompletePasswordResetPage } from './features/account/pages/CompletePasswordResetPage';
 import { CheckoutPage } from './features/checkout/pages/CheckoutPage';
+import { ThankYouPage } from './features/checkout/pages/ThankYouPage';
 
 export function Router() {
   return (
@@ -74,6 +75,15 @@ export function Router() {
           element={
             <AuthenticationRequired>
               <FavoritesPage />
+            </AuthenticationRequired>
+          }
+        />
+
+        <Route
+          path='/thank-you'
+          element={
+            <AuthenticationRequired>
+              <ThankYouPage />
             </AuthenticationRequired>
           }
         />

@@ -18,7 +18,7 @@
         "maxLengthError": "Потребителското име е твърде дълго."
       }
     },
-    "writeReview": {
+    "createReview": {
       "productId": {
         "requiredError": "Идентификаторът на продукта е задължителен.",
         "invalidError": "Невалиден идентификатор на продукта."
@@ -32,17 +32,20 @@
     }
   },
   "components": {
+    "checkoutForm": {
+      "pay": "Плати",
+      "now": "сега"
+    },
     "adminPanelLink": {
       "adminPanel": "Административен панел"
     },
     "reviewForm": {
-      "writeAReview": "Напишете отзив",
-      "shareYourThoughtsAndRatingForThisProduct": "Споделете вашите мисли и оценка за този продукт.",
+      "leaveAReview": "Напишете отзив",
+      "shareYourThoughtsAndRatingForThisProduct": "Споделете вашето мнение и оценка за този продукт.",
       "rating": "Оценка",
       "comment": "Коментар",
-      "writeYourReview": "Напишете своя отзив...",
-      "submitReview": "Изпратете отзива",
-      "submitting": "Изпращане..."
+      "leaveAComment": "Напишете своя отзив...",
+      "submitReview": "Изпратете отзива"
     },
     "contactInformationForm": {
       "country": "Държава",
@@ -227,7 +230,8 @@
       "reviews": "Отзиви",
       "noReviewsForThisProduct": "Няма отзиви за този продукт",
       "noReviewsHaveBeenLeftForThisProductYet": "Все още няма оставени отзиви за този продукт",
-      "writeTheFirstReviewViaTheFormBelow": "Напишете първия отзив чрез формата по-долу"
+      "writeTheFirstReviewViaTheFormBelow": "Напишете първия отзив чрез формата по-долу",
+      "noCommentProvided": "Няма предоставен коментар"
     },
     "loader": {
       "loading": "Зареждане"
@@ -349,7 +353,7 @@
     "useSignIn": {
       "invalidCredentials": "Невалидни данни за вход."
     },
-    "useWriteReview": {
+    "useCreateReview": {
       "reviewSubmittedSuccessfully": "Отзивът е изпратен успешно."
     }
   }

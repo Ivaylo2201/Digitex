@@ -18,7 +18,7 @@ export type Translation = {
         maxLengthError: string;
       };
     };
-    writeReview: {
+    createReview: {
       productId: {
         requiredError: string;
         invalidError: string;
@@ -32,14 +32,17 @@ export type Translation = {
     };
   };
   components: {
+    checkoutForm: {
+      pay: string;
+      now: string;
+    };
     reviewForm: {
-      writeAReview: string;
+      leaveAReview: string;
       shareYourThoughtsAndRatingForThisProduct: string;
       rating: string;
       comment: string;
-      writeYourReview: string;
+      leaveAComment: string;
       submitReview: string;
-      submitting: string;
     };
     adminPanelLink: {
       adminPanel: string;
@@ -202,6 +205,7 @@ export type Translation = {
       noReviewsForThisProduct: string;
       noReviewsHaveBeenLeftForThisProductYet: string;
       writeTheFirstReviewViaTheFormBelow: string;
+      noCommentProvided: string;
     };
     loader: {
       loading: string;
@@ -344,7 +348,7 @@ export type Translation = {
     useSignIn: {
       invalidCredentials: string;
     };
-    useWriteReview: {
+    useCreateReview: {
       reviewSubmittedSuccessfully: string;
     };
   };
@@ -370,7 +374,7 @@ export const translation: Translation = {
         maxLengthError: 'Username is too long.',
       },
     },
-    writeReview: {
+    createReview: {
       productId: {
         requiredError: 'Product ID is required',
         invalidError: 'Invalid product ID',
@@ -384,6 +388,10 @@ export const translation: Translation = {
     },
   },
   components: {
+    checkoutForm: {
+      pay: "Pay",
+      now: "now",
+    },
     contactInformationForm: {
       country: 'Country',
       selectCountry: 'Select country',
@@ -506,6 +514,7 @@ export const translation: Translation = {
         'No reviews have been left for this product yet',
       writeTheFirstReviewViaTheFormBelow:
         'Write the first review via the form below',
+      noCommentProvided: 'No comment provided',
     },
     loader: {
       loading: 'Loading',
@@ -601,14 +610,12 @@ export const translation: Translation = {
       adminPanel: 'Admin Panel',
     },
     reviewForm: {
-      writeAReview: 'Write a Review',
-      shareYourThoughtsAndRatingForThisProduct:
-        'Share your thoughts and rating for this product.',
+      leaveAReview: 'Leave a review',
+      shareYourThoughtsAndRatingForThisProduct:'Share your thoughts and rating for this product.',
       rating: 'Rating',
       comment: 'Comment',
-      writeYourReview: 'Write your review...',
-      submitReview: 'Submit Review',
-      submitting: 'Submitting...',
+      leaveAComment: 'Leave a comment...',
+      submitReview: 'Submit review',
     },
   },
   specifications: {
@@ -712,7 +719,7 @@ export const translation: Translation = {
     useSignIn: {
       invalidCredentials: 'Invalid credentials.',
     },
-    useWriteReview: {
+    useCreateReview: {
       reviewSubmittedSuccessfully: 'Review submitted successfully.',
     },
   },

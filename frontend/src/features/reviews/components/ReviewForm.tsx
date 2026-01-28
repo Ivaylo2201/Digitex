@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import {
-  useWriteReviewSchema,
-  type WriteReviewSchema,
-} from '../hooks/write-review/useWriteReviewSchema';
-import { useWriteReview } from '../hooks/write-review/useWriteReview';
+  useCreateReviewSchema,
+  type CreateReviewSchema,
+} from '../hooks/create-review/useCreateReviewSchema';
+import { useCreateReview } from '../hooks/create-review/useCreateReview';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,7 @@ import { Rating } from '@/features/products/components/Rating';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Spinner } from '@/components/ui/spinner';
+import { Send } from 'lucide-react';
 
 type ReviewFormProps = {
   productId: string;
@@ -31,20 +32,19 @@ export function ReviewForm({ productId }: ReviewFormProps) {
     setValue,
     reset,
     formState: { isSubmitting },
-  } = useForm<WriteReviewSchema>({
+  } = useForm<CreateReviewSchema>({
     defaultValues: { productId, rating: 0, comment: '' },
   });
-  const writeReviewSchema = useWriteReviewSchema();
-  const { mutate, isPending } = useWriteReview();
+  const createReviewSchema = useCreateReviewSchema();
+  const { mutate, isPending } = useCreateReview();
   const {
     components: { reviewForm },
   } = useTranslation();
 
   const rating = watch('rating');
 
-  const onSubmit = (data: WriteReviewSchema) => {
-    const result = writeReviewSchema.safeParse(data);
-    console.log(data);
+  const onSubmit = (data: CreateReviewSchema) => {
+    const result = createReviewSchema.safeParse(data);
 
     if (!result.success) {
       toast.error(result.error?.errors[0].message);
@@ -56,9 +56,9 @@ export function ReviewForm({ productId }: ReviewFormProps) {
   };
 
   return (
-    <Card className='w-full max-w-md bg-theme-gunmetal text-theme-white self-center'>
+    <Card className='w-full max-w-md bg-theme-gunmetal text-theme-white self-center mt-8'>
       <CardHeader>
-        <CardTitle>{reviewForm.writeAReview}</CardTitle>
+        <CardTitle>{reviewForm.leaveAReview}</CardTitle>
         <CardDescription className='text-gray-400'>
           {reviewForm.shareYourThoughtsAndRatingForThisProduct}
         </CardDescription>
@@ -83,7 +83,7 @@ export function ReviewForm({ productId }: ReviewFormProps) {
               maxLength={500}
               id='comment'
               value={watch('comment')}
-              placeholder={reviewForm.writeYourReview}
+              placeholder={reviewForm.leaveAComment}
               className='bg-theme-white text-theme-gunmetal placeholder:text-theme-gunmetal'
               {...register('comment')}
             />
@@ -92,9 +92,10 @@ export function ReviewForm({ productId }: ReviewFormProps) {
           <Button
             type='submit'
             disabled={isSubmitting}
-            className='w-full bg-theme-crimson hover:bg-theme-lightcrimson cursor-pointer duration-200 transition-colors'
+            className='w-full bg-theme-crimson hover:bg-theme-lightcrimson cursor-pointer duration-200 transition-colors flex items-center justify-center gap-2'
           >
             {isPending && <Spinner />}
+            <Send />
             {reviewForm.submitReview}
           </Button>
         </form>

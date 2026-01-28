@@ -18,7 +18,7 @@
         "maxLengthError": "Der Benutzername ist zu lang."
       }
     },
-    "writeReview": {
+    "createReview": {
       "productId": {
         "requiredError": "Produkt-ID ist erforderlich",
         "invalidError": "Ungültige Produkt-ID"
@@ -34,6 +34,10 @@
     }
   },
   "components": {
+    "checkoutForm": {
+      "pay": "Bezahlen",
+      "now": "jetzt"
+    },
     "adminPanelLink": {
       "adminPanel": "Admin-Bereich"
     },
@@ -48,13 +52,12 @@
       "apartment": "Wohnung"
     },
     "reviewForm": {
-      "writeAReview": "Eine Bewertung schreiben",
+      "leaveAReview": "Eine Bewertung schreiben",
       "shareYourThoughtsAndRatingForThisProduct": "Teilen Sie Ihre Gedanken und Bewertung zu diesem Produkt.",
       "rating": "Bewertung",
       "comment": "Kommentar",
-      "writeYourReview": "Schreiben Sie Ihre Bewertung...",
-      "submitReview": "Bewertung absenden",
-      "submitting": "Wird gesendet..."
+      "leaveAComment": "Schreiben Sie Ihre Bewertung...",
+      "submitReview": "Bewertung absenden"
     },
     "billingForm": {
       "contactInformation": "Kontaktinformationen",
@@ -229,7 +232,8 @@
       "reviews": "Bewertungen",
       "noReviewsForThisProduct": "Keine Bewertungen für dieses Produkt",
       "noReviewsHaveBeenLeftForThisProductYet": "Es wurden noch keine Bewertungen abgegeben",
-      "writeTheFirstReviewViaTheFormBelow": "Schreiben Sie die erste Bewertung über das Formular unten"
+      "writeTheFirstReviewViaTheFormBelow": "Schreiben Sie die erste Bewertung über das Formular unten",
+      "noCommentProvided": "Kein Kommentar vorhanden"
     },
     "loader": {
       "loading": "Lädt"
@@ -351,7 +355,7 @@
     "useSignIn": {
       "invalidCredentials": "Ungültige Anmeldedaten."
     },
-    "useWriteReview": {
+    "useCreateReview": {
       "reviewSubmittedSuccessfully": "Die Bewertung wurde erfolgreich eingereicht."
     }
   }

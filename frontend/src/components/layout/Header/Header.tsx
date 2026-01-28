@@ -19,8 +19,6 @@ export function Header() {
     components: { header },
   } = useTranslation();
 
-  console.log(role)
-
   return (
     <header className='text-white font-montserrat'>
       <section className='flex flex-col md:flex-row py-3 md:py-1 gap-y-2 justify-center md:justify-around items-center text-xs font-medium bg-theme-gunmetal'>
