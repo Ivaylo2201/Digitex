@@ -243,6 +243,7 @@ public static class DependencyInjection
                     Initial = source.InitialPrice,
                     Discounted = source.Price
                 })
+                .Map(destination => destination.Rating, source => source.AverageRating)
                 .Map(destination => destination.Quantity, source => source.Quantity);
             
             TypeAdapterConfig<Item, ItemDto>.NewConfig()
@@ -259,6 +260,7 @@ public static class DependencyInjection
 
             TypeAdapterConfig<ProductBase, ProductDetailsDto>.NewConfig().Inherits<ProductBase, ProductSummaryDto>()
                 .Map(destination => destination.Sku, source => source.Sku.ToUpper())
+                .Map(destination => destination.Rating, source => source.AverageRating)
                 .Map(destination => destination.TotalReviews, source => source.Reviews.Count);
         
             TypeAdapterConfig<Processor, ProcessorDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();

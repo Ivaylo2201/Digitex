@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { WriteReviewSchema } from './useWriteReviewSchema';
 import { httpClient } from '@/lib/api/httpClient';
 import type { ApiError } from '@/lib/api/ApiError';
@@ -14,11 +14,15 @@ async function writeReview(data: WriteReviewSchema) {
 
 export function useWriteReview() {
   const { hooks } = useTranslation();
+  const queryClient = useQueryClient();
 
   return useMutation<UseWriteReviewResponse, ApiError, WriteReviewSchema>({
     mutationFn: writeReview,
-    onSuccess: () =>
-      toast.success(hooks.useWriteReview.reviewSubmittedSuccessfully),
+    onSuccess: (_, variables) => {
+      toast.success(hooks.useWriteReview.reviewSubmittedSuccessfully);
+      queryClient.invalidateQueries({ queryKey: ['reviews'] });
+      queryClient.invalidateQueries({ queryKey: [variables.productId] });
+    },
     onError: () => toast.error(hooks.generic.somethingWentWrong),
   });
 }

@@ -1,5 +1,4 @@
 ﻿using Backend.Domain.Entities;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,15 +6,18 @@ namespace Backend.Infrastructure.Database.Repositories;
 
 public class ReviewRepository(DatabaseContext context) : IReviewRepository
 {
-    public async Task<Review> CreateAsync(Review review, CancellationToken stoppingToken = default)
+    public async Task<Review> CreateAsync(Review review, CancellationToken cancellationToken = default)
     {
-        var entity = (await context.Reviews.AddAsync(review, stoppingToken)).Entity;
-        await context.SaveChangesAsync(stoppingToken);
+        var entity = (await context.Reviews.AddAsync(review, cancellationToken)).Entity;
+        await context.SaveChangesAsync(cancellationToken);
         return entity;
     }
 
-    public async Task<double> GetAverageRatingAsync(Guid productId)
+    public async Task<List<Review>> GetRecentByProductIdAsync(Guid productId, int limit, CancellationToken cancellationToken = default)
         => await context.Reviews
+            .AsNoTracking()
             .Where(review => review.ProductId == productId)
-            .AverageAsync(review => review.Rating);
+            .OrderByDescending(review => review.CreatedAt)
+            .Take(limit)
+            .ToListAsync(cancellationToken);
 }

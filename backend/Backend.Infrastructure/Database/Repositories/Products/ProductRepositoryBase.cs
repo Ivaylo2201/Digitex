@@ -31,7 +31,9 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
     {
         var queryable = context
             .Set<TProduct>()
+            .OrderBy(product => product.Id)
             .AsNoTracking()
+            .Include(product => product.Reviews)
             .Include(p => p.Brand)
             .Where(p => p.Quantity > 0)
             .Where(filter);

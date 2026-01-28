@@ -11,7 +11,7 @@ namespace Backend.WebApi.Controllers;
 public class CurrenciesController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public async Task<Results<Ok<IEnumerable<CurrencyDto>>, BadRequest<ProblemDetails>>> GetAllCurrenciesAsync(CancellationToken cancellationToken)
+    public async Task<Ok<IEnumerable<CurrencyDto>>> GetAllCurrenciesAsync(CancellationToken cancellationToken)
     {
         var result = await mediator.Send(new GetAllCurrenciesRequest(), cancellationToken);
         return TypedResults.Ok(result.Value);

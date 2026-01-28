@@ -29,6 +29,7 @@ export function ReviewForm({ productId }: ReviewFormProps) {
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { isSubmitting },
   } = useForm<WriteReviewSchema>({
     defaultValues: { productId, rating: 0, comment: '' },
@@ -51,6 +52,7 @@ export function ReviewForm({ productId }: ReviewFormProps) {
     }
 
     mutate(data);
+    reset();
   };
 
   return (

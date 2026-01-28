@@ -21,4 +21,5 @@ public abstract class ProductBase
     public ICollection<Sale> Sales { get; init; } = [];  
 
     public decimal Price => InitialPrice * (1 - DiscountPercentage / 100m);
+    public double AverageRating => Reviews.Count is not 0 ? Reviews.Average(r => r.Rating) : 0;
 }

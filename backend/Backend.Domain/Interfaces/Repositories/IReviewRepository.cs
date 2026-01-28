@@ -5,5 +5,5 @@ namespace Backend.Domain.Interfaces.Repositories;
 
 public interface IReviewRepository : ICreatable<Review>
 {
-    Task<double> GetAverageRatingAsync(Guid productId);
+    Task<List<Review>> GetRecentByProductIdAsync(Guid productId, int limit, CancellationToken cancellationToken);
 }
