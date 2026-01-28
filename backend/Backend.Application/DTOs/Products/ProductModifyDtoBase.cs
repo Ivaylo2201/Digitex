@@ -1,6 +1,6 @@
 ﻿namespace Backend.Application.DTOs.Products;
 
-public record ProductCreateDto
+public record ProductModifyDtoBase
 {
     public required int BrandId { get; init; }
     public required string ModelName { get; init; }

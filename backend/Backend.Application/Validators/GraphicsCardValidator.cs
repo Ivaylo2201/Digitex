@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Backend.Application.Validators;
 
-public class GraphicsCardsValidator : ProductValidatorBase<GraphicsCard>
+public class GraphicsCardValidator : ProductValidatorBase<GraphicsCard>
 {
-    public GraphicsCardsValidator()
+    public GraphicsCardValidator()
     {
         RuleFor(x => x.Memory.CapacityInGb).GreaterThanOrEqualTo(0);
         RuleFor(x => x.ClockSpeed.Base).GreaterThanOrEqualTo(0);

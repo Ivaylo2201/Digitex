@@ -8,9 +8,9 @@ using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class PowerSupplyFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<PowerSupplyFiltersDto>
+public class PowerSupplyFilterService(IBrandRepository brandRepository) : IFilterService<PowerSupplyFiltersDto>
 {
-    public async Task<PowerSupplyFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<PowerSupplyFiltersDto> GetFiltersAsync(CancellationToken stoppingToken = default)
     {
         return new PowerSupplyFiltersDto
         {

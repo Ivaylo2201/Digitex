@@ -7,9 +7,9 @@ using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class GraphicsCardFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<GraphicsCardFiltersDto>
+public class GraphicsCardFilterService(IBrandRepository brandRepository) : IFilterService<GraphicsCardFiltersDto>
 {
-    public async Task<GraphicsCardFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<GraphicsCardFiltersDto> GetFiltersAsync(CancellationToken stoppingToken = default)
     {
         return new GraphicsCardFiltersDto
         {

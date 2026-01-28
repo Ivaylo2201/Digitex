@@ -8,9 +8,9 @@ using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class MotherboardFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<MotherboardFiltersDto>
+public class MotherboardFilterService(IBrandRepository brandRepository) : IFilterService<MotherboardFiltersDto>
 {
-    public async Task<MotherboardFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<MotherboardFiltersDto> GetFiltersAsync(CancellationToken stoppingToken = default)
     {
         return new MotherboardFiltersDto
         {

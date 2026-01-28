@@ -8,9 +8,9 @@ using Monitor = Backend.Domain.Entities.Monitor;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class MonitorFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<MonitorFiltersDto>
+public class MonitorFilterService(IBrandRepository brandRepository) : IFilterService<MonitorFiltersDto>
 {
-    public async Task<MonitorFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<MonitorFiltersDto> GetFiltersAsync(CancellationToken stoppingToken = default)
     {
         return new MonitorFiltersDto
         {

@@ -8,9 +8,9 @@ using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class RamFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<RamFiltersDto>
+public class RamFilterService(IBrandRepository brandRepository) : IFilterService<RamFiltersDto>
 {
-    public async Task<RamFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<RamFiltersDto> GetFiltersAsync(CancellationToken stoppingToken = default)
     {
         return new RamFiltersDto
         {

@@ -1,6 +1,4 @@
-﻿using Backend.Application.DTOs;
-using Backend.Application.DTOs.Filters;
-using Backend.Application.DTOs.Products;
+﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products.Motherboard;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
@@ -13,5 +11,4 @@ namespace Backend.WebApi.Controllers.Products;
 public class MotherboardsController(
     IProductService<Motherboard, MotherboardDto> productService,
     IExpressionBuilderService<Motherboard> expressionBuilderService,
-    IFiltersProviderService<MotherboardFiltersDto> filtersProviderService)
-    : ProductControllerBase<Motherboard, MotherboardDto, MotherboardFiltersDto>(productService, expressionBuilderService, filtersProviderService);
+    IFilterService<MotherboardFiltersDto> filterService) : ProductControllerBase<Motherboard, MotherboardDto, MotherboardModifyDto, MotherboardFiltersDto>(productService, expressionBuilderService, filterService);

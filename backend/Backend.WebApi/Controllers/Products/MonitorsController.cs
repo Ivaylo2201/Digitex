@@ -1,6 +1,4 @@
-﻿using Backend.Application.DTOs;
-using Backend.Application.DTOs.Filters;
-using Backend.Application.DTOs.Products;
+﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products.Monitor;
 using Backend.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,5 +11,4 @@ namespace Backend.WebApi.Controllers.Products;
 public class MonitorsController(
     IProductService<Monitor, MonitorDto> productService,
     IExpressionBuilderService<Monitor> expressionBuilderService,
-    IFiltersProviderService<MonitorFiltersDto> filtersProviderService) 
-    : ProductControllerBase<Monitor, MonitorDto, MonitorFiltersDto>(productService, expressionBuilderService, filtersProviderService);
+    IFilterService<MonitorFiltersDto> filterService) : ProductControllerBase<Monitor, MonitorDto, MonitorModifyDto, MonitorFiltersDto>(productService, expressionBuilderService, filterService);

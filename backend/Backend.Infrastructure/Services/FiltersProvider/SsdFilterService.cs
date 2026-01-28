@@ -8,9 +8,9 @@ using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
 
-public class SsdFiltersProviderService(IBrandRepository brandRepository) : IFiltersProviderService<SsdFiltersDto>
+public class SsdFilterService(IBrandRepository brandRepository) : IFilterService<SsdFiltersDto>
 {
-    public async Task<SsdFiltersDto> ProvideFiltersAsync(CancellationToken stoppingToken = default)
+    public async Task<SsdFiltersDto> GetFiltersAsync(CancellationToken stoppingToken = default)
     {
         return new SsdFiltersDto
         {

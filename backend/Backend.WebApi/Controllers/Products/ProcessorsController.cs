@@ -1,6 +1,4 @@
-﻿using Backend.Application.DTOs;
-using Backend.Application.DTOs.Filters;
-using Backend.Application.DTOs.Products;
+﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products.Processor;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
@@ -13,5 +11,4 @@ namespace Backend.WebApi.Controllers.Products;
 public class ProcessorsController(
     IProductService<Processor, ProcessorDto> productService,
     IExpressionBuilderService<Processor> expressionBuilderService,
-    IFiltersProviderService<ProcessorFiltersDto> filtersProviderService)
-    : ProductControllerBase<Processor, ProcessorDto, ProcessorFiltersDto>(productService, expressionBuilderService, filtersProviderService);
+    IFilterService<ProcessorFiltersDto> filterService) : ProductControllerBase<Processor, ProcessorDto, ProcessorModifyDto, ProcessorFiltersDto>(productService, expressionBuilderService, filterService);

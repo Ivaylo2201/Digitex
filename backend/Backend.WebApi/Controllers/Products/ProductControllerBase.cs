@@ -12,13 +12,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.WebApi.Controllers.Products;
 
-public abstract class ProductControllerBase<TProduct, TProjection, TFilters>(
-    IProductService<TProduct, TProjection> productService,
+public abstract class ProductControllerBase<TProduct, TDto, TModifyDto, TFilters>(
+    IProductService<TProduct, TDto> productService,
     IExpressionBuilderService<TProduct> expressionBuilderService,
-    IFiltersProviderService<TFilters> filtersProviderService) : ControllerBase where TProduct : ProductBase
+    IFilterService<TFilters> filterService) : ControllerBase where TProduct : ProductBase
 {
     [HttpGet("{id:guid}")]
-    public async Task<Results<Ok<TProjection>, NotFound<ProblemDetails>>> GetOneAsync([FromRoute] Guid id, [FromQuery] string currency, CancellationToken cancellationToken)
+    public async Task<Results<Ok<TDto>, NotFound<ProblemDetails>>> GetOneAsync([FromRoute] Guid id, [FromQuery] string currency, CancellationToken cancellationToken)
     {
         var result = await productService.GetOneAsync(id, currency.ToCurrencyIsoCode(), cancellationToken);
 
@@ -42,20 +42,20 @@ public abstract class ProductControllerBase<TProduct, TProjection, TFilters>(
 
     [HttpPost]
     [Authorize(Roles = nameof(Role.Admin))]
-    public async Task<Results<Created, BadRequest>> CreateAsync([FromBody] TProduct product, CancellationToken cancellationToken)
+    public async Task<Results<Created, BadRequest>> CreateAsync([FromBody] TModifyDto dto, CancellationToken cancellationToken)
     {
-        var result = await productService.CreateAsync(product.Adapt<TProduct>(), cancellationToken);
+        var result = await productService.CreateAsync(dto.Adapt<TProduct>(), cancellationToken);
         
         return result.IsSuccess
             ? TypedResults.Created()
             : TypedResults.BadRequest();
     }
 
-    [HttpPatch("{id:guid}")]
+    [HttpPut("{id:guid}")]
     [Authorize(Roles = nameof(Role.Admin))]
-    public async Task<Results<Ok, BadRequest>> UpdateAsync([FromRoute] Guid id, [FromBody] TProduct product, CancellationToken cancellationToken)
+    public async Task<Results<Ok, BadRequest>> UpdateAsync([FromRoute] Guid id, [FromBody] TModifyDto dto, CancellationToken cancellationToken)
     {
-        var result = await productService.UpdateAsync(id, product.Adapt<TProduct>(), cancellationToken);
+        var result = await productService.UpdateAsync(id, dto.Adapt<TProduct>(), cancellationToken);
         
         return result.IsSuccess
             ? TypedResults.Ok()
@@ -75,5 +75,5 @@ public abstract class ProductControllerBase<TProduct, TProjection, TFilters>(
     
     [HttpGet("filters")]
     public async Task<Ok<TFilters>> GetFiltersAsync(CancellationToken cancellationToken)
-        => TypedResults.Ok(await filtersProviderService.ProvideFiltersAsync(cancellationToken));
+        => TypedResults.Ok(await filterService.GetFiltersAsync(cancellationToken));
 }

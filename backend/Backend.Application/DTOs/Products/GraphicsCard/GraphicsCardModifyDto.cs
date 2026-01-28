@@ -3,7 +3,7 @@ using Backend.Domain.ValueObjects;
 
 namespace Backend.Application.DTOs.Products.GraphicsCard;
 
-public record GraphicsCardCreateDto : ProductCreateDto
+public record GraphicsCardModifyDto : ProductModifyDtoBase
 {
     public required Memory Memory { get; init; }
     public required ClockSpeed ClockSpeed { get; init; }
