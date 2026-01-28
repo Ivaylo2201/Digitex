@@ -18,8 +18,29 @@ export type Translation = {
         maxLengthError: string;
       };
     };
+    writeReview: {
+      productId: {
+        requiredError: string;
+        invalidError: string;
+      };
+      rating: {
+        requiredError: string;
+      };
+      comment: {
+        maxLengthError: string;
+      };
+    };
   };
   components: {
+    reviewForm: {
+      writeAReview: string;
+      shareYourThoughtsAndRatingForThisProduct: string;
+      rating: string;
+      comment: string;
+      writeYourReview: string;
+      submitReview: string;
+      submitting: string;
+    };
     adminPanelLink: {
       adminPanel: string;
     };
@@ -323,6 +344,9 @@ export type Translation = {
     useSignIn: {
       invalidCredentials: string;
     };
+    useWriteReview: {
+      reviewSubmittedSuccessfully: string;
+    };
   };
 };
 
@@ -346,6 +370,18 @@ export const translation: Translation = {
         maxLengthError: 'Username is too long.',
       },
     },
+    writeReview: {
+      productId: {
+        requiredError: 'Product ID is required',
+        invalidError: 'Invalid product ID',
+      },
+      rating: {
+        requiredError: 'Rating is required'
+      },
+      comment: {
+        maxLengthError: 'Comment cannot exceed 500 characters',
+      },
+    },
   },
   components: {
     contactInformationForm: {
@@ -362,7 +398,8 @@ export const translation: Translation = {
       contactInformation: 'Contact Information',
       shippingMethod: 'Shipping Method',
       returnPolicyLabel: 'Return Policy',
-      returnPolicyText: "We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition. Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.",
+      returnPolicyText:
+        "We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition. Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.",
     },
     cartPage: {
       price: 'Price',
@@ -421,7 +458,8 @@ export const translation: Translation = {
     },
     emptyComparePage: {
       noProductsAddedForComparison: 'No products added for comparison',
-      youHaveNotAddedAnyProductsForComparisonYet: "You haven't added any products for comparison yet.",
+      youHaveNotAddedAnyProductsForComparisonYet:
+        "You haven't added any products for comparison yet.",
       getStartedByAddingAProduct: 'Get started by adding a product.',
       addProducts: 'Add products',
     },
@@ -431,8 +469,10 @@ export const translation: Translation = {
     },
     emptyReviewsSection: {
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below',
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below',
     },
     favoritesLink: {
       favorites: 'Favorites',
@@ -462,15 +502,18 @@ export const translation: Translation = {
     reviewsSection: {
       reviews: 'Reviews',
       noReviewsForThisProduct: 'No reviews for this product',
-      noReviewsHaveBeenLeftForThisProductYet: 'No reviews have been left for this product yet',
-      writeTheFirstReviewViaTheFormBelow: 'Write the first review via the form below',
+      noReviewsHaveBeenLeftForThisProductYet:
+        'No reviews have been left for this product yet',
+      writeTheFirstReviewViaTheFormBelow:
+        'Write the first review via the form below',
     },
     loader: {
       loading: 'Loading',
     },
     signInForm: {
       signInToYourAccount: 'Sign in to your account',
-      enterYourCredentialsToSignInToYourAccount: 'Enter your credentials to sign in to your account.',
+      enterYourCredentialsToSignInToYourAccount:
+        'Enter your credentials to sign in to your account.',
       email: 'Email',
       password: 'Password',
       signIn: 'Sign in',
@@ -481,7 +524,8 @@ export const translation: Translation = {
     },
     signUpForm: {
       createdAnAccount: 'Create an account',
-      enterYourCredentialsToSignUpForAnAccount: 'Enter your credentials to sign up for an account.',
+      enterYourCredentialsToSignUpForAnAccount:
+        'Enter your credentials to sign up for an account.',
       email: 'Email',
       username: 'Username',
       password: 'Password',
@@ -502,7 +546,8 @@ export const translation: Translation = {
       newPasswordConfirmation: 'New password confirmation',
     },
     requestPasswordResetForm: {
-      enterYourEmailToRequestAPasswordResetForYourAccount: 'Enter your email to request a password reset for your account.',
+      enterYourEmailToRequestAPasswordResetForYourAccount:
+        'Enter your email to request a password reset for your account.',
       email: 'Email',
       requestAPasswordReset: 'Request a password reset',
     },
@@ -547,13 +592,24 @@ export const translation: Translation = {
     },
     emptyCartPage: {
       yourCartIsEmpty: 'Your cart is empty',
-      youHaveNotAddedAnyItemsInYourCart: 'You have not added any items in your cart',
+      youHaveNotAddedAnyItemsInYourCart:
+        'You have not added any items in your cart',
       GetStartedByAddingAnItem: 'Get started by adding an item',
       AddItems: 'Add items',
     },
     adminPanelLink: {
-      adminPanel: "Admin Panel",
-    }
+      adminPanel: 'Admin Panel',
+    },
+    reviewForm: {
+      writeAReview: 'Write a Review',
+      shareYourThoughtsAndRatingForThisProduct:
+        'Share your thoughts and rating for this product.',
+      rating: 'Rating',
+      comment: 'Comment',
+      writeYourReview: 'Write your review...',
+      submitReview: 'Submit Review',
+      submitting: 'Submitting...',
+    },
   },
   specifications: {
     base: {
@@ -655,6 +711,9 @@ export const translation: Translation = {
     },
     useSignIn: {
       invalidCredentials: 'Invalid credentials.',
+    },
+    useWriteReview: {
+      reviewSubmittedSuccessfully: 'Review submitted successfully.',
     },
   },
 };

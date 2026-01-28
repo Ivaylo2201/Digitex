@@ -17,6 +17,20 @@
         "minLengthError": "Der Benutzername ist zu kurz.",
         "maxLengthError": "Der Benutzername ist zu lang."
       }
+    },
+    "writeReview": {
+      "productId": {
+        "requiredError": "Produkt-ID ist erforderlich",
+        "invalidError": "Ungültige Produkt-ID"
+      },
+      "rating": {
+        "requiredError": "Bewertung ist erforderlich",
+        "minError": "Die Bewertung muss mindestens 1 sein",
+        "maxError": "Die Bewertung darf 5 nicht überschreiten"
+      },
+      "comment": {
+        "maxLengthError": "Kommentar darf 500 Zeichen nicht überschreiten"
+      }
     }
   },
   "components": {
@@ -32,6 +46,15 @@
       "streetNumber": "Hausnummer",
       "floor": "Stockwerk",
       "apartment": "Wohnung"
+    },
+    "reviewForm": {
+      "writeAReview": "Eine Bewertung schreiben",
+      "shareYourThoughtsAndRatingForThisProduct": "Teilen Sie Ihre Gedanken und Bewertung zu diesem Produkt.",
+      "rating": "Bewertung",
+      "comment": "Kommentar",
+      "writeYourReview": "Schreiben Sie Ihre Bewertung...",
+      "submitReview": "Bewertung absenden",
+      "submitting": "Wird gesendet..."
     },
     "billingForm": {
       "contactInformation": "Kontaktinformationen",
@@ -327,6 +350,9 @@
     },
     "useSignIn": {
       "invalidCredentials": "Ungültige Anmeldedaten."
+    },
+    "useWriteReview": {
+      "reviewSubmittedSuccessfully": "Die Bewertung wurde erfolgreich eingereicht."
     }
   }
 }

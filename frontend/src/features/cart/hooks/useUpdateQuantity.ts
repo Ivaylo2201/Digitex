@@ -10,7 +10,7 @@ export function useUpdateQuantity(itemId: number) {
 
   return useMutation<void, ApiError, { newQuantity: number }>({
     mutationFn: async ({ newQuantity }) => {
-      await httpClient.patch(`/carts/${itemId}`, { newQuantity });
+      await httpClient.patch(`/carts/${itemId}/update`, { newQuantity });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });

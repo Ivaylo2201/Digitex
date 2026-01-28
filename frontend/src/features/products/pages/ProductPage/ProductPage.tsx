@@ -15,6 +15,7 @@ import { QuantityControlButtons } from './components/QuantityControlButtons';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Loader } from '../../components/Loader';
 import { useQuantityControl } from '../../hooks/useQuantityControl';
+import { ReviewForm } from '@/features/reviews/components/ReviewForm';
 
 type ProductPageProps<T extends ProductLong> = {
   category: string;
@@ -107,10 +108,8 @@ export function ProductPage<T extends ProductLong>({
           </div>
         </div>
 
-        <SuggestedProductsSection
-          suggestedProducts={[]}
-        />
-        <ReviewsSection reviews={[]} />
+        <SuggestedProductsSection suggestedProducts={[]} />
+        <ReviewsSection productId={product.id} reviews={[]} />
       </section>
     </Page>
   );

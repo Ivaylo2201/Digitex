@@ -17,11 +17,32 @@
         "minLengthError": "Потребителското име е твърде кратко.",
         "maxLengthError": "Потребителското име е твърде дълго."
       }
+    },
+    "writeReview": {
+      "productId": {
+        "requiredError": "Идентификаторът на продукта е задължителен.",
+        "invalidError": "Невалиден идентификатор на продукта."
+      },
+      "rating": {
+        "requiredError": "Оценката е задължителна."
+      },
+      "comment": {
+        "maxLengthError": "Коментарът не може да надвишава 500 знака."
+      }
     }
   },
   "components": {
     "adminPanelLink": {
       "adminPanel": "Административен панел"
+    },
+    "reviewForm": {
+      "writeAReview": "Напишете отзив",
+      "shareYourThoughtsAndRatingForThisProduct": "Споделете вашите мисли и оценка за този продукт.",
+      "rating": "Оценка",
+      "comment": "Коментар",
+      "writeYourReview": "Напишете своя отзив...",
+      "submitReview": "Изпратете отзива",
+      "submitting": "Изпращане..."
     },
     "contactInformationForm": {
       "country": "Държава",
@@ -327,6 +348,9 @@
     },
     "useSignIn": {
       "invalidCredentials": "Невалидни данни за вход."
+    },
+    "useWriteReview": {
+      "reviewSubmittedSuccessfully": "Отзивът е изпратен успешно."
     }
   }
 }

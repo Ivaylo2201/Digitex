@@ -4,12 +4,14 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Rating } from '@/features/products/components/Rating';
 import { EmptyReviewsSection } from './EmptyReviewsSection';
+import { ReviewForm } from './ReviewForm';
 
 type ReviewsSectionProps = {
+  productId: string;
   reviews: Review[];
 };
 
-export function ReviewsSection({ reviews }: ReviewsSectionProps) {
+export function ReviewsSection({ reviews, productId }: ReviewsSectionProps) {
   const {
     components: { reviewsSection },
   } = useTranslation();
@@ -43,6 +45,7 @@ export function ReviewsSection({ reviews }: ReviewsSectionProps) {
       ) : (
         <EmptyReviewsSection />
       )}
+      <ReviewForm productId={productId} />
     </section>
   );
 }

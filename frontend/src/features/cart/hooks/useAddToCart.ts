@@ -8,7 +8,7 @@ import { toast } from "sonner";
 type UseAddToCartRequest = { productId: string; quantity: number };
 
 async function addToCart(data: UseAddToCartRequest) {
-  const res = await httpClient.post('/carts', data);
+  const res = await httpClient.post('/carts/add', data);
   return res.data;
 }
 
