@@ -12,17 +12,15 @@ export const useAuthStore = create<AuthStore>((set) => ({
   isAuthenticated: !!localStorage.getItem('token'),
   signIn: (token: string, role: string, rememberMe: boolean = false) => {
     set({ isAuthenticated: true, role });
-    
-    if (['admin', 'manager'].includes(role.toLowerCase()))
-      return; // Force admins to log in each time for security reasons
 
-    if (rememberMe) {
-      localStorage.setItem('token', token);
-      sessionStorage.removeItem('token');
-    } else {
+    if (!rememberMe || ['admin', 'manager'].includes(role.toLowerCase())) {
       localStorage.removeItem('token');
       sessionStorage.setItem('token', token);
+      return;
     }
+
+    localStorage.setItem('token', token);
+    sessionStorage.removeItem('token');
   },
   signOut: () => {
     set({ isAuthenticated: false, role: null });

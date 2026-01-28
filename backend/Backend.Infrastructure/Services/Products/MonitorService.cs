@@ -1,5 +1,4 @@
-﻿using Backend.Application.DTOs.Products;
-using Backend.Application.DTOs.Products.Monitor;
+﻿using Backend.Application.DTOs.Products.Monitor;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Interfaces.Repositories;
 using FluentValidation;

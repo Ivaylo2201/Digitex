@@ -1,5 +1,4 @@
-﻿using Backend.Application.DTOs.Products;
-using Backend.Application.DTOs.Products.Processor;
+﻿using Backend.Application.DTOs.Products.Processor;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
