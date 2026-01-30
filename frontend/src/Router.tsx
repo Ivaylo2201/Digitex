@@ -14,6 +14,8 @@ import { RequestPasswordResetPage } from './features/account/pages/RequestPasswo
 import { CompletePasswordResetPage } from './features/account/pages/CompletePasswordResetPage';
 import { CheckoutPage } from './features/checkout/pages/CheckoutPage';
 import { ThankYouPage } from './features/checkout/pages/ThankYouPage';
+import { AdminRequired } from './features/auth/components/AdminRequired';
+import { GraphicsCardsAdminPage } from './features/admin/pages/GraphicsCardsAdminPage';
 
 export function Router() {
   return (
@@ -21,7 +23,16 @@ export function Router() {
       <Routes>
         <Route path='/' element={<Page></Page>} />
 
-        <Route path='/admin-panel' element={<Page></Page>} />
+        <Route path='/admin'>
+          <Route
+            path='graphics-cards'
+            element={
+              <AdminRequired>
+                <GraphicsCardsAdminPage />
+              </AdminRequired>
+            }
+          />
+        </Route>
 
         <Route path='/products'>
           <Route path='categories/:category' element={<ProductsPage />} />

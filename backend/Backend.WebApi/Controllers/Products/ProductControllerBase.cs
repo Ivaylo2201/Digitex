@@ -1,5 +1,4 @@
-﻿using Backend.Application.DTOs.Products;
-using Backend.Application.Interfaces.Services;
+﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
@@ -28,7 +27,7 @@ public abstract class ProductControllerBase<TProduct, TDto, TModifyDto, TFilters
     }
 
     [HttpGet]
-    public async Task<Ok<Pagination<ProductSummaryDto>>> GetAllAsync([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string currency, [FromQuery] IDictionary<string, string> criteria, CancellationToken cancellationToken)
+    public async Task<Ok<Pagination<TDto>>> GetAllAsync([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] string currency, [FromQuery] IDictionary<string, string> criteria, CancellationToken cancellationToken)
     {
         var result = await productService.GetAllAsync(
             page,

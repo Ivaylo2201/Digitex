@@ -6,7 +6,7 @@ namespace Backend.Application.DTOs.Products.Monitor;
 public record MonitorModifyDto : ProductModifyDtoBase
 {
     public required double DisplayDiagonal { get; init; }
-    public required RefreshRate RefreshRate { get; init; }
+    public required int RefreshRate { get; init; }
     public required double Latency { get; init; }
     public required Matrix Matrix { get; init; }
     public required Resolution Resolution { get; init; }

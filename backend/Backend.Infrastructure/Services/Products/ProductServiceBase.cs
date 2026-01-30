@@ -33,15 +33,15 @@ public abstract class ProductServiceBase<TProduct, TProjection>(
         return Result<TProjection?>.Success(HttpStatusCode.OK, projection);
     }
 
-    public async Task<Result<Pagination<ProductSummaryDto>>> GetAllAsync(int page, int pageSize, CurrencyIsoCode currency, Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken)
+    public async Task<Result<Pagination<TProjection>>> GetAllAsync(int page, int pageSize, CurrencyIsoCode currency, Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken)
     {
         var products = await productRepository.GetAllAsync(page, pageSize, filter, cancellationToken);
         var filteredProductsCount = await productRepository.CountAsync(filter, cancellationToken);
         
         var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, currency, cancellationToken);
-        var projections = currencyService.ConvertPrices(products, p => p.InitialPrice *= rate).Adapt<IEnumerable<ProductSummaryDto>>();
+        var projections = currencyService.ConvertPrices(products, p => p.InitialPrice *= rate).Adapt<IEnumerable<TProjection>>();
 
-        return Result<Pagination<ProductSummaryDto>>.Success(HttpStatusCode.OK, new Pagination<ProductSummaryDto>
+        return Result<Pagination<TProjection>>.Success(HttpStatusCode.OK, new Pagination<TProjection>
         {
             Items = projections,
             TotalItems = filteredProductsCount,

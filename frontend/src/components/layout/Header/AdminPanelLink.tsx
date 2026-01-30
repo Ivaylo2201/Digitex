@@ -9,7 +9,7 @@ export function AdminPanelLink() {
 
   return (
     <Link
-      to='/admin-panel'
+      to='/admin'
       className='ml-4 flex justify-center items-center gap-1.5 cursor-pointer'
     >
       <Shield className='text-theme-crimson' size={16} />

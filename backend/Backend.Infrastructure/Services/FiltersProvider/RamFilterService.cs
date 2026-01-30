@@ -3,7 +3,6 @@ using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 
 namespace Backend.Infrastructure.Services.FiltersProvider;
@@ -19,9 +18,7 @@ public class RamFilterService(IBrandRepository brandRepository) : IFilterService
             MemoryTypes = Enum.GetValues<MemoryType>()
                 .Select(memoryType => memoryType.GetEnumMemberValue())
                 .ToList(),
-            Frequencies = Enum.GetValues<Frequency>()
-                .Cast<int>()
-                .ToList()
+            Frequencies = new List<int> { 2133, 3200, 3600, 4000 },
         };
     }
 }

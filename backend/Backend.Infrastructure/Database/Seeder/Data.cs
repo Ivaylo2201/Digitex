@@ -45,9 +45,9 @@ public static class Data
             InitialPrice = 328.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 1.83, Boost: 2.05),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 160
@@ -60,9 +60,9 @@ public static class Data
             InitialPrice = 328.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.85, Boost: 2.10),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 160
@@ -75,9 +75,9 @@ public static class Data
             InitialPrice = 337.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.85, Boost: 2.10),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 165
@@ -90,9 +90,9 @@ public static class Data
             InitialPrice = 345.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.88, Boost: 2.15),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 170
@@ -105,9 +105,9 @@ public static class Data
             InitialPrice = 345.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.90, Boost: 2.18),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 170
@@ -120,9 +120,9 @@ public static class Data
             InitialPrice = 346.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.90, Boost: 2.18),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 170
@@ -135,9 +135,9 @@ public static class Data
             InitialPrice = 367.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.95, Boost: 2.25),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 180
@@ -150,9 +150,9 @@ public static class Data
             InitialPrice = 386.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.88, Boost: 2.15),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 180
@@ -165,9 +165,9 @@ public static class Data
             InitialPrice = 456.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 1.88, Boost: 2.18),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 3072,
             DirectXSupport = 12,
             Tdp = 185
@@ -180,9 +180,9 @@ public static class Data
             InitialPrice = 484.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr7, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr7, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 2.10, Boost: 2.40),
-            BusWidth = BusWidth.Bits256,
+            BusWidth = 256,
             CudaCores = 4096,
             DirectXSupport = 12,
             Tdp = 200
@@ -195,9 +195,9 @@ public static class Data
             InitialPrice = 233.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz2800),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 2800),
             ClockSpeed = new ClockSpeed(Base: 1.62, Boost: 1.79),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 1792,
             DirectXSupport = 12,
             Tdp = 130
@@ -210,9 +210,9 @@ public static class Data
             InitialPrice = 298.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3200),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3200),
             ClockSpeed = new ClockSpeed(Base: 1.80, Boost: 2.00),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 2304,
             DirectXSupport = 12,
             Tdp = 160
@@ -225,9 +225,9 @@ public static class Data
             InitialPrice = 327.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3200),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3200),
             ClockSpeed = new ClockSpeed(Base: 1.80, Boost: 2.05),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 2304,
             DirectXSupport = 12,
             Tdp = 160
@@ -240,9 +240,9 @@ public static class Data
             InitialPrice = 353.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 2.00, Boost: 2.30),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 2560,
             DirectXSupport = 12,
             Tdp = 180
@@ -255,9 +255,9 @@ public static class Data
             InitialPrice = 443.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 2.00, Boost: 2.30),
-            BusWidth = BusWidth.Bits256,
+            BusWidth = 256,
             CudaCores = 4096,
             DirectXSupport = 12,
             Tdp = 220
@@ -270,9 +270,9 @@ public static class Data
             InitialPrice = 443.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 2.00, Boost: 2.30),
-            BusWidth = BusWidth.Bits256,
+            BusWidth = 256,
             CudaCores = 4096,
             DirectXSupport = 12,
             Tdp = 220
@@ -285,9 +285,9 @@ public static class Data
             InitialPrice = 746.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 2.10, Boost: 2.50),
-            BusWidth = BusWidth.Bits256,
+            BusWidth = 256,
             CudaCores = 4608,
             DirectXSupport = 12,
             Tdp = 240
@@ -300,9 +300,9 @@ public static class Data
             InitialPrice = 746.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 2.10, Boost: 2.50),
-            BusWidth = BusWidth.Bits256,
+            BusWidth = 256,
             CudaCores = 4608,
             DirectXSupport = 12,
             Tdp = 240
@@ -315,9 +315,9 @@ public static class Data
             InitialPrice = 754.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 2.15, Boost: 2.55),
-            BusWidth = BusWidth.Bits256,
+            BusWidth = 256,
             CudaCores = 4608,
             DirectXSupport = 12,
             Tdp = 240
@@ -330,9 +330,9 @@ public static class Data
             InitialPrice = 824.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3600),
+            Memory = new Memory(CapacityInGb: 16, Type: MemoryType.GDdr6, Frequency: 3600),
             ClockSpeed = new ClockSpeed(Base: 2.15, Boost: 2.55),
-            BusWidth = BusWidth.Bits256,
+            BusWidth = 256,
             CudaCores = 4608,
             DirectXSupport = 12,
             Tdp = 240
@@ -345,9 +345,9 @@ public static class Data
             InitialPrice = 111.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 4, Type: MemoryType.GDdr5, Frequency: Frequency.Mhz1800),
+            Memory = new Memory(CapacityInGb: 4, Type: MemoryType.GDdr5, Frequency: 1800),
             ClockSpeed = new ClockSpeed(Base: 1.00, Boost: 1.10),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 320,
             DirectXSupport = 11,
             Tdp = 75
@@ -360,9 +360,9 @@ public static class Data
             InitialPrice = 305.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3200),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3200),
             ClockSpeed = new ClockSpeed(Base: 1.75, Boost: 1.95),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 2304,
             DirectXSupport = 12,
             Tdp = 160
@@ -375,9 +375,9 @@ public static class Data
             InitialPrice = 369.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 2.00, Boost: 2.30),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 2560,
             DirectXSupport = 12,
             Tdp = 180
@@ -390,9 +390,9 @@ public static class Data
             InitialPrice = 384.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 2.00, Boost: 2.30),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 2560,
             DirectXSupport = 12,
             Tdp = 180
@@ -405,9 +405,9 @@ public static class Data
             InitialPrice = 410.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: Frequency.Mhz3500),
+            Memory = new Memory(CapacityInGb: 8, Type: MemoryType.GDdr6, Frequency: 3500),
             ClockSpeed = new ClockSpeed(Base: 2.05, Boost: 2.35),
-            BusWidth = BusWidth.Bits128,
+            BusWidth = 128,
             CudaCores = 2560,
             DirectXSupport = 12,
             Tdp = 180
@@ -779,7 +779,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24.5,
-            RefreshRate = RefreshRate.Hz100,
+            RefreshRate = 100,
             Latency = 5,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -796,7 +796,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 23.8,
-            RefreshRate = RefreshRate.Hz120,
+            RefreshRate = 120,
             Latency = 1,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -813,7 +813,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 23.8,
-            RefreshRate = RefreshRate.Hz180,
+            RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -830,7 +830,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 23.8,
-            RefreshRate = RefreshRate.Hz200,
+            RefreshRate = 200,
             Latency = 1,
             Matrix = Matrix.Va,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -847,7 +847,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz100,
+            RefreshRate = 100,
             Latency = 4,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -864,7 +864,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz165,
+            RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -881,7 +881,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz180,
+            RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -898,7 +898,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -915,7 +915,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 25,
-            RefreshRate = RefreshRate.Hz240,
+            RefreshRate = 240,
             Latency = 0.5,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -932,7 +932,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz180,
+            RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Va,
             Resolution = new Resolution(2560, 1440, ResolutionType.Qhd),
@@ -949,7 +949,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24,
-            RefreshRate = RefreshRate.Hz165,
+            RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -966,7 +966,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24,
-            RefreshRate = RefreshRate.Hz180,
+            RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Va,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -983,7 +983,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 25,
-            RefreshRate = RefreshRate.Hz165,
+            RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Tn,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1000,7 +1000,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24,
-            RefreshRate = RefreshRate.Hz180,
+            RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1017,7 +1017,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1034,7 +1034,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz170,
+            RefreshRate = 170,
             Latency = 1,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(2560, 1440, ResolutionType.Qhd),
@@ -1051,7 +1051,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 32,
-            RefreshRate = RefreshRate.Hz165,
+            RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Va,
             Resolution = new Resolution(2560, 1440, ResolutionType.Qhd),
@@ -1068,7 +1068,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 34,
-            RefreshRate = RefreshRate.Hz100,
+            RefreshRate = 100,
             Latency = 5,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(3440, 1440, ResolutionType.Qhd),
@@ -1085,7 +1085,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1102,7 +1102,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1119,7 +1119,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 22,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Tn,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1136,7 +1136,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Va,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1153,7 +1153,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1170,7 +1170,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 27,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1187,7 +1187,7 @@ public static class Data
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
             DisplayDiagonal = 24,
-            RefreshRate = RefreshRate.Hz75,
+            RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
             Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
@@ -1207,7 +1207,7 @@ public static class Data
             InitialPrice = 111.03m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(32, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1218,7 +1218,7 @@ public static class Data
             InitialPrice = 111.03m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(32, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1229,7 +1229,7 @@ public static class Data
             InitialPrice = 170.51m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3600),
+            Memory = new Memory(32, MemoryType.Ddr4, 3600),
             Timing = "18-22-22"
         },
         new()
@@ -1240,7 +1240,7 @@ public static class Data
             InitialPrice = 257.34m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(64, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(64, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1251,7 +1251,7 @@ public static class Data
             InitialPrice = 410.77m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(96, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(96, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1262,7 +1262,7 @@ public static class Data
             InitialPrice = 7.49m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(8, MemoryType.Ddr4, Frequency.Mhz3200),
+            Memory = new Memory(8, MemoryType.Ddr4, 3200),
             Timing = "16-18-18"
         },
         new()
@@ -1273,7 +1273,7 @@ public static class Data
             InitialPrice = 7.49m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(8, MemoryType.Ddr4, Frequency.Mhz2400),
+            Memory = new Memory(8, MemoryType.Ddr4, 2400),
             Timing = "15-15-15"
         },
         new()
@@ -1284,7 +1284,7 @@ public static class Data
             InitialPrice = 65.38m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(16, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(16, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1295,7 +1295,7 @@ public static class Data
             InitialPrice = 86.09m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3200),
+            Memory = new Memory(32, MemoryType.Ddr4, 3200),
             Timing = "16-18-18"
         },
         new()
@@ -1306,7 +1306,7 @@ public static class Data
             InitialPrice = 106.53m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(32, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1317,7 +1317,7 @@ public static class Data
             InitialPrice = 121.51m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(16, MemoryType.Ddr4, Frequency.Mhz3600),
+            Memory = new Memory(16, MemoryType.Ddr4, 3600),
             Timing = "18-22-22"
         },
         new()
@@ -1328,7 +1328,7 @@ public static class Data
             InitialPrice = 124.40m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(32, MemoryType.Ddr5, 6000),
             Timing = "38-38-38"
         },
         new()
@@ -1339,7 +1339,7 @@ public static class Data
             InitialPrice = 124.40m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
+            Memory = new Memory(32, MemoryType.Ddr5, 6400),
             Timing = "36-36-36"
         },
         new()
@@ -1350,7 +1350,7 @@ public static class Data
             InitialPrice = 124.40m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
+            Memory = new Memory(32, MemoryType.Ddr5, 6400),
             Timing = "36-36-36"
         },
         new()
@@ -1361,7 +1361,7 @@ public static class Data
             InitialPrice = 134.42m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
+            Memory = new Memory(32, MemoryType.Ddr5, 6400),
             Timing = "36-36-36"
         },
         new()
@@ -1372,7 +1372,7 @@ public static class Data
             InitialPrice = 139.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(32, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1383,7 +1383,7 @@ public static class Data
             InitialPrice = 139.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
+            Memory = new Memory(32, MemoryType.Ddr5, 6400),
             Timing = "36-36-36"
         },
         new()
@@ -1394,7 +1394,7 @@ public static class Data
             InitialPrice = 144.77m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz5200),
+            Memory = new Memory(32, MemoryType.Ddr5, 5200),
             Timing = "36-36-36"
         },
         new()
@@ -1405,7 +1405,7 @@ public static class Data
             InitialPrice = 144.77m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3200),
+            Memory = new Memory(32, MemoryType.Ddr4, 3200),
             Timing = "16-18-18"
         },
         new()
@@ -1416,7 +1416,7 @@ public static class Data
             InitialPrice = 144.77m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz5200),
+            Memory = new Memory(32, MemoryType.Ddr5, 5200),
             Timing = "36-36-36"
         },
         new()
@@ -1427,7 +1427,7 @@ public static class Data
             InitialPrice = 159.24m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
+            Memory = new Memory(32, MemoryType.Ddr5, 6400),
             Timing = "32-32-32"
         },
         new()
@@ -1438,7 +1438,7 @@ public static class Data
             InitialPrice = 168.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6000),
+            Memory = new Memory(32, MemoryType.Ddr5, 6000),
             Timing = "36-36-36"
         },
         new()
@@ -1449,7 +1449,7 @@ public static class Data
             InitialPrice = 182.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
+            Memory = new Memory(32, MemoryType.Ddr5, 6400),
             Timing = "36-36-36"
         },
         new()
@@ -1460,7 +1460,7 @@ public static class Data
             InitialPrice = 182.00m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr4, Frequency.Mhz3600),
+            Memory = new Memory(32, MemoryType.Ddr4, 3600),
             Timing = "18-22-22"
         },
         new()
@@ -1471,7 +1471,7 @@ public static class Data
             InitialPrice = 232.69m,
             DiscountPercentage = GetRandomDiscountPercentage(),
             Quantity = GetRandomQuantity(),
-            Memory = new Memory(32, MemoryType.Ddr5, Frequency.Mhz6400),
+            Memory = new Memory(32, MemoryType.Ddr5, 6400),
             Timing = "32-32-32"
         }
     ];

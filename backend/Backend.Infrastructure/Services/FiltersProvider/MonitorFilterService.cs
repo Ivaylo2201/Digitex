@@ -2,7 +2,6 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Enums;
 using Backend.Domain.Extensions;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 using Monitor = Backend.Domain.Entities.Monitor;
 
@@ -15,9 +14,7 @@ public class MonitorFilterService(IBrandRepository brandRepository) : IFilterSer
         return new MonitorFiltersDto
         {
             Brands = await brandRepository.ListBrandNamesAsync<Monitor>(stoppingToken),
-            RefreshRates = Enum.GetValues<RefreshRate>()
-                .Cast<int>()
-                .ToList(),
+            RefreshRates = [75, 100, 120, 165, 170, 180, 200, 240],
             Matrices = Enum.GetValues<Matrix>()
                 .Select(matrix => matrix.GetEnumMemberValue())
                 .ToList(),
