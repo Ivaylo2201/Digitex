@@ -2,10 +2,12 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using Backend.Application;
 using Backend.Application.Enums;
+using Backend.Application.Interfaces.Services;
 using Backend.Infrastructure;
 using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
 using Backend.Infrastructure.Extensions;
+using Backend.Infrastructure.Services;
 using Backend.WebApi.Extensions;
 using Microsoft.OpenApi;
 using Serilog;
@@ -20,10 +22,8 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 
-builder.Services.ConfigureHttpJsonOptions(options =>
-    {
-        options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    })
+builder.Services
+    .AddScoped(typeof(IFileService<>), typeof(FileService<>))
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
     .AddEndpointsApiExplorer()

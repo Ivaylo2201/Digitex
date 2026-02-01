@@ -32,6 +32,22 @@
     }
   },
   "components": {
+    "dataTable": {
+      "discountPercentage": "Отстъпка",
+      "price": "Цена",
+      "quantity": "Количество",
+      "actions": "Действия",
+      "confirmDeletion": "Потвърдете изтриването",
+      "areYouSureYouWantToDelete": "Сигурни ли сте, че искате да изтриете",
+      "cancel": "Отказ",
+      "delete": "Изтрий",
+      "sku": "Артикулен номер",
+      "product": "Продукт",
+      "searchBySku": "Търсене по артикулен номер",
+      "noResults": "Няма резултати",
+      "previous": "Предишна",
+      "next": "Следваща"
+    },
     "checkoutForm": {
       "pay": "Плати",
       "now": "сега"

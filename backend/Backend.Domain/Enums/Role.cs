@@ -2,6 +2,7 @@
 
 namespace Backend.Domain.Enums;
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Role
 {
     [JsonStringEnumMemberName("client")]

@@ -1,5 +1,4 @@
 ﻿using Backend.Domain.Entities;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,4 +16,7 @@ public class BrandRepository(DatabaseContext context) : IBrandRepository
             .Distinct()
             .ToListAsync(stoppingToken);
     }
+
+    public async Task<List<Brand>> GetAllAsync(CancellationToken cancellationToken)
+        => await context.Brands.AsNoTracking().ToListAsync(cancellationToken);
 }

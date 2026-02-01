@@ -34,6 +34,22 @@
     }
   },
   "components": {
+    "dataTable": {
+      "discountPercentage": "Rabatt",
+      "price": "Preis",
+      "quantity": "Menge",
+      "actions": "Aktionen",
+      "confirmDeletion": "Löschen bestätigen",
+      "areYouSureYouWantToDelete": "Möchten Sie wirklich löschen",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "sku": "Artikelnummer",
+      "product": "Produkt",
+      "searchBySku": "Suche nach Artikelnummer",
+      "noResults": "Keine Ergebnisse",
+      "previous": "Vorherige",
+      "next": "Nächste"
+    },
     "checkoutForm": {
       "pay": "Bezahlen",
       "now": "jetzt"

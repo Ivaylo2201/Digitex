@@ -9,7 +9,7 @@ export function AdminPanelLink() {
 
   return (
     <Link
-      to='/admin'
+      to='/admin/graphics-cards'
       className='ml-4 flex justify-center items-center gap-1.5 cursor-pointer'
     >
       <Shield className='text-theme-crimson' size={16} />

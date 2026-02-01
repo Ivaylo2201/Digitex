@@ -1,14 +1,60 @@
 ﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products.Monitor;
 using Backend.Application.Interfaces.Services;
+using Backend.Application.UseCases.Products.CreateProduct;
+using Backend.Application.UseCases.Products.DeleteProduct;
+using Backend.Application.UseCases.Products.GetAllProducts;
+using Backend.Application.UseCases.Products.GetOneProduct;
+using Backend.Application.UseCases.Products.UpdateProduct;
+using Backend.Domain.Common;
+using Backend.Domain.Enums;
+using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Monitor = Backend.Domain.Entities.Monitor;
 
 namespace Backend.WebApi.Controllers.Products;
 
 [ApiController]
-[Route("api/products/[controller]")]
-public class MonitorsController(
-    IProductService<Monitor, MonitorDto> productService,
-    IExpressionBuilderService<Monitor> expressionBuilderService,
-    IFilterService<MonitorFiltersDto> filterService) : ProductControllerBase<Monitor, MonitorDto, MonitorModifyDto, MonitorFiltersDto>(productService, expressionBuilderService, filterService);
+[Route("api/products/monitors")]
+public class MonitorsController(IMediator mediator, IFilterService<MonitorFiltersDto> filterService) : ControllerBase
+{
+    [HttpPost]
+    public async Task<Results<Created, BadRequest>> CreateAsync([FromForm] CreateMonitorRequest request, CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(request, cancellationToken);
+        return result.IsSuccess ? TypedResults.Created() : TypedResults.BadRequest();
+    }
+
+    [HttpGet]
+    public async Task<Ok<Pagination<MonitorDto>>> GetAllAsync([FromQuery] GetAllMonitorsRequest request, CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(request, cancellationToken);
+        return TypedResults.Ok(result.Value);
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<Results<Ok<MonitorDto>, NotFound>> GetOneAsync([FromRoute] Guid id, [FromQuery] CurrencyIsoCode currency, CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(new GetOneMonitorRequest { Id = id }, cancellationToken);
+        return result.IsSuccess ? TypedResults.Ok(result.Value) : TypedResults.NotFound();
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<Results<NoContent, NotFound>> DeleteAsync([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(new DeleteMonitorRequestBase { Id = id }, cancellationToken);
+        return result.IsSuccess ? TypedResults.NoContent() : TypedResults.NotFound();
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<Results<Ok, BadRequest>> UpdateAsync([FromRoute] Guid id, [FromForm] UpdateMonitorRequest request, CancellationToken cancellationToken)
+    {
+        request.Id = id;
+        var result = await mediator.Send(request, cancellationToken);
+        return result.IsSuccess ? TypedResults.Ok() : TypedResults.BadRequest();
+    }
+    
+    [HttpGet("filters")]
+    public async Task<Ok<MonitorFiltersDto>> GetFiltersAsync(CancellationToken cancellationToken)
+        => TypedResults.Ok(await filterService.GetFiltersAsync(cancellationToken));
+}

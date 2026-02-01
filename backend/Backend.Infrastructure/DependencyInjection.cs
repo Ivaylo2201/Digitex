@@ -27,7 +27,6 @@ using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Http;
 using Backend.Infrastructure.Services;
 using Backend.Infrastructure.Services.FiltersProvider;
-using Backend.Infrastructure.Services.Products;
 using Backend.Infrastructure.Services.QueryBuilder;
 using DotNetEnv;
 using Mapster;
@@ -125,14 +124,6 @@ public static class DependencyInjection
             .AddScoped<ICityRepository, CityRepository>();
 
         private IServiceCollection AddServices() => services
-            .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
-            .AddScoped<IProductService<Monitor, MonitorDto>, MonitorService>()
-            .AddScoped<IProductService<Ram, RamDto>, RamService>()
-            .AddScoped<IProductService<Processor, ProcessorDto>, ProcessorService>()
-            .AddScoped<IProductService<GraphicsCard, GraphicsCardDto>, GraphicsCardService>()
-            .AddScoped<IProductService<Ssd, SsdDto>, SsdService>()
-            .AddScoped<IProductService<Motherboard, MotherboardDto>, MotherboardService>()
-            .AddScoped<IProductService<PowerSupply, PowerSupplyDto>, PowerSupplyService>()
             .AddScoped<ICurrencyService, CurrencyService>()
             .AddScoped<IFilterService<GraphicsCardFiltersDto>, GraphicsCardFilterService>()
             .AddScoped<IFilterService<MonitorFiltersDto>, MonitorFilterService>()

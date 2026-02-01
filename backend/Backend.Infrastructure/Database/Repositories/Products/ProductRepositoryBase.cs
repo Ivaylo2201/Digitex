@@ -49,10 +49,25 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        await context.Set<TProduct>()
-            .Where(product => product.Id == id)
-            .ExecuteDeleteAsync(cancellationToken);
+        var product = await context.Set<TProduct>().FirstOrDefaultAsync(product => product.Id == id, cancellationToken);
+        
+        if (product is null)
+            return;
+        
+        context.Set<TProduct>().Remove(product);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public abstract Task UpdateAsync(Guid id, TProduct item, CancellationToken cancellationToken);
+    public async Task UpdateAsync(Guid id, TProduct item, CancellationToken cancellationToken)
+    {
+        var product = await context.Set<TProduct>().FirstOrDefaultAsync(graphicsCard => graphicsCard.Id == id, cancellationToken);
+
+        if (product is null)
+            return;
+        
+        item.Id = product.Id;
+        context.Entry(product).CurrentValues.SetValues(item);
+        
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }

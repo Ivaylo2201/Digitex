@@ -32,6 +32,22 @@ export type Translation = {
     };
   };
   components: {
+    dataTable: {
+      discountPercentage: string;
+      price: string;
+      quantity: string;
+      actions: string;
+      confirmDeletion: string;
+      areYouSureYouWantToDelete: string;
+      cancel: string;
+      delete: string;
+      sku: string;
+      product: string
+      searchBySku: string;
+      noResults: string;
+      previous: string;
+      next: string;
+    };
     checkoutForm: {
       pay: string;
       now: string;
@@ -380,7 +396,7 @@ export const translation: Translation = {
         invalidError: 'Invalid product ID',
       },
       rating: {
-        requiredError: 'Rating is required'
+        requiredError: 'Rating is required',
       },
       comment: {
         maxLengthError: 'Comment cannot exceed 500 characters',
@@ -388,9 +404,25 @@ export const translation: Translation = {
     },
   },
   components: {
+    dataTable: {
+      discountPercentage: 'Discount',
+      price: 'Price',
+      quantity: 'Quantity',
+      actions: 'Actions',
+      confirmDeletion: 'Confirm Deletion',
+      areYouSureYouWantToDelete: 'Are you sure you want to delete',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      sku: "SKU",
+      product: "Product",
+      searchBySku: "Search by SKU",
+      noResults: "No results",
+      previous: "Previous",
+      next: "Next"
+    },
     checkoutForm: {
-      pay: "Pay",
-      now: "now",
+      pay: 'Pay',
+      now: 'now',
     },
     contactInformationForm: {
       country: 'Country',
@@ -611,7 +643,8 @@ export const translation: Translation = {
     },
     reviewForm: {
       leaveAReview: 'Leave a review',
-      shareYourThoughtsAndRatingForThisProduct:'Share your thoughts and rating for this product.',
+      shareYourThoughtsAndRatingForThisProduct:
+        'Share your thoughts and rating for this product.',
       rating: 'Rating',
       comment: 'Comment',
       leaveAComment: 'Leave a comment...',

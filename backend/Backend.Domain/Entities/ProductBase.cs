@@ -2,14 +2,14 @@
 
 public abstract class ProductBase
 {
-    public Guid Id { get; init; }
+    public Guid Id { get; set; }
     public string Sku { get; init; } = Guid.NewGuid().ToString("N")[..8];
-    public int BrandId { get; init; }
+    public int BrandId { get; set; }
     public Brand Brand { get; init; } = null!;
-    public required string ModelName { get; init; }
-    public required string ImagePath { get; init; }
+    public required string ModelName { get; set; }
+    public required string ImagePath { get; set; }
     public required decimal InitialPrice { get; set; }
-    public int DiscountPercentage { get; init; }
+    public int DiscountPercentage { get; set; }
     public required int Quantity { get; set; }
     public int Rating { get; set; }
     

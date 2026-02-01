@@ -28,7 +28,7 @@ export function ProductCard({
 
       <img
         src={getStaticFile(imagePath)}
-        className='object-contain group-hover:scale-105 transition-transform duration-200'
+        className='w-[297px] h-[222px] object-contain group-hover:scale-105 transition-transform duration-200'
       />
       <div className='flex flex-col items-center gap-1'>
         <p className='text-gray-600'>{brandName}</p>
