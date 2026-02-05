@@ -56,7 +56,9 @@ export function CompletePasswordResetForm() {
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
           <div className='grid gap-2'>
-            <Label htmlFor='newPassword'>{completePasswordResetForm.newPassword}</Label>
+            <Label htmlFor='newPassword'>
+              {completePasswordResetForm.newPassword}
+            </Label>
             <Input
               id='newPassword'
               type='password'

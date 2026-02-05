@@ -13,5 +13,5 @@ public record UpdateRequestBase : IRequest<Result<Unit>>, IUpdateRequest
     public required decimal InitialPrice { get; set; }
     public int DiscountPercentage { get; init; }
     public required int Quantity { get; set; }
-    public required IFormFile Image { get; init; }
+    public IFormFile? Image { get; init; }
 }

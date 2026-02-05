@@ -32,6 +32,49 @@
     }
   },
   "components": {
+    "ordersLink": {
+      "orders": "Поръчки"
+    },
+    "graphicsCardDatatable": {
+      "memory": "Памет",
+      "clock": "Такт. честота",
+      "busWidth": "Шир. на шината",
+      "cudaCores": "CUDA ядра",
+      "directXSupport": "DirectX поддръжка",
+      "tdp": "Мощност (W)"
+    },
+    "graphicsCardForm": {
+      "memory": {
+        "type": "Тип памет",
+        "frequency": "Честота (MHz)",
+        "capacityInGb": "Капацитет (GB)"
+      },
+      "clockSpeed": {
+        "base": "Базова тактова честота (MHz)",
+        "boost": "Максимална тактова честота (MHz)"
+      },
+      "busWidth": "Шина (bit)",
+      "cudaCores": "CUDA ядра",
+      "directXSupport": "DirectX поддръжка",
+      "tdp": "Мощност (W)",
+      "chooseAType": "Изберете тип"
+    },
+    "baseForm": {
+      "chooseABrand": "Изберете марка",
+      "add": "Добавяне",
+      "addNewProduct": "Добавяне на нов продукт",
+      "editingProduct": "Редактиране на продукт",
+      "fillInDetails": "Попълнете подробностите",
+      "image": "Изображение",
+      "brand": "Марка",
+      "modelName": "Име на модел",
+      "currentImage": "Текущо изображение",
+      "price": "Цена (€)",
+      "discountPercentage": "Отстъпка (%)",
+      "quantity": "Количество",
+      "cancel": "Отказ",
+      "save": "Запази"
+    },
     "dataTable": {
       "discountPercentage": "Отстъпка",
       "price": "Цена",
@@ -41,7 +84,7 @@
       "areYouSureYouWantToDelete": "Сигурни ли сте, че искате да изтриете",
       "cancel": "Отказ",
       "delete": "Изтрий",
-      "sku": "Артикулен номер",
+      "sku": "Арт. номер",
       "product": "Продукт",
       "searchBySku": "Търсене по артикулен номер",
       "noResults": "Няма резултати",
@@ -180,9 +223,6 @@
     },
     "searchBox": {
       "searchForProducts": "Търсене на продукти..."
-    },
-    "accountLink": {
-      "account": "Профил"
     },
     "signInLink": {
       "signIn": "Вход"

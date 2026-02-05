@@ -12,6 +12,7 @@ import { SsdsFilterForm } from '@/features/filters/components/forms/SsdsFilterFo
 import { PowerSuppliesFilterForm } from '@/features/filters/components/forms/PowerSuppliesFilterForm';
 import { useEffect, useState } from 'react';
 import { ProductsPagination } from './components/ProductsPagination';
+import type { GraphicsCard } from '../../models/GraphicsCard';
 
 const filterForms: Record<string, React.ComponentType> = {
   'graphics-cards': GraphicsCardsFilterForm,
@@ -27,7 +28,7 @@ export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(9); //TODO: IMplement page size selector
-  const { data } = useProducts(category ?? '', page, pageSize);
+  const { data } = useProducts<GraphicsCard>(category ?? '', page, pageSize);
 
   useEffect(() => {
     setPage(1);

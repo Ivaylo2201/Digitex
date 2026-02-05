@@ -66,7 +66,17 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
             return;
         
         item.Id = product.Id;
-        context.Entry(product).CurrentValues.SetValues(item);
+        
+        var entry = context.Entry(product);
+        foreach (var property in entry.Metadata.GetProperties())
+        {
+            var newValue = item.GetType().GetProperty(property.Name)?.GetValue(item);
+            if (newValue != null)
+            {
+                entry.Property(property.Name).CurrentValue = newValue;
+            }
+        }
+
         
         await context.SaveChangesAsync(cancellationToken);
     }

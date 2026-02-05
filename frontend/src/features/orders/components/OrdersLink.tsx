@@ -1,20 +1,20 @@
 import { useTranslation } from '@/features/language/hooks/useTranslation';
-import { User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ShoppingBag } from 'lucide-react';
+import { Link } from 'react-router';
 
-export function AccountLink() {
+export function OrdersLink() {
   const {
-    components: { accountLink }
+    components: { ordersLink },
   } = useTranslation();
 
   return (
     <Link
       className='flex flex-col gap-0.5 justify-center items-center cursor-pointer'
-      to='/auth/account'
+      to='/orders'
     >
-      <User size={19} />
+      <ShoppingBag size={19} />
       <span className='text-theme-white text-xs font-Montserrat'>
-        {accountLink.account}
+        {ordersLink.orders}
       </span>
     </Link>
   );

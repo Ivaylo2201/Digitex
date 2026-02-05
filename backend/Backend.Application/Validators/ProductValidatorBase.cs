@@ -7,11 +7,11 @@ public class ProductValidatorBase<TProduct> : AbstractValidator<TProduct> where 
 {
     protected ProductValidatorBase()
     {
-        RuleFor(x => x.BrandId).NotNull().GreaterThanOrEqualTo(0);
-        RuleFor(x => x.ModelName).NotEmpty();
-        RuleFor(x => x.ImagePath).NotEmpty();
-        RuleFor(x => x.InitialPrice).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.DiscountPercentage).GreaterThanOrEqualTo(0);
-        RuleFor(x => x.Quantity).GreaterThanOrEqualTo(0);
+        // RuleFor(x => x.BrandId).NotNull().GreaterThanOrEqualTo(0);
+        // RuleFor(x => x.ModelName).NotEmpty();
+        // RuleFor(x => x.ImagePath).NotEmpty();
+        // RuleFor(x => x.InitialPrice).GreaterThanOrEqualTo(0);
+        // RuleFor(x => x.DiscountPercentage).GreaterThanOrEqualTo(0);
+        // RuleFor(x => x.Quantity).GreaterThanOrEqualTo(0);
     }
 }

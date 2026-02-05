@@ -34,6 +34,49 @@
     }
   },
   "components": {
+    "ordersLink": {
+      "orders": "Bestellungen"
+    },
+    "baseForm": {
+      "chooseABrand": "Wählen Sie eine Marke",
+      "image": "Bild",
+      "add": "Hinzufügen",
+      "addNewProduct": "Neues Produkt hinzufügen",
+      "editingProduct": "Produkt bearbeiten",
+      "fillInDetails": "Details ausfüllen",
+      "brand": "Marke",
+      "modelName": "Modellname",
+      "currentImage": "Aktuelles Bild",
+      "price": "Preis (€)",
+      "discountPercentage": "Rabatt (%)",
+      "quantity": "Menge",
+      "cancel": "Abbrechen",
+      "save": "Speichern"
+    },
+    "graphicsCardDatatable": {
+      "memory": "Speicher",
+      "clock": "Takt",
+      "busWidth": "Busbreite",
+      "cudaCores": "CUDA-Kerne",
+      "directXSupport": "DirectX-Unterstützung",
+      "tdp": "Leistungsaufnahme (W)"
+    },
+    "graphicsCardForm": {
+      "memory": {
+        "type": "Speichertyp",
+        "frequency": "Frequenz (MHz)",
+        "capacityInGb": "Kapazität (GB)"
+      },
+      "clockSpeed": {
+        "base": "Basistaktfrequenz (MHz)",
+        "boost": "Maximale Taktfrequenz (MHz)"
+      },
+      "busWidth": "Busbreite (bit)",
+      "cudaCores": "CUDA-Kerne",
+      "directXSupport": "DirectX-Unterstützung",
+      "tdp": "Leistungsaufnahme (W)",
+      "chooseAType": "Wählen Sie einen Typ"
+    },
     "dataTable": {
       "discountPercentage": "Rabatt",
       "price": "Preis",
@@ -182,9 +225,6 @@
     },
     "searchBox": {
       "searchForProducts": "Produkte suchen..."
-    },
-    "accountLink": {
-      "account": "Profil"
     },
     "signInLink": {
       "signIn": "Anmelden"

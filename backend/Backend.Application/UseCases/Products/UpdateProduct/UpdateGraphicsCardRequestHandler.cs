@@ -19,7 +19,7 @@ public class UpdateGraphicsCardRequestHandler(
     IProductRepository<GraphicsCard> productRepository,
     IFileService<GraphicsCard> fileService) : UpdateProductRequestHandlerBase<UpdateGraphicsCardRequest, GraphicsCard>(productRepository, fileService)
 {
-    protected override GraphicsCard CreateProduct(UpdateGraphicsCardRequest request, string imagePath)
+    protected override GraphicsCard CreateProduct(UpdateGraphicsCardRequest request, string? imagePath)
     {
         return new GraphicsCard
         {

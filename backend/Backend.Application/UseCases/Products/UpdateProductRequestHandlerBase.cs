@@ -22,5 +22,5 @@ public abstract class UpdateProductRequestHandlerBase<TRequest, TProduct>(
         return Result<Unit>.Success(HttpStatusCode.OK, Unit.Value);
     }
     
-    protected abstract TProduct CreateProduct(TRequest request, string imagePath);
+    protected abstract TProduct CreateProduct(TRequest request, string? imagePath);
 }

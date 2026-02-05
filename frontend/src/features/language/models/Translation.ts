@@ -32,6 +32,46 @@ export type Translation = {
     };
   };
   components: {
+    graphicsCardDatatable: {
+      memory: string;
+      clock: string;
+      busWidth: string;
+      cudaCores: string;
+      directXSupport: string;
+      tdp: string;
+    };
+    graphicsCardForm: {
+      memory: {
+        type: string;
+        frequency: string;
+        capacityInGb: string;
+      };
+      clockSpeed: {
+        base: string;
+        boost: string;
+      };
+      chooseAType: string;
+      busWidth: string;
+      cudaCores: string;
+      directXSupport: string;
+      tdp: string;
+    };
+    baseForm: {
+      chooseABrand: string;
+      add: string;
+      addNewProduct: string;
+      editingProduct: string;
+      fillInDetails: string;
+      brand: string;
+      modelName: string;
+      currentImage: string;
+      price: string;
+      discountPercentage: string;
+      quantity: string;
+      cancel: string;
+      save: string;
+      image: string;
+    };
     dataTable: {
       discountPercentage: string;
       price: string;
@@ -42,7 +82,7 @@ export type Translation = {
       cancel: string;
       delete: string;
       sku: string;
-      product: string
+      product: string;
       searchBySku: string;
       noResults: string;
       previous: string;
@@ -87,6 +127,9 @@ export type Translation = {
     };
     chatbot: {
       typeYourMessage: string;
+    };
+    ordersLink: {
+      orders: string;
     };
     cartPage: {
       price: string;
@@ -146,9 +189,6 @@ export type Translation = {
     };
     searchBox: {
       searchForProducts: string;
-    };
-    accountLink: {
-      account: string;
     };
     signInLink: {
       signIn: string;
@@ -404,6 +444,30 @@ export const translation: Translation = {
     },
   },
   components: {
+    graphicsCardDatatable: {
+      memory: 'Memory',
+      clock: 'Clock',
+      busWidth: 'Bus Width',
+      cudaCores: 'CUDA Cores',
+      directXSupport: 'DirectX',
+      tdp: 'TDP (W)',
+    },
+    baseForm: {
+      chooseABrand: 'Choose a brand',
+      image: 'Image',
+      add: 'Add',
+      addNewProduct: 'Add New Product',
+      fillInDetails: 'Fill in the details',
+      brand: 'Brand',
+      modelName: 'Model Name',
+      currentImage: 'Current Image',
+      price: 'Price (€)',
+      discountPercentage: 'Discount (%)',
+      quantity: 'Quantity',
+      cancel: 'Cancel',
+      save: 'Save',
+      editingProduct: 'Editing Product',
+    },
     dataTable: {
       discountPercentage: 'Discount',
       price: 'Price',
@@ -413,12 +477,12 @@ export const translation: Translation = {
       areYouSureYouWantToDelete: 'Are you sure you want to delete',
       cancel: 'Cancel',
       delete: 'Delete',
-      sku: "SKU",
-      product: "Product",
-      searchBySku: "Search by SKU",
-      noResults: "No results",
-      previous: "Previous",
-      next: "Next"
+      sku: 'SKU',
+      product: 'Product',
+      searchBySku: 'Search by SKU',
+      noResults: 'No results',
+      previous: 'Previous',
+      next: 'Next',
     },
     checkoutForm: {
       pay: 'Pay',
@@ -475,8 +539,8 @@ export const translation: Translation = {
     searchBox: {
       searchForProducts: 'Search for products...',
     },
-    accountLink: {
-      account: 'Account',
+    ordersLink: {
+      orders: 'Orders',
     },
     signInLink: {
       signIn: 'Sign in',
@@ -649,6 +713,22 @@ export const translation: Translation = {
       comment: 'Comment',
       leaveAComment: 'Leave a comment...',
       submitReview: 'Submit review',
+    },
+    graphicsCardForm: {
+      memory: {
+        type: 'Type',
+        frequency: 'Frequency',
+        capacityInGb: 'Capacity (GB)',
+      },
+      clockSpeed: {
+        base: 'Base clock speed (MHz)',
+        boost: 'Boost clock speed (MHz)',
+      },
+      busWidth: 'Bus width (bits)',
+      cudaCores: 'CUDA cores',
+      directXSupport: 'DirectX support',
+      tdp: 'TDP (W)',
+      chooseAType: 'Choose a type',
     },
   },
   specifications: {

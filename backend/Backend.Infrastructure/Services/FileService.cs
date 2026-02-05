@@ -8,8 +8,11 @@ namespace Backend.Infrastructure.Services;
 
 public class FileService<TProduct>(IWebHostEnvironment env) : IFileService<TProduct> where TProduct : ProductBase
 {
-    public async Task<string> SaveFileAsync(IFormFile file)
+    public async Task<string?> SaveFileAsync(IFormFile? file)
     {
+        if (file is null)
+            return null;
+        
         var subfolder = typeof(TProduct) switch
         {
             var product when product == typeof(GraphicsCard) => "graphics-cards",

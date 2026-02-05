@@ -5,5 +5,5 @@ namespace Backend.Application.Interfaces.Common;
 public interface IUpdateRequest
 {
     Guid Id { get; }
-    IFormFile Image { get; }
+    IFormFile? Image { get; }
 }

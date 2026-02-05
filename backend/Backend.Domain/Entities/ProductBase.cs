@@ -7,7 +7,7 @@ public abstract class ProductBase
     public int BrandId { get; set; }
     public Brand Brand { get; init; } = null!;
     public required string ModelName { get; set; }
-    public required string ImagePath { get; set; }
+    public string? ImagePath { get; set; }
     public required decimal InitialPrice { get; set; }
     public int DiscountPercentage { get; set; }
     public required int Quantity { get; set; }

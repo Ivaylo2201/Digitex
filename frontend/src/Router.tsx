@@ -16,6 +16,7 @@ import { CheckoutPage } from './features/checkout/pages/CheckoutPage';
 import { ThankYouPage } from './features/checkout/pages/ThankYouPage';
 import { AdminRequired } from './features/auth/components/AdminRequired';
 import { GraphicsCardsAdminPage } from './features/admin/pages/GraphicsCardsAdminPage';
+import { OrdersPage } from './features/orders/pages/OrdersPage';
 
 export function Router() {
   return (
@@ -38,6 +39,8 @@ export function Router() {
           <Route path='categories/:category' element={<ProductsPage />} />
           <Route path=':category/:id' element={<ProductPageResolver />} />
         </Route>
+
+        <Route path='/orders' element={<OrdersPage />} />
 
         <Route path='/account'>
           <Route

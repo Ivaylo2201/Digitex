@@ -1,27 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
-import type { ProductShort } from '../models/base/ProductShort';
 import { staleTime } from '@/lib/api/constants';
 import { httpClient } from '@/lib/api/httpClient';
 import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 import { useLocation } from 'react-router';
 
-type FetchProductsResponse = {
-  items: ProductShort[];
+type FetchProductsResponse<T> = {
+  items: T[];
   totalItems: number;
   totalPages: number;
 };
 
-async function fetchProducts(
+async function fetchProducts<T>(
   category: string,
   queryParams: string | undefined
 ) {
-  const res = await httpClient.get<FetchProductsResponse>(
+  const res = await httpClient.get<FetchProductsResponse<T>>(
     `/products/${category}${queryParams}`
   );
   return res.data;
 }
 
-export function useProducts(category: string, page: number, pageSize: number) {
+export function useProducts<T>(category: string, page: number, pageSize: number) {
   const location = useLocation();
   const { currency } = useCurrencyStore();
 
@@ -34,7 +33,7 @@ export function useProducts(category: string, page: number, pageSize: number) {
       }&page=${page}&pageSize=${pageSize}${
         searchParams ? `&${searchParams}` : ''
       }`;
-      return fetchProducts(category, queryParams);
+      return fetchProducts<T>(category, queryParams);
     },
     staleTime: staleTime,
     retry: false,

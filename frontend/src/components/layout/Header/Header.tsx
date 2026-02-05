@@ -1,5 +1,4 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
-import { AccountLink } from '../../../features/account/components/AccountLink';
 import { CartLink } from '../../../features/cart/components/CartLink';
 import { LogoLink } from './LogoLink';
 import { Searchbox } from './Searchbox';
@@ -12,6 +11,7 @@ import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { LanguageSelect } from '@/features/language/components/LanguageSelect';
 import { useAuthStore } from '@/features/auth/stores/useAuth';
 import { AdminPanelLink } from './AdminPanelLink';
+import { OrdersLink } from '@/features/orders/components/OrdersLink';
 
 export function Header() {
   const { isAuthenticated, role } = useAuthStore();
@@ -52,7 +52,7 @@ export function Header() {
           <Searchbox />
         </div>
         <div className='md:w-1/3 flex justify-center items-center gap-6 pt-2.5 md:pt-0'>
-          <AccountLink />
+          <OrdersLink />
           <CartLink />
           <FavoritesLink />
           <CompareLink />

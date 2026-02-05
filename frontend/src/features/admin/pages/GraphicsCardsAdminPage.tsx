@@ -1,12 +1,12 @@
 import { Page } from '@/components/layout/Page';
-import { GraphicsCardsUpsertForm } from '../components/forms/variants/GraphicsCardsUpsertForm';
-import { GraphicsCardsDatatable } from '../components/tables/variants/GraphicsCardsDatatable';
+import { GraphicsCardsDatatable } from '../components/GraphicsCardsDatatable';
+import { GraphicsCardForm } from '../components/GraphicsCardsForm';
 
 export function GraphicsCardsAdminPage({}) {
   return (
     <Page>
       <div className='flex flex-col items-start'>
-        <GraphicsCardsUpsertForm />
+        <GraphicsCardForm />
         <GraphicsCardsDatatable />
       </div>
     </Page>
