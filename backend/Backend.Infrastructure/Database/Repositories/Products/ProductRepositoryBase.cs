@@ -66,15 +66,14 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
             return;
         
         item.Id = product.Id;
-        
         var entry = context.Entry(product);
+        
         foreach (var property in entry.Metadata.GetProperties())
         {
-            var newValue = item.GetType().GetProperty(property.Name)?.GetValue(item);
-            if (newValue != null)
-            {
-                entry.Property(property.Name).CurrentValue = newValue;
-            }
+            var value = item.GetType().GetProperty(property.Name)?.GetValue(item);
+            
+            if (value is not null)
+                entry.Property(property.Name).CurrentValue = value;
         }
 
         

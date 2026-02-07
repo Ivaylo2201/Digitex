@@ -23,11 +23,10 @@ public class ReviewConfiguration : IEntityTypeConfiguration<Review>
             .HasColumnType("TEXT");
 
         builder
-        
             .HasOne(review => review.Product)
             .WithMany(product => product.Reviews)
             .HasForeignKey(review => review.ProductId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder
             .HasOne(review => review.User)

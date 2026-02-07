@@ -29,7 +29,7 @@ public class UpdateSsdRequestHandler(
             StorageInterface = request.StorageInterface,
             ModelName = request.ModelName,
             ImagePath = imagePath,
-            InitialPrice = request.InitialPrice,
+            InitialPrice = request.Price,
             Quantity = request.Quantity
         };
     }

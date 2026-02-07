@@ -39,7 +39,7 @@ public class UpdateMonitorRequestHandler(
             ColorSpectre = request.ColorSpectre,
             ModelName = request.ModelName,
             ImagePath = imagePath,
-            InitialPrice = request.InitialPrice,
+            InitialPrice = request.Price,
             Quantity = request.Quantity
         };
     }

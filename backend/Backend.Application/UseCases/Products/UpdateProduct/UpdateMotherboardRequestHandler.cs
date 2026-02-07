@@ -19,7 +19,7 @@ public class UpdateMotherboardRequestHandler(
     IFileService<Motherboard> fileService)
     : UpdateProductRequestHandlerBase<UpdateMotherboardRequest, Motherboard>(productRepository, fileService)
 {
-    protected override Motherboard CreateProduct(UpdateMotherboardRequest request, string imagePath)
+    protected override Motherboard CreateProduct(UpdateMotherboardRequest request, string? imagePath)
     {
         return new Motherboard
         {
@@ -32,7 +32,7 @@ public class UpdateMotherboardRequestHandler(
             PcieSlots = request.PcieSlots,
             ModelName = request.ModelName,
             ImagePath = imagePath,
-            InitialPrice = request.InitialPrice,
+            InitialPrice = request.Price,
             Quantity = request.Quantity
         };
     }

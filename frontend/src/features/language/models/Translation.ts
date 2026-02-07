@@ -1,5 +1,111 @@
 export type Translation = {
   validationSchemas: {
+    baseForm: {
+      brandId: {
+        requiredError: string;
+        nonNegativeError: string;
+      };
+      modelName: {
+        requiredError: string;
+        minLengthError: string;
+      };
+      price: {
+        requiredError: string;
+        nonNegativeError: string;
+      };
+      discountPercentage: {
+        requiredError: string;
+        minError: string;
+        maxError: string;
+      };
+      quantity: {
+        requiredError: string;
+        integerError: string;
+        nonNegativeError: string;
+      };
+    };
+    processorForm: {
+      cores: {
+        requiredError: string;
+        integerError: string;
+        positiveError: string;
+      };
+      threads: {
+        requiredError: string;
+        integerError: string;
+        positiveError: string;
+      };
+      clockSpeed: {
+        base: {
+          requiredError: string;
+          positiveError: string;
+        };
+        boost: {
+          requiredError: string;
+          positiveError: string;
+        };
+      };
+      socket: { requiredError: string };
+      tdp: {
+        requiredError: string;
+        positiveError: string;
+      };
+    };
+    motherboardForm: {
+      socket: { requiredError: string };
+      formFactor: { requiredError: string };
+      chipset: { requiredError: string };
+      ramSlots: {
+        requiredError: string;
+        integerError: string;
+        positiveError: string;
+      };
+      pcieSlots: {
+        requiredError: string;
+        integerError: string;
+        positiveError: string;
+      };
+    };
+    graphicsCardForm: {
+      memory: {
+        capacityInGb: {
+          requiredError: string;
+          positiveError: string;
+        };
+        type: {
+          minLengthError: string;
+        };
+        frequency: {
+          positiveError: string;
+        };
+      };
+      clockSpeed: {
+        base: {
+          requiredError: string;
+          positiveError: string;
+        };
+        boost: {
+          requiredError: string;
+          positiveError: string;
+        };
+      };
+      busWidth: {
+        requiredError: string;
+        positiveError: string;
+      };
+      cudaCores: {
+        requiredError: string;
+        positiveError: string;
+      };
+      directXSupport: {
+        requiredError: string;
+        positiveError: string;
+      };
+      tdp: {
+        requiredError: string;
+        positiveError: string;
+      };
+    };
     auth: {
       email: {
         requiredError: string;
@@ -32,7 +138,38 @@ export type Translation = {
     };
   };
   components: {
-    graphicsCardDatatable: {
+    processorsDataTable: {
+      cores: string;
+      threads: string;
+      clockSpeed: string;
+      socket: string;
+      tdp: string;
+    };
+    processorForm: {
+      cores: string;
+      threads: string;
+      clockSpeed: {
+        base: string;
+        boost: string;
+      };
+      socket: string;
+      tdp: string;
+    };
+    motherboardsDataTable: {
+      socket: string;
+      formFactor: string;
+      chipset: string;
+      ramSlots: string;
+      pcieSlots: string;
+    };
+    motherboardForm: {
+      socket: string;
+      formFactor: string;
+      chipset: string;
+      ramSlots: string;
+      pcieSlots: string;
+    };
+    graphicsCardsDataTable: {
       memory: string;
       clock: string;
       busWidth: string;
@@ -412,6 +549,114 @@ export type Translation = {
 
 export const translation: Translation = {
   validationSchemas: {
+    baseForm: {
+      brandId: {
+        requiredError: 'Brand is required',
+        nonNegativeError: 'Brand ID must be non-negative',
+      },
+      modelName: {
+        requiredError: 'Model name is required',
+        minLengthError: 'Model name must be at least 1 character',
+      },
+      price: {
+        requiredError: 'Price is required',
+        nonNegativeError: 'Price must be 0 or greater',
+      },
+      discountPercentage: {
+        requiredError: 'Discount is required',
+        minError: 'Discount cannot be less than 0%',
+        maxError: 'Discount cannot exceed 100%',
+      },
+      quantity: {
+        requiredError: 'Quantity is required',
+        integerError: 'Quantity must be an integer',
+        nonNegativeError: 'Quantity must be 0 or greater',
+      },
+    },
+    processorForm: {
+      cores: {
+        requiredError: 'Cores is required',
+        integerError: 'Cores must be an integer',
+        positiveError: 'Cores must be positive',
+      },
+      threads: {
+        requiredError: 'Threads is required',
+        integerError: 'Threads must be an integer',
+        positiveError: 'Threads must be positive',
+      },
+      clockSpeed: {
+        base: {
+          requiredError: 'Base clock speed is required',
+          positiveError: 'Base clock speed must be positive',
+        },
+        boost: {
+          requiredError: 'Boost clock speed is required',
+          positiveError: 'Boost clock speed must be positive',
+        },
+      },
+      socket: {
+        requiredError: 'Socket is required',
+      },
+      tdp: {
+        requiredError: 'TDP is required',
+        positiveError: 'TDP must be positive',
+      },
+    },
+    motherboardForm: {
+      socket: { requiredError: 'Socket is required' },
+      formFactor: { requiredError: 'Form factor is required' },
+      chipset: { requiredError: 'Chipset is required' },
+      ramSlots: {
+        requiredError: 'RAM slots is required',
+        integerError: 'RAM slots must be an integer',
+        positiveError: 'RAM slots must be positive',
+      },
+      pcieSlots: {
+        requiredError: 'PCIe slots is required',
+        integerError: 'PCIe slots must be an integer',
+        positiveError: 'PCIe slots must be positive',
+      },
+    },
+    graphicsCardForm: {
+      memory: {
+        capacityInGb: {
+          requiredError: 'Capacity in GB is required',
+          positiveError: 'Capacity in GB must be positive',
+        },
+        type: {
+          minLengthError: 'Type must be at least 1 character',
+        },
+        frequency: {
+          positiveError: 'Frequency must be positive',
+        },
+      },
+      clockSpeed: {
+        base: {
+          requiredError: 'Base clock speed is required',
+          positiveError: 'Base clock speed must be positive',
+        },
+        boost: {
+          requiredError: 'Boost clock speed is required',
+          positiveError: 'Boost clock speed must be positive',
+        },
+      },
+      busWidth: {
+        requiredError: 'Bus width is required',
+        positiveError: 'Bus width must be positive',
+      },
+      cudaCores: {
+        requiredError: 'CUDA cores is required',
+        positiveError: 'CUDA cores must be positive',
+      },
+      directXSupport: {
+        requiredError: 'DirectX support is required',
+        positiveError: 'DirectX support must be positive',
+      },
+      tdp: {
+        requiredError: 'TDP is required',
+        positiveError: 'TDP must be positive',
+      },
+    },
     auth: {
       email: {
         requiredError: 'Email is required.',
@@ -444,13 +689,30 @@ export const translation: Translation = {
     },
   },
   components: {
-    graphicsCardDatatable: {
+    processorForm: {
+      cores: 'Cores',
+      threads: 'Threads',
+      clockSpeed: {
+        base: 'Base clock speed (MHz)',
+        boost: 'Boost clock speed (MHz)',
+      },
+      socket: 'Socket',
+      tdp: 'TDP (W)',
+    },
+    processorsDataTable: {
+      cores: 'Cores',
+      threads: 'Threads',
+      clockSpeed: 'Clock Speed',
+      socket: 'Socket',
+      tdp: 'TDP',
+    },
+    graphicsCardsDataTable: {
       memory: 'Memory',
       clock: 'Clock',
       busWidth: 'Bus Width',
       cudaCores: 'CUDA Cores',
       directXSupport: 'DirectX',
-      tdp: 'TDP (W)',
+      tdp: 'TDP',
     },
     baseForm: {
       chooseABrand: 'Choose a brand',
@@ -716,7 +978,7 @@ export const translation: Translation = {
     },
     graphicsCardForm: {
       memory: {
-        type: 'Type',
+        type: 'Memory type',
         frequency: 'Frequency',
         capacityInGb: 'Capacity (GB)',
       },
@@ -729,6 +991,20 @@ export const translation: Translation = {
       directXSupport: 'DirectX support',
       tdp: 'TDP (W)',
       chooseAType: 'Choose a type',
+    },
+    motherboardsDataTable: {
+      socket: 'Socket',
+      formFactor: 'Form factor',
+      chipset: 'Chipset',
+      ramSlots: 'RAM slots',
+      pcieSlots: 'PCIe slots',
+    },
+    motherboardForm: {
+      socket: 'Socket',
+      formFactor: 'Form factor',
+      chipset: 'Chipset',
+      ramSlots: 'RAM slots',
+      pcieSlots: 'PCIe slots',
     },
   },
   specifications: {

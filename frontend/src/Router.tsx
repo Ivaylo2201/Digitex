@@ -17,6 +17,8 @@ import { ThankYouPage } from './features/checkout/pages/ThankYouPage';
 import { AdminRequired } from './features/auth/components/AdminRequired';
 import { GraphicsCardsAdminPage } from './features/admin/pages/GraphicsCardsAdminPage';
 import { OrdersPage } from './features/orders/pages/OrdersPage';
+import { MotherboardsAdminPage } from './features/admin/pages/MotherboardsAdminPage';
+import { ProcessorsAdminPage } from './features/admin/pages/ProcessorsAdminPage';
 
 export function Router() {
   return (
@@ -30,6 +32,22 @@ export function Router() {
             element={
               <AdminRequired>
                 <GraphicsCardsAdminPage />
+              </AdminRequired>
+            }
+          />
+          <Route
+            path='motherboards'
+            element={
+              <AdminRequired>
+                <MotherboardsAdminPage />
+              </AdminRequired>
+            }
+          />
+          <Route
+            path='processors'
+            element={
+              <AdminRequired>
+                <ProcessorsAdminPage />
               </AdminRequired>
             }
           />

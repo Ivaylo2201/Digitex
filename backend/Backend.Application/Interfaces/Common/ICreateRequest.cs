@@ -4,5 +4,5 @@ namespace Backend.Application.Interfaces.Common;
 
 public interface ICreateRequest
 {
-    IFormFile Image { get; }
+    IFormFile? Image { get; }
 }

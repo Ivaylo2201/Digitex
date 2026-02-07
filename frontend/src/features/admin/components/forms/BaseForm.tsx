@@ -17,10 +17,10 @@ import {
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Controller, useFormContext } from 'react-hook-form';
-import { useBrands } from '../hooks/useBrands';
+import { useBrands } from '../../hooks/useBrands';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { SquarePen } from 'lucide-react';
-import type { BaseFormData } from '../types/BaseFormData';
+import type { BaseFormData } from '../../types/BaseFormData';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Label } from '@/components/ui/label';
 
@@ -81,7 +81,7 @@ export function BaseForm<T extends { imagePath: string; sku: string }>({
                     onValueChange={(val) => field.onChange(Number(val))}
                   >
                     <SelectTrigger className='w-full'>
-                      <SelectValue placeholder={baseForm.chooseABrand} />
+                      <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       {brands?.map((brand) => (
@@ -155,11 +155,7 @@ export function BaseForm<T extends { imagePath: string; sku: string }>({
             >
               {baseForm.cancel}
             </Button>
-            <Button
-              className='cursor-pointer bg-theme-crimson'
-              onClick={() => setOpen(false)}
-              type='submit'
-            >
+            <Button className='cursor-pointer bg-theme-crimson' type='submit'>
               {baseForm.save}
             </Button>
           </div>

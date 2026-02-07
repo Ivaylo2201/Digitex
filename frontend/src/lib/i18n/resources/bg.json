@@ -1,5 +1,113 @@
 {
   "validationSchemas": {
+    "processorForm": {
+      "cores": {
+        "requiredError": "Броят ядра е задължителен",
+        "integerError": "Броят ядра трябва да е цяло число",
+        "positiveError": "Броят ядра трябва да е положителен"
+      },
+      "threads": {
+        "requiredError": "Броят нишки е задължителен",
+        "integerError": "Броят нишки трябва да е цяло число",
+        "positiveError": "Броят нишки трябва да е положителен"
+      },
+      "clockSpeed": {
+        "base": {
+          "requiredError": "Базовата тактова честота е задължителна",
+          "positiveError": "Базовата тактова честота трябва да е положителна"
+        },
+        "boost": {
+          "requiredError": "Boost тактовата честота е задължителна",
+          "positiveError": "Boost тактовата честота трябва да е положителна"
+        }
+      },
+      "socket": {
+        "requiredError": "Сокетът е задължителен"
+      },
+      "tdp": {
+        "requiredError": "TDP е задължителен",
+        "positiveError": "TDP трябва да е положителен"
+      }
+    },
+    "baseForm": {
+      "brandId": {
+        "requiredError": "Марката е задължителна",
+        "nonNegativeError": "ID на марката трябва да бъде неотрицателно"
+      },
+      "modelName": {
+        "requiredError": "Името на модела е задължително",
+        "minLengthError": "Името на модела трябва да е поне 1 символ"
+      },
+      "price": {
+        "requiredError": "Цената е задължителна",
+        "nonNegativeError": "Цената трябва да бъде 0 или повече"
+      },
+      "discountPercentage": {
+        "requiredError": "Отстъпката е задължителна",
+        "minError": "Отстъпката не може да бъде по-малка от 0%",
+        "maxError": "Отстъпката не може да надвишава 100%"
+      },
+      "quantity": {
+        "requiredError": "Количеството е задължително",
+        "integerError": "Количеството трябва да е цяло число",
+        "nonNegativeError": "Количеството трябва да бъде 0 или повече"
+      }
+    },
+    "motherboardForm": {
+      "socket": { "requiredError": "Сокетът е задължителен" },
+      "formFactor": { "requiredError": "Форм факторът е задължителен" },
+      "chipset": { "requiredError": "Чипсетът е задължителен" },
+      "ramSlots": {
+        "requiredError": "Броят RAM слотове е задължителен",
+        "integerError": "RAM слотовете трябва да са цяло число",
+        "positiveError": "RAM слотовете трябва да са положително число"
+      },
+      "pcieSlots": {
+        "requiredError": "Броят PCIe слотове е задължителен",
+        "integerError": "PCIe слотовете трябва да са цяло число",
+        "positiveError": "PCIe слотовете трябва да са положително число"
+      }
+    },
+    "graphicsCardForm": {
+      "memory": {
+        "capacityInGb": {
+          "requiredError": "Капацитетът в GB е задължителен",
+          "positiveError": "Капацитетът в GB трябва да бъде положителен"
+        },
+        "type": {
+          "minLengthError": "Типът трябва да бъде поне 1 символ"
+        },
+        "frequency": {
+          "positiveError": "Честотата трябва да бъде положителна"
+        }
+      },
+      "clockSpeed": {
+        "base": {
+          "requiredError": "Базовата честота е задължителна",
+          "positiveError": "Базовата честота трябва да бъде положителна"
+        },
+        "boost": {
+          "requiredError": "Boost честотата е задължителна",
+          "positiveError": "Boost честотата трябва да бъде положителна"
+        }
+      },
+      "busWidth": {
+        "requiredError": "Ширината на шината е задължителна",
+        "positiveError": "Ширината на шината трябва да бъде положителна"
+      },
+      "cudaCores": {
+        "requiredError": "CUDA ядрата са задължителни",
+        "positiveError": "CUDA ядрата трябва да бъдат положителни"
+      },
+      "directXSupport": {
+        "requiredError": "DirectX поддръжката е задължителна",
+        "positiveError": "DirectX поддръжката трябва да бъде положителна"
+      },
+      "tdp": {
+        "requiredError": "TDP е задължително",
+        "positiveError": "TDP трябва да бъде положително"
+      }
+    },
     "auth": {
       "email": {
         "requiredError": "Имейлът е задължителен.",
@@ -32,16 +140,47 @@
     }
   },
   "components": {
+    "processorForm": {
+      "cores": "Ядра",
+      "threads": "Нишки",
+      "clockSpeed": {
+        "base": "Базова тактова честота (MHz)",
+        "boost": "Максимална тактова честота (MHz)"
+      },
+      "socket": "Сокет",
+      "tdp": "Мощност (W)"
+    },
+    "processorsDataTable": {
+      "cores": "Ядра",
+      "threads": "Нишки",
+      "clockSpeed": "Тактова честота",
+      "socket": "Сокет",
+      "tdp": "Мощност"
+    },
     "ordersLink": {
       "orders": "Поръчки"
     },
-    "graphicsCardDatatable": {
+    "motherboardsDataTable": {
+      "socket": "Сокет",
+      "formFactor": "Форм фактор",
+      "chipset": "Чипсет",
+      "ramSlots": "RAM слотове",
+      "pcieSlots": "PCIe слотове"
+    },
+    "motherboardForm": {
+      "socket": "Сокет",
+      "formFactor": "Форм фактор",
+      "chipset": "Чипсет",
+      "ramSlots": "RAM слотове",
+      "pcieSlots": "PCIe слотове"
+    },
+    "graphicsCardsDataTable": {
       "memory": "Памет",
       "clock": "Такт. честота",
       "busWidth": "Шир. на шината",
       "cudaCores": "CUDA ядра",
-      "directXSupport": "DirectX поддръжка",
-      "tdp": "Мощност (W)"
+      "directXSupport": "DirectX",
+      "tdp": "Мощност"
     },
     "graphicsCardForm": {
       "memory": {

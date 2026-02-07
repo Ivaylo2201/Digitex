@@ -33,7 +33,7 @@ public class UpdateProcessorRequestHandler(
             Tdp = request.Tdp,
             ModelName = request.ModelName,
             ImagePath = imagePath,
-            InitialPrice = request.InitialPrice,
+            InitialPrice = request.Price,
             Quantity = request.Quantity
         };
     }

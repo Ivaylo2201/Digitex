@@ -5,6 +5,6 @@ namespace Backend.Application.UseCases.Products.DeleteProduct;
 
 public record DeleteProcessorRequestBase : DeleteRequestBase;
 
-public class DeleteProcessorRequestHandler(IProductRepository<GraphicsCard> productRepository)
-    : DeleteProductRequestHandlerBase<DeleteProcessorRequestBase, GraphicsCard>(productRepository);
+public class DeleteProcessorRequestHandler(IProductRepository<Processor> productRepository)
+    : DeleteProductRequestHandlerBase<DeleteProcessorRequestBase, Processor>(productRepository);
     

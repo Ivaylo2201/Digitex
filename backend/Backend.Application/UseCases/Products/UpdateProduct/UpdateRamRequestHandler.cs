@@ -26,7 +26,7 @@ public class UpdateRamRequestHandler(
             Timing = request.Timing,
             ModelName = request.ModelName,
             ImagePath = imagePath,
-            InitialPrice = request.InitialPrice,
+            InitialPrice = request.Price,
             Quantity = request.Quantity
         };
     }

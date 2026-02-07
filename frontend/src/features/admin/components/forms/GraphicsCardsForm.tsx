@@ -9,11 +9,14 @@ import { Input } from '@/components/ui/input';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { BaseForm } from './BaseForm';
 import type { GraphicsCard } from '@/features/products/models/GraphicsCard';
-import { useBrands } from '../hooks/useBrands';
-import type { GraphicsCardFormData } from '../types/GraphicsCardFormData';
+import { useBrands } from '../../hooks/useBrands';
+import type { GraphicsCardFormData } from '../../types/GraphicsCardFormData';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Label } from '@/components/ui/label';
-import { useProductUpdate } from '../hooks/useProductUpdate';
+import { useProductUpdate } from '../../hooks/useProductUpdate';
+import { toast } from 'sonner';
+import { useGraphicsCardFormSchema } from '../../hooks/schemas/useGraphicsCardFormSchema';
+import { useProductCreate } from '../../hooks/useProductCreate';
 
 type GraphicsCardFormProps = {
   product?: GraphicsCard;
@@ -25,6 +28,8 @@ export function GraphicsCardForm({ product }: GraphicsCardFormProps) {
     components: { graphicsCardForm },
   } = useTranslation();
   const { mutate: onUpdate } = useProductUpdate('graphics-cards', product?.id);
+  const { mutate: onCreate } = useProductCreate('graphics-cards');
+  const graphicsCardFormSchema = useGraphicsCardFormSchema();
 
   const methods = useForm<GraphicsCardFormData>({
     defaultValues: {
@@ -55,16 +60,23 @@ export function GraphicsCardForm({ product }: GraphicsCardFormProps) {
 
   const onSubmit = async (data: GraphicsCardFormData) => {
     console.log(data);
+    const validationResult = graphicsCardFormSchema.safeParse(data);
+
+    if (!validationResult.success) {
+      toast.error(validationResult.error.errors[0].message);
+      return;
+    }
+
     const formData = new FormData();
 
     if (data.image?.length) {
-      formData.append('ImagePath', data.image[0]);
+      formData.append('Image', data.image[0]);
     }
 
     formData.append('Id', data.id?.toString());
     formData.append('BrandId', data.brandId.toString());
     formData.append('ModelName', data.modelName);
-    formData.append('InitialPrice', data.price.toString());
+    formData.append('Price', data.price.toString());
     formData.append('DiscountPercentage', data.discountPercentage.toString());
     formData.append('Quantity', data.quantity.toString());
     formData.append('BusWidth', data.busWidth.toString());
@@ -77,7 +89,11 @@ export function GraphicsCardForm({ product }: GraphicsCardFormProps) {
     formData.append('Memory.Frequency', data.memory.frequency.toString());
     formData.append('Memory.Type', data.memory.type);
 
-    onUpdate(formData);
+    if (data.id === undefined) {
+      onCreate(formData);
+    } else {
+      onUpdate(formData);
+    }
   };
 
   return (
@@ -101,7 +117,7 @@ export function GraphicsCardForm({ product }: GraphicsCardFormProps) {
               render={({ field }) => (
                 <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger className='w-full'>
-                    <SelectValue placeholder={graphicsCardForm.chooseAType} />
+                    <SelectValue />
                   </SelectTrigger>
 
                   <SelectContent>

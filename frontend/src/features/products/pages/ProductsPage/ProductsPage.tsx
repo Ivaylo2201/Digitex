@@ -27,8 +27,7 @@ const filterForms: Record<string, React.ComponentType> = {
 export function ProductsPage() {
   const { category } = useParams<{ category: string }>();
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(9); //TODO: IMplement page size selector
-  const { data } = useProducts<GraphicsCard>(category ?? '', page, pageSize);
+  const { data } = useProducts<GraphicsCard>(category ?? '', page, 9);
 
   useEffect(() => {
     setPage(1);
@@ -55,7 +54,7 @@ export function ProductsPage() {
         </div>
         <ProductsPagination
           page={page}
-          pageSize={pageSize}
+          pageSize={9}
           setPage={setPage}
           totalPages={data.totalPages}
         />

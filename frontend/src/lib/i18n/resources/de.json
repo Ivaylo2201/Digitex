@@ -1,5 +1,113 @@
 {
   "validationSchemas": {
+    "processorForm": {
+      "cores": {
+        "requiredError": "Anzahl der Kerne ist erforderlich",
+        "integerError": "Anzahl der Kerne muss eine ganze Zahl sein",
+        "positiveError": "Anzahl der Kerne muss positiv sein"
+      },
+      "threads": {
+        "requiredError": "Anzahl der Threads ist erforderlich",
+        "integerError": "Anzahl der Threads muss eine ganze Zahl sein",
+        "positiveError": "Anzahl der Threads muss positiv sein"
+      },
+      "clockSpeed": {
+        "base": {
+          "requiredError": "Basistakt ist erforderlich",
+          "positiveError": "Basistakt muss positiv sein"
+        },
+        "boost": {
+          "requiredError": "Boost-Takt ist erforderlich",
+          "positiveError": "Boost-Takt muss positiv sein"
+        }
+      },
+      "socket": {
+        "requiredError": "Sockel ist erforderlich"
+      },
+      "tdp": {
+        "requiredError": "TDP ist erforderlich",
+        "positiveError": "TDP muss positiv sein"
+      }
+    },
+    "baseForm": {
+      "brandId": {
+        "requiredError": "Marke ist erforderlich",
+        "nonNegativeError": "Marken-ID muss positiv oder null sein"
+      },
+      "modelName": {
+        "requiredError": "Modellname ist erforderlich",
+        "minLengthError": "Modellname muss mindestens 1 Zeichen haben"
+      },
+      "price": {
+        "requiredError": "Preis ist erforderlich",
+        "nonNegativeError": "Preis muss 0 oder größer sein"
+      },
+      "discountPercentage": {
+        "requiredError": "Rabatt ist erforderlich",
+        "minError": "Rabatt darf nicht kleiner als 0% sein",
+        "maxError": "Rabatt darf 100% nicht überschreiten"
+      },
+      "quantity": {
+        "requiredError": "Menge ist erforderlich",
+        "integerError": "Menge muss eine ganze Zahl sein",
+        "nonNegativeError": "Menge muss 0 oder größer sein"
+      }
+    },
+    "motherboardForm": {
+      "socket": { "requiredError": "Sockel ist erforderlich" },
+      "formFactor": { "requiredError": "Formfaktor ist erforderlich" },
+      "chipset": { "requiredError": "Chipsatz ist erforderlich" },
+      "ramSlots": {
+        "requiredError": "Anzahl der RAM-Steckplätze ist erforderlich",
+        "integerError": "RAM-Steckplätze müssen eine ganze Zahl sein",
+        "positiveError": "RAM-Steckplätze müssen positiv sein"
+      },
+      "pcieSlots": {
+        "requiredError": "Anzahl der PCIe-Steckplätze ist erforderlich",
+        "integerError": "PCIe-Steckplätze müssen eine ganze Zahl sein",
+        "positiveError": "PCIe-Steckplätze müssen positiv sein"
+      }
+    },
+    "graphicsCardForm": {
+      "memory": {
+        "capacityInGb": {
+          "requiredError": "Kapazität in GB ist erforderlich",
+          "positiveError": "Kapazität in GB muss positiv sein"
+        },
+        "type": {
+          "minLengthError": "Typ muss mindestens 1 Zeichen lang sein"
+        },
+        "frequency": {
+          "positiveError": "Frequenz muss positiv sein"
+        }
+      },
+      "clockSpeed": {
+        "base": {
+          "requiredError": "Basis-Taktfrequenz ist erforderlich",
+          "positiveError": "Basis-Taktfrequenz muss positiv sein"
+        },
+        "boost": {
+          "requiredError": "Boost-Taktfrequenz ist erforderlich",
+          "positiveError": "Boost-Taktfrequenz muss positiv sein"
+        }
+      },
+      "busWidth": {
+        "requiredError": "Busbreite ist erforderlich",
+        "positiveError": "Busbreite muss positiv sein"
+      },
+      "cudaCores": {
+        "requiredError": "CUDA‑Kerne sind erforderlich",
+        "positiveError": "CUDA‑Kerne müssen positiv sein"
+      },
+      "directXSupport": {
+        "requiredError": "DirectX‑Unterstützung ist erforderlich",
+        "positiveError": "DirectX‑Unterstützung muss positiv sein"
+      },
+      "tdp": {
+        "requiredError": "TDP ist erforderlich",
+        "positiveError": "TDP muss positiv sein"
+      }
+    },
     "auth": {
       "email": {
         "requiredError": "E-Mail ist erforderlich.",
@@ -34,8 +142,39 @@
     }
   },
   "components": {
+    "processorForm": {
+      "cores": "Kerner",
+      "threads": "Threads",
+      "clockSpeed": {
+        "base": "Basistakt (MHz)",
+        "boost": "Boost-Takt (MHz)"
+      },
+      "socket": "Sockel",
+      "tdp": "TDP (W)"
+    },
+    "processorsDataTable": {
+      "cores": "Kerner",
+      "threads": "Threads",
+      "clockSpeed": "Taktfrequenz",
+      "socket": "Sockel",
+      "tdp": "TDP"
+    },
     "ordersLink": {
       "orders": "Bestellungen"
+    },
+    "motherboardsDataTable": {
+      "socket": "Sockel",
+      "formFactor": "Formfaktor",
+      "chipset": "Chipsatz",
+      "ramSlots": "RAM-Steckplätze",
+      "pcieSlots": "PCIe-Steckplätze"
+    },
+    "motherboardForm": {
+      "socket": "Sockel",
+      "formFactor": "Formfaktor",
+      "chipset": "Chipsatz",
+      "ramSlots": "RAM-Steckplätze",
+      "pcieSlots": "PCIe-Steckplätze"
     },
     "baseForm": {
       "chooseABrand": "Wählen Sie eine Marke",
@@ -53,13 +192,13 @@
       "cancel": "Abbrechen",
       "save": "Speichern"
     },
-    "graphicsCardDatatable": {
+    "graphicsCardsDataTable": {
       "memory": "Speicher",
       "clock": "Takt",
       "busWidth": "Busbreite",
       "cudaCores": "CUDA-Kerne",
-      "directXSupport": "DirectX-Unterstützung",
-      "tdp": "Leistungsaufnahme (W)"
+      "directXSupport": "DirectX",
+      "tdp": "Leistungsaufnahme"
     },
     "graphicsCardForm": {
       "memory": {

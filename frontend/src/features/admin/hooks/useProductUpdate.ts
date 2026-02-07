@@ -8,10 +8,14 @@ export function useProductUpdate(category: string, id: string | undefined) {
     mutationFn: async (data: FormData) => {
       if (!id) return;
 
-      await httpClient.put(`/products/${category}/${id}`, data);
+      const res = await httpClient.put(`/products/${category}/${id}`, data);
+      console.log(res.data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['products', category] });
+    },
+    onError: (error) => {
+      console.error('Error updating product:', error);
     },
   });
 }

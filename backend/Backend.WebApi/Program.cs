@@ -75,7 +75,7 @@ app.UseCors((app.Environment.IsDevelopment() ? Policy.AllowAny : Policy.AllowFro
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
-app.UseGlobalExceptionHandler();
+//app.UseGlobalExceptionHandler();
 app.MapControllers();
 
 Log.Information("[{ServiceName}]: Configuring web host in {ServiceEnvironment}...", serviceName, app.Environment.EnvironmentName);

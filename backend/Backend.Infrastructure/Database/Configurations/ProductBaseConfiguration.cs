@@ -53,6 +53,12 @@ public class ProductBaseConfiguration : IEntityTypeConfiguration<ProductBase>
             .OnDelete(DeleteBehavior.Restrict);
         
         builder
+            .HasMany(product => product.Reviews)
+            .WithOne(review => review.Product)
+            .HasForeignKey(review => review.ProductId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        builder
             .HasMany(product => product.Suggestions)
             .WithMany(product => product.SuggestedBy)
             .UsingEntity(
