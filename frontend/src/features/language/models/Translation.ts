@@ -24,6 +24,52 @@ export type Translation = {
         nonNegativeError: string;
       };
     };
+    monitorForm: {
+      displayDiagonal: {
+        required: string;
+        positive: string;
+      };
+      refreshRate: {
+        required: string;
+        positive: string;
+        int: string;
+      };
+      latency: {
+        required: string;
+        positive: string;
+        int: string;
+      };
+      matrix: {
+        required: string;
+      };
+      resolution: {
+        width: {
+          required: string;
+          positive: string;
+          int: string;
+        };
+        height: {
+          required: string;
+          positive: string;
+          int: string;
+        };
+        type: {
+          required: string;
+        };
+      };
+      pixelSize: {
+        required: string;
+        positive: string;
+      };
+      brightness: {
+        required: string;
+        positive: string;
+      };
+      colorSpectre: {
+        required: string;
+        positive: string;
+      };
+    };
     processorForm: {
       cores: {
         requiredError: string;
@@ -106,6 +152,26 @@ export type Translation = {
         positiveError: string;
       };
     };
+    ramForm: {
+      memory: {
+        capacityInGb: {
+          requiredError: string;
+          positiveError: string;
+          intError: string;
+        };
+        type: {
+          requiredError: string;
+        };
+        frequency: {
+          requiredError: string;
+          positiveError: string;
+          intError: string;
+        };
+      };
+      timing: {
+        requiredError: string;
+      };
+    };
     auth: {
       email: {
         requiredError: string;
@@ -138,6 +204,42 @@ export type Translation = {
     };
   };
   components: {
+    ramForm: {
+      memory: {
+        type: string;
+        frequency: string;
+        capacityInGb: string;
+      };
+      timing: string;
+    };
+    ramsDataTable: {
+      memory: string;
+      timing: string;
+    };
+    monitorForm: {
+      displayDiagonal: string;
+      refreshRate: string;
+      latency: string;
+      matrix: string;
+      resolution: {
+        width: string;
+        height: string;
+        type: string;
+      };
+      pixelSize: string;
+      brightness: string;
+      colorSpectre: string;
+    };
+    monitorsDataTable: {
+      displayDiagonal: string;
+      refreshRate: string;
+      latency: string;
+      matrix: string;
+      resolution: string;
+      pixelSize: string;
+      brightness: string;
+      colorSpectre: string;
+    };
     processorsDataTable: {
       cores: string;
       threads: string;
@@ -549,6 +651,72 @@ export type Translation = {
 
 export const translation: Translation = {
   validationSchemas: {
+    ramForm: {
+      memory: {
+        capacityInGb: {
+          requiredError: 'Capacity is required',
+          positiveError: 'Capacity must be positive',
+          intError: 'Capacity must be an integer',
+        },
+        type: {
+          requiredError: 'Type is required',
+        },
+        frequency: {
+          requiredError: 'Frequency is required',
+          positiveError: 'Frequency must be positive',
+          intError: 'Frequency must be an integer',
+        },
+      },
+      timing: {
+        requiredError: 'Timing is required',
+      },
+    },
+    monitorForm: {
+      displayDiagonal: {
+        required: 'Display diagonal is required',
+        positive: 'Display diagonal must be positive',
+      },
+      refreshRate: {
+        required: 'Refresh rate is required',
+        positive: 'Refresh rate must be positive',
+        int: 'Refresh rate must be an integer',
+      },
+      latency: {
+        required: 'Latency is required',
+        positive: 'Latency must be positive',
+        int: 'Latency must be an integer',
+      },
+      matrix: {
+        required: 'Matrix type is required',
+      },
+      resolution: {
+        width: {
+          required: 'Resolution width is required',
+          positive: 'Resolution width must be positive',
+          int: 'Resolution width must be an integer',
+        },
+        height: {
+          required: 'Resolution height is required',
+          positive: 'Resolution height must be positive',
+          int: 'Resolution height must be an integer',
+        },
+        type: {
+          required: 'Resolution type is required',
+        },
+      },
+      pixelSize: {
+        required: 'Pixel size is required',
+        positive: 'Pixel size must be positive',
+      },
+      brightness: {
+        required: 'Brightness is required',
+        positive: 'Brightness must be positive',
+      },
+      colorSpectre: {
+        required: 'Color spectre is required',
+        positive: 'Color spectre must be positive',
+      },
+    },
     baseForm: {
       brandId: {
         requiredError: 'Brand is required',
@@ -689,6 +857,42 @@ export const translation: Translation = {
     },
   },
   components: {
+    ramForm: {
+      memory: {
+        type: 'Type',
+        frequency: 'Frequency',
+        capacityInGb: 'Capacity',
+      },
+      timing: 'Timing',
+    },
+    ramsDataTable: {
+      memory: 'Memory',
+      timing: 'Timing',
+    },
+    monitorForm: {
+      displayDiagonal: 'Display diagonal',
+      refreshRate: 'Refresh rate',
+      latency: 'Latency',
+      matrix: 'Matrix',
+      resolution: {
+        width: 'Width',
+        height: 'Height',
+        type: 'Type',
+      },
+      pixelSize: 'Pixel Size',
+      brightness: 'Brightness',
+      colorSpectre: 'Color Spectre',
+    },
+    monitorsDataTable: {
+      displayDiagonal: 'Display Diagonal',
+      refreshRate: 'Refresh Rate',
+      latency: 'Latency',
+      matrix: 'Matrix Type',
+      resolution: 'Resolution',
+      pixelSize: 'Pixel Size',
+      brightness: 'Brightness',
+      colorSpectre: 'Color Spectre',
+    },
     processorForm: {
       cores: 'Cores',
       threads: 'Threads',

@@ -19,6 +19,8 @@ import { GraphicsCardsAdminPage } from './features/admin/pages/GraphicsCardsAdmi
 import { OrdersPage } from './features/orders/pages/OrdersPage';
 import { MotherboardsAdminPage } from './features/admin/pages/MotherboardsAdminPage';
 import { ProcessorsAdminPage } from './features/admin/pages/ProcessorsAdminPage';
+import { MonitorsAdminPage } from './features/admin/pages/MonitorsAdminPage';
+import { RamsAdminPage } from './features/admin/pages/RamsAdminPage';
 
 export function Router() {
   return (
@@ -48,6 +50,22 @@ export function Router() {
             element={
               <AdminRequired>
                 <ProcessorsAdminPage />
+              </AdminRequired>
+            }
+          />
+          <Route
+            path='monitors'
+            element={
+              <AdminRequired>
+                <MonitorsAdminPage />
+              </AdminRequired>
+            }
+          />
+          <Route
+            path='rams'
+            element={
+              <AdminRequired>
+                <RamsAdminPage />
               </AdminRequired>
             }
           />

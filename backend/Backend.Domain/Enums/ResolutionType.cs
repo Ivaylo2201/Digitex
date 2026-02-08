@@ -6,8 +6,8 @@ namespace Backend.Domain.Enums;
 public enum ResolutionType
 {
     [JsonStringEnumMemberName("Full HD")]
-    Fhd,
+    FullHd,
 
-    [JsonStringEnumMemberName("4K")]
-    Qhd
+    [JsonStringEnumMemberName("Quad HD")]
+    QuadHd
 }

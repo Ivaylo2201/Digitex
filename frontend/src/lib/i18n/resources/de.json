@@ -1,5 +1,71 @@
 {
   "validationSchemas": {
+    "ramForm": {
+      "memory": {
+        "capacityInGb": {
+          "requiredError": "Kapazität in GB ist erforderlich",
+          "positiveError": "Kapazität in GB muss positiv sein",
+          "intError": "Kapazität in GB muss eine ganze Zahl sein"
+        },
+        "type": {
+          "requiredError": "Speichertyp ist erforderlich"
+        },
+        "frequency": {
+          "requiredError": "Frequenz ist erforderlich",
+          "positiveError": "Frequenz muss positiv sein",
+          "intError": "Frequenz muss eine ganze Zahl sein"
+        }
+      },
+      "timing": {
+        "requiredError": "Timing ist erforderlich"
+      }
+    },
+    "monitorForm": {
+      "displayDiagonal": {
+        "required": "Bildschirmdiagonale ist erforderlich",
+        "positive": "Bildschirmdiagonale muss positiv sein"
+      },
+      "refreshRate": {
+        "required": "Bildwiederholfrequenz ist erforderlich",
+        "positive": "Bildwiederholfrequenz muss positiv sein",
+        "int": "Bildwiederholfrequenz muss eine ganze Zahl sein"
+      },
+      "latency": {
+        "required": "Latenz ist erforderlich",
+        "positive": "Latenz muss positiv sein",
+        "int": "Latenz muss eine ganze Zahl sein"
+      },
+      "matrix": {
+        "required": "Matrixtyp ist erforderlich"
+      },
+      "resolution": {
+        "width": {
+          "required": "Breite der Auflösung ist erforderlich",
+          "positive": "Breite der Auflösung muss positiv sein",
+          "int": "Breite der Auflösung muss eine ganze Zahl sein"
+        },
+        "height": {
+          "required": "Höhe der Auflösung ist erforderlich",
+          "positive": "Höhe der Auflösung muss positiv sein",
+          "int": "Höhe der Auflösung muss eine ganze Zahl sein"
+        },
+        "type": {
+          "required": "Auflösungstyp ist erforderlich"
+        }
+      },
+      "pixelSize": {
+        "required": "Pixelgröße ist erforderlich",
+        "positive": "Pixelgröße muss positiv sein"
+      },
+      "brightness": {
+        "required": "Helligkeit ist erforderlich",
+        "positive": "Helligkeit muss positiv sein"
+      },
+      "colorSpectre": {
+        "required": "Farbspektrum ist erforderlich",
+        "positive": "Farbspektrum muss positiv sein"
+      }
+    },
     "processorForm": {
       "cores": {
         "requiredError": "Anzahl der Kerne ist erforderlich",
@@ -142,6 +208,42 @@
     }
   },
   "components": {
+    "ramForm": {
+      "memory": {
+        "type": "Speichertyp",
+        "frequency": "Frequenz",
+        "capacityInGb": "Kapazität"
+      },
+      "timing": "Timing"
+    },
+    "ramsDataTable": {
+      "memory": "Speicher",
+      "timing": "Timing"
+    },
+    "monitorsDataTable": {
+      "displayDiagonal": "Bildschirmdiagonale",
+      "refreshRate": "Bildwiederholfrequenz",
+      "latency": "Latenz",
+      "matrix": "Matrixtyp",
+      "resolution": "Auflösung",
+      "pixelSize": "Pixelgröße",
+      "brightness": "Helligkeit",
+      "colorSpectre": "Farbspektrum"
+    },
+    "monitorForm": {
+      "displayDiagonal": "Bildschirmdiagonale (Zoll)",
+      "refreshRate": "Bildwiederholfrequenz (Hz)",
+      "latency": "Latenz (ms)",
+      "matrix": "Matrixtyp",
+      "resolution": {
+        "width": "Breite (Pixel)",
+        "height": "Höhe (Pixel)",
+        "type": "Auflösungstyp"
+      },
+      "pixelSize": "Pixelgröße (mm)",
+      "brightness": "Helligkeit (nits)",
+      "colorSpectre": "Farbspektrum (%)"
+    },
     "processorForm": {
       "cores": "Kerner",
       "threads": "Threads",

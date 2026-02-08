@@ -782,7 +782,7 @@ public static class Data
             RefreshRate = 100,
             Latency = 5,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.28,
             Brightness = 250,
             ColorSpectre = 72
@@ -799,7 +799,7 @@ public static class Data
             RefreshRate = 120,
             Latency = 1,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 72
@@ -816,7 +816,7 @@ public static class Data
             RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.28,
             Brightness = 250,
             ColorSpectre = 99
@@ -833,7 +833,7 @@ public static class Data
             RefreshRate = 200,
             Latency = 1,
             Matrix = Matrix.Va,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 99
@@ -850,7 +850,7 @@ public static class Data
             RefreshRate = 100,
             Latency = 4,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.31,
             Brightness = 250,
             ColorSpectre = 72
@@ -867,7 +867,7 @@ public static class Data
             RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.31,
             Brightness = 300,
             ColorSpectre = 99
@@ -884,7 +884,7 @@ public static class Data
             RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.31,
             Brightness = 350,
             ColorSpectre = 99
@@ -901,7 +901,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.31,
             Brightness = 250,
             ColorSpectre = 72
@@ -918,7 +918,7 @@ public static class Data
             RefreshRate = 240,
             Latency = 0.5,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.28,
             Brightness = 400,
             ColorSpectre = 99
@@ -935,7 +935,7 @@ public static class Data
             RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Va,
-            Resolution = new Resolution(2560, 1440, ResolutionType.Qhd),
+            Resolution = new Resolution(2560, 1440, ResolutionType.QuadHd),
             PixelSize = 0.23,
             Brightness = 300,
             ColorSpectre = 72
@@ -952,7 +952,7 @@ public static class Data
             RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 99
@@ -969,7 +969,7 @@ public static class Data
             RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Va,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 300,
             ColorSpectre = 95
@@ -986,7 +986,7 @@ public static class Data
             RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Tn,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.28,
             Brightness = 250,
             ColorSpectre = 90
@@ -1003,7 +1003,7 @@ public static class Data
             RefreshRate = 180,
             Latency = 1,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 99
@@ -1020,7 +1020,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.31,
             Brightness = 250,
             ColorSpectre = 99
@@ -1037,7 +1037,7 @@ public static class Data
             RefreshRate = 170,
             Latency = 1,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(2560, 1440, ResolutionType.Qhd),
+            Resolution = new Resolution(2560, 1440, ResolutionType.QuadHd),
             PixelSize = 0.23,
             Brightness = 350,
             ColorSpectre = 99
@@ -1054,7 +1054,7 @@ public static class Data
             RefreshRate = 165,
             Latency = 1,
             Matrix = Matrix.Va,
-            Resolution = new Resolution(2560, 1440, ResolutionType.Qhd),
+            Resolution = new Resolution(2560, 1440, ResolutionType.QuadHd),
             PixelSize = 0.27,
             Brightness = 300,
             ColorSpectre = 95
@@ -1071,7 +1071,7 @@ public static class Data
             RefreshRate = 100,
             Latency = 5,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(3440, 1440, ResolutionType.Qhd),
+            Resolution = new Resolution(3440, 1440, ResolutionType.QuadHd),
             PixelSize = 0.23,
             Brightness = 300,
             ColorSpectre = 99
@@ -1088,7 +1088,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 98
@@ -1105,7 +1105,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 98
@@ -1122,7 +1122,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Tn,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.25,
             Brightness = 250,
             ColorSpectre = 90
@@ -1139,7 +1139,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Va,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.31,
             Brightness = 300,
             ColorSpectre = 95
@@ -1156,7 +1156,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 4,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 97
@@ -1173,7 +1173,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.31,
             Brightness = 250,
             ColorSpectre = 98
@@ -1190,7 +1190,7 @@ public static class Data
             RefreshRate = 75,
             Latency = 5,
             Matrix = Matrix.Ips,
-            Resolution = new Resolution(1920, 1080, ResolutionType.Fhd),
+            Resolution = new Resolution(1920, 1080, ResolutionType.FullHd),
             PixelSize = 0.27,
             Brightness = 250,
             ColorSpectre = 98
