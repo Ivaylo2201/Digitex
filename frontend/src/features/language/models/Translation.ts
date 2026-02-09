@@ -1,5 +1,39 @@
 export type Translation = {
   validationSchemas: {
+    powerSupplyForm: {
+      wattage: {
+        requiredError: string;
+        positiveError: string;
+        intError: string;
+      };
+      efficiencyPercentage: {
+        requiredError: string;
+        positiveError: string;
+        intError: string;
+      };
+    };
+    ssdForm: {
+      capacityInGb: {
+        requiredError: string;
+        positiveError: string;
+        intError: string;
+      };
+      operationSpeed: {
+        read: {
+          requiredError: string;
+          positiveError: string;
+          intError: string;
+        };
+        write: {
+          requiredError: string;
+          positiveError: string;
+          intError: string;
+        };
+      };
+      storageInterface: {
+        requiredError: string;
+      };
+    };
     baseForm: {
       brandId: {
         requiredError: string;
@@ -204,6 +238,34 @@ export type Translation = {
     };
   };
   components: {
+    powerSupplyForm: {
+      wattage: string;
+      formFactor: string;
+      efficiencyPercentage: string;
+      modularity: string;
+    };
+    powerSuppliesDataTable: {
+      wattage: string;
+      formFactor: string;
+      efficiencyPercentage: string;
+      modularity: string;
+    };
+    ssdForm: {
+      capacityInGb: string;
+      operationSpeed: {
+        read: string;
+        write: string;
+      };
+      storageInterface: string;
+    };
+    ssdsDataTable: {
+      capacityInGb: string;
+      operationSpeed: {
+        read: string;
+        write: string;
+      };
+      storageInterface: string;
+    };
     ramForm: {
       memory: {
         type: string;
@@ -651,6 +713,28 @@ export type Translation = {
 
 export const translation: Translation = {
   validationSchemas: {
+    ssdForm: {
+      capacityInGb: {
+        requiredError: 'Capacity is required',
+        positiveError: 'Capacity must be positive',
+        intError: 'Capacity must be an integer',
+      },
+      operationSpeed: {
+        read: {
+          requiredError: 'Read speed is required',
+          positiveError: 'Read speed must be positive',
+          intError: 'Read speed must be an integer',
+        },
+        write: {
+          requiredError: 'Write speed is required',
+          positiveError: 'Write speed must be positive',
+          intError: 'Write speed must be an integer',
+        },
+      },
+      storageInterface: {
+        requiredError: 'Storage interface is required',
+      },
+    },
     ramForm: {
       memory: {
         capacityInGb: {
@@ -855,8 +939,48 @@ export const translation: Translation = {
         maxLengthError: 'Comment cannot exceed 500 characters',
       },
     },
+    powerSupplyForm: {
+      wattage: {
+        requiredError: 'Wattage is required',
+        positiveError: 'Wattage must be positive',
+        intError: 'Wattage must be an integer',
+      },
+      efficiencyPercentage: {
+        requiredError: 'Efficiency percentage is required',
+        positiveError: 'Efficiency percentage must be positive',
+        intError: 'Efficiency percentage must be an integer',
+      },
+    },
   },
   components: {
+    powerSupplyForm: {
+      wattage: 'Wattage',
+      formFactor: 'Form Factor',
+      efficiencyPercentage: 'Efficiency Percentage',
+      modularity: 'Modularity',
+    },
+    powerSuppliesDataTable: {
+      wattage: 'Wattage',
+      formFactor: 'Form Factor',
+      efficiencyPercentage: 'Efficiency Percentage',
+      modularity: 'Modularity',
+    },
+    ssdForm: {
+      capacityInGb: 'Capacity',
+      operationSpeed: {
+        read: 'Read Speed',
+        write: 'Write Speed',
+      },
+      storageInterface: 'Storage Interface',
+    },
+    ssdsDataTable: {
+      capacityInGb: 'Capacity',
+      operationSpeed: {
+        read: 'Read Speed',
+        write: 'Write Speed',
+      },
+      storageInterface: 'Storage Interface',
+    },
     ramForm: {
       memory: {
         type: 'Type',

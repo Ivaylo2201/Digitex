@@ -11,6 +11,6 @@ public enum FormFactor
     [JsonStringEnumMemberName("Micro ATX")]
     MicroAtx,
 
-    [JsonStringEnumMemberName("Mini ATX")]
+    [JsonStringEnumMemberName("Mini Itx")]
     MiniItx
 }

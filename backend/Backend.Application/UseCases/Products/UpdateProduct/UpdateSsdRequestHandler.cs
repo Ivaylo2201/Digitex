@@ -18,7 +18,7 @@ public class UpdateSsdRequestHandler(
     IFileService<Ssd> fileService)
     : UpdateProductRequestHandlerBase<UpdateSsdRequest, Ssd>(productRepository, fileService)
 {
-    protected override Ssd CreateProduct(UpdateSsdRequest request, string imagePath)
+    protected override Ssd CreateProduct(UpdateSsdRequest request, string? imagePath)
     {
         return new Ssd
         {

@@ -1,6 +1,6 @@
-import type { ProductLong } from './base/ProductLong';
+import type { BaseFormData } from './BaseFormData';
 
-export type Ssd = ProductLong & {
+export type SsdFormData = BaseFormData & {
   capacityInGb: number;
   operationSpeed: {
     read: number;

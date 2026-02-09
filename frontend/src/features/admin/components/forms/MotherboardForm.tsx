@@ -126,9 +126,9 @@ export function MotherboardForm({ product }: MotherboardFormProps) {
                   </SelectTrigger>
 
                   <SelectContent>
-                    <SelectItem value='Atx'>ATX</SelectItem>
-                    <SelectItem value='MicroAtx'>Micro ATX</SelectItem>
-                    <SelectItem value='MiniAtx'>Mini ITX</SelectItem>
+                    <SelectItem value='ATX'>ATX</SelectItem>
+                    <SelectItem value='Micro ATX'>Micro ATX</SelectItem>
+                    <SelectItem value='Mini ITX'>Mini ITX</SelectItem>
                   </SelectContent>
                 </Select>
               )}

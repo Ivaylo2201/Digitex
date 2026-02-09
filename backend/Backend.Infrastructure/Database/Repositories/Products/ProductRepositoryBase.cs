@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
+using Backend.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Database.Repositories.Products;
@@ -70,10 +71,14 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
         
         foreach (var property in entry.Metadata.GetProperties())
         {
-            var value = item.GetType().GetProperty(property.Name)?.GetValue(item);
-            
-            if (value is not null)
-                entry.Property(property.Name).CurrentValue = value;
+            var newValue = item.GetType()
+                .GetProperty(property.Name)?
+                .GetValue(item);
+
+            if (newValue is not null)
+            {
+                entry.Property(property.Name).CurrentValue = newValue;
+            }
         }
 
         

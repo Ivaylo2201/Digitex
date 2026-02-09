@@ -181,7 +181,7 @@ export function useFormatProduct() {
       },
       {
         specificationName: translation.specifications.ssds.interface,
-        value: ssd.interface
+        value: ssd.storageInterface
       },
       {
         specificationName: translation.specifications.ssds.operationSpeedRead,

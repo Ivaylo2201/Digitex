@@ -1,5 +1,39 @@
 {
   "validationSchemas": {
+    "powerSupplyForm": {
+      "wattage": {
+        "requiredError": "Wattage ist erforderlich",
+        "positiveError": "Wattage muss positiv sein",
+        "intError": "Wattage muss eine ganze Zahl sein"
+      },
+      "efficiencyPercentage": {
+        "requiredError": "Effizienzprozentsatz ist erforderlich",
+        "positiveError": "Effizienzprozentsatz muss positiv sein",
+        "intError": "Effizienzprozentsatz muss eine ganze Zahl sein"
+      }
+    },
+    "ssdForm": {
+      "capacityInGb": {
+        "requiredError": "Kapazität in GB ist erforderlich",
+        "positiveError": "Kapazität in GB muss positiv sein",
+        "intError": "Kapazität in GB muss eine ganze Zahl sein"
+      },
+      "operationSpeed": {
+        "read": {
+          "requiredError": "Lesegeschwindigkeit ist erforderlich",
+          "positiveError": "Lesegeschwindigkeit muss positiv sein",
+          "intError": "Lesegeschwindigkeit muss eine ganze Zahl sein"
+        },
+        "write": {
+          "requiredError": "Schreibgeschwindigkeit ist erforderlich",
+          "positiveError": "Schreibgeschwindigkeit muss positiv sein",
+          "intError": "Schreibgeschwindigkeit muss eine ganze Zahl sein"
+        }
+      },
+      "storageInterface": {
+        "requiredError": "Speicherinterface ist erforderlich"
+      }
+    },
     "ramForm": {
       "memory": {
         "capacityInGb": {
@@ -208,6 +242,34 @@
     }
   },
   "components": {
+    "powerSupplyForm": {
+      "wattage": "Watt",
+      "formFactor": "Formfaktor",
+      "efficiencyPercentage": "Effizienzprozentsatz",
+      "modularity": "Modularität"
+    },
+    "powerSuppliesDataTable": {
+      "wattage": "Watt",
+      "formFactor": "Formfaktor",
+      "efficiencyPercentage": "Effizienzprozentsatz",
+      "modularity": "Modularität"
+    },
+    "ssdForm": {
+      "capacityInGb": "Kapazität",
+      "operationSpeed": {
+        "read": "Lesegeschwindigkeit",
+        "write": "Schreibgeschwindigkeit"
+      },
+      "storageInterface": "Speicherinterface"
+    },
+    "ssdsDataTable": {
+      "capacityInGb": "Kapazität",
+      "operationSpeed": {
+        "read": "Lesegeschwindigkeit",
+        "write": "Schreibgeschwindigkeit"
+      },
+      "storageInterface": "Speicherinterface"
+    },
     "ramForm": {
       "memory": {
         "type": "Speichertyp",

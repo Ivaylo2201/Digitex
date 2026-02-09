@@ -21,6 +21,8 @@ import { MotherboardsAdminPage } from './features/admin/pages/MotherboardsAdminP
 import { ProcessorsAdminPage } from './features/admin/pages/ProcessorsAdminPage';
 import { MonitorsAdminPage } from './features/admin/pages/MonitorsAdminPage';
 import { RamsAdminPage } from './features/admin/pages/RamsAdminPage';
+import { SsdsAdminPage } from './features/admin/pages/SsdsAdminPage';
+import { PowerSuppliesAdminPage } from './features/admin/pages/PowerSuppliesAdminPage';
 
 export function Router() {
   return (
@@ -66,6 +68,22 @@ export function Router() {
             element={
               <AdminRequired>
                 <RamsAdminPage />
+              </AdminRequired>
+            }
+          />
+          <Route
+            path='ssds'
+            element={
+              <AdminRequired>
+                <SsdsAdminPage />
+              </AdminRequired>
+            }
+          />
+          <Route
+            path='power-supplies'
+            element={
+              <AdminRequired>
+                <PowerSuppliesAdminPage />
               </AdminRequired>
             }
           />

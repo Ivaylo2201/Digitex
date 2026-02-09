@@ -1,5 +1,39 @@
 {
   "validationSchemas": {
+    "powerSupplyForm": {
+      "wattage": {
+        "requiredError": "Волтажът е задължителен",
+        "positiveError": "Волтажът трябва да е положителен",
+        "intError": "Волтажът трябва да е цяло число"
+      },
+      "efficiencyPercentage": {
+        "requiredError": "Процентът на ефективност е задължителен",
+        "positiveError": "Процентът на ефективност трябва да е положителен",
+        "intError": "Процентът на ефективност трябва да е цяло число"
+      }
+    },
+    "ssdForm": {
+      "capacityInGb": {
+        "requiredError": "Капацитетът в GB е задължителен",
+        "positiveError": "Капацитетът в GB трябва да е положителен",
+        "intError": "Капацитетът в GB трябва да е цяло число"
+      },
+      "operationSpeed": {
+        "read": {
+          "requiredError": "Скоростта на четене е задължителна",
+          "positiveError": "Скоростта на четене трябва да е положителна",
+          "intError": "Скоростта на четене трябва да е цяло число"
+        },
+        "write": {
+          "requiredError": "Скоростта на запис е задължителна",
+          "positiveError": "Скоростта на запис трябва да е положителна",
+          "intError": "Скоростта на запис трябва да е цяло число"
+        }
+      },
+      "storageInterface": {
+        "requiredError": "Интерфейсът за съхранение е задължителен"
+      }
+    },
     "ramForm": {
       "memory": {
         "capacityInGb": {
@@ -206,6 +240,34 @@
     }
   },
   "components": {
+    "powerSupplyForm": {
+      "wattage": "Волтаж",
+      "formFactor": "Форм фактор",
+      "efficiencyPercentage": "Процент на ефективност",
+      "modularity": "Модуларност"
+    },
+    "powerSuppliesDataTable": {
+      "wattage": "Ватове",
+      "formFactor": "Форм фактор",
+      "efficiencyPercentage": "Процент на ефективност",
+      "modularity": "Модуларност"
+    },
+    "ssdForm": {
+      "capacityInGb": "Капацитет",
+      "operationSpeed": {
+        "read": "Скорост на четене",
+        "write": "Скорост на запис"
+      },
+      "storageInterface": "Интерфейс за съхранение"
+    },
+    "ssdsDataTable": {
+      "capacityInGb": "Капацитет",
+      "operationSpeed": {
+        "read": "Скорост на четене",
+        "write": "Скорост на запис"
+      },
+      "storageInterface": "Интерфейс за съхранение"
+    },
     "ramForm": {
       "memory": {
         "type": "Тип памет",
