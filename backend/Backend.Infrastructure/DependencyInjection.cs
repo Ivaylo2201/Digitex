@@ -121,7 +121,8 @@ public static class DependencyInjection
             .AddScoped<ICurrencyRepository, CurrencyRepository>()
             .AddScoped<IBrandRepository, BrandRepository>()
             .AddScoped<ICountryRepository, CountryRepository>()
-            .AddScoped<ICityRepository, CityRepository>();
+            .AddScoped<ICityRepository, CityRepository>()
+            .AddScoped<IProductBaseRepository, ProductBaseRepository>();
 
         private IServiceCollection AddServices() => services
             .AddScoped<ICurrencyService, CurrencyService>()
@@ -249,14 +250,22 @@ public static class DependencyInjection
                     BrandName = source.Product.Brand.BrandName,
                     ModelName = source.Product.ModelName,
                     Price = source.Product.Price,
-                    ImagePath = source.Product.ImagePath
+                    ImagePath = source.Product.ImagePath ?? ""
                 })
                 .Map(destination => destination.LineTotal, source => source.Product.Price * source.Quantity);
 
             TypeAdapterConfig<ProductBase, ProductDetailsDto>.NewConfig().Inherits<ProductBase, ProductSummaryDto>()
                 .Map(destination => destination.Sku, source => source.Sku.ToUpper())
                 .Map(destination => destination.Rating, source => source.AverageRating)
-                .Map(destination => destination.TotalReviews, source => source.Reviews.Count);
+                .Map(destination => destination.TotalReviews, source => source.Reviews.Count)
+                .Map(dest => dest.Suggestions, src => src.Suggestions.Select(suggestion => new SuggestedProductDto
+                {
+                    Id = suggestion.Id,
+                    BrandName = suggestion.Brand.BrandName,
+                    ModelName = suggestion.ModelName,
+                    ImagePath = suggestion.ImagePath ?? "",
+                    Category = suggestion.Category
+                }));
         
             TypeAdapterConfig<Processor, ProcessorDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();
             TypeAdapterConfig<GraphicsCard, GraphicsCardDto>.NewConfig().Inherits<ProductBase, ProductDetailsDto>();

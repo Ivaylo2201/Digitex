@@ -2,6 +2,7 @@
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Backend.Domain.Settings;
 using MediatR;
 using Microsoft.Extensions.Logging;

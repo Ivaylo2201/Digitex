@@ -28,7 +28,7 @@ export function SuggestedProductsSection({
         className='bg-gray-300 h-px mt-2 mb-4'
       />
 
-      <div>
+      <div className='flex flex-wrap gap-4 items-center justify-center'>
         {hasProducts ? (
           suggestedProducts.map((product) => (
             <Link

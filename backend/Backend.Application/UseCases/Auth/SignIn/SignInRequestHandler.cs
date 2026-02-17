@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
-using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
@@ -19,10 +19,10 @@ public class SignInRequestHandler(
     {
         using (LogContext.PushProperty("Source", Source))
         {
-            logger.LogDebug("Getting user by credentials...");
+            logger.LogInformation("Getting user by credentials...");
             var user = await userRepository.GetOneByCredentialsAsync(request.Email, request.Password, cancellationToken);
 
-            logger.LogDebug("Generating JWT...");
+            logger.LogInformation("Generating JWT...");
             return user is null ?
                 Result<SignInResponse>.Failure(HttpStatusCode.BadRequest) :
                 Result<SignInResponse>.Success(HttpStatusCode.OK, new SignInResponse

@@ -41,6 +41,8 @@ export function ProductPage<T extends ProductLong>({
     );
   }
 
+  console.log(product);
+
   const isInStock = product.quantity > 0;
   const displayName = `${product.brandName} ${product.modelName}`;
   const specifications = onFormatSpecifications(product);
@@ -64,7 +66,7 @@ export function ProductPage<T extends ProductLong>({
 
               <div className='flex flex-col gap-4'>
                 <AddToCompareButton product={product} category={category} />
-                <AddToFavoritesButton />
+                <AddToFavoritesButton product={product} />
               </div>
             </div>
           </div>
@@ -108,7 +110,7 @@ export function ProductPage<T extends ProductLong>({
         </div>
 
         <ReviewsSection productId={product.id} />
-        <SuggestedProductsSection suggestedProducts={[]} />
+        <SuggestedProductsSection suggestedProducts={product.suggestions} />
       </section>
     </Page>
   );

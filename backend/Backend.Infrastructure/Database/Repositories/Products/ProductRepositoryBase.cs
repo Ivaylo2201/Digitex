@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
-using Backend.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Database.Repositories.Products;

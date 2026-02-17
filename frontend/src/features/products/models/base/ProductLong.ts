@@ -6,5 +6,5 @@ export type ProductLong = ProductShort & {
   sku: string;
   totalReviews: number;
   recentReviews: Review[];
-  suggestedProducts: SuggestedProduct[];
+  suggestions: SuggestedProduct[];
 };

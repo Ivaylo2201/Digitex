@@ -1,5 +1,6 @@
 ﻿using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
+using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Database.Repositories;
@@ -20,8 +21,12 @@ public class UserRepository(DatabaseContext context) : IUserRepository
 
     public async Task<User?> GetOneByCredentialsAsync(string email, string password, CancellationToken cancellationToken = default)
     {
-        var user = await VerifiedUsers.FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
-        return BCrypt.Net.BCrypt.Verify(password, user?.Password) ? user : null;
+        var user = await context.Users.FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
+
+        if (user is null)
+            return null;
+        
+        return BCrypt.Net.BCrypt.Verify(password, user.Password) ? user : null;
     }
 
     public async Task<User?> VerifyUserAsync(int id, CancellationToken cancellationToken = default)
@@ -42,6 +47,14 @@ public class UserRepository(DatabaseContext context) : IUserRepository
 
     public async Task<User?> GetOneByIdWithCartAsync(int id, CancellationToken cancellationToken = default)
         => await VerifiedUsers.Include(user => user.Cart).FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+
+    public async Task<User?> GetOneWithFavoritesAsync(int id, CancellationToken cancellationToken = default)
+        => await VerifiedUsers.Include(user => user.Wishlist).FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+
+    public async Task SaveChangesAsync(CancellationToken stoppingToken = default)
+    {
+        await context.SaveChangesAsync(stoppingToken);
+    }
 
     public async Task<User?> GetOneAsync(int id, CancellationToken cancellationToken = default)
         => await VerifiedUsers.FirstOrDefaultAsync(user => user.Id == id, cancellationToken);

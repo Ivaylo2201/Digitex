@@ -9,7 +9,7 @@ public class SignInValidator : AbstractValidator<SignInRequest>
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage(AuthConstants.EmailRequired)
             .EmailAddress().WithMessage(AuthConstants.EmailInvalid);
-
+        
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage(AuthConstants.PasswordRequired)
             .MinimumLength(AuthConstants.PasswordMinLength).WithMessage(AuthConstants.PasswordTooShort)

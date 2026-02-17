@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.Text.Json.Serialization;
 using Backend.Application;
 using Backend.Application.Enums;
 using Backend.Application.Interfaces.Services;
@@ -8,7 +7,6 @@ using Backend.Infrastructure.Database;
 using Backend.Infrastructure.Database.Seeder;
 using Backend.Infrastructure.Extensions;
 using Backend.Infrastructure.Services;
-using Backend.WebApi.Extensions;
 using Microsoft.OpenApi;
 using Serilog;
 

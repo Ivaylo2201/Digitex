@@ -1,9 +1,10 @@
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useFavorites } from '../hooks/useFavorites';
 
 export function FavoritesLink() {
-  const { items } = { items: [{}] };
+  const { data } = useFavorites();
   const {
     components: { favoritesLink }
   } = useTranslation();
@@ -15,9 +16,9 @@ export function FavoritesLink() {
     >
       <div className='relative'>
         <Heart size={19} />
-        {items.length > 0 && (
+        {(data?.length ?? 0) > 0 && (
           <span className='size-4.5 flex justify-center items-center absolute -top-3 -right-4 rounded-full bg-theme-crimson text-[11px] text-theme-white font-Montserrat'>
-            {items.length}
+            {data?.length}
           </span>
         )}
       </div>

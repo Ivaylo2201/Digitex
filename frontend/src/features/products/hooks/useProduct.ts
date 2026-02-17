@@ -14,7 +14,7 @@ export function useProduct<T>(category: string, id: string) {
   const { currency } = useCurrencyStore();
 
   return useQuery({
-    queryKey: [id, category, currency],
+    queryKey: ['product', id, category, currency],
     queryFn: () => fetchProduct<T>(category, id, currency.currencyIsoCode),
     staleTime: staleTime,
     retry: false,
