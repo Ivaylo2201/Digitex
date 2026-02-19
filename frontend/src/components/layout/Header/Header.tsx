@@ -12,6 +12,7 @@ import { LanguageSelect } from '@/features/language/components/LanguageSelect';
 import { useAuthStore } from '@/features/auth/stores/useAuth';
 import { AdminPanelLink } from './AdminPanelLink';
 import { OrdersLink } from '@/features/orders/components/OrdersLink';
+import { ManagerPageLink } from './ManagerPageLink';
 
 export function Header() {
   const { isAuthenticated, role } = useAuthStore();
@@ -41,6 +42,7 @@ export function Header() {
           <LanguageSelect />
           {isAuthenticated ? <SignOutButton /> : <SignInLink />}
           {role === 'admin' && <AdminPanelLink />}
+          {role === 'manager' && <ManagerPageLink />}
         </ul>
       </section>
 

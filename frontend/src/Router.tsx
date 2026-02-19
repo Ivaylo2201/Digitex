@@ -23,12 +23,23 @@ import { MonitorsAdminPage } from './features/admin/pages/MonitorsAdminPage';
 import { RamsAdminPage } from './features/admin/pages/RamsAdminPage';
 import { SsdsAdminPage } from './features/admin/pages/SsdsAdminPage';
 import { PowerSuppliesAdminPage } from './features/admin/pages/PowerSuppliesAdminPage';
+import { ManagerRequired } from './features/auth/components/ManagerRequired';
+import { ManagerPage } from './features/manager/pages/ManagerPage';
 
 export function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Page></Page>} />
+
+        <Route
+          path='manager'
+          element={
+            <ManagerRequired>
+              <ManagerPage />
+            </ManagerRequired>
+          }
+        />
 
         <Route path='/admin'>
           <Route
