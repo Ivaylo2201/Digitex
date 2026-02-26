@@ -4,7 +4,6 @@ using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Entities;
 using Backend.Domain.Enums;
-using Backend.Domain.Extensions;
 using Backend.Domain.Interfaces.Repositories;
 using Mapster;
 using MediatR;
@@ -25,7 +24,7 @@ public class GetOneProductRequestHandlerBase<TRequest, TProduct, TProjection>(
         if (product is null)
             return Result<TProjection?>.Failure(HttpStatusCode.NotFound);
         
-        var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, request.Currency.ToCurrencyIsoCode(), cancellationToken);
+        var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, request.Currency, cancellationToken);
         var projection = currencyService.ConvertPrice(product, p => p.InitialPrice *= rate).Adapt<TProjection>();
         
         return Result<TProjection?>.Success(HttpStatusCode.OK, projection);

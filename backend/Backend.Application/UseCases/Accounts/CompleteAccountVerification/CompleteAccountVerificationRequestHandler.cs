@@ -41,10 +41,10 @@ public class CompleteAccountVerificationRequestHandler(
                 return Result<CompleteAccountVerificationResponse>.Failure(HttpStatusCode.BadRequest);
             }
         
-            logger.LogDebug("Verifying User with Username={Username}...", userToken.User.Username);
+            logger.LogInformation("Verifying User with Username={Username}...", userToken.User.Username);
             var user = await userRepository.VerifyUserAsync(userToken.User.Id, cancellationToken);
         
-            logger.LogDebug("Deleting UserToken with Id={Id}...", userToken.Id);
+            logger.LogInformation("Deleting UserToken with Id={Id}...", userToken.Id);
             await userTokenRepository.DeleteAsync(userToken.Id, cancellationToken);
         
             return user is null ? 

@@ -24,6 +24,7 @@ public class SignUpRequestHandler(
     {
         try
         {
+            logger.LogInformation("[{Source}]: Signing up user {Username}...", Source, request.Username);
             var user = await userRepository.CreateAsync(new User
             {
                 Username = request.Username,
@@ -41,6 +42,7 @@ public class SignUpRequestHandler(
         }
         catch (Exception)
         {
+            throw;
             return Result<SignUpResponse>.Failure(HttpStatusCode.InternalServerError);       
         }
     }

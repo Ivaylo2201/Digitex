@@ -39,9 +39,9 @@ public class GraphicsCardsController(IMediator mediator, IFilterService<Graphics
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<Results<Ok<GraphicsCardDto>, NotFound>> GetOneAsync([FromRoute] Guid id, [FromQuery] CurrencyIsoCode currency, CancellationToken cancellationToken)
+    public async Task<Results<Ok<GraphicsCardDto>, NotFound>> GetOneAsync([FromRoute] Guid id, [FromQuery] CurrencyIsoCode currency = CurrencyIsoCode.Eur, CancellationToken cancellationToken = default)
     {
-        var result = await mediator.Send(new GetOneGraphicsCardRequest { Id = id }, cancellationToken);
+        var result = await mediator.Send(new GetOneGraphicsCardRequest { Id = id, Currency = currency }, cancellationToken);
         
         return result.IsSuccess
             ? TypedResults.Ok(result.Value)

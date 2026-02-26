@@ -20,7 +20,7 @@ export function AccountVerificationPage() {
         try {
           const { data: res } =
             await httpClient.patch<AccountVerificationResponse>(
-              '/accounts/verify',
+              '/accounts/complete-account-verification',
               { token }
             );
           signIn(res.token, res.role);

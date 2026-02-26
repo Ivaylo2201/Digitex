@@ -3,7 +3,6 @@ using Backend.Application.DTOs;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 using Mapster;
 using MediatR;
@@ -16,14 +15,18 @@ public class GetCartRequestHandler(
     ICartRepository cartRepository,
     IExchangeRepository exchangeRepository,
     ICurrencyService currencyService) : IRequestHandler<GetCartRequest, Result<GetCartResponse>>
-{
+{   
+    private const string Source = nameof(GetCartRequestHandler);
+    
     public async Task<Result<GetCartResponse>> Handle(GetCartRequest request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("[{Source}]: Getting cart for UserId={UserId}", Source, request.UserId);
         var cart = await cartRepository.GetCartAsync(request.UserId, cancellationToken);
         
         if (cart is null)
             return Result<GetCartResponse>.Failure(HttpStatusCode.NotFound);
         
+        logger.LogInformation("[{Source}]: Converting items price...", Source);
         var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, request.CurrencyIsoCode, cancellationToken);
         var converted = currencyService.ConvertPrices(cart.Items, item => item.Product.InitialPrice *= rate);
         

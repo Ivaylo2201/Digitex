@@ -4,7 +4,7 @@ import type { Message } from '../types/Message';
 export function useAssistant() {
   const askAssistant = async (messages: Message[]) => {
     try {
-      const { data } = await httpClient.post<{ response: string }>('/chatbot', {
+      const { data } = await httpClient.post<{ response: string }>('/assistant', {
         messages,
       });
       return data;

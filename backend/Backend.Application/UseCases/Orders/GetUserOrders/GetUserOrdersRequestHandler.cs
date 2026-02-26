@@ -11,8 +11,11 @@ public class GetUserOrdersRequestHandler(
     ILogger<GetUserOrdersRequestHandler> logger,
     IOrderRepository orderRepository) : IRequestHandler<GetUserOrdersRequest, Result<GetUserOrdersResponse>>
 {
+    private const string Source = nameof(GetUserOrdersRequestHandler);
+    
     public async Task<Result<GetUserOrdersResponse>> Handle(GetUserOrdersRequest request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("[{Source}]: Getting User {UserId} orders", Source, request.UserId);
         var orders = await orderRepository.GetOrdersByUserIdAsync(request.UserId, cancellationToken);
         
         return Result<GetUserOrdersResponse>.Success(HttpStatusCode.OK, new GetUserOrdersResponse

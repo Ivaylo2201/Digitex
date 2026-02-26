@@ -4,6 +4,7 @@ import { httpClient } from '@/lib/api/httpClient';
 import { useQuery } from '@tanstack/react-query';
 
 async function fetchProduct<T>(category: string, id: string, currency: string) {
+  console.log(currency)
   const res = await httpClient.get<T>(
     `/products/${category}/${id}?currency=${currency}`,
   );

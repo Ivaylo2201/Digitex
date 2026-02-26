@@ -25,6 +25,7 @@ public class AddToCartRequestHandler(
             return Result<AddToCartResponse>.Failure(HttpStatusCode.NotFound);
         }
         
+        logger.LogInformation("[{Source}]: Adding new item...", Source);
         await cartRepository.AddToCartAsync(new Item
         {
             ProductId = request.ProductId,

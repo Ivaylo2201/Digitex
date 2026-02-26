@@ -12,8 +12,11 @@ public class GetAllShipmentsRequestHandler(
     ILogger<GetAllShipmentsRequestHandler> logger,
     IShipmentRepository shipmentRepository) : IRequestHandler<GetAllShipmentsRequest, Result<IEnumerable<ShipmentDto>>>
 {
+    private const string Source = nameof(GetAllShipmentsRequestHandler);
+    
     public async Task<Result<IEnumerable<ShipmentDto>>> Handle(GetAllShipmentsRequest request, CancellationToken cancellationToken)
     {
+        logger.LogInformation("[{Source}]: Getting  all shipments...", Source);
         var shipments = await shipmentRepository.GetAllAsync(cancellationToken);
         return Result<IEnumerable<ShipmentDto>>.Success(HttpStatusCode.OK, shipments.Adapt<IEnumerable<ShipmentDto>>());
     }

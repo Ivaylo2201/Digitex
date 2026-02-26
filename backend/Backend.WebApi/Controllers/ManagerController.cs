@@ -21,6 +21,7 @@ public class ManagerController(IMediator mediator) : ControllerBase
         return TypedResults.Ok(result.Value);
     }
     
+    [HttpGet("total-revenue")]
     public async Task<Ok<GetTotalRevenueResponse>> GetTotalRevenueAsync(CancellationToken cancellationToken)
     {
         var result = await mediator.Send(new GetTotalRevenueRequest(), cancellationToken);

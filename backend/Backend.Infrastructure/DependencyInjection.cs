@@ -122,7 +122,9 @@ public static class DependencyInjection
             .AddScoped<IBrandRepository, BrandRepository>()
             .AddScoped<ICountryRepository, CountryRepository>()
             .AddScoped<ICityRepository, CityRepository>()
-            .AddScoped<IProductBaseRepository, ProductBaseRepository>();
+            .AddScoped<IProductBaseRepository, ProductBaseRepository>()
+            .AddScoped<ISaleRepository, SaleRepository>()
+            .AddScoped<IOrderRepository, OrderRepository>();
 
         private IServiceCollection AddServices() => services
             .AddScoped<ICurrencyService, CurrencyService>()

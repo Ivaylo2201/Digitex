@@ -33,9 +33,9 @@ public class ProcessorsController(IMediator mediator, IFilterService<ProcessorFi
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<Results<Ok<ProcessorDto>, NotFound>> GetOneAsync([FromRoute] Guid id, [FromQuery] CurrencyIsoCode currency, CancellationToken cancellationToken)
+    public async Task<Results<Ok<ProcessorDto>, NotFound>> GetOneAsync([FromRoute] Guid id, [FromQuery] CurrencyIsoCode currency = CurrencyIsoCode.Eur, CancellationToken cancellationToken = default)
     {
-        var result = await mediator.Send(new GetOneProcessorRequest { Id = id }, cancellationToken);
+        var result = await mediator.Send(new GetOneProcessorRequest { Id = id, Currency = currency }, cancellationToken);
         return result.IsSuccess ? TypedResults.Ok(result.Value) : TypedResults.NotFound();
     }
 

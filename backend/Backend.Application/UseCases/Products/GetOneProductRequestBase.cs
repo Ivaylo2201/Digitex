@@ -1,5 +1,6 @@
 ﻿using Backend.Application.Interfaces.Common;
 using Backend.Domain.Common;
+using Backend.Domain.Enums;
 using MediatR;
 
 namespace Backend.Application.UseCases.Products;
@@ -7,5 +8,5 @@ namespace Backend.Application.UseCases.Products;
 public record GetOneProductRequestBase<TProjection> : IRequest<Result<TProjection?>>, IGetOneRequest
 {
     public required Guid Id { get; init; }
-    public string Currency { get; init; } = "EUR";
+    public required CurrencyIsoCode Currency { get; init; }
 }
