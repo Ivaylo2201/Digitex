@@ -50,6 +50,25 @@ public class EmailSenderService(
         }
     }
 
+    public async Task SendOrderConfirmationEmailAsync(User user, Order order, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            logger.LogInformation("[{Source}]: Sending order confirmation email to {Email}...", Source, user.Email);
+            
+            await SendEmailAsync(
+                user,
+                $"Order #{order.Id} Confirmation",
+                emailBuilderService.BuildOrderConfirmationEmail(user.Username, order),
+                cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError("[{Source}]: Failed to send password reset email to {Email}. Exception message - {Exception}", Source, user.Email, ex.Message);
+            throw;
+        }
+    }
+
     private async Task SendEmailAsync(User user, string subject, string body, CancellationToken stoppingToken)
     {
         await fluentEmail

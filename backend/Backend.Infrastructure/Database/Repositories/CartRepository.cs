@@ -48,4 +48,9 @@ public class CartRepository(DatabaseContext context) : ICartRepository
         context.Items.Update(item);
         await context.SaveChangesAsync(stoppingToken);
     }
+
+    public async Task ClearCartAsync(int userId, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

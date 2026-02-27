@@ -16,8 +16,16 @@ public class SaleRepository(DatabaseContext context) : ISaleRepository
     public async Task<List<IGrouping<int, Sale>>> GetSalesForYearAsync(int year, CancellationToken cancellationToken)
     {
         return await context.Sales
+            .Include(sale => sale.Product)
             .Where(sale => sale.SaleDate.Year == year)
             .GroupBy(s => s.SaleDate.Month)
             .ToListAsync(cancellationToken);
+    }
+
+    public async Task<Sale> CreateAsync(Sale item, CancellationToken cancellationToken)
+    {
+        var sale = await context.Sales.AddAsync(item, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+        return sale.Entity;
     }
 }

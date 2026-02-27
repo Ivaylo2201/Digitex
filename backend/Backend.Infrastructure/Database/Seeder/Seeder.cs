@@ -81,7 +81,6 @@ public class Seeder(ILogger<Seeder> logger, DatabaseContext context)
         context.Brands.RemoveRange(context.Brands);
         context.Cities.RemoveRange(context.Cities);
         context.Countries.RemoveRange(context.Countries);
-        context.Payments.RemoveRange(context.Payments);
         context.Sales.RemoveRange(context.Sales);
         context.Currencies.RemoveRange(context.Currencies);
     }

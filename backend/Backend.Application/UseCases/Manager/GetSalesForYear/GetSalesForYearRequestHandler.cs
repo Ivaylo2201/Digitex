@@ -22,7 +22,8 @@ public class GetSalesForYearRequestHandler(
             .Select(g => new SalesReport
             {
                 Month = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(g.Key),
-                Sales = g.Count()
+                Sales = g.Count(),
+                Revenue = g.Sum(sale => sale.QuantitySold * sale.Product.Price)
             })
             .OrderBy(r => DateTime.ParseExact(r.Month, "MMMM", CultureInfo.InvariantCulture).Month)
             .ToList();

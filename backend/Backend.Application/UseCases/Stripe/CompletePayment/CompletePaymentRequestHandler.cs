@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Backend.Application.Interfaces.Services;
 using Backend.Domain.Common;
+using Backend.Domain.Entities;
 using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 using Backend.Domain.Settings;
@@ -15,6 +16,9 @@ public class CompletePaymentRequestHandler(
     ILogger<CompletePaymentRequestHandler> logger,
     IOptions<EnvSettings> options,
     IUserRepository userRepository,
+    IProductBaseRepository productBaseRepository,
+    ISaleRepository saleRepository,
+    IOrderRepository orderRepository,
     IEmailSenderService emailSenderService) : IRequestHandler<CompletePaymentRequest, Result<CompletePaymentResponse>>
 {
     private const string Source = nameof(CompletePaymentRequestHandler);
@@ -49,13 +53,32 @@ public class CompletePaymentRequestHandler(
                 logger.LogError("[{Source}]: Missing userId in Metadata.", Source);
                 return Result<CompletePaymentResponse>.Failure(HttpStatusCode.BadRequest);
             }
+            
+            if (!paymentIntent.Metadata.TryGetValue("shipmentId", out var shipmentIdValue) || !int.TryParse(shipmentIdValue, out var shipmentId))
+            {
+                logger.LogError("[{Source}]: Missing shipmentId in Metadata.", Source);
+                return Result<CompletePaymentResponse>.Failure(HttpStatusCode.BadRequest);
+            }
+            
+            var user = await userRepository.GetOneAsync(userId, cancellationToken);
 
-            //var user = await userRepository.GetOneWithItemsAndProductsAsync(userId, stoppingToken);
+            if (user is null)
+            {
+                logger.LogError("[{Source}]: User not found.", Source);
+                return Result<CompletePaymentResponse>.Failure(HttpStatusCode.NotFound);
+            }
+
+            foreach (var item in user.Cart.Items)
+            {
+                await productBaseRepository.ReduceQuantityAsync(item.Product.Id, item.Quantity, cancellationToken);
                 
-            // For each item in user.Cart.Items, reduce the stock of the product by the quantity of the item and create a sale object
-            // Clear the cart
+                await saleRepository.CreateAsync(
+                    new Sale { ProductId = item.ProductId, QuantitySold =  item.Quantity },
+                    cancellationToken);
+            }
 
-            //await emailSenderService.SendOrderConfirmationEmailAsync(user, stoppingToken);
+            var order = await orderRepository.CreateAsync(user.Id, shipmentId, user.Cart.Items, cancellationToken);
+            await emailSenderService.SendOrderConfirmationEmailAsync(user, order, cancellationToken);
                 
             return Result<CompletePaymentResponse>.Success(HttpStatusCode.OK, new CompletePaymentResponse
             {

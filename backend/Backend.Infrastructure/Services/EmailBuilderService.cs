@@ -1,4 +1,5 @@
 ﻿using Backend.Application.Interfaces.Services;
+using Backend.Domain.Entities;
 
 namespace Backend.Infrastructure.Services;
 
@@ -78,7 +79,40 @@ public class EmailBuilderService : IEmailBuilderService
 
         return BuildEmail("Reset Your Password", body);
     }
-    
+
+    public string BuildOrderConfirmationEmail(string username, Order order)
+    {
+        var body = $"""
+                        <p style="color: #15161d; font-size: 16px; line-height: 1.6">
+                            Hello, <strong>{username}</strong>,<br />
+                            Thank you for your order! We're excited to let you know that we've received your order 
+                            <strong>#{order.Id}</strong>.
+                        </p>
+
+                        <p style="color: #15161d; font-size: 16px; line-height: 1.6">
+                            Order Summary:
+                        </p>
+
+                        <ul style="color: #15161d; font-size: 16px; line-height: 1.6; padding-left: 20px">
+                            {string.Join("", order.Items.Select(item => $"<li>{item.Quantity} x {item.Product.Brand.BrandName} {item.Product.ModelName} - ${item.Price:F2}</li>"))}
+                        </ul>
+
+                        <p style="color: #15161d; font-size: 16px; line-height: 1.6">
+                            Total: <strong>${order.Items.Sum(item => item.Price):F2}</strong>
+                        </p>
+
+                        <p style="margin: 30px 0">
+                            We will notify you once your order has been shipped.
+                        </p>
+
+                        <p style="font-size: 13px; color: #555; line-height: 1.5">
+                            If you have any questions, feel free to contact our support team.
+                        </p>
+                    """;
+
+        return BuildEmail($"Order #{order.Id} Confirmation", body);
+    }
+
     private static string BuildEmail(string title, string body)
     {
         return $"""
