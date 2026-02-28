@@ -7,4 +7,5 @@ namespace Backend.Application.UseCases.Stripe.CreatePaymentIntent;
 public record CreatePaymentIntentRequest : IRequest<Result<CreatePaymentIntentResponse>>, IAuthorized
 {
     public int UserId { get; set; }
+    public required int ShipmentId { get; init; }
 }

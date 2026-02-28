@@ -1,4 +1,5 @@
-﻿using Backend.Application.UseCases.Manager.GetSalesForDateRange;
+﻿using Backend.Application.UseCases.Manager.GetCategorySales;
+using Backend.Application.UseCases.Manager.GetSalesForYear;
 using Backend.Application.UseCases.Manager.GetTotalRevenue;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -25,6 +26,13 @@ public class ManagerController(IMediator mediator) : ControllerBase
     public async Task<Ok<GetTotalRevenueResponse>> GetTotalRevenueAsync(CancellationToken cancellationToken)
     {
         var result = await mediator.Send(new GetTotalRevenueRequest(), cancellationToken);
+        return TypedResults.Ok(result.Value);
+    }
+    
+    [HttpGet("category-sales")]
+    public async Task<Ok<List<CategorySaleReport>>> GetCategorySalesReportsAsync(CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(new GetCategorySalesRequest(), cancellationToken);
         return TypedResults.Ok(result.Value);
     }
 }

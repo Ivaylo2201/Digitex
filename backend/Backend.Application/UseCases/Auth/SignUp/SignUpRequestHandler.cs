@@ -42,7 +42,6 @@ public class SignUpRequestHandler(
         }
         catch (Exception)
         {
-            throw;
             return Result<SignUpResponse>.Failure(HttpStatusCode.InternalServerError);       
         }
     }

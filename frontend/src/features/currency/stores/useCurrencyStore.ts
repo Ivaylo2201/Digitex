@@ -15,10 +15,13 @@ export const useCurrencyStore = create<CurrencyStore>((set) => {
     currency: currency,
     currencies: [currency],
     setCurrencies: (currencies) =>
-      set({
+      set((state) => ({
         currencies,
-        currency: currencies[1],
-      }),
+        currency:
+          currencies.find(
+            (c) => c.currencyIsoCode === state.currency.currencyIsoCode,
+          ) ?? currencies[0],
+      })),
     changeCurrency: (currencyIsoCode) =>
       set((state) => {
         const currency =

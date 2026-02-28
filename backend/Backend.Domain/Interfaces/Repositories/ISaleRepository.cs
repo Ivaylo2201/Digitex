@@ -7,4 +7,5 @@ public interface ISaleRepository : ICreatable<Sale>
 {
     Task<decimal> GetTotalRevenueAsync(CancellationToken cancellationToken);
     Task<List<IGrouping<int, Sale>>> GetSalesForYearAsync(int year, CancellationToken cancellationToken);
+    Task<List<Sale>> GetSalesWithProductAsync(CancellationToken cancellationToken);
 }

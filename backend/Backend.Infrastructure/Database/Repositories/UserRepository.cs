@@ -1,5 +1,4 @@
 ﻿using Backend.Domain.Entities;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,7 +45,11 @@ public class UserRepository(DatabaseContext context) : IUserRepository
     }
 
     public async Task<User?> GetOneByIdWithCartAsync(int id, CancellationToken cancellationToken = default)
-        => await VerifiedUsers.Include(user => user.Cart).FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+        => await VerifiedUsers
+            .Include(user => user.Cart)
+            .ThenInclude(cart => cart.Items)
+            .ThenInclude(item => item.Product)
+            .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
 
     public async Task<User?> GetOneWithFavoritesAsync(int id, CancellationToken cancellationToken = default)
         => await VerifiedUsers.Include(user => user.Wishlist).FirstOrDefaultAsync(user => user.Id == id, cancellationToken);

@@ -57,6 +57,12 @@ public class ProductBaseRepository(DatabaseContext context) : IProductBaseReposi
 
     public async Task ReduceQuantityAsync(Guid productId, int quantity, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var product = await context.Products.FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
+
+        if (product is null)
+            return;
+        
+        product.Quantity -= quantity;
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -20,13 +20,20 @@ public class OrderRepository(DatabaseContext context) : IOrderRepository
         };
         
         await context.Orders.AddAsync(order, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
         
         foreach (var item in items)
         {
             item.OrderId = order.Id;
+            item.CartId = null;
         }
         
         await context.SaveChangesAsync(cancellationToken);
-        return order;
+
+        return await context.Orders
+            .Include(o => o.Items)
+            .ThenInclude(item => item.Product)
+            .ThenInclude(product => product.Brand)
+            .FirstAsync(o => o.Id == order.Id, cancellationToken);
     }
 }

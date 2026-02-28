@@ -12,13 +12,9 @@ import { useCurrency } from '../hooks/useCurrency';
 import { useEffect } from 'react';
 
 export function CurrencySelect() {
-  const { 
-    currency,
-    currencies,
-    changeCurrency,
-    setCurrencies
-  } = useCurrencyStore();
-    
+  const { currency, currencies, changeCurrency, setCurrencies } =
+    useCurrencyStore();
+
   const { data } = useCurrency();
 
   useEffect(() => {

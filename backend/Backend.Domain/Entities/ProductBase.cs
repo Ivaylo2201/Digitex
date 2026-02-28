@@ -22,5 +22,5 @@ public abstract class ProductBase
 
     public decimal Price => InitialPrice * (1 - DiscountPercentage / 100m);
     public double AverageRating => Reviews.Count is not 0 ? Reviews.Average(r => r.Rating) : 0;
-    public string Category => this.GetType() switch { var product when product == typeof(GraphicsCard) => "graphics-cards", var product when product == typeof(Monitor) => "monitors", var product when product == typeof(Motherboard) => "motherboards", var product when product == typeof(PowerSupply) => "power-supplies", var product when product == typeof(Processor) => "processors", var product when product == typeof(Ram) => "rams", var product when product == typeof(Ssd) => "ssds", _ => throw new NotSupportedException("Invalid subfolder mapping.") };
+    public string Category => GetType() switch { var product when product == typeof(GraphicsCard) => "graphics-cards", var product when product == typeof(Monitor) => "monitors", var product when product == typeof(Motherboard) => "motherboards", var product when product == typeof(PowerSupply) => "power-supplies", var product when product == typeof(Processor) => "processors", var product when product == typeof(Ram) => "rams", var product when product == typeof(Ssd) => "ssds", _ => throw new NotSupportedException("Invalid subfolder mapping.") };
 }

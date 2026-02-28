@@ -14,10 +14,10 @@ export function toQueryParams(obj: Record<string, any>): string {
         .map((v) => encodeURIComponent(v.toString().trim()))
         .join(',');
 
-      params.push(`${encodeURIComponent(key)}=${encoded}`);
+      params.push(`Criteria[${encodeURIComponent(key)}]=${encoded}`);
     } else {
       params.push(
-        `${encodeURIComponent(key)}=${encodeURIComponent(value.toString())}`
+        `Criteria[${encodeURIComponent(key)}]=${encodeURIComponent(value.toString())}`,
       );
     }
   }

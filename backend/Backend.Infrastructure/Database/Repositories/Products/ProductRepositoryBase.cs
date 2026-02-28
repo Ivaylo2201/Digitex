@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Backend.Domain.Entities;
+﻿using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,16 +26,14 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
         return entity;
     }
 
-    public async Task<List<TProduct>> GetAllAsync(int page, int pageSize, Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken)
+    public async Task<List<TProduct>> GetAllAsync(int page, int pageSize, IQueryable<TProduct> filter, CancellationToken cancellationToken)
     {
-        var queryable = context
-            .Set<TProduct>()
+        var queryable = filter
             .OrderBy(product => product.Id)
             .AsNoTracking()
             .Include(product => product.Reviews)
             .Include(p => p.Brand)
-            .Where(p => p.Quantity > 0)
-            .Where(filter);
+            .Where(p => p.Quantity > 0);
 
         return await queryable
             .Skip((Math.Max(page, 1) - 1) * pageSize)
@@ -44,8 +41,10 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<int> CountAsync(Expression<Func<TProduct, bool>> filter, CancellationToken cancellationToken)
-        => await context.Set<TProduct>().CountAsync(filter, cancellationToken);
+    public async Task<int> CountAsync(IQueryable<TProduct> filter, CancellationToken cancellationToken)
+        => await filter.CountAsync(cancellationToken);
+
+    public IQueryable<TProduct> Query() => context.Set<TProduct>().AsNoTracking();
 
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {

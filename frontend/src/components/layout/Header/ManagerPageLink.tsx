@@ -1,4 +1,3 @@
-import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { ShieldUser } from 'lucide-react';
 import { Link } from 'react-router';
 

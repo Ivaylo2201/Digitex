@@ -5,7 +5,7 @@ using Backend.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Backend.Application.UseCases.Manager.GetSalesForDateRange;
+namespace Backend.Application.UseCases.Manager.GetSalesForYear;
 
 public class GetSalesForYearRequestHandler(
     ILogger<GetSalesForYearRequestHandler> logger,

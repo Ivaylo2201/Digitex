@@ -16,6 +16,7 @@ public class GetTotalRevenueRequestHandler(
     {
         logger.LogInformation("[{Source}]: Getting total revenue...", Source);
         var totalRevenue = await saleRepository.GetTotalRevenueAsync(cancellationToken);
+        
         return Result<GetTotalRevenueResponse>.Success(HttpStatusCode.OK, new GetTotalRevenueResponse
         {
             TotalRevenue = totalRevenue

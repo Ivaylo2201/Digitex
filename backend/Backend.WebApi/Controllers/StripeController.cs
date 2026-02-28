@@ -33,9 +33,9 @@ public class StripeController(IMediator mediator) : ControllerBase
     
     [HttpPost("create-payment-intent")]
     [Authorize]
-    public async Task<Results<Ok<CreatePaymentIntentResponse>, BadRequest<ProblemDetails>>> CreatePaymentIntentAsync(CancellationToken cancellationToken)
+    public async Task<Results<Ok<CreatePaymentIntentResponse>, BadRequest<ProblemDetails>>> CreatePaymentIntentAsync(CreatePaymentIntentRequest request, CancellationToken cancellationToken)
     {
-        var result = await mediator.Send(new CreatePaymentIntentRequest().Authorize(HttpContext), cancellationToken);
+        var result = await mediator.Send(request.Authorize(HttpContext), cancellationToken);
 
         return result.IsSuccess
             ? TypedResults.Ok(result.Value)

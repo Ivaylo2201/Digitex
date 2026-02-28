@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using Backend.Domain.Common;
-using Backend.Domain.Interfaces;
 using Backend.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -32,7 +31,8 @@ public class CreatePaymentIntentRequestHandler(
                 PaymentMethodTypes = ["card"],
                 Metadata = new Dictionary<string, string>
                 {
-                    { "userId", request.UserId.ToString() }
+                    { "userId", request.UserId.ToString() },
+                    { "shipmentId", request.ShipmentId.ToString() }
                 }
             };
 
@@ -49,8 +49,7 @@ public class CreatePaymentIntentRequestHandler(
         }
         catch (Exception ex)
         {
-            logger.LogError("[{Source}]: Failed to create payment intent. Exception message - {Exception}", Source,
-                ex.Message);
+            logger.LogError("[{Source}]: Failed to create payment intent. Exception message - {Exception}", Source, ex.Message);
             return Result<CreatePaymentIntentResponse>.Failure(HttpStatusCode.BadRequest);
         }
     }

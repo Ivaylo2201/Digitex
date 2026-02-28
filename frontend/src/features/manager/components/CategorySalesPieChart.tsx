@@ -1,12 +1,8 @@
-'use client';
-
-import { TrendingUp } from 'lucide-react';
-import { LabelList, Pie, PieChart, Cell } from 'recharts';
+import { Pie, PieChart, Cell } from 'recharts';
 
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -17,17 +13,9 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from '@/components/ui/chart';
+import { useCategorySales } from '../hooks/useCategorySales';
 
 export const description = 'Category sales distribution';
-
-const chartData = [
-  { category: 'Graphics Cards', revenue: 500000 },
-  { category: 'Monitors', revenue: 400000 },
-  { category: 'Keyboards', revenue: 70000 },
-  { category: 'Mice', revenue: 30000 },
-];
-
-const totalRevenue = chartData.reduce((sum, item) => sum + item.revenue, 0);
 
 const SLICE_COLORS = [
   'var(--color-theme-crimson)',
@@ -35,19 +23,21 @@ const SLICE_COLORS = [
 ];
 
 const chartConfig = {
-  revenue: {
-    label: 'Revenue',
+  percentage: {
+    label: 'Percentage',
   },
-  'Graphics Cards': {
-    label: 'Graphics Cards',
-    color: 'var(--color-theme-crimson)',
-  },
-  Monitors: { label: 'Monitors', color: 'var(--color-theme-crimson)' },
-  Keyboards: { label: 'Keyboards', color: 'var(--color-theme-crimson)' },
-  Mice: { label: 'Mice', color: 'var(--color-theme-crimson)' },
 } satisfies ChartConfig;
 
 export function CategorySalesPieChart() {
+  const { data } = useCategorySales();
+
+  const normalize = (input: string) => {
+    return input
+      .split('-')
+      .map((x) => x.charAt(0).toUpperCase() + x.slice(1))
+      .join(' ');
+  };
+
   return (
     <Card className='flex flex-col'>
       <CardHeader className='items-center pb-0'>
@@ -64,29 +54,23 @@ export function CategorySalesPieChart() {
               content={
                 <ChartTooltipContent
                   hideLabel
-                  formatter={(_, _name, item) => {
-                    const revenue = item?.payload?.revenue ?? 0;
-                    const percent = ((revenue / totalRevenue) * 100).toFixed(0);
-                    return `${percent}%`;
+                  formatter={(_, __, item) => {
+                    const percent = item?.payload?.percentage ?? 0;
+                    const count = item?.payload?.count ?? 0;
+                    const category = item?.payload?.category ?? '';
+                    return `${normalize(category)} - ${percent}% (${count})`;
                   }}
                 />
               }
             />
 
-            <Pie data={chartData} dataKey='revenue' nameKey='category'>
-              {chartData.map((_, index) => (
+            <Pie data={data} dataKey='percentage' nameKey='category'>
+              {data?.map((_, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={SLICE_COLORS[index % SLICE_COLORS.length]}
                 />
               ))}
-
-              <LabelList
-                dataKey='category'
-                className='fill-background'
-                stroke='none'
-                fontSize={12}
-              />
             </Pie>
           </PieChart>
         </ChartContainer>
@@ -94,8 +78,7 @@ export function CategorySalesPieChart() {
 
       <CardFooter className='flex-col gap-2 text-sm'>
         <div className='flex items-center gap-2 leading-none font-medium'>
-          Revenue increased by 8.4% this quarter{' '}
-          <TrendingUp className='h-4 w-4' />
+          Distribution by percentage
         </div>
       </CardFooter>
     </Card>

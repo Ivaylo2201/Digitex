@@ -1,4 +1,4 @@
-﻿namespace Backend.Application.UseCases.Manager.GetSalesForDateRange;
+﻿namespace Backend.Application.UseCases.Manager.GetSalesForYear;
 
 public record SalesReport
 {

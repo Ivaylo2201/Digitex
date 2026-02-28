@@ -8,7 +8,7 @@ type RangeSliderProps = {
   max: number;
   step: number;
   title: string;
-  urlValues?: [string, string]
+  urlValues?: [string, string];
   onChange?: (value: [number, number]) => void;
   onFormat?: (value: number) => string;
 };
@@ -29,8 +29,8 @@ export function RangeSlider({
     const params = Object.fromEntries(new URLSearchParams(location.search));
 
     setRange([
-      parseNumber(params[urlValues?.[0] ?? '']) ?? min,
-      parseNumber(params[urlValues?.[1] ?? '']) ?? max,
+      parseNumber(params[`Criteria[${urlValues?.[0]}]`] ?? '') || min,
+      parseNumber(params[`Criteria[${urlValues?.[1]}]`] ?? '') || max,
     ]);
   }, [location.search, min, max]);
 

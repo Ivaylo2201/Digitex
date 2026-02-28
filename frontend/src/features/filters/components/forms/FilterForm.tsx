@@ -7,6 +7,7 @@ import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 import { useLocation, useNavigate } from 'react-router';
 import { toQueryParams } from '../../../../lib/utils/toQueryParams';
 import { Button } from '@/components/ui/button';
+import { useQueryClient } from '@tanstack/react-query';
 
 type FilterFormProps = React.PropsWithChildren<{
   brands: string[];
@@ -19,6 +20,7 @@ export function FilterForm({ brands, children }: FilterFormProps) {
 
   const { control, setValue, handleSubmit } = useFormContext();
   const { currency } = useCurrencyStore();
+  const queryClient = useQueryClient();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -26,6 +28,8 @@ export function FilterForm({ brands, children }: FilterFormProps) {
     const queryParams = Object.fromEntries(
       new URLSearchParams(location.search)
     );
+    queryClient.invalidateQueries({ queryKey: ['products'] });
+    
     navigate(
       `${location.pathname}?${toQueryParams({ ...queryParams, ...data })}`,
       { replace: true }

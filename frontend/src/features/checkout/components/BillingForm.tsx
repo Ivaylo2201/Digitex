@@ -17,12 +17,16 @@ export const billingSchema = z.object({
   streetNumber: z.number().min(1, 'Street number is required'),
   floor: z.number().optional(),
   apartmentNumber: z.number().optional(),
-  shipmentId: z.number().min(0, 'Shipping method is required'),
 });
 
 export type Billing = z.infer<typeof billingSchema>;
 
-export function BillingForm() {
+type BillingFormProps = {
+  shipmentId: number;
+  setShipmentId: (val: number) => void;
+};
+
+export function BillingForm({ shipmentId, setShipmentId }: BillingFormProps) {
   const {
     components: { billingForm },
   } = useTranslation();
@@ -37,19 +41,28 @@ export function BillingForm() {
         className='w-72 md:w-[500px] bg-them-gunmetal'
       >
         <AccordionItem value='item-1'>
-          <AccordionTrigger className='cursor-pointer'>{billingForm.contactInformation}</AccordionTrigger>
+          <AccordionTrigger className='cursor-pointer'>
+            {billingForm.contactInformation}
+          </AccordionTrigger>
           <AccordionContent className='flex flex-col gap-4 text-balance'>
             <ContactInformationForm />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-2'>
-          <AccordionTrigger className='cursor-pointer'>{billingForm.shippingMethod}</AccordionTrigger>
+          <AccordionTrigger className='cursor-pointer'>
+            {billingForm.shippingMethod}
+          </AccordionTrigger>
           <AccordionContent className='flex flex-col gap-4 text-balance'>
-            <ShipmentMethodForm />
+            <ShipmentMethodForm
+              shipmentId={shipmentId}
+              setShipmentId={setShipmentId}
+            />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-3'>
-          <AccordionTrigger className='cursor-pointer'>{billingForm.returnPolicyLabel}</AccordionTrigger>
+          <AccordionTrigger className='cursor-pointer'>
+            {billingForm.returnPolicyLabel}
+          </AccordionTrigger>
           <AccordionContent className='flex flex-col gap-4'>
             <p>{billingForm.returnPolicyText}</p>
           </AccordionContent>

@@ -60,7 +60,7 @@ public class CompletePaymentRequestHandler(
                 return Result<CompletePaymentResponse>.Failure(HttpStatusCode.BadRequest);
             }
             
-            var user = await userRepository.GetOneAsync(userId, cancellationToken);
+            var user = await userRepository.GetOneByIdWithCartAsync(userId, cancellationToken);
 
             if (user is null)
             {

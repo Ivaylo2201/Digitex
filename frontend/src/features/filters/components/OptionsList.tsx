@@ -27,7 +27,9 @@ export function OptionsList<T extends FieldValues>({
 
   useEffect(() => {
     if (!field.value || field.value.length === 0) {
-      const queryParam = new URLSearchParams(window.location.search).get(name);
+      const queryParam = new URLSearchParams(window.location.search).get(
+        `Criteria[${name}]`,
+      );
       if (queryParam) {
         field.onChange(queryParam.split(','));
       }
@@ -53,7 +55,7 @@ export function OptionsList<T extends FieldValues>({
                   field.onChange(
                     checked
                       ? [...values, optionString]
-                      : values.filter((value) => value !== optionString)
+                      : values.filter((value) => value !== optionString),
                   )
                 }
                 className='cursor-pointer data-[state=checked]:bg-theme-crimson data-[state=checked]:border-theme-crimson border-gray-300'

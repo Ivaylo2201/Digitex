@@ -2,14 +2,14 @@ import { staleTime } from '@/lib/api/constants';
 import { httpClient } from '@/lib/api/httpClient';
 import { useQuery } from '@tanstack/react-query';
 
-export function useSales() {
+export function useTotalRevenue() {
   return useQuery({
-    queryKey: ['sales'],
+    queryKey: ['totalRevenue'],
     queryFn: async () => {
-      const res = await httpClient.get<
-        { month: string; sales: number; revenue: number }[]
-      >(`/manager/sales/${new Date().getFullYear()}`);
-      return res.data;
+      const response = await httpClient.get<{ totalRevenue: number }>(
+        '/manager/total-revenue',
+      );
+      return response.data;
     },
     staleTime: staleTime,
   });

@@ -27,7 +27,6 @@ public class EmailSenderService(
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: Failed to send account verification email to {Email}. Exception message - {Exception}", Source, user.Email, ex.Message);
-            throw;
         }
     }
 
@@ -46,7 +45,6 @@ public class EmailSenderService(
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: Failed to send password reset email to {Email}. Exception message - {Exception}", Source, user.Email, ex.Message);
-            throw;
         }
     }
 
@@ -65,7 +63,6 @@ public class EmailSenderService(
         catch (Exception ex)
         {
             logger.LogError("[{Source}]: Failed to send password reset email to {Email}. Exception message - {Exception}", Source, user.Email, ex.Message);
-            throw;
         }
     }
 

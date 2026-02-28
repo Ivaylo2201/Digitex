@@ -4,33 +4,38 @@ import { loadStripe, type Stripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { CheckoutForm } from './CheckoutForm';
 
-export function Payment() {
+type PaymentProps = { shipmentId: number };
+
+export function Payment({ shipmentId }: PaymentProps) {
   const [stripePromise, setStripePromise] =
     useState<Promise<Stripe | null> | null>(null);
   const [clientSecret, setClientSecret] = useState<string>('');
 
   useEffect(() => {
-    httpClient
-      .get<{ publishableKey: string }>('/stripe/publishable-key')
-      .then((res) => {
-        const { publishableKey } = res.data;
-        setStripePromise(loadStripe(publishableKey));
-      });
+    async function init() {
+      const { data: keyData } = await httpClient.get<{
+        publishableKey: string;
+      }>('/stripe/publishable-key');
 
-    httpClient
-      .post<{ clientSecret: string }>('/stripe/create-payment-intent')
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
+      setStripePromise(loadStripe(keyData.publishableKey));
+
+      console.log(shipmentId);
+
+      const { data: intentData } = await httpClient.post<{
+        clientSecret: string;
+      }>('/stripe/create-payment-intent', { shipmentId });
+
+      setClientSecret(intentData.clientSecret);
+    }
+
+    init();
   }, []);
 
+  if (!stripePromise || !clientSecret) return null;
+
   return (
-    <>
-      {stripePromise && clientSecret && (
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
-        </Elements>
-      )}
-    </>
+    <Elements stripe={stripePromise} options={{ clientSecret }}>
+      <CheckoutForm />
+    </Elements>
   );
 }

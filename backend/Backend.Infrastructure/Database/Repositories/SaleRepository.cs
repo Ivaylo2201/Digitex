@@ -9,8 +9,11 @@ public class SaleRepository(DatabaseContext context) : ISaleRepository
     public async Task<decimal> GetTotalRevenueAsync(CancellationToken cancellationToken)
     {
         return await context.Sales
-            .Include(sale => sale.Product)
-            .SumAsync(sale => sale.QuantitySold * sale.Product.Price, cancellationToken);
+            .SumAsync(sale =>
+                    sale.QuantitySold *
+                    (sale.Product.InitialPrice *
+                     (1 - sale.Product.DiscountPercentage / 100m)),
+                cancellationToken);
     }
 
     public async Task<List<IGrouping<int, Sale>>> GetSalesForYearAsync(int year, CancellationToken cancellationToken)
@@ -19,6 +22,13 @@ public class SaleRepository(DatabaseContext context) : ISaleRepository
             .Include(sale => sale.Product)
             .Where(sale => sale.SaleDate.Year == year)
             .GroupBy(s => s.SaleDate.Month)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<List<Sale>> GetSalesWithProductAsync(CancellationToken cancellationToken)
+    {
+        return await context.Sales
+            .Include(sale => sale.Product)
             .ToListAsync(cancellationToken);
     }
 

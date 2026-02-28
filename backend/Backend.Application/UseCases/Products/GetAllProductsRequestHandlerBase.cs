@@ -21,7 +21,7 @@ public class GetAllProductsRequestHandlerBase<TRequest, TProduct, TProjection>(
 {
     public async Task<Result<Pagination<TProjection>>> Handle(TRequest request, CancellationToken cancellationToken)
     {
-        var filter = expressionBuilderService.Build(request.Criteria);
+        var filter = expressionBuilderService.Build(productRepository.Query(), request.Criteria);
         
         var products = await productRepository.GetAllAsync(request.Page, request.PageSize, filter, cancellationToken);
         var filteredProductsCount = await productRepository.CountAsync(filter, cancellationToken);

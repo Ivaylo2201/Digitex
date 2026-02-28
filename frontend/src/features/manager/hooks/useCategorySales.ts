@@ -2,13 +2,17 @@ import { staleTime } from '@/lib/api/constants';
 import { httpClient } from '@/lib/api/httpClient';
 import { useQuery } from '@tanstack/react-query';
 
-export function useSales() {
+export function useCategorySales() {
   return useQuery({
-    queryKey: ['sales'],
+    queryKey: ['category-sales'],
     queryFn: async () => {
       const res = await httpClient.get<
-        { month: string; sales: number; revenue: number }[]
-      >(`/manager/sales/${new Date().getFullYear()}`);
+        {
+          category: string;
+          percentage: number;
+          count: number;
+        }[]
+      >('/manager/category-sales');
       return res.data;
     },
     staleTime: staleTime,

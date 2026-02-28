@@ -11,6 +11,6 @@ export function useCurrency() {
       return data;
     },
     staleTime: staleTime,
-    retry: false,
+    retry: false
   });
 }
