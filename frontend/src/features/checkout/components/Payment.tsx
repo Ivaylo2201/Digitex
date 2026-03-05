@@ -19,8 +19,6 @@ export function Payment({ shipmentId }: PaymentProps) {
 
       setStripePromise(loadStripe(keyData.publishableKey));
 
-      console.log(shipmentId);
-
       const { data: intentData } = await httpClient.post<{
         clientSecret: string;
       }>('/stripe/create-payment-intent', { shipmentId });

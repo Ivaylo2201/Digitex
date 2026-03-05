@@ -67,12 +67,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                     .HasKey("UserId", "ProductId"));
         
         builder
-            .HasMany(user => user.Addresses)
-            .WithOne(address => address.User)
-            .HasForeignKey(address => address.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
-        
-        builder
             .HasMany(user => user.Tokens)
             .WithOne(userToken => userToken.User)
             .HasForeignKey(userToken => userToken.UserId)

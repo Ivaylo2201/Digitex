@@ -1,6 +1,7 @@
 import { ChartContainer, type ChartConfig } from '@/components/ui/chart';
 import { Bar, BarChart, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { useSales } from '../hooks/useSales';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 const chartConfig = {
   revenue: {
@@ -15,6 +16,7 @@ const chartConfig = {
 
 export function SalesChart() {
   const { data } = useSales();
+  const { components: { salesChart } } = useTranslation();
 
   const allMonths = [
     'January',
@@ -52,8 +54,8 @@ export function SalesChart() {
             return (
               <div className='bg-theme-gunmetal text-white p-2 rounded shadow'>
                 <strong>{label}</strong>
-                <div>Revenue: €{revenue}</div>
-                <div>Sales: {sales}</div>
+                <div>{salesChart.revenue}: €{revenue}</div>
+                <div>{salesChart.sales}: {sales}</div>
               </div>
             );
           }}

@@ -16,6 +16,7 @@ public class CompletePaymentRequestHandler(
     ILogger<CompletePaymentRequestHandler> logger,
     IOptions<EnvSettings> options,
     IUserRepository userRepository,
+    IAddressRepository addressRepository,
     IProductBaseRepository productBaseRepository,
     ISaleRepository saleRepository,
     IOrderRepository orderRepository,

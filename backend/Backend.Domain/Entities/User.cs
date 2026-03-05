@@ -15,6 +15,5 @@ public class User
     public ICollection<Order> Orders { get; init; } = [];
     public ICollection<Review> Reviews { get; init; } = [];
     public ICollection<ProductBase> Wishlist { get; init; } = [];
-    public ICollection<Address> Addresses { get; init; } = [];
     public ICollection<UserToken> Tokens { get; init; } = [];
 }

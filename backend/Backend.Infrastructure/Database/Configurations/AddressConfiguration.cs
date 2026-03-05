@@ -22,21 +22,13 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
             .OnDelete(DeleteBehavior.Restrict);
         
         builder
-            .HasOne(address => address.User)
-            .WithMany(user => user.Addresses)
-            .HasForeignKey(address => address.UserId)
+            .HasMany(address => address.Orders)
+            .WithOne(order => order.Address)
+            .HasForeignKey(order => order.AddressId)
             .OnDelete(DeleteBehavior.Restrict);
-
-        builder.ComplexProperty(address => address.Street, street =>
-        {
-            street
-                .Property(s => s.StreetName)
-                .HasColumnName("StreetName")
-                .HasMaxLength(StreetNameMaxLength);
-            
-            street
-                .Property(s => s.Number)
-                .HasColumnName("StreetNumber");
-        });
+        
+        builder
+            .Property(s => s.StreetName)
+            .HasMaxLength(StreetNameMaxLength);
     }
 }

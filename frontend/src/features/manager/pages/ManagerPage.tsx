@@ -3,9 +3,7 @@ import { SalesChart } from '../components/SalesChart';
 import { CategorySalesPieChart } from '../components/CategorySalesPieChart';
 import { TotalRevenueCard } from '../components/TotalRevenueCard';
 
-type ManagerPageProps = {};
-
-export function ManagerPage({}: ManagerPageProps) {
+export function ManagerPage() {
   return (
     <Page>
       <div className='flex justify-center'>

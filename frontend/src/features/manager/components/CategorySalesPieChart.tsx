@@ -14,6 +14,7 @@ import {
   type ChartConfig,
 } from '@/components/ui/chart';
 import { useCategorySales } from '../hooks/useCategorySales';
+import { useTranslation } from '@/features/language/hooks/useTranslation';
 
 export const description = 'Category sales distribution';
 
@@ -30,6 +31,7 @@ const chartConfig = {
 
 export function CategorySalesPieChart() {
   const { data } = useCategorySales();
+  const { components: { categorySalesPieChart } } = useTranslation();
 
   const normalize = (input: string) => {
     return input
@@ -41,7 +43,7 @@ export function CategorySalesPieChart() {
   return (
     <Card className='flex flex-col'>
       <CardHeader className='items-center pb-0'>
-        <CardTitle>Sales by Category</CardTitle>
+        <CardTitle>{categorySalesPieChart.salesByCategory}</CardTitle>
       </CardHeader>
 
       <CardContent className='flex-1 pb-0'>
@@ -78,7 +80,7 @@ export function CategorySalesPieChart() {
 
       <CardFooter className='flex-col gap-2 text-sm'>
         <div className='flex items-center gap-2 leading-none font-medium'>
-          Distribution by percentage
+          {categorySalesPieChart.distributionByPercentage}
         </div>
       </CardFooter>
     </Card>

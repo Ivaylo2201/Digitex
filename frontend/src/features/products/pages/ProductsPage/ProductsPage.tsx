@@ -52,12 +52,14 @@ export function ProductsPage() {
           <FilterForm />
           <ProductsList products={data.items} category={category} />
         </div>
-        <ProductsPagination
-          page={page}
-          pageSize={9}
-          setPage={setPage}
-          totalPages={data.totalPages}
-        />
+        {data.items && (
+          <ProductsPagination
+            page={page}
+            pageSize={9}
+            setPage={setPage}
+            totalPages={data.totalPages}
+          />
+        )}
       </div>
     </Page>
   );

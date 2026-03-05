@@ -238,6 +238,20 @@ export type Translation = {
     };
   };
   components: {
+    categorySalesPieChart: {
+      salesByCategory: string;
+      distributionByPercentage: string;
+    };
+    salesChart: {
+      revenue: string;
+      sales: string;
+    };
+    totalRevenueCard: {
+      totalRevenue: string;
+    };
+    productsList: {
+      noProductsFound: string;
+    };
     powerSupplyForm: {
       wattage: string;
       formFactor: string;
@@ -953,6 +967,9 @@ export const translation: Translation = {
     },
   },
   components: {
+    productsList: {
+      noProductsFound: 'No products found',
+    },
     powerSupplyForm: {
       wattage: 'Wattage',
       formFactor: 'Form Factor',
@@ -1333,6 +1350,17 @@ export const translation: Translation = {
       chipset: 'Chipset',
       ramSlots: 'RAM slots',
       pcieSlots: 'PCIe slots',
+    },
+    categorySalesPieChart: {
+      salesByCategory: 'Sales by category',
+      distributionByPercentage: 'Distribution by percentage',
+    },
+    salesChart: {
+      revenue: 'Revenue',
+      sales: 'Sales',
+    },
+    totalRevenueCard: {
+      totalRevenue: 'Total revenue',
     },
   },
   specifications: {

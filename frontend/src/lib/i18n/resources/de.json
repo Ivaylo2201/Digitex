@@ -242,6 +242,20 @@
     }
   },
   "components": {
+    "categorySalesPieChart": {
+      "salesByCategory": "Verkäufe nach Kategorie",
+      "distributionByPercentage": "Verteilung nach Prozentsatz"
+    },
+    "salesChart": {
+      "revenue": "Umsatz",
+      "sales": "Verkäufe"
+    },
+    "totalRevenueCard": {
+      "totalRevenue": "Gesamtumsatz"
+    },
+    "productsList": {
+      "noProductsFound": "Keine Produkte gefunden"
+    },
     "powerSupplyForm": {
       "wattage": "Watt",
       "formFactor": "Formfaktor",

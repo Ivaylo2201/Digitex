@@ -240,6 +240,20 @@
     }
   },
   "components": {
+    "categorySalesPieChart": {
+      "salesByCategory": "Продажби по категории",
+      "distributionByPercentage": "Разпределение по проценти"
+    },
+    "salesChart": {
+      "revenue": "Приход",
+      "sales": "Продажби"
+    },
+    "totalRevenueCard": {
+      "totalRevenue": "Общо приходи"
+    },
+    "productsList": {
+      "noProductsFound": "Няма намерени продукти"
+    },
     "powerSupplyForm": {
       "wattage": "Волтаж",
       "formFactor": "Форм фактор",

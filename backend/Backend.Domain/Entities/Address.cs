@@ -1,6 +1,4 @@
-﻿using Backend.Domain.ValueObjects;
-
-namespace Backend.Domain.Entities;
+﻿namespace Backend.Domain.Entities;
 
 public class Address
 {
@@ -9,7 +7,10 @@ public class Address
     public City City { get; init; } = null!;
     public int UserId { get; init; }
     public User User { get; init; } = null!;
-    public required Street Street { get; init; }
+    public required string StreetName { get; init; }
+    public required int StreetNumber { get; init; }
     public int? Floor { get; init; }
     public int? ApartmentNumber { get; init; }
+    
+    public ICollection<Order> Orders { get; init; } = [];
 }
