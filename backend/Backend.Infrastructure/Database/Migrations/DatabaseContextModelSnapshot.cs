@@ -40,23 +40,16 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<int?>("Floor")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<string>("StreetName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("StreetNumber")
                         .HasColumnType("int");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Street", "Backend.Domain.Entities.Address.Street#Street", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<int>("Number")
-                                .HasColumnType("int")
-                                .HasColumnName("StreetNumber");
-
-                            b1.Property<string>("StreetName")
-                                .IsRequired()
-                                .HasMaxLength(50)
-                                .HasColumnType("nvarchar(50)")
-                                .HasColumnName("StreetName");
-                        });
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -227,7 +220,7 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("PaymentId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<int>("ShipmentId")
@@ -238,33 +231,13 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("ShipmentId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Orders", (string)null);
-                });
-
-            modelBuilder.Entity("Backend.Domain.Entities.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId")
-                        .IsUnique();
-
-                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.ProductBase", b =>
@@ -726,9 +699,9 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsRequired();
 
                     b.HasOne("Backend.Domain.Entities.User", "User")
-                        .WithMany("Addresses")
+                        .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("City");
@@ -804,6 +777,12 @@ namespace Backend.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Backend.Domain.Entities.Order", b =>
                 {
+                    b.HasOne("Backend.Domain.Entities.Address", "Address")
+                        .WithMany("Orders")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Backend.Domain.Entities.Shipment", "Shipment")
                         .WithMany("Orders")
                         .HasForeignKey("ShipmentId")
@@ -816,20 +795,11 @@ namespace Backend.Infrastructure.Database.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Address");
+
                     b.Navigation("Shipment");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Backend.Domain.Entities.Payment", b =>
-                {
-                    b.HasOne("Backend.Domain.Entities.Order", "Order")
-                        .WithOne("Payment")
-                        .HasForeignKey("Backend.Domain.Entities.Payment", "OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.ProductBase", b =>
@@ -977,6 +947,11 @@ namespace Backend.Infrastructure.Database.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Backend.Domain.Entities.Address", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("Backend.Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -1000,8 +975,6 @@ namespace Backend.Infrastructure.Database.Migrations
             modelBuilder.Entity("Backend.Domain.Entities.Order", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("Payment");
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.ProductBase", b =>
@@ -1020,8 +993,6 @@ namespace Backend.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("Cart")
                         .IsRequired();
 

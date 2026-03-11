@@ -242,6 +242,13 @@
     }
   },
   "components": {
+    "thankYouPage": {
+      "paymentSuccessful": "Zahlung erfolgreich",
+      "orderProcessed": "Ihre Bestellung wurde bearbeitet.",
+      "confirmationEmail": "Eine Bestätigungs-E-Mail wurde an Ihren Posteingang gesendet.",
+      "continueShopping": "Weiter einkaufen",
+      "viewOrders": "Bestellungen ansehen"
+    },
     "categorySalesPieChart": {
       "salesByCategory": "Verkäufe nach Kategorie",
       "distributionByPercentage": "Verteilung nach Prozentsatz"

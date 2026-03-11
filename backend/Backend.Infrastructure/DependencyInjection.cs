@@ -124,7 +124,8 @@ public static class DependencyInjection
             .AddScoped<ICityRepository, CityRepository>()
             .AddScoped<IProductBaseRepository, ProductBaseRepository>()
             .AddScoped<ISaleRepository, SaleRepository>()
-            .AddScoped<IOrderRepository, OrderRepository>();
+            .AddScoped<IOrderRepository, OrderRepository>()
+            .AddScoped<IAddressRepository, AddressRepository>();
 
         private IServiceCollection AddServices() => services
             .AddScoped<ICurrencyService, CurrencyService>()

@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Stripe;
+using Address = Backend.Domain.Entities.Address;
 
 namespace Backend.Application.UseCases.Stripe.CompletePayment;
 
@@ -29,9 +30,7 @@ public class CompletePaymentRequestHandler(
     {
         using var reader = new StreamReader(request.Payload);
         var json = await reader.ReadToEndAsync(cancellationToken);
-        
-        try
-        {
+
             var stripeEvent = EventUtility.ConstructEvent(
                 json,
                 request.Headers["Stripe-Signature"],
@@ -48,20 +47,8 @@ public class CompletePaymentRequestHandler(
                 logger.LogError("[{Source}]: Could not cast Stripe event into a PaymentIntent.", Source);
                 return Result<CompletePaymentResponse>.Failure(HttpStatusCode.InternalServerError);
             }
-                
-            if (!paymentIntent.Metadata.TryGetValue("userId", out var userIdValue) || !int.TryParse(userIdValue, out var userId))
-            {
-                logger.LogError("[{Source}]: Missing userId in Metadata.", Source);
-                return Result<CompletePaymentResponse>.Failure(HttpStatusCode.BadRequest);
-            }
             
-            if (!paymentIntent.Metadata.TryGetValue("shipmentId", out var shipmentIdValue) || !int.TryParse(shipmentIdValue, out var shipmentId))
-            {
-                logger.LogError("[{Source}]: Missing shipmentId in Metadata.", Source);
-                return Result<CompletePaymentResponse>.Failure(HttpStatusCode.BadRequest);
-            }
-            
-            var user = await userRepository.GetOneByIdWithCartAsync(userId, cancellationToken);
+            var user = await userRepository.GetOneByIdWithCartAsync(int.Parse(paymentIntent.Metadata["userId"]), cancellationToken);
 
             if (user is null)
             {
@@ -74,22 +61,26 @@ public class CompletePaymentRequestHandler(
                 await productBaseRepository.ReduceQuantityAsync(item.Product.Id, item.Quantity, cancellationToken);
                 
                 await saleRepository.CreateAsync(
-                    new Sale { ProductId = item.ProductId, QuantitySold =  item.Quantity },
+                    new Sale { ProductId = item.ProductId, QuantitySold = item.Quantity },
                     cancellationToken);
             }
 
-            var order = await orderRepository.CreateAsync(user.Id, shipmentId, user.Cart.Items, cancellationToken);
+            var address = await addressRepository.CreateAsync(new Address
+            {
+                CityId = int.Parse(paymentIntent.Metadata["cityId"]),
+                StreetName =  paymentIntent.Metadata["streetName"],
+                StreetNumber = int.Parse(paymentIntent.Metadata["streetNumber"]),
+                Floor = string.IsNullOrEmpty(paymentIntent.Metadata["floor"]) ? null : int.Parse(paymentIntent.Metadata["floor"]),
+                ApartmentNumber = string.IsNullOrEmpty(paymentIntent.Metadata["apartmentNumber"]) ? null : int.Parse(paymentIntent.Metadata["apartmentNumber"]),
+                UserId = user.Id
+            }, cancellationToken);
+
+            var order = await orderRepository.CreateAsync(user.Id, address.Id, int.Parse(paymentIntent.Metadata["shipmentId"]), user.Cart.Items, cancellationToken);
             await emailSenderService.SendOrderConfirmationEmailAsync(user, order, cancellationToken);
                 
             return Result<CompletePaymentResponse>.Success(HttpStatusCode.OK, new CompletePaymentResponse
             {
                 Message = "Payment completed successfully."
             });
-        }
-        catch (Exception ex)
-        {
-            logger.LogError("[{Source}]: Failed to process webhook call from Stripe. Exception message - {Exception}", Source, ex.Message);
-            return Result<CompletePaymentResponse>.Failure(HttpStatusCode.BadRequest);
-        }
     }
 }

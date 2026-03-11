@@ -1,16 +1,19 @@
 import { Button } from '@/components/ui/button';
-import { useCart } from '@/features/cart/hooks/useCart';
-import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useState } from 'react';
+import { useCart } from '@/features/cart/hooks/useCart';
+import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 
-export function CheckoutForm() {
+type CheckoutFormProps = { shippingCost: number };
+
+export function CheckoutForm({ shippingCost }: CheckoutFormProps) {
+  const { data } = useCart();
   const stripe = useStripe();
   const elements = useElements();
   const sign = useCurrencyStore((store) => store.currency.sign);
-  const { data: cart } = useCart();
+
   const {
     components: { checkoutForm },
   } = useTranslation();
@@ -35,6 +38,8 @@ export function CheckoutForm() {
     setIsProcessing(false);
   };
 
+  console.log(data?.totalPrice, shippingCost);
+
   return (
     <form
       id='payment-form'
@@ -47,7 +52,7 @@ export function CheckoutForm() {
         className='bg-theme-crimson hover:bg-theme-gunmetal transition-colors duration-300 cursor-pointer'
       >
         {checkoutForm.pay} {sign}
-        {cart?.totalPrice.toFixed(2)} {checkoutForm.now}
+        {((data?.totalPrice ?? 0) + shippingCost).toFixed(2)} {checkoutForm.now}
       </Button>
     </form>
   );

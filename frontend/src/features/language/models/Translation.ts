@@ -238,6 +238,13 @@ export type Translation = {
     };
   };
   components: {
+    thankYouPage: {
+      paymentSuccessful: string;
+      orderProcessed: string;
+      confirmationEmail: string;
+      continueShopping: string;
+      viewOrders: string;
+    };
     categorySalesPieChart: {
       salesByCategory: string;
       distributionByPercentage: string;
@@ -967,6 +974,13 @@ export const translation: Translation = {
     },
   },
   components: {
+    thankYouPage: {
+      paymentSuccessful: 'Payment Successful',
+      orderProcessed: 'Your order has been processed.',
+      confirmationEmail: 'A confirmation email has been sent to your inbox.',
+      continueShopping: 'Continue Shopping',
+      viewOrders: 'View Orders',
+    },
     productsList: {
       noProductsFound: 'No products found',
     },

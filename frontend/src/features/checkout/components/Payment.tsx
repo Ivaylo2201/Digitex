@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { loadStripe, type Stripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import { CheckoutForm } from './CheckoutForm';
+import type { Billing } from '../pages/BillingPage';
 
-type PaymentProps = { shipmentId: number };
+type PaymentProps = { billing: Billing; shippingCost: number };
 
-export function Payment({ shipmentId }: PaymentProps) {
+export function Payment({ billing, shippingCost }: PaymentProps) {
   const [stripePromise, setStripePromise] =
     useState<Promise<Stripe | null> | null>(null);
   const [clientSecret, setClientSecret] = useState<string>('');
@@ -19,9 +20,11 @@ export function Payment({ shipmentId }: PaymentProps) {
 
       setStripePromise(loadStripe(keyData.publishableKey));
 
+      console.log(billing);
+
       const { data: intentData } = await httpClient.post<{
         clientSecret: string;
-      }>('/stripe/create-payment-intent', { shipmentId });
+      }>('/stripe/create-payment-intent', billing);
 
       setClientSecret(intentData.clientSecret);
     }
@@ -33,7 +36,7 @@ export function Payment({ shipmentId }: PaymentProps) {
 
   return (
     <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <CheckoutForm />
+      <CheckoutForm shippingCost={shippingCost} />
     </Elements>
   );
 }

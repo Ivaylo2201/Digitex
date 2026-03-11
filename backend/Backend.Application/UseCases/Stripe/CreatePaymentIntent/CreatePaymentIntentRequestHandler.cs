@@ -9,7 +9,8 @@ namespace Backend.Application.UseCases.Stripe.CreatePaymentIntent;
 
 public class CreatePaymentIntentRequestHandler(
     ILogger<CreatePaymentIntentRequestHandler> logger,
-    ICartRepository cartRepository) : IRequestHandler<CreatePaymentIntentRequest, Result<CreatePaymentIntentResponse>>
+    ICartRepository cartRepository,
+    IShipmentRepository shipmentRepository) : IRequestHandler<CreatePaymentIntentRequest, Result<CreatePaymentIntentResponse>>
 {
     private const string Source = nameof(CreatePaymentIntentRequestHandler);
 
@@ -19,20 +20,28 @@ public class CreatePaymentIntentRequestHandler(
 
         if (cart is null || cart.Items.Count is 0)
             return Result<CreatePaymentIntentResponse>.Failure(HttpStatusCode.BadRequest);
-
+        
         var paymentIntentService = new PaymentIntentService();
 
         try
         {
+            var shipment = await shipmentRepository.GetOneAsync(request.ShipmentId, cancellationToken);
+            
             var paymentIntentOptions = new PaymentIntentCreateOptions
             {
-                Amount = (long)cart.Items.Sum(item => item.Price) * 100,
+                Amount = (long)((cart.Items.Sum(item => item.Price) + shipment?.Cost ?? 0) * 100),
                 Currency = "eur",
                 PaymentMethodTypes = ["card"],
                 Metadata = new Dictionary<string, string>
                 {
                     { "userId", request.UserId.ToString() },
-                    { "shipmentId", request.ShipmentId.ToString() }
+                    { "shipmentId", request.ShipmentId.ToString() },
+                    { "countryId", request.CountryId.ToString() },
+                    { "cityId", request.CityId.ToString() },
+                    { "streetName", request.StreetName },
+                    { "streetNumber", request.StreetNumber.ToString() },
+                    { "floor", request.Floor?.ToString() ?? "" },
+                    { "apartmentNumber", request.ApartmentNumber?.ToString() ?? "" }
                 }
             };
 

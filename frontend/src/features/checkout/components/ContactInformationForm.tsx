@@ -15,14 +15,14 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { useFormContext, useWatch } from 'react-hook-form';
-import type { Billing } from './BillingForm';
 import { useCountries } from '../hooks/useCountries';
 import { useCities } from '../hooks/useCities';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
+import { type Billing } from '../pages/BillingPage';
 
 export function ContactInformationForm() {
-  const { handleSubmit, control } = useFormContext<Billing>();
-  const selectedCountryId = useWatch({ control, name: 'countryId'});
+  const { control } = useFormContext<Billing>();
+  const selectedCountryId = useWatch({ control, name: 'countryId' });
   const {
     components: { contactInformationForm },
   } = useTranslation();
@@ -30,12 +30,8 @@ export function ContactInformationForm() {
   const { data: countries = [] } = useCountries();
   const { data: cities = [] } = useCities(selectedCountryId);
 
-  function onSubmit(values: Billing) {
-    console.log(values);
-  }
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='space-y-6 w-full'>
+    <div className='space-y-6 w-full'>
       <div className='space-y-2'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
           <FormField
@@ -50,7 +46,9 @@ export function ContactInformationForm() {
                 >
                   <FormControl>
                     <SelectTrigger className='w-full'>
-                      <SelectValue placeholder={contactInformationForm.selectCountry} />
+                      <SelectValue
+                        placeholder={contactInformationForm.selectCountry}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -82,7 +80,9 @@ export function ContactInformationForm() {
                 >
                   <FormControl>
                     <SelectTrigger className='w-full'>
-                      <SelectValue placeholder={contactInformationForm.selectCity} />
+                      <SelectValue
+                        placeholder={contactInformationForm.selectCity}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -179,6 +179,6 @@ export function ContactInformationForm() {
           />
         </div>
       </div>
-    </form>
+    </div>
   );
 }

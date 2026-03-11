@@ -240,6 +240,13 @@
     }
   },
   "components": {
+    "thankYouPage": {
+      "paymentSuccessful": "Плащането е успешно",
+      "orderProcessed": "Вашата поръчка е обработена.",
+      "confirmationEmail": "Потвърждаващ имейл е изпратен във входящата ви поща.",
+      "continueShopping": "Продължете пазаруването",
+      "viewOrders": "Преглед на поръчките"
+    },
     "categorySalesPieChart": {
       "salesByCategory": "Продажби по категории",
       "distributionByPercentage": "Разпределение по проценти"

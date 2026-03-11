@@ -12,7 +12,6 @@ import { ProductPageResolver } from './features/products/pages/ProductPage/Produ
 import { AccountVerificationPage } from './features/account/pages/AccountVerificationPage';
 import { RequestPasswordResetPage } from './features/account/pages/RequestPasswordResetPage';
 import { CompletePasswordResetPage } from './features/account/pages/CompletePasswordResetPage';
-import { CheckoutPage } from './features/checkout/pages/CheckoutPage';
 import { ThankYouPage } from './features/checkout/pages/ThankYouPage';
 import { AdminRequired } from './features/auth/components/AdminRequired';
 import { GraphicsCardsAdminPage } from './features/admin/pages/GraphicsCardsAdminPage';
@@ -25,12 +24,15 @@ import { SsdsAdminPage } from './features/admin/pages/SsdsAdminPage';
 import { PowerSuppliesAdminPage } from './features/admin/pages/PowerSuppliesAdminPage';
 import { ManagerRequired } from './features/auth/components/ManagerRequired';
 import { ManagerPage } from './features/manager/pages/ManagerPage';
+import { BillingPage } from './features/checkout/pages/BillingPage';
 
 export function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Page></Page>} />
+
+        <Route path='/checkout' element={<BillingPage />} />
 
         <Route
           path='manager'
@@ -141,14 +143,7 @@ export function Router() {
             </AuthenticationRequired>
           }
         />
-        <Route
-          path='/checkout'
-          element={
-            <AuthenticationRequired>
-              <CheckoutPage />
-            </AuthenticationRequired>
-          }
-        />
+
         <Route
           path='/favorites'
           element={

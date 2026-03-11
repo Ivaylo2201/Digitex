@@ -11,10 +11,11 @@ public class OrderRepository(DatabaseContext context) : IOrderRepository
         return await context.Orders.Where(order => order.UserId == userId).ToListAsync(cancellationToken);
     }
 
-    public async Task<Order> CreateAsync(int userId, int shipmentId, ICollection<Item> items, CancellationToken cancellationToken)
+    public async Task<Order> CreateAsync(int userId, int addressId, int shipmentId, ICollection<Item> items, CancellationToken cancellationToken)
     {
         var order = new Order
         {
+            AddressId = addressId,
             UserId = userId,
             ShipmentId = shipmentId
         };
