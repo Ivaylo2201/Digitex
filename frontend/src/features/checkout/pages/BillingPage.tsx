@@ -10,6 +10,7 @@ import { Form } from '@/components/ui/form';
 import { FormField, FormItem, FormControl } from '@/components/ui/form';
 import { useState } from 'react';
 import { Payment } from '../components/Payment';
+import { Button } from '@/components/ui/button';
 
 export const billingSchema = z.object({
   countryId: z.number().min(1, 'Country is required'),
@@ -18,7 +19,7 @@ export const billingSchema = z.object({
   streetNumber: z.number().min(1, 'Street number is required'),
   floor: z.number().optional(),
   apartmentNumber: z.number().optional(),
-  shipmentId: z.number().min(1, 'Shipment is required'),
+  shipmentId: z.number().min(1, 'Shipment is required')
 });
 
 export type Billing = z.infer<typeof billingSchema>;
@@ -29,7 +30,7 @@ export function BillingPage() {
   const form = useForm<Billing>();
 
   const {
-    components: { billingForm },
+    components: { billingForm }
   } = useTranslation();
 
   const { data: shipments = [] } = useShipments();
@@ -53,7 +54,7 @@ export function BillingPage() {
                       onValueChange={(val) => {
                         field.onChange(Number(val));
                         const opt = shipments.find(
-                          (o) => o.id.toString() === val,
+                          (o) => o.id.toString() === val
                         );
                         setShippingCost(opt?.cost ?? 0);
                       }}
@@ -106,9 +107,12 @@ export function BillingPage() {
           </div>
 
           <div className='flex justify-center items-center mt-5'>
-            <button onClick={() => setIsProceeded(true)} className='self-start'>
+            <Button
+              onClick={() => setIsProceeded(true)}
+              className='bg-theme-crimson hover:bg-theme-gunmetal self-start transition-colors duration-300 cursor-pointer'
+            >
               Submit
-            </button>
+            </Button>
           </div>
         </div>
       </Form>

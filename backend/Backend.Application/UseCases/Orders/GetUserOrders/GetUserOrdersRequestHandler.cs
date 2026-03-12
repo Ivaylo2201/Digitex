@@ -37,6 +37,8 @@ public class GetUserOrdersRequestHandler(
                     Quantity = item.Quantity,
                     LineTotal = item.Product.Price * item.Quantity
                 }),
+                ShipmentType = order.Shipment.ShipmentType,
+                BillingAddress = $"{order.Address.City.Country.CountryName}, {order.Address.City.CityName}, {order.Address.StreetName} {order.Address.StreetNumber}",
                 TotalPrice = order.Items.Sum(item => item.Price)
             }),
         });

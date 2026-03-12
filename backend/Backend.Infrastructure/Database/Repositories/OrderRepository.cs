@@ -8,7 +8,17 @@ public class OrderRepository(DatabaseContext context) : IOrderRepository
 {
     public async Task<List<Order>> GetOrdersByUserIdAsync(int userId, CancellationToken cancellationToken)
     {
-        return await context.Orders.Where(order => order.UserId == userId).ToListAsync(cancellationToken);
+        return await context.Orders
+            .Include(order => order.Shipment)
+            .Include(order => order.Address)
+            .ThenInclude(address => address.City)
+            .ThenInclude(city => city.Country)
+            .Include(order => order.Items)
+            .ThenInclude(item => item.Product)
+            .ThenInclude(product => product.Brand)
+            .Where(order => order.UserId == userId)
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
     }
 
     public async Task<Order> CreateAsync(int userId, int addressId, int shipmentId, ICollection<Item> items, CancellationToken cancellationToken)
