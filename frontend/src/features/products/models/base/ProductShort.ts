@@ -10,4 +10,5 @@ export type ProductShort = {
   discountPercentage: number;
   rating: number;
   quantity: number;
+  category?: string;
 };

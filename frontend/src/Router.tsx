@@ -4,7 +4,6 @@ import { AccountPage } from '@/features/account/pages/AccountPage';
 import { FavoritesPage } from '@/features/favorites/pages/FavoritesPage';
 import { SignInPage } from '@/features/auth/pages/SignInPage';
 import { SignUpPage } from '@/features/auth/pages/SignUpPage';
-import { Page } from '@/components/layout/Page';
 import { ProductsPage } from '@/features/products/pages/ProductsPage/ProductsPage';
 import { CartPage } from './features/cart/pages/CartPage';
 import { ComparePage } from './features/compare/pages/ComparePage';
@@ -25,12 +24,14 @@ import { PowerSuppliesAdminPage } from './features/admin/pages/PowerSuppliesAdmi
 import { ManagerRequired } from './features/auth/components/ManagerRequired';
 import { ManagerPage } from './features/manager/pages/ManagerPage';
 import { BillingPage } from './features/checkout/pages/BillingPage';
+import { SearchPage } from './features/products/pages/SearchPage/SearchPage';
+import { HomePage } from './components/layout/Home/HomePage';
 
 export function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Page></Page>} />
+        <Route path='/' element={<HomePage />} />
 
         <Route path='/checkout' element={<BillingPage />} />
 
@@ -105,6 +106,7 @@ export function Router() {
         <Route path='/products'>
           <Route path='categories/:category' element={<ProductsPage />} />
           <Route path=':category/:id' element={<ProductPageResolver />} />
+          <Route path='search' element={<SearchPage />} />
         </Route>
 
         <Route path='/orders' element={<OrdersPage />} />

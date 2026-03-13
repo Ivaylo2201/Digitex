@@ -9,4 +9,5 @@ public interface IProductBaseRepository : ISingleReadable<ProductBase, Guid>
     Task AddSuggestionAsync(Guid productId, string suggestedProductSku, CancellationToken cancellationToken);
     Task RemoveSuggestionAsync(Guid productId, string suggestedProductSku, CancellationToken cancellationToken);
     Task ReduceQuantityAsync(Guid productId, int quantity, CancellationToken cancellationToken);
+    Task<List<ProductBase>> SearchAsync(string query, CancellationToken cancellationToken);
 }

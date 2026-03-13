@@ -1,13 +1,13 @@
 import { Page } from '@/components/layout/Page';
-import { ProductsList } from '@/features/products/pages/ProductsPage/components/ProductsList';
 import { useFavorites } from '../hooks/useFavorites';
+import { FavoritesList } from '../components/FavoritesList';
 
 export function FavoritesPage() {
   const { data } = useFavorites();
 
   return (
     <Page>
-      <ProductsList products={data} category={''} />
+      <FavoritesList products={data} />
     </Page>
   );
 }

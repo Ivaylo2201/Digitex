@@ -6,15 +6,15 @@ import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 export function Searchbox() {
-  const [search, setSearch] = useState<string>('');
+  const [query, setQuery] = useState<string>('');
   const {
     components: { searchBox }
   } = useTranslation();
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (search !== '') {
-      navigate(`/products?search=${search}`);
+    if (query !== '') {
+      navigate(`/products/search?query=${query}`);
     }
   };
 
@@ -22,9 +22,9 @@ export function Searchbox() {
     <Fragment>
       <Input
         type='text'
-        value={search}
+        value={query}
         placeholder={searchBox.searchForProducts}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
         className='w-2/3 text-sm font-medium italic text-theme-gunmetal placeholder-theme-gunmetal! selection:bg-theme-crimson bg-theme-white ring-0 outline-none border-0 focus-visible:ring-0 data-[state=open]:ring-0 data-[state=open]:border-0'
       />
       <Button

@@ -65,4 +65,14 @@ public class ProductBaseRepository(DatabaseContext context) : IProductBaseReposi
         product.Quantity -= quantity;
         await context.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<List<ProductBase>> SearchAsync(string query, CancellationToken cancellationToken)
+    {
+        return await context.Products
+            .Include(product => product.Brand)
+            .Where(product => EF.Functions.Like(product.Brand.BrandName, $"%{query}%") || 
+                              EF.Functions.Like(product.ModelName, $"%{query}%") ||
+                              EF.Functions.Like(product.Sku, $"%{query}%"))
+            .ToListAsync(cancellationToken);
+    }
 }
