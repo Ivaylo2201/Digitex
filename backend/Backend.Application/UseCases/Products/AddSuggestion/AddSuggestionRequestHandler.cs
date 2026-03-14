@@ -9,7 +9,7 @@ public class AddSuggestionRequestHandler(IProductBaseRepository productBaseRepos
 {
     public async Task<Result<Unit>> Handle(AddSuggestionRequest request, CancellationToken cancellationToken)
     {
-        await productBaseRepository.AddSuggestionAsync(request.ProductId, request.SuggestedProductSku, cancellationToken);
+        await productBaseRepository.AddSuggestionAsync(request.ProductId, request.SuggestionProductId, cancellationToken);
         
         return Result<Unit>.Success(HttpStatusCode.OK, Unit.Value);
     }

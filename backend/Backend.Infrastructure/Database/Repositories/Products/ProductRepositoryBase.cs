@@ -52,8 +52,8 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
         
         if (product is null)
             return;
-        
-        context.Set<TProduct>().Remove(product);
+
+        product.IsDeleted = true;
         await context.SaveChangesAsync(cancellationToken);
     }
 

@@ -259,6 +259,9 @@ namespace Backend.Infrastructure.Database.Migrations
                     b.Property<decimal>("InitialPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ModelName")
                         .IsRequired()
                         .HasMaxLength(150)

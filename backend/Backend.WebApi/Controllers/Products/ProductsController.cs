@@ -1,4 +1,7 @@
-﻿using Backend.Application.DTOs.Products;
+﻿using Backend.Application.DTOs;
+using Backend.Application.DTOs.Products;
+using Backend.Application.UseCases.Products.GetSuggested;
+using Backend.Application.UseCases.Products.GetSuggestions;
 using Backend.Application.UseCases.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -14,6 +17,20 @@ public class ProductsController(IMediator mediator) : ControllerBase
     public async Task<Ok<IEnumerable<ProductSummaryDto>>> SearchAsync([FromQuery] string query)
     {
         var result = await mediator.Send(new SearchProductsRequest { Query = query });
+        return TypedResults.Ok(result.Value);
+    }
+    
+    [HttpGet("{productId:guid}/suggestions")]
+    public async Task<Ok<IEnumerable<SuggestedProductDto>>> GetSuggestionsAsync([FromRoute] Guid productId)
+    {
+        var result = await mediator.Send(new GetSuggestionsRequest { ProductId = productId });
+        return TypedResults.Ok(result.Value);
+    }
+    
+    [HttpGet("{productId:guid}/suggested")]
+    public async Task<Ok<IEnumerable<SuggestedProductDto>>> GetSuggestedAsync([FromRoute] Guid productId)
+    {
+        var result = await mediator.Send(new GetSuggestedRequest { ProductId = productId });
         return TypedResults.Ok(result.Value);
     }
 }

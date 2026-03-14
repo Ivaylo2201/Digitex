@@ -32,15 +32,12 @@ builder.Services
             Name = "Authorization",
             In = ParameterLocation.Header,
             Type = SecuritySchemeType.Http,
-            Scheme = "Bearer",
-            BearerFormat = "JWT",
+            Scheme = "Bearer"
         });
-            
-        options.AddSecurityRequirement(_ => new OpenApiSecurityRequirement
+    
+        options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
         {
-            {
-                new OpenApiSecuritySchemeReference(referenceId: "Bearer"), []
-            }
+            [new OpenApiSecuritySchemeReference("Bearer", document)] = []
         });
     })
     .AddRouting(options => options.LowercaseUrls = true)

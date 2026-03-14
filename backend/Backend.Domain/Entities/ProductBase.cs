@@ -7,11 +7,12 @@ public abstract class ProductBase
     public int BrandId { get; set; }
     public Brand Brand { get; init; } = null!;
     public required string ModelName { get; set; }
-    public string? ImagePath { get; set; }
+    public string ImagePath { get; set; } = null!;
     public required decimal InitialPrice { get; set; }
     public int DiscountPercentage { get; set; }
     public required int Quantity { get; set; }
     public int Rating { get; set; }
+    public bool IsDeleted { get; set; }
     
     public ICollection<Item> Items { get; init; } = [];
     public ICollection<Review> Reviews { get; init; } = [];

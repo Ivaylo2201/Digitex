@@ -20,29 +20,18 @@ import {
   type SortingState,
   type VisibilityState,
 } from '@tanstack/react-table';
-import { ArrowUpDown, Minus, Plus, Trash } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
 import {
-  useRef,
   useState,
-  type PropsWithChildren,
-  type RefObject,
+  type PropsWithChildren
 } from 'react';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 import { type Translation } from '@/features/language/models/Translation';
-import { httpClient } from '@/lib/api/httpClient';
-import { useQueryClient } from '@tanstack/react-query';
+import { DeleteProductDialog } from './dialogs/DeleteProductDialog';
+import { SuggestionsDialog } from './dialogs/SuggestionsDialog';
 
 function getColumns<T extends ProductLong>(
   columns: ColumnDef<T>[],
@@ -50,7 +39,6 @@ function getColumns<T extends ProductLong>(
   onDelete: (id: string) => void,
   renderEditForm: (product: T) => React.ReactNode,
   translation: Translation['components']['dataTable'],
-  suggestionSku: RefObject<string>,
 ) {
   const baseColumns: ColumnDef<T>[] = [
     {
@@ -146,168 +134,11 @@ function getColumns<T extends ProductLong>(
     header: translation.actions,
     enableHiding: false,
     cell: ({ row }) => {
-      const [open, setOpen] = useState(false);
-      const queryClient = useQueryClient();
-
-      const handleDelete = async (id: string) => {
-        onDelete(id);
-        queryClient.invalidateQueries({
-          queryKey: ['product', row.original.id],
-        });
-        setOpen(false);
-      };
-
-      const handleAddSuggestion = async () => {
-        await httpClient.post('/products/graphics-cards/suggestions', {
-          productId: row.original.id,
-          suggestedProductSku: suggestionSku.current,
-        });
-        queryClient.invalidateQueries({
-          queryKey: ['product', row.original.id],
-        });
-        setOpen(false);
-      };
-
-      const handleRemoveSuggestion = async () => {
-        await httpClient.delete(
-          `/products/graphics-cards/${row.original.id}/suggestions/${suggestionSku.current}`,
-        );
-        queryClient.invalidateQueries({
-          queryKey: ['product', row.original.id],
-        });
-        setOpen(false);
-      };
-
       return (
         <div className='flex items-center gap-3 justify-center'>
           {renderEditForm(row.original)}
-
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <button
-                className='h-4 w-4 p-0 text-destructive hover:opacity-80 cursor-pointer'
-                aria-label='Delete product'
-              >
-                <Trash className='h-4 w-4' />
-              </button>
-            </DialogTrigger>
-
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>{translation.confirmDeletion}</DialogTitle>
-                <DialogDescription>
-                  {translation.areYouSureYouWantToDelete}{' '}
-                  <strong className='text-theme-gunmetal'>
-                    {row.original.modelName}
-                  </strong>
-                </DialogDescription>
-              </DialogHeader>
-
-              <DialogFooter className='flex justify-end gap-2'>
-                <Button
-                  className='cursor-pointer bg-theme-gunmetal text-white'
-                  onClick={() => setOpen(false)}
-                >
-                  {translation.cancel}
-                </Button>
-                <Button
-                  variant='destructive'
-                  className='cursor-pointer bg-theme-crimson'
-                  onClick={() => handleDelete(row.original.id)}
-                >
-                  {translation.delete}
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <button
-                className='h-4 w-4 p-0 hover:opacity-80 cursor-pointer'
-                aria-label='Add suggestion'
-              >
-                <Plus className='h-4 w-4' />
-              </button>
-            </DialogTrigger>
-
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Add a suggested product</DialogTitle>
-                <DialogDescription>
-                  Enter the SKU of the product you want to add
-                </DialogDescription>
-              </DialogHeader>
-
-              <Input
-                type='text'
-                placeholder='ABCD1234'
-                onChange={(e) => {
-                  suggestionSku.current = e.target.value;
-                }}
-              />
-
-              <DialogFooter className='flex justify-end gap-2'>
-                <Button
-                  className='cursor-pointer bg-theme-gunmetal text-white'
-                  onClick={() => setOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant='destructive'
-                  className='cursor-pointer bg-theme-crimson'
-                  onClick={handleAddSuggestion}
-                >
-                  Add
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <button
-                className='h-4 w-4 p-0 hover:opacity-80 cursor-pointer'
-                aria-label='Remove suggestion'
-              >
-                <Minus className='h-4 w-4' />
-              </button>
-            </DialogTrigger>
-
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Remove a suggested product</DialogTitle>
-                <DialogDescription>
-                  Enter the SKU of the product you want to remove
-                </DialogDescription>
-              </DialogHeader>
-
-              <Input
-                type='text'
-                placeholder='ABCD1234'
-                onChange={(e) => {
-                  suggestionSku.current = e.target.value;
-                }}
-              />
-
-              <DialogFooter className='flex justify-end gap-2'>
-                <Button
-                  className='cursor-pointer bg-theme-gunmetal text-white'
-                  onClick={() => setOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  variant='destructive'
-                  className='cursor-pointer bg-theme-crimson'
-                  onClick={handleRemoveSuggestion}
-                >
-                  Remove
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          <DeleteProductDialog row={row} onDelete={onDelete} />
+          <SuggestionsDialog product={row.original} />
         </div>
       );
     },
@@ -333,7 +164,6 @@ export function DataTable<T extends ProductLong>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
-  const suggestionSku = useRef<string>('');
 
   const {
     components: { dataTable },
@@ -347,8 +177,7 @@ export function DataTable<T extends ProductLong>({
       sign,
       onDelete,
       renderEditForm,
-      dataTable,
-      suggestionSku,
+      dataTable
     ),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

@@ -5,6 +5,7 @@ import { PaymentElement } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 import { useCart } from '@/features/cart/hooks/useCart';
 import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
+import { useNavigate } from 'react-router';
 
 type CheckoutFormProps = { shippingCost: number };
 
@@ -13,6 +14,7 @@ export function CheckoutForm({ shippingCost }: CheckoutFormProps) {
   const stripe = useStripe();
   const elements = useElements();
   const sign = useCurrencyStore((store) => store.currency.sign);
+  const navigate = useNavigate();
 
   const {
     components: { checkoutForm },
@@ -28,14 +30,23 @@ export function CheckoutForm({ shippingCost }: CheckoutFormProps) {
 
     setIsProcessing(true);
 
-    await stripe.confirmPayment({
+    const { paymentIntent } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        return_url: 'http://localhost:5173/thank-you',
-      },
+      redirect: 'if_required',
     });
 
     setIsProcessing(false);
+
+    if (paymentIntent?.status === 'succeeded') {
+      navigate(`/thank-you?payment_intent=${paymentIntent.id}`);
+    }
+
+    // await stripe.confirmPayment({
+    //   elements,
+    //   confirmParams: {
+    //     return_url: 'http://localhost:5173/thank-you',
+    //   },
+    // });
   };
 
   console.log(data?.totalPrice, shippingCost);

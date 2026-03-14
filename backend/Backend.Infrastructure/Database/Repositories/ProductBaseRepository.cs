@@ -18,13 +18,13 @@ public class ProductBaseRepository(DatabaseContext context) : IProductBaseReposi
             .ToListAsync(cancellationToken);
     }
 
-    public async Task AddSuggestionAsync(Guid productId, string suggestedProductSku, CancellationToken cancellationToken)
+    public async Task AddSuggestionAsync(Guid productId, Guid suggestedProductId, CancellationToken cancellationToken)
     {
         var product = await context.Products
             .Include(p => p.Suggestions)
             .FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
         
-        var suggestion = await context.Products.FirstOrDefaultAsync(p => p.Sku == suggestedProductSku, cancellationToken);
+        var suggestion = await context.Products.FirstOrDefaultAsync(p => p.Id == suggestedProductId, cancellationToken);
         
         if (product is null || suggestion is null || product.Suggestions.Contains(suggestion))
             return;
@@ -35,7 +35,7 @@ public class ProductBaseRepository(DatabaseContext context) : IProductBaseReposi
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task RemoveSuggestionAsync(Guid productId, string suggestedProductSku, CancellationToken ct)
+    public async Task RemoveSuggestionAsync(Guid productId, Guid suggestedProductId, CancellationToken ct)
     {
         var product = await context.Products
             .Include(p => p.Suggestions)
@@ -45,7 +45,7 @@ public class ProductBaseRepository(DatabaseContext context) : IProductBaseReposi
 
         var suggestion = await context.Products
             .Include(p => p.Suggestions)
-            .FirstOrDefaultAsync(p => p.Sku == suggestedProductSku, ct);
+            .FirstOrDefaultAsync(p => p.Id == suggestedProductId, ct);
 
         if (suggestion is null) return;
 
@@ -73,6 +73,35 @@ public class ProductBaseRepository(DatabaseContext context) : IProductBaseReposi
             .Where(product => EF.Functions.Like(product.Brand.BrandName, $"%{query}%") || 
                               EF.Functions.Like(product.ModelName, $"%{query}%") ||
                               EF.Functions.Like(product.Sku, $"%{query}%"))
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<List<ProductBase>> GetSuggestedProductsAsync(Guid productId, CancellationToken cancellationToken)
+    {
+        var product = await context.Products
+            .Include(p => p.Suggestions)
+            .ThenInclude(p => p.Brand)
+            .FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
+
+        if (product is null) return [];
+
+        return product.Suggestions.ToList();
+    }
+
+    public async Task<List<ProductBase>> GetSuggestionsProductsAsync(Guid productId, CancellationToken cancellationToken)
+    {
+        var product = await context.Products
+            .Include(p => p.SuggestedBy)
+            .FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
+
+        if (product is null)
+            return [];
+        
+        var suggestedIds = product.SuggestedBy.Select(p => p.Id).ToList();
+
+        return await context.Products
+            .Include(p => p.Brand)
+            .Where(p => !suggestedIds.Contains(p.Id) && p.Id != product.Id)
             .ToListAsync(cancellationToken);
     }
 }

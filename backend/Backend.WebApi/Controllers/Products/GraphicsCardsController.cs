@@ -82,13 +82,13 @@ public class GraphicsCardsController(IMediator mediator, IFilterService<Graphics
         return TypedResults.Ok();
     }
     
-    [HttpDelete("{productId:guid}/suggestions/{suggestionSku}")]
-    public async Task<NoContent> RemoveSuggestionAsync([FromRoute] Guid productId, [FromRoute] string suggestionSku, CancellationToken cancellationToken)
+    [HttpDelete("{productId:guid}/suggestions/{suggestionProductId:guid}")]
+    public async Task<NoContent> RemoveSuggestionAsync([FromRoute] Guid productId, [FromRoute] Guid suggestionProductId, CancellationToken cancellationToken)
     {
         await mediator.Send(new RemoveSuggestionRequest
         {
             ProductId = productId,
-            SuggestedProductSku = suggestionSku
+            SuggestedProductId = suggestionProductId
         }, cancellationToken);
         
         return TypedResults.NoContent();

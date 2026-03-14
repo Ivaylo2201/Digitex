@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20260307182448_Initial")]
+    [Migration("20260314144811_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -261,6 +261,9 @@ namespace Backend.Infrastructure.Database.Migrations
 
                     b.Property<decimal>("InitialPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModelName")
                         .IsRequired()

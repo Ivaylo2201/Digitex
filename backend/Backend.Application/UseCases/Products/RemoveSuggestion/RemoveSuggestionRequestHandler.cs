@@ -9,7 +9,7 @@ public class RemoveSuggestionRequestHandler(IProductBaseRepository productBaseRe
 {
     public async Task<Result<Unit>> Handle(RemoveSuggestionRequest request, CancellationToken cancellationToken)
     {
-        await productBaseRepository.RemoveSuggestionAsync(request.ProductId, request.SuggestedProductSku, cancellationToken);
+        await productBaseRepository.RemoveSuggestionAsync(request.ProductId, request.SuggestedProductId, cancellationToken);
         
         return Result<Unit>.Success(HttpStatusCode.NoContent, Unit.Value);
     }
