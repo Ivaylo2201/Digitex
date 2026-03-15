@@ -238,6 +238,13 @@ export type Translation = {
     };
   };
   components: {
+    suggestionsDialog: {
+      editingSuggestions: string;
+      editingSuggestionsFor: string;
+      productsForSuggestion: string;
+      suggestedProducts: string;
+      searchProducts: string;
+    };
     thankYouPage: {
       paymentSuccessful: string;
       orderProcessed: string;
@@ -974,6 +981,13 @@ export const translation: Translation = {
     },
   },
   components: {
+    suggestionsDialog: {
+      editingSuggestions: 'Editing suggestions',
+      editingSuggestionsFor: 'Editing suggestions for',
+      productsForSuggestion: 'Products for suggestion',
+      suggestedProducts: 'Suggested products',
+      searchProducts: 'Search products',
+    },
     thankYouPage: {
       paymentSuccessful: 'Payment Successful',
       orderProcessed: 'Your order has been processed.',

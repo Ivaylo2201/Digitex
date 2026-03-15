@@ -6,17 +6,21 @@ import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { useQueryClient } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
 
+type SuggestionCardProps = {
+  product: Suggestion;
+  baseProductId: string;
+  category?: string;
+};
+
 export function SuggestionCard({
   product,
   baseProductId,
-}: {
-  product: Suggestion;
-  baseProductId: string;
-}) {
+  category,
+}: SuggestionCardProps) {
   const queryClient = useQueryClient();
 
   const handleAdd = async (product: Suggestion) => {
-    await httpClient.post('/products/graphics-cards/suggestions', {
+    await httpClient.post(`/products/${category}/suggestions`, {
       productId: baseProductId,
       suggestionProductId: product.id,
     });

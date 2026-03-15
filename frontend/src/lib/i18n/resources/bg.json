@@ -240,6 +240,13 @@
     }
   },
   "components": {
+    "suggestionsDialog": {
+      "editingSuggestions": "Редактиране на предложения",
+      "editingSuggestionsFor": "Редактиране на предложения за",
+      "productsForSuggestion": "Продукти за предложение",
+      "suggestedProducts": "Предложени продукти",
+      "searchProducts": "Търсене на продукти"
+    },
     "thankYouPage": {
       "paymentSuccessful": "Плащането е успешно",
       "orderProcessed": "Вашата поръчка е обработена.",

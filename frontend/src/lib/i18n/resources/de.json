@@ -242,6 +242,13 @@
     }
   },
   "components": {
+    "suggestionsDialog": {
+      "editingSuggestions": "Vorschläge bearbeiten",
+      "editingSuggestionsFor": "Vorschläge für",
+      "productsForSuggestion": "Produkte für Vorschlag",
+      "suggestedProducts": "Vorgeschlagene Produkte",
+      "searchProducts": "Produkte suchen"
+    },
     "thankYouPage": {
       "paymentSuccessful": "Zahlung erfolgreich",
       "orderProcessed": "Ihre Bestellung wurde bearbeitet.",

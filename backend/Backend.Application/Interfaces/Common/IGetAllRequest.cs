@@ -5,5 +5,6 @@ public interface IGetAllRequest
     int Page { get; init; }
     int PageSize { get; init; }
     string Currency { get; init; }
+    bool IsAdmin { get; init; }
     IDictionary<string, string> Criteria { get; init; }
 }

@@ -6,18 +6,22 @@ import { getStaticFile } from '@/lib/utils/getStaticFile';
 import { useQueryClient } from '@tanstack/react-query';
 import { Minus } from 'lucide-react';
 
+type SuggestionCardProps = {
+  product: Suggestion;
+  baseProductId: string;
+  category?: string;
+};
+
 export function SuggestedCard({
   product,
   baseProductId,
-}: {
-  product: Suggestion;
-  baseProductId: string;
-}) {
+  category,
+}: SuggestionCardProps) {
   const queryClient = useQueryClient();
 
   const handleRemove = async (product: Suggestion) => {
     await httpClient.delete(
-      `/products/graphics-cards/${baseProductId}/suggestions/${product.id}`,
+      `/products/${category}/${baseProductId}/suggestions/${product.id}`,
     );
 
     queryClient.invalidateQueries({ queryKey: ['suggestions'] });

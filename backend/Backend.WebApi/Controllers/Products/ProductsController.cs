@@ -1,7 +1,9 @@
 ﻿using Backend.Application.DTOs;
 using Backend.Application.DTOs.Products;
+using Backend.Application.UseCases.Products.AddSuggestion;
 using Backend.Application.UseCases.Products.GetSuggested;
 using Backend.Application.UseCases.Products.GetSuggestions;
+using Backend.Application.UseCases.Products.RemoveSuggestion;
 using Backend.Application.UseCases.Products.SearchProducts;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -32,5 +34,24 @@ public class ProductsController(IMediator mediator) : ControllerBase
     {
         var result = await mediator.Send(new GetSuggestedRequest { ProductId = productId });
         return TypedResults.Ok(result.Value);
+    }
+    
+    [HttpPost("suggestions")]
+    public async Task<Ok> AddSuggestionAsync([FromBody] AddSuggestionRequest request, CancellationToken cancellationToken)
+    {
+        await mediator.Send(request, cancellationToken);
+        return TypedResults.Ok();
+    }
+    
+    [HttpDelete("{productId:guid}/suggestions/{suggestionProductId:guid}")]
+    public async Task<NoContent> RemoveSuggestionAsync([FromRoute] Guid productId, [FromRoute] Guid suggestionProductId, CancellationToken cancellationToken)
+    {
+        await mediator.Send(new RemoveSuggestionRequest
+        {
+            ProductId = productId,
+            SuggestedProductId = suggestionProductId
+        }, cancellationToken);
+        
+        return TypedResults.NoContent();
     }
 }

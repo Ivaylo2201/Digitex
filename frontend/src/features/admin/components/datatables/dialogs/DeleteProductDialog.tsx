@@ -41,12 +41,9 @@ export function DeleteProductDialog<T extends ProductShort>({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button
-          className='h-4 w-4 p-0 text-destructive hover:opacity-80 cursor-pointer'
-          aria-label='Delete product'
-        >
-          <Trash className='h-4 w-4' />
-        </button>
+        <Button variant='outline' size='sm' className='cursor-pointer'>
+          <Trash className='h-4 w-4 text-destructive' />
+        </Button>
       </DialogTrigger>
 
       <DialogContent>

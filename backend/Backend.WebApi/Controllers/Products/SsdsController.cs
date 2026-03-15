@@ -1,10 +1,12 @@
 ﻿using Backend.Application.DTOs.Filters;
 using Backend.Application.DTOs.Products.Ssd;
 using Backend.Application.Interfaces.Services;
+using Backend.Application.UseCases.Products.AddSuggestion;
 using Backend.Application.UseCases.Products.CreateProduct;
 using Backend.Application.UseCases.Products.DeleteProduct;
 using Backend.Application.UseCases.Products.GetAllProducts;
 using Backend.Application.UseCases.Products.GetOneProduct;
+using Backend.Application.UseCases.Products.RemoveSuggestion;
 using Backend.Application.UseCases.Products.UpdateProduct;
 using Backend.Domain.Common;
 using Backend.Domain.Enums;
@@ -57,4 +59,23 @@ public class SsdsController(IMediator mediator, IFilterService<SsdFiltersDto> fi
     [HttpGet("filters")]
     public async Task<Ok<SsdFiltersDto>> GetFiltersAsync(CancellationToken cancellationToken)
         => TypedResults.Ok(await filterService.GetFiltersAsync(cancellationToken));
+    
+    [HttpPost("suggestions")]
+    public async Task<Ok> AddSuggestionAsync([FromBody] AddSuggestionRequest request, CancellationToken cancellationToken)
+    {
+        await mediator.Send(request, cancellationToken);
+        return TypedResults.Ok();
+    }
+    
+    [HttpDelete("{productId:guid}/suggestions/{suggestionProductId:guid}")]
+    public async Task<NoContent> RemoveSuggestionAsync([FromRoute] Guid productId, [FromRoute] Guid suggestionProductId, CancellationToken cancellationToken)
+    {
+        await mediator.Send(new RemoveSuggestionRequest
+        {
+            ProductId = productId,
+            SuggestedProductId = suggestionProductId
+        }, cancellationToken);
+        
+        return TypedResults.NoContent();
+    }
 }

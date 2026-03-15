@@ -26,15 +26,17 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
         return entity;
     }
 
-    public async Task<List<TProduct>> GetAllAsync(int page, int pageSize, IQueryable<TProduct> filter, CancellationToken cancellationToken)
+    public async Task<List<TProduct>> GetAllAsync(int page, int pageSize, IQueryable<TProduct> filter, bool isAdmin, CancellationToken cancellationToken)
     {
-        var queryable = filter
-            .OrderBy(product => product.Id)
+        IQueryable<TProduct> queryable = filter
+            .OrderBy(p => p.Id)
             .AsNoTracking()
-            .Include(product => product.Reviews)
-            .Include(p => p.Brand)
-            .Where(p => p.Quantity > 0);
+            .Include(p => p.Reviews)
+            .Include(p => p.Brand);
 
+        if (!isAdmin)
+            queryable = queryable.Where(p => !p.IsDeleted);
+        
         return await queryable
             .Skip((Math.Max(page, 1) - 1) * pageSize)
             .Take(pageSize)

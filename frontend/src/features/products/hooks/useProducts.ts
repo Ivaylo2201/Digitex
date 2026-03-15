@@ -3,6 +3,7 @@ import { staleTime } from '@/lib/api/constants';
 import { httpClient } from '@/lib/api/httpClient';
 import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 import { useLocation } from 'react-router';
+import { useAuthStore } from '@/features/auth/stores/useAuth';
 
 type FetchProductsResponse<T> = {
   items: T[];
@@ -12,27 +13,28 @@ type FetchProductsResponse<T> = {
 
 async function fetchProducts<T>(
   category: string,
-  queryParams: string | undefined
+  queryParams: string | undefined,
 ) {
   const res = await httpClient.get<FetchProductsResponse<T>>(
-    `/products/${category}${queryParams}`
+    `/products/${category}${queryParams}`,
   );
   return res.data;
 }
 
-export function useProducts<T>(category: string, page: number, pageSize: number) {
+export function useProducts<T>(
+  category: string,
+  page: number,
+  pageSize: number,
+) {
   const location = useLocation();
   const { currency } = useCurrencyStore();
+  const { role } = useAuthStore();
 
   return useQuery({
     queryKey: ['products', category, page, currency, location.search],
     queryFn: () => {
       const searchParams = location.search.split('?')[1];
-      const queryParams = `?currency=${
-        currency.currencyIsoCode
-      }&page=${page}&pageSize=${pageSize}${
-        searchParams ? `&${searchParams}` : ''
-      }`;
+      const queryParams = `?currency=${currency.currencyIsoCode}&isAdmin=${role === 'admin'}&page=${page}&pageSize=${pageSize}${searchParams ? `&${searchParams}` : ''}`;
       return fetchProducts<T>(category, queryParams);
     },
     staleTime: staleTime,

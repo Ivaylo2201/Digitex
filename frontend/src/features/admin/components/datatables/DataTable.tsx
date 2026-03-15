@@ -138,7 +138,7 @@ function getColumns<T extends ProductLong>(
         <div className='flex items-center gap-3 justify-center'>
           {renderEditForm(row.original)}
           <DeleteProductDialog row={row} onDelete={onDelete} />
-          <SuggestionsDialog product={row.original} />
+          <SuggestionsDialog product={row.original} category={row.original.category} />
         </div>
       );
     },

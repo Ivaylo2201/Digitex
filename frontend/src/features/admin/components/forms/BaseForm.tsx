@@ -46,11 +46,14 @@ export function BaseForm<T extends { imagePath: string; sku: string }>({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {product ? (
-          <SquarePen className='h-4 w-4 cursor-pointer' />
+          <Button variant='outline' size='sm' className='cursor-pointer'>
+            <SquarePen className='h-4 w-4 cursor-pointer' />
+          </Button>
         ) : (
           <Button
-            variant='secondary'
-            className='bg-theme-crimson text-theme-white hover:bg-theme-gunmetal hover:text-theme-white cursor-pointer'
+            variant='outline'
+            size='sm'
+            className='cursor-pointer bg-theme-crimson text-white'
           >
             {baseForm.add}
           </Button>

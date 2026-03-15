@@ -9,7 +9,7 @@ public interface IProductRepository<TProduct> :
     IDeletable<Guid>,
     IUpdatable<TProduct, Guid> where TProduct : ProductBase
 { 
-    Task<List<TProduct>> GetAllAsync(int page, int pageSize, IQueryable<TProduct> filter, CancellationToken cancellationToken);
+    Task<List<TProduct>> GetAllAsync(int page, int pageSize, IQueryable<TProduct> filter, bool isAdmin, CancellationToken cancellationToken);
     Task<int> CountAsync(IQueryable<TProduct> filter, CancellationToken cancellationToken);
     IQueryable<TProduct> Query();
 }

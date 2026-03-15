@@ -34,6 +34,7 @@ public class GraphicsCardsController(IMediator mediator, IFilterService<Graphics
     [HttpGet]
     public async Task<Ok<Pagination<GraphicsCardDto>>> GetAllAsync([FromQuery] GetAllGraphicsCardsRequest request, CancellationToken cancellationToken)
     {
+        Console.WriteLine(request.IsAdmin);
         var result = await mediator.Send(request, cancellationToken);
         return TypedResults.Ok(result.Value);
     }

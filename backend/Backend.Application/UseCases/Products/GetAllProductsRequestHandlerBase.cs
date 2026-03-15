@@ -23,7 +23,7 @@ public class GetAllProductsRequestHandlerBase<TRequest, TProduct, TProjection>(
     {
         var filter = expressionBuilderService.Build(productRepository.Query(), request.Criteria);
         
-        var products = await productRepository.GetAllAsync(request.Page, request.PageSize, filter, cancellationToken);
+        var products = await productRepository.GetAllAsync(request.Page, request.PageSize, filter, request.IsAdmin, cancellationToken);
         var filteredProductsCount = await productRepository.CountAsync(filter, cancellationToken);
         
         var rate = await exchangeRepository.GetRateAsync(CurrencyIsoCode.Eur, request.Currency.ToCurrencyIsoCode(), cancellationToken);
