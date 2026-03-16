@@ -1,10 +1,11 @@
-﻿using Backend.Domain.Entities;
+﻿using Backend.Application.Interfaces.Services;
+using Backend.Domain.Entities;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Infrastructure.Database.Repositories;
 
-public class ProductBaseRepository(DatabaseContext context) : IProductBaseRepository
+public class ProductBaseRepository(DatabaseContext context, IEmailSenderService emailSenderService) : IProductBaseRepository
 {
     public async Task<ProductBase?> GetOneAsync(Guid id, CancellationToken cancellationToken)
         => await context.Products.FirstOrDefaultAsync(product => product.Id == id, cancellationToken);
@@ -57,13 +58,20 @@ public class ProductBaseRepository(DatabaseContext context) : IProductBaseReposi
 
     public async Task ReduceQuantityAsync(Guid productId, int quantity, CancellationToken cancellationToken)
     {
-        var product = await context.Products.FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
+        var product = await context.Products
+            .Include(p => p.Brand)
+            .FirstOrDefaultAsync(p => p.Id == productId, cancellationToken);
 
         if (product is null)
             return;
         
         product.Quantity -= quantity;
         await context.SaveChangesAsync(cancellationToken);
+
+        if (product.Quantity is 0)
+        {
+            await emailSenderService.SendInsufficientProductQuantityEmailAsync(product, cancellationToken);
+        }
     }
 
     public async Task<List<ProductBase>> SearchAsync(string query, CancellationToken cancellationToken)

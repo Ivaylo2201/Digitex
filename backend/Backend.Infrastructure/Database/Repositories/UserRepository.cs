@@ -1,4 +1,5 @@
 ﻿using Backend.Domain.Entities;
+using Backend.Domain.Enums;
 using Backend.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -57,6 +58,11 @@ public class UserRepository(DatabaseContext context) : IUserRepository
     public async Task SaveChangesAsync(CancellationToken stoppingToken = default)
     {
         await context.SaveChangesAsync(stoppingToken);
+    }
+
+    public async Task<List<User>> GetAdminUsersAsync(CancellationToken stoppingToken = default)
+    {
+        return await context.Users.Where(user => user.Role == Role.Admin).ToListAsync(stoppingToken);
     }
 
     public async Task<User?> GetOneAsync(int id, CancellationToken cancellationToken = default)

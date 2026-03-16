@@ -1,5 +1,6 @@
 ﻿using Backend.Application.Interfaces.Services;
 using Backend.Domain.Entities;
+using Backend.Domain.Interfaces.Repositories;
 using FluentEmail.Core;
 using Microsoft.Extensions.Logging;
 
@@ -8,7 +9,8 @@ namespace Backend.Infrastructure.Services;
 public class EmailSenderService(
     ILogger<EmailSenderService> logger,
     IFluentEmail fluentEmail,
-    IEmailBuilderService emailBuilderService) : IEmailSenderService
+    IEmailBuilderService emailBuilderService,
+    IUserRepository userRepository) : IEmailSenderService
 {
     private const string Source = nameof(EmailSenderService);
 
@@ -64,6 +66,19 @@ public class EmailSenderService(
         {
             logger.LogError("[{Source}]: Failed to send password reset email to {Email}. Exception message - {Exception}", Source, user.Email, ex.Message);
         }
+    }
+
+    public async Task SendInsufficientProductQuantityEmailAsync(ProductBase product, CancellationToken cancellationToken = default)
+    {
+        var users = await userRepository.GetAdminUsersAsync(cancellationToken);
+
+        var sendTasks = users.Select(user => SendEmailAsync(
+            user,
+            $"Product {product.Brand.BrandName} {product.ModelName} is out of stock",
+            emailBuilderService.BuildInsufficientProductQuantityEmail(product, user),
+            cancellationToken));
+
+        await Task.WhenAll(sendTasks);
     }
 
     private async Task SendEmailAsync(User user, string subject, string body, CancellationToken stoppingToken)

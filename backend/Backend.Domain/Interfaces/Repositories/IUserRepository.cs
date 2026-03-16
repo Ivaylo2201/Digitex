@@ -12,4 +12,5 @@ public interface IUserRepository : ICreatable<User>, ISingleReadable<User, int>
     Task<User?> GetOneByIdWithCartAsync(int id, CancellationToken stoppingToken = default);
     Task<User?> GetOneWithFavoritesAsync(int id, CancellationToken stoppingToken = default);
     Task SaveChangesAsync(CancellationToken stoppingToken = default);
+    Task<List<User>> GetAdminUsersAsync(CancellationToken stoppingToken = default);
 }

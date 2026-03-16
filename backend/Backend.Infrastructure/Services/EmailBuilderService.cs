@@ -113,6 +113,30 @@ public class EmailBuilderService : IEmailBuilderService
         return BuildEmail($"Order #{order.Id} Confirmation", body);
     }
 
+    public string BuildInsufficientProductQuantityEmail(ProductBase product, User user)
+    {
+        var body = $"""
+                        <p style="color: #15161d; font-size: 16px; line-height: 1.6">
+                            Hello Admin {user.Username},<br />
+                            The following product has reached <strong>0 quantity</strong> and is now <strong>out of stock</strong>.
+                        </p>
+
+                        <p style="color: #15161d; font-size: 16px; line-height: 1.6">
+                            Product:
+                        </p>
+
+                        <ul style="color: #15161d; font-size: 16px; line-height: 1.6; padding-left: 20px">
+                            <li>{product.Brand.BrandName} {product.ModelName}</li>
+                        </ul>
+
+                        <p style="margin: 30px 0; font-size: 16px; line-height: 1.6">
+                            Please restock this product as soon as possible.
+                        </p>
+                    """;
+
+        return BuildEmail("Product Out of Stock", body);
+    }
+
     private static string BuildEmail(string title, string body)
     {
         return $"""
