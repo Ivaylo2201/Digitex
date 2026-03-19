@@ -249,6 +249,11 @@
       "suggestedProducts": "Vorgeschlagene Produkte",
       "searchProducts": "Produkte suchen"
     },
+    "mostSoldProduct": {
+      "mostSoldProduct": "Meistverkauftes Produkt",
+      "sales": "Verkäufe",
+      "quantitySold": "Verkaufte Menge"
+    },
     "thankYouPage": {
       "paymentSuccessful": "Zahlung erfolgreich",
       "orderProcessed": "Ihre Bestellung wurde bearbeitet.",

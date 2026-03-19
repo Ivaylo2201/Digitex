@@ -238,6 +238,11 @@ export type Translation = {
     };
   };
   components: {
+    mostSoldProduct: {
+      mostSoldProduct: string;
+      sales: string;
+      quantitySold: string;
+    };
     suggestionsDialog: {
       editingSuggestions: string;
       editingSuggestionsFor: string;
@@ -745,142 +750,142 @@ export const translation: Translation = {
       capacityInGb: {
         requiredError: 'Capacity is required',
         positiveError: 'Capacity must be positive',
-        intError: 'Capacity must be an integer',
+        intError: 'Capacity must be an integer'
       },
       operationSpeed: {
         read: {
           requiredError: 'Read speed is required',
           positiveError: 'Read speed must be positive',
-          intError: 'Read speed must be an integer',
+          intError: 'Read speed must be an integer'
         },
         write: {
           requiredError: 'Write speed is required',
           positiveError: 'Write speed must be positive',
-          intError: 'Write speed must be an integer',
-        },
+          intError: 'Write speed must be an integer'
+        }
       },
       storageInterface: {
-        requiredError: 'Storage interface is required',
-      },
+        requiredError: 'Storage interface is required'
+      }
     },
     ramForm: {
       memory: {
         capacityInGb: {
           requiredError: 'Capacity is required',
           positiveError: 'Capacity must be positive',
-          intError: 'Capacity must be an integer',
+          intError: 'Capacity must be an integer'
         },
         type: {
-          requiredError: 'Type is required',
+          requiredError: 'Type is required'
         },
         frequency: {
           requiredError: 'Frequency is required',
           positiveError: 'Frequency must be positive',
-          intError: 'Frequency must be an integer',
-        },
+          intError: 'Frequency must be an integer'
+        }
       },
       timing: {
-        requiredError: 'Timing is required',
-      },
+        requiredError: 'Timing is required'
+      }
     },
     monitorForm: {
       displayDiagonal: {
         required: 'Display diagonal is required',
-        positive: 'Display diagonal must be positive',
+        positive: 'Display diagonal must be positive'
       },
       refreshRate: {
         required: 'Refresh rate is required',
         positive: 'Refresh rate must be positive',
-        int: 'Refresh rate must be an integer',
+        int: 'Refresh rate must be an integer'
       },
       latency: {
         required: 'Latency is required',
         positive: 'Latency must be positive',
-        int: 'Latency must be an integer',
+        int: 'Latency must be an integer'
       },
       matrix: {
-        required: 'Matrix type is required',
+        required: 'Matrix type is required'
       },
       resolution: {
         width: {
           required: 'Resolution width is required',
           positive: 'Resolution width must be positive',
-          int: 'Resolution width must be an integer',
+          int: 'Resolution width must be an integer'
         },
         height: {
           required: 'Resolution height is required',
           positive: 'Resolution height must be positive',
-          int: 'Resolution height must be an integer',
+          int: 'Resolution height must be an integer'
         },
         type: {
-          required: 'Resolution type is required',
-        },
+          required: 'Resolution type is required'
+        }
       },
       pixelSize: {
         required: 'Pixel size is required',
-        positive: 'Pixel size must be positive',
+        positive: 'Pixel size must be positive'
       },
       brightness: {
         required: 'Brightness is required',
-        positive: 'Brightness must be positive',
+        positive: 'Brightness must be positive'
       },
       colorSpectre: {
         required: 'Color spectre is required',
-        positive: 'Color spectre must be positive',
-      },
+        positive: 'Color spectre must be positive'
+      }
     },
     baseForm: {
       brandId: {
         requiredError: 'Brand is required',
-        nonNegativeError: 'Brand ID must be non-negative',
+        nonNegativeError: 'Brand ID must be non-negative'
       },
       modelName: {
         requiredError: 'Model name is required',
-        minLengthError: 'Model name must be at least 1 character',
+        minLengthError: 'Model name must be at least 1 character'
       },
       price: {
         requiredError: 'Price is required',
-        nonNegativeError: 'Price must be 0 or greater',
+        nonNegativeError: 'Price must be 0 or greater'
       },
       discountPercentage: {
         requiredError: 'Discount is required',
         minError: 'Discount cannot be less than 0%',
-        maxError: 'Discount cannot exceed 100%',
+        maxError: 'Discount cannot exceed 100%'
       },
       quantity: {
         requiredError: 'Quantity is required',
         integerError: 'Quantity must be an integer',
-        nonNegativeError: 'Quantity must be 0 or greater',
-      },
+        nonNegativeError: 'Quantity must be 0 or greater'
+      }
     },
     processorForm: {
       cores: {
         requiredError: 'Cores is required',
         integerError: 'Cores must be an integer',
-        positiveError: 'Cores must be positive',
+        positiveError: 'Cores must be positive'
       },
       threads: {
         requiredError: 'Threads is required',
         integerError: 'Threads must be an integer',
-        positiveError: 'Threads must be positive',
+        positiveError: 'Threads must be positive'
       },
       clockSpeed: {
         base: {
           requiredError: 'Base clock speed is required',
-          positiveError: 'Base clock speed must be positive',
+          positiveError: 'Base clock speed must be positive'
         },
         boost: {
           requiredError: 'Boost clock speed is required',
-          positiveError: 'Boost clock speed must be positive',
-        },
+          positiveError: 'Boost clock speed must be positive'
+        }
       },
       socket: {
-        requiredError: 'Socket is required',
+        requiredError: 'Socket is required'
       },
       tdp: {
         requiredError: 'TDP is required',
-        positiveError: 'TDP must be positive',
-      },
+        positiveError: 'TDP must be positive'
+      }
     },
     motherboardForm: {
       socket: { requiredError: 'Socket is required' },
@@ -889,96 +894,96 @@ export const translation: Translation = {
       ramSlots: {
         requiredError: 'RAM slots is required',
         integerError: 'RAM slots must be an integer',
-        positiveError: 'RAM slots must be positive',
+        positiveError: 'RAM slots must be positive'
       },
       pcieSlots: {
         requiredError: 'PCIe slots is required',
         integerError: 'PCIe slots must be an integer',
-        positiveError: 'PCIe slots must be positive',
-      },
+        positiveError: 'PCIe slots must be positive'
+      }
     },
     graphicsCardForm: {
       memory: {
         capacityInGb: {
           requiredError: 'Capacity in GB is required',
-          positiveError: 'Capacity in GB must be positive',
+          positiveError: 'Capacity in GB must be positive'
         },
         type: {
-          minLengthError: 'Type must be at least 1 character',
+          minLengthError: 'Type must be at least 1 character'
         },
         frequency: {
-          positiveError: 'Frequency must be positive',
-        },
+          positiveError: 'Frequency must be positive'
+        }
       },
       clockSpeed: {
         base: {
           requiredError: 'Base clock speed is required',
-          positiveError: 'Base clock speed must be positive',
+          positiveError: 'Base clock speed must be positive'
         },
         boost: {
           requiredError: 'Boost clock speed is required',
-          positiveError: 'Boost clock speed must be positive',
-        },
+          positiveError: 'Boost clock speed must be positive'
+        }
       },
       busWidth: {
         requiredError: 'Bus width is required',
-        positiveError: 'Bus width must be positive',
+        positiveError: 'Bus width must be positive'
       },
       cudaCores: {
         requiredError: 'CUDA cores is required',
-        positiveError: 'CUDA cores must be positive',
+        positiveError: 'CUDA cores must be positive'
       },
       directXSupport: {
         requiredError: 'DirectX support is required',
-        positiveError: 'DirectX support must be positive',
+        positiveError: 'DirectX support must be positive'
       },
       tdp: {
         requiredError: 'TDP is required',
-        positiveError: 'TDP must be positive',
-      },
+        positiveError: 'TDP must be positive'
+      }
     },
     auth: {
       email: {
         requiredError: 'Email is required.',
-        invalidEmailError: 'Invalid email address.',
+        invalidEmailError: 'Invalid email address.'
       },
       password: {
         requiredError: 'Password is required.',
         minLengthError: 'Password is too short.',
         regexError: 'Password does not meet complexity requirements.',
         passwordMismatchError: 'Passwords do not match.',
-        passwordContainsUsername: 'Password cannot contain the username.',
+        passwordContainsUsername: 'Password cannot contain the username.'
       },
       username: {
         requiredError: 'Username is required.',
         minLengthError: 'Username is too short.',
-        maxLengthError: 'Username is too long.',
-      },
+        maxLengthError: 'Username is too long.'
+      }
     },
     createReview: {
       productId: {
         requiredError: 'Product ID is required',
-        invalidError: 'Invalid product ID',
+        invalidError: 'Invalid product ID'
       },
       rating: {
-        requiredError: 'Rating is required',
+        requiredError: 'Rating is required'
       },
       comment: {
-        maxLengthError: 'Comment cannot exceed 500 characters',
-      },
+        maxLengthError: 'Comment cannot exceed 500 characters'
+      }
     },
     powerSupplyForm: {
       wattage: {
         requiredError: 'Wattage is required',
         positiveError: 'Wattage must be positive',
-        intError: 'Wattage must be an integer',
+        intError: 'Wattage must be an integer'
       },
       efficiencyPercentage: {
         requiredError: 'Efficiency percentage is required',
         positiveError: 'Efficiency percentage must be positive',
-        intError: 'Efficiency percentage must be an integer',
-      },
-    },
+        intError: 'Efficiency percentage must be an integer'
+      }
+    }
   },
   components: {
     suggestionsDialog: {
@@ -986,57 +991,57 @@ export const translation: Translation = {
       editingSuggestionsFor: 'Editing suggestions for',
       productsForSuggestion: 'Products for suggestion',
       suggestedProducts: 'Suggested products',
-      searchProducts: 'Search products',
+      searchProducts: 'Search products'
     },
     thankYouPage: {
       paymentSuccessful: 'Payment Successful',
       orderProcessed: 'Your order has been processed.',
       confirmationEmail: 'A confirmation email has been sent to your inbox.',
       continueShopping: 'Continue Shopping',
-      viewOrders: 'View Orders',
+      viewOrders: 'View Orders'
     },
     productsList: {
-      noProductsFound: 'No products found',
+      noProductsFound: 'No products found'
     },
     powerSupplyForm: {
       wattage: 'Wattage',
       formFactor: 'Form Factor',
       efficiencyPercentage: 'Efficiency Percentage',
-      modularity: 'Modularity',
+      modularity: 'Modularity'
     },
     powerSuppliesDataTable: {
       wattage: 'Wattage',
       formFactor: 'Form Factor',
       efficiencyPercentage: 'Efficiency Percentage',
-      modularity: 'Modularity',
+      modularity: 'Modularity'
     },
     ssdForm: {
       capacityInGb: 'Capacity',
       operationSpeed: {
         read: 'Read Speed',
-        write: 'Write Speed',
+        write: 'Write Speed'
       },
-      storageInterface: 'Storage Interface',
+      storageInterface: 'Storage Interface'
     },
     ssdsDataTable: {
       capacityInGb: 'Capacity',
       operationSpeed: {
         read: 'Read Speed',
-        write: 'Write Speed',
+        write: 'Write Speed'
       },
-      storageInterface: 'Storage Interface',
+      storageInterface: 'Storage Interface'
     },
     ramForm: {
       memory: {
         type: 'Type',
         frequency: 'Frequency',
-        capacityInGb: 'Capacity',
+        capacityInGb: 'Capacity'
       },
-      timing: 'Timing',
+      timing: 'Timing'
     },
     ramsDataTable: {
       memory: 'Memory',
-      timing: 'Timing',
+      timing: 'Timing'
     },
     monitorForm: {
       displayDiagonal: 'Display diagonal',
@@ -1046,11 +1051,11 @@ export const translation: Translation = {
       resolution: {
         width: 'Width',
         height: 'Height',
-        type: 'Type',
+        type: 'Type'
       },
       pixelSize: 'Pixel Size',
       brightness: 'Brightness',
-      colorSpectre: 'Color Spectre',
+      colorSpectre: 'Color Spectre'
     },
     monitorsDataTable: {
       displayDiagonal: 'Display Diagonal',
@@ -1060,24 +1065,24 @@ export const translation: Translation = {
       resolution: 'Resolution',
       pixelSize: 'Pixel Size',
       brightness: 'Brightness',
-      colorSpectre: 'Color Spectre',
+      colorSpectre: 'Color Spectre'
     },
     processorForm: {
       cores: 'Cores',
       threads: 'Threads',
       clockSpeed: {
         base: 'Base clock speed (MHz)',
-        boost: 'Boost clock speed (MHz)',
+        boost: 'Boost clock speed (MHz)'
       },
       socket: 'Socket',
-      tdp: 'TDP (W)',
+      tdp: 'TDP (W)'
     },
     processorsDataTable: {
       cores: 'Cores',
       threads: 'Threads',
       clockSpeed: 'Clock Speed',
       socket: 'Socket',
-      tdp: 'TDP',
+      tdp: 'TDP'
     },
     graphicsCardsDataTable: {
       memory: 'Memory',
@@ -1085,7 +1090,7 @@ export const translation: Translation = {
       busWidth: 'Bus Width',
       cudaCores: 'CUDA Cores',
       directXSupport: 'DirectX',
-      tdp: 'TDP',
+      tdp: 'TDP'
     },
     baseForm: {
       chooseABrand: 'Choose a brand',
@@ -1101,7 +1106,7 @@ export const translation: Translation = {
       quantity: 'Quantity',
       cancel: 'Cancel',
       save: 'Save',
-      editingProduct: 'Editing Product',
+      editingProduct: 'Editing Product'
     },
     dataTable: {
       discountPercentage: 'Discount',
@@ -1117,11 +1122,11 @@ export const translation: Translation = {
       searchBySku: 'Search by SKU',
       noResults: 'No results',
       previous: 'Previous',
-      next: 'Next',
+      next: 'Next'
     },
     checkoutForm: {
       pay: 'Pay',
-      now: 'now',
+      now: 'now'
     },
     contactInformationForm: {
       country: 'Country',
@@ -1131,112 +1136,111 @@ export const translation: Translation = {
       streetName: 'Street name',
       streetNumber: 'Street number',
       floor: 'Floor',
-      apartment: 'Apartment',
+      apartment: 'Apartment'
     },
     billingForm: {
       contactInformation: 'Contact Information',
       shippingMethod: 'Shipping Method',
       returnPolicyLabel: 'Return Policy',
       returnPolicyText:
-        "We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition. Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item.",
+        "We stand behind our products with a comprehensive 30-day return policy. If you're not completely satisfied, simply return the item in its original condition. Our hassle-free return process includes free return shipping and full refunds processed within 48 hours of receiving the returned item."
     },
     cartPage: {
       price: 'Price',
       quantity: 'Quantity',
       product: 'Product',
       subtotal: 'Subtotal',
-      proceedToCheckout: 'Proceed to Checkout',
+      proceedToCheckout: 'Proceed to Checkout'
     },
     chatbot: {
-      typeYourMessage: 'Type your message...',
+      typeYourMessage: 'Type your message...'
     },
     emptyMessagesSection: {
       hiThereImYourDigitexAssistant: "Hi there! I'm your Digitex assistant",
-      imHereToHelpAskMeAnything: "I'm here to help - Ask me anything!",
+      imHereToHelpAskMeAnything: "I'm here to help - Ask me anything!"
     },
     footer: {
-      allRightsReserved: 'All rights reserved.',
+      allRightsReserved: 'All rights reserved.'
     },
     filterForm: {
       brand: 'Brand',
       price: 'Price',
-      apply: 'Apply',
+      apply: 'Apply'
     },
     processorsFilterForm: {
       cores: 'Cores',
       threads: 'Threads',
       socket: 'Socket',
-      tdp: 'TDP',
+      tdp: 'TDP'
     },
     header: {
-      merchantAddress: import.meta.env.VITE_MERCHANT_ADDRESS,
+      merchantAddress: import.meta.env.VITE_MERCHANT_ADDRESS
     },
     searchBox: {
-      searchForProducts: 'Search for products...',
+      searchForProducts: 'Search for products...'
     },
     ordersLink: {
-      orders: 'Orders',
+      orders: 'Orders'
     },
     signInLink: {
-      signIn: 'Sign in',
+      signIn: 'Sign in'
     },
     signOutButton: {
-      signOut: 'Sign out',
+      signOut: 'Sign out'
     },
     cartLink: {
-      cart: 'Cart',
+      cart: 'Cart'
     },
     compareLink: {
-      compare: 'Compare',
+      compare: 'Compare'
     },
     productCompareTable: {
-      comparedProducts: 'Compared Products',
+      comparedProducts: 'Compared Products'
     },
     productPage: {
-      sku: 'SKU',
+      sku: 'SKU'
     },
     emptyComparePage: {
       noProductsAddedForComparison: 'No products added for comparison',
       youHaveNotAddedAnyProductsForComparisonYet:
         "You haven't added any products for comparison yet.",
       getStartedByAddingAProduct: 'Get started by adding a product.',
-      addProducts: 'Add products',
+      addProducts: 'Add products'
     },
     emptySuggestedProductsSection: {
       noSuggestedProductsAvailable: 'No suggested products available',
-      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet',
+      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet'
     },
     emptyReviewsSection: {
       noReviewsForThisProduct: 'No reviews for this product',
       noReviewsHaveBeenLeftForThisProductYet:
         'No reviews have been left for this product yet',
       writeTheFirstReviewViaTheFormBelow:
-        'Write the first review via the form below',
+        'Write the first review via the form below'
     },
     favoritesLink: {
-      favorites: 'Favorites',
+      favorites: 'Favorites'
     },
     productPageBreadcrumb: {
-      home: 'Home',
+      home: 'Home'
     },
     addToCompareButton: {
       maxComparisonCapacityReached: 'Max compare capacity reached.',
       incompatibleComparisonCategory: 'Incompatible comparison category.',
       productAlreadyAddedToComparison: 'Product already present in comparison.',
-      productSuccessfullyAddedToComparison: 'Product added to comparison.',
+      productSuccessfullyAddedToComparison: 'Product added to comparison.'
     },
-    //addToFavoritesButton: {},
     specificationsTable: {
-      mainSpecifications: 'Main specifications',
+      mainSpecifications: 'Main specifications'
     },
     addToCartButton: {
       addToCart: 'Add to cart',
-      outOfStock: 'Out of stock',
+      outOfStock: 'Out of stock'
     },
     suggestedProductsSection: {
       suggestedProducts: 'Suggested products',
       noSuggestedProductsAvailable: 'No suggested products available',
-      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet',
+      thisProductHasNoSuggestionsYet: 'This product has no suggestions yet'
     },
     reviewsSection: {
       reviews: 'Reviews',
@@ -1245,10 +1249,10 @@ export const translation: Translation = {
         'No reviews have been left for this product yet',
       writeTheFirstReviewViaTheFormBelow:
         'Write the first review via the form below',
-      noCommentProvided: 'No comment provided',
+      noCommentProvided: 'No comment provided'
     },
     loader: {
-      loading: 'Loading',
+      loading: 'Loading'
     },
     signInForm: {
       signInToYourAccount: 'Sign in to your account',
@@ -1260,7 +1264,7 @@ export const translation: Translation = {
       dontHaveAnAccount: "Don't have an account?",
       signUp: 'Sign up',
       rememberMe: 'Remember me',
-      forgotPassword: 'Forgot password?',
+      forgotPassword: 'Forgot password?'
     },
     signUpForm: {
       createdAnAccount: 'Create an account',
@@ -1273,72 +1277,72 @@ export const translation: Translation = {
       signUp: 'Sign up',
       alreadyHaveAnAccount: 'Already have an account?',
       signIn: 'Sign in',
-      acceptTermsAndConditions: 'I accept the Terms and Conditions',
+      acceptTermsAndConditions: 'I accept the Terms and Conditions'
     },
     accountVerifiedPage: {
       accountVerifiedSuccessfully: 'Account verified successfully.',
-      accountVerificationFailed: 'Account verification failed.',
+      accountVerificationFailed: 'Account verification failed.'
     },
     completePasswordResetForm: {
       completePasswordReset: 'Complete password reset',
       enterYourNewPasswordBelow: 'Enter your new password below.',
       newPassword: 'New password',
-      newPasswordConfirmation: 'New password confirmation',
+      newPasswordConfirmation: 'New password confirmation'
     },
     requestPasswordResetForm: {
       enterYourEmailToRequestAPasswordResetForYourAccount:
         'Enter your email to request a password reset for your account.',
       email: 'Email',
-      requestAPasswordReset: 'Request a password reset',
+      requestAPasswordReset: 'Request a password reset'
     },
     graphicsCardsFilterForm: {
       busWidth: 'Bus width',
       memoryCapacity: 'Memory capacity',
       clockSpeed: 'Clock speed',
-      cudaCores: 'CUDA cores',
+      cudaCores: 'CUDA cores'
     },
     motherboardsFilterForm: {
       socket: 'Socket',
       formFactor: 'Form factor',
-      chipset: 'Chipset',
+      chipset: 'Chipset'
     },
     powerSuppliesFilterForm: {
       formFactor: 'Form factor',
       efficiencyPercentage: 'Efficiency percentage',
-      modularity: 'Modularity',
+      modularity: 'Modularity'
     },
     ramsFilterForm: {
       memoryCapacity: 'Memory capacity',
       memoryType: 'Memory type',
-      frequency: 'Frequency',
+      frequency: 'Frequency'
     },
     ssdsFilterForm: {
       memoryCapacity: 'Memory capacity',
       storageInterface: 'Storage interface',
       readSpeed: 'Read speed',
-      writeSpeed: 'Write speed',
+      writeSpeed: 'Write speed'
     },
     monitorsFilterForm: {
       refreshRates: 'Refresh rates',
       matrices: 'Matrices',
-      resolutionTypes: 'Resolution types',
+      resolutionTypes: 'Resolution types'
     },
     productsPagination: {
       previous: 'Previous',
       next: 'Next',
       showing: 'Showing',
       outOf: 'out of',
-      products: 'products',
+      products: 'products'
     },
     emptyCartPage: {
       yourCartIsEmpty: 'Your cart is empty',
       youHaveNotAddedAnyItemsInYourCart:
         'You have not added any items in your cart',
       GetStartedByAddingAnItem: 'Get started by adding an item',
-      AddItems: 'Add items',
+      AddItems: 'Add items'
     },
     adminPanelLink: {
-      adminPanel: 'Admin Panel',
+      adminPanel: 'Admin Panel'
     },
     reviewForm: {
       leaveAReview: 'Leave a review',
@@ -1347,56 +1351,61 @@ export const translation: Translation = {
       rating: 'Rating',
       comment: 'Comment',
       leaveAComment: 'Leave a comment...',
-      submitReview: 'Submit review',
+      submitReview: 'Submit review'
     },
     graphicsCardForm: {
       memory: {
         type: 'Memory type',
         frequency: 'Frequency',
-        capacityInGb: 'Capacity (GB)',
+        capacityInGb: 'Capacity (GB)'
       },
       clockSpeed: {
         base: 'Base clock speed (MHz)',
-        boost: 'Boost clock speed (MHz)',
+        boost: 'Boost clock speed (MHz)'
       },
       busWidth: 'Bus width (bits)',
       cudaCores: 'CUDA cores',
       directXSupport: 'DirectX support',
       tdp: 'TDP (W)',
-      chooseAType: 'Choose a type',
+      chooseAType: 'Choose a type'
     },
     motherboardsDataTable: {
       socket: 'Socket',
       formFactor: 'Form factor',
       chipset: 'Chipset',
       ramSlots: 'RAM slots',
-      pcieSlots: 'PCIe slots',
+      pcieSlots: 'PCIe slots'
     },
     motherboardForm: {
       socket: 'Socket',
       formFactor: 'Form factor',
       chipset: 'Chipset',
       ramSlots: 'RAM slots',
-      pcieSlots: 'PCIe slots',
+      pcieSlots: 'PCIe slots'
     },
     categorySalesPieChart: {
       salesByCategory: 'Sales by category',
-      distributionByPercentage: 'Distribution by percentage',
+      distributionByPercentage: 'Distribution by percentage'
     },
     salesChart: {
       revenue: 'Revenue',
-      sales: 'Sales',
+      sales: 'Sales'
     },
     totalRevenueCard: {
-      totalRevenue: 'Total revenue',
+      totalRevenue: 'Total revenue'
     },
+    mostSoldProduct: {
+      mostSoldProduct: 'Most sold product',
+      sales: 'Sales',
+      quantitySold: 'Quantity sold'
+    }
   },
   specifications: {
     base: {
       brand: 'Brand',
       model: 'Model',
       image: 'Image',
-      price: 'Price',
+      price: 'Price'
     },
     monitors: {
       displayDiagonal: 'Display diagonal',
@@ -1406,7 +1415,7 @@ export const translation: Translation = {
       resolution: 'Resolution',
       pixelSize: 'Pixel size',
       brightness: 'Brightness',
-      colorSpectre: 'Color spectre',
+      colorSpectre: 'Color spectre'
     },
     processors: {
       cores: 'Cores',
@@ -1414,7 +1423,7 @@ export const translation: Translation = {
       baseClockSpeed: 'Base clock speed',
       boostClockSpeed: 'Boost clock speed',
       socket: 'Socket',
-      tdp: 'TDP',
+      tdp: 'TDP'
     },
     graphicsCards: {
       memory: 'Memory',
@@ -1423,14 +1432,14 @@ export const translation: Translation = {
       busWidth: 'Bus width',
       cudaCores: 'CUDA cores',
       directXSupport: 'DirectX support',
-      tdp: 'TDP',
+      tdp: 'TDP'
     },
     motherboards: {
       socket: 'Socket',
       formFactor: 'Form factor',
       chipset: 'Chipset',
       ramSlots: 'RAM slots',
-      pcieSlots: 'PCIe slots',
+      pcieSlots: 'PCIe slots'
     },
     powerSupplies: {
       wattage: 'Wattage',
@@ -1440,19 +1449,19 @@ export const translation: Translation = {
         label: 'Modularity',
         none: 'None',
         semi: 'Semi',
-        full: 'Full',
-      },
+        full: 'Full'
+      }
     },
     rams: {
       memory: 'Memory',
-      timing: 'Timing',
+      timing: 'Timing'
     },
     ssds: {
       capacityInGb: 'Capacity',
       operationSpeedRead: 'Read speed',
       operationSpeedWrite: 'Write speed',
-      interface: 'Interface',
-    },
+      interface: 'Interface'
+    }
   },
   routeNames: {
     monitors: 'Monitors',
@@ -1462,7 +1471,7 @@ export const translation: Translation = {
     'power-supplies': 'Power supplies',
     rams: 'RAMs',
     ssds: 'SSDs',
-    home: 'Home',
+    home: 'Home'
   },
   units: {
     gigabytes: 'GB',
@@ -1474,26 +1483,26 @@ export const translation: Translation = {
     mbPerSecond: 'MB/s',
     milliseconds: 'ms',
     millimeters: 'mm',
-    nits: 'nits',
+    nits: 'nits'
   },
   hooks: {
     useSignUp: {
       visitYourEmailToVerifyYourAccount:
-        'Visit your email to verify your account.',
+        'Visit your email to verify your account.'
     },
     useForgotPassword: {
       visitYourEmailToResetYourPassword:
-        'Visit your email to reset your password.',
+        'Visit your email to reset your password.'
     },
     generic: { somethingWentWrong: 'Something went wrong.' },
     useAddToCart: {
-      productSuccessfullyAddedToCart: 'Product successfully added to cart.',
+      productSuccessfullyAddedToCart: 'Product successfully added to cart.'
     },
     useSignIn: {
-      invalidCredentials: 'Invalid credentials.',
+      invalidCredentials: 'Invalid credentials.'
     },
     useCreateReview: {
-      reviewSubmittedSuccessfully: 'Review submitted successfully.',
-    },
-  },
+      reviewSubmittedSuccessfully: 'Review submitted successfully.'
+    }
+  }
 };

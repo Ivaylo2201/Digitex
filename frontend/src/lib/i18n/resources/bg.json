@@ -254,6 +254,11 @@
       "continueShopping": "Продължете пазаруването",
       "viewOrders": "Преглед на поръчките"
     },
+    "mostSoldProduct": {
+      "mostSoldProduct": "Най-продаван продукт",
+      "sales": "Продажби",
+      "quantitySold": "Продадено количество"
+    },
     "categorySalesPieChart": {
       "salesByCategory": "Продажби по категории",
       "distributionByPercentage": "Разпределение по проценти"

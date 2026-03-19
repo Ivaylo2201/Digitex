@@ -39,7 +39,7 @@ export function SalesChart() {
   });
 
   return (
-    <ChartContainer config={chartConfig} className='min-h-[300px] w-full'>
+    <ChartContainer config={chartConfig} className='min-h-[300px] w-3/4'>
       <BarChart data={chartData} barGap={4} barCategoryGap='20%'>
         <CartesianGrid vertical={false} />
         <XAxis dataKey='month' />
