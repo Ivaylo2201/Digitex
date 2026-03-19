@@ -12,4 +12,5 @@ public interface IProductBaseRepository : ISingleReadable<ProductBase, Guid>
     Task<List<ProductBase>> SearchAsync(string query, CancellationToken cancellationToken);
     Task<List<ProductBase>> GetSuggestionsProductsAsync(Guid productId, CancellationToken cancellationToken);
     Task<List<ProductBase>> GetSuggestedProductsAsync(Guid productId, CancellationToken cancellationToken);
+    Task<ProductBase?> GetMostSoldProductAsync(CancellationToken cancellationToken);
 }

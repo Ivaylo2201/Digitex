@@ -1,6 +1,9 @@
-﻿using Backend.Application.UseCases.Manager.GetCategorySales;
+﻿using Backend.Application.DTOs.Products;
+using Backend.Application.UseCases.Manager.GetCategorySales;
+using Backend.Application.UseCases.Manager.GetMostSoldProduct;
 using Backend.Application.UseCases.Manager.GetSalesForYear;
 using Backend.Application.UseCases.Manager.GetTotalRevenue;
+using Backend.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -34,5 +37,16 @@ public class ManagerController(IMediator mediator) : ControllerBase
     {
         var result = await mediator.Send(new GetCategorySalesRequest(), cancellationToken);
         return TypedResults.Ok(result.Value);
+    }
+    
+    [HttpGet("products/most-sold")]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    public async Task<Results<Ok<MostSoldProductDto>, ProblemHttpResult>> GetMostSoldProductAsync(CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(new GetMostSoldProductRequest(), cancellationToken);
+        
+        return result.IsSuccess
+            ? TypedResults.Ok(result.Value)
+            : TypedResults.Problem(result.ToProblemDetails());
     }
 }

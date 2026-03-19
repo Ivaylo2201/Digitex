@@ -96,6 +96,15 @@ public class ProductBaseRepository(DatabaseContext context, IEmailSenderService 
         return product.Suggestions.ToList();
     }
 
+    public async Task<ProductBase?> GetMostSoldProductAsync(CancellationToken cancellationToken)
+    {
+        return await context.Products
+            .Where(p => p.Sales.Any())
+            .Include(p => p.Brand)
+            .OrderByDescending(p => p.Sales.Count)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
     public async Task<List<ProductBase>> GetSuggestionsProductsAsync(Guid productId, CancellationToken cancellationToken)
     {
         var product = await context.Products

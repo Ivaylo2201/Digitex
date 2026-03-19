@@ -70,15 +70,22 @@ public class EmailSenderService(
 
     public async Task SendInsufficientProductQuantityEmailAsync(ProductBase product, CancellationToken cancellationToken = default)
     {
-        var users = await userRepository.GetAdminUsersAsync(cancellationToken);
+        try
+        {
+            var users = await userRepository.GetAdminUsersAsync(cancellationToken);
 
-        var sendTasks = users.Select(user => SendEmailAsync(
-            user,
-            $"Product {product.Brand.BrandName} {product.ModelName} is out of stock",
-            emailBuilderService.BuildInsufficientProductQuantityEmail(product, user),
-            cancellationToken));
+            var sendTasks = users.Select(user => SendEmailAsync(
+                user,
+                $"Product {product.Brand.BrandName} {product.ModelName} is out of stock",
+                emailBuilderService.BuildInsufficientProductQuantityEmail(product, user),
+                cancellationToken));
 
-        await Task.WhenAll(sendTasks);
+            await Task.WhenAll(sendTasks);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError("[{Source}]: Failed to send insufficient quantity emails. Exception message - {Exception}", Source, ex.Message);
+        }
     }
 
     private async Task SendEmailAsync(User user, string subject, string body, CancellationToken stoppingToken)
