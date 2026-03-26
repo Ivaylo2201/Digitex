@@ -6,8 +6,9 @@ using MediatR;
 
 namespace Backend.Application.UseCases.Manager.GetMostSoldProduct;
 
-public class GetMostSoldProductRequestHandler(IProductBaseRepository productBaseRepository) 
-    : IRequestHandler<GetMostSoldProductRequest, Result<MostSoldProductDto>>
+public class GetMostSoldProductRequestHandler(
+    IProductBaseRepository productBaseRepository,
+    ISaleRepository saleRepository) : IRequestHandler<GetMostSoldProductRequest, Result<MostSoldProductDto>>
 {
     public async Task<Result<MostSoldProductDto>> Handle(GetMostSoldProductRequest request, CancellationToken cancellationToken)
     {
@@ -15,12 +16,16 @@ public class GetMostSoldProductRequestHandler(IProductBaseRepository productBase
         
         if (product is null)
             return Result<MostSoldProductDto>.Failure(HttpStatusCode.NotFound);
-
+        
+        var (sales, quantity) = await saleRepository.GetSalesForProductAsync(product.Id, cancellationToken);
+        
         return Result<MostSoldProductDto>.Success(HttpStatusCode.OK, new MostSoldProductDto
         {
             BrandName = product.Brand.BrandName,
             ModelName = product.ModelName,
             ImagePath = product.ImagePath,
+            Sales = sales,
+            Quantity = quantity,
             Price = product.Price
         });
     }

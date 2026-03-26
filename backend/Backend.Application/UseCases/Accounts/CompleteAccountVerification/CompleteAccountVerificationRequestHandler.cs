@@ -16,7 +16,8 @@ public class CompleteAccountVerificationRequestHandler(
     ITokenService tokenService,
     IUserTokenRepository userTokenRepository,
     IUserRepository userRepository,
-    IJwtService jwtService) : IRequestHandler<CompleteAccountVerificationRequest, Result<CompleteAccountVerificationResponse>>
+    IJwtService jwtService) 
+    : IRequestHandler<CompleteAccountVerificationRequest, Result<CompleteAccountVerificationResponse>>
 {
     private const string Source = nameof(CompleteAccountVerificationRequestHandler);
     

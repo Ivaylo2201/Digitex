@@ -68,7 +68,7 @@ public class ProductBaseRepository(DatabaseContext context, IEmailSenderService 
         product.Quantity -= quantity;
         await context.SaveChangesAsync(cancellationToken);
 
-        if (product.Quantity is 0)
+        if (product.Quantity <= 3)
         {
             await emailSenderService.SendInsufficientProductQuantityEmailAsync(product, cancellationToken);
         }
@@ -101,7 +101,8 @@ public class ProductBaseRepository(DatabaseContext context, IEmailSenderService 
         return await context.Products
             .Where(p => p.Sales.Any())
             .Include(p => p.Brand)
-            .OrderByDescending(p => p.Sales.Count)
+            .Include(p => p.Sales)
+            .OrderByDescending(p => p.Sales.Count())
             .FirstOrDefaultAsync(cancellationToken);
     }
 

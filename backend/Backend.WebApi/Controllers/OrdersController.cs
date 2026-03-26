@@ -12,9 +12,10 @@ namespace Backend.WebApi.Controllers;
 public class OrdersController(IMediator mediator) : ControllerBase
 {
     [HttpGet]
+    [Authorize]
     public async Task<Ok<GetUserOrdersResponse>> GetUserOrdersAsync(CancellationToken cancellationToken)
     {
-        var result = await mediator.Send(new GetUserOrdersRequest() { UserId = 1 }, cancellationToken);
+        var result = await mediator.Send(new GetUserOrdersRequest().Authorize(HttpContext), cancellationToken);
         return TypedResults.Ok(result.Value);
     }
 }

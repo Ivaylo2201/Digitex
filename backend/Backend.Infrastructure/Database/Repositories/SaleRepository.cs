@@ -32,6 +32,13 @@ public class SaleRepository(DatabaseContext context) : ISaleRepository
             .ToListAsync(cancellationToken);
     }
 
+    public async Task<(int, int)> GetSalesForProductAsync(Guid productId, CancellationToken cancellationToken)
+    {
+        var sales = await context.Sales.Where(x => x.ProductId == productId).CountAsync(cancellationToken);
+        var totalProductsSold = await context.Sales.Where(x => x.ProductId == productId).SumAsync(x => x.QuantitySold, cancellationToken);
+        return (sales, totalProductsSold);
+    }
+
     public async Task<Sale> CreateAsync(Sale item, CancellationToken cancellationToken)
     {
         var sale = await context.Sales.AddAsync(item, cancellationToken);
