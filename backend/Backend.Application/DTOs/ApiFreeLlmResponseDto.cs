@@ -1,6 +1,13 @@
-﻿namespace Backend.Application.DTOs;
+﻿using System.Text.Json.Serialization;
 
-public record ApiFreeLlmResponseDto
+namespace Backend.Application.DTOs;
+
+public class ApiFreeLlmResponseDto
 {
-    public required string Response { get; init; }
+    public bool Success { get; set; }
+    [JsonPropertyName("response")]
+    public string Response { get; set; } = string.Empty;
+    public string Provider { get; set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
+    public string Tier { get; set; } = string.Empty;
 }

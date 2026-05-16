@@ -33,14 +33,17 @@ public class AskAssistantRequestHandler(
                     logger.LogDebug("Could not deserialize response into AskAssistantResponse.");
                     return Result<AskAssistantResponse>.Failure(HttpStatusCode.InternalServerError);
                 }
-                
+
+                Console.WriteLine(apiFreeLlmResponse.Response);
                 return Result<AskAssistantResponse>.Success(HttpStatusCode.OK, new AskAssistantResponse
                 {
                     Response = apiFreeLlmResponse.Response
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                logger.LogError(ex.Message);
+                
                 return Result<AskAssistantResponse>.Success(HttpStatusCode.ServiceUnavailable, new AskAssistantResponse
                 {
                     Response = "ApiFreeLlm is currently unavailable."
