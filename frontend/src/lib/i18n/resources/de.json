@@ -731,6 +731,38 @@
     "millimeters": "mm",
     "nits": "nits"
   },
+  "home": {
+    "hero": {
+      "eyebrow": "Sorgfältig ausgewählte PC-Komponenten",
+      "title": "Bau das System, das",
+      "titleHighlight": "mit dir Schritt hält",
+      "subtitle": "Handverlesene Prozessoren, Grafikkarten und alles dazwischen. Originalteile, Kompatibilitätsprüfung und schneller, versicherter Versand.",
+      "primaryCta": "Grafikkarten ansehen",
+      "secondaryCta": "Kategorien ansehen",
+      "metaOriginal": "Originalkomponenten",
+      "metaWarranty": "Bis zu 3 Jahre Garantie",
+      "metaDelivery": "Lieferung in 24 Std."
+    },
+    "categories": {
+      "heading": "Nach Kategorie einkaufen",
+      "subheading": "Alles, was du brauchst, um dein System zu bauen oder aufzurüsten."
+    },
+    "valueProps": {
+      "shippingTitle": "Schneller, versicherter Versand",
+      "shippingText": "Sicherer Versand für jede empfindliche Komponente, bis vor deine Tür verfolgt.",
+      "warrantyTitle": "Bis zu 3 Jahre Garantie",
+      "warrantyText": "Offizielle Herstellergarantie auf alle wichtigen Teile.",
+      "compatibilityTitle": "Kompatibilität geprüft",
+      "compatibilityText": "Wir prüfen deine Konfiguration vor dem Versand, damit alles auf Anhieb passt.",
+      "supportTitle": "Experten-Support",
+      "supportText": "Du sprichst mit Leuten, die PCs bauen, nicht mit einem Skript."
+    },
+    "cta": {
+      "title": "Nicht sicher, wo du anfangen sollst?",
+      "text": "Sag unserem Assistenten, was du baust, und wir zeigen dir die richtigen Teile.",
+      "button": "Jetzt einkaufen"
+    }
+  },
   "hooks": {
     "useAddToCart": {
       "productSuccessfullyAddedToCart": "Produkt wurde erfolgreich zum Warenkorb hinzugefügt."

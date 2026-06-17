@@ -722,6 +722,38 @@ export type Translation = {
     millimeters: string;
     nits: string;
   };
+  home: {
+    hero: {
+      eyebrow: string;
+      title: string;
+      titleHighlight: string;
+      subtitle: string;
+      primaryCta: string;
+      secondaryCta: string;
+      metaOriginal: string;
+      metaWarranty: string;
+      metaDelivery: string;
+    };
+    categories: {
+      heading: string;
+      subheading: string;
+    };
+    valueProps: {
+      shippingTitle: string;
+      shippingText: string;
+      warrantyTitle: string;
+      warrantyText: string;
+      compatibilityTitle: string;
+      compatibilityText: string;
+      supportTitle: string;
+      supportText: string;
+    };
+    cta: {
+      title: string;
+      text: string;
+      button: string;
+    };
+  };
   hooks: {
     useAddToCart: {
       productSuccessfullyAddedToCart: string;
@@ -1503,6 +1535,41 @@ export const translation: Translation = {
     },
     useCreateReview: {
       reviewSubmittedSuccessfully: 'Review submitted successfully.'
+    }
+  },
+  home: {
+    hero: {
+      eyebrow: 'PC components, curated',
+      title: 'Build the rig that',
+      titleHighlight: 'keeps up with you',
+      subtitle:
+        'Hand-picked processors, graphics cards and everything in between. Original parts, expert compatibility checks and fast, insured delivery.',
+      primaryCta: 'Shop graphics cards',
+      secondaryCta: 'Browse categories',
+      metaOriginal: 'Original components',
+      metaWarranty: 'Up to 3-year warranty',
+      metaDelivery: 'Delivery in 24h'
+    },
+    categories: {
+      heading: 'Shop by category',
+      subheading: 'Every part you need to assemble or upgrade your setup.'
+    },
+    valueProps: {
+      shippingTitle: 'Fast, insured delivery',
+      shippingText:
+        'Safe shipping for every fragile component, tracked from our door to yours.',
+      warrantyTitle: 'Up to 3-year warranty',
+      warrantyText: 'Official manufacturer coverage on all major parts.',
+      compatibilityTitle: 'Compatibility checked',
+      compatibilityText:
+        'We review your build before it ships, so everything fits the first time.',
+      supportTitle: 'Expert support',
+      supportText: 'Talk to people who build PCs, not a script.'
+    },
+    cta: {
+      title: 'Not sure where to start?',
+      text: 'Tell our assistant what you are building and we will point you to the right parts.',
+      button: 'Start shopping'
     }
   }
 };
