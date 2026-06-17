@@ -22,10 +22,7 @@ import {
 } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 import { getStaticFile } from '@/lib/utils/getStaticFile';
-import {
-  useState,
-  type PropsWithChildren
-} from 'react';
+import { useState, type PropsWithChildren } from 'react';
 import { useTranslation } from '@/features/language/hooks/useTranslation';
 import type { ProductLong } from '@/features/products/models/base/ProductLong';
 import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
@@ -138,7 +135,10 @@ function getColumns<T extends ProductLong>(
         <div className='flex items-center gap-3 justify-center'>
           {renderEditForm(row.original)}
           <DeleteProductDialog row={row} onDelete={onDelete} />
-          <SuggestionsDialog product={row.original} category={row.original.category} />
+          <SuggestionsDialog
+            product={row.original}
+            category={row.original.category}
+          />
         </div>
       );
     },
@@ -172,13 +172,7 @@ export function DataTable<T extends ProductLong>({
 
   const table = useReactTable({
     data,
-    columns: getColumns(
-      columns,
-      sign,
-      onDelete,
-      renderEditForm,
-      dataTable
-    ),
+    columns: getColumns(columns, sign, onDelete, renderEditForm, dataTable),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -239,7 +233,9 @@ export function DataTable<T extends ProductLong>({
                     return (
                       <TableCell
                         key={cell.id}
-                        className={`border-r last:border-r-0 text-center`}
+                        className={
+                          'border border-gray-200 last:border-r-0 text-center'
+                        }
                       >
                         {flexRender(
                           cell.column.columnDef.cell,

@@ -20,8 +20,6 @@ button {
   background: #e02b4a;
 }
 
-
-
 @custom-variant dark (&:is(.dark *));
 
 @theme {
