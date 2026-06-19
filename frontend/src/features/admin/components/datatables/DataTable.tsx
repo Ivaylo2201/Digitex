@@ -127,6 +127,18 @@ function getColumns<T extends ProductLong>(
     },
   ];
 
+  const isDeletedColumn: ColumnDef<T> = {
+    header: 'Is Deleted',
+    enableHiding: false,
+    cell: ({ row }) => {
+      return (
+        <span className='text-center font-medium'>
+          {row.original.isDeleted.toString()}
+        </span>
+      );
+    },
+  };
+
   const actionsColumn: ColumnDef<T> = {
     header: translation.actions,
     enableHiding: false,
@@ -144,7 +156,12 @@ function getColumns<T extends ProductLong>(
     },
   };
 
-  return [...baseColumns, ...columns, actionsColumn] as ColumnDef<T>[];
+  return [
+    ...baseColumns,
+    ...columns,
+    isDeletedColumn,
+    actionsColumn,
+  ] as ColumnDef<T>[];
 }
 
 type DatatableProps<T extends ProductLong> = PropsWithChildren & {

@@ -33,7 +33,7 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
             .AsNoTracking()
             .Include(p => p.Reviews)
             .Include(p => p.Brand);
-
+        
         if (!isAdmin)
             queryable = queryable.Where(p => !p.IsDeleted);
         

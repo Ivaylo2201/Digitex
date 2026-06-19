@@ -9,6 +9,7 @@ export function useProductDelete(category: string) {
       await httpClient.delete(`/products/${category}/${id}`);
     },
     onSuccess: () => {
+      console.log("Invalidating queries for category:", category);
       queryClient.invalidateQueries({ queryKey: ['products', category] });
     },
   });

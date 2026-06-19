@@ -5,4 +5,5 @@ public record ProductDetailsDto : ProductSummaryDto
     public required string Sku { get; init; }
     public required int TotalReviews { get; init; }
     public ICollection<SuggestedProductDto> Suggestions { get; init; } = [];
+    public bool IsDeleted { get; init; }
 }

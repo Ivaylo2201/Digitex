@@ -18,6 +18,7 @@ async function fetchProducts<T>(
   const res = await httpClient.get<FetchProductsResponse<T>>(
     `/products/${category}${queryParams}`,
   );
+  console.log(res.data)
   return res.data;
 }
 

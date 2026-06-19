@@ -7,4 +7,5 @@ export type ProductLong = ProductShort & {
   totalReviews: number;
   recentReviews: Review[];
   suggestions: SuggestedProduct[];
+  isDeleted: boolean;
 };

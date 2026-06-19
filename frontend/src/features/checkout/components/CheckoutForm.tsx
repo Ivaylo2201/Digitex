@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useCart } from '@/features/cart/hooks/useCart';
 import { useCurrencyStore } from '@/features/currency/stores/useCurrencyStore';
 import { useNavigate } from 'react-router';
+import { useQueryClient } from '@tanstack/react-query';
 
 type CheckoutFormProps = { shippingCost: number };
 
@@ -13,8 +14,9 @@ export function CheckoutForm({ shippingCost }: CheckoutFormProps) {
   const { data } = useCart();
   const stripe = useStripe();
   const elements = useElements();
-  const sign = useCurrencyStore((store) => store.currency.sign);
+  const { currency } = useCurrencyStore();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const {
     components: { checkoutForm },
@@ -38,18 +40,15 @@ export function CheckoutForm({ shippingCost }: CheckoutFormProps) {
     setIsProcessing(false);
 
     if (paymentIntent?.status === 'succeeded') {
+      setTimeout(async () => {
+        await queryClient.invalidateQueries({
+          queryKey: ['cart', currency.currencyIsoCode],
+        });
+      }, 1000);
+      await queryClient.invalidateQueries({ queryKey: ['orders'] });
       navigate(`/thank-you?payment_intent=${paymentIntent.id}`);
     }
-
-    // await stripe.confirmPayment({
-    //   elements,
-    //   confirmParams: {
-    //     return_url: 'http://localhost:5173/thank-you',
-    //   },
-    // });
   };
-
-  console.log(data?.totalPrice, shippingCost);
 
   return (
     <form
@@ -62,7 +61,7 @@ export function CheckoutForm({ shippingCost }: CheckoutFormProps) {
         disabled={isProcessing}
         className='bg-theme-crimson hover:bg-theme-gunmetal transition-colors duration-300 cursor-pointer'
       >
-        {checkoutForm.pay} {sign}
+        {checkoutForm.pay} {currency.sign}
         {((data?.totalPrice ?? 0) + shippingCost).toFixed(2)} {checkoutForm.now}
       </Button>
     </form>

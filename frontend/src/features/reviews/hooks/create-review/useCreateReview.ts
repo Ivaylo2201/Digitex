@@ -19,8 +19,7 @@ export function useCreateReview() {
     onSuccess: (_, variables) => {
       toast.success(hooks.useCreateReview.reviewSubmittedSuccessfully);
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
-      queryClient.invalidateQueries({ queryKey: ['products'] });
-      queryClient.invalidateQueries({ queryKey: [variables.productId] });
+      queryClient.invalidateQueries({ queryKey: ['product', variables.productId] });
     },
     onError: () => toast.error(hooks.generic.somethingWentWrong),
   });

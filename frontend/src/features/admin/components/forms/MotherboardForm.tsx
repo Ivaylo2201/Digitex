@@ -40,12 +40,7 @@ export function MotherboardForm({ product }: MotherboardFormProps) {
       discountPercentage: product?.discountPercentage,
       quantity: product?.quantity,
       socket: product?.socket,
-      formFactor: product?.formFactor
-        .split(' ')
-        .map(
-          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(),
-        )
-        .join(''),
+      formFactor: product?.formFactor,
       chipset: product?.chipset,
       ramSlots: product?.ramSlots,
       pcieSlots: product?.pcieSlots,

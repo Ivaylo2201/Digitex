@@ -2,29 +2,38 @@ import { create } from 'zustand';
 
 type AuthStore = {
   role: string | null;
+  token: string | null;
   isAuthenticated: boolean;
   signIn: (token: string, role: string, rememberMe?: boolean) => void;
   signOut: () => void;
 };
 
+const getToken = () => localStorage.getItem('token');
+
 export const useAuthStore = create<AuthStore>((set) => ({
-  role: null,
-  isAuthenticated: !!localStorage.getItem('token'),
-  signIn: (token: string, role: string, rememberMe: boolean = false) => {
-    set({ isAuthenticated: true, role });
+  role: localStorage.getItem('role'),
+  token: getToken(),
+  isAuthenticated: !!getToken(),
 
-    if (!rememberMe || ['admin', 'manager'].includes(role.toLowerCase())) {
-      localStorage.removeItem('token');
-      sessionStorage.setItem('token', token);
-      return;
-    }
-
+  signIn: (token, role) => {
     localStorage.setItem('token', token);
-    sessionStorage.removeItem('token');
+    localStorage.setItem('role', role);
+
+    set({
+      token,
+      role,
+      isAuthenticated: true,
+    });
   },
+
   signOut: () => {
-    set({ isAuthenticated: false, role: null });
     localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('role');
+
+    set({
+      token: null,
+      role: null,
+      isAuthenticated: false,
+    });
   },
 }));
