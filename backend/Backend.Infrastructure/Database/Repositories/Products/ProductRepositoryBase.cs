@@ -80,8 +80,29 @@ public abstract class ProductRepositoryBase<TProduct>(DatabaseContext context) :
                 entry.Property(property.Name).CurrentValue = newValue;
             }
         }
-
         
+        foreach (var complex in entry.ComplexProperties)
+        {
+            var complexValue = item.GetType()
+                .GetProperty(complex.Metadata.Name)?
+                .GetValue(item);
+
+            if (complexValue is null)
+                continue;
+
+            foreach (var prop in complex.Properties)
+            {
+                var newValue = complexValue.GetType()
+                    .GetProperty(prop.Metadata.Name)?
+                    .GetValue(complexValue);
+
+                if (newValue is not null)
+                {
+                    prop.CurrentValue = newValue;
+                }
+            }
+        }
+
         await context.SaveChangesAsync(cancellationToken);
     }
 }
